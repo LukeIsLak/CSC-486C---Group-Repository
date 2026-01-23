@@ -14,7 +14,7 @@ The team is composed of the following members and each corresponding role
 
 ## Installation
 
-This game is developed in `Unity <Version #>`. To install the codebase, clone the repo as such
+This game is developed in `Unity 2022.3.62f2`. To install the codebase, clone the repo as such
 ```
 git clone https://github.com/LukeIsLak/CSC-486C---Group-Repository.git
 ```
