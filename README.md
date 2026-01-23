@@ -8,7 +8,7 @@ The team is composed of the following members and each corresponding role
 
 - **Design Lead**: Jonah
 - **Build Lead**: Luke
-- **Scrum Lead**: Nathan or Nick
+- **Scrum Lead**: Nick
 - **Designers**: Marina, Justin, Will
 - **Developers**: Nathan, Nick, Archie, Robert, Khanh
 
