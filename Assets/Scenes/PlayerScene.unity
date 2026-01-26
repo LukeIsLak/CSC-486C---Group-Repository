@@ -2510,8 +2510,8 @@ GameObject:
   m_Component:
   - component: {fileID: 537267986}
   - component: {fileID: 537267987}
-  - component: {fileID: 537267989}
   - component: {fileID: 537267988}
+  - component: {fileID: 537267989}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2635,6 +2635,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 581f74c5-60a3-4062-b94b-f4d3ee446409
     m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 537267989}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ffb13c9e-5357-4846-af10-b66fb34331e0
+    m_ActionName: Player/Sprint[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2652,9 +2668,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd11427f66547d4b8338d1af41256de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 8
-  gravity: -9.81
+  walkSpeed: 5
+  sprintSpeed: 8
+  jumpForce: 5
+  gravity: -10
   xSensitivity: 50
   ySensitivity: 50
   rotationXlimit: 80

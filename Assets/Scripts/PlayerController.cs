@@ -6,32 +6,37 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     
-    [SerializeField] float speed = 5f;
+    [SerializeField] float walkSpeed = 5f;
+    [SerializeField] float sprintSpeed = 10f;
     [SerializeField] float jumpForce = 2f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float xSensitivity = 100f;
     [SerializeField] float ySensitivity = 100f;
     [SerializeField] float rotationXlimit = 80f;
+
     private CharacterController controller;
     private Camera camera;
+
     private Vector2 moveDirection;
     private Vector2 lookValue;
-    private float rotationX; // 
+
+    private float rotationX; 
     private float verticalVelocity;
     private bool isJumping;
-
+    private float currentSpeed;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         camera = GetComponentInChildren<Camera>();
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     // Update is called once per frame
     void Update()
     {
         Vector3 move = transform.right * moveDirection.x + transform.forward * moveDirection.y;
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move * currentSpeed * Time.deltaTime);
+
         if (isJumping && controller.isGrounded)
         {
             verticalVelocity = jumpForce;
@@ -62,7 +67,14 @@ public class PlayerController : MonoBehaviour
     public void OnLook(InputAction.CallbackContext context)
     {
         lookValue = context.ReadValue<Vector2>();
-        Debug.Log($"Look value: {moveDirection}");
+        //Debug.Log($"Look value: {moveDirection}");
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        if (context.performed) currentSpeed = sprintSpeed;
+
+        if (context.canceled) currentSpeed = walkSpeed;
     }
 
     private void Look()
@@ -72,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
         // Vertical look (move cam)
         rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX,-rotationXlimit,rotationXlimit);
+        rotationX = Mathf.Clamp(rotationX, -rotationXlimit, rotationXlimit);
         camera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
 
         // Horizontal look ( move body)
