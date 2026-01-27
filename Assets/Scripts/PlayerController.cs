@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     
-    [SerializeField] float walkSpeed = 5f;
-    [SerializeField] float sprintSpeed = 10f;
+    [SerializeField] float speed = 5f;
     [SerializeField] float jumpForce = 2f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float xSensitivity = 100f;
@@ -23,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private float rotationX; 
     private float verticalVelocity;
     private bool isJumping;
-    private float currentSpeed;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -35,7 +33,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector3 move = transform.right * moveDirection.x + transform.forward * moveDirection.y;
-        controller.Move(move * currentSpeed * Time.deltaTime);
+        controller.Move(move * speed * Time.deltaTime);
 
         if (isJumping && controller.isGrounded)
         {
@@ -68,13 +66,6 @@ public class PlayerController : MonoBehaviour
     {
         lookValue = context.ReadValue<Vector2>();
         //Debug.Log($"Look value: {moveDirection}");
-    }
-
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        if (context.performed) currentSpeed = sprintSpeed;
-
-        if (context.canceled) currentSpeed = walkSpeed;
     }
 
     private void Look()
