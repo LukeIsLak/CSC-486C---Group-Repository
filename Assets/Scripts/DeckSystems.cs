@@ -15,6 +15,7 @@ public class DeckSystems : MonoBehaviour
     // The queue functions as the deck, with dequeue being equivelent to drawing a card, enqueue would be the same as putting a card back in to the deck at the bottom
     public Queue<GameObject> deck = new Queue<GameObject>();
     public int deckSize;
+    public int currentDeckSize;
     public int maxDeckSize = 20; // to be updated once max size is decided
 
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class DeckSystems : MonoBehaviour
     {
         // add card to deck
         deck.Enqueue(card);
+        currentDeckSize++;
     }
 
     /// <summary>
@@ -70,8 +72,21 @@ public class DeckSystems : MonoBehaviour
                 return null;
         }
 
+        currentDeckSize--;
         // return the draw card for use
         return card;
     }
 
+    public void shuffleExcHand() { 
+        GameObject[] sortingArray = new GameObject[currentDeckSize];
+        deck.CopyTo(sortingArray, 0);
+
+        //Random rnd = new Random();
+        while (currentDeckSize != 0) {
+            //rnd.Next(currentDeckSize);
+            //....
+            
+        }
+    }
+    //to add shuffle (not including hand), shuffle (including hand) load deck, tests, 
 }
