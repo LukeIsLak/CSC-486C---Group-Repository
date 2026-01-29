@@ -14,7 +14,9 @@ public class DeckSystems : MonoBehaviour
 
     // The queue functions as the deck, with dequeue being equivelent to drawing a card, enqueue would be the same as putting a card back in to the deck at the bottom
     public Queue<GameObject> deck = new Queue<GameObject>();
+    // used out of combat (total deck size)
     public int deckSize;
+    // used in combat (cards left in deck during level, ex. doesnt not include hand)
     public int currentDeckSize;
     public int maxDeckSize = 20; // to be updated once max size is decided
 
@@ -88,5 +90,60 @@ public class DeckSystems : MonoBehaviour
             
         }
     }
-    //to add shuffle (not including hand), shuffle (including hand) load deck, tests, 
+
+    public void shuffleIncHand() { 
+    }
+
+    public bool loadDeck(GameObject[] passedDeck, int size) { 
+        deckSize = size;
+        for (int i = 0; i < deckSize; i++) {
+            switch (i)
+            {
+                case 0:
+                    handSlot1 = passedDeck[i];
+                    break;
+                case 1:
+                    handSlot2 = passedDeck[i];
+                    break;
+                case 2:
+                    handSlot3 = passedDeck[i];
+                    break;
+                case 3:
+                    handSlot4 = passedDeck[i];
+                    break;
+                default:
+                    addCardToDeck(passedDeck[i]);
+                    break;
+            }
+        }
+        return true;
+    }
+
+    public GameObject[] storeDeck() {
+        GameObject[] returnArray = new GameObject[deckSize];
+
+        for (int i = 0; i < deckSize; i++){
+            switch (i)
+            {
+                case 0:
+                    returnArray[i] = handSlot1;
+                    break;
+                case 1:
+                    returnArray[i] = handSlot2;
+                    break;
+                case 2:
+                    returnArray[i] = handSlot3;
+                    break;
+                case 3:
+                    returnArray[i] = handSlot4;
+                    break;
+                default:
+                    returnArray[i] = deck.Dequeue();
+                    break;
+            }
+        }
+        return returnArray;
+    }
+
+    //to add shuffle (not including hand), shuffle (including hand) load deck, store deck, tests, 
 }
