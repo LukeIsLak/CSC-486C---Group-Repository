@@ -12,6 +12,11 @@ public class DeckSystems : MonoBehaviour
     public GameObject handSlot3;
     public GameObject handSlot4;
 
+    const int HANDSLOT1INDEX = 0;
+    const int HANDSLOT2INDEX = 1;
+    const int HANDSLOT3INDEX = 2;
+    const int HANDSLOT4INDEX = 3;
+
     // The queue functions as the deck, with dequeue being equivelent to drawing a card, enqueue would be the same as putting a card back in to the deck at the bottom
     public Queue<GameObject> deck = new Queue<GameObject>();
     // used out of combat (total deck size)
@@ -57,16 +62,16 @@ public class DeckSystems : MonoBehaviour
         // determine which handslot the card should take up
         switch (handslot)
         {
-            case 1:
+            case HANDSLOT1INDEX:
                 handSlot1 = card;
                 break;
-            case 2:
+            case HANDSLOT2INDEX:
                 handSlot2 = card;
                 break;
-            case 3:
+            case HANDSLOT3INDEX:
                 handSlot3 = card;
                 break;
-            case 4:
+            case HANDSLOT4INDEX:
                 handSlot4 = card;
                 break;
             default: // if invalid log the error and return null
@@ -80,18 +85,35 @@ public class DeckSystems : MonoBehaviour
     }
 
     public void shuffleExcHand() { 
-        GameObject[] sortingArray = new GameObject[currentDeckSize];
-        deck.CopyTo(sortingArray, 0);
+        List<GameObject> sortingList = new List<GameObject>();
+        int listSize = currentDeckSize;
+        currentDeckSize = 0;
 
-        //Random rnd = new Random();
-        while (currentDeckSize != 0) {
-            //rnd.Next(currentDeckSize);
-            //....
-            
+        for (int i = 0; i < listSize; i++) { 
+            sortingList.Add(deck.Dequeue());
+        }
+
+        int index = 0;
+        while (listSize != 0) {
+            index = Random.Range(0, listSize);
+            addCardToDeck(sortingList[index]);
+            sortingList.RemoveAt(index);
+            listSize--;
         }
     }
 
-    public void shuffleIncHand() { 
+    public void shuffleIncHand() {
+        addCardToDeck(handSlot1);
+        addCardToDeck(handSlot2);
+        addCardToDeck(handSlot3);
+        addCardToDeck(handSlot4);
+
+        shuffleExcHand();
+
+        drawCard(HANDSLOT1INDEX);
+        drawCard(HANDSLOT2INDEX);
+        drawCard(HANDSLOT3INDEX);
+        drawCard(HANDSLOT4INDEX);
     }
 
     public bool loadDeck(GameObject[] passedDeck, int size) { 
@@ -99,16 +121,16 @@ public class DeckSystems : MonoBehaviour
         for (int i = 0; i < deckSize; i++) {
             switch (i)
             {
-                case 0:
+                case HANDSLOT1INDEX:
                     handSlot1 = passedDeck[i];
                     break;
-                case 1:
+                case HANDSLOT2INDEX:
                     handSlot2 = passedDeck[i];
                     break;
-                case 2:
+                case HANDSLOT3INDEX:
                     handSlot3 = passedDeck[i];
                     break;
-                case 3:
+                case HANDSLOT4INDEX:
                     handSlot4 = passedDeck[i];
                     break;
                 default:
@@ -125,16 +147,16 @@ public class DeckSystems : MonoBehaviour
         for (int i = 0; i < deckSize; i++){
             switch (i)
             {
-                case 0:
+                case HANDSLOT1INDEX:
                     returnArray[i] = handSlot1;
                     break;
-                case 1:
+                case HANDSLOT2INDEX:
                     returnArray[i] = handSlot2;
                     break;
-                case 2:
+                case HANDSLOT3INDEX:
                     returnArray[i] = handSlot3;
                     break;
-                case 3:
+                case HANDSLOT4INDEX:
                     returnArray[i] = handSlot4;
                     break;
                 default:
