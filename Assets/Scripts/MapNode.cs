@@ -12,7 +12,7 @@ public enum GenerationChoice
     MergeBoth   = MergeLeft | MergeRight
 }
 
-public enum EncouterType
+public enum EncounterType
 {
     None        = 0b0000,
     Enemies     = 0b0001,
@@ -46,7 +46,7 @@ public class MapNode : MonoBehaviour
     *********************/
 
     // Setters
-    public void SetEncounter(EncouterType e)    { encounter = e; }
+    public void SetEncounter(EncounterType e)    { encounter = e; }
 
     public void SetBranch(MapBranch b)          { branch = b; }
 
