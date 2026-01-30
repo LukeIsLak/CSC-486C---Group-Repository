@@ -2,19 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GenerationChoice
+{
+    None        = 0b0000,
+    Split       = 0b0001,
+    Continue    = 0b0010,
+    MergeLeft   = 0b0100,
+    MergeRight  = 0b1000,
+    MergeBoth   = MergeLeft | MergeRight
+}
+
+public enum EncouterType
+{
+    None        = 0b0000,
+    Enemies     = 0b0001,
+    Boss        = 0b0010,
+    Shop        = 0b0100,
+    Treasure    = 0b1000,
+}
+
 public class MapNode : MonoBehaviour
 {
     /*********************
-     DATA STRUCTURES
+     Node Information
     *********************/
 
-    private string encounterType;       // What type of encounter is this
-    private MapBranch branch;           // What branch does this belong to 
-    private float branchInProb;         // Probability of branching in
-    private float branchOutProb;        // Probability of branching out
-    private List<MapNode> inNodes;      // Nodes connecting into this one
-    private List<MapNode> outNodes;     // Nodes this one connects into
-    
+    private MapBranch branch;                   // What branch does this belong to 
+    private List<MapNode> inNodes;              // Nodes connecting into this one
+    private List<MapNode> outNodes;             // Nodes this one connects into
+    private int numChildren;                    // Current number of children
+    public GenerationChoice choice;             // Choice made for generation
+    public EncounterType encounter;             // The encounter of the room
+
+
     // Awake is called on initialization
     void Awake()
     {
@@ -22,41 +42,32 @@ public class MapNode : MonoBehaviour
     }
 
     /*********************
-     GETTERS AND SETTERS
+     Public Methods
     *********************/
-    // Getters
-    public string 
-    GetEncounterType() { return encounterType; }
 
-    public MapBranch     
-    GetBranch() { return branch; }
-
-    public float 
-    GetBranchInProb() { return branchInProb; }
-
-    public float 
-    GetBranchOutProb() { return branchOutProb; }
-
-    public List<MapNode>
-    GetOutNodes() { return outNodes; }
-
-    public List<MapNode>
-    GetInNodes()  { return inNodes;  }  
-    
     // Setters
-    public void
-    SetEncounterType(string e) { encounterType = e; }
+    public void SetEncounter(EncouterType e)    { encounter = e; }
 
-    public void
-    SetBranch(MapBranch b) { branch = b; }
+    public void SetBranch(MapBranch b)          { branch = b; }
 
-    public void 
-    SetBranchInProb(float p) { branchInProb = p; }
 
-    public void 
-    SetBranchOutProb(float p) { branchOutProb = p; }
+    // Child insertion
+    public void AddChildLeft(MapNode child)     { outNodes.Insert(0, child); }
 
-    // In/Out nodes lists will be accessed and modified by reference
+    public void AddChildRight(MapNode child)    { outNodes.Add(child); }
 
+
+    // Getters
+    public EncounterType GetEncounter()         { return encounter; }
+
+    public MapBranch GetBranch()                { return branch; }
+
+    public List<MapNode> GetOutNodes()          { return outNodes; }
+
+    public List<MapNode> GetInNodes()           { return inNodes;  }  
+
+    public MapNode GetLeftmostChild()           { return numChildren == 0 ? null : outNodes[0]; }
+
+    public MapNode GetRightmostChild()          { return numChildren == 0 ? null : outNodes[numChildren - 1]; }
 
 }
