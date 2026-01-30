@@ -13,7 +13,7 @@ public class MapGen : MonoBehaviour
     public GameObject mapNodeContainer;         // Transform that will parent all created MapNodes
 
     [Header("Generation Parameters")]
-    public int maxDepth         = 5;            // Depth to generate until
+    public int layersToGenerate         = 5;            // Depth to generate until
     public int maxWidth         = 3;            // Maximum number of branches in a single layer.
     public int randomSeed       = 0;            // The random seed to use in generation
     public bool useSetSeed      = false;        // Whether not to use to provided seed
@@ -81,7 +81,7 @@ public class MapGen : MonoBehaviour
             foreach (MapNode node in layer) { Destroy(node); }
             layer.Clear(); 
         }
-        layerList.Clear();
+        layersList.Clear();
         numLayers    = 0;
         currentLayer = 0;
     }
@@ -101,8 +101,46 @@ public class MapGen : MonoBehaviour
         Repeat
         */
         
-        while (numLayers)
-        for (int i = 0; i < layers)
+        // Generate layers between start and end
+        while (numLayers < layersToGenerate)
+        {
+            // Make first genertion choice
+            foreach (MapNode node in layersList[currentLayer])
+            {
+                MakeGenerationChoice(node);
+
+            }
+
+            // Flag invalid merges as none
+            foreach (MapNode node in layersList[currentLayer])
+            {
+                // Check if can merge, else force continue
+                // Note that if we set the choice to to continue them move
+                // onto the next one and check if it can merge, we will be
+                // biased to merging towards the lower index.
+                // So instead, set the state to None at this point,
+                // then on another iteration, find the None choices and set to
+                // continue
+            }
+
+            foreach (MapNode node in layersList[currentLayer])
+            {
+                if (node.choice == GenerationChoice.None)
+                {
+                    node.choice = GenerationChoice.Continue;
+                }
+            }
+
+            // Final pass, connect merges 
+            foreach (MapNode node in layersList[currentLayer])
+            {
+                // Check if can merge, else force continue
+            }
+
+            
+        }
+
+        // Generate final layer and connect previous layer into it
 
         return ;
     }
