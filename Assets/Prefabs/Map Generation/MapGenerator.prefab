@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0b9d5ceacb1d84eaee68a40bcf952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapNodePrefab: {fileID: 8158851920061294882, guid: c2ef58bd333eda8409389671adf6bbe3, type: 3}
   maxDepth: 5
   maxWidth: 3
-  mapNodePrefab: {fileID: 8158851920061294882, guid: c2ef58bd333eda8409389671adf6bbe3, type: 3}
+  randomSeed: 0
+  useSetSeed: 0

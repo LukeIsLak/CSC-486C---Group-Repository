@@ -28,17 +28,22 @@ public class MapNode : MonoBehaviour
     *********************/
 
     private MapBranch branch;                   // What branch does this belong to 
+    public GenerationChoice choice;             // Choice made for generation
+    private int numChildren;                    // Current number of children
     private List<MapNode> inNodes;              // Nodes connecting into this one
     private List<MapNode> outNodes;             // Nodes this one connects into
-    private int numChildren;                    // Current number of children
-    public GenerationChoice choice;             // Choice made for generation
     public EncounterType encounter;             // The encounter of the room
 
 
     // Awake is called on initialization
     void Awake()
     {
-        return;
+        branch      = null;
+        choice      = GenerationChoice.None;
+        numChildren = 0;
+        inNodes     = new List<MapNode>();
+        outNodes    = new List<MapNode>();
+        encounter   = EncounterType.None;
     }
 
     /*********************
@@ -46,7 +51,7 @@ public class MapNode : MonoBehaviour
     *********************/
 
     // Setters
-    public void SetEncounter(EncounterType e)    { encounter = e; }
+    public void SetEncounter(EncounterType e)   { encounter = e; }
 
     public void SetBranch(MapBranch b)          { branch = b; }
 
