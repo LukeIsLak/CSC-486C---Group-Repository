@@ -31,7 +31,7 @@ public class MapNode : MonoBehaviour
     public GenerationChoice choice;             // Choice made for generation
     private int numChildren;                    // Current number of children
     private List<MapNode> inNodes;              // Nodes connecting into this one
-    private List<MapNode> outNodes;             // Nodes this one connects into
+    public List<MapNode> outNodes;             // Nodes this one connects into
     public EncounterType encounter;             // The encounter of the room
     public float branchInProbability = 0.5f;    // To be attached to the branch later. Probability of merging into this node from another.
 
@@ -58,9 +58,9 @@ public class MapNode : MonoBehaviour
 
 
     // Child insertion
-    public void AddChildLeft(MapNode child)     { outNodes.Insert(0, child); }
+    public void AddChildLeft(MapNode child)     { outNodes.Insert(0, child); numChildren++; }
 
-    public void AddChildRight(MapNode child)    { outNodes.Add(child); }
+    public void AddChildRight(MapNode child)    { outNodes.Add(child); numChildren++; }
 
 
     // Getters
