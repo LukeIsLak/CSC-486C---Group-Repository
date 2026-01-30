@@ -10,7 +10,8 @@ public class MapGen : MonoBehaviour
     *********************/
 
     public GameObject mapNodePrefab;            // Prefab for mapnodes
-    public Transform mapNodeContainer;         // Transform that will parent all created MapNodes
+    public Transform mapNodeContainer;          // Transform that will parent all created MapNodes
+    public List<Transform> layerContainers;     // List of the transforms containing each layer
 
     [Header("Generation Parameters")]
     public int layersToGenerate = 5;            // Depth to generate until
@@ -25,13 +26,14 @@ public class MapGen : MonoBehaviour
 
     private List<List<MapNode>> layersList;     // List whose entries are lists of the nodes at each layer
     private int numLayers;                      // Current number of layers
-    private int currentLayerIndex;                   // Current layer being operated on
+    private int currentLayerIndex;              // Current layer being operated on
     private MapNode firstNode;                  // First node to begin generation
 
     // Initialize data structures on wakeup
     void Awake() 
     { 
         layersList = new List<List<MapNode>>(); 
+        layerContainers = new List<Transform>();
     }
 
     /*********************
@@ -53,10 +55,10 @@ public class MapGen : MonoBehaviour
     *********************/
 
     // Reset data structures, variables, random seed etc. for generation
-    void Initialize()
+    public void Initialize()
     {
         // Create parent container for mapnodes if none provided
-        mapNodeContainer = new GameObject("MapNode Container").transform;
+        mapNodeContainer = mapNodeContainer == null ?  new GameObject("MapNode Container").transform : mapNodeContainer;
 
         // Configure randomness
         randomSeed = useSetSeed ? randomSeed : (int)System.DateTime.Now.Ticks;
@@ -77,19 +79,22 @@ public class MapGen : MonoBehaviour
         // Destroy every game object and then clear references
         foreach (List<MapNode> layer in layersList)
         { 
-            foreach (MapNode node in layer) { Destroy(node); }
+            foreach (MapNode node in layer) { Destroy(node.gameObject); }
             layer.Clear(); 
         }
         layersList.Clear();
-        numLayers    = 0;
-        currentLayerIndex = 0;
+        numLayers           = 0;
+        currentLayerIndex   = 0;
+
+        foreach (Transform lc in layerContainers) { Destroy(lc.gameObject); }
+        layerContainers.Clear();
     }
 
     /*********************
      Generation
     *********************/
 
-    private void GenerateLayout() 
+    public void GenerateLayout() 
     { 
         // Generate layers between start and end
         while (numLayers < layersToGenerate)
@@ -234,9 +239,23 @@ public class MapGen : MonoBehaviour
     }
 
     /*********************
-     Visualization
+     Post-Processing
     *********************/
 
-    // Visualize the result generation
-    private void DoVisualization() { return; }
+    // Visualize the result of generation
+    public void DoVisualization() 
+    {   
+        int li = 0;
+        foreach (List<MapNode> curLayer in layersList)
+        {   
+            Transform layerContainer = new GameObject("Layer" + li.ToString()).transform;
+            layerContainer.SetParent(mapNodeContainer, false);
+            layerContainers.Add(layerContainer);
+            foreach (MapNode node in curLayer)
+            {
+                node.transform.SetParent(layerContainer, false);
+            }
+            li++;
+        }
+    }
 }
