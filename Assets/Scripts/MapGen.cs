@@ -42,6 +42,18 @@ public class MapGen : MonoBehaviour
 
     void Start() { DoGeneration(); }
 
+    void Update()
+    {
+        foreach (List<MapNode> layer in layersList)
+        {
+            foreach (MapNode node in layer)
+            {
+                foreach (MapNode child in node.outNodes)
+                    Debug.DrawLine(node.transform.position, child.transform.position, Color.green);
+            }
+        }
+    }
+
     // Perform a compelete round of generation  
     void DoGeneration()
     {
@@ -160,7 +172,7 @@ public class MapGen : MonoBehaviour
     {
         // TO DO: Make choice according to probabilities.
         // Where we draw these probabilities from is TBD...
-        node.choice = GenerationChoice.Split;
+        node.choice = GenerationChoice.MergeLeft;
         return;
     }
 
@@ -181,52 +193,18 @@ public class MapGen : MonoBehaviour
         newNode = Instantiate(mapNodePrefab, mapNodeContainer).GetComponent<MapNode>();
         newNode.branch = node.branch; // Same branch for now
         node.AddChildRight(newNode);
+        // TO DO: Determine method of placing "set sequences"
     }
 
-    // TO DO: Determine method of placing "set sequences"
-
+    // Prune invalid merge flags and set the node to go forward instead if both invalid
     private void PruneInvalidMergesToForward(List<MapNode> curLayer)
     {
         int ni = 0;
         foreach (MapNode node in curLayer)
         {   
             if ((node.choice & GenerationChoice.MergeBoth) == 0) continue;
-
-            // Left check
-            if ((node.choice & GenerationChoice.MergeLeft) != 0)
-            {
-                if (ni == 0)  node.choice &= GenerationChoice.MergeRight;
-                MapNode leftNeighbour = curLayer[ni - 1];
-
-                // Check if neightbour has merge right flag
-                if ((leftNeighbour.choice & GenerationChoice.MergeRight) != 0) continue;
-
-                // Check if neightbour has forward or split
-                if ((leftNeighbour.choice & (GenerationChoice.Split | GenerationChoice.Forward)) != 0)
-                {
-                    // Check roll for success on merging into the child branch
-                    if (Random.Range(0f, 1f) <= leftNeighbour.branchInProbability) continue;
-                }
-                node.choice &= GenerationChoice.MergeRight;
-            }
-
-            // Right check
-            if ((node.choice & GenerationChoice.MergeLeft) != 0)
-            {
-                if (ni == curLayer.Count - 1)  node.choice &= GenerationChoice.MergeLeft;
-                MapNode rightNeighbour = curLayer[ni + 1];
-
-                // Check if neightbour has merge left flag
-                if ((rightNeighbour.choice & GenerationChoice.MergeLeft) != 0) continue;
-
-                // Check if neightbour has forward or split
-                if ((rightNeighbour.choice & (GenerationChoice.Split | GenerationChoice.Forward)) != 0)
-                {
-                    // Check roll for success on merging into the child branch
-                    if (Random.Range(0f, 1f) <= rightNeighbour.branchInProbability) continue;
-                }
-                node.choice &= GenerationChoice.MergeLeft;
-            }
+            CheckLeft(node, curLayer, ni);
+            CheckRight(node, curLayer, ni);
 
             // Check if fully pruned and set to forward
             if (node.choice == GenerationChoice.None)
@@ -235,6 +213,48 @@ public class MapGen : MonoBehaviour
                 DoForward(node);
             }
             ni++;
+        }
+    }
+
+    // Check for merge left flag and validity, and prune if invalid
+    private void CheckLeft(MapNode node, List<MapNode> curLayer, int ni)
+    {
+        if ((node.choice & GenerationChoice.MergeLeft) != 0)
+        {
+            if (ni == 0) { node.choice &= GenerationChoice.MergeRight; return; }
+            MapNode leftNeighbour = curLayer[ni - 1];
+
+            // Check if neightbour has merge right flag
+            if ((leftNeighbour.choice & GenerationChoice.MergeRight) != 0) return;
+
+            // Check if neightbour has forward or split
+            if ((leftNeighbour.choice & (GenerationChoice.Split | GenerationChoice.Forward)) != 0)
+            {
+                // Check roll for success on merging into the child branch
+                if (Random.Range(0f, 1f) <= leftNeighbour.branchInProbability) return;
+            }
+            node.choice &= GenerationChoice.MergeRight;      
+        }
+    }
+
+    // Check for merge right flag and validity, and prune if invalid
+    private void CheckRight(MapNode node, List<MapNode> curLayer, int ni)
+    {
+        if ((node.choice & GenerationChoice.MergeRight) != 0)
+        {
+            if (ni == 0) { node.choice &= GenerationChoice.MergeLeft; return; }
+            MapNode rightNeighbour = curLayer[ni + 1];
+
+            // Check if neightbour has merge left flag
+            if ((rightNeighbour.choice & GenerationChoice.MergeLeft) != 0) return;
+
+            // Check if neightbour has forward or split
+            if ((rightNeighbour.choice & (GenerationChoice.Split | GenerationChoice.Forward)) != 0)
+            {
+                // Check roll for success on merging into the child branch
+                if (Random.Range(0f, 1f) <= rightNeighbour.branchInProbability) return;
+            }
+            node.choice &= GenerationChoice.MergeLeft;      
         }
     }
 
@@ -250,10 +270,14 @@ public class MapGen : MonoBehaviour
         {   
             Transform layerContainer = new GameObject("Layer" + li.ToString()).transform;
             layerContainer.SetParent(mapNodeContainer, false);
+            layerContainer.Translate(Vector3.right * 4 * li);
             layerContainers.Add(layerContainer);
+            int ni = 0;
             foreach (MapNode node in curLayer)
             {
                 node.transform.SetParent(layerContainer, false);
+                node.transform.Translate(Vector3.back * (curLayer.Count - 1) * 2 + Vector3.forward * 4 * ni);
+                ni++;
             }
             li++;
         }
