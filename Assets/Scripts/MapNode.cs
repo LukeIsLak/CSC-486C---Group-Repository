@@ -6,7 +6,7 @@ public enum GenerationChoice
 {
     None        = 0b0000,
     Split       = 0b0001,
-    Continue    = 0b0010,
+    Forward     = 0b0010,
     MergeLeft   = 0b0100,
     MergeRight  = 0b1000,
     MergeBoth   = MergeLeft | MergeRight
@@ -33,6 +33,7 @@ public class MapNode : MonoBehaviour
     private List<MapNode> inNodes;              // Nodes connecting into this one
     private List<MapNode> outNodes;             // Nodes this one connects into
     public EncounterType encounter;             // The encounter of the room
+    public float branchInProbability = 0.5f;    // To be attached to the branch later. Probability of merging into this node from another.
 
 
     // Awake is called on initialization

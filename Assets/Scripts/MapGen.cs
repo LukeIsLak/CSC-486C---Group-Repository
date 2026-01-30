@@ -13,7 +13,7 @@ public class MapGen : MonoBehaviour
     public GameObject mapNodeContainer;         // Transform that will parent all created MapNodes
 
     [Header("Generation Parameters")]
-    public int layersToGenerate         = 5;            // Depth to generate until
+    public int layersToGenerate = 5;            // Depth to generate until
     public int maxWidth         = 3;            // Maximum number of branches in a single layer.
     public int randomSeed       = 0;            // The random seed to use in generation
     public bool useSetSeed      = false;        // Whether not to use to provided seed
@@ -92,49 +92,36 @@ public class MapGen : MonoBehaviour
 
     private void GenerateLayout() 
     { 
-        /*
-        For each node in each layer
-        Make generation choice
-        Split? No -> Continue? No -> Merge? No -> Continue.
-
-        Iterate again to create next layer
-        Repeat
-        */
         
         // Generate layers between start and end
         while (numLayers < layersToGenerate)
         {
+            List<MapNode> curNodesList = layersList[currentLayer];
+
             // Make first genertion choice
-            foreach (MapNode node in layersList[currentLayer])
+            foreach (MapNode node in curNodesList)
             {
                 MakeGenerationChoice(node);
-
+                if (node.choice = GenerationChoice.Forward) DoForward(node);
+                else if (node.choice = GenerationChoice.Split) DoSplit(node);
             }
-
-            // Flag invalid merges as none
-            foreach (MapNode node in layersList[currentLayer])
-            {
-                // Check if can merge, else force continue
-                // Note that if we set the choice to to continue them move
-                // onto the next one and check if it can merge, we will be
-                // biased to merging towards the lower index.
-                // So instead, set the state to None at this point,
-                // then on another iteration, find the None choices and set to
-                // continue
-            }
-
-            foreach (MapNode node in layersList[currentLayer])
+            PruneInvalidMerges(curNodesList);
+            
+            // Force fully pruned merges to forward
+            foreach (MapNode node in curNodesList)
             {
                 if (node.choice == GenerationChoice.None)
                 {
-                    node.choice = GenerationChoice.Continue;
+                    node.choice = GenerationChoice.Forward;
+                    DoForward(node);
                 }
             }
 
-            // Final pass, connect merges 
-            foreach (MapNode node in layersList[currentLayer])
+            // Final pass. Connect / Create children and append to next layer list in order
+            ni = 0;
+            foreach (MapNode node in curNodesList)
             {
-                // Check if can merge, else force continue
+
             }
 
             
@@ -147,8 +134,64 @@ public class MapGen : MonoBehaviour
 
     private void MakeGenerationChoice(MapNode node)
     {
-        // TO DO: Make choice according to probability distribution
-        node.choice = GenerationChoice.Continue;
+        // TO DO: Make choice according to probabilities
+        node.choice = GenerationChoice.Forward;
+        return;
+    }
+
+    private void PruneInvalidMerges(List<MapNode> curNodesList)
+    {
+        int ni = 0;
+        foreach (MapNode node in curNodesList)
+        {   
+            if ((node.choice & GenerationChoice.MergeBoth) == 0) continue;
+
+            // Left check
+            if ((node.choice & GenerationChoice.MergeLeft) != 0)
+            {
+                if (ni == 0)  node.choice &= GenerationChoice.MergeRight;
+                MapNode leftNeighbour = curNodesList[ni - 1];
+
+                // Check if neightbour has merge right flag
+                if ((leftNeighbour.choice & GenerationChoice.MergeRight) != 0) continue;
+
+                // Check if neightbour has forward or split
+                if ((leftNeighbour.choice & (GenerationChoice.Split | GenerationChoice.Forward)) != 0)
+                {
+                    // Check roll for success on merging into the child branch
+                    if (Random.Range(0f, 1f) <= leftNeighbour.branchInProbability) continue;
+                }
+                node.choice &= GenerationChoice.MergeRight;
+            }
+
+            // Right check
+            if ((node.choice & GenerationChoice.MergeLeft) != 0)
+            {
+                if (ni == curNodesList.Count - 1)  node.choice &= GenerationChoice.MergeLeft;
+                MapNode rightNeighbour = curNodesList[ni + 1];
+
+                // Check if neightbour has merge left flag
+                if ((rightNeighbour.choice & GenerationChoice.MergeLeft) != 0) continue;
+
+                // Check if neightbour has forward or split
+                if ((rightNeighbour.choice & (GenerationChoice.Split | GenerationChoice.Forward)) != 0)
+                {
+                    // Check roll for success on merging into the child branch
+                    if (Random.Range(0f, 1f) <= rightNeighbour.branchInProbability) continue;
+                }
+                node.choice &= GenerationChoice.MergeLeft;
+            }
+            ni++;
+        }
+    }
+
+    private void DoForward(MapNode node)
+    {
+        return;
+    }
+
+    private void DoSplit(MapNode node)
+    {
         return;
     }
 
