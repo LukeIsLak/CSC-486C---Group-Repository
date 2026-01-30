@@ -37,7 +37,6 @@ public class MapGen : MonoBehaviour
     /*********************
      Main Functionality
     *********************/
-    
 
     void Start() { DoGeneration(); }
 
@@ -92,7 +91,6 @@ public class MapGen : MonoBehaviour
 
     private void GenerateLayout() 
     { 
-        
         // Generate layers between start and end
         while (numLayers < layersToGenerate)
         {
@@ -102,23 +100,13 @@ public class MapGen : MonoBehaviour
             foreach (MapNode node in curNodesList)
             {
                 MakeGenerationChoice(node);
-                if (node.choice = GenerationChoice.Forward) DoForward(node);
-                else if (node.choice = GenerationChoice.Split) DoSplit(node);
+                if (node.choice == GenerationChoice.Forward) DoForward(node);
+                else if (node.choice == GenerationChoice.Split) DoSplit(node);
             }
+            // Prune invalid merges and force to forward if both directions invalid.
             PruneInvalidMerges(curNodesList);
             
-            // Force fully pruned merges to forward
-            foreach (MapNode node in curNodesList)
-            {
-                if (node.choice == GenerationChoice.None)
-                {
-                    node.choice = GenerationChoice.Forward;
-                    DoForward(node);
-                }
-            }
-
             // Final pass. Connect / Create children and append to next layer list in order
-            ni = 0;
             foreach (MapNode node in curNodesList)
             {
 
@@ -134,12 +122,34 @@ public class MapGen : MonoBehaviour
 
     private void MakeGenerationChoice(MapNode node)
     {
-        // TO DO: Make choice according to probabilities
+        // TO DO: Make choice according to probabilities.
+        // Where we draw these probabilities from is TBD...
         node.choice = GenerationChoice.Forward;
         return;
     }
 
-    private void PruneInvalidMerges(List<MapNode> curNodesList)
+    private void DoForward(MapNode node)
+    {
+        MapNode newNode;
+        newNode = Initialize(mapNodePrefab, mapNodeContainer).GetComponent<MapNode>();
+        newNode.branch = node.branch;
+        node.AddChildRight(newNode);
+    }
+
+    private void DoSplit(MapNode node)
+    {
+        MapNode newNode;
+        newNode = Initialize(mapNodePrefab, mapNodeContainer).GetComponent<MapNode>();
+        newNode.branch = node.branch; // Same branch for now
+        node.AddChildRight(newNode);        
+        newNode = Initialize(mapNodePrefab, mapNodeContainer).GetComponent<MapNode>();
+        newNode.branch = node.branch; // Same branch for now
+        node.AddChildRight(newNode);
+    }
+
+    // TO DO: Determine method of placing "set sequences"
+
+    private void PruneInvalidMergesToForward(List<MapNode> curNodesList)
     {
         int ni = 0;
         foreach (MapNode node in curNodesList)
@@ -181,18 +191,15 @@ public class MapGen : MonoBehaviour
                 }
                 node.choice &= GenerationChoice.MergeLeft;
             }
+
+            // Check if fully pruned and set to forward
+            if (node.choice == GenerationChoice.None)
+            {
+                node.choice = GenerationChoice.Forward;
+                DoForward(node)
+            }
             ni++;
         }
-    }
-
-    private void DoForward(MapNode node)
-    {
-        return;
-    }
-
-    private void DoSplit(MapNode node)
-    {
-        return;
     }
 
     /*********************

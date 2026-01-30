@@ -27,7 +27,7 @@ public class MapNode : MonoBehaviour
      Node Information
     *********************/
 
-    private MapBranch branch;                   // What branch does this belong to 
+    public MapBranch branch;                    // What branch does this belong to 
     public GenerationChoice choice;             // Choice made for generation
     private int numChildren;                    // Current number of children
     private List<MapNode> inNodes;              // Nodes connecting into this one
