@@ -133,8 +133,8 @@ public class MapGen : MonoBehaviour
                 else if (node.choice == GenerationChoice.Split) DoSplit(node);
             }
 
-            // Prune invalid merges and force to forward if both directions invalid.
-            PruneInvalidMergesToForward(curLayer);
+            // Prune invalid decisions and force to forward 
+            PruneInvalidToForward(curLayer);
             
             // Handle remaining merges. All are valid, so just create connections (and nodes, if needed)
             // Also, create the list for the next layer
@@ -189,7 +189,12 @@ public class MapGen : MonoBehaviour
         if (node.choice != GenerationChoice.None) return;
         // TO DO: Make choice according to probabilities.
         // Where we draw these probabilities from is TBD...
-        node.choice = GenerationChoice.Split;
+        if (Random.Range(0f, 1f) < 0.25f) node.choice = GenerationChoice.Split;
+        else 
+        {
+            if (Random.Range(0f, 1f) < 0.2f) { node.choice |= GenerationChoice.MergeLeft; }
+            if (Random.Range(0f, 1f) < 0.2f) node.choice |= GenerationChoice.MergeRight;
+        }
     }
 
     private void DoForward(MapNode node)
@@ -213,22 +218,22 @@ public class MapGen : MonoBehaviour
     }
 
     // Prune invalid merge flags and set the node to go forward instead if both invalid
-    private void PruneInvalidMergesToForward(List<MapNode> curLayer)
+    private void PruneInvalidToForward(List<MapNode> curLayer)
     {
-        int ni = 0;
+        int ni = -1;
         foreach (MapNode node in curLayer)
         {   
-            if ((node.choice & GenerationChoice.MergeBoth) == 0) continue;
+            ni++;
+            if ((node.choice & GenerationChoice.MergeBoth) == 0 && node.choice != GenerationChoice.None) continue;
             CheckLeft(node, curLayer, ni);
             CheckRight(node, curLayer, ni);
 
             // Check if fully pruned and set to forward
             if (node.choice == GenerationChoice.None)
             {
-                node.choice = GenerationChoice.Forward;
+                node.choice = GenerationChoice.Split;
                 DoForward(node);
             }
-            ni++;
         }
     }
 
@@ -257,8 +262,10 @@ public class MapGen : MonoBehaviour
     private void CheckRight(MapNode node, List<MapNode> curLayer, int ni)
     {
         if ((node.choice & GenerationChoice.MergeRight) != 0)
-        {
-            if (ni == 0) { node.choice &= GenerationChoice.MergeLeft; return; }
+        {   
+            Debug.Log(ni);
+            Debug.Log(curLayer.Count);
+            if (ni == curLayer.Count - 1) { node.choice &= GenerationChoice.MergeLeft; return; }
             MapNode rightNeighbour = curLayer[ni + 1];
 
             // Check if neightbour has merge left flag
