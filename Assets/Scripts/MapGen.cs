@@ -28,6 +28,7 @@ public class MapGen : MonoBehaviour
     private int numLayers;                      // Current number of layers
     private int currentLayerIndex;              // Current layer being operated on
     private MapNode firstNode;                  // First node to begin generation
+    private MapNode lastNode;                   // last node to end generation
 
     // Initialize data structures on wakeup
     void Awake() 
@@ -44,13 +45,21 @@ public class MapGen : MonoBehaviour
 
     void Update()
     {
+        int li = 0;
         foreach (List<MapNode> layer in layersList)
         {
             foreach (MapNode node in layer)
             {
                 foreach (MapNode child in node.outNodes)
-                    Debug.DrawLine(node.transform.position, child.transform.position, Color.green);
+                {
+                    Color toUse;
+                    if (li == 0) { toUse = Color.blue;}
+                    else if (li == layersList.Count - 2) {toUse = Color.red;}
+                    else {toUse = Color.green;}
+                    Debug.DrawLine(node.transform.position, child.transform.position, toUse);
+                }
             }
+            li++;
         }
     }
 
@@ -82,7 +91,6 @@ public class MapGen : MonoBehaviour
         // Create first node
         firstNode = Instantiate(mapNodePrefab, mapNodeContainer).GetComponent<MapNode>();
         layersList[0].Add(firstNode);
-
     }
 
     // Clear previously generated objects and reset data structures
@@ -108,11 +116,14 @@ public class MapGen : MonoBehaviour
 
     public void GenerateLayout() 
     { 
+        List<MapNode> curLayer;
+        List<MapNode> nextLayer;
+
         // Generate layers between start and end
         while (numLayers < layersToGenerate)
         {
-            List<MapNode> curLayer = layersList[currentLayerIndex];
-            List<MapNode> nextLayer = new List<MapNode>();
+            curLayer = layersList[currentLayerIndex];
+            nextLayer = new List<MapNode>();
 
             // Make first generation choice
             foreach (MapNode node in curLayer)
@@ -121,6 +132,7 @@ public class MapGen : MonoBehaviour
                 if (node.choice == GenerationChoice.Forward) DoForward(node);
                 else if (node.choice == GenerationChoice.Split) DoSplit(node);
             }
+
             // Prune invalid merges and force to forward if both directions invalid.
             PruneInvalidMergesToForward(curLayer);
             
@@ -163,17 +175,21 @@ public class MapGen : MonoBehaviour
             currentLayerIndex++;
         }
 
-        // Generate final layer and connect previous layer into it
-
-        return ;
+        // Generate final layer (node) and connect previous layer into it
+        curLayer = layersList[currentLayerIndex];
+        nextLayer = new List<MapNode>();
+        lastNode = Instantiate(mapNodePrefab, mapNodeContainer).GetComponent<MapNode>();
+        nextLayer.Add(lastNode);
+        layersList.Add(nextLayer);
+        foreach (MapNode node in curLayer) { node.AddChildLeft(lastNode); }
     }
 
     private void MakeGenerationChoice(MapNode node)
     {
+        if (node.choice != GenerationChoice.None) return;
         // TO DO: Make choice according to probabilities.
         // Where we draw these probabilities from is TBD...
-        node.choice = GenerationChoice.MergeLeft;
-        return;
+        node.choice = GenerationChoice.Split;
     }
 
     private void DoForward(MapNode node)
