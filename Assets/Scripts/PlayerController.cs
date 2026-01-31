@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     
-    [SerializeField] float speed = 5f;
-    [SerializeField] float jumpForce = 2f;
-    [SerializeField] float gravity = -9.81f;
-    [SerializeField] float xSensitivity = 100f;
-    [SerializeField] float ySensitivity = 100f;
-    [SerializeField] float rotationXlimit = 80f;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpForce = 2f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float xSensitivity = 100f;
+    [SerializeField] private float ySensitivity = 100f;
+    [SerializeField] private float rotationXlimit = 80f;
 
     private CharacterController controller;
     private Camera camera;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float rotationX; 
     private float verticalVelocity;
     private bool isJumping;
+    private bool isAttacking;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -61,12 +62,13 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
     public void OnLook(InputAction.CallbackContext context)
     {
         lookValue = context.ReadValue<Vector2>();
         //Debug.Log($"Look value: {moveDirection}");
     }
+
+
 
     private void Look()
     {
