@@ -30,7 +30,6 @@ public class MapNode2 : MonoBehaviour
     public MapBranch branch;                    // What branch does this belong to 
     public GenerationChoice2 choice;             // Choice made for generation
     private int numChildren;                    // Current number of children
-    private List<MapNode2> inNodes;              // Nodes connecting into this one
     public List<MapNode2> outNodes;              // Nodes this one connects into
     public EncounterType encounter;             // The encounter of the room
     public float branchInProbability = 1f;    // To be attached to the branch later. Probability of merging into this node from another.
@@ -42,7 +41,6 @@ public class MapNode2 : MonoBehaviour
         branch      = null;
         choice      = GenerationChoice2.None;
         numChildren = 0;
-        inNodes     = new List<MapNode2>();
         outNodes    = new List<MapNode2>();
         encounter   = EncounterType.None;
     }
@@ -69,8 +67,6 @@ public class MapNode2 : MonoBehaviour
     public MapBranch GetBranch()                { return branch; }
 
     public List<MapNode2> GetOutNodes()          { return outNodes; }
-
-    public List<MapNode2> GetInNodes()           { return inNodes;  }  
 
     public MapNode2 GetLeftmostChild()           { return numChildren == 0 ? null : outNodes[0]; }
 

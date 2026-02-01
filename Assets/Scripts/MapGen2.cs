@@ -33,17 +33,20 @@ public class MapGen2 : MonoBehaviour
      Data Structures
     *********************/
 
-    private List<List<MapNode2>> layersList;     // List whose entries are lists of the nodes at each layer
+    private List<List<MapNode2>> layersList;    // List whose entries are lists of the nodes at each layer
     private int numLayers;                      // Current number of layers
     private int currentLayerIndex;              // Current layer being operated on
-    private MapNode2 firstNode;                  // First node to begin generation
-    private MapNode2 lastNode;                   // last node to end generation
+    private MapNode2 firstNode;                 // First node to begin generation
+    private MapNode2 lastNode;                  // last node to end generation
+    private List<GenOp> choices;                // ough
+    private int created = 0;
 
     // Initialize data structures on wakeup
     void Awake() 
     { 
-        layersList = new List<List<MapNode2>>(); 
+        layersList      = new List<List<MapNode2>>(); 
         layerContainers = new List<Transform>();
+        choices         = new List<GenOp>();
     }
 
     /*********************
@@ -156,7 +159,8 @@ public class MapGen2 : MonoBehaviour
     */
     private void MakeGenerationChoice2s(List<MapNode2> curLayer)
     {
-        List<GenOp> choices = new List<GenOp>();
+        choices.Clear();
+        choices.TrimExcess();
 
         int nextSize = DetermineNextWidth(curLayer.Count);
 
@@ -167,6 +171,7 @@ public class MapGen2 : MonoBehaviour
         int nodesMade = surplusOp == GenOp.Split? 2 * Mathf.Abs(diff) : Mathf.Abs(diff);
         int costLeft = nextSize - nodesMade;
 
+        // Choose actions to consume remaining cost
         while (costLeft > 0)
         {
             // If we can do a split + merge AND we roll it, do it.
@@ -180,20 +185,14 @@ public class MapGen2 : MonoBehaviour
             choices.Add(GenOp.Forward);
             costLeft--;
         }
-        int n = choices.Count;
-        while (n > 1) 
-        {
-            n--;
-            int k = Random.Range(0, n);
-            GenOp value = choices[k];
-            choices[k] = choices[n];
-            choices[n] = value;
-        }
 
-        // Now iterate and apply generation choices appropriately
+        // Randomly poll from list and apply action to nodes in order
         int curNode = 0;
-        foreach (GenOp op in choices)
+        while(choices.Count > 0)
         {
+            int i       = Random.Range(0, choices.Count);
+            GenOp op    = choices[i];
+            choices.RemoveAt(i);
             if (op == GenOp.Forward)
             {
                 curLayer[curNode].choice = GenerationChoice2.Forward;
@@ -209,9 +208,10 @@ public class MapGen2 : MonoBehaviour
             curLayer[curNode].choice = GenerationChoice2.MergeRight;
             curLayer[curNode+1].choice = GenerationChoice2.MergeLeft;
             curNode += 2;
+
         }
     }
-
+        
     // Determine the size of the next layer
     private int DetermineNextWidth(int curSize)
     {
@@ -221,7 +221,7 @@ public class MapGen2 : MonoBehaviour
 
         // Force convergence towards a single point
         int distanceToEnd = layersToGenerate - layersList.Count;
-        curMax      = Mathf.Min(curMax, (int)Mathf.Pow(2, distanceToEnd));
+        if (distanceToEnd < 15) curMax = (int)Mathf.Min(curMax, (int)Mathf.Pow(2, distanceToEnd));
 
         // Tend to be half full at least
         curMin      = Mathf.Max(curMin, (maxWidth + maxWidth % 2)/2);
@@ -264,6 +264,7 @@ public class MapGen2 : MonoBehaviour
             {
                 foreach (MapNode2 child in node.outNodes) 
                 nextLayer.Add(child);
+
                 continue;
             }
 
@@ -282,6 +283,7 @@ public class MapGen2 : MonoBehaviour
                 if (!lmChild)
                 {
                     lmChild = Instantiate(MapNode2Prefab, MapNode2Container).GetComponent<MapNode2>();
+
                     nextLayer.Add(lmChild);
                 }
                 node.AddChildRight(lmChild);
