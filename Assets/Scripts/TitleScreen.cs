@@ -6,16 +6,22 @@ using UnityEngine.SceneManagement;
 public class TitleScreen : MonoBehaviour
 {
 
+    public GameObject MainMenu;
+    public GameObject OptionsMenu;
+
+    void Start() {
+        MainMenu.SetActive(true);
+        OptionsMenu.SetActive(false);
+
+    }
+
     public void OnPlayButton(){
         // On pressing play, load intro level
         SceneManager.LoadScene(1);
     }
 
-    //public void OnOptionsButton(){
-        //Implement this when there is an options menu created
-   // }
-
     public void OnQuitButton(){
+        // On pressing quit, quit the application
         Application.Quit();
     }
 
