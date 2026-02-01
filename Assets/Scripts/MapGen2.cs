@@ -134,9 +134,7 @@ public class MapGen2 : MonoBehaviour
             curLayer = layersList[currentLayerIndex];
             
             // Set choices
-            int curMax = Mathf.Min(curLayer.Count * 2, maxWidth);
-            Debug.Log(curMax);
-            MakeGenerationChoice2s(curLayer, Random.Range((int)(curLayer.Count/2 + 1), curMax + 1));
+            MakeGenerationChoice2s(curLayer);
 
             // Handle splits and forwards first
             foreach (MapNode2 node in curLayer)
@@ -156,23 +154,19 @@ public class MapGen2 : MonoBehaviour
     /*
     Set the generation choice of each node
     */
-    private void MakeGenerationChoice2s(List<MapNode2> curLayer, int nextSize)
+    private void MakeGenerationChoice2s(List<MapNode2> curLayer)
     {
         List<GenOp> choices = new List<GenOp>();
+
+        int nextSize = DetermineNextWidth(curLayer.Count);
 
         // Determine imbalance of size and create merges or splits
         int diff = nextSize - curLayer.Count;
         GenOp surplusOp = diff < 0 ? GenOp.Merge : GenOp.Split;
         for (int i = 0; i < Mathf.Abs(diff); i++) choices.Add(surplusOp);
-
         int nodesMade = surplusOp == GenOp.Split? 2 * Mathf.Abs(diff) : Mathf.Abs(diff);
         int costLeft = nextSize - nodesMade;
 
-        Debug.Log(curLayer.Count);
-        Debug.Log(nextSize);
-        Debug.Log(diff);
-        Debug.Log(nodesMade);
-        Debug.Log(costLeft);
         while (costLeft > 0)
         {
             // If we can do a split + merge AND we roll it, do it.
@@ -216,6 +210,25 @@ public class MapGen2 : MonoBehaviour
             curLayer[curNode+1].choice = GenerationChoice2.MergeLeft;
             curNode += 2;
         }
+    }
+
+    // Determine the size of the next layer
+    private int DetermineNextWidth(int curSize)
+    {
+        // Mathematical upper and lower bounds
+        int curMax  = Mathf.Min(curSize * 2, maxWidth);
+        int curMin  = (curSize + curSize % 2) / 2;
+
+        // Force convergence towards a single point
+        int distanceToEnd = layersToGenerate - layersList.Count;
+        curMax      = Mathf.Min(curMax, (int)Mathf.Pow(2, distanceToEnd));
+
+        // Tend to be half full at least
+        curMin      = Mathf.Max(curMin, (maxWidth + maxWidth % 2)/2);
+        // Clamp to max
+        curMin      = Mathf.Min(curMax, curMin);    
+
+        return Random.Range(curMin, curMax + 1);
     }
 
     private void DoForward(MapNode2 node)
