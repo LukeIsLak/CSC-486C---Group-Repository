@@ -160,8 +160,9 @@ public class DeckSystems : MonoBehaviour
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
-            if (0 <= i || i < 5) {
+            if (i < 5) {
                 hand[i] = passedDeck[i];
+                currentHandSize++;
             } else {
                 addCardToDeck(passedDeck[i]);
             }
@@ -180,10 +181,12 @@ public class DeckSystems : MonoBehaviour
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
-            if (0 <= i || i < 5) {
+            if (i < 5) {
                 returnList.Add(hand[i]);
+                currentHandSize--;
             } else {
                 returnList.Add(deck.Dequeue());
+                currentDeckSize--;
             }
         }
         return returnList;
