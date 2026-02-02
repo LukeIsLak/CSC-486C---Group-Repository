@@ -154,6 +154,9 @@ public class DeckSystems : MonoBehaviour
     public bool loadDeck(List<GameObject> passedDeck, int size) {
         //make sure the deck is empty
         deck.Clear();
+        PlayerDeckCosmectic.Clear();
+
+        PlayerDeckCosmectic = passedDeck;
 
         //set the size of loaded deck
         deckSize = size;
@@ -161,6 +164,7 @@ public class DeckSystems : MonoBehaviour
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
             if (i < 5) {
+                Debug.Log(hand[4]);
                 hand[i] = passedDeck[i];
                 currentHandSize++;
             } else {
@@ -178,17 +182,19 @@ public class DeckSystems : MonoBehaviour
     public List<GameObject> storeDeck() {
         // array that will be used to send deck information out of the system
         List<GameObject> returnList = new List<GameObject>();
-
+        
         // loop through hand first then move on to the deck
-        for (int i = 0; i < deckSize; i++) {
+        for (int i = 0; i < (currentDeckSize + currentHandSize); i++) { 
             if (i < 5) {
                 returnList.Add(hand[i]);
-                currentHandSize--;
+                
             } else {
                 returnList.Add(deck.Dequeue());
-                currentDeckSize--;
+                
             }
         }
+        currentDeckSize = 0;
+        currentHandSize = 0;
         return returnList;
     }
 
