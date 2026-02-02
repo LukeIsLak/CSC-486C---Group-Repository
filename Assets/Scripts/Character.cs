@@ -6,21 +6,23 @@ using UnityEngine.InputSystem;
 public class Character : MonoBehaviour
 {
     [Header("Attack")]
-    [SerializeField] private float attackDistance = 1.0f;
+    [SerializeField] private float attackRange = 2.0f;
     [SerializeField] private float attackDelay = 1.0f;
-    [SerializeField] private float attackSpeed = 1.0f;
     [SerializeField] private float attackDamage = 1.0f;
     [SerializeField] private int attackCount = 3;
-
+    [SerializeField] private float attackRadius = 0.4f;
+    [SerializeField] private float attackHitStopDuration = 0.03f;
+    [SerializeField] private LayerMask enemyLayer;
     [Header("Animation State")]
     [SerializeField] private const string ATTACK1 = "Attack 1";
     [SerializeField] private const string ATTACK2 = "Attack 2";
     [SerializeField] private const string ATTACK3 = "Attack 3";
     [SerializeField] private const string ATTACKIDLE = "Idle";
 
-    private Animator animator;
+    private Animator swordAnimator;
     private Camera cam;
-    private LayerMask enemyLayer;
+    
+    private Coroutine hitStopCoroutine;
 
     private string currentAnimationState;
     private bool isAttacking;
@@ -28,7 +30,7 @@ public class Character : MonoBehaviour
     private int comboIndex = 0;
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
+        swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
     }
     public void OnAttack(InputAction.CallbackContext context)
@@ -41,8 +43,8 @@ public class Character : MonoBehaviour
         if(currentAnimationState == newState) return;
 
         currentAnimationState = newState;
-        //Debug.Log(currentAnimationState);
-        animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
+        Debug.Log(currentAnimationState);
+        swordAnimator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
 
     }
 
@@ -76,14 +78,30 @@ public class Character : MonoBehaviour
     }
 
     // call this in animation event
-    public void Raycast()
+    public void AttackRaycast()
     {
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, enemyLayer))
+        if(Physics.SphereCast(cam.transform.position, attackRadius,cam.transform.forward,out RaycastHit hit, attackRange, enemyLayer))
         {
-            // Deal damage to hit
+            //Debug.Log($"Hit: {hit.collider.name} ");
+            TriggerHitStop(attackHitStopDuration);
+            
         }
     }
+
+    private void TriggerHitStop(float duration)
+    {
+        if(hitStopCoroutine != null) StopCoroutine(hitStopCoroutine);
+        hitStopCoroutine = StartCoroutine(HitStopCoroutine(duration));
+    }
     
+    private IEnumerator HitStopCoroutine(float duration)
+    {
+        float originalSpeed = swordAnimator.speed;
+        swordAnimator.speed = 0f;
+        yield return new WaitForSecondsRealtime(duration);
+        swordAnimator.speed = originalSpeed;
+        hitStopCoroutine = null;
+    }
     // call this in animation event
     public void ResetAttack()
     {

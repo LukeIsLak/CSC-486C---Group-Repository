@@ -10,9 +10,9 @@ public class SwordAnimationEvent : MonoBehaviour
         character = GetComponentInParent<Character>();
     }
 
-    public void RayCast()
+    public void AttackRayCast()
     {
-        character.Raycast();
+        character.AttackRaycast();
     }
 
     public void ResetAttack()
