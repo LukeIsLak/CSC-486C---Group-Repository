@@ -28,6 +28,11 @@ public class Character : MonoBehaviour
     private bool isAttacking;
     private float lastAttackTime;
     private int comboIndex = 0;
+
+
+    // For queuing next attack
+    private bool canQueue;
+    private bool queuedNextAttack;
     private void Awake()
     {
         swordAnimator = GetComponentInChildren<Animator>();
@@ -35,7 +40,13 @@ public class Character : MonoBehaviour
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed) Attack();
+        if (!context.performed) return;
+        if (isAttacking && canQueue)
+        {
+            queuedNextAttack = true;
+            return;
+        }
+        Attack();
     }
 
     private void ChangeAnimationState(string newState)
@@ -103,9 +114,27 @@ public class Character : MonoBehaviour
         hitStopCoroutine = null;
     }
     // call this in animation event
-    public void ResetAttack()
+    public void EndAttack()
     {
         isAttacking = false;
+        canQueue = false;
+        if (queuedNextAttack)
+        {
+            queuedNextAttack = false;
+            Attack();
+            return;
+        }
         ChangeAnimationState(ATTACKIDLE);
     }
+
+    public void OpenComboWindow()
+    {
+        canQueue = true;
+    }
+
+    public void CloseComboWindow()
+    {
+        canQueue = true;
+    }
+
 }

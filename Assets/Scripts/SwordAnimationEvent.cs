@@ -15,8 +15,18 @@ public class SwordAnimationEvent : MonoBehaviour
         character.AttackRaycast();
     }
 
-    public void ResetAttack()
+    public void EndAttack()
     {
-        character.ResetAttack();
+        character.EndAttack();
+    }
+
+    public void OpenComboWindow()
+    {
+        character.OpenComboWindow();
+    }
+
+    public void CloseComboWindow()
+    {
+        character.CloseComboWindow();
     }
 }
