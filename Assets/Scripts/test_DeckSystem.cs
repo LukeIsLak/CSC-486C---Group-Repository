@@ -9,7 +9,7 @@ public class test_deckSystem : MonoBehaviour
     //note all of these test are manal and can be viewed in the decksystem test scene
     public DeckSystems deckSystem;
     public TMP_Text output;
-    List<GameObject> testDeck;
+    public GameObject[] testDeck;
 
     // set up mock cards and deck to be used for testing
     void Start()
@@ -30,7 +30,7 @@ public class test_deckSystem : MonoBehaviour
         GameObject fourteen = new GameObject("Card14");
         GameObject fifteen = new GameObject("Card15");
 
-        testDeck = new List<GameObject> { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen };
+        testDeck = new GameObject[] { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen };
     }
 
     /// <summary>
@@ -40,20 +40,20 @@ public class test_deckSystem : MonoBehaviour
         //load deck in to the system and then shuffle it and the hand
         deckSystem.loadDeck(testDeck, 15);
         deckSystem.shuffleIncHand();
-
+        
         // strings used to put information in to tmp text
         string hand = "";
         string deck = "";
         //get deck back from system
-        List<GameObject> resultList = deckSystem.storeDeck();
+        GameObject[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
-        for (int i = 0; i < resultList.Count; i++) {
+        for (int i = 0; i < resultArray.Length; i++) {
             if (i < 5) {
-                hand += resultList[i].name + ", ";
+                hand += resultArray[i].name + ", ";
             }
             else {
-                deck += resultList[i].name + ", ";
+                deck += resultArray[i].name + ", ";
             }
         }
 
@@ -73,7 +73,7 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
 
         // pull information from deck and prep to be outputted
-        for (int i = 0; i < testDeck.Count; i++) {
+        for (int i = 0; i < testDeck.Length; i++) {
             if (i < 5) {
                 hand += deckSystem.hand[i].name + ", ";
             } else {
@@ -96,14 +96,14 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        List<GameObject> resultList = deckSystem.storeDeck();
+        GameObject[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
-        for (int i = 0; i < resultList.Count; i++) {
+        for (int i = 0; i < resultArray.Length; i++) {
             if (i < 5) {
-                hand += resultList[i].name + ", ";
+                hand += resultArray[i].name + ", ";
             } else {
-                deck += resultList[i].name + ", ";
+                deck += resultArray[i].name + ", ";
             }
         }
 
@@ -124,14 +124,14 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        List<GameObject> resultList = deckSystem.storeDeck();
+        GameObject[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
-        for (int i = 0; i < resultList.Count; i++) {
+        for (int i = 0; i < resultArray.Length; i++) {
             if (i < 5) {
-                hand += resultList[i].name + ", ";
+                hand += resultArray[i].name + ", ";
             } else {
-                deck += resultList[i].name + ", ";
+                deck += resultArray[i].name + ", ";
             }
         }
 
@@ -153,18 +153,18 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        List<GameObject> resultList = deckSystem.storeDeck();
+        GameObject[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
-        for (int i = 0; i < resultList.Count; i++) {
+        for (int i = 0; i < resultArray.Length; i++) {
             if (i < 5) {
-                if (resultList[i] == null) {
+                if (resultArray[i] == null) {
                     hand += " null ";
                 } else {
-                    hand += resultList[i].name + ", ";
+                    hand += resultArray[i].name + ", ";
                 }
             } else {
-                deck += resultList[i].name + ", ";
+                deck += resultArray[i].name + ", ";
             }
         }
 
@@ -205,18 +205,18 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        List<GameObject> resultList = deckSystem.storeDeck();
+        GameObject[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
-        for (int i = 0; i < resultList.Count; i++){
+        for (int i = 0; i < resultArray.Length; i++){
             if (i < 5){
-                if (resultList[i] == null){
+                if (resultArray[i] == null){
                     hand += " null ";
                 } else {
-                    hand += resultList[i].name + ", ";
+                    hand += resultArray[i].name + ", ";
                 }
             } else {
-                deck += resultList[i].name + ", ";
+                deck += resultArray[i].name + ", ";
             }
         }
 
@@ -260,18 +260,18 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        List<GameObject> resultList = deckSystem.storeDeck();
+        GameObject[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
-        for (int i = 0; i < resultList.Count; i++) {
+        for (int i = 0; i < resultArray.Length; i++) {
             if (i < 5) {
-                if (resultList[i] == null) {
+                if (resultArray[i] == null) {
                     hand += " null ";
                 } else {
-                    hand += resultList[i].name + ", ";
+                    hand += resultArray[i].name + ", ";
                 }
             } else {
-                deck += resultList[i].name + ", ";
+                deck += resultArray[i].name + ", ";
             }
         }
 

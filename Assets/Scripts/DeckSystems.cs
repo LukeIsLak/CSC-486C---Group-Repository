@@ -5,9 +5,6 @@ using UnityEngine;
 // idea of this system being its created at the begining of the game and stays present through-out all scenes
 public class DeckSystems : MonoBehaviour
 {
-    //stores a version of the deck to be used for card inspections and general deck viewing, will be the deck loaded in at the begining of encounters
-    public List<GameObject> PlayerDeckCosmectic = new List<GameObject>();
-
     // holds GameObject reference/information of what cards are currently in the players hand
     // will be updated by drawcard()
     public GameObject[] hand = new GameObject[5];
@@ -134,6 +131,9 @@ public class DeckSystems : MonoBehaviour
         addCardToDeck(hand[HANDSLOT4INDEX]);
         addCardToDeck(hand[HANDSLOT5INDEX]);
 
+        //hand now empty
+        currentHandSize = 0;
+
         //shuffle the deck now it has the players hand in it
         shuffleExcHand();
 
@@ -151,12 +151,15 @@ public class DeckSystems : MonoBehaviour
     /// <param name="passedDeck"></param>
     /// <param name="size"></param>
     /// <returns> will return true if sucsesful </returns>
-    public bool loadDeck(List<GameObject> passedDeck, int size) {
-        //make sure the deck is empty
+    public bool loadDeck(GameObject[] passedDeck, int size) {
+        //make sure the deck and discard is empty
         deck.Clear();
-        PlayerDeckCosmectic.Clear();
+        discard.Clear();
 
-        PlayerDeckCosmectic = passedDeck;
+        //make sure sizes are reset before loading deck
+        deckSize = 0;
+        currentHandSize = 0;
+        currentDeckSize = 0;
 
         //set the size of loaded deck
         deckSize = size;
@@ -164,7 +167,6 @@ public class DeckSystems : MonoBehaviour
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
             if (i < 5) {
-                Debug.Log(hand[4]);
                 hand[i] = passedDeck[i];
                 currentHandSize++;
             } else {
@@ -179,23 +181,24 @@ public class DeckSystems : MonoBehaviour
     /// takes the current deck state and loads it in to an array for storage (think exiting the game)
     /// </summary>
     /// <returns> an array with the first five slot representing the hand and the next ten representing the deck </returns>
-    public List<GameObject> storeDeck() {
+    public GameObject[] storeDeck() {
         // array that will be used to send deck information out of the system
-        List<GameObject> returnList = new List<GameObject>();
-        
+        GameObject[] returnArray = new GameObject[currentDeckSize + currentHandSize];
+
         // loop through hand first then move on to the deck
         for (int i = 0; i < (currentDeckSize + currentHandSize); i++) { 
             if (i < 5) {
-                returnList.Add(hand[i]);
+                returnArray[i] = hand[i];
                 
             } else {
-                returnList.Add(deck.Dequeue());
+                returnArray[i] = deck.Dequeue();
                 
             }
         }
+
         currentDeckSize = 0;
         currentHandSize = 0;
-        return returnList;
+        return returnArray;
     }
 
     /// <summary>
