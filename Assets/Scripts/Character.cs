@@ -94,6 +94,9 @@ public class Character : MonoBehaviour
         if(Physics.SphereCast(cam.transform.position, attackRadius,cam.transform.forward,out RaycastHit hit, attackRange, enemyLayer))
         {
             //Debug.Log($"Hit: {hit.collider.name} ");
+
+            var healthComponent = hit.collider.GetComponentInParent<Health>();
+            if (healthComponent != null) healthComponent.TakeDamage(attackDamage);
             TriggerHitStop(attackHitStopDuration);
             
         }
@@ -134,7 +137,7 @@ public class Character : MonoBehaviour
 
     public void CloseComboWindow()
     {
-        canQueue = true;
+        canQueue = false;
     }
 
 }
