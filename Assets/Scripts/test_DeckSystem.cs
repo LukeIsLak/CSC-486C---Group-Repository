@@ -9,28 +9,30 @@ public class test_deckSystem : MonoBehaviour
     //note all of these test are manal and can be viewed in the decksystem test scene
     public DeckSystems deckSystem;
     public TMP_Text output;
-    public GameObject[] testDeck;
+    public Cards[] testDeck;
+
+    public Cards fireball;
 
     // set up mock cards and deck to be used for testing
     void Start()
     {
-        GameObject one = new GameObject("Card1");
-        GameObject two = new GameObject("Card2");
-        GameObject three = new GameObject("Card3");
-        GameObject four = new GameObject("Card4");
-        GameObject five = new GameObject("Card5");
-        GameObject six = new GameObject("Card6");
-        GameObject seven = new GameObject("Card7");
-        GameObject eight = new GameObject("Card8");
-        GameObject nine = new GameObject("Card9");
-        GameObject ten = new GameObject("Card10");
-        GameObject eleven = new GameObject("Card11");
-        GameObject twelve = new GameObject("Card12");
-        GameObject thirteen = new GameObject("Card13");
-        GameObject fourteen = new GameObject("Card14");
-        GameObject fifteen = new GameObject("Card15");
+        Cards one = fireball;
+        Cards two = fireball;
+        Cards three = fireball;
+        Cards four = fireball;
+        Cards five = fireball;
+        Cards six = fireball;
+        Cards seven = fireball;
+        Cards eight = fireball;
+        Cards nine = fireball;
+        Cards ten = fireball;
+        Cards eleven = fireball;
+        Cards twelve = fireball;
+        Cards thirteen = fireball;
+        Cards fourteen = fireball;
+        Cards fifteen = fireball;
 
-        testDeck = new GameObject[] { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen };
+        testDeck = new Cards[] { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen };
     }
 
     /// <summary>
@@ -45,7 +47,7 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -96,7 +98,7 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -124,7 +126,7 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -153,7 +155,7 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -205,7 +207,7 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++){
@@ -260,7 +262,7 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {

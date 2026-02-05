@@ -7,7 +7,7 @@ public class DeckSystems : MonoBehaviour
 {
     // holds GameObject reference/information of what cards are currently in the players hand
     // will be updated by drawcard()
-    public GameObject[] hand = new GameObject[5];
+    public Cards[] hand = new Cards[5];
     //let the system know how many cards are currently in a player hand
     public int currentHandSize = 0;
     
@@ -26,7 +26,7 @@ public class DeckSystems : MonoBehaviour
     const int EMPTYHANDSIZE = 0;
 
     // The queue functions as the deck, with dequeue being equivelent to drawing a card, enqueue would be the same as putting a card back in to the deck at the bottom
-    public Queue<GameObject> deck = new Queue<GameObject>();
+    public Queue<Cards> deck = new Queue<Cards>();
 
     // used out of combat (total deck size)
     public int deckSize;
@@ -38,7 +38,7 @@ public class DeckSystems : MonoBehaviour
     const int MAXDECKSIZE = 15;
 
     //store any card that has been used
-    public List<GameObject> discard = new List<GameObject>();
+    public List<Cards> discard = new List<Cards>();
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +65,7 @@ public class DeckSystems : MonoBehaviour
     /// ASSUMPTION: when a card is colected the check for deck size happens, this function is for adding a used card back in to the deck
     /// </summary>
     /// <param name="card"></param>
-    public void addCardToDeck(GameObject card)
+    public void addCardToDeck(Cards card)
     {
         // add card to deck
         deck.Enqueue(card);
@@ -77,10 +77,10 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     /// <param name="handslot"></param>
     /// <returns> null if handslot is invalid (less than 0 or greater than 5) or the card draw (GameObject) </returns>
-    public GameObject drawCard(int handslot)
+    public Cards drawCard(int handslot)
     {
         // remove first card from deck
-        GameObject card = deck.Dequeue();
+        Cards card = deck.Dequeue();
 
         // check handslot is valid
         if (handslot < 0 || handslot > 4) { 
@@ -97,11 +97,11 @@ public class DeckSystems : MonoBehaviour
     }
 
     /// <summary>
-    /// will suffle the player hand but will exclude any card assigned to the player hand, insperation: https://en.wikipedia.org/wiki/Fisher–Yates_shuffle
+    /// will suffle the player hand but will exclude any card assigned to the player hand, insperation: https://en.wikipedia.org/wiki/Fisherï¿½Yates_shuffle
     /// </summary>
     public void shuffleExcHand() {
         //temporary list to aid in suffeling (abbility to pull specific indexes) 
-        List<GameObject> sortingList = new List<GameObject>();
+        List<Cards> sortingList = new List<Cards>();
         int listSize = currentDeckSize;
         currentDeckSize = 0;
 
@@ -151,7 +151,7 @@ public class DeckSystems : MonoBehaviour
     /// <param name="passedDeck"></param>
     /// <param name="size"></param>
     /// <returns> will return true if sucsesful </returns>
-    public bool loadDeck(GameObject[] passedDeck, int size) {
+    public bool loadDeck(Cards[] passedDeck, int size) {
         //make sure the deck and discard is empty
         deck.Clear();
         discard.Clear();
@@ -181,9 +181,9 @@ public class DeckSystems : MonoBehaviour
     /// takes the current deck state and loads it in to an array for storage (think exiting the game)
     /// </summary>
     /// <returns> an array with the first five slot representing the hand and the next ten representing the deck </returns>
-    public GameObject[] storeDeck() {
+    public Cards[] storeDeck() {
         // array that will be used to send deck information out of the system
-        GameObject[] returnArray = new GameObject[currentDeckSize + currentHandSize];
+        Cards[] returnArray = new Cards[currentDeckSize + currentHandSize];
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < (currentDeckSize + currentHandSize); i++) { 
