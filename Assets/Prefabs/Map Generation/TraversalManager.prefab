@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1542659884841498409
+--- !u!1 &3586655531442555394
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5535742977307355100}
-  - component: {fileID: 5979531403691336936}
+  - component: {fileID: 6826904225101438097}
+  - component: {fileID: 7488399860724131802}
   m_Layer: 0
-  m_Name: MapGenerator2
+  m_Name: TraversalManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5535742977307355100
+--- !u!4 &6826904225101438097
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542659884841498409}
+  m_GameObject: {fileID: 3586655531442555394}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.436935, y: -154.36397, z: 52.415924}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5979531403691336936
+--- !u!114 &7488399860724131802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542659884841498409}
+  m_GameObject: {fileID: 3586655531442555394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0305f732937a5f469592d907e1ab97e, type: 3}
+  m_Script: {fileID: 11500000, guid: 10fb8d3cfbbac6e459b3e32109ba175d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapNode2Prefab: {fileID: 8588258619676421314, guid: 2a2c48b94e95e764391198dc094718f2, type: 3}
-  MapNode2Container: {fileID: 0}
+  layoutGeneratorPrefab: {fileID: 1542659884841498409, guid: e227d64ebbf116348a4974f253c7f4d6, type: 3}
+  mapEncounterPrefab: {fileID: 2838874819895571372, guid: d4c14d69036dffe459cb999afdb94ae6, type: 3}
   layerContainers: []
-  layersToGenerate: 5
-  maxWidth: 3
-  randomSeed: 0
-  useSetSeed: 0
+  hoveredEncounter: {fileID: 0}
+  selectedEncounter: {fileID: 0}

@@ -13,14 +13,13 @@ public enum GenOp
 
 public class MapGen2 : MonoBehaviour
 {
+    // Assign in prefab
+    public GameObject MapNode2Prefab;           // Prefab for MapNode2s
     
     /*********************
      Generation Parameters
     *********************/
 
-    public GameObject MapNode2Prefab;           // Prefab for MapNode2s
-    public Transform MapNode2Container;         // Transform that will parent all created MapNode2s
-    public List<Transform> layerContainers;     // List of the transforms containing each layer
 
     [Header("Generation Parameters")]
     public int layersToGenerate = 5;            // Depth to generate until
@@ -32,14 +31,14 @@ public class MapGen2 : MonoBehaviour
     /*********************
      Data Structures
     *********************/
-
+    public Transform MapNode2Container;         // Transform that will parent all created MapNode2s
+    public List<Transform> layerContainers;     // List of the transforms containing each layer
     private List<List<MapNode2>> layersList;    // List whose entries are lists of the nodes at each layer
     private int numLayers;                      // Current number of layers
     private int currentLayerIndex;              // Current layer being operated on
     private MapNode2 firstNode;                 // First node to begin generation
     private MapNode2 lastNode;                  // last node to end generation
     private List<GenOp> choices;                // ough
-    private int created = 0;
 
     // Initialize data structures on wakeup
     void Awake() 
@@ -74,7 +73,7 @@ public class MapGen2 : MonoBehaviour
     }
 
     // Perform a compelete round of generation  
-    List<List<MapNode2>> DoGeneration()
+    public List<List<MapNode2>> DoGeneration()
     {
         Initialize();
         GenerateLayout();
