@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SwordAnimationEvent : MonoBehaviour
 {   
-    private Character character;
+    private PlayerCharacter character;
     private void Awake()
     {
-        character = GetComponentInParent<Character>();
+        character = GetComponentInParent<PlayerCharacter>();
     }
 
     public void AttackRayCast()

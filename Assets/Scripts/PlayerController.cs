@@ -12,10 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float xSensitivity = 100f;
     [SerializeField] private float ySensitivity = 100f;
     [SerializeField] private float rotationXlimit = 80f;
-
+    [SerializeField] private CharacterData characterData;
     private CharacterController controller;
     private Camera camera;
-
     private Vector2 moveDirection;
     private Vector2 lookValue;
 

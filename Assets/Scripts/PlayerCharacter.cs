@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Character : MonoBehaviour
+public class PlayerCharacter : MonoBehaviour
 {
     [Header("Attack")]
     [SerializeField] private float attackRange = 2.0f;
@@ -13,30 +13,34 @@ public class Character : MonoBehaviour
     [SerializeField] private float attackRadius = 0.4f;
     [SerializeField] private float attackHitStopDuration = 0.03f;
     [SerializeField] private LayerMask enemyLayer;
+
     [Header("Animation State")]
     [SerializeField] private const string ATTACK1 = "Attack 1";
     [SerializeField] private const string ATTACK2 = "Attack 2";
     [SerializeField] private const string ATTACK3 = "Attack 3";
     [SerializeField] private const string ATTACKIDLE = "Idle";
 
+    [Header("References")]
+    [SerializeField] private CharacterData playerData;
+
     private Animator swordAnimator;
     private Camera cam;
-    
+    private Health healthComponent;
     private Coroutine hitStopCoroutine;
-
     private string currentAnimationState;
     private bool isAttacking;
     private float lastAttackTime;
     private int comboIndex = 0;
 
-
-    // For queuing next attack
+    // For checking when to queue and queue next attack
     private bool canQueue;
     private bool queuedNextAttack;
     private void Awake()
     {
         swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
+        healthComponent = GetComponent<Health>();
+        healthComponent.Init(playerData.maxHealth);
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -138,6 +142,15 @@ public class Character : MonoBehaviour
     public void CloseComboWindow()
     {
         canQueue = false;
+    }
+
+    private void Update()
+    {
+        // for testing player health
+        if (Input.GetKeyDown(KeyCode.F)) 
+        {
+            healthComponent.TakeDamage(10);
+        }
     }
 
 }

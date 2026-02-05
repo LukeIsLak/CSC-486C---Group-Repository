@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Health health;
-    public EnemyData enemyData;
+    [SerializeField] private CharacterData enemyData;
 
     private void Awake()
     {
