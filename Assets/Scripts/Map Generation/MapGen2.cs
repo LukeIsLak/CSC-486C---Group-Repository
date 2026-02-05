@@ -18,8 +18,8 @@ public class MapGen2 : MonoBehaviour
      Generation Parameters
     *********************/
 
-    public GameObject MapNode2Prefab;            // Prefab for MapNode2s
-    public Transform MapNode2Container;          // Transform that will parent all created MapNode2s
+    public GameObject MapNode2Prefab;           // Prefab for MapNode2s
+    public Transform MapNode2Container;         // Transform that will parent all created MapNode2s
     public List<Transform> layerContainers;     // List of the transforms containing each layer
 
     [Header("Generation Parameters")]
@@ -53,8 +53,6 @@ public class MapGen2 : MonoBehaviour
      Main Functionality
     *********************/
 
-    void Start() { DoGeneration(); }
-
     void Update()
     {
         int li = 0;
@@ -76,11 +74,12 @@ public class MapGen2 : MonoBehaviour
     }
 
     // Perform a compelete round of generation  
-    void DoGeneration()
+    List<List<MapNode2>> DoGeneration()
     {
         Initialize();
         GenerateLayout();
         DoVisualization();
+        return layersList;
     }
 
     /*********************
@@ -90,6 +89,7 @@ public class MapGen2 : MonoBehaviour
     // Reset data structures, variables, random seed etc. for generation
     public void Initialize()
     {
+        ClearGenerationObjects();
         // Create parent container for MapNode2s if none provided
         MapNode2Container = MapNode2Container == null ?  new GameObject("MapNode2 Container").transform : MapNode2Container;
 
@@ -97,7 +97,6 @@ public class MapGen2 : MonoBehaviour
         randomSeed = useSetSeed ? randomSeed : (int)System.DateTime.Now.Ticks;
         Random.InitState(randomSeed);
 
-        ClearGenerationObjects();
         layersList.Add(new List<MapNode2>());
 
         // Create first node
@@ -106,7 +105,7 @@ public class MapGen2 : MonoBehaviour
     }
 
     // Clear previously generated objects and reset data structures
-    void ClearGenerationObjects() 
+    public void ClearGenerationObjects() 
     {
         // Destroy every game object and then clear references
         foreach (List<MapNode2> layer in layersList)
@@ -120,6 +119,8 @@ public class MapGen2 : MonoBehaviour
 
         foreach (Transform lc in layerContainers) { Destroy(lc.gameObject); }
         layerContainers.Clear();
+        
+        if (MapNode2Container != null) Destroy(MapNode2Container.gameObject);
     }
 
     /*********************

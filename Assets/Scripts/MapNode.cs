@@ -12,15 +12,6 @@ public enum GenerationChoice
     MergeBoth   = MergeLeft | MergeRight
 }
 
-public enum EncounterType
-{
-    None        = 0b0000,
-    Enemies     = 0b0001,
-    Boss        = 0b0010,
-    Shop        = 0b0100,
-    Treasure    = 0b1000,
-}
-
 public class MapNode : MonoBehaviour
 {
     /*********************
