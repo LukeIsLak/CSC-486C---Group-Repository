@@ -21,9 +21,11 @@ public class MapEncounter : MonoBehaviour
     public bool isCompleted;
     public bool isHovered;
     public bool isSelected;
+
     public List<MapEncounter> children;
     public Color visColor;
     public float visAlpha;
+    public TraversalManager traversalManager;
 
     // Internal reference 
     private Transform visual;
@@ -41,18 +43,12 @@ public class MapEncounter : MonoBehaviour
         isSelected      = false;
         children        = new List<MapEncounter>();
         visColor        = Color.white;
-        visAlpha        = 1f;
+        visAlpha        = 0.2f;
         visual          = transform.Find("Cylinder");
 
         crimson         = new Color(0.8627452f/2, 0.07843138f/2, 0.2352941f/2, 1f);
         gold            = new Color(0.854902f, 0.6470588f, 0.1254902f, 1f);
         goldenRod       = new Color(1f, 0.8431373f, 0f, 1f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /**********************************
@@ -73,29 +69,56 @@ public class MapEncounter : MonoBehaviour
     public void SetEncounter(EncounterType enc)
     {
         encounter = enc;
-        if (enc == EncounterType.Start) { SetVisColor(Color.blue); return; }
-        if (enc == EncounterType.Shop) { SetVisColor(goldenRod); return; }
-        if (enc == EncounterType.Loot){ SetVisColor(gold); return; }
-        if (enc == EncounterType.Boss) { SetVisColor(crimson); return; }
-        if (enc == EncounterType.Dungeon) { SetVisColor(Color.red); return; }
+        UpdateAppearance();
     }
 
     /**********************************
     ********** Visualization **********
     **********************************/
+
+    public void SetIsAccessible(bool val)
+    {
+        isAccessible = val;
+        UpdateAppearance();
+    }
+    public void SetIsCompleted(bool val)
+    {
+        isCompleted = val;
+        UpdateAppearance();
+    }
+    public void SetIsHovered(bool val)
+    {
+        isHovered = val;
+        UpdateAppearance();
+    }
+    public void SetIsSelected(bool val)
+    {
+        isSelected = val;
+        UpdateAppearance();
+    }
     public void UpdateAppearance()
     {
+        if (encounter == EncounterType.Start)     visColor = Color.blue;
+        if (encounter == EncounterType.Shop)      visColor = goldenRod;
+        if (encounter == EncounterType.Loot)      visColor = gold;
+        if (encounter == EncounterType.Boss)      visColor = crimson;
+        if (encounter == EncounterType.Dungeon)   visColor = Color.red;
+        if (isSelected) visColor = Color.white;
+
+        if (!isAccessible) visAlpha = 0.3f;
+        else if (isHovered || isCompleted || isSelected) visAlpha = 1.0f;
+        else visAlpha = 0.3f;
+        
         Color newColor = new Color(visColor.r, visColor.g, visColor.b, visAlpha);
         visual.GetComponent<Renderer>().material.color = newColor;
     }
-    public void SetVisAlpha(float a)
+    
+    // Update is called once per frame
+    void Update()
     {
-        visAlpha = a;
-        UpdateAppearance();
-    }
-    public void SetVisColor(Color c)
-    {
-        visColor = c;
-        UpdateAppearance();
+        if (Input.GetMouseButtonDown(0) && isHovered)
+        {
+            traversalManager?.ReceiveClick(this);
+        }
     }
 }

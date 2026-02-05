@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7138153235184318349}
   - component: {fileID: 8394463528707355370}
   - component: {fileID: 1802804637427506934}
-  - component: {fileID: 1205155683594348522}
+  - component: {fileID: 4570203858957310565}
+  - component: {fileID: 2046568454605488253}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be823a06ae0ef4047ae8438477da30b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,8 +85,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1205155683594348522
-CapsuleCollider:
+--- !u!64 &4570203858957310565
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,11 +103,23 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2046568454605488253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673362268742758846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e727452f69e35429f0414dc9eda17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 6862399530391398374}
 --- !u!1 &2838874819895571372
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +130,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6998156638420727791}
   - component: {fileID: 6862399530391398374}
-  - component: {fileID: 2487848248027216702}
   m_Layer: 0
   m_Name: MapEncounter
   m_TagString: Untagged
@@ -161,25 +173,3 @@ MonoBehaviour:
   children: []
   visColor: {r: 0, g: 0, b: 0, a: 0}
   visAlpha: 0
---- !u!64 &2487848248027216702
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2838874819895571372}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}

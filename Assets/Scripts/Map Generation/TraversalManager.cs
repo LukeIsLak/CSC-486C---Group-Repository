@@ -15,7 +15,6 @@ public class TraversalManager : MonoBehaviour
     public List<Transform> layerContainers;
 
     // Related to traversal
-    public MapEncounter hoveredEncounter;
     public MapEncounter selectedEncounter;
 
     void Awake()
@@ -66,6 +65,7 @@ public class TraversalManager : MonoBehaviour
 
         foreach (Transform lc in layerContainers) { Destroy(lc.gameObject); }
         layerContainers.Clear();
+        selectedEncounter = null;
     }
 
     // Convert generated layout into structure of encounter nodes
@@ -74,9 +74,13 @@ public class TraversalManager : MonoBehaviour
         List<List<MapEncounter>> result = new List<List<MapEncounter>>();
         List<MapEncounter> nextLayer = new List<MapEncounter>();
         if (genLayers.Count == 0) return result;
+        MapEncounter newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
+        newChild.traversalManager = this;
+        newChild.SetIsCompleted(true);
 
-        nextLayer.Add(Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>());
+        nextLayer.Add(newChild);
         result.Add(nextLayer);
+
         for (int i = 0; i < genLayers.Count - 1; i++)
         {   
             List<MapNode2> genLayer     = genLayers[i];        // Current layer from genLayers
@@ -99,9 +103,11 @@ public class TraversalManager : MonoBehaviour
                     }
 
                     // Child doesn't exist yet, so add right (we are going l -> r)
-                    GameObject newChild = Instantiate(mapEncounterPrefab, transform);
-                    curRes.AddChildRight(newChild.GetComponent<MapEncounter>());
-                    nextLayer.Add(newChild.GetComponent<MapEncounter>());
+                    newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
+                    newChild.traversalManager = this;
+                    if (i == 0) newChild.SetIsAccessible(true);
+                    curRes.AddChildRight(newChild);
+                    nextLayer.Add(newChild);
                 }
             }
             result.Add(nextLayer);
@@ -150,9 +156,15 @@ public class TraversalManager : MonoBehaviour
     ************ Traversal ************
     **********************************/
 
-    public void RecieveClick(MapEncounter enc)
+    public void ReceiveClick(MapEncounter enc)
     {
-
+        if (enc.isAccessible)
+        {
+            Debug.Log(enc.encounter);
+            selectedEncounter?.SetIsSelected(false);
+            selectedEncounter = enc;
+            enc.SetIsSelected(true);
+        }
     }
 
     void Update()
