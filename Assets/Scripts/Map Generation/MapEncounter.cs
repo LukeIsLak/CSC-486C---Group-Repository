@@ -43,7 +43,7 @@ public class MapEncounter : MonoBehaviour
         isSelected      = false;
         children        = new List<MapEncounter>();
         visColor        = Color.white;
-        visAlpha        = 0.2f;
+        visAlpha        = 0.1f;
         visual          = transform.Find("Cylinder");
 
         crimson         = new Color(0.8627452f/2, 0.07843138f/2, 0.2352941f/2, 1f);
@@ -51,9 +51,11 @@ public class MapEncounter : MonoBehaviour
         goldenRod       = new Color(1f, 0.8431373f, 0f, 1f);
     }
 
+
     /**********************************
     ********** Regeneration  **********
     **********************************/
+
     public void AddChildLeft(MapEncounter child)   { children.Insert(0, child); }
     public MapEncounter GetLeftmostChild() 
     { 
@@ -72,6 +74,7 @@ public class MapEncounter : MonoBehaviour
         UpdateAppearance();
     }
 
+
     /**********************************
     ********** Visualization **********
     **********************************/
@@ -84,6 +87,7 @@ public class MapEncounter : MonoBehaviour
     public void SetIsCompleted(bool val)
     {
         isCompleted = val;
+        isAccessible = false;
         UpdateAppearance();
     }
     public void SetIsHovered(bool val)
@@ -104,10 +108,10 @@ public class MapEncounter : MonoBehaviour
         if (encounter == EncounterType.Boss)      visColor = crimson;
         if (encounter == EncounterType.Dungeon)   visColor = Color.red;
         if (isSelected) visColor = Color.white;
+        if (isCompleted) visColor = Color.green;
 
-        if (!isAccessible) visAlpha = 0.3f;
-        else if (isHovered || isCompleted || isSelected) visAlpha = 1.0f;
-        else visAlpha = 0.3f;
+        if (!isAccessible && !isCompleted) visAlpha = 0.1f;
+        else visAlpha = 1.0f;
         
         Color newColor = new Color(visColor.r, visColor.g, visColor.b, visAlpha);
         visual.GetComponent<Renderer>().material.color = newColor;

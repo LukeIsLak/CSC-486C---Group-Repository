@@ -15,7 +15,8 @@ public class TraversalManager : MonoBehaviour
     public List<Transform> layerContainers;
 
     // Related to traversal
-    public MapEncounter selectedEncounter;
+    public MapEncounter prevSelectedEncounter;
+    public MapEncounter curSelectedEncounter;
 
     void Awake()
     {
@@ -51,6 +52,8 @@ public class TraversalManager : MonoBehaviour
 
         // Physical positioning
         DoLayerPlacement(mapLayers);
+
+        InitTraversal();
     }
 
     // Reset as if never used
@@ -65,7 +68,7 @@ public class TraversalManager : MonoBehaviour
 
         foreach (Transform lc in layerContainers) { Destroy(lc.gameObject); }
         layerContainers.Clear();
-        selectedEncounter = null;
+        curSelectedEncounter = null;
     }
 
     // Convert generated layout into structure of encounter nodes
@@ -76,7 +79,6 @@ public class TraversalManager : MonoBehaviour
         if (genLayers.Count == 0) return result;
         MapEncounter newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
         newChild.traversalManager = this;
-        newChild.SetIsCompleted(true);
 
         nextLayer.Add(newChild);
         result.Add(nextLayer);
@@ -105,7 +107,6 @@ public class TraversalManager : MonoBehaviour
                     // Child doesn't exist yet, so add right (we are going l -> r)
                     newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
                     newChild.traversalManager = this;
-                    if (i == 0) newChild.SetIsAccessible(true);
                     curRes.AddChildRight(newChild);
                     nextLayer.Add(newChild);
                 }
@@ -156,13 +157,41 @@ public class TraversalManager : MonoBehaviour
     ************ Traversal ************
     **********************************/
 
+    public void InitTraversal()
+    {
+        if (mapLayers.Count == 0) return;
+        prevSelectedEncounter = mapLayers[0][0];
+        prevSelectedEncounter.SetIsCompleted(true);
+        foreach (MapEncounter child in prevSelectedEncounter.children)
+        {
+            child.SetIsAccessible(true);
+        }
+    }
+
+    public void DoProgress()
+    {
+        if (!curSelectedEncounter) return;
+        curSelectedEncounter.SetIsCompleted(true);
+
+        foreach (MapEncounter child in prevSelectedEncounter.children)
+        {
+            child.SetIsAccessible(false);
+        }
+        foreach (MapEncounter child in curSelectedEncounter.children)
+        {
+            child.SetIsAccessible(true);
+        }
+        prevSelectedEncounter = curSelectedEncounter;
+        curSelectedEncounter = null;
+    }
+
     public void ReceiveClick(MapEncounter enc)
     {
         if (enc.isAccessible)
         {
             Debug.Log(enc.encounter);
-            selectedEncounter?.SetIsSelected(false);
-            selectedEncounter = enc;
+            curSelectedEncounter?.SetIsSelected(false);
+            curSelectedEncounter = enc;
             enc.SetIsSelected(true);
         }
     }
