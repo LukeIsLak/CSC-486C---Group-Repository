@@ -117,8 +117,8 @@ public class MapEncounter : MonoBehaviour
         visual.GetComponent<Renderer>().material.color = newColor;
     }
     
-    void OnSelect()
+    void Update()
     {
-        if (isHovered) traversableLayout?.ReceiveClick(this);
+        if (Input.GetMouseButtonDown(0) && isHovered) traversableLayout?.ReceiveClick(this);
     }
 }

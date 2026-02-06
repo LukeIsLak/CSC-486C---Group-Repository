@@ -209,8 +209,6 @@ public class TraversableLayout : MonoBehaviour
 
     void Update()
     {
-        return;
-        int li = 0;
         foreach (List<MapEncounter> layer in mapLayers)
         {   foreach (MapEncounter node in layer)
             {   foreach (MapEncounter child in node.children)
@@ -218,7 +216,6 @@ public class TraversableLayout : MonoBehaviour
                     Debug.DrawLine(node.transform.position, child.transform.position, Color.white);
                 }
             }
-            li++;
         }
     }
 }

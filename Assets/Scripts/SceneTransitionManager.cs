@@ -5,22 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    public GameObject traversableLayoutPrefab;
-    private TraversableLayout traversableLayout;
+    public static SceneTransitionManager instance;
+
     private PersistentData pd;
     private EventSystem es;
 
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
-    
+
+
     void Start()
     {
         // Subscribe to appropriate unity events
-        pd = GameObject.FindWithTag("Persistent Data")?.GetComponent<PersistentData>();
-        es = GameObject.FindWithTag("Event Sytem")?.GetComponent<EventSystem>();
+        pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
+        es = GameObject.FindWithTag("Event System").GetComponent<EventSystem>();
         if (es) 
         {
             es.ExitLobbyToLayout.AddListener(SceneSwapToMapLayoutStart);
@@ -75,11 +82,6 @@ public class SceneTransitionManager : MonoBehaviour
 
     void SceneSwapToMapLayoutProgress()
     {
-        if (!traversableLayout) 
-        {
-            Debug.Log("Progress called out of order! No traversal manager initialized.");
-            return;
-        }
         SceneManager.LoadScene("Scenes/LayoutTraversal");
     }
 

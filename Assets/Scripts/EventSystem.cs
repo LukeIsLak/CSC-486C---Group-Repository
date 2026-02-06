@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class EventSystem : MonoBehaviour
 {
+    public static EventSystem instance;
+
     /* Use this for intercommunication of systems.
     The idea is simple: create an event here and you 
     can subscribe to it in your script's Start().
@@ -14,17 +16,20 @@ public class EventSystem : MonoBehaviour
     */
 
     /* Scene management */
-    public UnityEvent           ExitLobbyToLayout,
-                                ExitLayoutToEncounter,
-                                ExitEncounterToLayout,
-                                ExitToMainMenu;
+    public UnityEvent ExitLobbyToLayout       = new UnityEvent();
+    public UnityEvent ExitLayoutToEncounter   = new UnityEvent();
+    public UnityEvent ExitEncounterToLayout   = new UnityEvent();
+    public UnityEvent ExitToMainMenu          = new UnityEvent();
 
 
-    void Start()
+    void Awake()
     {
-        ExitLobbyToLayout       = new UnityEvent();
-        ExitLayoutToEncounter   = new UnityEvent();
-        ExitEncounterToLayout   = new UnityEvent();
-        ExitToMainMenu          = new UnityEvent();
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }

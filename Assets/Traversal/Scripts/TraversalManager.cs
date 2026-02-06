@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TraversalManager : MonoBehaviour
 {
+    public static TraversalManager instance;
+    
     // Start is called before the first frame update
     public GameObject traversableLayoutPrefab;
     private PersistentData pd;
@@ -16,14 +18,20 @@ public class TraversalManager : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        pd = GameObject.FindWithTag("Persistent Data")?.GetComponent<PersistentData>();
-        es = GameObject.FindWithTag("Event System")?.GetComponent<EventSystem>();
-        es?.ExitToMainMenu.AddListener(CleanUpTraversal);
+        pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
+        es = GameObject.FindWithTag("Event System").GetComponent<EventSystem>();
+        es.ExitToMainMenu.AddListener(CleanUpTraversal);
 
         GameObject tmp = Instantiate(traversableLayoutPrefab, transform);
         traversableLayout = tmp.GetComponent<TraversableLayout>();
@@ -42,11 +50,11 @@ public class TraversalManager : MonoBehaviour
         {
             traversableLayout.gameObject.SetActive(true);
             respondToInputs = true;
+            if (!pd.firstTimeAtLayout) traversableLayout.DoProgress();
         }
         else
         {
-            traversableLayout.gameObject.SetActive(false);
-            respondToInputs = false;
+
         }
     }
 
@@ -56,6 +64,8 @@ public class TraversalManager : MonoBehaviour
         if (respondToInputs && Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
         {
             pd.currentEncounterType = traversableLayout.curSelectedEncounter.encounter;
+            traversableLayout.gameObject.SetActive(false);
+            respondToInputs = false;
             es.ExitLayoutToEncounter.Invoke();
         }
     }
