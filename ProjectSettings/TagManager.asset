@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TraversalManager
+  - Event System
+  - Persistent Data
   layers:
   - Default
   - TransparentFX

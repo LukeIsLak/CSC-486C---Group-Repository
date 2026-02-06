@@ -11,10 +11,13 @@ public class PersistentData : MonoBehaviour
 
     /* Traversal */
     public EncounterType    currentEncounterType;
+    public bool             firstTimeAtLayout;
     public int              layoutSeed, roomSeed;
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        currentEncounterType    = EncounterType.None;
+        firstTimeAtLayout       = true; 
     }
 }

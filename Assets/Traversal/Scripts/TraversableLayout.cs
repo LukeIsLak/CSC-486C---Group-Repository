@@ -9,6 +9,13 @@ public class TraversableLayout : MonoBehaviour
     private MapGen2 layoutGenerator;    
     public GameObject mapEncounterPrefab;
     
+    
+    [Header("Generation Parameters")]
+    public int depth;
+    public int maxWidth;
+    public int randomSeed;
+    public bool useSeed;
+
     // Data Structures
     private List<List<MapEncounter>> mapLayers;
     private List<List<MapNode2>> genLayers;
@@ -22,17 +29,6 @@ public class TraversableLayout : MonoBehaviour
     {
         mapLayers = new List<List<MapEncounter>>();
         layerContainers = new List<Transform>();
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Start()
-    {
-        EventSystem es = GameObject.FindWithTag("Event Sytem").GetComponent<EventSystem>();
-        if (es)
-        {
-            es.ExitToMainMenu.AddListener(DestroySelf);
-        }
-        Initialize();
     }
 
     /**********************************
@@ -47,9 +43,10 @@ public class TraversableLayout : MonoBehaviour
 
         // Do layout generation
         layoutGenerator = Instantiate(layoutGeneratorPrefab, transform).GetComponent<MapGen2>();
-        layoutGenerator.layersToGenerate    = 10;
-        layoutGenerator.maxWidth            = 5;
-        layoutGenerator.useSetSeed          = false;
+        layoutGenerator.layersToGenerate    = depth;
+        layoutGenerator.maxWidth            = maxWidth;
+        layoutGenerator.useSetSeed          = useSeed;
+        layoutGenerator.randomSeed          = randomSeed;
         genLayers = layoutGenerator.DoGeneration();
 
         // Do conversion to encounters, destroy generator
@@ -212,6 +209,7 @@ public class TraversableLayout : MonoBehaviour
 
     void Update()
     {
+        return;
         int li = 0;
         foreach (List<MapEncounter> layer in mapLayers)
         {   foreach (MapEncounter node in layer)
@@ -222,16 +220,5 @@ public class TraversableLayout : MonoBehaviour
             }
             li++;
         }
-    }
-
-    public void DestroySelf()
-    {
-        EventSystem es = GameObject.FindWithTag("Event Sytem").GetComponent<EventSystem>();
-        if (es)
-        {
-            es.ExitToMainMenu.RemoveListener(DestroySelf);
-        }
-        DestroyEverything();
-        Destroy(gameObject);
     }
 }

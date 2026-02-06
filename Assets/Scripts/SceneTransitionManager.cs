@@ -8,16 +8,19 @@ public class SceneTransitionManager : MonoBehaviour
     public GameObject traversableLayoutPrefab;
     private TraversableLayout traversableLayout;
     private PersistentData pd;
+    private EventSystem es;
+
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
-
+    
     void Start()
     {
         // Subscribe to appropriate unity events
-        EventSystem es = GameObject.FindWithTag("Event Sytem").GetComponent<EventSystem>();
+        pd = GameObject.FindWithTag("Persistent Data")?.GetComponent<PersistentData>();
+        es = GameObject.FindWithTag("Event Sytem")?.GetComponent<EventSystem>();
         if (es) 
         {
             es.ExitLobbyToLayout.AddListener(SceneSwapToMapLayoutStart);
@@ -25,9 +28,6 @@ public class SceneTransitionManager : MonoBehaviour
             es.ExitEncounterToLayout.AddListener(SceneSwapToMapLayoutProgress);
             es.ExitToMainMenu.AddListener(SceneSwapToMainMenu);
         }
-        PersistentData pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
-
-
     }
 
 
@@ -35,19 +35,9 @@ public class SceneTransitionManager : MonoBehaviour
     ************ Traversal ************
     **********************************/
 
-    void CleanUpTraversal()
-    {
-        if (!traversableLayout) return;
-        traversableLayout.DestroyEverything();
-        Destroy(traversableLayout.gameObject);
-        traversableLayout = null;
-    }
-
     void SceneSwapToMapLayoutStart()
     {
-        CleanUpTraversal();
-        SceneManager.LoadScene("Scenes/Test");
-        traversableLayout = Instantiate(traversableLayoutPrefab).GetComponent<TraversableLayout>();
+        SceneManager.LoadScene("Scenes/LayoutTraversal");
     }
 
     void SceneSwapToEncounter()
@@ -90,9 +80,7 @@ public class SceneTransitionManager : MonoBehaviour
             Debug.Log("Progress called out of order! No traversal manager initialized.");
             return;
         }
-        traversableLayout.gameObject.SetActive(true);
         SceneManager.LoadScene("Scenes/LayoutTraversal");
-        traversableLayout.DoProgress();
     }
 
     void SceneSwapToMainMenu()
