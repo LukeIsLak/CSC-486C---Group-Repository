@@ -29,6 +29,14 @@ public class TraversalManager : MonoBehaviour
 
     void Start()
     {
+        // Managers
+        pd = PersistentData.instance;
+        es = EventSystem.instance;
+
+        // Listeners
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        es.ExitToMainMenu.AddListener(DestroySelf);
+
         pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
         es = GameObject.FindWithTag("Event System").GetComponent<EventSystem>();
         es.ExitToMainMenu.AddListener(CleanUpTraversal);
@@ -76,5 +84,14 @@ public class TraversalManager : MonoBehaviour
         traversableLayout.DestroyEverything();
         Destroy(traversableLayout.gameObject);
         Destroy(gameObject);
+    }
+
+    void DestroySelf()
+    {
+        CleanUpTraversal();
+
+        // Listeners
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        es.ExitToMainMenu.RemoveListener(DestroySelf);
     }
 }

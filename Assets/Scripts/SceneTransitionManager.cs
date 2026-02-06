@@ -56,28 +56,30 @@ public class SceneTransitionManager : MonoBehaviour
             Debug.Log("No encounter type provided.");
             return;
         }
-
-
         if (encType == EncounterType.Merchant)
         {
             SceneManager.LoadScene("Scenes/Encounters/Merchant");
+            return;
         }
         if (encType == EncounterType.Treasure)
         {
             SceneManager.LoadScene("Scenes/Encounters/Treasure");
+            return;
+
         }
         if (encType == EncounterType.Dungeon)
         {
             SceneManager.LoadScene("Scenes/Encounters/Dungeon");
+            return;
+
         }
         if (encType == EncounterType.Boss)
         {
             SceneManager.LoadScene("Scenes/Encounters/Boss");  
+            return;
+
         }
-        else 
-        {
-            Debug.Log("Nothing to do for you with this encounter type.");
-        }
+        Debug.Log("Nothing to do for you with this encounter type.");
     }
 
     void SceneSwapToMapLayoutProgress()

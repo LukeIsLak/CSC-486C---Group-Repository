@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PersistentData : MonoBehaviour
 {
-    /* Store data to be referenced between scenes.
-    Where applicable, managers for individual scenes should
-    reference this script where 
-    */
+    public static PersistentData instance;
+
 
     /* Traversal */
     public EncounterType    currentEncounterType;
@@ -16,7 +14,13 @@ public class PersistentData : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
         currentEncounterType    = EncounterType.None;
         firstTimeAtLayout       = true; 
     }
