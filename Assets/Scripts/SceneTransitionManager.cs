@@ -13,6 +13,20 @@ public class SceneTransitionManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    void Start()
+    {
+        // Subscribe to appropriate unity events
+        EventSystem es = GameObject.FindWithTag("Event Sytem").GetComponent<EventSystem>();
+        if (es) 
+        {
+            es.ExitLobbyToLayout.AddListener(SceneSwapToMapLayoutStart);
+            es.ExitLayoutToEncounter.AddListener(SceneSwapToEncounter);
+            es.ExitEncounterToLayout.AddListener(SceneSwapToMapLayoutProgress);
+            es.ExitToMainMenu.AddListener(SceneSwapToMainMenu);
+        }
+
+    }
+
 
     /**********************************
     ************ Traversal ************
@@ -47,7 +61,7 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         // To do: determine encounter type
-        SceneManager.LoadScene("Scenes/Enc");
+        SceneManager.LoadScene("Scenes/Encounters/Merchant");
         traversalManager.gameObject.SetActive(false);
     }
 
@@ -59,24 +73,12 @@ public class SceneTransitionManager : MonoBehaviour
             return;
         }
         traversalManager.gameObject.SetActive(true);
-        SceneManager.LoadScene("Scenes/Test");
+        SceneManager.LoadScene("Scenes/LayoutTraversal");
         traversalManager.DoProgress();
     }
 
-
-    void Update() 
+    void SceneSwapToMainMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SceneSwapToMapLayoutStart();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SceneSwapToEncounter();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SceneSwapToMapLayoutProgress();
-        }
+
     }
 }

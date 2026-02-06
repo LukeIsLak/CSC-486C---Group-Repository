@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum EncounterType 
 {
-    None    = 0,
-    Start   = 1,
-    Shop    = 2,
-    Loot    = 3,
-    Dungeon = 4,
-    Boss = 5
+    None        = 0,
+    Start       = 1,
+    Merchant    = 2,
+    Treasure    = 3,
+    Dungeon     = 4,
+    Boss        = 5
 }
 
 public class MapEncounter : MonoBehaviour
@@ -103,8 +103,8 @@ public class MapEncounter : MonoBehaviour
     public void UpdateAppearance()
     {
         if (encounter == EncounterType.Start)     visColor = Color.blue;
-        if (encounter == EncounterType.Shop)      visColor = goldenRod;
-        if (encounter == EncounterType.Loot)      visColor = gold;
+        if (encounter == EncounterType.Merchant)  visColor = goldenRod;
+        if (encounter == EncounterType.Treasure)  visColor = gold;
         if (encounter == EncounterType.Boss)      visColor = crimson;
         if (encounter == EncounterType.Dungeon)   visColor = Color.red;
         if (isSelected) visColor = Color.white;
