@@ -27,7 +27,7 @@ public class MapNode2 : MonoBehaviour
      Node Information
     *********************/
 
-    public MapBranch branch;                    // What branch does this belong to 
+    // public MapBranch branch;                    // What branch does this belong to 
     public GenerationChoice2 choice;             // Choice made for generation
     private int numChildren;                    // Current number of children
     public List<MapNode2> outNodes;              // Nodes this one connects into
@@ -38,7 +38,7 @@ public class MapNode2 : MonoBehaviour
     // Awake is called on initialization
     void Awake()
     {
-        branch      = null;
+        // branch      = null;
         choice      = GenerationChoice2.None;
         numChildren = 0;
         outNodes    = new List<MapNode2>();
@@ -52,7 +52,7 @@ public class MapNode2 : MonoBehaviour
     // Setters
     public void SetEncounter(EncounterType e)   { encounter = e; }
 
-    public void SetBranch(MapBranch b)          { branch = b; }
+    // public void SetBranch(MapBranch b)          { branch = b; }
 
 
     // Child insertion
@@ -64,7 +64,7 @@ public class MapNode2 : MonoBehaviour
     // Getters
     public EncounterType GetEncounter()         { return encounter; }
 
-    public MapBranch GetBranch()                { return branch; }
+    // public MapBranch GetBranch()                { return branch; }
 
     public List<MapNode2> GetOutNodes()          { return outNodes; }
 

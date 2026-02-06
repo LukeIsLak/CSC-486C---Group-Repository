@@ -235,7 +235,7 @@ public class MapGen2 : MonoBehaviour
     {
         MapNode2 newNode;
         newNode = Instantiate(MapNode2Prefab, MapNode2Container).GetComponent<MapNode2>();
-        newNode.branch = node.branch;
+        // newNode.branch = node.branch;
         node.AddChildRight(newNode);
     }
 
@@ -244,10 +244,10 @@ public class MapGen2 : MonoBehaviour
     {
         MapNode2 newNode;
         newNode = Instantiate(MapNode2Prefab, MapNode2Container).GetComponent<MapNode2>();
-        newNode.branch = node.branch; // Same branch for now
+        // newNode.branch = node.branch; // Same branch for now
         node.AddChildRight(newNode);        
         newNode = Instantiate(MapNode2Prefab, MapNode2Container).GetComponent<MapNode2>();
-        newNode.branch = node.branch; // Same branch for now
+        // newNode.branch = node.branch; // Same branch for now
         node.AddChildRight(newNode);
         // TO DO: Determine method of placing "set sequences"
     }
