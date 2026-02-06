@@ -45,6 +45,8 @@ public class SceneTransitionManager : MonoBehaviour
             Debug.Log("No encounter selected!");
             return;
         }
+
+        // To do: determine encounter type
         SceneManager.LoadScene("Scenes/Enc");
         traversalManager.gameObject.SetActive(false);
     }
