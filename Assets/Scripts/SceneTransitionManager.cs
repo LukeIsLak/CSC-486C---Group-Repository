@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    public GameObject traversalManagerPrefab;
-    private TraversalManager traversalManager;
+    public GameObject traversableLayoutPrefab;
+    private TraversableLayout traversableLayout;
 
     void Awake()
     {
@@ -34,47 +34,62 @@ public class SceneTransitionManager : MonoBehaviour
 
     void CleanUpTraversal()
     {
-        if (!traversalManager) return;
-        traversalManager.DestroyEverything();
-        Destroy(traversalManager.gameObject);
-        traversalManager = null;
+        if (!traversableLayout) return;
+        traversableLayout.DestroyEverything();
+        Destroy(traversableLayout.gameObject);
+        traversableLayout = null;
     }
 
     void SceneSwapToMapLayoutStart()
     {
         CleanUpTraversal();
         SceneManager.LoadScene("Scenes/Test");
-        traversalManager = Instantiate(traversalManagerPrefab).GetComponent<TraversalManager>();
+        traversableLayout = Instantiate(traversableLayoutPrefab).GetComponent<TraversableLayout>();
     }
 
     void SceneSwapToEncounter()
     {
-        if (!traversalManager) 
+        EncounterType encType = PersistentData.currentEncounterType;
+    
+        if (!encType || encType = EncounterType.None) 
         {
-            Debug.Log("Progress called out of order! No traversal manager initialized.");
-            return;
-        }
-        if (!traversalManager.curSelectedEncounter)
-        {
-            Debug.Log("No encounter selected!");
+            Debug.Log("No encounter type provided.");
             return;
         }
 
-        // To do: determine encounter type
-        SceneManager.LoadScene("Scenes/Encounters/Merchant");
-        traversalManager.gameObject.SetActive(false);
+
+        if (encType = EncounterType.Merchant)
+        {
+            SceneManager.LoadScene("Scenes/Encounters/Merchant");
+        }
+        if (encType = EncounterType.Treasure)
+        {
+            SceneManager.LoadScene("Scenes/Encounters/Treasure");
+        }
+        if (encType = EncounterType.Dungeon)
+        {
+            SceneManager.LoadScene("Scenes/Encounters/Dungeon");
+        }
+        if (encType = EncounterType.Boss)
+        {
+            SceneManager.LoadScene("Scenes/Encounters/Boss");  
+        }
+        else 
+        {
+            Debug.Log("Nothing to do for you with this encounter type.")
+        }
     }
 
     void SceneSwapToMapLayoutProgress()
     {
-        if (!traversalManager) 
+        if (!traversableLayout) 
         {
             Debug.Log("Progress called out of order! No traversal manager initialized.");
             return;
         }
-        traversalManager.gameObject.SetActive(true);
+        traversableLayout.gameObject.SetActive(true);
         SceneManager.LoadScene("Scenes/LayoutTraversal");
-        traversalManager.DoProgress();
+        traversableLayout.DoProgress();
     }
 
     void SceneSwapToMainMenu()

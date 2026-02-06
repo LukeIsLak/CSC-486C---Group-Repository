@@ -12,10 +12,13 @@ public class EventSystem : MonoBehaviour
     Then, the event can be invoked from anywhere else,
     and the function provided in the listener will be run.
     */
+
+    /* Scene management */
     public UnityEvent           ExitLobbyToLayout,
                                 ExitLayoutToEncounter,
                                 ExitEncounterToLayout,
                                 ExitToMainMenu;
+
 
     void Start()
     {

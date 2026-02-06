@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TraversalManager : MonoBehaviour
+public class TraversableLayout : MonoBehaviour
 {
     [Header("Required Prefabs")]
     public GameObject layoutGeneratorPrefab;
@@ -27,6 +27,7 @@ public class TraversalManager : MonoBehaviour
 
     void Start()
     {
+        EventSystem.ExitToMainMenu.AddListener(DestroySelf);
         Initialize();
     }
 
@@ -84,7 +85,7 @@ public class TraversalManager : MonoBehaviour
         List<MapEncounter> nextLayer = new List<MapEncounter>();
         if (genLayers.Count == 0) return result;
         MapEncounter newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
-        newChild.traversalManager = this;
+        newChild.traversableLayout = this;
 
         nextLayer.Add(newChild);
         result.Add(nextLayer);
@@ -112,7 +113,7 @@ public class TraversalManager : MonoBehaviour
 
                     // Child doesn't exist yet, so add right (we are going l -> r)
                     newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
-                    newChild.traversalManager = this;
+                    newChild.traversableLayout = this;
                     curRes.AddChildRight(newChild);
                     nextLayer.Add(newChild);
                 }
@@ -217,5 +218,12 @@ public class TraversalManager : MonoBehaviour
             }
             li++;
         }
+    }
+
+    public void DestroySelf()
+    {
+        EventSystem.ExitToMainMenu.RemoveListener(DestroySelf);
+        DestroyEverything();
+        Destroy(gameObject);
     }
 }

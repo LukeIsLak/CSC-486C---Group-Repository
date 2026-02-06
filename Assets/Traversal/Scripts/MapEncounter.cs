@@ -25,7 +25,7 @@ public class MapEncounter : MonoBehaviour
     public List<MapEncounter> children;
     public Color visColor;
     public float visAlpha;
-    public TraversalManager traversalManager;
+    public TraversableLayout traversableLayout;
 
     // Internal reference 
     private Transform visual;
@@ -117,12 +117,8 @@ public class MapEncounter : MonoBehaviour
         visual.GetComponent<Renderer>().material.color = newColor;
     }
     
-    // Update is called once per frame
-    void Update()
+    void OnSelect()
     {
-        if (Input.GetMouseButtonDown(0) && isHovered)
-        {
-            traversalManager?.ReceiveClick(this);
-        }
+        if (isHovered) traversableLayout?.ReceiveClick(this);
     }
 }
