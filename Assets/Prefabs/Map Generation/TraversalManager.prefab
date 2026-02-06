@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7488399860724131802}
   m_Layer: 0
   m_Name: TraversalManager
-  m_TagString: Untagged
+  m_TagString: TraversalManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,5 +47,5 @@ MonoBehaviour:
   layoutGeneratorPrefab: {fileID: 1542659884841498409, guid: e227d64ebbf116348a4974f253c7f4d6, type: 3}
   mapEncounterPrefab: {fileID: 2838874819895571372, guid: d4c14d69036dffe459cb999afdb94ae6, type: 3}
   layerContainers: []
-  hoveredEncounter: {fileID: 0}
-  selectedEncounter: {fileID: 0}
+  prevSelectedEncounter: {fileID: 0}
+  curSelectedEncounter: {fileID: 0}

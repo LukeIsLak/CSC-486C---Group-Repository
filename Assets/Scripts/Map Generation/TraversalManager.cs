@@ -22,8 +22,13 @@ public class TraversalManager : MonoBehaviour
     {
         mapLayers = new List<List<MapEncounter>>();
         layerContainers = new List<Transform>();
+        DontDestroyOnLoad(this.gameObject);
     }
 
+    void Start()
+    {
+        Initialize();
+    }
 
     /**********************************
     ********** PRE-TRAVERSAL **********
@@ -68,6 +73,7 @@ public class TraversalManager : MonoBehaviour
 
         foreach (Transform lc in layerContainers) { Destroy(lc.gameObject); }
         layerContainers.Clear();
+        prevSelectedEncounter = null;
         curSelectedEncounter = null;
     }
 
@@ -183,6 +189,9 @@ public class TraversalManager : MonoBehaviour
         }
         prevSelectedEncounter = curSelectedEncounter;
         curSelectedEncounter = null;
+
+        // Check for finish here!
+        // if (prevselectedencounter = finalencounter)...
     }
 
     public void ReceiveClick(MapEncounter enc)
