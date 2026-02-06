@@ -7,6 +7,7 @@ public class SceneTransitionManager : MonoBehaviour
 {
     public GameObject traversableLayoutPrefab;
     private TraversableLayout traversableLayout;
+    private PersistentData pd;
 
     void Awake()
     {
@@ -24,6 +25,8 @@ public class SceneTransitionManager : MonoBehaviour
             es.ExitEncounterToLayout.AddListener(SceneSwapToMapLayoutProgress);
             es.ExitToMainMenu.AddListener(SceneSwapToMainMenu);
         }
+        PersistentData pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
+
 
     }
 
@@ -49,34 +52,34 @@ public class SceneTransitionManager : MonoBehaviour
 
     void SceneSwapToEncounter()
     {
-        EncounterType encType = PersistentData.currentEncounterType;
+        EncounterType encType = pd.currentEncounterType;
     
-        if (!encType || encType = EncounterType.None) 
+        if (encType == EncounterType.None) 
         {
             Debug.Log("No encounter type provided.");
             return;
         }
 
 
-        if (encType = EncounterType.Merchant)
+        if (encType == EncounterType.Merchant)
         {
             SceneManager.LoadScene("Scenes/Encounters/Merchant");
         }
-        if (encType = EncounterType.Treasure)
+        if (encType == EncounterType.Treasure)
         {
             SceneManager.LoadScene("Scenes/Encounters/Treasure");
         }
-        if (encType = EncounterType.Dungeon)
+        if (encType == EncounterType.Dungeon)
         {
             SceneManager.LoadScene("Scenes/Encounters/Dungeon");
         }
-        if (encType = EncounterType.Boss)
+        if (encType == EncounterType.Boss)
         {
             SceneManager.LoadScene("Scenes/Encounters/Boss");  
         }
         else 
         {
-            Debug.Log("Nothing to do for you with this encounter type.")
+            Debug.Log("Nothing to do for you with this encounter type.");
         }
     }
 

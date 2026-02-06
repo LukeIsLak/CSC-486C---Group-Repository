@@ -27,7 +27,11 @@ public class TraversableLayout : MonoBehaviour
 
     void Start()
     {
-        EventSystem.ExitToMainMenu.AddListener(DestroySelf);
+        EventSystem es = GameObject.FindWithTag("Event Sytem").GetComponent<EventSystem>();
+        if (es)
+        {
+            es.ExitToMainMenu.AddListener(DestroySelf);
+        }
         Initialize();
     }
 
@@ -222,7 +226,11 @@ public class TraversableLayout : MonoBehaviour
 
     public void DestroySelf()
     {
-        EventSystem.ExitToMainMenu.RemoveListener(DestroySelf);
+        EventSystem es = GameObject.FindWithTag("Event Sytem").GetComponent<EventSystem>();
+        if (es)
+        {
+            es.ExitToMainMenu.RemoveListener(DestroySelf);
+        }
         DestroyEverything();
         Destroy(gameObject);
     }
