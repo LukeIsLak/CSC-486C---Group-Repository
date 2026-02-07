@@ -87,6 +87,6 @@ public class SceneTransitionManager : MonoBehaviour
 
     void SceneSwapToMainMenu()
     {
-
+        SceneManager.LoadScene("Scenes/Begin");
     }
 }

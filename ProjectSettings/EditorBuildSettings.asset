@@ -11,10 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LayoutTraversal.unity
     guid: 60c1ab1472df08e41947363c842155ea
-  - enabled: 0
-    path: Assets/Scenes/TraversalTestScenes/TBoss.unity
-    guid: 6496516d047ea864c95a9759e5201abf
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Merchant.unity
+    guid: 10d0db9ea267c8a4ebff4a96f3d225b0
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Treasure.unity
+    guid: 173e6691b947bb14fb8d6b29c4536bad
   - enabled: 1
     path: Assets/Scenes/Encounters/Dungeon.unity
     guid: 4a8a3683c26439a45bed34eb34bbd2c1
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Boss.unity
+    guid: 4d926dc355c866749af1aac66a562c7f
   m_configObjects: {}

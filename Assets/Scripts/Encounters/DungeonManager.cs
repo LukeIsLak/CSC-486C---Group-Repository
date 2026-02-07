@@ -51,7 +51,7 @@ public class DungeonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            es?.ExitLayoutToEncounter.Invoke();
+            es?.ExitEncounterToLayout.Invoke();
         }
     }
 }

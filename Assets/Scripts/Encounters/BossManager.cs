@@ -17,7 +17,12 @@ public class BossManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            es?.ExitLayoutToEncounter.Invoke();
+            es?.ExitEncounterToLayout.Invoke();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            es?.ExitToMainMenu.Invoke();
+        }
+
     }
 }

@@ -33,11 +33,9 @@ public class TraversalManager : MonoBehaviour
         // Listeners
         SceneManager.sceneLoaded += OnSceneLoaded;
         es.ExitToMainMenu.AddListener(DestroySelf);
-
-        pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
-        es = GameObject.FindWithTag("Event System").GetComponent<EventSystem>();
         es.ExitToMainMenu.AddListener(CleanUpTraversal);
 
+        pd.firstTimeAtLayout = false;
         GameObject tmp = Instantiate(traversableLayoutPrefab, transform);
         traversableLayout = tmp.GetComponent<TraversableLayout>();
         traversableLayout.depth = 10;
@@ -84,6 +82,7 @@ public class TraversalManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
         es.ExitToMainMenu.RemoveListener(DestroySelf);
         CleanUpTraversal();
+        pd.firstTimeAtLayout = true;
         Destroy(gameObject);
     }
 }
