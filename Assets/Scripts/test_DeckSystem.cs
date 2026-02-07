@@ -192,6 +192,7 @@ public class test_deckSystem : MonoBehaviour
     IEnumerator Testredrawco() {
         // load deck in to the system then use all cards in players hand
         deckSystem.loadDeck(testDeck, 15);
+        deckSystem.currentHandIndex = 0;
         deckSystem.useCard();
         deckSystem.currentHandIndex = 1;
         deckSystem.useCard();
