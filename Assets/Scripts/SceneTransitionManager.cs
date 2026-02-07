@@ -5,12 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
+    private PersistentData  pd;
+    private EventSystem     es;
+
     public static SceneTransitionManager instance;
-
-    private PersistentData pd;
-    private EventSystem es;
-
-
     void Awake()
     {
         if (instance != null && instance != this)
@@ -89,6 +87,6 @@ public class SceneTransitionManager : MonoBehaviour
 
     void SceneSwapToMainMenu()
     {
-
+        SceneManager.LoadScene("Scenes/Begin");
     }
 }

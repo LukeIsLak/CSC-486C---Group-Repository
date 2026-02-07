@@ -5,17 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class TraversalManager : MonoBehaviour
 {
-    public static TraversalManager instance;
-    
-    // Start is called before the first frame update
     public GameObject traversableLayoutPrefab;
-    private PersistentData pd;
-    private EventSystem es;
 
+    private PersistentData  pd;
+    private EventSystem     es;
     private TraversableLayout traversableLayout;
-
     private bool respondToInputs = true;
 
+    public static TraversalManager instance;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -36,11 +33,9 @@ public class TraversalManager : MonoBehaviour
         // Listeners
         SceneManager.sceneLoaded += OnSceneLoaded;
         es.ExitToMainMenu.AddListener(DestroySelf);
-
-        pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
-        es = GameObject.FindWithTag("Event System").GetComponent<EventSystem>();
         es.ExitToMainMenu.AddListener(CleanUpTraversal);
 
+        pd.firstTimeAtLayout = false;
         GameObject tmp = Instantiate(traversableLayoutPrefab, transform);
         traversableLayout = tmp.GetComponent<TraversableLayout>();
         traversableLayout.depth = 10;
@@ -59,10 +54,6 @@ public class TraversalManager : MonoBehaviour
             traversableLayout.gameObject.SetActive(true);
             respondToInputs = true;
             if (!pd.firstTimeAtLayout) traversableLayout.DoProgress();
-        }
-        else
-        {
-
         }
     }
 
@@ -83,15 +74,15 @@ public class TraversalManager : MonoBehaviour
         if (!traversableLayout) return;
         traversableLayout.DestroyEverything();
         Destroy(traversableLayout.gameObject);
-        Destroy(gameObject);
     }
 
     void DestroySelf()
     {
-        CleanUpTraversal();
-
         // Listeners
         SceneManager.sceneLoaded -= OnSceneLoaded;
         es.ExitToMainMenu.RemoveListener(DestroySelf);
+        CleanUpTraversal();
+        pd.firstTimeAtLayout = true;
+        Destroy(gameObject);
     }
 }

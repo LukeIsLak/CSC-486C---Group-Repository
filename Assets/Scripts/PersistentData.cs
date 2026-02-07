@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PersistentData : MonoBehaviour
 {
-    public static PersistentData instance;
-
-
     /* Traversal */
     public EncounterType    currentEncounterType;
     public bool             firstTimeAtLayout;
-    public int              layoutSeed, roomSeed;
+    public int              layoutSeed;
 
+    /* Dungeon Encounter */
+    public int              dungeonPoolSize,
+                            dungeonIters,
+                            dungeonItersPerSpecial,
+                            dungeonSeed;
+                            
+    public static PersistentData instance;
     void Awake()
     {
         if (instance != null && instance != this)

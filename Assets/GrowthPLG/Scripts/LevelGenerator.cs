@@ -409,7 +409,7 @@ public class LevelGenerator : MonoBehaviour
 
         GameObject realSpecial = Instantiate(specialPrefab, roomContainer);
         realSpecial.transform.localPosition = GetPlacementPosition(specialRoom, roomScale);
-        realSpecial.transform.localRotation = Quaternion.Euler(new Vector3(0f, rotation, 0f));
+        realSpecial.transform.Rotate(0f, rotation, 0f, Space.World);
         realSpecials.Add(realSpecial);
     }
 
@@ -467,7 +467,7 @@ public class LevelGenerator : MonoBehaviour
         // Instantiate the real room and place
         GameObject realRoom = Instantiate(type, roomContainer, false);
         realRoom.transform.localPosition = GetPlacementPosition(room, roomScale);
-        realRoom.transform.localRotation = Quaternion.Euler(new Vector3(0f, rotation, 0f));
+        realRoom.transform.Rotate(0f, rotation, 0f, Space.World);
         realHalls.Add(realRoom);
     }
 
