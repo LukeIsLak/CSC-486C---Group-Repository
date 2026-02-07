@@ -5,17 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class TraversalManager : MonoBehaviour
 {
-    public static TraversalManager instance;
-    
-    // Start is called before the first frame update
     public GameObject traversableLayoutPrefab;
-    private PersistentData pd;
-    private EventSystem es;
 
+    private PersistentData  pd;
+    private EventSystem     es;
     private TraversableLayout traversableLayout;
-
     private bool respondToInputs = true;
 
+    public static TraversalManager instance;
     void Awake()
     {
         if (instance != null && instance != this)
