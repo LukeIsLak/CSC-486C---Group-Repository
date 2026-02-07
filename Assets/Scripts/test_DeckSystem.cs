@@ -11,26 +11,28 @@ public class test_deckSystem : MonoBehaviour
     public TMP_Text output;
     public Cards[] testDeck;
 
-    public Cards fireball;
+    //List of all cards set in the inspector
+    public List<Cards> allCards;
 
     // set up mock cards and deck to be used for testing
     void Start()
     {
-        Cards one = fireball;
-        Cards two = fireball;
-        Cards three = fireball;
-        Cards four = fireball;
-        Cards five = fireball;
-        Cards six = fireball;
-        Cards seven = fireball;
-        Cards eight = fireball;
-        Cards nine = fireball;
-        Cards ten = fireball;
-        Cards eleven = fireball;
-        Cards twelve = fireball;
-        Cards thirteen = fireball;
-        Cards fourteen = fireball;
-        Cards fifteen = fireball;
+        //Create a list of a random cards as the starting deck
+        Cards one = allCards[Random.Range(0,allCards.Count)];
+        Cards two = allCards[Random.Range(0,allCards.Count)];
+        Cards three = allCards[Random.Range(0,allCards.Count)];
+        Cards four = allCards[Random.Range(0,allCards.Count)];
+        Cards five = allCards[Random.Range(0,allCards.Count)];
+        Cards six = allCards[Random.Range(0,allCards.Count)];
+        Cards seven = allCards[Random.Range(0,allCards.Count)];
+        Cards eight = allCards[Random.Range(0,allCards.Count)];
+        Cards nine = allCards[Random.Range(0,allCards.Count)];
+        Cards ten = allCards[Random.Range(0,allCards.Count)];
+        Cards eleven = allCards[Random.Range(0,allCards.Count)];
+        Cards twelve = allCards[Random.Range(0,allCards.Count)];
+        Cards thirteen = allCards[Random.Range(0,allCards.Count)];
+        Cards fourteen = allCards[Random.Range(0,allCards.Count)];
+        Cards fifteen = allCards[Random.Range(0,allCards.Count)];
 
         testDeck = new Cards[] { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen };
     }

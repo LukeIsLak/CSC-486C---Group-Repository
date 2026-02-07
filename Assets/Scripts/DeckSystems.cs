@@ -206,6 +206,9 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     public void useCard() {
         //stuff here to trigger card script
+        // Get the current card
+        Cards CurrentCard = hand[currentHandIndex];
+        //Check for which card is currently selected
         // put card in discard and remove from hand
         discard.Add(hand[currentHandIndex]);
         hand[currentHandIndex] = null;

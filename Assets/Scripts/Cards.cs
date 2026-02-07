@@ -8,6 +8,7 @@ public class Cards : ScriptableObject
     public string name = null;
     public Sprite image = null;
 
+    public abstract void Play(Cards card);
 }
 
 [CreateAssetMenu(menuName = "Cards/AttackCards")]
@@ -17,6 +18,9 @@ public class AttackCards : Cards
     public string element;
     public string attackType;
 
+    public override void Play(Cards card){
+        
+    }
 }
 
 [CreateAssetMenu(menuName = "Cards/ModifierCards")]
@@ -24,4 +28,8 @@ public class ModifierCards : Cards
 {
     public string effect;
     public int value;
+
+    public override void Play(Cards card){
+
+    }
 }
