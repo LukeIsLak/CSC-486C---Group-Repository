@@ -57,10 +57,6 @@ public class TraversalManager : MonoBehaviour
             respondToInputs = true;
             if (!pd.firstTimeAtLayout) traversableLayout.DoProgress();
         }
-        else
-        {
-
-        }
     }
 
     // Update is called once per frame
@@ -80,15 +76,14 @@ public class TraversalManager : MonoBehaviour
         if (!traversableLayout) return;
         traversableLayout.DestroyEverything();
         Destroy(traversableLayout.gameObject);
-        Destroy(gameObject);
     }
 
     void DestroySelf()
     {
-        CleanUpTraversal();
-
         // Listeners
         SceneManager.sceneLoaded -= OnSceneLoaded;
         es.ExitToMainMenu.RemoveListener(DestroySelf);
+        CleanUpTraversal();
+        Destroy(gameObject);
     }
 }
