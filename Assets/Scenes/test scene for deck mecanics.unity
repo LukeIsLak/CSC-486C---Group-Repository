@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d348dd7cf2d5c7c48baf51944f6d0160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDeckCosmectic: []
   hand:
   - {fileID: 0}
   - {fileID: 0}
@@ -945,6 +944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deckSystem: {fileID: 172248230}
   output: {fileID: 1504350015}
+  testDeck: []
 --- !u!4 &573300085
 Transform:
   m_ObjectHideFlags: 0
