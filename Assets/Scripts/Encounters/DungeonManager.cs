@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DungeonManager : MonoBehaviour
 {
+    private PersistentData  pd;
+    private EventSystem     es;
+
     [Header("GrowthPLG Prefabs")]
     public GameObject   dungeonGeneratorPrefab;
     public GameObject   Single;                     // 1 connection
@@ -11,9 +14,6 @@ public class DungeonManager : MonoBehaviour
     public GameObject   DoubleL;                    // 2 connections at a right angle
     public GameObject   Triple;                     // 3 connections
     public GameObject   Quad;                       // 4 connections
-
-    private PersistentData  pd;
-    private EventSystem     es;
     private LevelGenerator  lg;
 
     // Start is called before the first frame update
@@ -27,11 +27,11 @@ public class DungeonManager : MonoBehaviour
     void SetupDungeon()
     {
         lg = Instantiate(dungeonGeneratorPrefab, transform).GetComponent<LevelGenerator>();
-        lg.Single   = Single;
-        lg.DoubleI  = DoubleI;
-        lg.DoubleL  = DoubleL;
-        lg.Triple   = Triple;
-        lg.Quad     = Quad;
+        lg.Single               = Single;
+        lg.DoubleI              = DoubleI;
+        lg.DoubleL              = DoubleL;
+        lg.Triple               = Triple;
+        lg.Quad                 = Quad;
         lg.roomScale            = 6;
 
         /* Poll info from persistent data */
@@ -41,13 +41,17 @@ public class DungeonManager : MonoBehaviour
         lg.iterationsPerSpecial = pd.dungeonItersPerSpecial;
         lg.randomSeed           = pd.dungeonSeed;
         lg.useSeed              = true;
-        lg.DoGeneration();
-        lg.ToggleVisuals();
+
+        /* Generate */
+        lg.DoGeneration();              
+        lg.ClearGenerationObjects();    
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            es?.ExitLayoutToEncounter.Invoke();
+        }
     }
 }
