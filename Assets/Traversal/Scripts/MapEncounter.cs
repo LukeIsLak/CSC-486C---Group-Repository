@@ -56,13 +56,13 @@ public class MapEncounter : MonoBehaviour
     ********** Regeneration  **********
     **********************************/
 
-    public void AddChildLeft(MapEncounter child)   { children.Insert(0, child); }
+    public void AddChildLeft(MapEncounter child)   { children.Insert(0, child); MakeLines(); }
     public MapEncounter GetLeftmostChild() 
     { 
         int n = children.Count;
         return n == 0 ? null : children[0];
     }
-    public void AddChildRight(MapEncounter child)  { children.Add(child);       }
+    public void AddChildRight(MapEncounter child)  { children.Add(child); MakeLines(); }
     public MapEncounter GetRightmostChild() 
     { 
         int n = children.Count;
@@ -110,11 +110,20 @@ public class MapEncounter : MonoBehaviour
         if (isSelected) visColor = Color.white;
         if (isCompleted) visColor = Color.green;
 
-        if (!isAccessible && !isCompleted) visAlpha = 0.1f;
-        else visAlpha = 1.0f;
+        if (!isAccessible && !isCompleted) {visAlpha = 0.1f;}
+        else {visAlpha = 1.0f;}
         
         Color newColor = new Color(visColor.r, visColor.g, visColor.b, visAlpha);
         visual.GetComponent<Renderer>().material.color = newColor;
+        UpdateLines();
+    }
+    public void MakeLines()
+    {
+        transform.Find("LineCreator").GetComponent<LineToOthers>().SetOthers(children);
+    }
+    public void UpdateLines()
+    {
+        transform.Find("LineCreator").GetComponent<LineToOthers>().UpdateLines();
     }
     
     void Update()

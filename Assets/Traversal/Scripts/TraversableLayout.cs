@@ -158,12 +158,19 @@ public class TraversableLayout : MonoBehaviour
             }
             li++;
         }
+        UpdateAppearance();
     }
 
 
     /**********************************
     ************ Traversal ************
     **********************************/
+    public void UpdateAppearance()
+    { foreach (List<MapEncounter> curLayer in mapLayers)
+        {   foreach (MapEncounter node in curLayer)
+            { node.UpdateAppearance(); }
+        }
+    }
 
     public void InitTraversal()
     {
