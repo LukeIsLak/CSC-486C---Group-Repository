@@ -48,6 +48,9 @@ public class MapEncounter : MonoBehaviour
     private Color gold;
     private Color goldenRod;
 
+    private float hoverHeight   = 0.3f;
+    private float desiredHeight = 0.1f;
+    private float baseHeight    = 0.1f;
 
     void Awake()
     {
@@ -112,6 +115,7 @@ public class MapEncounter : MonoBehaviour
     public void SetIsHovered(bool val)
     {
         isHovered = val;
+        desiredHeight = val ? hoverHeight : baseHeight;
         UpdateAppearance();
     }
     public void SetIsSelected(bool val)
@@ -158,5 +162,16 @@ public class MapEncounter : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && isHovered) traversableLayout?.ReceiveClick(this);
+        float curHeight = graphicsGO.transform.localPosition[1];
+        float interp = (desiredHeight - curHeight)/1.2f;
+        Debug.Log(desiredHeight.ToString() +" " + curHeight.ToString());
+        if (Mathf.Abs(interp) < 0.01f)
+        {
+            graphicsGO.transform.localPosition = new Vector3(0f, desiredHeight, 0f);
+        }
+        else 
+        {
+            graphicsGO.transform.localPosition += new Vector3(0f, interp, 0f);
+        }
     }
 }

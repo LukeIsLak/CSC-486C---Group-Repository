@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class TraversalManager : MonoBehaviour
 {
-    [Header("Required Prefabs")]
+    [Header("Required References")]
     public GameObject traversableLayoutPrefab;
+    public Camera sceneCamera;
     
     [Header("Data")]
     public LayoutData layoutData;
@@ -17,6 +19,7 @@ public class TraversalManager : MonoBehaviour
     private TraversableLayout traversableLayout;
     private bool respondToInputs = true;
     
+    private int offsetFromEdgeNodes = 3;
 
     void Start()
     {
@@ -48,6 +51,15 @@ public class TraversalManager : MonoBehaviour
             traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
             EnterEncounter.Raise();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            Vector2  diff   = Mouse.current.delta.ReadValue();
+            float offsetH   = -diff[0]/50f;
+            float offsetV   = -diff[1]/50f;
+
+            sceneCamera.transform.position += new Vector3(offsetH, 0f, offsetV);
         }
     }
 

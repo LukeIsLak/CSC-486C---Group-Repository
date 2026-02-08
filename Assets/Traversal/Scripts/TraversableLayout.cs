@@ -151,13 +151,13 @@ public class TraversableLayout : MonoBehaviour
         {   
             Transform layerContainer = new GameObject("Layer" + li.ToString()).transform;
             layerContainer.SetParent(transform, false);
-            layerContainer.Translate(Vector3.right * 4 * li);
+            layerContainer.Translate(Vector3.back * 4 * li);
             layerContainers.Add(layerContainer);
             int ni = 0;
             foreach (MapEncounter node in curLayer)
             {
                 node.transform.SetParent(layerContainer, false);
-                node.transform.Translate(Vector3.back * (curLayer.Count - 1) * 2 + Vector3.forward * 4 * ni);
+                node.transform.Translate(Vector3.left * (curLayer.Count - 1) * 2 + Vector3.right * 4 * ni);
                 ni++;
             }
             li++;
