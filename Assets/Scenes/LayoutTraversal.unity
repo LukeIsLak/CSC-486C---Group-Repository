@@ -320,6 +320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TraversalManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
+      propertyPath: EnterEncounter
+      value: 
+      objectReference: {fileID: 11400000, guid: bd10d720d2ae37d40beb52c0770b1d02, type: 2}
     - target: {fileID: 7284723983683458099, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -363,8 +367,55 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1960965781143065970, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4797681890916358898}
   m_SourcePrefab: {fileID: 100100000, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
+--- !u!1 &4797681890916358896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1960965781143065970, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
+  m_PrefabInstance: {fileID: 4797681890916358895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4797681890916358897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
+  m_PrefabInstance: {fileID: 4797681890916358895}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797681890916358896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fb8d3cfbbac6e459b3e32109ba175d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4797681890916358898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797681890916358896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4797681890916358897}
+        m_TargetAssemblyTypeName: TraversalManager, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

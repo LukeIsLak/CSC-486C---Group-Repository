@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    private PersistentData  pd;
-    private EventSystem     es;
+    public SceneField   merchantScene,
+                        treasureScene,
+                        dungeonScene,
+                        bossScene,
+                        layoutScene,
+                        menuScene;
 
+
+    private PersistentData  pd;
     public static SceneTransitionManager instance;
     void Awake()
     {
@@ -24,15 +30,7 @@ public class SceneTransitionManager : MonoBehaviour
     void Start()
     {
         // Subscribe to appropriate unity events
-        pd = GameObject.FindWithTag("Persistent Data").GetComponent<PersistentData>();
-        es = GameObject.FindWithTag("Event System").GetComponent<EventSystem>();
-        if (es) 
-        {
-            es.ExitLobbyToLayout.AddListener(SceneSwapToMapLayoutStart);
-            es.ExitLayoutToEncounter.AddListener(SceneSwapToEncounter);
-            es.ExitEncounterToLayout.AddListener(SceneSwapToMapLayoutProgress);
-            es.ExitToMainMenu.AddListener(SceneSwapToMainMenu);
-        }
+        pd = PersistentData.instance;
     }
 
 
@@ -40,12 +38,12 @@ public class SceneTransitionManager : MonoBehaviour
     ************ Traversal ************
     **********************************/
 
-    void SceneSwapToMapLayoutStart()
+    public void SceneSwapToMapLayout()
     {
-        SceneManager.LoadScene("Scenes/LayoutTraversal");
+        SceneManager.LoadScene(layoutScene);
     }
 
-    void SceneSwapToEncounter()
+    public void SceneSwapToEncounter()
     {
         EncounterType encType = pd.currentEncounterType;
     
@@ -56,37 +54,32 @@ public class SceneTransitionManager : MonoBehaviour
         }
         if (encType == EncounterType.Merchant)
         {
-            SceneManager.LoadScene("Scenes/Encounters/Merchant");
+            SceneManager.LoadScene(layoutScene);
             return;
         }
         if (encType == EncounterType.Treasure)
         {
-            SceneManager.LoadScene("Scenes/Encounters/Treasure");
+            SceneManager.LoadScene(treasureScene);
             return;
 
         }
         if (encType == EncounterType.Dungeon)
         {
-            SceneManager.LoadScene("Scenes/Encounters/Dungeon");
+            SceneManager.LoadScene(dungeonScene);
             return;
 
         }
         if (encType == EncounterType.Boss)
         {
-            SceneManager.LoadScene("Scenes/Encounters/Boss");  
+            SceneManager.LoadScene(bossScene);  
             return;
 
         }
         Debug.Log("Nothing to do for you with this encounter type.");
     }
 
-    void SceneSwapToMapLayoutProgress()
+    public void SceneSwapToMainMenu()
     {
-        SceneManager.LoadScene("Scenes/LayoutTraversal");
-    }
-
-    void SceneSwapToMainMenu()
-    {
-        SceneManager.LoadScene("Scenes/Begin");
+        SceneManager.LoadScene(menuScene);
     }
 }

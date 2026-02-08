@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class TraversalManager : MonoBehaviour
 {
     public GameObject traversableLayoutPrefab;
+    public GameEvent EnterEncounter;
 
     private PersistentData  pd;
-    private EventSystem     es;
     private TraversableLayout traversableLayout;
     private bool respondToInputs = true;
 
@@ -28,12 +28,9 @@ public class TraversalManager : MonoBehaviour
     {
         // Managers
         pd = PersistentData.instance;
-        es = EventSystem.instance;
 
         // Listeners
         SceneManager.sceneLoaded += OnSceneLoaded;
-        es.ExitToMainMenu.AddListener(DestroySelf);
-        es.ExitToMainMenu.AddListener(CleanUpTraversal);
 
         pd.firstTimeAtLayout = false;
         GameObject tmp = Instantiate(traversableLayoutPrefab, transform);
@@ -65,7 +62,7 @@ public class TraversalManager : MonoBehaviour
             pd.currentEncounterType = traversableLayout.curSelectedEncounter.encounter;
             traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
-            es.ExitLayoutToEncounter.Invoke();
+            EnterEncounter.Raise();
         }
     }
 
@@ -76,11 +73,9 @@ public class TraversalManager : MonoBehaviour
         Destroy(traversableLayout.gameObject);
     }
 
-    void DestroySelf()
+    public void DestroySelf()
     {
         // Listeners
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        es.ExitToMainMenu.RemoveListener(DestroySelf);
         CleanUpTraversal();
         pd.firstTimeAtLayout = true;
         Destroy(gameObject);
