@@ -5,7 +5,9 @@ using UnityEngine;
 public class DungeonManager : MonoBehaviour
 {
     private PersistentData  pd;
-    private EventSystem     es;
+
+    [Header("Raisable Events")]
+    public GameEvent EnterLayout;
 
     [Header("GrowthPLG Prefabs")]
     public GameObject   dungeonGeneratorPrefab;
@@ -20,7 +22,6 @@ public class DungeonManager : MonoBehaviour
     void Start()
     {
         pd = PersistentData.instance;
-        es = EventSystem.instance;
         SetupDungeon();
     }
 
@@ -51,7 +52,7 @@ public class DungeonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            es?.ExitEncounterToLayout.Invoke();
+            EnterLayout.Raise();
         }
     }
 }
