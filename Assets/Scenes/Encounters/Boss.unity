@@ -337,6 +337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7024d986b110d419cea31be2b4c723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
+  ExitToMenu: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
 --- !u!4 &1997052226
 Transform:
   m_ObjectHideFlags: 0

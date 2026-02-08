@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851f01ffd8ffeb4da8156ea423d1682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
   dungeonGeneratorPrefab: {fileID: 544458499791502142, guid: 44a586e71f9097f439ead40ce63f8841, type: 3}
   Single: {fileID: 5652754335795074277, guid: 63b4169418bddb049b72e1a54f7bf63e, type: 3}
   DoubleI: {fileID: 4096025244378332357, guid: 876ead2e324985f4e975728a9f8573c9, type: 3}
