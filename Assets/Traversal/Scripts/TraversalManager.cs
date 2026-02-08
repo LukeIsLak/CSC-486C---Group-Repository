@@ -20,10 +20,8 @@ public class TraversalManager : MonoBehaviour
 
     void Start()
     {
-        /* Really, we should be storing the layout and reconstructing it as needed.
-        But that can come later. For now, we assume that if it's not existent, we are visiting 
-        the layout for the first time. If it already exists, we're returning after an encounter.*/
-    
+        /* Since we store the parameters before first generation, we can regenerate
+        and update to keep progress. */
         InitializeLayout();
         traversableLayout.DoProgress(layoutData.completedIndices);
         respondToInputs = true;

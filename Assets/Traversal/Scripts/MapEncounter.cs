@@ -14,6 +14,20 @@ public enum EncounterType
 
 public class MapEncounter : MonoBehaviour
 {
+    private static int ACCESSIBLE   = 0;
+    private static int INACCESIBLE  = 1;
+    private static int COMPLETED    = 2;
+
+    public GameObject   graphicsGO;
+    public SpriteRenderer graphicsSR;
+
+    [Header("Encounter Icons")]
+    public List<Sprite> merchantAIC;
+    public List<Sprite> treasureAIC;
+    public List<Sprite> dungeonAIC;
+    public List<Sprite> bossAIC;
+
+    [Header("Encounter Information")]
     public EncounterType encounter;
 
     // For navigation and visualization
@@ -30,7 +44,6 @@ public class MapEncounter : MonoBehaviour
     public TraversableLayout traversableLayout;
 
     // Internal reference 
-    private Transform visual;
     private Color crimson;
     private Color gold;
     private Color goldenRod;
@@ -46,11 +59,15 @@ public class MapEncounter : MonoBehaviour
         children        = new List<MapEncounter>();
         visColor        = Color.white;
         visAlpha        = 0.1f;
-        visual          = transform.Find("Cylinder");
 
         crimson         = new Color(0.8627452f/2, 0.07843138f/2, 0.2352941f/2, 1f);
         gold            = new Color(0.854902f, 0.6470588f, 0.1254902f, 1f);
         goldenRod       = new Color(1f, 0.8431373f, 0f, 1f);
+
+    }
+    void Start()
+    {
+        graphicsSR = graphicsGO.GetComponent<SpriteRenderer>();
     }
 
 
@@ -102,23 +119,33 @@ public class MapEncounter : MonoBehaviour
         isSelected = val;
         UpdateAppearance();
     }
+
     public void UpdateAppearance()
     {
-        if (encounter == EncounterType.Start)     visColor = Color.blue;
-        if (encounter == EncounterType.Merchant)  visColor = goldenRod;
-        if (encounter == EncounterType.Treasure)  visColor = gold;
-        if (encounter == EncounterType.Boss)      visColor = crimson;
-        if (encounter == EncounterType.Dungeon)   visColor = Color.red;
-        if (isSelected) visColor = Color.white;
-        if (isCompleted) visColor = Color.green;
+        int i = INACCESIBLE;
+        if (isCompleted) i = COMPLETED;
+        else if (isAccessible) i = ACCESSIBLE;
 
-        if (!isAccessible && !isCompleted) {visAlpha = 0.1f;}
-        else {visAlpha = 1.0f;}
-        
-        Color newColor = new Color(visColor.r, visColor.g, visColor.b, visAlpha);
-        visual.GetComponent<Renderer>().material.color = newColor;
+        if (!graphicsSR) { Debug.Log("No sr"); }
+        if (encounter == EncounterType.Merchant)
+        {
+            graphicsSR.sprite = merchantAIC[i];
+        }
+        if (encounter == EncounterType.Treasure)
+        {
+            graphicsSR.sprite = treasureAIC[i];
+        }
+        if (encounter == EncounterType.Dungeon)
+        {
+            graphicsSR.sprite = dungeonAIC[i];
+        }
+        if (encounter == EncounterType.Boss)
+        {
+            graphicsSR.sprite = bossAIC[i];
+        }
         UpdateLines();
     }
+
     public void MakeLines()
     {
         transform.Find("LineCreator").GetComponent<LineToOthers>().SetOthers(children);
