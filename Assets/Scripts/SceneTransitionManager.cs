@@ -14,22 +14,8 @@ public class SceneTransitionManager : MonoBehaviour
 
 
     private PersistentData  pd;
-    public static SceneTransitionManager instance;
-    void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-
     void Start()
     {
-        // Subscribe to appropriate unity events
         pd = PersistentData.instance;
     }
 
