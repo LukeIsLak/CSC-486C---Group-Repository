@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Create a class to hold the information for the cards
-public class Cards : ScriptableObject
+public abstract class Cards : ScriptableObject
 {
     public string name = null;
     public Sprite image = null;

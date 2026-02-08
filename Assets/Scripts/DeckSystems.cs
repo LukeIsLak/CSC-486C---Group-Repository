@@ -209,6 +209,7 @@ public class DeckSystems : MonoBehaviour
         // Get the current card
         Cards CurrentCard = hand[currentHandIndex];
         //Check for which card is currently selected
+        //if (CurrentCard.) { }
         // put card in discard and remove from hand
         discard.Add(hand[currentHandIndex]);
         hand[currentHandIndex] = null;
@@ -216,5 +217,29 @@ public class DeckSystems : MonoBehaviour
         currentHandSize--;
     }
 
-    //to add tests 
+    /// <summary>
+    /// Assumes that the discard pil is checked before being called
+    /// takes an amount of cards from discard pile (randomly) and puts them in to the players deck, player deck will be shuffled after
+    /// </summary>
+    /// <param name="amount"></param>
+    public void drawFromDiscard(int amount) {
+        int temp;
+        int discardSize = discard.Count;
+        if (amount > discardSize) {
+            temp = discardSize;
+        } else {
+            temp = amount;
+        }
+
+        int index = 0;
+        
+        for (int i = 0; i < temp; i++) {
+            index = Random.Range(0, discardSize);
+            addCardToDeck(discard[index]);
+            discard.RemoveAt(index);
+            discardSize--;
+        }
+
+        shuffleExcHand();
+    } 
 }
