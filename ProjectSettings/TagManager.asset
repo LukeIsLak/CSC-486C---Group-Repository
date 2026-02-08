@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - TraversalManager
   - Event System
   - Persistent Data
+  - Traversable Layout
   layers:
   - Default
   - TransparentFX

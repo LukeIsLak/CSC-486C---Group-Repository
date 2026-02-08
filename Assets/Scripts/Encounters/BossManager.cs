@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    private PersistentData  pd;
-
-    [Header("Raisable Events")]
+    [Header("Events")]
     public GameEvent EnterLayout;
     public GameEvent ExitToMenu;
 
     void Start()
     {
-        pd = PersistentData.instance;
     }
 
     void Update()

@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class MerchantManager : MonoBehaviour
 {
-    private PersistentData  pd;
-
-    [Header("Raisable Events")]
+    [Header("Events")]
     public GameEvent EnterLayout;
 
 
     void Start()
     {
-        pd = PersistentData.instance;
     }
 
     void Update()

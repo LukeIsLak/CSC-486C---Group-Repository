@@ -321,6 +321,10 @@ PrefabInstance:
       value: TraversalManager
       objectReference: {fileID: 0}
     - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
+      propertyPath: layoutData
+      value: 
+      objectReference: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
+    - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
       propertyPath: EnterEncounter
       value: 
       objectReference: {fileID: 11400000, guid: bd10d720d2ae37d40beb52c0770b1d02, type: 2}

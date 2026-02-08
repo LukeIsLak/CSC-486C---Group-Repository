@@ -5,20 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    public SceneField   merchantScene,
-                        treasureScene,
-                        dungeonScene,
-                        bossScene,
-                        layoutScene,
-                        menuScene;
+    [Header("Scenes")]
+    public SceneField   merchantScene;
+    public SceneField   treasureScene;
+    public SceneField   dungeonScene;
+    public SceneField   bossScene;
+    public SceneField   layoutScene;
+    public SceneField   menuScene;
 
+    [Header("Data")]
+    public LayoutData   layoutData;
 
-    private PersistentData  pd;
-    void Start()
+    /* Added this back... Assuming it will be ever-present */
+    public static SceneTransitionManager instance;
+    void Awake()
     {
-        pd = PersistentData.instance;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
-
 
     /**********************************
     ************ Traversal ************
@@ -31,7 +40,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneSwapToEncounter()
     {
-        EncounterType encType = pd.currentEncounterType;
+        EncounterType encType = layoutData.currentEncounter;
     
         if (encType == EncounterType.None) 
         {
