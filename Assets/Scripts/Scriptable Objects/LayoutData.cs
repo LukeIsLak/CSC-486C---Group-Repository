@@ -13,4 +13,7 @@ public class LayoutData : ScriptableObject
                             shouldDoProgress;
     public EncounterType    currentEncounter;
     public List<int>        completedIndices = new List<int>(); // For regeneration!
+
+    public int              layerDistance,
+                            encounterSep;
 }

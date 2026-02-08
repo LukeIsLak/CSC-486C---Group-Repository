@@ -49,7 +49,7 @@ public class SceneTransitionManager : MonoBehaviour
         }
         if (encType == EncounterType.Merchant)
         {
-            SceneManager.LoadScene(layoutScene);
+            SceneManager.LoadScene(merchantScene);
             return;
         }
         if (encType == EncounterType.Treasure)

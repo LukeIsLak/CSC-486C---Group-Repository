@@ -115,12 +115,13 @@ public class MapEncounter : MonoBehaviour
     public void SetIsHovered(bool val)
     {
         isHovered = val;
-        desiredHeight = val ? hoverHeight : baseHeight;
+        desiredHeight = val && !isSelected ? hoverHeight : baseHeight;
         UpdateAppearance();
     }
     public void SetIsSelected(bool val)
     {
         isSelected = val;
+        desiredHeight = baseHeight;
         UpdateAppearance();
     }
 
@@ -163,8 +164,7 @@ public class MapEncounter : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && isHovered) traversableLayout?.ReceiveClick(this);
         float curHeight = graphicsGO.transform.localPosition[1];
-        float interp = (desiredHeight - curHeight)/1.2f;
-        Debug.Log(desiredHeight.ToString() +" " + curHeight.ToString());
+        float interp = (desiredHeight - curHeight)/4f;
         if (Mathf.Abs(interp) < 0.01f)
         {
             graphicsGO.transform.localPosition = new Vector3(0f, desiredHeight, 0f);

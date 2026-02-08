@@ -10,11 +10,8 @@ public class TraversableLayout : MonoBehaviour
     public GameObject mapEncounterPrefab;
     
     
-    [Header("Generation Parameters")]
-    public int depth;
-    public int maxWidth;
-    public int randomSeed;
-    public bool useSeed;
+    [Header("Data")]
+    public LayoutData layoutData;
 
     // Data Structures
     private List<List<MapEncounter>> mapLayers;
@@ -43,10 +40,10 @@ public class TraversableLayout : MonoBehaviour
 
         // Do layout generation
         layoutGenerator = Instantiate(layoutGeneratorPrefab, transform).GetComponent<MapGen2>();
-        layoutGenerator.layersToGenerate    = depth;
-        layoutGenerator.maxWidth            = maxWidth;
-        layoutGenerator.useSetSeed          = useSeed;
-        layoutGenerator.randomSeed          = randomSeed;
+        layoutGenerator.layersToGenerate    = layoutData.depth;
+        layoutGenerator.maxWidth            = layoutData.maxWidth;
+        layoutGenerator.useSetSeed          = layoutData.useSeed;
+        layoutGenerator.randomSeed          = layoutData.randomSeed;
         genLayers = layoutGenerator.DoGeneration();
 
         // Do conversion to encounters, destroy generator
@@ -151,13 +148,14 @@ public class TraversableLayout : MonoBehaviour
         {   
             Transform layerContainer = new GameObject("Layer" + li.ToString()).transform;
             layerContainer.SetParent(transform, false);
-            layerContainer.Translate(Vector3.back * 4 * li);
+            layerContainer.Translate(Vector3.back * layoutData.layerDistance * li);
             layerContainers.Add(layerContainer);
             int ni = 0;
             foreach (MapEncounter node in curLayer)
             {
+                int sep = layoutData.encounterSep;
                 node.transform.SetParent(layerContainer, false);
-                node.transform.Translate(Vector3.left * (curLayer.Count - 1) * 2 + Vector3.right * 4 * ni);
+                node.transform.Translate(Vector3.left * (curLayer.Count - 1) * sep/2 + Vector3.right * sep * ni);
                 ni++;
             }
             li++;
@@ -176,8 +174,9 @@ public class TraversableLayout : MonoBehaviour
         }
     }
 
-    public void DoProgress(List<int> completedIndices)
+    public MapEncounter DoProgress(List<int> completedIndices)
     {
+
         int l = 0;
         foreach (int i in completedIndices)
         {
@@ -193,6 +192,7 @@ public class TraversableLayout : MonoBehaviour
         UpdateAppearance();
         // Check for finish here!
         // if (prevselectedencounter = finalencounter)...
+        return mapLayers[l][completedIndices[completedIndices.Count-1]];
     }
 
     public void ReceiveClick(MapEncounter enc)

@@ -19,15 +19,14 @@ public class TraversalManager : MonoBehaviour
     private TraversableLayout traversableLayout;
     private bool respondToInputs = true;
     
-    private int offsetFromEdgeNodes = 3;
-
     void Start()
     {
         /* Since we store the parameters before first generation, we can regenerate
         and update to keep progress. */
         InitializeLayout();
-        traversableLayout.DoProgress(layoutData.completedIndices);
+        MapEncounter lastFinished = traversableLayout.DoProgress(layoutData.completedIndices);
         respondToInputs = true;
+        sceneCamera.transform.position = lastFinished.transform.position + new Vector3(0f, 8, 0f);
     }
 
     void InitializeLayout()
@@ -35,10 +34,6 @@ public class TraversalManager : MonoBehaviour
         layoutData.shouldGenerate       = false;
         GameObject tmp = Instantiate(traversableLayoutPrefab);
         traversableLayout = tmp.GetComponent<TraversableLayout>();
-        traversableLayout.depth         = layoutData.depth;
-        traversableLayout.maxWidth      = layoutData.depth;
-        traversableLayout.randomSeed    = layoutData.randomSeed;
-        traversableLayout.useSeed       = layoutData.useSeed;
         traversableLayout.Initialize();
     }
     // Update is called once per frame
@@ -59,7 +54,14 @@ public class TraversalManager : MonoBehaviour
             float offsetH   = -diff[0]/50f;
             float offsetV   = -diff[1]/50f;
 
-            sceneCamera.transform.position += new Vector3(offsetH, 0f, offsetV);
+            Vector3 curPos = sceneCamera.transform.position;
+            curPos      += new Vector3(offsetH, 0f, offsetV);
+            curPos[0]   = Mathf.Min(layoutData.maxWidth * layoutData.encounterSep / 2, curPos[0]);
+            curPos[0]   = Mathf.Max(-layoutData.maxWidth * layoutData.encounterSep / 2, curPos[0]);
+            curPos[2]   = Mathf.Min(0, curPos[2]);
+            curPos[2]   = Mathf.Max(-layoutData.depth * layoutData.layerDistance, curPos[2]);
+
+            sceneCamera.transform.position = curPos;
         }
     }
 
