@@ -358,6 +358,8 @@ MonoBehaviour:
   DoubleL: {fileID: 541758946328569497, guid: 40e9619bd611bea4e825005e48c45ccf, type: 3}
   Triple: {fileID: 6801531063469995002, guid: 4ad0d98009b2b0e43823d3d5bc978f75, type: 3}
   Quad: {fileID: 5053080330027968242, guid: 8eaed6a09e85360438c6d1bbf8b734e3, type: 3}
+  dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
+  EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

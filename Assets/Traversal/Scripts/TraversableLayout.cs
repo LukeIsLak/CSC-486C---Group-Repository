@@ -59,8 +59,6 @@ public class TraversableLayout : MonoBehaviour
 
         // Physical positioning
         DoLayerPlacement(mapLayers);
-
-        InitTraversal();
     }
 
     // Reset as if never used
@@ -87,6 +85,8 @@ public class TraversableLayout : MonoBehaviour
         if (genLayers.Count == 0) return result;
         MapEncounter newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
         newChild.traversableLayout = this;
+        newChild.layer = 0;
+        newChild.index = 0;
 
         nextLayer.Add(newChild);
         result.Add(nextLayer);
@@ -96,6 +96,7 @@ public class TraversableLayout : MonoBehaviour
             List<MapNode2> genLayer     = genLayers[i];        // Current layer from genLayers
             List<MapEncounter> resLayer = result[i];           // Current layer from result
             nextLayer = new List<MapEncounter>();
+            int childIndex      = 0;
             
             // Create next layer
             for (int j = 0; j < genLayer.Count; j++)
@@ -114,7 +115,10 @@ public class TraversableLayout : MonoBehaviour
 
                     // Child doesn't exist yet, so add right (we are going l -> r)
                     newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
-                    newChild.traversableLayout = this;
+                    newChild.traversableLayout  = this;
+                    Debug.Log("Layer " + i.ToString() + childIndex.ToString());
+                    newChild.layer              = i + 1;
+                    newChild.index              = childIndex++;
                     curRes.AddChildRight(newChild);
                     nextLayer.Add(newChild);
                 }
@@ -172,33 +176,21 @@ public class TraversableLayout : MonoBehaviour
         }
     }
 
-    public void InitTraversal()
+    public void DoProgress(List<int> completedIndices)
     {
-        if (mapLayers.Count == 0) return;
-        prevSelectedEncounter = mapLayers[0][0];
-        prevSelectedEncounter.SetIsCompleted(true);
-        foreach (MapEncounter child in prevSelectedEncounter.children)
+        int l = 0;
+        foreach (int i in completedIndices)
         {
-            child.SetIsAccessible(true);
+            mapLayers[l++][i].isCompleted = true;
+            Debug.Log(l.ToString() + i.ToString());
         }
-    }
 
-    public void DoProgress()
-    {
-        if (!curSelectedEncounter) return;
-        curSelectedEncounter.SetIsCompleted(true);
-
-        foreach (MapEncounter child in prevSelectedEncounter.children)
+        foreach (MapEncounter child in mapLayers[--l][completedIndices[completedIndices.Count-1]].children)
         {
-            child.SetIsAccessible(false);
+            child.isAccessible = true;
         }
-        foreach (MapEncounter child in curSelectedEncounter.children)
-        {
-            child.SetIsAccessible(true);
-        }
-        prevSelectedEncounter = curSelectedEncounter;
-        curSelectedEncounter = null;
 
+        UpdateAppearance();
         // Check for finish here!
         // if (prevselectedencounter = finalencounter)...
     }

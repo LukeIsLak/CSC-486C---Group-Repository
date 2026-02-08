@@ -5,67 +5,51 @@ using UnityEngine.SceneManagement;
 
 public class TraversalManager : MonoBehaviour
 {
+    [Header("Required Prefabs")]
     public GameObject traversableLayoutPrefab;
+    
+    [Header("Data")]
+    public LayoutData layoutData;
 
-    private PersistentData  pd;
-    private EventSystem     es;
+    [Header("Events")]
+    public GameEvent EnterEncounter;
+
     private TraversableLayout traversableLayout;
     private bool respondToInputs = true;
-
-    public static TraversalManager instance;
-    void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+    
 
     void Start()
     {
-        // Managers
-        pd = PersistentData.instance;
-        es = EventSystem.instance;
-
-        // Listeners
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        es.ExitToMainMenu.AddListener(DestroySelf);
-        es.ExitToMainMenu.AddListener(CleanUpTraversal);
-
-        pd.firstTimeAtLayout = false;
-        GameObject tmp = Instantiate(traversableLayoutPrefab, transform);
-        traversableLayout = tmp.GetComponent<TraversableLayout>();
-        traversableLayout.depth = 10;
-        traversableLayout.maxWidth = 7;
-        traversableLayout.randomSeed = (int)System.DateTime.Now.Ticks;
-        traversableLayout.useSeed = true;
-        traversableLayout.Initialize();
-        // Handle camera placement, layout placement etc.
+        /* Really, we should be storing the layout and reconstructing it as needed.
+        But that can come later. For now, we assume that if it's not existent, we are visiting 
+        the layout for the first time. If it already exists, we're returning after an encounter.*/
+    
+        InitializeLayout();
+        traversableLayout.DoProgress(layoutData.completedIndices);
+        respondToInputs = true;
     }
 
-    // What to do when transitioning in/out of the scene
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void InitializeLayout()
     {
-        if (scene.name == "LayoutTraversal")
-        {
-            traversableLayout.gameObject.SetActive(true);
-            respondToInputs = true;
-            if (!pd.firstTimeAtLayout) traversableLayout.DoProgress();
-        }
+        layoutData.shouldGenerate       = false;
+        GameObject tmp = Instantiate(traversableLayoutPrefab);
+        traversableLayout = tmp.GetComponent<TraversableLayout>();
+        traversableLayout.depth         = layoutData.depth;
+        traversableLayout.maxWidth      = layoutData.depth;
+        traversableLayout.randomSeed    = layoutData.randomSeed;
+        traversableLayout.useSeed       = layoutData.useSeed;
+        traversableLayout.Initialize();
     }
-
     // Update is called once per frame
     void Update()
     {
         if (respondToInputs && Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
         {
-            pd.currentEncounterType = traversableLayout.curSelectedEncounter.encounter;
+            layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
+            layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
             traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
-            es.ExitLayoutToEncounter.Invoke();
+            EnterEncounter.Raise();
         }
     }
 
@@ -76,13 +60,10 @@ public class TraversalManager : MonoBehaviour
         Destroy(traversableLayout.gameObject);
     }
 
-    void DestroySelf()
+    public void DestroySelf()
     {
         // Listeners
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        es.ExitToMainMenu.RemoveListener(DestroySelf);
         CleanUpTraversal();
-        pd.firstTimeAtLayout = true;
         Destroy(gameObject);
     }
 }

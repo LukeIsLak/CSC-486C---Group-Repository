@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    private PersistentData  pd;
-    private EventSystem     es;
+    [Header("Events")]
+    public GameEvent EnterLayout;
+    public GameEvent ExitToMenu;
 
     void Start()
     {
-        pd = PersistentData.instance;
-        es = EventSystem.instance;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            es?.ExitEncounterToLayout.Invoke();
+            EnterLayout.Raise();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            es?.ExitToMainMenu.Invoke();
+            ExitToMenu.Raise();
         }
 
     }

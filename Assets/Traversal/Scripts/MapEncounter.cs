@@ -21,6 +21,8 @@ public class MapEncounter : MonoBehaviour
     public bool isCompleted;
     public bool isHovered;
     public bool isSelected;
+    public int layer;
+    public int index;
 
     public List<MapEncounter> children;
     public Color visColor;
