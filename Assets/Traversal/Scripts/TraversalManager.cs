@@ -23,29 +23,16 @@ public class TraversalManager : MonoBehaviour
         /* Really, we should be storing the layout and reconstructing it as needed.
         But that can come later. For now, we assume that if it's not existent, we are visiting 
         the layout for the first time. If it already exists, we're returning after an encounter.*/
-        
-        traversableLayout = GameObject.FindWithTag("Traversable Layout")?.GetComponent<TraversableLayout>();
-
-        if (!traversableLayout) 
-        { 
-            InitializeLayout();
-        }
-
-        traversableLayout.SetActive(true);
-        if (shouldDoProgress)
-        {
-            traversableLayout.DoProgress();
-        }
-
+    
+        InitializeLayout();
+        traversableLayout.DoProgress(layoutData.completedIndices);
         respondToInputs = true;
     }
 
     void InitializeLayout()
     {
         layoutData.shouldGenerate       = false;
-        layoutData.shouldDoProgress     = true;
         GameObject tmp = Instantiate(traversableLayoutPrefab);
-        DontDestroyOnLoad(tmp);
         traversableLayout = tmp.GetComponent<TraversableLayout>();
         traversableLayout.depth         = layoutData.depth;
         traversableLayout.maxWidth      = layoutData.depth;
@@ -59,6 +46,7 @@ public class TraversalManager : MonoBehaviour
         if (respondToInputs && Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
         {
             layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
+            layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
             traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
             EnterEncounter.Raise();

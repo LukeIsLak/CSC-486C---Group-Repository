@@ -12,4 +12,5 @@ public class LayoutData : ScriptableObject
                             shouldGenerate,
                             shouldDoProgress;
     public EncounterType    currentEncounter;
+    public List<int>        completedIndices = new List<int>(); // For regeneration!
 }
