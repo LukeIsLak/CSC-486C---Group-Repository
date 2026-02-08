@@ -65,8 +65,7 @@ public class DeckSystems : MonoBehaviour
     /// ASSUMPTION: when a card is colected the check for deck size happens, this function is for adding a used card back in to the deck
     /// </summary>
     /// <param name="card"></param>
-    public void addCardToDeck(Cards card)
-    {
+    public void addCardToDeck(Cards card) {
         // add card to deck
         deck.Enqueue(card);
         currentDeckSize++;
@@ -77,8 +76,7 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     /// <param name="handslot"></param>
     /// <returns> null if handslot is invalid (less than 0 or greater than 5) or the card draw (GameObject) </returns>
-    public Cards drawCard(int handslot)
-    {
+    public Cards drawCard(int handslot) {
         // remove first card from deck
         Cards card = deck.Dequeue();
 
@@ -241,5 +239,39 @@ public class DeckSystems : MonoBehaviour
         }
 
         shuffleExcHand();
-    } 
+    }
+
+    /// <summary>
+    /// assumes a check that the deck has enough cards for this has happend
+    /// will swap rwo cards in playes hand with two random cards in their deck
+    /// </summary>
+    /// <param name="amount"></param>
+    public void swaptwocards(int amount) {
+        int index1 = 0;
+        int index2 = 0;
+
+        if (currentHandSize == 2) {
+
+        } else {
+
+            while (index1 == index2 || hand[index1] == null || hand[index2] == null) {
+                index1 = Random.Range(0, MAXHANDSIZE);
+                index2 = Random.Range(0, MAXHANDSIZE);
+            }
+
+        }
+        Cards swap1 = hand[index1];
+        Cards swap2 = hand[index2];
+
+        int deckindex1 = 0;
+        int deckindex2 = 0;
+
+        while (deckindex1 == deckindex2) {
+            index1 = Random.Range(0, currentDeckSize);
+            index2 = Random.Range(0, currentDeckSize);
+        }
+
+        addCardToDeck(swap1);
+        addCardToDeck(swap2);
+    }
 }
