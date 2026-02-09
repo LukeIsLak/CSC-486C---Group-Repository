@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyInterface : MonoBehaviour
 {
-    protected int health;
-    protected double moveSpeed;
+    // protected int health;
+    // protected double moveSpeed;
+
 }

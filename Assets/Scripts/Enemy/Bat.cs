@@ -30,6 +30,41 @@ public class Bat : EnemyInterface
     private bool isMoving = false;
     private List<Vector3> targetPath = new List<Vector3>();
 
+    // Flutter behaviour parameters
+    [Header("Flutter (around player)")]
+    public Transform playerTransform;               // assign in inspector or at runtime
+    public bool isFluttering = false;
+    public float flutterRadius = 3f;                // average orbit radius
+    public float flutterAngularSpeed = 90f;         // degrees per second
+    public float flutterRadialJitter = 0.5f;        // random variation in radius
+    public float verticalBobAmplitude = 0.4f;       // vertical bob amount
+    public float verticalBobSpeed = 2f;             // vertical bob speed
+    public float horizontalBobAmplitude = 0.4f;     // horizontal bob amount
+    public float horizontalBobSpeed = 2f;
+    public float flutterMoveSpeed = 4f;             // movement speed while fluttering
+    public float flutterTurnSpeed = 5f;             // rotation smoothing
+    [SerializeField]
+    private float flutterAngleDeg = 0f;
+    [SerializeField]
+    private float flutterJitterSeed;
+
+    // Smoothing for horizontal squiggle to reduce spikiness (higher = smoother)
+    [Header("Flutter Noise Smoothing")]
+    public float lateralSmoothing = 8f;
+
+
+    [Header("Steering Controls")]
+    public int steerSteps = 1;
+    public int steerAngularSteps = 10;
+    public float steerViewAngle = 45f;
+    public float maxSteerDistance = 10f;
+    public float steerDistanceWeight = 2f;
+    public float steerDirectionWeight = 1f;
+    public LayerMask steerLayerMask = ~0;
+
+    private Vector3 prevLateralOffset = Vector3.zero;
+
+    public BatStates currentState;
 
     private List<RaycastHit> findCeilingMesh() {
         List<RaycastHit> hits = new List<RaycastHit>();
@@ -129,8 +164,22 @@ public class Bat : EnemyInterface
         catch {}
     }
 
+    public static Vector3 ReflectAcrossAxis(Vector3 v, Vector3 axis) {
+        if (axis.sqrMagnitude < 1e-12f) return v; // no axis -> identity
+        Vector3 u = axis.normalized;
+        return 2f * Vector3.Dot(v, u) * u - v;
+    }
+
+    // Reflect a vector v across a plane given by its normal n (plane passes through origin).
+    // n must be non-zero. Result = reflection across the plane.
+    // public static Vector3 ReflectAcrossPlaneNormal(Vector3 v, Vector3 n) {
+    //     if (n.sqrMagnitude < 1e-12f) return v;
+    //     Vector3 nn = n.normalized;
+    //     return v - 2f * Vector3.Dot(v, nn) * nn;
+    // }
+
     /*t is between [0, 1]*/
-    private Vector3 CubicBezierCurvePoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t) {
+    private static Vector3 CubicBezierCurvePoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t) {
         float u = 1f - t;
         return (u * u * u * p0) + 
                (3f * u * u * t * p1) +
@@ -149,17 +198,174 @@ public class Bat : EnemyInterface
         Vector3 p1 = cur + dir * 0.25f + normal * Random.Range(-2f, 2f);
         Vector3 p2 = cur + dir * 0.25f + normal * Random.Range(-2f, 2f);
 
-        print(cur);
-        print(p1);
-        print(p2);
-        print(target);
         List<Vector3> targetPoints = new List<Vector3>();
         for (int i = 1; i <= numPathPoint; i++) targetPoints.Add(CubicBezierCurvePoint(cur, p1, p2, target, (i / (float)numPathPoint)));
 
         return targetPoints;
     }
 
+    void StartFlutter(Transform player)
+    {
+        if (player == null) return;
+        playerTransform = player;
+        isFluttering = true;
+        flutterAngleDeg = UnityEngine.Random.Range(0f, 360f);
+        flutterJitterSeed = UnityEngine.Random.value * 100f;
+        // optionally stop path-following
+        isMoving = false;
+    }
+
+    void StopFlutter()
+    {
+        isFluttering = false;
+    }
+
+    // XXX flutter should make a steer towards point!
+    void UpdateFlutter()
+    {
+        if (!isFluttering || playerTransform == null) return;
+
+        // Advance angle
+        flutterAngleDeg += flutterAngularSpeed * Time.deltaTime;
+        if (flutterAngleDeg >= 360f) flutterAngleDeg -= 360f;
+
+        // Smooth radial jitter
+        float jitter = (Mathf.PerlinNoise(flutterJitterSeed, Time.time * 0.5f) - 0.5f) * 2f * flutterRadialJitter;
+        float radius = Mathf.Max(0.1f, flutterRadius + jitter);
+
+        // Vertical bob
+        float vertBob = Mathf.Sin(Time.time * verticalBobSpeed + flutterJitterSeed) * verticalBobAmplitude;
+
+        float angleRad = flutterAngleDeg * Mathf.Deg2Rad;
+        Vector3 center = playerTransform.position;
+
+        // Unit vectors for orbit
+        Vector3 baseDir = new Vector3(Mathf.Cos(angleRad), 0f, Mathf.Sin(angleRad));
+        Vector3 sideDir = new Vector3(-baseDir.z, 0f, baseDir.x); // perpendicular in XZ
+
+        // Perlin-based squiggle evolving with angle and time
+        float noiseU = angleRad * 0.5f + flutterJitterSeed;
+        float noiseV = Time.time * horizontalBobSpeed + flutterJitterSeed;
+        float squig = (Mathf.PerlinNoise(noiseU, noiseV) - 0.5f) * 2f; // in [-1,1]
+
+        // Small radial modulation so circle breathes
+        float radialMod = squig * (horizontalBobAmplitude * 0.25f);
+        Vector3 baseOrbit = baseDir * (radius + radialMod);
+
+        // Lateral squiggle perpendicular to orbit (produces wavy circle)
+        Vector3 lateralTarget = sideDir * (squig * horizontalBobAmplitude);
+        // exponential smoothing: alpha in (0,1) per-frame derived from smoothing rate
+        float alpha = 1f - Mathf.Exp(-lateralSmoothing * Time.deltaTime);
+        Vector3 lateralOffset = Vector3.Lerp(prevLateralOffset, lateralTarget, alpha);
+        prevLateralOffset = lateralOffset;
+
+        // Combine into target position (horizontal orbit + lateral squiggle + vertical bob)
+        Vector3 targetPos = center + baseOrbit + lateralOffset + new Vector3(0f, vertBob, 0f);
+
+        // Move smoothly toward targetPos
+        float step = flutterMoveSpeed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+
+        // Smoothly face movement direction
+        Vector3 toTarget = (targetPos - transform.position);
+        if (toTarget.sqrMagnitude > 1e-6f)
+        {
+            Quaternion desired = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, desired, flutterTurnSpeed * Time.deltaTime);
+        }
+    }
+
+
+    void PeckTarget() {
+        isFluttering = false;
+
+    }
+
+    // XXX this steer function... sucks... please improve it!
+    public void steer()
+    {
+        Vector3 origin = transform.position;
+        Vector3 forward = transform.forward.normalized;
+
+        // build orthonormal sampling frame around forward
+        Vector3 axis1 = transform.forward;
+        if (Mathf.Abs(Vector3.Dot(axis1.normalized, forward)) > 0.99f) axis1 = transform.right;
+        Vector3 axis2 = Vector3.Cross(forward, axis1).normalized;
+        axis1 = Vector3.Cross(axis2, forward).normalized;
+
+        // accumulate repulsion from hits
+        Vector3 repulsion = Vector3.zero;
+
+        for (int ring = 0; ring <= steerSteps; ring++)
+        {
+            float t = steerSteps == 0 ? 0f : (float)ring / steerSteps;
+            float theta = t * steerViewAngle; // tilt from forward
+            int samples = (ring == 0) ? 1 : Mathf.Max(1, steerAngularSteps * ring);
+
+            for (int s = 0; s < samples; s++)
+            {
+                float phi = (360f * s) / samples;
+                float phiRad = phi * Mathf.Deg2Rad;
+
+                // tangent axis and sample direction
+                Vector3 tangentAxis = (Mathf.Cos(phiRad) * axis1 + Mathf.Sin(phiRad) * axis2).normalized;
+                Vector3 dir = Quaternion.AngleAxis(theta, tangentAxis) * forward;
+
+                if (Physics.Raycast(origin, dir, out RaycastHit hit, maxSteerDistance, steerLayerMask)
+                    && hit.collider != null
+                    && hit.collider.transform != transform
+                    && !hit.collider.transform.IsChildOf(transform))
+                {
+                    float hitFactor = 1f - (hit.distance / Mathf.Max(0.0001f, maxSteerDistance)); // 0..1 stronger when close
+                    Vector3 away = (origin - hit.point).normalized * hitFactor * steerDistanceWeight;
+                    repulsion += away;
+
+                    if (debug) Debug.DrawRay(origin, dir * hit.distance, Color.Lerp(Color.blue, Color.red, hitFactor));
+                }
+                else if (debug)
+                {
+                    // visualize free sample rays faintly
+                    Debug.DrawRay(origin, dir * Mathf.Min(maxSteerDistance, 1.0f), new Color(0f, 1f, 0f, 0.2f));
+                }
+            }
+        }
+
+        // no obstacles found -> nothing to steer away from
+        if (repulsion.sqrMagnitude < 1e-6f) return;
+
+        // build desired direction combining forward intent and repulsion
+        Vector3 repulseDir = repulsion.normalized;
+        Vector3 desiredDir = (forward + repulseDir * steerDirectionWeight).normalized;
+
+        // move by a step towards the desired direction (clamped by maxSteerDistance)
+        Vector3 desiredPos = origin + desiredDir * Mathf.Min(maxSteerDistance, moveSpeed);
+        float step = moveSpeed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, desiredPos, step);
+
+        if (debug) Debug.DrawRay(origin, repulsion, Color.magenta);
+        if (debug) Debug.DrawLine(origin, desiredPos, Color.cyan);
+
+        // rotate to face movement
+        Vector3 toTarget = desiredPos - transform.position;
+        if (toTarget.sqrMagnitude > 1e-6f)
+        {
+            Quaternion look = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, look, 10f * Time.deltaTime);
+        }
+    }
+
+
+
+
+
     void Update() {
+
+        if (isFluttering) {
+            UpdateFlutter();
+        }
+
+        steer();
+
         if (Input.GetKeyDown(KeyCode.Space)) {
             List<RaycastHit> hits = findCeilingMesh();
             
