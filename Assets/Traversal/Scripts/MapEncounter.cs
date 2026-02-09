@@ -17,6 +17,7 @@ public class MapEncounter : MonoBehaviour
     private static int ACCESSIBLE   = 0;
     private static int INACCESIBLE  = 1;
     private static int COMPLETED    = 2;
+    private static int HOVERED      = 3;
 
     public GameObject   graphicsGO;
     public SpriteRenderer graphicsSR;
@@ -129,9 +130,8 @@ public class MapEncounter : MonoBehaviour
     {
         int i = INACCESIBLE;
         if (isCompleted) i = COMPLETED;
-        else if (isAccessible) i = ACCESSIBLE;
+        else if (isAccessible) i = isHovered ? HOVERED : ACCESSIBLE;
 
-        if (!graphicsSR) { Debug.Log("No sr"); }
         if (encounter == EncounterType.Merchant)
         {
             graphicsSR.sprite = merchantAIC[i];
