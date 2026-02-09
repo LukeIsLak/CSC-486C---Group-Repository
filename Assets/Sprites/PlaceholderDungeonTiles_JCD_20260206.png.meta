@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0
+guid: 9c62188158db20b459e436e024db8d56
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,327 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Unreachable_Combat
+      name: Placeholder_WallBase
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4390244819600b48b7bc06345a59e94
-      internalID: -1707302033
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reachable_Combat
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 72
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fb175fb8947f4b649b9ef1260561a41d
-      internalID: -1100653601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Unreachable_Mystery
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 40
-        width: 19
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 60ba8018968e498438f9510c409f178c
-      internalID: 1710345884
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reachable_Mystery
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 72
-        width: 19
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 44b04b18bd30020448039566a11c0aa1
-      internalID: -601846495
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Unreachable_Shop
-      rect:
-        serializedVersion: 2
-        x: 47
-        y: 41
-        width: 18
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43ebc68c8be2cc44cb5d0ee8192b7238
-      internalID: 890794497
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reachable_Shop
-      rect:
-        serializedVersion: 2
-        x: 47
-        y: 73
-        width: 18
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83f7e6438e10480469b75fc570593c21
-      internalID: 2070105257
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Unreachable_Boss
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 33
-        width: 24
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 616e244f4e6bc404cb8ab41de7c298cb
-      internalID: -622201144
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reachable_Boss
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 65
-        width: 24
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe4b0e53705497447b02994a2d3ccc57
-      internalID: -1724828971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cleared_Combat
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 8
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f948fac437407a1448b5d228f5fc0e52
-      internalID: 1202719947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cleared_Mystery
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 8
-        width: 19
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef10501997cca964f8409bfabc489884
-      internalID: -1162132569
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cleared_Shop
-      rect:
-        serializedVersion: 2
-        x: 47
-        y: 9
-        width: 18
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ee6fbf0b3ca2f746929c0f712047236
-      internalID: -323223572
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cleared_Boss
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 1
-        width: 24
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 991462b487b6c1f4c9f8af3bc9b754f7
-      internalID: -1672081315
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hovered_Combat
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 104
-        width: 26
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18d2780ecac81954db39fbdc9dc3a929
-      internalID: -1362446071
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hovered_Mystery
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 104
-        width: 21
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f4b63ad06ec5da49ba8da3e7d85254e
-      internalID: -183375075
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hovered_Shop
-      rect:
-        serializedVersion: 2
-        x: 47
-        y: 105
-        width: 20
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fba62a48f6bbfbb49a5b98dfe0246280
-      internalID: -865636401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hovered_Boss
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 97
-        width: 26
+        y: 64
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -439,8 +124,218 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e09c024626ff3d24d95e4ccd6f40f403
-      internalID: 647394035
+      spriteID: e991afc43770327419ee805bbbbb0dcd
+      internalID: -1814740773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_WallUpper
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f2303294741eeb4c98b1167b4aa8ba1
+      internalID: 161508692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_WoodFloor1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 922859395e2287a41b75a0839523f779
+      internalID: -424922412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_WoodFloor2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50f0a3d98a5f86740b0d4fd545eca5b2
+      internalID: 254776309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_StoneFloor1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ef878ba291cbce4cb7371f19b60990d
+      internalID: -1600901716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_StoneFloor2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 403938010b66dca46a50f6a09522120c
+      internalID: -445688909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_FloorTrans2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25f6e63dae15130478e0567292174335
+      internalID: 168711474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_FloorTrans1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31be1d37672c5e24a8f7650739f54a91
+      internalID: 1822993736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_DoorframeLeft
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44725781aa591f54f9b2b085994413f8
+      internalID: -2078035428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_DoorframeRight
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 64
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda713cf33b1da943871ddbb6b4804e8
+      internalID: -1805295941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Placeholder_DoorframeSide
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 64
+        width: 4
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de189aa1280b3a74c947b84060c9363a
+      internalID: 1011758321
       vertices: []
       indices: 
       edges: []
@@ -448,7 +343,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 7b2561aa72c77c64f956aa0a7f1ff2a6
+    spriteID: b1247ac0b580a24488c330dff5c4c697
     internalID: 0
     vertices: []
     indices: 
@@ -456,22 +351,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cleared_Boss: -1672081315
-      Cleared_Combat: 1202719947
-      Cleared_Mystery: -1162132569
-      Cleared_Shop: -323223572
-      Hovered_Boss: 647394035
-      Hovered_Combat: -1362446071
-      Hovered_Mystery: -183375075
-      Hovered_Shop: -865636401
-      Reachable_Boss: -1724828971
-      Reachable_Combat: -1100653601
-      Reachable_Mystery: -601846495
-      Reachable_Shop: 2070105257
-      Unreachable_Boss: -622201144
-      Unreachable_Combat: -1707302033
-      Unreachable_Mystery: 1710345884
-      Unreachable_Shop: 890794497
+      Placeholder_DoorframeLeft: -2078035428
+      Placeholder_DoorframeRight: -1805295941
+      Placeholder_DoorframeSide: 1011758321
+      Placeholder_FloorTrans1: 1822993736
+      Placeholder_FloorTrans2: 168711474
+      Placeholder_StoneFloor1: -1600901716
+      Placeholder_StoneFloor2: -445688909
+      Placeholder_WallBase: -1814740773
+      Placeholder_WallUpper: 161508692
+      Placeholder_WoodFloor1: -424922412
+      Placeholder_WoodFloor2: 254776309
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

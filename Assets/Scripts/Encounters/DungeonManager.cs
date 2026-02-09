@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DungeonManager : MonoBehaviour
 {
-    private PersistentData  pd;
-    private EventSystem     es;
-
     [Header("GrowthPLG Prefabs")]
     public GameObject   dungeonGeneratorPrefab;
     public GameObject   Single;                     // 1 connection
@@ -14,13 +11,19 @@ public class DungeonManager : MonoBehaviour
     public GameObject   DoubleL;                    // 2 connections at a right angle
     public GameObject   Triple;                     // 3 connections
     public GameObject   Quad;                       // 4 connections
+
+    [Header("Data")]
+    public DungeonData dungeonData;
+    
+    [Header("Events")]
+    public GameEvent EnterLayout;
+
+
     private LevelGenerator  lg;
 
     // Start is called before the first frame update
     void Start()
     {
-        pd = PersistentData.instance;
-        es = EventSystem.instance;
         SetupDungeon();
     }
 
@@ -35,12 +38,11 @@ public class DungeonManager : MonoBehaviour
         lg.roomScale            = 6;
 
         /* Poll info from persistent data */
-        if (!pd) { lg.DoGeneration(); return; }
-        lg.recentPoolSize       = pd.dungeonPoolSize;
-        lg.desiredIterations    = pd.dungeonIters;
-        lg.iterationsPerSpecial = pd.dungeonItersPerSpecial;
-        lg.randomSeed           = pd.dungeonSeed;
-        lg.useSeed              = true;
+        lg.recentPoolSize       = dungeonData.dungeonPoolSize;
+        lg.desiredIterations    = dungeonData.dungeonIters;
+        lg.iterationsPerSpecial = dungeonData.dungeonItersPerSpecial;
+        lg.randomSeed           = dungeonData.dungeonSeed;
+        lg.useSeed              = dungeonData.useSeed;
 
         /* Generate */
         lg.DoGeneration();              
@@ -51,7 +53,7 @@ public class DungeonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            es?.ExitEncounterToLayout.Invoke();
+            EnterLayout.Raise();
         }
     }
 }

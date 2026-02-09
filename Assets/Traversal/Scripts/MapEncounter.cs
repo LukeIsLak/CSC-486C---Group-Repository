@@ -14,6 +14,21 @@ public enum EncounterType
 
 public class MapEncounter : MonoBehaviour
 {
+    private static int ACCESSIBLE   = 0;
+    private static int INACCESIBLE  = 1;
+    private static int COMPLETED    = 2;
+    private static int HOVERED      = 3;
+
+    public GameObject   graphicsGO;
+    public SpriteRenderer graphicsSR;
+
+    [Header("Encounter Icons")]
+    public List<Sprite> merchantAIC;
+    public List<Sprite> treasureAIC;
+    public List<Sprite> dungeonAIC;
+    public List<Sprite> bossAIC;
+
+    [Header("Encounter Information")]
     public EncounterType encounter;
 
     // For navigation and visualization
@@ -21,6 +36,8 @@ public class MapEncounter : MonoBehaviour
     public bool isCompleted;
     public bool isHovered;
     public bool isSelected;
+    public int layer;
+    public int index;
 
     public List<MapEncounter> children;
     public Color visColor;
@@ -28,11 +45,13 @@ public class MapEncounter : MonoBehaviour
     public TraversableLayout traversableLayout;
 
     // Internal reference 
-    private Transform visual;
     private Color crimson;
     private Color gold;
     private Color goldenRod;
 
+    private float hoverHeight   = 0.3f;
+    private float desiredHeight = 0.1f;
+    private float baseHeight    = 0.1f;
 
     void Awake()
     {
@@ -44,11 +63,15 @@ public class MapEncounter : MonoBehaviour
         children        = new List<MapEncounter>();
         visColor        = Color.white;
         visAlpha        = 0.1f;
-        visual          = transform.Find("Cylinder");
 
         crimson         = new Color(0.8627452f/2, 0.07843138f/2, 0.2352941f/2, 1f);
         gold            = new Color(0.854902f, 0.6470588f, 0.1254902f, 1f);
         goldenRod       = new Color(1f, 0.8431373f, 0f, 1f);
+
+    }
+    void Start()
+    {
+        graphicsSR = graphicsGO.GetComponent<SpriteRenderer>();
     }
 
 
@@ -93,30 +116,41 @@ public class MapEncounter : MonoBehaviour
     public void SetIsHovered(bool val)
     {
         isHovered = val;
+        desiredHeight = val && !isSelected ? hoverHeight : baseHeight;
         UpdateAppearance();
     }
     public void SetIsSelected(bool val)
     {
         isSelected = val;
+        desiredHeight = baseHeight;
         UpdateAppearance();
     }
+
     public void UpdateAppearance()
     {
-        if (encounter == EncounterType.Start)     visColor = Color.blue;
-        if (encounter == EncounterType.Merchant)  visColor = goldenRod;
-        if (encounter == EncounterType.Treasure)  visColor = gold;
-        if (encounter == EncounterType.Boss)      visColor = crimson;
-        if (encounter == EncounterType.Dungeon)   visColor = Color.red;
-        if (isSelected) visColor = Color.white;
-        if (isCompleted) visColor = Color.green;
+        int i = INACCESIBLE;
+        if (isCompleted) i = COMPLETED;
+        else if (isAccessible) i = isHovered ? HOVERED : ACCESSIBLE;
 
-        if (!isAccessible && !isCompleted) {visAlpha = 0.1f;}
-        else {visAlpha = 1.0f;}
-        
-        Color newColor = new Color(visColor.r, visColor.g, visColor.b, visAlpha);
-        visual.GetComponent<Renderer>().material.color = newColor;
+        if (encounter == EncounterType.Merchant)
+        {
+            graphicsSR.sprite = merchantAIC[i];
+        }
+        if (encounter == EncounterType.Treasure)
+        {
+            graphicsSR.sprite = treasureAIC[i];
+        }
+        if (encounter == EncounterType.Dungeon)
+        {
+            graphicsSR.sprite = dungeonAIC[i];
+        }
+        if (encounter == EncounterType.Boss)
+        {
+            graphicsSR.sprite = bossAIC[i];
+        }
         UpdateLines();
     }
+
     public void MakeLines()
     {
         transform.Find("LineCreator").GetComponent<LineToOthers>().SetOthers(children);
@@ -129,5 +163,15 @@ public class MapEncounter : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && isHovered) traversableLayout?.ReceiveClick(this);
+        float curHeight = graphicsGO.transform.localPosition[1];
+        float interp = (desiredHeight - curHeight)/4f;
+        if (Mathf.Abs(interp) < 0.01f)
+        {
+            graphicsGO.transform.localPosition = new Vector3(0f, desiredHeight, 0f);
+        }
+        else 
+        {
+            graphicsGO.transform.localPosition += new Vector3(0f, interp, 0f);
+        }
     }
 }

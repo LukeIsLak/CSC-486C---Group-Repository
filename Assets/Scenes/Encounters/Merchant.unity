@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb06a7bd5d8bb264a942cd2326c54aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
 --- !u!4 &690068907
 Transform:
   m_ObjectHideFlags: 0

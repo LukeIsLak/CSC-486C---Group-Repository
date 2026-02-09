@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7399160e971125943b6e30007531f509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
 --- !u!1 &1187819726
 GameObject:
   m_ObjectHideFlags: 0

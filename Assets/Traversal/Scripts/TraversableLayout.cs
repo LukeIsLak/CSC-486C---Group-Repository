@@ -10,11 +10,8 @@ public class TraversableLayout : MonoBehaviour
     public GameObject mapEncounterPrefab;
     
     
-    [Header("Generation Parameters")]
-    public int depth;
-    public int maxWidth;
-    public int randomSeed;
-    public bool useSeed;
+    [Header("Data")]
+    public LayoutData layoutData;
 
     // Data Structures
     private List<List<MapEncounter>> mapLayers;
@@ -43,10 +40,10 @@ public class TraversableLayout : MonoBehaviour
 
         // Do layout generation
         layoutGenerator = Instantiate(layoutGeneratorPrefab, transform).GetComponent<MapGen2>();
-        layoutGenerator.layersToGenerate    = depth;
-        layoutGenerator.maxWidth            = maxWidth;
-        layoutGenerator.useSetSeed          = useSeed;
-        layoutGenerator.randomSeed          = randomSeed;
+        layoutGenerator.layersToGenerate    = layoutData.depth;
+        layoutGenerator.maxWidth            = layoutData.maxWidth;
+        layoutGenerator.useSetSeed          = layoutData.useSeed;
+        layoutGenerator.randomSeed          = layoutData.randomSeed;
         genLayers = layoutGenerator.DoGeneration();
 
         // Do conversion to encounters, destroy generator
@@ -59,8 +56,6 @@ public class TraversableLayout : MonoBehaviour
 
         // Physical positioning
         DoLayerPlacement(mapLayers);
-
-        InitTraversal();
     }
 
     // Reset as if never used
@@ -87,6 +82,8 @@ public class TraversableLayout : MonoBehaviour
         if (genLayers.Count == 0) return result;
         MapEncounter newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
         newChild.traversableLayout = this;
+        newChild.layer = 0;
+        newChild.index = 0;
 
         nextLayer.Add(newChild);
         result.Add(nextLayer);
@@ -96,6 +93,7 @@ public class TraversableLayout : MonoBehaviour
             List<MapNode2> genLayer     = genLayers[i];        // Current layer from genLayers
             List<MapEncounter> resLayer = result[i];           // Current layer from result
             nextLayer = new List<MapEncounter>();
+            int childIndex      = 0;
             
             // Create next layer
             for (int j = 0; j < genLayer.Count; j++)
@@ -114,7 +112,10 @@ public class TraversableLayout : MonoBehaviour
 
                     // Child doesn't exist yet, so add right (we are going l -> r)
                     newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
-                    newChild.traversableLayout = this;
+                    newChild.traversableLayout  = this;
+                    Debug.Log("Layer " + i.ToString() + childIndex.ToString());
+                    newChild.layer              = i + 1;
+                    newChild.index              = childIndex++;
                     curRes.AddChildRight(newChild);
                     nextLayer.Add(newChild);
                 }
@@ -147,13 +148,14 @@ public class TraversableLayout : MonoBehaviour
         {   
             Transform layerContainer = new GameObject("Layer" + li.ToString()).transform;
             layerContainer.SetParent(transform, false);
-            layerContainer.Translate(Vector3.right * 4 * li);
+            layerContainer.Translate(Vector3.back * layoutData.layerDistance * li);
             layerContainers.Add(layerContainer);
             int ni = 0;
             foreach (MapEncounter node in curLayer)
             {
+                int sep = layoutData.encounterSep;
                 node.transform.SetParent(layerContainer, false);
-                node.transform.Translate(Vector3.back * (curLayer.Count - 1) * 2 + Vector3.forward * 4 * ni);
+                node.transform.Translate(Vector3.left * (curLayer.Count - 1) * sep/2 + Vector3.right * sep * ni);
                 ni++;
             }
             li++;
@@ -172,35 +174,25 @@ public class TraversableLayout : MonoBehaviour
         }
     }
 
-    public void InitTraversal()
+    public MapEncounter DoProgress(List<int> completedIndices)
     {
-        if (mapLayers.Count == 0) return;
-        prevSelectedEncounter = mapLayers[0][0];
-        prevSelectedEncounter.SetIsCompleted(true);
-        foreach (MapEncounter child in prevSelectedEncounter.children)
-        {
-            child.SetIsAccessible(true);
-        }
-    }
 
-    public void DoProgress()
-    {
-        if (!curSelectedEncounter) return;
-        curSelectedEncounter.SetIsCompleted(true);
-
-        foreach (MapEncounter child in prevSelectedEncounter.children)
+        int l = 0;
+        foreach (int i in completedIndices)
         {
-            child.SetIsAccessible(false);
+            mapLayers[l++][i].isCompleted = true;
+            Debug.Log(l.ToString() + i.ToString());
         }
-        foreach (MapEncounter child in curSelectedEncounter.children)
-        {
-            child.SetIsAccessible(true);
-        }
-        prevSelectedEncounter = curSelectedEncounter;
-        curSelectedEncounter = null;
 
+        foreach (MapEncounter child in mapLayers[--l][completedIndices[completedIndices.Count-1]].children)
+        {
+            child.isAccessible = true;
+        }
+
+        UpdateAppearance();
         // Check for finish here!
         // if (prevselectedencounter = finalencounter)...
+        return mapLayers[l][completedIndices[completedIndices.Count-1]];
     }
 
     public void ReceiveClick(MapEncounter enc)
