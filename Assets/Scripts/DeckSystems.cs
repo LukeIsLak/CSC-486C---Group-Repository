@@ -207,11 +207,15 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     public void useCard() {
         //stuff here to trigger card script
+        if (currentHandSize <= 0) return;
+
         // put card in discard and remove from hand
         discard.Add(hand[currentHandIndex]);
         hand[currentHandIndex] = null;
         //reflect change in hand size
         currentHandSize--;
+
+        EnsureValidCard(); // move to the next card
     }
 
     private void ChangeHandIndex(int direction)
@@ -243,10 +247,10 @@ public class DeckSystems : MonoBehaviour
             if (hand[i] != null) 
             {
                 currentHandIndex = i;
+                Debug.Log("Select: " + currentHandIndex);
                 return;
             }
         }
-
         currentHandIndex = 0;
 
     }
@@ -275,7 +279,7 @@ public class DeckSystems : MonoBehaviour
         {
             ChangeHandIndex(-1);
         }
-        Debug.Log("Select: " + currentHandIndex + " " + value);
+        Debug.Log("Select: " + currentHandIndex);
 
     }
     //to add tests 
