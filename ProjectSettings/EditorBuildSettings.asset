@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Begin.unity
+    guid: b3cbf916c04dc714da9f6201b6acfe9f
+  - enabled: 1
+    path: Assets/Scenes/LayoutTraversal.unity
+    guid: 60c1ab1472df08e41947363c842155ea
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Merchant.unity
+    guid: 10d0db9ea267c8a4ebff4a96f3d225b0
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Treasure.unity
+    guid: 173e6691b947bb14fb8d6b29c4536bad
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Dungeon.unity
+    guid: 4a8a3683c26439a45bed34eb34bbd2c1
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Boss.unity
+    guid: 4d926dc355c866749af1aac66a562c7f
   m_configObjects: {}
