@@ -43,6 +43,7 @@ public class Bat : EnemyInterface
     public float horizontalBobSpeed = 2f;
     public float flutterMoveSpeed = 4f;             // movement speed while fluttering
     public float flutterTurnSpeed = 5f;             // rotation smoothing
+    public float flutterBaseHeight = 2f;
     [SerializeField]
     private float flutterAngleDeg = 0f;
     [SerializeField]
@@ -51,6 +52,21 @@ public class Bat : EnemyInterface
     // Smoothing for horizontal squiggle to reduce spikiness (higher = smoother)
     [Header("Flutter Noise Smoothing")]
     public float lateralSmoothing = 8f;
+
+    [Header("Bat Peck Variables")]
+    public bool testPeck = false;
+    public bool isPecking = false;
+    public bool isPeckRebounding = false;
+    public bool peckComplete = false;
+    public float peckSpeed = 5f;
+    public float peckReboundSpeed = 10f;
+    public Vector3? peckStartPosition = null;
+    public Vector3? interruptPosition = null;
+    public float reboundHeight = 1f;
+    public float reboundIncompleteHeight = 1f;
+    public float minRebountHeight = 1f;
+    public float reboundDistance = 1f;
+    public float reboundIncompleteDistance = 1f; // incomplete as in attack doesn't finish
 
 
     [Header("Steering Controls")]
@@ -186,7 +202,7 @@ public class Bat : EnemyInterface
                (3f * u * t * t * p2) +
                (t * t * t * p3);
     }
-    private List<Vector3> calculatePath(Vector3 cur, Vector3 target) {
+    private List<Vector3> calculatePath(Vector3 cur, Vector3 target, Vector3? _p1 = null, Vector3? _p2 = null) {
         Vector3 dir = (target - cur);
         Vector3 normal = Vector3.Cross(dir, Vector3.up).normalized;
 
@@ -195,13 +211,31 @@ public class Bat : EnemyInterface
         float d2 = dir.magnitude * 0.75f; // 3-quarter way
 
         /*hyper parameter??*/
-        Vector3 p1 = cur + dir * 0.25f + normal * Random.Range(-2f, 2f);
-        Vector3 p2 = cur + dir * 0.25f + normal * Random.Range(-2f, 2f);
+        Vector3 p1 = (_p1 != null)? _p1.Value : cur + dir * 0.25f + normal * Random.Range(-2f, 2f);
+        Vector3 p2 = (_p2 != null)? _p2.Value :cur + dir * 0.25f + normal * Random.Range(-2f, 2f);
 
         List<Vector3> targetPoints = new List<Vector3>();
         for (int i = 1; i <= numPathPoint; i++) targetPoints.Add(CubicBezierCurvePoint(cur, p1, p2, target, (i / (float)numPathPoint)));
 
         return targetPoints;
+    }
+
+    // Returns the movement speed based on the current state
+    private float GetCurrentSpeed()
+    {
+        switch (currentState)
+        {
+            case BatStates.Flutter:
+                return flutterMoveSpeed;
+            case BatStates.PeckAttack:
+                return peckSpeed;
+            case BatStates.PeckCompleteRebound:
+                return peckReboundSpeed;
+            case BatStates.PeckIncompleteRebound:
+                return peckReboundSpeed;
+            default:
+                return moveSpeed;
+        }
     }
 
     void StartFlutter(Transform player)
@@ -213,14 +247,9 @@ public class Bat : EnemyInterface
         flutterJitterSeed = UnityEngine.Random.value * 100f;
         // optionally stop path-following
         isMoving = false;
+        currentState = BatStates.Flutter;
     }
 
-    void StopFlutter()
-    {
-        isFluttering = false;
-    }
-
-    // XXX flutter should make a steer towards point!
     void UpdateFlutter()
     {
         if (!isFluttering || playerTransform == null) return;
@@ -254,6 +283,7 @@ public class Bat : EnemyInterface
 
         // Lateral squiggle perpendicular to orbit (produces wavy circle)
         Vector3 lateralTarget = sideDir * (squig * horizontalBobAmplitude);
+        lateralTarget[1] += flutterBaseHeight;
         // exponential smoothing: alpha in (0,1) per-frame derived from smoothing rate
         float alpha = 1f - Mathf.Exp(-lateralSmoothing * Time.deltaTime);
         Vector3 lateralOffset = Vector3.Lerp(prevLateralOffset, lateralTarget, alpha);
@@ -278,7 +308,54 @@ public class Bat : EnemyInterface
 
     void PeckTarget() {
         isFluttering = false;
+        currentState = BatStates.PeckAttack;
+        
+        Vector3 start = transform.position;
+        Vector3 end = playerTransform.position;
 
+        Vector3 p1 = new Vector3(start.x, end.y, start.z);
+        Vector3 p2 = (p1 + end) * 0.5f;
+
+        targetPath = calculatePath(start, end, p1, p2);
+        
+        currentPathIndex = 0;
+        isMoving = true;
+        isPecking = true;
+        peckStartPosition = start;
+    }
+
+    void PeckRebound() {
+        isPecking = false;
+        currentState = BatStates.PeckCompleteRebound;
+
+        float _reboundHeight = Mathf.Max((peckComplete)? peckStartPosition.Value.y + reboundHeight : transform.position.y + reboundIncompleteHeight, minRebountHeight);
+        float _reboundDistance = (peckComplete)? reboundDistance : reboundIncompleteDistance;
+
+        Vector3 start = transform.position;
+        Vector3 end;
+        if (interruptPosition == null) {
+            Vector3 horizontalDir = peckStartPosition.Value - transform.position;
+            horizontalDir.y = 0f;
+            horizontalDir = horizontalDir.normalized;
+            Vector3 reboundTarget = transform.position + horizontalDir * _reboundDistance;
+            reboundTarget.y = _reboundHeight;
+            end = reboundTarget;
+        }
+        else {
+            Vector3 awayDir = transform.position - interruptPosition.Value;
+            awayDir.y = 0f;
+            awayDir = awayDir.normalized;
+            Vector3 reboundTarget = transform.position + awayDir * _reboundDistance;
+            reboundTarget.y = _reboundHeight;
+            end = reboundTarget;
+        }
+
+        targetPath = calculatePath(start, end);
+
+        currentPathIndex = 0;
+        isMoving = true;
+        isPeckRebounding = true;
+        peckStartPosition = null;
     }
 
     // XXX this steer function... sucks... please improve it!
@@ -364,7 +441,10 @@ public class Bat : EnemyInterface
             UpdateFlutter();
         }
 
-        steer();
+        if (testPeck && !isMoving) {
+            PeckTarget();
+            print("test");
+        }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             List<RaycastHit> hits = findCeilingMesh();
@@ -388,7 +468,7 @@ public class Bat : EnemyInterface
 
         if (isMoving && targetPath.Count > 0) {
             Vector3 target = targetPath[currentPathIndex];
-            float step = moveSpeed * Time.deltaTime;
+            float step = GetCurrentSpeed() * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target, step);
 
             Vector3 toTarget = target - transform.position;
@@ -399,11 +479,19 @@ public class Bat : EnemyInterface
             if (Vector3.Distance(transform.position, target) <= pointTolerance) {
                 currentPathIndex++;
                 if (currentPathIndex >= targetPath.Count) {
+                    if (isPecking) peckComplete = true;
                     isMoving = false;
                     transform.rotation = Quaternion.identity;
-                    transform.position = new Vector3(transform.position.x, 0.4f, transform.position.z);
+                    // transform.position = new Vector3(transform.position.x, 0.4f, transform.position.z);
                 }
             }
+        }
+        else if (isMoving == false && isPecking == true && isPeckRebounding == false) {
+            PeckRebound();
+        }
+
+        if (!testPeck && !isPecking && !isPeckRebounding) {
+            steer();
         }
     }
 }

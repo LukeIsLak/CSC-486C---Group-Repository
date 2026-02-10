@@ -5,20 +5,26 @@ using UnityEngine.Events;
 using System;
 
 public enum BatStates {
+    Perching,
     Perched,
     Flutter,
-    Attacking,
+    PeckAttack,
+    SwoopAttack,
+    PeckCompleteRebound,
+    PeckIncompleteRebound,
     Hit,
     Idle // returning to perched
 }
 
 public class BatStateManager : MonoBehaviour
 {
+    public Bat bat;
+    //XXX maybe move this to a scriptable object??
     public Dictionary<BatStates, List<(BatStates toState, Func<Bat, bool> condition)>> conditionLookup = new Dictionary<BatStates, List<(BatStates, Func<Bat, bool>)>>();
 
 
     public void Awake() {
-        // AddTransition(BatStates.Perched, BatStates.Flutter, FooA);
+        // AddTransition(BatStates.Perched, BatStates.Flutter, );
         // AddTransition(BatStates.Flutter, BatStates.Attacking, FooB);
         // XXX hit should have 2 transition:
         //  one to be perched if not close to ceiling
