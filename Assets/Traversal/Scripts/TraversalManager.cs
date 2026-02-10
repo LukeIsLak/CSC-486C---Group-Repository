@@ -9,9 +9,10 @@ public class TraversalManager : MonoBehaviour
     [Header("Required References")]
     public GameObject traversableLayoutPrefab;
     public Camera sceneCamera;
-    
+
     [Header("Data")]
     public LayoutData layoutData;
+    public DungeonData dungeonData;
 
     [Header("Events")]
     public GameEvent EnterEncounter;
@@ -21,11 +22,14 @@ public class TraversalManager : MonoBehaviour
     
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         /* Since we store the parameters before first generation, we can regenerate
         and update to keep progress. */
         InitializeLayout();
         MapEncounter lastFinished = traversableLayout.DoProgress(layoutData.completedIndices);
         respondToInputs = true;
+
         sceneCamera.transform.position = lastFinished.transform.position + new Vector3(0f, 8, 0f);
     }
 
@@ -45,6 +49,7 @@ public class TraversalManager : MonoBehaviour
             layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
             traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
+            dungeonData.dungeonSeed = (int)System.DateTime.Now.Ticks;
             EnterEncounter.Raise();
         }
 

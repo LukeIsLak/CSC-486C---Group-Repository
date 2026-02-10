@@ -167,11 +167,11 @@ public class MapEncounter : MonoBehaviour
         float interp = (desiredHeight - curHeight)/4f;
         if (Mathf.Abs(interp) < 0.01f)
         {
-            graphicsGO.transform.localPosition = new Vector3(0f, desiredHeight, 0f);
+            // graphicsGO.transform.localPosition = new Vector3(0f, desiredHeight, 0f);
         }
         else 
         {
-            graphicsGO.transform.localPosition += new Vector3(0f, interp, 0f);
+            // graphicsGO.transform.localPosition += new Vector3(0f, interp, 0f);
         }
     }
 }

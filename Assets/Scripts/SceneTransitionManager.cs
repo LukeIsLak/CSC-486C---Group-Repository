@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionManager : MonoBehaviour
 {
     [Header("Scenes")]
+    public SceneField   lobbyScene;
     public SceneField   merchantScene;
     public SceneField   treasureScene;
     public SceneField   dungeonScene;
@@ -33,6 +34,11 @@ public class SceneTransitionManager : MonoBehaviour
     ************ Traversal ************
     **********************************/
 
+    public void SceneSwapToLobby()
+    {
+        SceneManager.LoadScene(lobbyScene);
+    }
+    
     public void SceneSwapToMapLayout()
     {
         SceneManager.LoadScene(layoutScene);

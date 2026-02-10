@@ -8,7 +8,8 @@ public class TraversableLayout : MonoBehaviour
     public GameObject layoutGeneratorPrefab;
     private MapGen2 layoutGenerator;    
     public GameObject mapEncounterPrefab;
-    
+    public GameObject playerOnMapPrefab;
+    private GameObject playerOnMap;
     
     [Header("Data")]
     public LayoutData layoutData;
@@ -192,7 +193,9 @@ public class TraversableLayout : MonoBehaviour
         UpdateAppearance();
         // Check for finish here!
         // if (prevselectedencounter = finalencounter)...
-        return mapLayers[l][completedIndices[completedIndices.Count-1]];
+        MapEncounter lastCompleted = mapLayers[l][completedIndices[completedIndices.Count-1]];
+        playerOnMap = Instantiate(playerOnMapPrefab, lastCompleted.transform.position, lastCompleted.transform.rotation);
+        return lastCompleted;
     }
 
     public void ReceiveClick(MapEncounter enc)
@@ -202,6 +205,7 @@ public class TraversableLayout : MonoBehaviour
             Debug.Log(enc.encounter);
             curSelectedEncounter?.SetIsSelected(false);
             curSelectedEncounter = enc;
+            playerOnMap.transform.position = curSelectedEncounter.transform.position;
             enc.SetIsSelected(true);
         }
     }
