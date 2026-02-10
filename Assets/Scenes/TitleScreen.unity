@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cards of the Depth
+  m_text: Cards of the Depths
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -1273,6 +1273,126 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1696925509
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 39650891734709181, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_Name
+      value: Scene Transition Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635801921134481717, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936416260374037736, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: menuScene.m_SceneName
+      value: TitleScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936416260374037736, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: lobbyScene.m_SceneName
+      value: Begin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936416260374037736, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: menuScene.m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: ce5f1e5afdb1b4666ae89a412fc110ee, type: 3}
+    - target: {fileID: 7936416260374037736, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: lobbyScene.m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: b3cbf916c04dc714da9f6201b6acfe9f, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 39650891734709181, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1696925512}
+  m_SourcePrefab: {fileID: 100100000, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+--- !u!1 &1696925510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 39650891734709181, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+  m_PrefabInstance: {fileID: 1696925509}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1696925511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7936416260374037736, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+  m_PrefabInstance: {fileID: 1696925509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696925510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91895ec03257ea84789cbc375469602e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1696925512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696925510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a6a61f801e5940a45960431330abd6c0, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1696925511}
+        m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
+        m_MethodName: SceneSwapToLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1860569034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,6 +1725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenu: {fileID: 2109840187}
   OptionsMenu: {fileID: 28260772}
+  StartGame: {fileID: 11400000, guid: a6a61f801e5940a45960431330abd6c0, type: 2}
 --- !u!1001 &7063214237848786694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1730,3 +1851,4 @@ SceneRoots:
   - {fileID: 696790097}
   - {fileID: 1571151421}
   - {fileID: 1992344291}
+  - {fileID: 1696925509}

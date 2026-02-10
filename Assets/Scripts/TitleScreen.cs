@@ -8,6 +8,7 @@ public class TitleScreen : MonoBehaviour
 
     public GameObject MainMenu;
     public GameObject OptionsMenu;
+    public GameEvent StartGame;
 
     void Start() {
         MainMenu.SetActive(true);
@@ -17,7 +18,7 @@ public class TitleScreen : MonoBehaviour
 
     public void OnPlayButton(){
         // On pressing play, load intro level
-        SceneManager.LoadScene(1);
+        StartGame.Raise();
     }
 
     public void OnQuitButton(){
