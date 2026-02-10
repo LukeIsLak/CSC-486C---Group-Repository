@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layoutGeneratorPrefab: {fileID: 1542659884841498409, guid: e227d64ebbf116348a4974f253c7f4d6, type: 3}
   mapEncounterPrefab: {fileID: 2838874819895571372, guid: d4c14d69036dffe459cb999afdb94ae6, type: 3}
+  playerOnMapPrefab: {fileID: 8671957000330676690, guid: b23e451c849f1274caa828a5ee4e2215, type: 3}
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
   layerContainers: []
   prevSelectedEncounter: {fileID: 0}
