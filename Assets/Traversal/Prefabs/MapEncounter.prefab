@@ -136,7 +136,7 @@ MonoBehaviour:
   - {fileID: -1724828971, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   - {fileID: -622201144, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   - {fileID: -1672081315, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -323223572, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  - {fileID: 647394035, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   encounter: 0
   isAccessible: 0
   isCompleted: 0
@@ -221,7 +221,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -601846495, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -229,7 +229,7 @@ SpriteRenderer:
   m_Size: {x: 0.7916667, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4081912416213085794
