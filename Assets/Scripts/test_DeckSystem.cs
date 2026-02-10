@@ -81,7 +81,7 @@ public class test_deckSystem : MonoBehaviour
             if (i < 5) {
                 hand += deckSystem.hand[i].name + ", ";
             } else {
-                deck += deckSystem.drawCard(0).name + ", "; // note this does change what the hand is in the system and remove objects from the deck
+                deck += deckSystem.deck.Dequeue().name + ", "; // note this removes objects from the deck
             }
         }
 
@@ -192,15 +192,10 @@ public class test_deckSystem : MonoBehaviour
     IEnumerator Testredrawco() {
         // load deck in to the system then use all cards in players hand
         deckSystem.loadDeck(testDeck, 15);
-        deckSystem.currentHandIndex = 0;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 1;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 2;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 3;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 4;
         deckSystem.useCard();
 
         yield return new WaitForSeconds(1);
@@ -247,15 +242,10 @@ public class test_deckSystem : MonoBehaviour
         deckSystem.loadDeck(testDeck, 15);
         // use all cards in the player hand 3 times to empty out the deck
         for (int i = 0; i < 3; i++) {
-            deckSystem.currentHandIndex = 0;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 1;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 2;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 3;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 4;
             deckSystem.useCard();
             yield return new WaitForSeconds(1);
         }

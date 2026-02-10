@@ -157,7 +157,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  currentHandSize: 0
   currentHandIndex: 0
   deckSize: 0
   currentDeckSize: 0
@@ -948,6 +947,7 @@ MonoBehaviour:
   allCards:
   - {fileID: 11400000, guid: da4fcf997ae104fdc856394d2bf8b4aa, type: 2}
   - {fileID: 11400000, guid: a018673ce5cb845bdb17067d9fad47fb, type: 2}
+  - {fileID: 11400000, guid: 6cb6980c39975974a9e78b1aaad2fcce, type: 2}
 --- !u!4 &573300085
 Transform:
   m_ObjectHideFlags: 0
