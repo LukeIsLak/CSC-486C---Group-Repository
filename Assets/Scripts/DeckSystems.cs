@@ -217,13 +217,14 @@ public class DeckSystems : MonoBehaviour
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
         // put card in discard and remove from hand
+        GameObject used = hand[currentHandIndex];
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
         //reflect change in hand size
-        NotifyHandChanged();
-
+        Destroy(used);
         if(hand.Count == 0 ) currentHandIndex = 0;
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
+        NotifyHandChanged();
     }
 
     private void ChangeHandIndex(int direction)

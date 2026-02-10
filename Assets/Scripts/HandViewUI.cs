@@ -7,10 +7,10 @@ public class HandViewUI : MonoBehaviour
 
     [Header("Card Fanning Visual Settings")]
     [SerializeField] private float totalFanAngle = 30f;
-    [SerializeField] private float radius = 350f;  // bigger => flatter curve
-    [SerializeField] private float handHeight = -80f;
+    [SerializeField] private float radius = 360f;  // bigger => flatter curve
     [SerializeField] private float selectedCardLift = 30f;
-
+    [SerializeField] private float selectedScale = 1f;
+ 
     private void OnEnable()
     {
         deckSystems.OnHandChanged += UpdateCardPosition;
@@ -40,23 +40,28 @@ public class HandViewUI : MonoBehaviour
             angleStep = totalFanAngle / (cardCount-1);
         }
 
-        for(int i = 0;i < cardCount; i++)
+        RectTransform selectedCardTransform = null;
+
+        for (int i = 0;i < cardCount; i++)
         {
             float angleDeg = startingCardAngle + (angleStep*i);
             float angleRad = angleDeg * Mathf.Deg2Rad;
 
             float x = radius * Mathf.Sin(angleRad);
             float y = radius * Mathf.Cos(angleRad) - radius;
-            y += handHeight;
 
             RectTransform cardTransform = cards[i].GetComponent<RectTransform>();
-
+            cardTransform.SetSiblingIndex(i);
             cardTransform.anchoredPosition = new Vector2(x, y);
             cardTransform.localRotation = Quaternion.Euler(0, 0, -angleDeg);
+
             if (i == deckSystems.currentHandIndex)
             {
                 cardTransform.anchoredPosition += Vector2.up * selectedCardLift;
+                cardTransform.localRotation = Quaternion.identity;
+                selectedCardTransform = cardTransform;
             }
         }
+        if(selectedCardTransform != null) selectedCardTransform.SetAsLastSibling();
     }
 }
