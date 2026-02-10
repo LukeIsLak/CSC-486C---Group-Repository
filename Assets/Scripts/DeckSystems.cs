@@ -229,6 +229,27 @@ public class DeckSystems : MonoBehaviour
         }
         currentHandIndex = temp;
     }
+    private void EnsureValidCard()
+    {
+        if (hand[currentHandIndex] != null) return;
+        if (currentHandSize <= 0) 
+        {
+            currentHandIndex = 0;
+            return;
+        }
+
+        for(int i = 0; i < MAXHANDSIZE; i++)
+        {
+            if (hand[i] != null) 
+            {
+                currentHandIndex = i;
+                return;
+            }
+        }
+
+        currentHandIndex = 0;
+
+    }
 
     public void OnUseCard(InputAction.CallbackContext context)
     {
@@ -238,6 +259,7 @@ public class DeckSystems : MonoBehaviour
             Debug.Log("use Card: " + currentHandIndex);
         }
     }
+
 
     public void OnSwitchCard(InputAction.CallbackContext context)
     {
@@ -256,7 +278,5 @@ public class DeckSystems : MonoBehaviour
         Debug.Log("Select: " + currentHandIndex + " " + value);
 
     }
-
-
     //to add tests 
 }
