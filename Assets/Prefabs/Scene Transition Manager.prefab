@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 635801921134481717}
   - component: {fileID: 7936416260374037736}
+  - component: {fileID: 2325324687929303005}
+  - component: {fileID: 1616966836795773805}
+  - component: {fileID: 7616580799079918397}
   m_Layer: 0
   m_Name: Scene Transition Manager
   m_TagString: Untagged
@@ -44,4 +47,106 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91895ec03257ea84789cbc375469602e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traversalManagerPrefab: {fileID: 3586655531442555394, guid: 1a3e8eb0918fc8c42a15ac3694c9447f, type: 3}
+  merchantScene:
+    m_SceneAsset: {fileID: 102900000, guid: 10d0db9ea267c8a4ebff4a96f3d225b0, type: 3}
+    m_SceneName: Merchant
+  treasureScene:
+    m_SceneAsset: {fileID: 102900000, guid: 173e6691b947bb14fb8d6b29c4536bad, type: 3}
+    m_SceneName: Treasure
+  dungeonScene:
+    m_SceneAsset: {fileID: 102900000, guid: 4a8a3683c26439a45bed34eb34bbd2c1, type: 3}
+    m_SceneName: Dungeon
+  bossScene:
+    m_SceneAsset: {fileID: 102900000, guid: 4d926dc355c866749af1aac66a562c7f, type: 3}
+    m_SceneName: Boss
+  layoutScene:
+    m_SceneAsset: {fileID: 102900000, guid: 60c1ab1472df08e41947363c842155ea, type: 3}
+    m_SceneName: LayoutTraversal
+  menuScene:
+    m_SceneAsset: {fileID: 102900000, guid: b3cbf916c04dc714da9f6201b6acfe9f, type: 3}
+    m_SceneName: Begin
+  layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
+--- !u!114 &2325324687929303005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39650891734709181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7936416260374037736}
+        m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
+        m_MethodName: SceneSwapToMapLayout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1616966836795773805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39650891734709181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: bd10d720d2ae37d40beb52c0770b1d02, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7936416260374037736}
+        m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
+        m_MethodName: SceneSwapToEncounter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7616580799079918397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39650891734709181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7936416260374037736}
+        m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
+        m_MethodName: SceneSwapToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
