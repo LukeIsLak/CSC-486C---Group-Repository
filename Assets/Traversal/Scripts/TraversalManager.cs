@@ -9,7 +9,6 @@ public class TraversalManager : MonoBehaviour
     [Header("Required References")]
     public GameObject traversableLayoutPrefab;
     public Camera sceneCamera;
-    public GameObject playerOnMapPrefab;
 
     [Header("Data")]
     public LayoutData layoutData;
@@ -23,13 +22,14 @@ public class TraversalManager : MonoBehaviour
     
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         /* Since we store the parameters before first generation, we can regenerate
         and update to keep progress. */
         InitializeLayout();
         MapEncounter lastFinished = traversableLayout.DoProgress(layoutData.completedIndices);
         respondToInputs = true;
 
-        Instantiate(playerOnMapPrefab, lastFinished.transform);
         sceneCamera.transform.position = lastFinished.transform.position + new Vector3(0f, 8, 0f);
     }
 
