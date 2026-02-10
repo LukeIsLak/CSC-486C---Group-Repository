@@ -24,7 +24,7 @@ public class DeckSystems : MonoBehaviour
     const int HANDSLOT5INDEX = 4;
 
     // const to help define max and min hand size
-    const int MAXHANDSIZE = 5;
+    public const int MAXHANDSIZE = 5;
     const int EMPTYHANDSIZE = 0;
 
     // The queue functions as the deck, with dequeue being equivelent to drawing a card, enqueue would be the same as putting a card back in to the deck at the bottom
@@ -100,6 +100,7 @@ public class DeckSystems : MonoBehaviour
         currentDeckSize--;
         currentHandSize++;
         hand.Add(card);
+        NotifyHandChanged();
         // return the draw card for use
         return card;
     }
@@ -219,7 +220,8 @@ public class DeckSystems : MonoBehaviour
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
         //reflect change in hand size
-        
+        NotifyHandChanged();
+
         if(hand.Count == 0 ) currentHandIndex = 0;
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
     }
@@ -228,6 +230,7 @@ public class DeckSystems : MonoBehaviour
     {
         if(hand.Count == 0) return;
         currentHandIndex = (currentHandIndex + direction + hand.Count) % hand.Count;
+        NotifyHandChanged();
     }
  
 
@@ -236,7 +239,10 @@ public class DeckSystems : MonoBehaviour
         if (context.performed)
         {
             useCard();
-            Debug.Log("use Card: " + currentHandIndex);
+            for (int i = 0; i < hand.Count; i++)
+            {
+                Debug.Log(hand[i].name);
+            }
         }
     }
 
@@ -255,8 +261,6 @@ public class DeckSystems : MonoBehaviour
         {
             ChangeHandIndex(-1);
         }
-        Debug.Log("Select: " + currentHandIndex);
-
     }
     //to add tests 
 }
