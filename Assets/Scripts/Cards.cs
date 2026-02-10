@@ -10,26 +10,3 @@ public abstract class Cards : ScriptableObject
 
     public abstract void Play(Cards card);
 }
-
-[CreateAssetMenu(menuName = "Cards/AttackCards")]
-public class AttackCards : Cards
-{
-    public int attackDamage;
-    public string element;
-    public string attackType;
-
-    public override void Play(Cards card){
-        
-    }
-}
-
-[CreateAssetMenu(menuName = "Cards/ModifierCards")]
-public class ModifierCards : Cards
-{
-    public string effect;
-    public int value;
-
-    public override void Play(Cards card){
-
-    }
-}
