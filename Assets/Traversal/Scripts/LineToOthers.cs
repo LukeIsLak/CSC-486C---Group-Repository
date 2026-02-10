@@ -27,8 +27,13 @@ public class LineToOthers : MonoBehaviour
             lr.endWidth         = 0.05f;
             lr.positionCount    = 2;
             lr.useWorldSpace    = true;
-            lr.SetPosition(0, transform.position);
-            lr.SetPosition(1, me.transform.position);
+
+            Vector3 startPos = transform.position;
+            startPos[1] -= 0.2f;
+            Vector3 endPos = me.transform.position;
+            endPos[1] -= 0.2f;    
+            lr.SetPosition(0, startPos);
+            lr.SetPosition(1, endPos);
             lineRends.Add(lr);
         }
     }
@@ -40,8 +45,12 @@ public class LineToOthers : MonoBehaviour
             MapEncounter me = endPoints[i];
             LineRenderer lr = lineRends[i];
             
-            lr.SetPosition(0, transform.position);
-            lr.SetPosition(1, me.transform.position);
+            Vector3 startPos = transform.position;
+            startPos[1] -= 0.2f;
+            Vector3 endPos = me.transform.position;
+            endPos[1] -= 0.2f;      
+            lr.SetPosition(0, startPos);
+            lr.SetPosition(1, endPos);
         }
     }
 
