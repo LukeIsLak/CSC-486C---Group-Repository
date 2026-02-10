@@ -246,32 +246,23 @@ public class DeckSystems : MonoBehaviour
     /// will swap rwo cards in playes hand with two random cards in their deck
     /// </summary>
     /// <param name="amount"></param>
-    public void swaptwocards(int amount) {
-        int index1 = 0;
-        int index2 = 0;
+    public void swapcards(int amount) {
+        int[] indexs = new int[] { -1, -1, -1, -1, -1 };
+        List<int> avalibleHandSlots = new List<int>();
+        int spaceHolder = 0;
 
-        if (currentHandSize == 2) {
-
-        } else {
-
-            while (index1 == index2 || hand[index1] == null || hand[index2] == null) {
-                index1 = Random.Range(0, MAXHANDSIZE);
-                index2 = Random.Range(0, MAXHANDSIZE);
+        for (int i = 0; i < MAXHANDSIZE; i++) {
+            if (hand[i] != null) {
+                avalibleHandSlots.Add(i);
             }
-
-        }
-        Cards swap1 = hand[index1];
-        Cards swap2 = hand[index2];
-
-        int deckindex1 = 0;
-        int deckindex2 = 0;
-
-        while (deckindex1 == deckindex2) {
-            index1 = Random.Range(0, currentDeckSize);
-            index2 = Random.Range(0, currentDeckSize);
         }
 
-        addCardToDeck(swap1);
-        addCardToDeck(swap2);
+        int temp;
+        for (int i = 0; i < amount; i++) {
+            temp = Random.Range(0, avalibleHandSlots.Count);
+            indexs[i] = avalibleHandSlots[temp];
+            avalibleHandSlots.RemoveAt(temp);
+        }
+
     }
 }
