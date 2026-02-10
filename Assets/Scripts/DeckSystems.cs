@@ -45,10 +45,15 @@ public class DeckSystems : MonoBehaviour
 
     private void NotifyHandChanged() => OnHandChanged?.Invoke();
 
+    public GameObject inventoryContainer;
+    PlayerInventory inventory;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-
+        inventory = inventoryContainer.GetComponent<PlayerInventory>();
+        loadDeck(inventory.tempDeck, inventory.tempDeck.Length);
     }
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
@@ -299,6 +304,16 @@ public class DeckSystems : MonoBehaviour
 
     public void cardHeal(int percentage){
         //tbd
+    }
+
+    IEnumerator playerSpeedUp(){
+        //tbd
+        yield return new WaitForSeconds(1);
+    }
+
+    IEnumerator enemySpeedDown(){
+        //tbd
+        yield return new WaitForSeconds(1);
     }
 
     private void ChangeHandIndex(int direction)

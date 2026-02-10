@@ -4680,8 +4680,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2123653780}
+  - component: {fileID: 2123653781}
   m_Layer: 0
-  m_Name: Inventory (to add after merge)
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4702,6 +4703,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123653781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123653779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce76914afbcdcfc4f97cd555d25e651c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempDeck:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allCards:
+  - {fileID: 11400000, guid: da4fcf997ae104fdc856394d2bf8b4aa, type: 2}
+  - {fileID: 11400000, guid: a018673ce5cb845bdb17067d9fad47fb, type: 2}
+  - {fileID: 11400000, guid: 6cb6980c39975974a9e78b1aaad2fcce, type: 2}
 --- !u!1001 &4389861757339327979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4735,6 +4768,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7050272462483586888, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: Inventory
+      value: 
+      objectReference: {fileID: 2123653779}
+    - target: {fileID: 7050272462483586888, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: hand.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -4754,6 +4791,10 @@ PrefabInstance:
       propertyPath: hand.Array.data[4]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7050272462483586888, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: inventoryContainer
+      value: 
+      objectReference: {fileID: 2123653779}
     - target: {fileID: 8225715068774074998, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_Pivot.x
       value: 0
