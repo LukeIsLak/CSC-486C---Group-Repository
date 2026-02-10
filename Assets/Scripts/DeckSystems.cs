@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // idea of this system being its created at the begining of the game and stays present through-out all scenes
 public class DeckSystems : MonoBehaviour
@@ -212,6 +213,50 @@ public class DeckSystems : MonoBehaviour
         //reflect change in hand size
         currentHandSize--;
     }
+
+    private void ChangeHandIndex(int direction)
+    {
+        if(currentHandSize <= 0) return;
+        int temp = currentHandIndex;
+        for(int i = 0; i < MAXHANDSIZE; i++)
+        {
+            currentHandIndex = (currentHandIndex + direction + MAXHANDSIZE) % MAXHANDSIZE; // need to add maxhandsize to prevent negative number
+            if(hand[currentHandIndex] != null)
+            {
+                return; // found the valid card
+            }
+
+        }
+        currentHandIndex = temp;
+    }
+
+    public void OnUseCard(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            useCard();
+            Debug.Log("use Card: " + currentHandIndex);
+        }
+    }
+
+    public void OnSwitchCard(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        float value = context.ReadValue<float>();
+
+        if (value > 0.1f)
+        {
+            ChangeHandIndex(1);
+        }
+        else if (value < -0.1f)
+        {
+            ChangeHandIndex(-1);
+        }
+        Debug.Log("Select: " + currentHandIndex + " " + value);
+
+    }
+
 
     //to add tests 
 }
