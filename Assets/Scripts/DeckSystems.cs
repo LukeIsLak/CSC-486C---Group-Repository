@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class DeckSystems : MonoBehaviour
 {
     // holds GameObject reference/information of what cards are currently in the players hand
     // will be updated by drawcard()
-    public GameObject[] hand = new GameObject[5];
+    public List<GameObject> hand = new();
     //let the system know how many cards are currently in a player hand
     public int currentHandSize = 0;
     
@@ -40,6 +41,10 @@ public class DeckSystems : MonoBehaviour
 
     //store any card that has been used
     public List<GameObject> discard = new List<GameObject>();
+
+    public event Action OnHandChanged;
+
+    private void NotifyHandChanged() => OnHandChanged?.Invoke();
 
     // Start is called before the first frame update
     void Start()
@@ -80,19 +85,21 @@ public class DeckSystems : MonoBehaviour
     /// <returns> null if handslot is invalid (less than 0 or greater than 5) or the card draw (GameObject) </returns>
     public GameObject drawCard(int handslot)
     {
+        if (deck.Count == 0) return null;
+
+        if(hand.Count > MAXHANDSIZE) return null;
         // remove first card from deck
         GameObject card = deck.Dequeue();
 
-        // check handslot is valid
-        if (handslot < 0 || handslot > 4) { 
-            Debug.Log("error wrong value used on drawCard, value should be between 0-4");
-            return null;
-        }
-
-        hand[handslot] = card;
-
+        //// check handslot is valid
+        //if (handslot < 0 || handslot > 4) { 
+        //    Debug.Log("error wrong value used on drawCard, value should be between 0-4");
+        //    return null;
+        //}
+        //hand[handslot] = card;
         currentDeckSize--;
         currentHandSize++;
+        hand.Add(card);
         // return the draw card for use
         return card;
     }
@@ -114,7 +121,7 @@ public class DeckSystems : MonoBehaviour
         //randomly select a index and then put that card in to the deck
         int index = 0;
         while (listSize != 0) {
-            index = Random.Range(0, listSize);
+            index = UnityEngine.Random.Range(0, listSize);
             addCardToDeck(sortingList[index]);
             sortingList.RemoveAt(index);
             listSize--;
@@ -193,7 +200,6 @@ public class DeckSystems : MonoBehaviour
                 
             } else {
                 returnArray[i] = deck.Dequeue();
-                
             }
         }
 
@@ -207,53 +213,23 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     public void useCard() {
         //stuff here to trigger card script
-        if (currentHandSize <= 0) return;
-
+        if (hand.Count == 0) return;
+        if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
         // put card in discard and remove from hand
         discard.Add(hand[currentHandIndex]);
-        hand[currentHandIndex] = null;
+        hand.RemoveAt(currentHandIndex);
         //reflect change in hand size
-        currentHandSize--;
-
-        EnsureValidCard(); // move to the next card
+        
+        if(hand.Count == 0 ) currentHandIndex = 0;
+        else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
     }
 
     private void ChangeHandIndex(int direction)
     {
-        if(currentHandSize <= 0) return;
-        int temp = currentHandIndex;
-        for(int i = 0; i < MAXHANDSIZE; i++)
-        {
-            currentHandIndex = (currentHandIndex + direction + MAXHANDSIZE) % MAXHANDSIZE; // need to add maxhandsize to prevent negative number
-            if(hand[currentHandIndex] != null)
-            {
-                return; // found the valid card
-            }
-
-        }
-        currentHandIndex = temp;
+        if(hand.Count == 0) return;
+        currentHandIndex = (currentHandIndex + direction + hand.Count) % hand.Count;
     }
-    private void EnsureValidCard()
-    {
-        if (hand[currentHandIndex] != null) return;
-        if (currentHandSize <= 0) 
-        {
-            currentHandIndex = 0;
-            return;
-        }
-
-        for(int i = 0; i < MAXHANDSIZE; i++)
-        {
-            if (hand[i] != null) 
-            {
-                currentHandIndex = i;
-                Debug.Log("Select: " + currentHandIndex);
-                return;
-            }
-        }
-        currentHandIndex = 0;
-
-    }
+ 
 
     public void OnUseCard(InputAction.CallbackContext context)
     {
