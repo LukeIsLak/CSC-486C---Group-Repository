@@ -9,9 +9,11 @@ public class TraversalManager : MonoBehaviour
     [Header("Required References")]
     public GameObject traversableLayoutPrefab;
     public Camera sceneCamera;
-    
+    public GameObject playerOnMapPrefab;
+
     [Header("Data")]
     public LayoutData layoutData;
+    public DungeonData dungeonData;
 
     [Header("Events")]
     public GameEvent EnterEncounter;
@@ -26,6 +28,8 @@ public class TraversalManager : MonoBehaviour
         InitializeLayout();
         MapEncounter lastFinished = traversableLayout.DoProgress(layoutData.completedIndices);
         respondToInputs = true;
+
+        Instantiate(playerOnMapPrefab, lastFinished.transform);
         sceneCamera.transform.position = lastFinished.transform.position + new Vector3(0f, 8, 0f);
     }
 
@@ -45,6 +49,7 @@ public class TraversalManager : MonoBehaviour
             layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
             traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
+            dungeonData.dungeonSeed = (int)System.DateTime.Now.Ticks;
             EnterEncounter.Raise();
         }
 
