@@ -409,7 +409,7 @@ MonoBehaviour:
   peckComplete: 0
   peckSpeed: 5
   peckReboundSpeed: 10
-  reboundHeight: 2
+  reboundHeight: -2
   reboundIncompleteHeight: 1
   minRebountHeight: 1
   reboundDistance: 5
@@ -423,6 +423,7 @@ MonoBehaviour:
   steerLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  playerSearchDistance: 5
   currentState: 0
 --- !u!114 &522299386
 MonoBehaviour:
@@ -436,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd290050fa23ab3479e9d2e429804fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bat: {fileID: 0}
 --- !u!1 &896106338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8380157826906577798, guid: 3420ffcbc33074a459f3e421c150673f, type: 3}
@@ -748,6 +750,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3025714530200236336, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: enemyLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3856491782874674905, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

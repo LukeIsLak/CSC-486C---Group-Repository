@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
 public class Bat : EnemyInterface
 {
+    [Header("Bat Base Field")]
+    public Animator anim;
 
     [Header("Ceiling Location Possibilities")]
     public int radialSteps = 1;
@@ -27,7 +28,7 @@ public class Bat : EnemyInterface
     public float moveSpeed = 3f;
     public float pointTolerance = 0.05f;
     public int currentPathIndex = 0;
-    private bool isMoving = false;
+    public bool isMoving = false;
     private List<Vector3> targetPath = new List<Vector3>();
 
     // Flutter behaviour parameters
@@ -52,6 +53,8 @@ public class Bat : EnemyInterface
     // Smoothing for horizontal squiggle to reduce spikiness (higher = smoother)
     [Header("Flutter Noise Smoothing")]
     public float lateralSmoothing = 8f;
+
+    [Header("Bat ")]
 
     [Header("Bat Peck Variables")]
     public bool testPeck = false;
@@ -79,6 +82,26 @@ public class Bat : EnemyInterface
     public LayerMask steerLayerMask = ~0;
 
     private Vector3 prevLateralOffset = Vector3.zero;
+
+    [Header("Bat Transition Variables")]
+    public float playerSearchDistance = 5;
+    public bool isPerched = false;
+    public int attackAmount = 0;
+    public int minAttackAmount = 1;
+    public int maxAttackAmount = 3;
+    public bool canAttack = false;
+    public BatAttacks? nextAttack;
+
+    [Header("Attack Timing")]
+    public float attackCooldown = 2f;
+    private float attackCooldownTimer = 0f;
+
+    public List<WeightedAttack> weightedAttacks = new List<WeightedAttack>
+    {
+        new WeightedAttack(BatAttacks.PeckAttack, 2f),
+        // new WeightedAttack(BatAttacks.SwoopAttack, 1f)
+    };
+
 
     public BatStates currentState;
 
@@ -227,7 +250,7 @@ public class Bat : EnemyInterface
         {
             case BatStates.Flutter:
                 return flutterMoveSpeed;
-            case BatStates.PeckAttack:
+            case BatStates.PeckAttacking:
                 return peckSpeed;
             case BatStates.PeckCompleteRebound:
                 return peckReboundSpeed;
@@ -238,7 +261,7 @@ public class Bat : EnemyInterface
         }
     }
 
-    void StartFlutter(Transform player)
+    public void StartFlutter(Transform player)
     {
         if (player == null) return;
         playerTransform = player;
@@ -248,9 +271,10 @@ public class Bat : EnemyInterface
         // optionally stop path-following
         isMoving = false;
         currentState = BatStates.Flutter;
+        nextAttack = GetRandomWeightedAttack();
     }
 
-    void UpdateFlutter()
+    public void UpdateFlutter()
     {
         if (!isFluttering || playerTransform == null) return;
 
@@ -306,10 +330,10 @@ public class Bat : EnemyInterface
     }
 
 
-    void PeckTarget() {
+    public void PeckTarget() {
+        attackAmount -= 1;
         isFluttering = false;
-        currentState = BatStates.PeckAttack;
-        
+
         Vector3 start = transform.position;
         Vector3 end = playerTransform.position;
 
@@ -324,7 +348,7 @@ public class Bat : EnemyInterface
         peckStartPosition = start;
     }
 
-    void PeckRebound() {
+    public void PeckRebound() {
         isPecking = false;
         currentState = BatStates.PeckCompleteRebound;
 
@@ -356,6 +380,36 @@ public class Bat : EnemyInterface
         isMoving = true;
         isPeckRebounding = true;
         peckStartPosition = null;
+    }
+
+    public void SwoopAttack() {
+        isFluttering = false;
+
+        Vector3 start = transform.position;
+        Vector3 playerPos = playerTransform.position;
+
+        // Direction from bat to player (horizontal only)
+        Vector3 swoopDir = (playerPos - start);
+        swoopDir.y = 0f;
+        swoopDir = swoopDir.normalized;
+
+        float swoopDistance = 5f; // How far past the player to swoop (tweak as needed)
+        Vector3 end = playerPos + swoopDir * swoopDistance;
+        end.y = playerPos.y; // Keep same height as player, or set as desired
+
+        // Control points for a smooth arc: one above, one below
+        Vector3 mid = (start + end) * 0.5f;
+        Vector3 up = Vector3.up * 2f; // Arc height (tweak as needed)
+        Vector3 p1 = mid + up;
+        Vector3 p2 = playerPos; // Pass through player
+
+        targetPath = calculatePath(start, end, p1, p2);
+
+        currentPathIndex = 0;
+        isMoving = true;
+        isPecking = false;
+        isPeckRebounding = false;
+        peckStartPosition = start;
     }
 
     // XXX this steer function... sucks... please improve it!
@@ -431,41 +485,53 @@ public class Bat : EnemyInterface
         }
     }
 
-
-
-
-
-    void Update() {
-
-        if (isFluttering) {
-            UpdateFlutter();
-        }
-
-        if (testPeck && !isMoving) {
-            PeckTarget();
-            print("test");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            List<RaycastHit> hits = findCeilingMesh();
-            
-            Vector3? perchSpot = findCeilingPoint(hits);
-            if (perchSpot is Vector3 p) {
-                /*Line to decided perch point*/
-                Debug.DrawLine(p, transform.position, new Color(1f, 0f, 1f, 1f), 5f);
-            
-                targetPath = calculatePath(transform.position, p);
-                currentPathIndex = 0;
-                isMoving = targetPath.Count > 0;
-                if (debug && targetPath.Count > 0) {
-                    Debug.DrawLine(targetPath[0], transform.position, new Color(0f, 1f, 1f, 1f), 5f);
-                    for (int i = 1; i < targetPath.Count - 1; i++) {
-                        Debug.DrawLine(targetPath[i], targetPath[i+1], new Color(0f, 1f, 1f, 1f), 5f);
-                    }
+    public void findPerchSpot() {
+        List<RaycastHit> hits = findCeilingMesh();
+        Vector3? perchSpot = findCeilingPoint(hits);
+        if (perchSpot is Vector3 p) {
+            /*Line to decided perch point*/
+            Debug.DrawLine(p, transform.position, new Color(1f, 0f, 1f, 1f), 5f);
+        
+            targetPath = calculatePath(transform.position, p);
+            currentPathIndex = 0;
+            isMoving = targetPath.Count > 0;
+            if (debug && targetPath.Count > 0) {
+                Debug.DrawLine(targetPath[0], transform.position, new Color(0f, 1f, 1f, 1f), 5f);
+                for (int i = 1; i < targetPath.Count - 1; i++) {
+                    Debug.DrawLine(targetPath[i], targetPath[i+1], new Color(0f, 1f, 1f, 1f), 5f);
                 }
             }
         }
 
+        isMoving = true;
+    }
+
+    public void UpdatePerching() {
+        UpdateMoveSpot(false);
+
+        if (!isMoving) isPerched = true;
+    }
+
+    public void UpdatePeck() {
+        UpdateMoveSpot(false);
+
+        if (!isMoving && isPecking == true && !isPeckRebounding) peckComplete = true;
+    }
+
+    public void UpdateSwoop() {
+        UpdateMoveSpot(false);
+
+
+    }
+
+    public void UpdatePeckRebound() {
+        UpdateMoveSpot(false);
+
+        if (!isMoving && isPecking == true && isPeckRebounding) peckComplete = false;
+    }
+
+
+    void UpdateMoveSpot(bool s) {
         if (isMoving && targetPath.Count > 0) {
             Vector3 target = targetPath[currentPathIndex];
             float step = GetCurrentSpeed() * Time.deltaTime;
@@ -486,12 +552,34 @@ public class Bat : EnemyInterface
                 }
             }
         }
-        else if (isMoving == false && isPecking == true && isPeckRebounding == false) {
-            PeckRebound();
-        }
 
-        if (!testPeck && !isPecking && !isPeckRebounding) {
-            steer();
+        if (s) steer();
+    }
+
+    public BatAttacks GetRandomWeightedAttack()
+    {
+        float totalWeight = weightedAttacks.Sum(w => w.weight);
+        float r = UnityEngine.Random.Range(0, totalWeight);
+        float cumulative = 0f;
+        foreach (var wa in weightedAttacks)
+        {
+            cumulative += wa.weight;
+            if (r < cumulative)
+                return wa.attack;
         }
+        // fallback (should not happen)
+        return weightedAttacks[0].attack;
+    }
+
+    public void StartAttackCooldown(float delay)
+    {
+        StartCoroutine(AttackCooldownCoroutine(delay));
+    }
+
+    private IEnumerator AttackCooldownCoroutine(float delay)
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(delay);
+        canAttack = true;
     }
 }
