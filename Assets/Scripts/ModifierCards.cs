@@ -8,7 +8,7 @@ public class ModifierCards : Cards
     public string effect;
     public int value;
 
-    public override void Play(Cards card){
-
+    public override IEnumerator Play(Cards card){
+        yield break;
     }
 }

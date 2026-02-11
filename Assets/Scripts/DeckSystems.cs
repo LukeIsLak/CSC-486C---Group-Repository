@@ -220,7 +220,7 @@ public class DeckSystems : MonoBehaviour
 
         Cards currentCard = hand[currentHandIndex];
         if (currentCard is Fireball || currentCard is Spark){
-            currentCard.Play(currentCard);
+            StartCoroutine(currentCard.Play(currentCard));
         }
         
         Cards card = hand[currentHandIndex];

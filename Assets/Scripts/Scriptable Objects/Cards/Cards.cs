@@ -9,5 +9,5 @@ public abstract class Cards : ScriptableObject
     public Sprite image = null;
 
 
-    public abstract void Play(Cards card);
+    public abstract IEnumerator Play(Cards card);
 }

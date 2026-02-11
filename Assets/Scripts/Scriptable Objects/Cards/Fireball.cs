@@ -18,14 +18,14 @@ public class Fireball : Cards
     [SerializeField] private LayerMask enemylayer;
 
 
-    public override void Play(Cards card){
+    public override IEnumerator Play(Cards card){
         player = GameObject.FindWithTag("Player");
-        if (player == null) return;
-    if (card is Fireball attackCard)
-    {
-        useAttackCard(attackCard);
-        Debug.Log("Used card");
-    }
+        if (card is Fireball attackCard)
+        {
+            useAttackCard(attackCard);
+            Debug.Log("Used card");
+        }
+        yield break;
 
     }
 
