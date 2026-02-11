@@ -54,10 +54,8 @@ public class DeckSystems : MonoBehaviour
     {
         inventory = inventoryContainer.GetComponent<PlayerInventory>();
 
-        Debug.Log($"playerDeck count = {inventory.playerDeck?.Count ?? -1}");
-
         loadDeck(inventory.playerDeck);
-        Debug.Log($"hand count after load = {hand.Count}, deck count = {deck.Count}, currentDeckSize = {currentDeckSize}");
+
     }
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
