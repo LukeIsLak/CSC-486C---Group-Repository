@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+[CreateAssetMenu(menuName ="Inventory/PlayerInventory")]
+public class PlayerInventory : ScriptableObject
 {
     public Cards[] tempDeck = new Cards[15];
     public List<Cards> allCards;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Cards one = allCards[Random.Range(0,allCards.Count)];
         Cards two = allCards[Random.Range(0,allCards.Count)];

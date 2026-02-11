@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Fireball
-  m_EditorClassIdentifier: Assembly-CSharp::AttackCards
-  name: fireball
+  m_Script: {fileID: 11500000, guid: a2fc4980abacb4dd281e1db8f737b671, type: 3}
+  m_Name: Healing
+  m_EditorClassIdentifier: 
+  name: healing
   image: {fileID: 0}
-  attackDamage: 0
-  element: 
-  attackType: 0
-  attackHandler: {fileID: 0}
+  effect: heal
+  value: 10

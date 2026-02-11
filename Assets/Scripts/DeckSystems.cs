@@ -45,14 +45,15 @@ public class DeckSystems : MonoBehaviour
 
     private void NotifyHandChanged() => OnHandChanged?.Invoke();
 
-    public GameObject inventoryContainer;
-    PlayerInventory inventory;
+    public PlayerInventory inventory;
+    public EnemyEffects enemyeffects;
+
+    public GameEvent enemySpeedChange;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        inventory = inventoryContainer.GetComponent<PlayerInventory>();
         loadDeck(inventory.tempDeck, inventory.tempDeck.Length);
     }
 
@@ -215,6 +216,11 @@ public class DeckSystems : MonoBehaviour
         //stuff here to trigger card script
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
+        
+        Cards card = hand[currentHandIndex];
+
+        //call needed card function
+        
         // put card in discard and remove from hand
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
@@ -303,17 +309,28 @@ public class DeckSystems : MonoBehaviour
     }
 
     public void cardHeal(int percentage){
-        //tbd
+        Health playerhealth = GetComponent(typeof(Health)) as Health;
+        float healamount = playerhealth.maxHealth * (1f / (float)percentage);
+        //Debug.Log(healamount);
+        playerhealth.Heal(healamount);
     }
 
-    IEnumerator playerSpeedUp(){
-        //tbd
-        yield return new WaitForSeconds(1);
+    IEnumerator playerSpeedUp(int effectTime){
+        PlayerController playerStats = GetComponent(typeof(PlayerController)) as PlayerController;
+        playerStats.speed += 5f;
+        yield return new WaitForSeconds(effectTime);
+        playerStats.speed -= 5f;
     }
 
-    IEnumerator enemySpeedDown(){
-        //tbd
-        yield return new WaitForSeconds(1);
+    IEnumerator enemySpeedDown(int effectTime){
+        //change there speed to be slower and use an event to let them know
+        enemyeffects.changeEnemySpeed(0.5f);
+        enemySpeedChange.Raise();
+        //wait for the duration of the card
+        yield return new WaitForSeconds(effectTime);
+        //set everything back to normal and use an event to let the system know
+        enemyeffects.resetEnemySpeed();
+        enemySpeedChange.Raise();
     }
 
     private void ChangeHandIndex(int direction)

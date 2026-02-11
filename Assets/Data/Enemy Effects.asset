@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Fireball
-  m_EditorClassIdentifier: Assembly-CSharp::AttackCards
-  name: fireball
-  image: {fileID: 0}
-  attackDamage: 0
-  element: 
-  attackType: 0
-  attackHandler: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 6995102c6429e3041bee5beb06f0b5d5, type: 3}
+  m_Name: Enemy Effects
+  m_EditorClassIdentifier: 
