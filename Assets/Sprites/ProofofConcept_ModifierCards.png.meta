@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -93,124 +93,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ProofofConcept_ModifierCards_0
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 1372
-        width: 933
-        height: 1280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b26436826ba192245a69b02b5199babb
-      internalID: -1755192331
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProofofConcept_ModifierCards_1
-      rect:
-        serializedVersion: 2
-        x: 1092
-        y: 1372
-        width: 933
-        height: 1280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a6717bba92757746a125c67ddd2cdf5
-      internalID: -2062392452
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProofofConcept_ModifierCards_2
-      rect:
-        serializedVersion: 2
-        x: 2171
-        y: 1372
-        width: 933
-        height: 1280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0fd9b99295ebd5d4ba504b15031eb562
-      internalID: -907178410
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProofofConcept_ModifierCards_3
-      rect:
-        serializedVersion: 2
-        x: 3249
-        y: 1372
-        width: 933
-        height: 1280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45ca43170f9df6646a3cd4805e1f24a4
-      internalID: -1912514689
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ProofofConcept_ModifierCards_4
-      rect:
-        serializedVersion: 2
-        x: 4329
-        y: 1372
-        width: 933
-        height: 1280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 959bb8adc80675146beeba8ec7a74574
-      internalID: -1468716773
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ProofofConcept_ModifierCards_5
       rect:
         serializedVersion: 2
-        x: 13
-        y: 17
-        width: 933
-        height: 1280
+        x: 7
+        y: 13
+        width: 962
+        height: 1302
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +134,12 @@ TextureImporter:
       name: ProofofConcept_ModifierCards_6
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 17
-        width: 933
-        height: 1280
+        x: 1087
+        y: 13
+        width: 962
+        height: 1302
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +155,12 @@ TextureImporter:
       name: ProofofConcept_ModifierCards_7
       rect:
         serializedVersion: 2
-        x: 2171
-        y: 17
-        width: 933
-        height: 1280
+        x: 2166
+        y: 13
+        width: 962
+        height: 1302
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,12 +176,12 @@ TextureImporter:
       name: ProofofConcept_ModifierCards_8
       rect:
         serializedVersion: 2
-        x: 3249
-        y: 17
-        width: 933
-        height: 1280
+        x: 3236
+        y: 13
+        width: 980
+        height: 1302
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,12 +197,12 @@ TextureImporter:
       name: ProofofConcept_ModifierCards_9
       rect:
         serializedVersion: 2
-        x: 4329
-        y: 17
-        width: 933
-        height: 1280
+        x: 4321
+        y: 13
+        width: 962
+        height: 1302
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

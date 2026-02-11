@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Haste
   m_EditorClassIdentifier: 
   name: Haste
-  image: {fileID: -907178410, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
+  image: {fileID: -1179530230, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
   buffTime: 10
