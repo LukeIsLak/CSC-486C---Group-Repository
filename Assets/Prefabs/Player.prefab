@@ -484,7 +484,7 @@ MonoBehaviour:
   attackHitStopDuration: 0.1
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
 --- !u!114 &5473761978391616915
 MonoBehaviour:
@@ -526,9 +526,7 @@ MonoBehaviour:
   deckSize: 15
   currentDeckSize: 0
   discard: []
-  inventory: {fileID: 0}
-  enemyeffects: {fileID: 0}
-  enemySpeedChange: {fileID: 0}
+  inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
 --- !u!1 &7545902890681713120
 GameObject:
   m_ObjectHideFlags: 0

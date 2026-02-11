@@ -270,6 +270,14 @@ public class DeckSystems : MonoBehaviour
         List<int> avalibleDeckSlots = new List<int>();
         List<CardInstance> deckList = new List<CardInstance>();
 
+        if(hand.Count < 2 || deck.Count < 2){ // protection from index errors
+            if (hand.Count < deck.Count) {
+                amount = hand.Count;
+            } else {
+                amount = deck.Count;
+            }
+        }
+
         // get a list of numbers corisponding to card slots 
         for (int i = 0; i < hand.Count; i++) {
             avalibleHandSlots.Add(i);
