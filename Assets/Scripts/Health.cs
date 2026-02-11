@@ -35,6 +35,7 @@ public class Health : MonoBehaviour
         if (amount <= 0) return;
 
         currentHealth += amount;
+
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;

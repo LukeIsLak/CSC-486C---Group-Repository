@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     
-    [SerializeField] private float speed = 5f;
+    [SerializeField] public float speed = 5f;
     [SerializeField] private float jumpForce = 2f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float xSensitivity = 100f;
@@ -20,8 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private float rotationX; 
     private float verticalVelocity;
-    private bool isJumping;
-    private bool isAttacking;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -35,16 +34,14 @@ public class PlayerController : MonoBehaviour
         Vector3 move = transform.right * moveDirection.x + transform.forward * moveDirection.y;
         controller.Move(move * speed * Time.deltaTime);
 
-        if (isJumping && controller.isGrounded)
+        if (controller.isGrounded && verticalVelocity < 0)
         {
-            verticalVelocity = jumpForce;
-            isJumping = false;
+            verticalVelocity = -2f; // keep grounded
         }
         verticalVelocity += gravity * Time.deltaTime;
         controller.Move(Vector3.up * verticalVelocity * Time.deltaTime);
 
         Look();
-
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -55,9 +52,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && controller.isGrounded)
         {
-            isJumping = true;
+            verticalVelocity = jumpForce;
         }
 
     }
@@ -66,8 +63,6 @@ public class PlayerController : MonoBehaviour
         lookValue = context.ReadValue<Vector2>();
         //Debug.Log($"Look value: {moveDirection}");
     }
-
-
 
     private void Look()
     {
