@@ -10,7 +10,7 @@ public class DeckSystems : MonoBehaviour
 {
     // holds GameObject reference/information of what cards are currently in the players hand
     // will be updated by drawcard()
-    public List<Cards> hand = new();
+    public List<CardInstance> hand = new();
     
     // signifys the card the player currently has selected
     public int currentHandIndex = 0;
@@ -23,11 +23,11 @@ public class DeckSystems : MonoBehaviour
     const int HANDSLOT5INDEX = 4;
 
     // const to help define max and min hand size
-    const int MAXHANDSIZE = 5;
+    public const int MAXHANDSIZE = 5;
     const int EMPTYHANDSIZE = 0;
 
     // The queue functions as the deck, with dequeue being equivelent to drawing a card, enqueue would be the same as putting a card back in to the deck at the bottom
-    public Queue<Cards> deck = new Queue<Cards>();
+    public Queue<CardInstance> deck = new Queue<CardInstance>();
 
     // used out of combat (total deck size)
     public int deckSize;
@@ -39,14 +39,15 @@ public class DeckSystems : MonoBehaviour
     const int MAXDECKSIZE = 15;
 
     //store any card that has been used
-    public List<Cards> discard = new List<Cards>();
-
-    public event Action OnHandChanged;
-
-    private void NotifyHandChanged() => OnHandChanged?.Invoke();
+    public List<CardInstance> discard = new List<CardInstance>();
 
     public PlayerInventory inventory;
     
+    public event Action OnHandSelectionChanged;
+    public event Action OnHandContentsChanged;
+    private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
+    private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
+    private int nextUid = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +74,7 @@ public class DeckSystems : MonoBehaviour
     /// ASSUMPTION: when a card is colected the check for deck size happens, this function is for adding a used card back in to the deck
     /// </summary>
     /// <param name="card"></param>
-    public void addCardToDeck(Cards card) {
+    public void addCardToDeck(CardInstance card) {
         // add card to deck
         deck.Enqueue(card);
         currentDeckSize++;
@@ -84,22 +85,22 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     /// <param name="handslot"></param>
     /// <returns> null if handslot is invalid (less than 0 or greater than 5) or the card draw (GameObject) </returns>
-    public Cards drawCard()
+    public CardInstance drawCard()
     {
         if (deck.Count == 0) return null;
 
-        if(hand.Count > MAXHANDSIZE) return null;
+        if(hand.Count >= MAXHANDSIZE) return null;
         // remove first card from deck
-        Cards card = deck.Dequeue();
+        CardInstance card = deck.Dequeue();
 
         //// check handslot is valid
         //if (handslot < 0 || handslot > 4) { 
         //    Debug.Log("error wrong value used on drawCard, value should be between 0-4");
         //    return null;
         //}
-
         currentDeckSize--;
         hand.Add(card);
+        NotifyHandContentsChanged();
         // return the draw card for use
         return card;
     }
@@ -109,7 +110,7 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     public void shuffleExcHand() {
         //temporary list to aid in suffeling (abbility to pull specific indexes) 
-        List<Cards> sortingList = new List<Cards>();
+        List<CardInstance> sortingList = new List<CardInstance>();
         int listSize = currentDeckSize;
         currentDeckSize = 0;
 
@@ -159,27 +160,29 @@ public class DeckSystems : MonoBehaviour
     /// <param name="passedDeck"></param>
     /// <param name="size"></param>
     /// <returns> will return true if sucsesful </returns>
-    public bool loadDeck(Cards[] passedDeck, int size) {
+    public bool loadDeck(List<CardInstance> passedDeck) {
         //make sure the deck and discard is empty
         hand.Clear();
         deck.Clear();
         discard.Clear();
 
         //make sure sizes are reset before loading deck
-        deckSize = 0;
+        deckSize = passedDeck.Count;
         currentDeckSize = 0;
-
+        nextUid = 0;
         //set the size of loaded deck
-        deckSize = size;
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
-            if (i < 5) {
+            passedDeck[i].uid = nextUid++;
+            if (i < MAXHANDSIZE) {
                 hand.Add(passedDeck[i]);
             } else {
                 addCardToDeck(passedDeck[i]);
             }
         }
+        NotifyHandContentsChanged();
+
         return true;
     }
 
@@ -188,9 +191,9 @@ public class DeckSystems : MonoBehaviour
     /// takes the current deck state and loads it in to an array for storage (think exiting the game)
     /// </summary>
     /// <returns> an array with the first five slot representing the hand and the next ten representing the deck </returns>
-    public Cards[] storeDeck() {
+    public CardInstance[] storeDeck() {
         // array that will be used to send deck information out of the system
-        Cards[] returnArray = new Cards[currentDeckSize + hand.Count];
+        CardInstance[] returnArray = new CardInstance[currentDeckSize + hand.Count];
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < (currentDeckSize + hand.Count); i++) { 
@@ -218,12 +221,15 @@ public class DeckSystems : MonoBehaviour
         StartCoroutine(hand[currentHandIndex].Play(hand[currentHandIndex]));
 
         // put card in discard and remove from hand
+
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
         //reflect change in hand size
-        
+
         if(hand.Count == 0 ) currentHandIndex = 0;
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
+
+        NotifyHandContentsChanged();
     }
 
     /// <summary>
@@ -262,7 +268,7 @@ public class DeckSystems : MonoBehaviour
         List<int> indexsDeck = new List<int>();
         List<int> avalibleHandSlots = new List<int>();
         List<int> avalibleDeckSlots = new List<int>();
-        List<Cards> deckList = new List<Cards>();
+        List<CardInstance> deckList = new List<CardInstance>();
 
         // get a list of numbers corisponding to card slots 
         for (int i = 0; i < hand.Count; i++) {
@@ -291,7 +297,7 @@ public class DeckSystems : MonoBehaviour
         //clear up removing entire deck
         currentDeckSize = 0;
 
-        Cards swapper;
+        CardInstance swapper;
         for (int i = 0; i < amount; i++) {
             swapper = hand[indexsHand[i]];
             hand[indexsHand[i]] = deckList[indexsDeck[i]];
@@ -308,6 +314,7 @@ public class DeckSystems : MonoBehaviour
     {
         if(hand.Count == 0) return;
         currentHandIndex = (currentHandIndex + direction + hand.Count) % hand.Count;
+        NotifyHandSelectionChanged();
     }
  
 
@@ -316,10 +323,8 @@ public class DeckSystems : MonoBehaviour
         if (context.performed)
         {
             useCard();
-            Debug.Log("use Card: " + currentHandIndex);
         }
     }
-
 
     public void OnSwitchCard(InputAction.CallbackContext context)
     {
@@ -335,7 +340,5 @@ public class DeckSystems : MonoBehaviour
         {
             ChangeHandIndex(-1);
         }
-        Debug.Log("Select: " + currentHandIndex);
-
     }
 }
