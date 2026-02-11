@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleAoEProjectile : MonoBehaviour
+public class ShootFireball : MonoBehaviour
 {
     [SerializeField] private float projspeed = 10f;
     [SerializeField] private float dmgradius = 3f;
 
 
-    private int dmg;
+    private float dmg;
     private Vector3 dir; 
 
     [SerializeField] private LayerMask enemylayer;
 
 
-    public void Init(Vector3 direct, AttackCards card){
+    public void Init(Vector3 direct, Fireball card){
         //Needs a direction and damage amount
         dir = direct.normalized;
-        dmg = card.attackDamage;
+        dmg = card.dmg;
     }
 
     void Update(){
