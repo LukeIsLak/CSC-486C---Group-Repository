@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 7050272462483586888}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -526,7 +526,9 @@ MonoBehaviour:
   deckSize: 15
   currentDeckSize: 0
   discard: []
-  inventoryContainer: {fileID: 0}
+  inventory: {fileID: 0}
+  enemyeffects: {fileID: 0}
+  enemySpeedChange: {fileID: 0}
 --- !u!1 &7545902890681713120
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootFireball : MonoBehaviour
+public class ShootSpark : MonoBehaviour
 {
     [SerializeField] private float projspeed = 10f;
-    [SerializeField] private float dmgradius = 3f;
+    [SerializeField] private float dmgradius = 1f;
 
 
     private float dmg;
@@ -14,7 +14,7 @@ public class ShootFireball : MonoBehaviour
     [SerializeField] private LayerMask enemylayer;
 
 
-    public void Init(Vector3 direct, Fireball card){
+    public void Init(Vector3 direct, Spark card){
         //Needs a direction and damage amount
         dir = direct.normalized;
         dmg = card.dmg;

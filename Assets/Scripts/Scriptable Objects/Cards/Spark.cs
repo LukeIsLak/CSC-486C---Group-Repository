@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Cards/Fireball")]
-public class Fireball : Cards
+[CreateAssetMenu(menuName = "Cards/Spark")]
+public class Spark : Cards
 {
     [SerializeField] private float projspeed = 10f;
-    [SerializeField] private float dmgradius = 3f;
+    [SerializeField] private float dmgradius = 1f;
 
-    [SerializeField] private ShootFireball aoeprojprefab;
+    [SerializeField] private ShootSpark aoeprojprefab;
     private GameObject player;
 
 
@@ -17,19 +17,18 @@ public class Fireball : Cards
 
     [SerializeField] private LayerMask enemylayer;
 
-
     public override IEnumerator Play(Cards card){
         player = GameObject.FindWithTag("Player");
-        if (card is Fireball attackCard)
+        if (card is Spark sparkCard)
         {
-            useAttackCard(attackCard);
+            useSparkCard(sparkCard);
             Debug.Log("Used card");
         }
         yield break;
 
     }
 
-    public void useAttackCard(Fireball card)
+    public void useSparkCard(Spark card)
     {
         //Switch case based on attacktype, will add more cases as more cards get developed
         handleAoE(card);
@@ -37,10 +36,10 @@ public class Fireball : Cards
         
     }
 
-    public void handleAoE(Fireball card)
+    public void handleAoE(Spark card)
     {
         //For AoE attacks, create the projectile and fire it forward based on the player position
-        ShootFireball proj = Instantiate(aoeprojprefab, player.transform.position + player.transform.forward * 2f, 
+        ShootSpark proj = Instantiate(aoeprojprefab, player.transform.position + player.transform.forward * 2f, 
         Quaternion.identity);
 
         if (proj == null)

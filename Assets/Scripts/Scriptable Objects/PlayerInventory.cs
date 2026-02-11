@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+[CreateAssetMenu(menuName ="Inventory/PlayerInventory")]
+public class PlayerInventory : ScriptableObject
 {
     public List<CardInstance> playerDeck = new();
     public List<Cards> allCards;

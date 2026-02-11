@@ -36,26 +36,23 @@ public class DeckSystems : MonoBehaviour
     public int currentDeckSize;
 
     // the maximum amount of cards a player can have in a deck
-    const int MAXDECKSIZE = 15;
+    const int MAXDECKSIZE = 30;
 
     //store any card that has been used
     public List<CardInstance> discard = new List<CardInstance>();
 
+    public PlayerInventory inventory;
+    
     public event Action OnHandSelectionChanged;
     public event Action OnHandContentsChanged;
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
-    public GameObject inventoryContainer;
-    PlayerInventory inventory;
     private int nextUid = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        inventory = inventoryContainer.GetComponent<PlayerInventory>();
-
         loadDeck(inventory.playerDeck);
-
     }
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
@@ -219,6 +216,10 @@ public class DeckSystems : MonoBehaviour
         //stuff here to trigger card script
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
+
+        //call needed card function
+        StartCoroutine(hand[currentHandIndex].cardData.Play(hand[currentHandIndex].cardData));
+
         // put card in discard and remove from hand
 
         discard.Add(hand[currentHandIndex]);
@@ -307,20 +308,6 @@ public class DeckSystems : MonoBehaviour
             addCardToDeck(deckList[0]);
             deckList.RemoveAt(0);
         }
-    }
-
-    public void cardHeal(int percentage){
-        //tbd
-    }
-
-    IEnumerator playerSpeedUp(){
-        //tbd
-        yield return new WaitForSeconds(1);
-    }
-
-    IEnumerator enemySpeedDown(){
-        //tbd
-        yield return new WaitForSeconds(1);
     }
 
     private void ChangeHandIndex(int direction)

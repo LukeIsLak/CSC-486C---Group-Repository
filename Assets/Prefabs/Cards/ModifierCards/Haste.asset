@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d4be2e78a7b48cd9b05ebedd75309b, type: 3}
-  m_Name: TestFireball
+  m_Script: {fileID: 11500000, guid: 5b2d4117b6c7e1e4e8aa369e11f3c12d, type: 3}
+  m_Name: Haste
   m_EditorClassIdentifier: 
-  name: Fireball
+  name: Haste
   image: {fileID: 0}
-  projspeed: 10
-  dmgradius: 3
-  aoeprojprefab: {fileID: 7573748999677751953, guid: 26c580f88a05c424bac381c95aba4b26, type: 3}
-  dmg: 20
-  enemylayer:
-    serializedVersion: 2
-    m_Bits: 64
+  buffTime: 10
