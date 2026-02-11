@@ -534,10 +534,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   switchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: FMODAssets/CSC486C/CSC486C.fspro
-  sourceBankPath: FMODAssets/CSC486C/Build
+  sourceBankPath: FMODAssets/CSC486C/Build/Desktop
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
