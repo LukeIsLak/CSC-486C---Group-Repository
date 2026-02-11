@@ -84,6 +84,11 @@ public class BatStateManager : MonoBehaviour
         AddExitState(BatStates.PeckCompleteRebound, ExitPeckReboundState);
 
         /*Swoop*/
+        AddTransition(BatStates.SwoopAttacking, BatStates.Flutter, SwoopToFlutter);
+
+        AddEnterState(BatStates.SwoopAttacking, EnterSwoopAttackState);
+        AddWhileState(BatStates.SwoopAttacking, WhileSwoopAttackState);
+        AddExitState(BatStates.SwoopAttacking, ExitSwoopAttackState);
     }
 
     void Update() {
@@ -182,7 +187,12 @@ public class BatStateManager : MonoBehaviour
 
     /* From PeckRebound Transitions */
     public bool PeckReboundToFlutter(Bat b) {
-        return true;
+        return b.peckComplete == false;
+    }
+
+    /* From Swoop Transitions */
+    public bool SwoopToFlutter(Bat b) {
+        return b.swoopComplete;
     }
 
     /******************************/
@@ -209,10 +219,12 @@ public class BatStateManager : MonoBehaviour
     }
 
     public void EnterPeckAttackState(Bat b) {
+        b.isAttacking = true;
         b.PeckTarget();
     }
 
     public void EnterSwoopAttackState(Bat b) {
+        b.isAttacking = true;
         b.SwoopAttack();
     }
 
@@ -251,29 +263,14 @@ public class BatStateManager : MonoBehaviour
         b.UpdatePeck();
     }
 
-    public void WhileSwoopAttackState(Bat b) {
-        b.UpdateSwoop();
-    }
-
     public void WhilePeckCompleteReboundState(Bat b) {
         b.UpdatePeckRebound();
     }
 
-    // public void WhilePeckCompleteReboundState(Bat b) {
-    //     b.UpdateMoveSpot(false);
-    // }
+    public void WhileSwoopAttackState(Bat b) {
+        b.UpdateSwoop();
+    }
 
-    // public void WhilePeckIncompleteReboundState(Bat b) {
-    //     b.UpdateMoveSpot(false);
-    // }
-
-    // public void WhileHitState(Bat b) {
-    //     // Implement hit logic if needed
-    // }
-
-    // public void WhileIdleState(Bat b) {
-    //     // Idle
-    // }
 
     /******************************/
     /*    Exit State Functions    */
@@ -281,6 +278,7 @@ public class BatStateManager : MonoBehaviour
 
     public void ExitPerchedState(Bat b) {
         b.attackAmount = UnityEngine.Random.Range(b.minAttackAmount, b.maxAttackAmount);
+        b.isAttacking = false;
         b.isPerched = false;
         print("test");
         b.anim.SetBool("IsPerched", false);
@@ -288,5 +286,10 @@ public class BatStateManager : MonoBehaviour
 
     public void ExitPeckReboundState(Bat b) {
         b.peckComplete = false;
+    }
+
+    public void ExitSwoopAttackState(Bat b) {
+        b.isAttacking = false;
+        b.swoopComplete = false;
     }
 }

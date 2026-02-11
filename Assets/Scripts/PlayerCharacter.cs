@@ -99,8 +99,8 @@ public class PlayerCharacter : MonoBehaviour
         {
             //Debug.Log($"Hit: {hit.collider.name} ");
 
-            var healthComponent = hit.collider.GetComponentInParent<Health>();
-            if (healthComponent != null) healthComponent.TakeDamage(attackDamage);
+            var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
+            if (enemyComponent != null) enemyComponent.Hit(attackDamage);
             TriggerHitStop(attackHitStopDuration);
             
         }

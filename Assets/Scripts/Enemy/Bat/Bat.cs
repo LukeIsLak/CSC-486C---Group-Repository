@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+// Require RigidBody maybe?
+
 public class Bat : EnemyInterface
 {
     [Header("Bat Base Field")]
@@ -49,6 +51,8 @@ public class Bat : EnemyInterface
     private float flutterAngleDeg = 0f;
     [SerializeField]
     private float flutterJitterSeed;
+    [SerializeField]
+    private float direction = 1f;
 
     // Smoothing for horizontal squiggle to reduce spikiness (higher = smoother)
     [Header("Flutter Noise Smoothing")]
@@ -71,6 +75,9 @@ public class Bat : EnemyInterface
     public float reboundDistance = 1f;
     public float reboundIncompleteDistance = 1f; // incomplete as in attack doesn't finish
 
+    [Header("Bat Swoop Variables")]
+    public bool swoopComplete = false;
+    public float swoopSpeed = 5f;
 
     [Header("Steering Controls")]
     public int steerSteps = 1;
@@ -93,13 +100,14 @@ public class Bat : EnemyInterface
     public BatAttacks? nextAttack;
 
     [Header("Attack Timing")]
+    public bool isAttacking = false;
     public float attackCooldown = 2f;
     private float attackCooldownTimer = 0f;
 
     public List<WeightedAttack> weightedAttacks = new List<WeightedAttack>
     {
         new WeightedAttack(BatAttacks.PeckAttack, 2f),
-        // new WeightedAttack(BatAttacks.SwoopAttack, 1f)
+        new WeightedAttack(BatAttacks.SwoopAttack, 1f)
     };
 
 
@@ -209,13 +217,12 @@ public class Bat : EnemyInterface
         return 2f * Vector3.Dot(v, u) * u - v;
     }
 
-    // Reflect a vector v across a plane given by its normal n (plane passes through origin).
-    // n must be non-zero. Result = reflection across the plane.
-    // public static Vector3 ReflectAcrossPlaneNormal(Vector3 v, Vector3 n) {
-    //     if (n.sqrMagnitude < 1e-12f) return v;
-    //     Vector3 nn = n.normalized;
-    //     return v - 2f * Vector3.Dot(v, nn) * nn;
-    // }
+    private static Vector3 QuadraticBezierCurvePoint(Vector3 p0, Vector3 p1, Vector3 p2, float t) {
+        float u = 1f - t;
+        return (u * u * p0) + 
+               (2f * u * t * p1) +
+               (t * t * p2);
+    }
 
     /*t is between [0, 1]*/
     private static Vector3 CubicBezierCurvePoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t) {
@@ -225,7 +232,14 @@ public class Bat : EnemyInterface
                (3f * u * t * t * p2) +
                (t * t * t * p3);
     }
-    private List<Vector3> calculatePath(Vector3 cur, Vector3 target, Vector3? _p1 = null, Vector3? _p2 = null) {
+
+    private List<Vector3> calculatePathQuad(Vector3 cur, Vector3 target, Vector3 p1) {
+        List<Vector3> targetPoints = new List<Vector3>();
+        for (int i = 1; i <= numPathPoint; i++) targetPoints.Add(QuadraticBezierCurvePoint(cur, p1, target, (i / (float)numPathPoint)));
+        return targetPoints;
+    }
+    
+    private List<Vector3> calculatePathCube(Vector3 cur, Vector3 target, Vector3? _p1 = null, Vector3? _p2 = null) {
         Vector3 dir = (target - cur);
         Vector3 normal = Vector3.Cross(dir, Vector3.up).normalized;
 
@@ -244,6 +258,7 @@ public class Bat : EnemyInterface
     }
 
     // Returns the movement speed based on the current state
+    // XXX this is oddly inefficient, make this a enter state call
     private float GetCurrentSpeed()
     {
         switch (currentState)
@@ -256,6 +271,8 @@ public class Bat : EnemyInterface
                 return peckReboundSpeed;
             case BatStates.PeckIncompleteRebound:
                 return peckReboundSpeed;
+            case BatStates.SwoopAttacking:
+                return swoopSpeed;
             default:
                 return moveSpeed;
         }
@@ -266,6 +283,7 @@ public class Bat : EnemyInterface
         if (player == null) return;
         playerTransform = player;
         isFluttering = true;
+        direction = (UnityEngine.Random.Range(0f, 1f) < 0.5) ? -1f : 1f;
         flutterAngleDeg = UnityEngine.Random.Range(0f, 360f);
         flutterJitterSeed = UnityEngine.Random.value * 100f;
         // optionally stop path-following
@@ -279,8 +297,9 @@ public class Bat : EnemyInterface
         if (!isFluttering || playerTransform == null) return;
 
         // Advance angle
-        flutterAngleDeg += flutterAngularSpeed * Time.deltaTime;
+        flutterAngleDeg += flutterAngularSpeed * direction * Time.deltaTime;
         if (flutterAngleDeg >= 360f) flutterAngleDeg -= 360f;
+        if (flutterAngleDeg <= 0f) flutterAngleDeg += 360f;
 
         // Smooth radial jitter
         float jitter = (Mathf.PerlinNoise(flutterJitterSeed, Time.time * 0.5f) - 0.5f) * 2f * flutterRadialJitter;
@@ -340,7 +359,7 @@ public class Bat : EnemyInterface
         Vector3 p1 = new Vector3(start.x, end.y, start.z);
         Vector3 p2 = (p1 + end) * 0.5f;
 
-        targetPath = calculatePath(start, end, p1, p2);
+        targetPath = calculatePathCube(start, end, p1, p2);
         
         currentPathIndex = 0;
         isMoving = true;
@@ -374,7 +393,10 @@ public class Bat : EnemyInterface
             end = reboundTarget;
         }
 
-        targetPath = calculatePath(start, end);
+        Vector3 p1 = new Vector3(start.x, end.y, start.z);
+        Vector3 p2 = (p1 + end) * 0.5f;
+        
+        targetPath = calculatePathCube(start, end);
 
         currentPathIndex = 0;
         isMoving = true;
@@ -383,27 +405,23 @@ public class Bat : EnemyInterface
     }
 
     public void SwoopAttack() {
-        isFluttering = false;
+        // isFluttering = false;
 
         Vector3 start = transform.position;
         Vector3 playerPos = playerTransform.position;
 
-        // Direction from bat to player (horizontal only)
+        // // Direction from bat to player (horizontal only)
         Vector3 swoopDir = (playerPos - start);
         swoopDir.y = 0f;
         swoopDir = swoopDir.normalized;
 
-        float swoopDistance = 5f; // How far past the player to swoop (tweak as needed)
+        float swoopDistance = 5f;
         Vector3 end = playerPos + swoopDir * swoopDistance;
-        end.y = playerPos.y; // Keep same height as player, or set as desired
+        end.y = playerPos.y;
 
-        // Control points for a smooth arc: one above, one below
-        Vector3 mid = (start + end) * 0.5f;
-        Vector3 up = Vector3.up * 2f; // Arc height (tweak as needed)
-        Vector3 p1 = mid + up;
-        Vector3 p2 = playerPos; // Pass through player
+        Vector3 p1 = 2 * playerPos - (start + end) / 2;
 
-        targetPath = calculatePath(start, end, p1, p2);
+        targetPath = calculatePathQuad(start, end, p1);
 
         currentPathIndex = 0;
         isMoving = true;
@@ -492,7 +510,7 @@ public class Bat : EnemyInterface
             /*Line to decided perch point*/
             Debug.DrawLine(p, transform.position, new Color(1f, 0f, 1f, 1f), 5f);
         
-            targetPath = calculatePath(transform.position, p);
+            targetPath = calculatePathCube(transform.position, p);
             currentPathIndex = 0;
             isMoving = targetPath.Count > 0;
             if (debug && targetPath.Count > 0) {
@@ -504,6 +522,16 @@ public class Bat : EnemyInterface
         }
 
         isMoving = true;
+    }
+
+    public void findWanderPath() {
+        //iterate until end spot is away from the player distance wise or line of sight is broken with the player
+
+        bool endCondition = false;
+
+        while (!endCondition) {
+            
+        }
     }
 
     public void UpdatePerching() {
@@ -521,7 +549,7 @@ public class Bat : EnemyInterface
     public void UpdateSwoop() {
         UpdateMoveSpot(false);
 
-
+        if (!isMoving) swoopComplete = true;
     }
 
     public void UpdatePeckRebound() {
@@ -581,5 +609,22 @@ public class Bat : EnemyInterface
         canAttack = false;
         yield return new WaitForSeconds(delay);
         canAttack = true;
+    }
+
+    public override void Hit(float damage, float? weight = null, Vector3? colPoint = null) {
+
+    }
+
+
+    /******************************/
+    /*    Collision Condition     */ 
+    /******************************/
+
+    public void OnTriggerEnter(Collider other) {
+        if (isAttacking && other.CompareTag("Player")) {
+            Health h = other.GetComponent<Health>();
+            if (h != null) h.TakeDamage(10f); // XXX eventually 
+            isAttacking = false;
+        }
     }
 }
