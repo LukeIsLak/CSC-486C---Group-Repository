@@ -7,10 +7,8 @@ public class TestApp : MonoBehaviour
     public GameEvent EnterLayout;
     public LayoutData layoutData;
 
-    void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
             // Transition from lobby to layout
             layoutData.depth            = 9;
             layoutData.maxWidth         = 7;
@@ -21,6 +19,11 @@ public class TestApp : MonoBehaviour
             layoutData.completedIndices.Add(0);
             layoutData.layerDistance    = 4;
             layoutData.encounterSep     = 4;
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
             EnterLayout.Raise();
         }
     }
