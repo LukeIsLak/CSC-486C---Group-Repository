@@ -38,9 +38,9 @@ public class ShootSpark : MonoBehaviour
 
         foreach (Collider hit in impactArea)
         {
-            Enemy enem = hit.GetComponent<Enemy>();
+            EnemyInterface enem = hit.GetComponent<EnemyInterface>();
             if (enem != null){
-                //enem.Hit(dmg);
+                enem.Hit(dmg);
                 //Luke hasn't pushed this yet!
             }
         }

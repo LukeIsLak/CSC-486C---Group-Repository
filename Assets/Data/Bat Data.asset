@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2fc6b6ccfe8c242a594dd9fadbdb5b, type: 3}
+  m_Name: Bat Data
+  m_EditorClassIdentifier: 
+  baseHealth: 0
+  baseMoveSpeed: 0
+  moveSpeed: 3
+  flutterMoveSpeed: 4
+  peckSpeed: 5
+  peckReboundSpeed: 10
+  swoopSpeed: 5
+  numPathPoint: 4
+  pointTolerance: 0.05
+  radialSteps: 1
+  angularSteps: 10
+  coneAngle: 45
+  maxDistance: 10
+  maxColliderAngle: 45
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  pearchYOffset: -0.5
+  normalWeight: 1
+  heightWeight: 1
+  upAngleWeight: 1
+  flutterRadius: 3
+  flutterAngularSpeed: 90
+  flutterRadialJitter: 0.5
+  verticalBobAmplitude: 0.4
+  verticalBobSpeed: 2
+  horizontalBobAmplitude: 0.4
+  horizontalBobSpeed: 2
+  flutterTurnSpeed: 5
+  flutterBaseHeight: 2
+  lateralSmoothing: 8
+  reboundHeight: 1
+  reboundIncompleteHeight: 1
+  minRebountHeight: 1
+  reboundDistance: 1
+  reboundIncompleteDistance: 1
+  playerSearchDistance: 5
+  minAttackAmount: 1
+  maxAttackAmount: 3
+  perchDuration: 2
+  steerSteps: 1
+  steerAngularSteps: 10
+  steerViewAngle: 45
+  maxSteerDistance: 10
+  steerDistanceWeight: 2
+  steerDirectionWeight: 1
+  steerLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  attackCooldown: 2

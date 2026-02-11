@@ -113,6 +113,7 @@ public class BatStateManager : MonoBehaviour
         foreach(var (toState, condition) in transitions) {
             if (condition(b)) {
                 if (exitStates.TryGetValue(currentState, out var exitFunc)) exitFunc(b);
+                EnterUniversal(b);
                 if (enterStates.TryGetValue(toState, out var enterFunc)) enterFunc(b);
                 
                 CheckExit(b);
@@ -173,7 +174,7 @@ public class BatStateManager : MonoBehaviour
 
     /* From Perched Transtions */
     public bool PerchedToFlutterCondition(Bat b) {
-        return b.canLeavePerch && Vector3.Distance(b.gameObject.transform.position, b.playerTransform.position) <= b.playerSearchDistance;
+        return b.canLeavePerch && Vector3.Distance(b.gameObject.transform.position, b.playerTransform.position) <= b.bd.playerSearchDistance;
     }
 
     /* From Flutter Transtions */
@@ -208,6 +209,10 @@ public class BatStateManager : MonoBehaviour
     /*   Enter State Functions    */
     /******************************/
 
+    public void EnterUniversal(Bat b) {
+        b.ChangeCurrentSpeed();
+    }
+
     public void EnterPerchingState(Bat b) {
         b.findPerchSpot();
     }
@@ -223,11 +228,11 @@ public class BatStateManager : MonoBehaviour
 
         b.anim.SetBool("IsPerched", true);
         
-        b.StartPerchDuration(b.perchDuration);
+        b.StartPerchDuration(b.bd.perchDuration);
     }
 
     public void EnterFlutterState(Bat b) {
-        b.StartAttackCooldown(b.attackCooldown);
+        b.StartAttackCooldown(b.bd.attackCooldown);
         b.StartFlutter(b.playerTransform);
     }
 
@@ -290,7 +295,7 @@ public class BatStateManager : MonoBehaviour
     /******************************/
 
     public void ExitPerchedState(Bat b) {
-        b.attackAmount = UnityEngine.Random.Range(b.minAttackAmount, b.maxAttackAmount);
+        b.attackAmount = UnityEngine.Random.Range(b.bd.minAttackAmount, b.bd.maxAttackAmount);
         b.isAttacking = false;
         b.isPerched = false;
 
