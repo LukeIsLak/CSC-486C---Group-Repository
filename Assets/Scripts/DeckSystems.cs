@@ -49,6 +49,7 @@ public class DeckSystems : MonoBehaviour
     public EnemyEffects enemyeffects;
 
     public GameEvent enemySpeedChange;
+
     
 
     // Start is called before the first frame update
@@ -216,6 +217,11 @@ public class DeckSystems : MonoBehaviour
         //stuff here to trigger card script
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
+
+        Cards currentCard = hand[currentHandIndex];
+        if (currentCard is Fireball || currentCard is Spark){
+            currentCard.Play(currentCard);
+        }
         
         Cards card = hand[currentHandIndex];
 

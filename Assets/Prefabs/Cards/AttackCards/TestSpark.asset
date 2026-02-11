@@ -9,11 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Spark
-  m_EditorClassIdentifier: Assembly-CSharp::AttackCards
-  name: spark
+  m_Script: {fileID: 11500000, guid: dffb24b8aa0b34af29363e3189d1674e, type: 3}
+  m_Name: TestSpark
+  m_EditorClassIdentifier: 
+  name: 
   image: {fileID: 0}
-  attackDamage: 5
-  element: electric
-  attackType: AOEProjectile
+  projspeed: 10
+  dmgradius: 1
+  aoeprojprefab: {fileID: 0}
+  dmg: 20
+  enemylayer:
+    serializedVersion: 2
+    m_Bits: 0

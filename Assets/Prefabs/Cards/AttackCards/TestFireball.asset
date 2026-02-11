@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d4be2e78a7b48cd9b05ebedd75309b, type: 3}
   m_Name: TestFireball
   m_EditorClassIdentifier: 
-  name: 
+  name: Fireball
   image: {fileID: 0}
   projspeed: 10
   dmgradius: 3
-  aoeprojprefab: {fileID: 0}
-  player: {fileID: 0}
+  aoeprojprefab: {fileID: 7573748999677751953, guid: 26c580f88a05c424bac381c95aba4b26, type: 3}
   dmg: 20
   enemylayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
