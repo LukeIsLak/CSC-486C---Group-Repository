@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BaseEnemyData : ScriptableObject
 {
-    // These are in Percents
-    public int baseHealth;
-
+    [Header("Base Stats - In % Compared to Player")]
+    public float baseHealth;
     public float baseMoveSpeed;
 }
