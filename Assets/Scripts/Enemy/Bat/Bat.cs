@@ -9,6 +9,7 @@ public class Bat : EnemyInterface
 {
     [Header("Bat Base Field")]
     public Animator anim;
+    public Rigidbody rb;
 
     [Header("Ceiling Location Possibilities")]
     public int radialSteps = 1;
@@ -19,6 +20,7 @@ public class Bat : EnemyInterface
     public LayerMask layerMask = ~0;
     public bool debug = true;
     public bool debugPoint = true;
+    public float pearchYOffset = -0.5f;
 
     [Header("Ceiling Position Weights")]
     public float normalWeight = 1f;
@@ -98,6 +100,9 @@ public class Bat : EnemyInterface
     public int maxAttackAmount = 3;
     public bool canAttack = false;
     public BatAttacks? nextAttack;
+    public bool shouldPerch = false;
+    public bool canLeavePerch = false;
+    public float perchDuration = 2f;
 
     [Header("Attack Timing")]
     public bool isAttacking = false;
@@ -510,7 +515,7 @@ public class Bat : EnemyInterface
             /*Line to decided perch point*/
             Debug.DrawLine(p, transform.position, new Color(1f, 0f, 1f, 1f), 5f);
         
-            targetPath = calculatePathCube(transform.position, p);
+            targetPath = calculatePathCube(transform.position, (p + new Vector3(0f, pearchYOffset, 0f)));
             currentPathIndex = 0;
             isMoving = targetPath.Count > 0;
             if (debug && targetPath.Count > 0) {
@@ -522,16 +527,6 @@ public class Bat : EnemyInterface
         }
 
         isMoving = true;
-    }
-
-    public void findWanderPath() {
-        //iterate until end spot is away from the player distance wise or line of sight is broken with the player
-
-        bool endCondition = false;
-
-        while (!endCondition) {
-            
-        }
     }
 
     public void UpdatePerching() {
@@ -604,12 +599,26 @@ public class Bat : EnemyInterface
         StartCoroutine(AttackCooldownCoroutine(delay));
     }
 
+    public void StartPerchDuration(float delay)
+    {
+        StartCoroutine(PerchDuration(delay));
+    }
+
+    private IEnumerator PerchDuration(float delay)
+    {
+        canLeavePerch = false;
+        yield return new WaitForSeconds(delay);
+        canLeavePerch = true;
+    }
+
     private IEnumerator AttackCooldownCoroutine(float delay)
     {
         canAttack = false;
         yield return new WaitForSeconds(delay);
         canAttack = true;
+        if (attackAmount <= 0) shouldPerch = true;
     }
+
 
     public override void Hit(float damage, float? weight = null, Vector3? colPoint = null) {
 

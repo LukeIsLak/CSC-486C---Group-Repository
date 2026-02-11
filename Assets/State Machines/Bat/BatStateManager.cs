@@ -64,11 +64,16 @@ public class BatStateManager : MonoBehaviour
         AddExitState(BatStates.Perched, ExitPerchedState);
     
         /*Flutter*/
+
+        //XXX maybe make a function were if the player goes out of range to wander away and then
+
         AddTransition(BatStates.Flutter, BatStates.PeckAttacking, FlutterToPeckCondition);
         AddTransition(BatStates.Flutter, BatStates.SwoopAttacking, FlutterToSwoopCondition);
+        AddTransition(BatStates.Flutter, BatStates.Perching, FlutterToPerching);
 
         AddEnterState(BatStates.Flutter, EnterFlutterState);
         AddWhileState(BatStates.Flutter, WhileFlutterState);
+        AddExitState(BatStates.Flutter, ExitFlutterState);
 
         /*Peck*/
         AddTransition(BatStates.PeckAttacking, BatStates.PeckCompleteRebound, PeckToPeckRebound);
@@ -168,16 +173,20 @@ public class BatStateManager : MonoBehaviour
 
     /* From Perched Transtions */
     public bool PerchedToFlutterCondition(Bat b) {
-        return Vector3.Distance(b.gameObject.transform.position, b.playerTransform.position) <= b.playerSearchDistance;
+        return b.canLeavePerch && Vector3.Distance(b.gameObject.transform.position, b.playerTransform.position) <= b.playerSearchDistance;
     }
 
     /* From Flutter Transtions */
     public bool FlutterToPeckCondition(Bat b) {
-        return b.canAttack && b.nextAttack != null && b.nextAttack.Value == BatAttacks.PeckAttack;
+        return b.canAttack && !b.shouldPerch && b.nextAttack != null && b.nextAttack.Value == BatAttacks.PeckAttack;
     }
 
     public bool FlutterToSwoopCondition(Bat b) {
-        return b.canAttack && b.nextAttack != null && b.nextAttack.Value == BatAttacks.SwoopAttack;
+        return b.canAttack && !b.shouldPerch && b.nextAttack != null && b.nextAttack.Value == BatAttacks.SwoopAttack;
+    }
+
+    public bool FlutterToPerching(Bat b) {
+        return b.shouldPerch;
     }
 
     /* From Peck Transtions */
@@ -209,8 +218,12 @@ public class BatStateManager : MonoBehaviour
         b.isFluttering = false;
         b.isPecking = false;
         b.isPeckRebounding = false;
-        print("test on");
+
+        b.rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
         b.anim.SetBool("IsPerched", true);
+        
+        b.StartPerchDuration(b.perchDuration);
     }
 
     public void EnterFlutterState(Bat b) {
@@ -280,8 +293,15 @@ public class BatStateManager : MonoBehaviour
         b.attackAmount = UnityEngine.Random.Range(b.minAttackAmount, b.maxAttackAmount);
         b.isAttacking = false;
         b.isPerched = false;
-        print("test");
+
+        b.rb.constraints &= ~RigidbodyConstraints.FreezeRotationX | ~RigidbodyConstraints.FreezeRotationZ;
+        
         b.anim.SetBool("IsPerched", false);
+        b.canLeavePerch = false;
+    }
+
+    public void ExitFlutterState(Bat b) {
+        b.shouldPerch = false;
     }
 
     public void ExitPeckReboundState(Bat b) {
