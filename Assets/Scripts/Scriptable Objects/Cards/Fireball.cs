@@ -19,16 +19,6 @@ public class Fireball : Cards
 
 
     public override IEnumerator Play(Cards card){
-    if (card is Fireball attackCard)
-    {
-        useAttackCard(attackCard);
-        Debug.Log("Used card");
-        yield return new WaitForSeconds(0.5f);
-    }
-
-    }
-
-    void Start(){
         player = GameObject.FindWithTag("Player");
         if (card is Fireball attackCard)
         {
@@ -38,7 +28,6 @@ public class Fireball : Cards
         yield break;
 
     }
-
 
     public void useAttackCard(Fireball card)
     {
