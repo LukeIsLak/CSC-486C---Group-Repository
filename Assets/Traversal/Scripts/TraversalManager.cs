@@ -16,6 +16,7 @@ public class TraversalManager : MonoBehaviour
 
     [Header("Events")]
     public GameEvent EnterEncounter;
+    public GameEvent ExitToMenu;
 
     private TraversableLayout traversableLayout;
     private bool respondToInputs = true;
@@ -51,6 +52,10 @@ public class TraversalManager : MonoBehaviour
             respondToInputs = false;
             dungeonData.dungeonSeed = (int)System.DateTime.Now.Ticks;
             EnterEncounter.Raise();
+        }
+        if (respondToInputs && Input.GetKeyDown(KeyCode.R))
+        {
+            ExitToMenu.Raise();
         }
 
         if (Input.GetMouseButton(0))
