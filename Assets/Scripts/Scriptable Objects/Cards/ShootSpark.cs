@@ -40,7 +40,7 @@ public class ShootSpark : MonoBehaviour
         {
             Enemy enem = hit.GetComponent<Enemy>();
             if (enem != null){
-                //enem.OnHit(dmg);
+                //enem.Hit(dmg);
                 //Luke hasn't pushed this yet!
             }
         }
