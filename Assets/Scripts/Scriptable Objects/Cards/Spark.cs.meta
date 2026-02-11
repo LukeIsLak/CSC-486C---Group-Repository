@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 72d4be2e78a7b48cd9b05ebedd75309b
+guid: dffb24b8aa0b34af29363e3189d1674e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
   - image: {instanceID: 0}
-  - aoeprojprefab: {instanceID: 0}
+  - aoeprojprefab: {fileID: 3828313729109400056, guid: e8f309518f62d4e43b9025b05a60b12a, type: 3}
   - player: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
