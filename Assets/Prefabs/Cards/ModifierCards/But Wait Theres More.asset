@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ca408856da3604db9b3361a281178a, type: 3}
   m_Name: But Wait Theres More
   m_EditorClassIdentifier: 
-  name: 
+  name: But Wait, There's More
   image: {fileID: 0}
   value: 2

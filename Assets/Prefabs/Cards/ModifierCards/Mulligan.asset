@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbee20ff47a419744a60f28c2ecc36c5, type: 3}
   m_Name: Mulligan
   m_EditorClassIdentifier: 
-  name: 
+  name: Mulligan
   image: {fileID: 0}
   value: 2

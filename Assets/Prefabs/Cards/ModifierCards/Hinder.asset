@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a5b4a63bd82654e8e4230fcee3d1f4, type: 3}
   m_Name: Hinder
   m_EditorClassIdentifier: 
-  name: 
+  name: Hinder
   image: {fileID: 0}
   effectTime: 10
   enemyeffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffb24b8aa0b34af29363e3189d1674e, type: 3}
   m_Name: TestSpark
   m_EditorClassIdentifier: 
-  name: 
+  name: Spark
   image: {fileID: 0}
   projspeed: 10
   dmgradius: 1

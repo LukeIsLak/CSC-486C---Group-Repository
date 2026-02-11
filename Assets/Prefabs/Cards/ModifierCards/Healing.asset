@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f1939f9dd5dc204a9fd4a282a3ed410, type: 3}
   m_Name: Healing
   m_EditorClassIdentifier: 
-  name: 
+  name: Healing
   image: {fileID: 0}
   percentage: 10

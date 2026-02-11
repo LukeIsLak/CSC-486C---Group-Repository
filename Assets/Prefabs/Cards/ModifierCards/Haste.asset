@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2d4117b6c7e1e4e8aa369e11f3c12d, type: 3}
   m_Name: Haste
   m_EditorClassIdentifier: 
-  name: 
+  name: Haste
   image: {fileID: 0}
   buffTime: 10

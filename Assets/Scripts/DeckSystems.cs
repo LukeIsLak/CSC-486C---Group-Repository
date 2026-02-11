@@ -36,7 +36,7 @@ public class DeckSystems : MonoBehaviour
     public int currentDeckSize;
 
     // the maximum amount of cards a player can have in a deck
-    const int MAXDECKSIZE = 15;
+    const int MAXDECKSIZE = 30;
 
     //store any card that has been used
     public List<CardInstance> discard = new List<CardInstance>();
@@ -52,7 +52,7 @@ public class DeckSystems : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        loadDeck(inventory.tempDeck, inventory.tempDeck.Length);
+        loadDeck(inventory.playerDeck);
     }
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
@@ -218,7 +218,7 @@ public class DeckSystems : MonoBehaviour
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
 
         //call needed card function
-        StartCoroutine(hand[currentHandIndex].Play(hand[currentHandIndex]));
+        StartCoroutine(hand[currentHandIndex].cardData.Play(hand[currentHandIndex].cardData));
 
         // put card in discard and remove from hand
 
