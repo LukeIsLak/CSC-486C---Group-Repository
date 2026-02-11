@@ -12,35 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2fc6b6ccfe8c242a594dd9fadbdb5b, type: 3}
   m_Name: Bat Data
   m_EditorClassIdentifier: 
-  baseHealth: 0
-  baseMoveSpeed: 0
-  moveSpeed: 3
-  flutterMoveSpeed: 4
-  peckSpeed: 5
-  peckReboundSpeed: 10
-  swoopSpeed: 5
-  numPathPoint: 4
+  baseHealth: 0.2
+  baseMoveSpeed: 1.75
+  moveSpeed: 1
+  flutterMoveSpeed: 1
+  peckSpeed: 1
+  peckReboundSpeed: 1
+  swoopSpeed: 1
+  numPathPoint: 15
   pointTolerance: 0.05
-  radialSteps: 1
-  angularSteps: 10
-  coneAngle: 45
+  radialSteps: 2
+  angularSteps: 20
+  coneAngle: 10
   maxDistance: 10
-  maxColliderAngle: 45
+  maxColliderAngle: 37
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  pearchYOffset: -0.5
+  pearchYOffset: -0.25
   normalWeight: 1
   heightWeight: 1
   upAngleWeight: 1
   flutterRadius: 3
-  flutterAngularSpeed: 90
+  flutterAngularSpeed: 15
   flutterRadialJitter: 0.5
   verticalBobAmplitude: 0.4
   verticalBobSpeed: 2
-  horizontalBobAmplitude: 0.4
+  horizontalBobAmplitude: 0
   horizontalBobSpeed: 2
-  flutterTurnSpeed: 5
+  flutterTurnSpeed: 8.75
   flutterBaseHeight: 2
   lateralSmoothing: 8
   reboundHeight: 1
@@ -50,7 +50,7 @@ MonoBehaviour:
   reboundIncompleteDistance: 1
   playerSearchDistance: 5
   minAttackAmount: 1
-  maxAttackAmount: 3
+  maxAttackAmount: 5
   perchDuration: 2
   steerSteps: 1
   steerAngularSteps: 10

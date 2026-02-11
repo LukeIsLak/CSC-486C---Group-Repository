@@ -12,6 +12,7 @@ public class Bat : EnemyInterface
     public Rigidbody rb;
     public BatBaseData bd;
     public Transform playerTransform;
+    public BatStateManager bsm;
 
     [Header("Debug Fields")]
     public bool debug = true;
@@ -52,6 +53,30 @@ public class Bat : EnemyInterface
     [SerializeField] private Vector3 prevLateralOffset = Vector3.zero;
     // [SerializeField] private float attackCooldownTimer = 0f;
     public BatStates currentState;
+
+    /****************************************************/
+    /*          Beginning Of Instance Methods           */
+    /****************************************************/
+
+    // TODO : LK - This is fragile and volatile, eventually fix
+    public override void initialize() {
+        curHealth = bd.baseHealth * playerData.maxHealth;
+        moveSpeed = bd.baseMoveSpeed * playerData.moveSpeed;
+
+        BatStateManager env_bsm = FindObjectOfType<BatStateManager>();
+        bsm = env_bsm;
+        bsm.bats.Add(this);
+    }
+
+    public override void KillEnemy() {
+        bsm.bats.Remove(this);
+        Destroy(this.gameObject);
+    }
+
+
+    /****************************************************/
+    /*             End Of Instance Methods              */
+    /****************************************************/
 
 
 
@@ -218,22 +243,22 @@ public class Bat : EnemyInterface
         switch (currentState)
         {
             case BatStates.Flutter:
-                moveSpeed = bd.flutterMoveSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.flutterMoveSpeed * playerData.moveSpeed * bd.moveSpeed;
                 return;
             case BatStates.PeckAttacking:
-                moveSpeed = bd.peckSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.peckSpeed * playerData.moveSpeed * bd.moveSpeed;
                 return;
             case BatStates.PeckCompleteRebound:
-                moveSpeed = bd.peckReboundSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.peckReboundSpeed * playerData.moveSpeed * bd.moveSpeed;
                 return;
             case BatStates.PeckIncompleteRebound:
-                moveSpeed = bd.peckReboundSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.peckReboundSpeed * playerData.moveSpeed * bd.moveSpeed;
                 return;
             case BatStates.SwoopAttacking:
-                moveSpeed = bd.swoopSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.swoopSpeed * playerData.moveSpeed * bd.moveSpeed;
                 return;
             default:
-                moveSpeed = bd.moveSpeed * playerData.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.moveSpeed * playerData.moveSpeed;
                 return;
         }
     }

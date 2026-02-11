@@ -445,6 +445,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6200d2f1c446f9f4c8ad609c567b6862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1211092767 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 6990128973608440802, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+  m_PrefabInstance: {fileID: 1521455537789470213}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1333639635
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,9 +481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bats:
   - {fileID: 1157991987}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!4 &1333639637
 Transform:
   m_ObjectHideFlags: 0
@@ -757,10 +759,26 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1079460608}
+    - target: {fileID: 597559182054126838, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: rotatorLerpSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 864461203881756215, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
       propertyPath: m_Name
       value: Bat
       objectReference: {fileID: 0}
+    - target: {fileID: 5098527676356961825, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: bd
+      value: 
+      objectReference: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
+    - target: {fileID: 5098527676356961825, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1211092767}
+    - target: {fileID: 5098527676356961825, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
     - target: {fileID: 5098527676356961825, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
       propertyPath: playerTransform
       value: 
