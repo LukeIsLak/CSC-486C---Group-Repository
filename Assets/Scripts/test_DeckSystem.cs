@@ -9,28 +9,32 @@ public class test_deckSystem : MonoBehaviour
     //note all of these test are manal and can be viewed in the decksystem test scene
     public DeckSystems deckSystem;
     public TMP_Text output;
-    public GameObject[] testDeck;
+    public Cards[] testDeck;
+
+    //List of all cards set in the inspector
+    public List<Cards> allCards;
 
     // set up mock cards and deck to be used for testing
     void Start()
     {
-        GameObject one = new GameObject("Card1");
-        GameObject two = new GameObject("Card2");
-        GameObject three = new GameObject("Card3");
-        GameObject four = new GameObject("Card4");
-        GameObject five = new GameObject("Card5");
-        GameObject six = new GameObject("Card6");
-        GameObject seven = new GameObject("Card7");
-        GameObject eight = new GameObject("Card8");
-        GameObject nine = new GameObject("Card9");
-        GameObject ten = new GameObject("Card10");
-        GameObject eleven = new GameObject("Card11");
-        GameObject twelve = new GameObject("Card12");
-        GameObject thirteen = new GameObject("Card13");
-        GameObject fourteen = new GameObject("Card14");
-        GameObject fifteen = new GameObject("Card15");
+        //Create a list of a random cards as the starting deck
+        Cards one = allCards[Random.Range(0,allCards.Count)];
+        Cards two = allCards[Random.Range(0,allCards.Count)];
+        Cards three = allCards[Random.Range(0,allCards.Count)];
+        Cards four = allCards[Random.Range(0,allCards.Count)];
+        Cards five = allCards[Random.Range(0,allCards.Count)];
+        Cards six = allCards[Random.Range(0,allCards.Count)];
+        Cards seven = allCards[Random.Range(0,allCards.Count)];
+        Cards eight = allCards[Random.Range(0,allCards.Count)];
+        Cards nine = allCards[Random.Range(0,allCards.Count)];
+        Cards ten = allCards[Random.Range(0,allCards.Count)];
+        Cards eleven = allCards[Random.Range(0,allCards.Count)];
+        Cards twelve = allCards[Random.Range(0,allCards.Count)];
+        Cards thirteen = allCards[Random.Range(0,allCards.Count)];
+        Cards fourteen = allCards[Random.Range(0,allCards.Count)];
+        Cards fifteen = allCards[Random.Range(0,allCards.Count)];
 
-        testDeck = new GameObject[] { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen };
+        testDeck = new Cards[] { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen };
     }
 
     /// <summary>
@@ -45,7 +49,7 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -77,7 +81,7 @@ public class test_deckSystem : MonoBehaviour
             if (i < 5) {
                 hand += deckSystem.hand[i].name + ", ";
             } else {
-                deck += deckSystem.drawCard(0).name + ", "; // note this does change what the hand is in the system and remove objects from the deck
+                deck += deckSystem.deck.Dequeue().name + ", "; // note this removes objects from the deck
             }
         }
 
@@ -96,7 +100,7 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -124,7 +128,7 @@ public class test_deckSystem : MonoBehaviour
         string hand = "";
         string deck = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -153,7 +157,7 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {
@@ -188,15 +192,10 @@ public class test_deckSystem : MonoBehaviour
     IEnumerator Testredrawco() {
         // load deck in to the system then use all cards in players hand
         deckSystem.loadDeck(testDeck, 15);
-        deckSystem.currentHandIndex = 0;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 1;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 2;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 3;
         deckSystem.useCard();
-        deckSystem.currentHandIndex = 4;
         deckSystem.useCard();
 
         yield return new WaitForSeconds(1);
@@ -206,7 +205,7 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++){
@@ -243,15 +242,10 @@ public class test_deckSystem : MonoBehaviour
         deckSystem.loadDeck(testDeck, 15);
         // use all cards in the player hand 3 times to empty out the deck
         for (int i = 0; i < 3; i++) {
-            deckSystem.currentHandIndex = 0;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 1;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 2;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 3;
             deckSystem.useCard();
-            deckSystem.currentHandIndex = 4;
             deckSystem.useCard();
             yield return new WaitForSeconds(1);
         }
@@ -261,7 +255,7 @@ public class test_deckSystem : MonoBehaviour
         string deck = "";
         string discard = "";
         //get deck back from system
-        GameObject[] resultArray = deckSystem.storeDeck();
+        Cards[] resultArray = deckSystem.storeDeck();
 
         // pull information from deck and prep to be outputted
         for (int i = 0; i < resultArray.Length; i++) {

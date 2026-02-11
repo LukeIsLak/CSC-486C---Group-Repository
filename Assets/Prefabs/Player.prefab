@@ -516,9 +516,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  currentHandSize: 5
   currentHandIndex: 0
-  deckSize: 30
+  deckSize: 15
   currentDeckSize: 0
   discard: []
 --- !u!1 &7545902890681713120

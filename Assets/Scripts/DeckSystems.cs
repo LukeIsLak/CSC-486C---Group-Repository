@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// idea of this system being its created at the begining of the game and stays present through-out all scenes
+using Random=UnityEngine.Random;
+// idea of this system being its created at the begining of a encounter and stays present throughout
 public class DeckSystems : MonoBehaviour
 {
     // holds GameObject reference/information of what cards are currently in the players hand
     // will be updated by drawcard()
-    public List<GameObject> hand = new();
-    //let the system know how many cards are currently in a player hand
-    public int currentHandSize = 0;
+    public List<Cards> hand = new();
     
     // signifys the card the player currently has selected
     public int currentHandIndex = 0;
@@ -28,7 +27,7 @@ public class DeckSystems : MonoBehaviour
     const int EMPTYHANDSIZE = 0;
 
     // The queue functions as the deck, with dequeue being equivelent to drawing a card, enqueue would be the same as putting a card back in to the deck at the bottom
-    public Queue<GameObject> deck = new Queue<GameObject>();
+    public Queue<Cards> deck = new Queue<Cards>();
 
     // used out of combat (total deck size)
     public int deckSize;
@@ -40,27 +39,32 @@ public class DeckSystems : MonoBehaviour
     const int MAXDECKSIZE = 15;
 
     //store any card that has been used
-    public List<GameObject> discard = new List<GameObject>();
+    public List<Cards> discard = new List<Cards>();
 
     public event Action OnHandChanged;
 
     private void NotifyHandChanged() => OnHandChanged?.Invoke();
 
+    public GameObject inventoryContainer;
+    PlayerInventory inventory;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-
+        inventory = inventoryContainer.GetComponent<PlayerInventory>();
+        loadDeck(inventory.tempDeck, inventory.tempDeck.Length);
     }
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
     void Update()
     {
         // might want to put a delay on this
-        if (currentHandSize == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
+        if (hand.Count == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
             for (int i = 0; i < MAXHANDSIZE; i++)
             {
                 if (currentDeckSize > 0) { // in case a full hand isnt avalible
-                    drawCard(i);
+                    drawCard();
                 }
             }
         }
@@ -71,8 +75,7 @@ public class DeckSystems : MonoBehaviour
     /// ASSUMPTION: when a card is colected the check for deck size happens, this function is for adding a used card back in to the deck
     /// </summary>
     /// <param name="card"></param>
-    public void addCardToDeck(GameObject card)
-    {
+    public void addCardToDeck(Cards card) {
         // add card to deck
         deck.Enqueue(card);
         currentDeckSize++;
@@ -83,33 +86,32 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     /// <param name="handslot"></param>
     /// <returns> null if handslot is invalid (less than 0 or greater than 5) or the card draw (GameObject) </returns>
-    public GameObject drawCard(int handslot)
+    public Cards drawCard()
     {
         if (deck.Count == 0) return null;
 
         if(hand.Count > MAXHANDSIZE) return null;
         // remove first card from deck
-        GameObject card = deck.Dequeue();
+        Cards card = deck.Dequeue();
 
         //// check handslot is valid
         //if (handslot < 0 || handslot > 4) { 
         //    Debug.Log("error wrong value used on drawCard, value should be between 0-4");
         //    return null;
         //}
-        //hand[handslot] = card;
+
         currentDeckSize--;
-        currentHandSize++;
         hand.Add(card);
         // return the draw card for use
         return card;
     }
 
     /// <summary>
-    /// will suffle the player hand but will exclude any card assigned to the player hand, insperation: https://en.wikipedia.org/wiki/Fisher–Yates_shuffle
+    /// will suffle the player hand but will exclude any card assigned to the player hand, insperation: https://en.wikipedia.org/wiki/Fisherï¿½Yates_shuffle
     /// </summary>
     public void shuffleExcHand() {
         //temporary list to aid in suffeling (abbility to pull specific indexes) 
-        List<GameObject> sortingList = new List<GameObject>();
+        List<Cards> sortingList = new List<Cards>();
         int listSize = currentDeckSize;
         currentDeckSize = 0;
 
@@ -140,17 +142,17 @@ public class DeckSystems : MonoBehaviour
         addCardToDeck(hand[HANDSLOT5INDEX]);
 
         //hand now empty
-        currentHandSize = 0;
+        hand.Clear();
 
         //shuffle the deck now it has the players hand in it
         shuffleExcHand();
 
         //redraw the hand
-        drawCard(HANDSLOT1INDEX);
-        drawCard(HANDSLOT2INDEX);
-        drawCard(HANDSLOT3INDEX);
-        drawCard(HANDSLOT4INDEX);
-        drawCard(HANDSLOT5INDEX);
+        drawCard();
+        drawCard();
+        drawCard();
+        drawCard();
+        drawCard();
     }
 
     /// <summary>
@@ -159,14 +161,14 @@ public class DeckSystems : MonoBehaviour
     /// <param name="passedDeck"></param>
     /// <param name="size"></param>
     /// <returns> will return true if sucsesful </returns>
-    public bool loadDeck(GameObject[] passedDeck, int size) {
+    public bool loadDeck(Cards[] passedDeck, int size) {
         //make sure the deck and discard is empty
+        hand.Clear();
         deck.Clear();
         discard.Clear();
 
         //make sure sizes are reset before loading deck
         deckSize = 0;
-        currentHandSize = 0;
         currentDeckSize = 0;
 
         //set the size of loaded deck
@@ -175,8 +177,7 @@ public class DeckSystems : MonoBehaviour
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
             if (i < 5) {
-                hand[i] = passedDeck[i];
-                currentHandSize++;
+                hand.Add(passedDeck[i]);
             } else {
                 addCardToDeck(passedDeck[i]);
             }
@@ -189,13 +190,13 @@ public class DeckSystems : MonoBehaviour
     /// takes the current deck state and loads it in to an array for storage (think exiting the game)
     /// </summary>
     /// <returns> an array with the first five slot representing the hand and the next ten representing the deck </returns>
-    public GameObject[] storeDeck() {
+    public Cards[] storeDeck() {
         // array that will be used to send deck information out of the system
-        GameObject[] returnArray = new GameObject[currentDeckSize + currentHandSize];
+        Cards[] returnArray = new Cards[currentDeckSize + hand.Count];
 
         // loop through hand first then move on to the deck
-        for (int i = 0; i < (currentDeckSize + currentHandSize); i++) { 
-            if (i < 5) {
+        for (int i = 0; i < (currentDeckSize + hand.Count); i++) { 
+            if (i < hand.Count) {
                 returnArray[i] = hand[i];
                 
             } else {
@@ -204,7 +205,6 @@ public class DeckSystems : MonoBehaviour
         }
 
         currentDeckSize = 0;
-        currentHandSize = 0;
         return returnArray;
     }
 
@@ -222,6 +222,98 @@ public class DeckSystems : MonoBehaviour
         
         if(hand.Count == 0 ) currentHandIndex = 0;
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
+    }
+
+    /// <summary>
+    /// Assumes that the discard pil is checked before being called
+    /// takes an amount of cards from discard pile (randomly) and puts them in to the players deck, player deck will be shuffled after
+    /// </summary>
+    /// <param name="amount"></param>
+    public void drawFromDiscard(int amount) {
+        int temp;
+        int discardSize = discard.Count;
+        if (amount > discardSize) {
+            temp = discardSize;
+        } else {
+            temp = amount;
+        }
+
+        int index = 0;
+        
+        for (int i = 0; i < temp; i++) {
+            index = Random.Range(0, discardSize);
+            addCardToDeck(discard[index]);
+            discard.RemoveAt(index);
+            discardSize--;
+        }
+
+        shuffleExcHand();
+    }
+
+    /// <summary>
+    /// assumes a check that the deck has enough cards for this has happend and that the number is 5 or under
+    /// will swap rwo cards in playes hand with two random cards in their deck
+    /// </summary>
+    /// <param name="amount"></param>
+    public void swapcards(int amount) {
+        List<int> indexsHand = new List<int>();
+        List<int> indexsDeck = new List<int>();
+        List<int> avalibleHandSlots = new List<int>();
+        List<int> avalibleDeckSlots = new List<int>();
+        List<Cards> deckList = new List<Cards>();
+
+        // get a list of numbers corisponding to card slots 
+        for (int i = 0; i < hand.Count; i++) {
+            avalibleHandSlots.Add(i);
+        }
+        for (int i = 0; i < currentDeckSize; i++){
+            avalibleDeckSlots.Add(i);
+        }
+
+        // pick handslots randomly to swap cards with
+        int temp;
+        for (int i = 0; i < amount; i++) {
+            temp = Random.Range(0, avalibleHandSlots.Count);
+            indexsHand.Add(avalibleHandSlots[temp]);
+            avalibleHandSlots.RemoveAt(temp);
+
+            temp = Random.Range(0, avalibleDeckSlots.Count);
+            indexsDeck.Add(avalibleDeckSlots[temp]);
+            avalibleDeckSlots.RemoveAt(temp);
+        }
+
+        // pick random cards in deck to swap
+        for (int i = 0; i < currentDeckSize; i++){
+            deckList.Add(deck.Dequeue());
+        }
+        //clear up removing entire deck
+        currentDeckSize = 0;
+
+        Cards swapper;
+        for (int i = 0; i < amount; i++) {
+            swapper = hand[indexsHand[i]];
+            hand[indexsHand[i]] = deckList[indexsDeck[i]];
+            deckList[indexsDeck[i]] = swapper;
+        }
+
+        while (deckList.Count > 0){
+            addCardToDeck(deckList[0]);
+            deckList.RemoveAt(0);
+        }
+    }
+
+    public void cardHeal(int percentage){
+        //tbd
+    }
+
+    IEnumerator playerSpeedUp(){
+        //tbd
+        yield return new WaitForSeconds(1);
+    }
+
+    IEnumerator enemySpeedDown(){
+        //tbd
+        yield return new WaitForSeconds(1);
     }
 
     private void ChangeHandIndex(int direction)
@@ -258,5 +350,4 @@ public class DeckSystems : MonoBehaviour
         Debug.Log("Select: " + currentHandIndex);
 
     }
-    //to add tests 
 }
