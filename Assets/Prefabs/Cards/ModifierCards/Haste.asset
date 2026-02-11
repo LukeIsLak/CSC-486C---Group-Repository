@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fc4980abacb4dd281e1db8f737b671, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b2d4117b6c7e1e4e8aa369e11f3c12d, type: 3}
   m_Name: Haste
   m_EditorClassIdentifier: 
-  name: haste
+  name: 
   image: {fileID: 0}
-  effect: playerspeed
-  value: 10
+  buffTime: 10

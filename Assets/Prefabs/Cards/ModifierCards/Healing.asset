@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fc4980abacb4dd281e1db8f737b671, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f1939f9dd5dc204a9fd4a282a3ed410, type: 3}
   m_Name: Healing
   m_EditorClassIdentifier: 
-  name: healing
+  name: 
   image: {fileID: 0}
-  effect: heal
-  value: 10
+  percentage: 10

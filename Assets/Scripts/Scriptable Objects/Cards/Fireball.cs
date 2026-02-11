@@ -18,11 +18,12 @@ public class Fireball : Cards
     [SerializeField] private LayerMask enemylayer;
 
 
-    public override void Play(Cards card){
+    public override IEnumerator Play(Cards card){
     if (card is Fireball attackCard)
     {
         useAttackCard(attackCard);
         Debug.Log("Used card");
+        yield return new WaitForSeconds(0.5f);
     }
 
     }

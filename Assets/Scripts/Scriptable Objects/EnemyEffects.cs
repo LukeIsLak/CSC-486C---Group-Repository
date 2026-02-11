@@ -9,7 +9,7 @@ public class EnemyEffects : ScriptableObject
     const float ENEMYSPEEDNORMAL = 1f;
     
     //vars important to enemys
-    float EnemySpeedModifier = ENEMYSPEEDNORMAL;
+    public float EnemySpeedModifier = ENEMYSPEEDNORMAL;
 
     //called by decksystem to modify all enemys speed
     public void changeEnemySpeed(float value) {
