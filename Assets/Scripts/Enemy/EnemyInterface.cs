@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class EnemyInterface : MonoBehaviour
 {
+
+    [Header("Enemy Interface Variables")]
     public CharacterData playerData;
     public BaseEnemyData enemyData;
-
-
     protected float curHealth;
-    // protected double moveSpeed;
+    protected float moveSpeed;
 
     public void Awake() {
-
+        initialize();
     }
 
-    // public int getHealth() {
-    //     return health;
-    // }
+    public virtual void initialize() {
+        curHealth = enemyData.baseHealth * playerData.maxHealth;
+        moveSpeed = enemyData.baseMoveSpeed * playerData.moveSpeed;
+    }
 
-    public void KillEnemy() {
+    public virtual void KillEnemy() {
         Destroy(this.gameObject);
     }
 

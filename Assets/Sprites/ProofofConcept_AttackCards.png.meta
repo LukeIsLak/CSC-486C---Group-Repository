@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 417a6ca648652ac468c075336a29fa35
+guid: ceef31a104165ba419a575d05fbad1c9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -113,19 +113,19 @@ TextureImporter:
       name: ProofofConcept_AttackCards_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 12
-        width: 948
-        height: 1301
+        x: 4
+        y: 13
+        width: 962
+        height: 1302
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b0e6af3459ae524d94625cf2706b5ce
-      internalID: 2046072749
+      spriteID: 7073f89628b86cd46b72cadc04cc58a8
+      internalID: 328199383
       vertices: []
       indices: 
       edges: []
@@ -134,19 +134,19 @@ TextureImporter:
       name: ProofofConcept_AttackCards_1
       rect:
         serializedVersion: 2
-        x: 1076
-        y: 12
-        width: 948
-        height: 1301
+        x: 1069
+        y: 13
+        width: 962
+        height: 1302
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 685b1ea9e71636d4f81ceae0f8e0c04c
-      internalID: 1348591228
+      spriteID: d34fd292d1f1b8e4596dfc760ead1dda
+      internalID: -1298059059
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e4b043139b91e1e4c805ece0114e99fc
+    spriteID: 865493a67f32df448bc40ca91ddf3109
     internalID: 0
     vertices: []
     indices: 
@@ -162,8 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ProofofConcept_AttackCards_0: 2046072749
-      ProofofConcept_AttackCards_1: 1348591228
+      ProofofConcept_AttackCards_0: 328199383
+      ProofofConcept_AttackCards_1: -1298059059
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

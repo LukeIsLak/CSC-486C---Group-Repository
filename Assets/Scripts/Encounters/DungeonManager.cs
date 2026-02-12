@@ -35,7 +35,7 @@ public class DungeonManager : MonoBehaviour
         lg.DoubleL              = DoubleL;
         lg.Triple               = Triple;
         lg.Quad                 = Quad;
-        lg.roomScale            = 6;
+        lg.roomScale            = 6f*2.5f;
 
         /* Poll info from persistent data */
         lg.recentPoolSize       = dungeonData.dungeonPoolSize;

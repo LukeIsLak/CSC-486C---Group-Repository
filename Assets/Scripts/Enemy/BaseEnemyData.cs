@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName="Data/BaseEnemyData")]
 public class BaseEnemyData : ScriptableObject
 {
-    // These are in Percents
-    public int baseHealth;
-
+    [Header("Base Stats - In % Compared to Player")]
+    public float baseHealth;
     public float baseMoveSpeed;
 }

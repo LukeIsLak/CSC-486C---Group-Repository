@@ -6,6 +6,7 @@ public class ShootSpark : MonoBehaviour
 {
     [SerializeField] private float projspeed = 10f;
     [SerializeField] private float dmgradius = 1f;
+    [SerializeField] private float ttl = 5f;
 
 
     private float dmg;
@@ -18,6 +19,10 @@ public class ShootSpark : MonoBehaviour
         //Needs a direction and damage amount
         dir = direct.normalized;
         dmg = card.dmg;
+    }
+
+    void Start(){
+        StartCoroutine(timeToLive(ttl));
     }
 
     void Update(){
@@ -38,13 +43,18 @@ public class ShootSpark : MonoBehaviour
 
         foreach (Collider hit in impactArea)
         {
-            Enemy enem = hit.GetComponent<Enemy>();
+            EnemyInterface enem = hit.GetComponent<EnemyInterface>();
             if (enem != null){
-                //enem.Hit(dmg);
+                enem.Hit(dmg);
                 //Luke hasn't pushed this yet!
             }
         }
 
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator timeToLive(float dur) {
+        yield return new WaitForSeconds(dur);
+        Impact();
     }
 }

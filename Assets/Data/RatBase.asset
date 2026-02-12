@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b2d4117b6c7e1e4e8aa369e11f3c12d, type: 3}
-  m_Name: Haste
+  m_Script: {fileID: 11500000, guid: e80c6c6d1728c514c86598d9c6d75fd3, type: 3}
+  m_Name: RatBase
   m_EditorClassIdentifier: 
-  name: Haste
-  image: {fileID: -1179530230, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
-  buffTime: 10
+  baseHealth: 1
+  baseMoveSpeed: 2.5
