@@ -9,7 +9,8 @@ public class Fireball : Cards
     [SerializeField] private float dmgradius = 3f;
 
     [SerializeField] private ShootFireball aoeprojprefab;
-    private GameObject player;
+    private GameObject player; // TODO : LK - I left this in for now, in case you guys want it
+    private GameObject camera;
 
 
     [SerializeField]public float dmg = 20f;
@@ -20,6 +21,7 @@ public class Fireball : Cards
 
     public override IEnumerator Play(Cards card){
         player = GameObject.FindWithTag("Player");
+        camera = GameObject.FindWithTag("MainCamera");
         if (card is Fireball attackCard)
         {
             useAttackCard(attackCard);
@@ -47,7 +49,7 @@ public class Fireball : Cards
 {
     Debug.LogError("Projectile prefab not assigned!");
 }
-
-        proj.Init(player.transform.forward, card);
+        
+        proj.Init(camera.transform.forward, card);
     }
 }
