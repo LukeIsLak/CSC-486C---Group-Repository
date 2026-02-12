@@ -14,7 +14,6 @@ public class HealthBar : MonoBehaviour
         if (this.health != null) this.health.OnHealthChanged -= UpdateUI;
         this.health = health;
         this.health.OnHealthChanged += UpdateUI;
-
     }
 
     private void OnDestroy()
