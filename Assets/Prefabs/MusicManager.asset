@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -713852721
+      Data2: 1253868597
+      Data3: 1033718206
+      Data4: -244797876
+    Path: event:/Music/CSC486C Combat OST loop
