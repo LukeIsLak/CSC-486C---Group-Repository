@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7543521028479997880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/CSC486C/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639064271160985960
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-2747415345390878985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/CSC486C Combat OST loop
+  m_EditorClassIdentifier: 
+  Path: event:/Music/CSC486C Combat OST loop
+  Guid:
+    Data1: -713852721
+    Data2: 1253868597
+    Data3: 1033718206
+    Data4: -244797876
+  Banks:
+  - {fileID: 3930720716087991015}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 36363
+--- !u!114 &-124667302518503096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PlayerEvents/sword strike 1
+  m_EditorClassIdentifier: 
+  Path: event:/PlayerEvents/sword strike 1
+  Guid:
+    Data1: 1010208681
+    Data2: 1315469223
+    Data3: -876342620
+    Data4: 1243507397
+  Banks:
+  - {fileID: 5011775146828173744}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 701
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 8482465851250561231}
+  - {fileID: -7543521028479997880}
+  - {fileID: 3930720716087991015}
+  - {fileID: 5011775146828173744}
+  EditorEvents:
+  - {fileID: -2747415345390878985}
+  - {fileID: 9085641514080397274}
+  - {fileID: -124667302518503096}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -7543521028479997880}
+  StringsBanks:
+  - {fileID: 8482465851250561231}
+  cacheVersion: 131858
+  cacheTime: 639064271161037665
+  SerializableEventsDict:
+  - key: event:/Music/CSC486C Combat OST loop
+    index: 0
+  - key: event:/PlayerEvents/sword strike 2
+    index: 1
+  - key: event:/PlayerEvents/sword strike 1
+    index: 2
+--- !u!114 &3930720716087991015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/CSC486C/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 639064271161027286
+  FileSizes: []
+  Exists: 1
+--- !u!114 &5011775146828173744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/PlayerAtkFX.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/CSC486C/Build/Desktop/PlayerAtkFX.bank
+  Name: PlayerAtkFX
+  StudioPath: bank:/PlayerAtkFX
+  lastModified: 639064271161037665
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8482465851250561231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/CSC486C/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639064271160996689
+  FileSizes:
+  - Name: 
+    Value: 1006
+  Exists: 1
+--- !u!114 &9085641514080397274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PlayerEvents/sword strike 2
+  m_EditorClassIdentifier: 
+  Path: event:/PlayerEvents/sword strike 2
+  Guid:
+    Data1: 1216646706
+    Data2: 1123660963
+    Data3: -650264905
+    Data4: 1073267040
+  Banks:
+  - {fileID: 5011775146828173744}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 701

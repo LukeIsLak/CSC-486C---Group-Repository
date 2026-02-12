@@ -61,9 +61,11 @@ public class Bat : EnemyInterface
     // TODO : LK - This is fragile and volatile, eventually fix
     public override void initialize() {
         curHealth = bd.baseHealth * playerData.maxHealth;
-        moveSpeed = bd.baseMoveSpeed * playerData.moveSpeed;
+        moveSpeed = bd.baseMoveSpeed * playerData.baseSpeed;
 
+        playerTransform = GameObject.FindWithTag("Player").transform;
         BatStateManager env_bsm = FindObjectOfType<BatStateManager>();
+        
         bsm = env_bsm;
         bsm.bats.Add(this);
     }
@@ -243,22 +245,22 @@ public class Bat : EnemyInterface
         switch (currentState)
         {
             case BatStates.Flutter:
-                moveSpeed = bd.baseMoveSpeed * bd.flutterMoveSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.flutterMoveSpeed * playerData.baseSpeed * bd.moveSpeed;
                 return;
             case BatStates.PeckAttacking:
-                moveSpeed = bd.baseMoveSpeed * bd.peckSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.peckSpeed * playerData.baseSpeed * bd.moveSpeed;
                 return;
             case BatStates.PeckCompleteRebound:
-                moveSpeed = bd.baseMoveSpeed * bd.peckReboundSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.peckReboundSpeed * playerData.baseSpeed * bd.moveSpeed;
                 return;
             case BatStates.PeckIncompleteRebound:
-                moveSpeed = bd.baseMoveSpeed * bd.peckReboundSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.peckReboundSpeed * playerData.baseSpeed * bd.moveSpeed;
                 return;
             case BatStates.SwoopAttacking:
-                moveSpeed = bd.baseMoveSpeed * bd.swoopSpeed * playerData.moveSpeed * bd.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.swoopSpeed * playerData.baseSpeed * bd.moveSpeed;
                 return;
             default:
-                moveSpeed = bd.baseMoveSpeed * bd.moveSpeed * playerData.moveSpeed;
+                moveSpeed = bd.baseMoveSpeed * bd.moveSpeed * playerData.baseSpeed;
                 return;
         }
     }
@@ -281,7 +283,7 @@ public class Bat : EnemyInterface
     void UpdateMoveSpot(bool s) {
         if (isMoving && targetPath.Count > 0) {
             Vector3 target = targetPath[currentPathIndex];
-            float step = moveSpeed * Time.deltaTime;
+            float step = moveSpeed * speedModifier * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target, step);
 
             Vector3 toTarget = target - transform.position;
@@ -332,7 +334,7 @@ public class Bat : EnemyInterface
 
         // Advance angle
         // TODO: LK - Change flutter to move distance per second instead of angle per second
-        flutterAngleDeg += moveSpeed * bd.flutterAngularSpeed * direction * Time.deltaTime;
+        flutterAngleDeg += moveSpeed * speedModifier * bd.flutterAngularSpeed * direction * Time.deltaTime;
         if (flutterAngleDeg >= 360f) flutterAngleDeg -= 360f;
         if (flutterAngleDeg <= 0f) flutterAngleDeg += 360f;
 
@@ -371,7 +373,7 @@ public class Bat : EnemyInterface
         Vector3 targetPos = center + baseOrbit + lateralOffset + new Vector3(0f, vertBob, 0f);
 
         // Move smoothly toward targetPos
-        float step = moveSpeed * Time.deltaTime;
+        float step = moveSpeed * speedModifier * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
 
         // Smoothly face movement direction
@@ -573,8 +575,8 @@ public class Bat : EnemyInterface
         Vector3 desiredDir = (forward + repulseDir * bd.steerDirectionWeight).normalized;
 
         // move by a step towards the desired direction (clamped by maxSteerDistance)
-        Vector3 desiredPos = origin + desiredDir * Mathf.Min(bd.maxSteerDistance, moveSpeed);
-        float step = moveSpeed * Time.deltaTime;
+        Vector3 desiredPos = origin + desiredDir * Mathf.Min(bd.maxSteerDistance, moveSpeed * speedModifier);
+        float step = moveSpeed * speedModifier * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, desiredPos, step);
 
         if (debug) Debug.DrawRay(origin, repulsion, Color.magenta);
@@ -645,6 +647,21 @@ public class Bat : EnemyInterface
 
     /****************************************************/
     /*           End Of Couroutines / Timers            */
+    /****************************************************/
+
+
+
+    /****************************************************/
+    /*         Beginning Of Event Listeners             */
+    /****************************************************/
+
+    public void ApplySpeedModifier() 
+    {
+        speedModifier = enemyEffects.getEnemySpeedModifier();
+    }
+
+    /****************************************************/
+    /*                End Of Debuggers                  */
     /****************************************************/
 
 
