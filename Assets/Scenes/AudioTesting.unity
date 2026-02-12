@@ -2766,6 +2766,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ed91cfed-e615-4bca-9c55-1552368b0fd3
     m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 922b09ef-a7e7-465b-98c9-5cca212ee135
+    m_ActionName: Player/Switch Card[/Mouse/scroll/y,/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e768046-dad2-4882-8194-60b6eaa12114
+    m_ActionName: Player/Use Card[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3354,6 +3362,7 @@ GameObject:
   - component: {fileID: 778282491}
   - component: {fileID: 778282493}
   - component: {fileID: 778282492}
+  - component: {fileID: 778282494}
   m_Layer: 6
   m_Name: Dummy
   m_TagString: Untagged
@@ -3403,6 +3412,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+--- !u!114 &778282494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778282490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Untagged
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  EventPlayTrigger: 3
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &800949108
 GameObject:
   m_ObjectHideFlags: 0
