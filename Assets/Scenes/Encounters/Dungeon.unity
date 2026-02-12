@@ -388,6 +388,12 @@ MonoBehaviour:
   DoubleL: {fileID: 820067416755778186, guid: f3446e95a61d2d34b9f01458dee8b0ac, type: 3}
   Triple: {fileID: 449590578049619557, guid: 63926b68741943246b5177a6161a0105, type: 3}
   Quad: {fileID: 7078203947628582039, guid: 696d3756751775942b0059bea4d07781, type: 3}
+  specialPrefabs:
+  - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
+  - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
+  - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
+  - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
+  - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
   dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
 --- !u!1660057539 &9223372036854775807

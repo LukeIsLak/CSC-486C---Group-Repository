@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dungeon Data
   m_EditorClassIdentifier: 
   dungeonPoolSize: 10
-  dungeonIters: 25
-  dungeonItersPerSpecial: 0
-  dungeonSeed: 0
+  dungeonIters: 2
+  dungeonItersPerSpecial: 3
+  dungeonSeed: -409286658
   useSeed: 1

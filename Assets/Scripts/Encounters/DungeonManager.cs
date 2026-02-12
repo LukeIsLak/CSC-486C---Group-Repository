@@ -11,6 +11,7 @@ public class DungeonManager : MonoBehaviour
     public GameObject   DoubleL;                    // 2 connections at a right angle
     public GameObject   Triple;                     // 3 connections
     public GameObject   Quad;                       // 4 connections
+    public List<GameObject> specialPrefabs;
 
     [Header("Data")]
     public DungeonData dungeonData;
@@ -35,6 +36,8 @@ public class DungeonManager : MonoBehaviour
         lg.DoubleL              = DoubleL;
         lg.Triple               = Triple;
         lg.Quad                 = Quad;
+        lg.specialPrefabs       = specialPrefabs;
+        lg.useSpecialRooms      = true;
         lg.roomScale            = 6f*2.5f;
 
         /* Poll info from persistent data */

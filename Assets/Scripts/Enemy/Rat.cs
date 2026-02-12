@@ -40,6 +40,7 @@ public class Rat : EnemyInterface
         if (playerGO == null) return;
 
         Vector3 posDiff     = playerGO.transform.position - transform.position;
+        if (posDiff.magnitude == 0) return;
         Vector3 direction   = posDiff / posDiff.magnitude;
 
         // Preserve y velocity
@@ -53,7 +54,7 @@ public class Rat : EnemyInterface
         {
             desiredVel = curLeapDir * moveSpeed * leapSpeedRatio;
             desiredVel.y = velocityY;
-            rb.velocity = desiredVel;
+            rb.MovePosition(transform.position + desiredVel * Time.fixedDeltaTime);
             return;
         }
 
@@ -66,6 +67,7 @@ public class Rat : EnemyInterface
 
         // Get movement direction
         direction[1] = 0f;
+        if (direction.magnitude == 0) return;
         direction = direction / direction.magnitude;
 
         // We are in leap range
@@ -82,7 +84,7 @@ public class Rat : EnemyInterface
         // We are close but not in leap range, so home in
         desiredVel = direction * moveSpeed;
         desiredVel.y = velocityY;
-        rb.velocity = desiredVel;
+        rb.MovePosition(transform.position + desiredVel * Time.fixedDeltaTime);
     }
 
     // Set and unset relevant flags after timings met
