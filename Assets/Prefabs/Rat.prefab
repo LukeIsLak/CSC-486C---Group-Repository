@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3442011347787881593}
   - component: {fileID: 4600773774475733258}
   - component: {fileID: 4260370326165881459}
-  - component: {fileID: 4479169582174147467}
   m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2abcd94be8be3e042836a1b80225a0a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,29 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4479169582174147467
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2716075876927501173}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2.0000005
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4654030979180610721
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,6 +179,7 @@ GameObject:
   - component: {fileID: 4160189884461270681}
   - component: {fileID: 3591598911556201603}
   - component: {fileID: 7190806850133971939}
+  - component: {fileID: 6321008680994744596}
   m_Layer: 6
   m_Name: Rat
   m_TagString: Untagged
@@ -252,7 +229,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &3591598911556201603
 MonoBehaviour:
@@ -304,7 +281,27 @@ MonoBehaviour:
   leapCooldown: 3
   isLeaping: 0
   canLeap: 1
+  leapForce: 300
   curLeapDir: {x: 0, y: 0, z: 0}
   desiredVel: {x: 0, y: 0, z: 0}
-  baseMoveSpeed: 0
-  moveSpeed: 0
+--- !u!135 &6321008680994744596
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622133770335886410}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

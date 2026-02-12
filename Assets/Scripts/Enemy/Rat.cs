@@ -14,7 +14,8 @@ public class Rat : EnemyInterface
 
     public bool isLeaping          = false;
     public bool canLeap            = true;
-    
+    public float leapForce         = 20;
+    public float leapYIncrease     = 0.25f;
     public Vector3 curLeapDir;
     public Vector3 desiredVel;
     
@@ -40,6 +41,7 @@ public class Rat : EnemyInterface
         if (playerGO == null) return;
 
         Vector3 posDiff     = playerGO.transform.position - transform.position;
+        if (posDiff.magnitude == 0) return;
         Vector3 direction   = posDiff / posDiff.magnitude;
 
         // Preserve y velocity
@@ -48,15 +50,7 @@ public class Rat : EnemyInterface
         // Set forward to always face player
         transform.forward   = direction;
 
-        // If we're leaping, we continue no matter what.
-        if (isLeaping)
-        {
-            desiredVel = curLeapDir * moveSpeed * leapSpeedRatio;
-            desiredVel.y = velocityY;
-            rb.velocity = desiredVel;
-            return;
-        }
-
+        if (isLeaping) return;
         // Do nothing if out of range of the player
         if (posDiff.magnitude > detectionRadius) 
         {
@@ -65,31 +59,31 @@ public class Rat : EnemyInterface
         }
 
         // Get movement direction
-        direction[1] = 0f;
+        if (direction.magnitude == 0) return;
         direction = direction / direction.magnitude;
 
         // We are in leap range
         if (posDiff.magnitude < leapRadius && canLeap)
         {
             curLeapDir = direction;
-            // Better approach: impulse of velocity up + towards player
-            // Then don't let move unless on ground.
-            // Set canLeap accordingly, but isLeaping is then not needed.
+            curLeapDir[1] += leapYIncrease;
             StartCoroutine(DoLeap());
             return;
         }
 
         // We are close but not in leap range, so home in
+        direction[1] = 0f;
         desiredVel = direction * moveSpeed;
         desiredVel.y = velocityY;
-        rb.velocity = desiredVel;
+        rb.MovePosition(transform.position + desiredVel * Time.fixedDeltaTime);
     }
 
     // Set and unset relevant flags after timings met
     private IEnumerator DoLeap()
     {
-        canLeap = false;
         isLeaping = true;
+        canLeap = false;
+        rb.AddForce(curLeapDir * leapForce);
         yield return new WaitForSeconds(leapDuration);
         isLeaping = false;
         yield return new WaitForSeconds(leapCooldown);
@@ -98,7 +92,7 @@ public class Rat : EnemyInterface
 
     public void UpdateSpeed()
     {
-        moveSpeed = enemyData.baseMoveSpeed * enemyEffects.getEnemySpeedModifier();
+        moveSpeed = enemyData.baseMoveSpeed * playerData.moveSpeed * enemyEffects.getEnemySpeedModifier();
     }
 
     private void OnCollisionEnter(Collision other) 
