@@ -33,7 +33,7 @@ MonoBehaviour:
   normalWeight: 1
   heightWeight: 1
   upAngleWeight: 1
-  flutterRadius: 3
+  flutterRadius: 5
   flutterAngularSpeed: 15
   flutterRadialJitter: 0.5
   verticalBobAmplitude: 0.4
