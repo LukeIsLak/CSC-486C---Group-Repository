@@ -391,6 +391,8 @@ MonoBehaviour:
   specialPrefabs:
   - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
   - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
+  - {fileID: 2198971713089864924, guid: 1f5d6021bfe04f14eb9685e3602feddc, type: 3}
+  - {fileID: 2198971713089864924, guid: 1f5d6021bfe04f14eb9685e3602feddc, type: 3}
   dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
 --- !u!1001 &1978510871
