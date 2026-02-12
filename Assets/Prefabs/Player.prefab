@@ -481,10 +481,10 @@ MonoBehaviour:
   attackDamage: 1
   attackCount: 3
   attackRadius: 0.4
-  attackHitStopDuration: 0.1
+  attackHitStopDuration: 0.03
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
 --- !u!114 &5473761978391616915
 MonoBehaviour:

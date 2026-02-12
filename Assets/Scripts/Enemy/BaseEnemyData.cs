@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName="Data/BaseEnemyData")]
 public class BaseEnemyData : ScriptableObject
 {
     [Header("Base Stats - In % Compared to Player")]
