@@ -22,6 +22,7 @@ public class PlayerCharacter : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private CharacterData playerData;
+    [SerializeField] private HealthBar healthBar;
 
     private Animator swordAnimator;
     private Camera cam;
@@ -41,6 +42,8 @@ public class PlayerCharacter : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         healthComponent = GetComponent<Health>();
         healthComponent.Init(playerData.maxHealth);
+        healthBar.BindHealthUI(healthComponent);
+
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
