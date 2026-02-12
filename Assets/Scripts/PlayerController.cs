@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        controller.Move(Vector3.zero);
+
         Vector3 move = transform.right * moveDirection.x + transform.forward * moveDirection.y;
         controller.Move(move * speed * Time.deltaTime);
 

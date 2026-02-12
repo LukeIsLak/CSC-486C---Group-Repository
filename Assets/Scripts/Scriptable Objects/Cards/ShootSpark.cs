@@ -6,6 +6,7 @@ public class ShootSpark : MonoBehaviour
 {
     [SerializeField] private float projspeed = 10f;
     [SerializeField] private float dmgradius = 1f;
+    [SerializeField] private float ttl = 5f;
 
 
     private float dmg;
@@ -18,6 +19,10 @@ public class ShootSpark : MonoBehaviour
         //Needs a direction and damage amount
         dir = direct.normalized;
         dmg = card.dmg;
+    }
+
+    void Start(){
+        StartCoroutine(timeToLive(ttl));
     }
 
     void Update(){
@@ -46,5 +51,10 @@ public class ShootSpark : MonoBehaviour
         }
 
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator timeToLive(float dur) {
+        yield return new WaitForSeconds(dur);
+        Impact();
     }
 }
