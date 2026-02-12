@@ -4,4 +4,6 @@ using UnityEngine;
 public class AudioManagerScriptableObject : ScriptableObject
 {
  public FMODUnity.EventReference music;
+public FMODUnity.EventReference attack;
+
 }
