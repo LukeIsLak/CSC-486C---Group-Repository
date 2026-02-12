@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonPoolSize: 10
   dungeonIters: 2
-  dungeonItersPerSpecial: 3
+  dungeonItersPerSpecial: 1
   dungeonSeed: -409286658
   useSeed: 1
