@@ -7,6 +7,10 @@ public class EnemySpriteManager : MonoBehaviour
     public float rotatorXawOffsetDeg;
     public float rotatorLerpSpeed = 1;
 
+    void Start() {
+        playerTransform = GameObject.FindWithTag("Player").transform;
+    }
+
     void Update() {
         RotateToFacePlayer();
     }
