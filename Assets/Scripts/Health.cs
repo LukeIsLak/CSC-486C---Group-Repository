@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,12 +10,14 @@ public class Health : MonoBehaviour
     public float maxHealth { get; private set; }
     public float currentHealth {  get; private set; }
 
-   
+    public event Action<float, float> OnHealthChanged;
+    
+    private void NotifyHealthChanged() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
     public void Init(float maxHealth)
     {
         this.maxHealth = maxHealth;
         currentHealth = maxHealth;
-        if (healthBar != null) healthBar.SetMaxHealthUI(this.maxHealth);
+        NotifyHealthChanged();
     }
 
     public void TakeDamage(float amount)
@@ -22,24 +25,23 @@ public class Health : MonoBehaviour
         if (amount <= 0) return;
 
         currentHealth -= amount;
-        if (healthBar != null) healthBar.SetHealthUI(currentHealth);
         Debug.Log(currentHealth);
         if (currentHealth < 0)
         {
+            currentHealth = 0;
+            NotifyHealthChanged();
             Die();
+            return;
         }
+        NotifyHealthChanged();
     }
 
     public void Heal(float amount)
     {
         if (amount <= 0) return;
 
-        currentHealth += amount;
-
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        NotifyHealthChanged();
     }
     private void Die()
     {

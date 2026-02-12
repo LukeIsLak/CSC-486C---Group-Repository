@@ -17,9 +17,9 @@ public class HandViewUI : MonoBehaviour
     [SerializeField] private float selectedScale = 1f;
 
 
-    private readonly List<CardViewUI> cards = new();
+    private List<CardViewUI> cards = new();
     private void OnEnable()
-    {
+    {   
         deckSystems.OnHandSelectionChanged += UpdateCardPosition;
         deckSystems.OnHandContentsChanged += RefreshHand;
         UpdateCardPosition();
@@ -31,9 +31,11 @@ public class HandViewUI : MonoBehaviour
         deckSystems.OnHandContentsChanged -= RefreshHand;
     }
 
+    // When hand contents change, rebuild the UI list to match the data.
     private void RefreshHand()
     {
-        foreach(var card in cards)
+        // Destroy all existing UI card gameObjects.
+        foreach (var card in cards)
         {
             Destroy(card.gameObject);
         }
@@ -48,6 +50,7 @@ public class HandViewUI : MonoBehaviour
             cards.Add(card);
         }
 
+        // update the card fanning after rebuilt the UI
         UpdateCardPosition();
     }
 
@@ -58,7 +61,11 @@ public class HandViewUI : MonoBehaviour
         if (cardCount == 0) return;
 
         float startingCardAngle = -totalFanAngle / 2f; // starting card location Example: if card fan angle 30 starting will be -15 
+
         float angleStep; // how far apart each card is 
+        
+
+        // step between card. if there is 1 card, step will be 0 so that it stay in the center
         if (cardCount == 1)
         {
             angleStep = 0;
@@ -72,13 +79,16 @@ public class HandViewUI : MonoBehaviour
 
         for (int i = 0; i < cardCount; i++)
         {
+            // Calculate the angle of this card
             float angleDeg = startingCardAngle + (angleStep * i);
             float angleRad = angleDeg * Mathf.Deg2Rad;
 
+            // Get the card position on the circle arc 
             float x = radius * Mathf.Sin(angleRad);
             float y = radius * Mathf.Cos(angleRad) - radius;
 
             RectTransform cardTransform = cards[i].GetComponent<RectTransform>();
+            // set order of the card
             cardTransform.SetSiblingIndex(i);
             cardTransform.anchoredPosition = new Vector2(x, y);
             cardTransform.localRotation = Quaternion.Euler(0, 0, -angleDeg);
