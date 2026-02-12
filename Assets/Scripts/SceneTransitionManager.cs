@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class SceneTransitionManager : MonoBehaviour
 {
@@ -34,20 +35,30 @@ public class SceneTransitionManager : MonoBehaviour
     ************ Traversal ************
     **********************************/
 
+    private void ForceMouseOn()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void SceneSwapToLobby()
     {
+        ForceMouseOn();
         SceneManager.LoadScene(lobbyScene);
     }
     
     public void SceneSwapToMapLayout()
-    {
+    {   
+        ForceMouseOn();
         SceneManager.LoadScene(layoutScene);
     }
 
     public void SceneSwapToEncounter()
     {
+        
         EncounterType encType = layoutData.currentEncounter;
-    
+
+        ForceMouseOn();
         if (encType == EncounterType.None) 
         {
             Debug.Log("No encounter type provided.");
@@ -81,6 +92,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneSwapToMainMenu()
     {
+        ForceMouseOn();
         SceneManager.LoadScene(menuScene);
     }
 }

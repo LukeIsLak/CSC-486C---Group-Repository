@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Rat : EnemyInterface
 {
-    public EnemyEffects enemyEffects;
-
     public float detectionRadius    = 5;
     public float leapRadius         = 2;
     public float leapSpeedRatio     = 4;
