@@ -65,3 +65,7 @@
 *.spriteatlas			-text merge=unityyamlmerge linguist-generated
 *.terrainlayer			-text merge=unityyamlmerge linguist-generated
 *.unity					-text merge=unityyamlmerge linguist-generated
+
+#FMOD
+Assets/Plugins/FMOD/**/*.bundle text eol=lf
+Assets/Plugins/FMOD/**/Info.plist text eol=lf

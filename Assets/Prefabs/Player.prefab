@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 3025714530200236336}
   - component: {fileID: 5473761978391616915}
   - component: {fileID: 7050272462483586888}
+  - component: {fileID: -201263358416133198}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -528,6 +529,19 @@ MonoBehaviour:
   currentDeckSize: 0
   discard: []
   inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
+--- !u!114 &-201263358416133198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843415185380909026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4ca488b8aed96458ca019b53a3d3b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 11400000, guid: 80d20da5a49397e4081fca9d18df7a48, type: 2}
 --- !u!1 &7545902890681713120
 GameObject:
   m_ObjectHideFlags: 0
