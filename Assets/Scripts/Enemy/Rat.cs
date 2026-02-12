@@ -18,8 +18,7 @@ public class Rat : EnemyInterface
     public Vector3 curLeapDir;
     public Vector3 desiredVel;
     
-    public float baseMoveSpeed;
-    public float moveSpeed;
+    private float baseMoveSpeed;
     
     private GameObject playerGO;
     private Rigidbody rb;
@@ -27,8 +26,6 @@ public class Rat : EnemyInterface
     // Start is called before the first frame update
     void Start()
     {
-        curHealth = enemyData.baseHealth;
-        moveSpeed = enemyData.baseMoveSpeed * enemyEffects.getEnemySpeedModifier();
         
         playerGO = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody>();
@@ -47,6 +44,7 @@ public class Rat : EnemyInterface
 
         // Preserve y velocity
         float velocityY     = rb.velocity.y;
+
         // Set forward to always face player
         transform.forward   = direction;
 
@@ -82,12 +80,12 @@ public class Rat : EnemyInterface
         }
 
         // We are close but not in leap range, so home in
-
         desiredVel = direction * moveSpeed;
         desiredVel.y = velocityY;
         rb.velocity = desiredVel;
     }
 
+    // Set and unset relevant flags after timings met
     private IEnumerator DoLeap()
     {
         canLeap = false;
@@ -101,5 +99,14 @@ public class Rat : EnemyInterface
     public void UpdateSpeed()
     {
         moveSpeed = enemyData.baseMoveSpeed * enemyEffects.getEnemySpeedModifier();
+    }
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if (other.gameObject == playerGO)
+        {
+            Health hc = playerGO.GetComponent<Health>();
+            hc.TakeDamage(playerData.maxHealth * 0.05f);
+        }
     }
 }
