@@ -55,39 +55,12 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneSwapToEncounter()
     {
-        
-        EncounterType encType = layoutData.currentEncounter;
+        EncounterInfo encType = layoutData.currentEncounter;
 
-        ForceMouseOn();
-        if (encType == EncounterType.None) 
-        {
-            Debug.Log("No encounter type provided.");
-            return;
-        }
-        if (encType == EncounterType.Merchant)
-        {
-            SceneManager.LoadScene(merchantScene);
-            return;
-        }
-        if (encType == EncounterType.Treasure)
-        {
-            SceneManager.LoadScene(treasureScene);
-            return;
-
-        }
-        if (encType == EncounterType.Dungeon)
-        {
-            SceneManager.LoadScene(dungeonScene);
-            return;
-
-        }
-        if (encType == EncounterType.Boss)
-        {
-            SceneManager.LoadScene(bossScene);  
-            return;
-
-        }
+        if (encType.scene == null)
         Debug.Log("Nothing to do for you with this encounter type.");
+        ForceMouseOn();
+        SceneManager.LoadScene(encType.scene);
     }
 
     public void SceneSwapToMainMenu()
