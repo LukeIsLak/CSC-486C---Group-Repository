@@ -13,6 +13,8 @@ public class TraversableLayout : MonoBehaviour
     
     [Header("Data")]
     public LayoutData layoutData;
+    public EncounterInfo firstEncounter;
+    public EncounterInfo lastEncounter;
 
     // Data Structures
     private List<List<MapEncounter>> mapLayers;
@@ -30,7 +32,7 @@ public class TraversableLayout : MonoBehaviour
     }
 
     /**********************************
-    ********** PRE-TRAVERSAL **********
+    ********* Layout Creation *********
     **********************************/
     
     
@@ -114,7 +116,7 @@ public class TraversableLayout : MonoBehaviour
                     // Child doesn't exist yet, so add right (we are going l -> r)
                     newChild = Instantiate(mapEncounterPrefab, transform).GetComponent<MapEncounter>();
                     newChild.traversableLayout  = this;
-                    Debug.Log("Layer " + i.ToString() + childIndex.ToString());
+                    // Debug.Log("Layer " + i.ToString() + childIndex.ToString());
                     newChild.layer              = i + 1;
                     newChild.index              = childIndex++;
                     curRes.AddChildRight(newChild);
@@ -126,20 +128,67 @@ public class TraversableLayout : MonoBehaviour
         return result;
     }
 
-    // Decide an encounter for each node
+    /**********************************
+    ******* Encounter Placement *******
+    **********************************/
+
     private void PlaceEncounters(List<List<MapEncounter>> mapLayers)
     {
         if (mapLayers.Count == 0) return;
-        mapLayers[0][0].SetEncounter(EncounterType.Start);
-        mapLayers[mapLayers.Count -1][0].SetEncounter(EncounterType.Boss);
+        mapLayers[0][0].SetEncounter(firstEncounter);
         foreach (List<MapEncounter> layer in mapLayers)
         {   foreach (MapEncounter enc in layer)
             {
-                if (enc.encounter != EncounterType.None) continue;
-                enc.SetEncounter((EncounterType)Random.Range(2, 5));
+                if (enc.parents.Count == 0) continue; // For the first node.
+                enc.encounter = ChooseEncounterFromWeights(enc.parents);
             }
         }
+        mapLayers[mapLayers.Count -1][0].SetEncounter(lastEncounter);
     }
+
+    private EncounterInfo ChooseEncounterFromWeights(List<MapEncounter> parents)
+    {
+        Dictionary<EncounterInfo, float> weights = new Dictionary<EncounterInfo, float>();
+        float weightSum = 0f; // Save a loop by keeping track of this as we update the dictionary
+
+        // Sum probabilities for each encounter, or create entry if not yet tracked
+        foreach (MapEncounter parent in parents)
+        {
+            foreach (EncounterWeight encProb in parent.encounter.encounterWeights)
+            {
+                EncounterInfo enc   = encProb.encounter;
+                float weight        = encProb.weight;
+                weightSum           += weight;
+
+                if (weights.ContainsKey(enc))
+                {
+                    weights[enc] += weight;
+                    continue;
+                }
+                weights[enc] = weight;
+            }
+        }
+
+        if (weights.Count == 0 || weightSum == 0f)
+        {
+            Debug.Log("No weights available in parent nodes or sum of weights is zero");
+            return null;
+        }
+
+        float r = Random.Range(0f, weightSum);
+        foreach (var (key, value) in weights)
+        {
+            r -= value;
+            if (r <= 0f) return key;
+        }
+        // We shouldn't get here.
+        return null;
+    }
+
+
+    /**********************************
+    ************ Traversal ************
+    **********************************/
 
     // Player prefabs in their own location
     private void DoLayerPlacement(List<List<MapEncounter>> mapLayers)
@@ -164,10 +213,7 @@ public class TraversableLayout : MonoBehaviour
         UpdateAppearance();
     }
 
-
-    /**********************************
-    ************ Traversal ************
-    **********************************/
+    // Update the appearance of the map
     public void UpdateAppearance()
     { foreach (List<MapEncounter> curLayer in mapLayers)
         {   foreach (MapEncounter node in curLayer)
@@ -175,14 +221,14 @@ public class TraversableLayout : MonoBehaviour
         }
     }
 
+    // Progress given the indices of nodes completed at each layer
     public MapEncounter DoProgress(List<int> completedIndices)
     {
-
         int l = 0;
         foreach (int i in completedIndices)
         {
             mapLayers[l++][i].isCompleted = true;
-            Debug.Log(l.ToString() + i.ToString());
+            // Debug.Log(l.ToString() + i.ToString());
         }
 
         foreach (MapEncounter child in mapLayers[--l][completedIndices[completedIndices.Count-1]].children)
@@ -202,7 +248,7 @@ public class TraversableLayout : MonoBehaviour
     {
         if (enc.isAccessible)
         {
-            Debug.Log(enc.encounter);
+            // Debug.Log(enc.encounter);
             curSelectedEncounter?.SetIsSelected(false);
             curSelectedEncounter = enc;
             playerOnMap.transform.position = curSelectedEncounter.transform.position;
@@ -212,6 +258,7 @@ public class TraversableLayout : MonoBehaviour
 
     void Update()
     {
+        /*
         foreach (List<MapEncounter> layer in mapLayers)
         {   foreach (MapEncounter node in layer)
             {   foreach (MapEncounter child in node.children)
@@ -220,5 +267,6 @@ public class TraversableLayout : MonoBehaviour
                 }
             }
         }
+        */
     }
 }

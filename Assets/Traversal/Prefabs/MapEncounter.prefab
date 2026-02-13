@@ -117,37 +117,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsGO: {fileID: 3539539808464091172}
   graphicsSR: {fileID: 6052144100334469309}
-  merchantAIC:
-  - {fileID: 2070105257, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: 890794497, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -323223572, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -865636401, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  treasureAIC:
-  - {fileID: -601846495, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: 1710345884, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -1162132569, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -183375075, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  dungeonAIC:
-  - {fileID: -1100653601, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -1707302033, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: 1202719947, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -1362446071, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  bossAIC:
-  - {fileID: -1724828971, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -622201144, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: -1672081315, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  - {fileID: 647394035, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  encounter: 0
+  traversableLayout: {fileID: 0}
+  encounter: {fileID: 0}
+  defaultEncounter: {fileID: 0}
   isAccessible: 0
   isCompleted: 0
   isHovered: 0
   isSelected: 0
   layer: 0
   index: 0
+  parents: []
   children: []
-  visColor: {r: 0, g: 0, b: 0, a: 0}
-  visAlpha: 0
-  traversableLayout: {fileID: 0}
 --- !u!1 &3539539808464091172
 GameObject:
   m_ObjectHideFlags: 0

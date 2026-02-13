@@ -11,7 +11,7 @@ public class LayoutData : ScriptableObject
     public bool             useSeed,
                             shouldGenerate,
                             shouldDoProgress;
-    public EncounterType    currentEncounter;
+    public EncounterInfo    currentEncounter;
     public List<int>        completedIndices = new List<int>(); // For regeneration!
 
     public int              layerDistance,
