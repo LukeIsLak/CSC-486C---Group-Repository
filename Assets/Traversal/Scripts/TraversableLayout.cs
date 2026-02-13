@@ -140,43 +140,43 @@ public class TraversableLayout : MonoBehaviour
         {   foreach (MapEncounter enc in layer)
             {
                 if (enc.parents.Count == 0) continue; // For the first node.
-                enc.encounter = ChooseEcounterFromProbabilities(enc.parents);
+                enc.encounter = ChooseEncounterFromWeights(enc.parents);
             }
         }
         mapLayers[mapLayers.Count -1][0].SetEncounter(lastEncounter);
     }
 
-    private EncounterInfo ChooseEcounterFromProbabilities(List<MapEncounter> parents)
+    private EncounterInfo ChooseEncounterFromWeights(List<MapEncounter> parents)
     {
-        Dictionary<EncounterInfo, float> probabilities = new Dictionary<EncounterInfo, float>();
-        float probSum = 0f; // Save a loop by keeping track of this as we update the dictionary
+        Dictionary<EncounterInfo, float> weights = new Dictionary<EncounterInfo, float>();
+        float weightSum = 0f; // Save a loop by keeping track of this as we update the dictionary
 
         // Sum probabilities for each encounter, or create entry if not yet tracked
         foreach (MapEncounter parent in parents)
         {
-            foreach (EncounterProbability encProb in parent.encounter.encounterProbabilities)
+            foreach (EncounterWeight encProb in parent.encounter.encounterWeights)
             {
                 EncounterInfo enc   = encProb.encounter;
-                float prob          = encProb.probability;
-                probSum             += prob;
+                float weight        = encProb.weight;
+                weightSum           += weight;
 
-                if (probabilities.ContainsKey(enc))
+                if (weights.ContainsKey(enc))
                 {
-                    probabilities[enc] += prob;
+                    weights[enc] += weight;
                     continue;
                 }
-                probabilities[enc] = prob;
+                weights[enc] = weight;
             }
         }
 
-        if (probabilities.Count == 0 || probSum == 0f)
+        if (weights.Count == 0 || weightSum == 0f)
         {
-            Debug.Log("No probabilities available in parent nodes or sum of probabilities is zero");
+            Debug.Log("No weights available in parent nodes or sum of weights is zero");
             return null;
         }
 
-        float r = Random.Range(0f, probSum);
-        foreach (var (key, value) in probabilities)
+        float r = Random.Range(0f, weightSum);
+        foreach (var (key, value) in weights)
         {
             r -= value;
             if (r <= 0f) return key;

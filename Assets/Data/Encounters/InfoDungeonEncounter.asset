@@ -21,8 +21,9 @@ MonoBehaviour:
   - {fileID: -1707302033, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   - {fileID: 1202719947, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   - {fileID: -1362446071, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
-  encounterProbabilities:
+  encounterWeights:
   - {fileID: 11400000, guid: c4f495d16f909424e9ed067d57d0eb26, type: 2}
+  - {fileID: 11400000, guid: 15496984a4d9237428ac4c683c253f1d, type: 2}
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 4a8a3683c26439a45bed34eb34bbd2c1, type: 3}
     m_SceneName: Dungeon

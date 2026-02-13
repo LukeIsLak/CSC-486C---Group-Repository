@@ -11,6 +11,6 @@ public class EncounterInfo : ScriptableObject
     public int IND_HOVERED      = 3;
 
     public List<Sprite> stateSprites;
-    public List<EncounterProbability> encounterProbabilities;
+    public List<EncounterWeight> encounterWeights;
     public SceneField scene;
 }
