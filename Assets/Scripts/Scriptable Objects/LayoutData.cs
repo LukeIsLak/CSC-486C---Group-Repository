@@ -15,6 +15,19 @@ public class LayoutData : ScriptableObject
     public EncounterInfo    currentEncounter;
     public List<int>        completedIndices = new List<int>(); // For regeneration!
 
-    public int              layerDistance,
-                            encounterSep;
+    [Header("Fog Of War")]
+    public GameEvent        FogUpdated;
+    public int              layersRevealed = 2;
+
+    public void AddRevealed(int n)
+    {
+        layersRevealed += n;
+        FogUpdated.Raise();
+    }
+
+
+    [Header("Visualization")]
+    public int              layerDistance = 4;
+    public int              encounterSep = 4;
+
 }
