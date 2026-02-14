@@ -19,18 +19,43 @@ public class HandViewUI : MonoBehaviour
 
     private List<CardViewUI> cards = new();
     private void OnEnable()
-    {   
-        deckSystems.OnHandSelectionChanged += UpdateCardPosition;
-        deckSystems.OnHandContentsChanged += RefreshHand;
+    {
+        Hook(deckSystems);
         UpdateCardPosition();
     }
 
     private void OnDisable()
     {
-        deckSystems.OnHandSelectionChanged -= UpdateCardPosition;
-        deckSystems.OnHandContentsChanged -= RefreshHand;
+        Unhook(deckSystems);
     }
 
+    public void BindDeckSystem(DeckSystems d)
+    {
+        if (deckSystems == d) return;
+        // unsubsribe from the old event
+        Unhook(deckSystems);
+        deckSystems = d;
+        Hook(deckSystems);
+        RefreshHand();
+    }
+    
+    // helper function for hooking the the function to event
+    private void Hook(DeckSystems d)
+    {
+        if (d != null)
+        {
+            deckSystems.OnHandSelectionChanged += UpdateCardPosition;
+            deckSystems.OnHandContentsChanged += RefreshHand;
+        }
+    }
+    private void Unhook(DeckSystems d)
+    {
+        if (d != null)
+        {
+            deckSystems.OnHandSelectionChanged -= UpdateCardPosition;
+            deckSystems.OnHandContentsChanged -= RefreshHand;
+        }
+    }
     // When hand contents change, rebuild the UI list to match the data.
     private void RefreshHand()
     {
