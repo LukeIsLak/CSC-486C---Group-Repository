@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardsDatabase cardsDB;
     public static GameManager instance { get; private set; }
 
-
-    private Health playerhealth;
     private void Awake()
     {
         instance = this;
@@ -29,12 +27,4 @@ public class GameManager : MonoBehaviour
         UIManager.instance.BindPlayer(player);
     }
 
-    private void Update()
-    {
-        // for testing player health
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            playerhealth.TakeDamage(10);
-        }
-    }
 }
