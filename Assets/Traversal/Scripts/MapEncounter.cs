@@ -48,7 +48,7 @@ public class MapEncounter : MonoBehaviour
         int n = children.Count;
         return n == 0 ? null : children[0];
     }
-    public void AddChildRight(MapEncounter child)  { children.Add(child); child.parents.Add(this); MakeLines(); }
+    public void AddChildRight(MapEncounter child)  { children.Add(child); child.parents.Insert(0, this); MakeLines(); }
     public MapEncounter GetRightmostChild() 
     { 
         int n = children.Count;

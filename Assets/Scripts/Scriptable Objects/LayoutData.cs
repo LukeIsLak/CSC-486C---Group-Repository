@@ -8,6 +8,7 @@ public class LayoutData : ScriptableObject
     public int              depth,
                             maxWidth,
                             randomSeed;
+    public float            complexity;
     public bool             useSeed,
                             shouldGenerate,
                             shouldDoProgress;

@@ -12,13 +12,11 @@ public class TestApp : MonoBehaviour
             // Transition from lobby to layout
             layoutData.depth            = 9;
             layoutData.maxWidth         = 7;
-            layoutData.randomSeed       = (int)System.DateTime.Now.Ticks;
+            layoutData.randomSeed       = 0;
             layoutData.useSeed          = true;
             layoutData.shouldGenerate   = true;
             layoutData.completedIndices.Clear();
             layoutData.completedIndices.Add(0);
-            layoutData.layerDistance    = 4;
-            layoutData.encounterSep     = 4;
     }
     void Update()
     {
