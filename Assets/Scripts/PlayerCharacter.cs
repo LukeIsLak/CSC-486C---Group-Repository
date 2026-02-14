@@ -22,11 +22,9 @@ public class PlayerCharacter : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private CharacterData playerData;
-    [SerializeField] private HealthBar healthBar;
 
     private Animator swordAnimator;
     private Camera cam;
-    private Health healthComponent;
     private Coroutine hitStopCoroutine;
     private string currentAnimationState;
     private bool isAttacking;
@@ -40,10 +38,6 @@ public class PlayerCharacter : MonoBehaviour
     {
         swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
-        healthComponent = GetComponent<Health>();
-        healthComponent.Init(playerData.maxHealth);
-        healthBar.BindHealthUI(healthComponent);
-
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -149,11 +143,11 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Update()
     {
-        // for testing player health
-        if (Input.GetKeyDown(KeyCode.F)) 
-        {
-            healthComponent.TakeDamage(10);
-        }
+        //// for testing player health
+        //if (Input.GetKeyDown(KeyCode.F)) 
+        //{
+        //    healthComponent.TakeDamage(10);
+        //}
     }
 
 }

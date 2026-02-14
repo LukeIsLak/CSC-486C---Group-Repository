@@ -6,6 +6,13 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private HandViewUI handView;
+
+    public static UIManager instance { get; private set; }
+
+    private void Awake()
+    {
+        instance = this;
+    }
     public void BindPlayer(GameObject player)
     {
         var health = player.GetComponent<Health>();

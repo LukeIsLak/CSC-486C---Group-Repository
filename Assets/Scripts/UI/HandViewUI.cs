@@ -70,6 +70,7 @@ public class HandViewUI : MonoBehaviour
         // Create the UI for each card instance in hand 
         foreach(var instance in deckSystems.hand)
         {
+
             CardViewUI card = Instantiate(cardViewPrefab, handLocation);
             card.Init(instance.cardData);
             cards.Add(card);
