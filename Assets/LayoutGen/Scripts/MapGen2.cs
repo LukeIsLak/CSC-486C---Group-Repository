@@ -372,11 +372,13 @@ public class MapGen2 : MonoBehaviour
 
                 if (canConnect) 
                 {
-                    if (Random.Range(0f, 1f) < complexity)
+                    // Divide the choice to go either left or right
+                    float r = Random.Range(0f, 1f);
+                    if (r <= complexity/2)
                     {
                         nextNode.AddChildLeft(curChild);
                     }
-                    if (Random.Range(0f, 1f) < complexity)
+                    else if (r <= complexity)
                     {
                         curNode.AddChildRight(nextChild);
                     }  
