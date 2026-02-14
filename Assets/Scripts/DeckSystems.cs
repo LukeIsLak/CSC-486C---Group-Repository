@@ -40,20 +40,12 @@ public class DeckSystems : MonoBehaviour
 
     //store any card that has been used
     public List<CardInstance> discard = new List<CardInstance>();
-
-    public PlayerInventory inventory;
     
     public event Action OnHandSelectionChanged;
     public event Action OnHandContentsChanged;
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
     private int nextUid = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        loadDeck(inventory.playerDeck);
-    }
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
     void Update()
@@ -68,6 +60,26 @@ public class DeckSystems : MonoBehaviour
             }
         }
     }
+
+    // call this in game manager
+    public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
+    {
+        deck.Clear();
+        hand.Clear();
+        discard.Clear();
+
+        for (int i = 0; i < deckSize; i++)
+        {
+            Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
+            addCardToDeck(new CardInstance(pick));
+        }
+
+        for (int i = 0; i < MAXHANDSIZE; i++) drawCard();
+
+        NotifyHandContentsChanged();
+        NotifyHandSelectionChanged();
+    }
+
 
     /// <summary>
     /// adds the given card to the back of the deck, 
@@ -316,6 +328,8 @@ public class DeckSystems : MonoBehaviour
             addCardToDeck(deckList[0]);
             deckList.RemoveAt(0);
         }
+
+        NotifyHandContentsChanged();
     }
 
     private void ChangeHandIndex(int direction)
