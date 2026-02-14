@@ -47,6 +47,7 @@ public class TraversableLayout : MonoBehaviour
         layoutGenerator.maxWidth            = layoutData.maxWidth;
         layoutGenerator.useSetSeed          = layoutData.useSeed;
         layoutGenerator.randomSeed          = layoutData.randomSeed;
+        layoutGenerator.complexity          = layoutData.complexity;
         genLayers = layoutGenerator.DoGeneration();
 
         // Do conversion to encounters, destroy generator
@@ -110,7 +111,7 @@ public class TraversableLayout : MonoBehaviour
                         // If the genNode is contained already in the left neighbour,
                         // the corresponding resNode will have the child to add at the same index.
                         int ci = genLayer[j-1].outNodes.IndexOf(child);
-                        if (ci != -1) { curRes.AddChildLeft(resLayer[j-1].children[ci]); continue;}
+                        if (ci != -1) { curRes.AddChildRight(resLayer[j-1].children[ci]); continue;}
                     }
 
                     // Child doesn't exist yet, so add right (we are going l -> r)
