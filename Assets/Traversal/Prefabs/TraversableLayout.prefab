@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3586655531442555394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6826904225101438097}
+  - component: {fileID: -6877883850182717222}
+  m_Layer: 0
+  m_Name: TraversableLayout
+  m_TagString: TraversalManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6826904225101438097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3586655531442555394}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6877883850182717222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3586655531442555394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251ffde1c7cb6d346a48857e3646eeff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layoutGeneratorPrefab: {fileID: 1542659884841498409, guid: e227d64ebbf116348a4974f253c7f4d6, type: 3}
+  mapEncounterPrefab: {fileID: 2838874819895571372, guid: d4c14d69036dffe459cb999afdb94ae6, type: 3}
+  playerOnMapPrefab: {fileID: 8671957000330676690, guid: b23e451c849f1274caa828a5ee4e2215, type: 3}
+  layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
+  firstEncounter: {fileID: 11400000, guid: 0feaa69d8f5e1024d83c3dc0291d1f29, type: 2}
+  lastEncounter: {fileID: 11400000, guid: 007c3c4f7b4045a4cbdf1083d185fcce, type: 2}
+  layerContainers: []
+  prevSelectedEncounter: {fileID: 0}
+  curSelectedEncounter: {fileID: 0}

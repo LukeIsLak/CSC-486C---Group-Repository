@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 72d4be2e78a7b48cd9b05ebedd75309b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - image: {instanceID: 0}
+  - aoeprojprefab: {instanceID: 0}
+  - player: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
