@@ -113,10 +113,10 @@ TextureImporter:
       name: Unreachable_Combat
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 40
-        width: 24
-        height: 24
+        width: 26
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: Reachable_Combat
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 72
-        width: 24
-        height: 24
+        width: 26
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: Unreachable_Mystery
       rect:
         serializedVersion: 2
-        x: 26
+        x: 56
         y: 40
-        width: 19
-        height: 24
+        width: 21
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: Reachable_Mystery
       rect:
         serializedVersion: 2
-        x: 26
+        x: 56
         y: 72
-        width: 19
-        height: 24
+        width: 21
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: Unreachable_Shop
       rect:
         serializedVersion: 2
-        x: 47
+        x: 77
         y: 41
-        width: 18
-        height: 23
+        width: 20
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +218,10 @@ TextureImporter:
       name: Reachable_Shop
       rect:
         serializedVersion: 2
-        x: 47
+        x: 77
         y: 73
-        width: 18
-        height: 23
+        width: 20
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: Unreachable_Boss
       rect:
         serializedVersion: 2
-        x: 67
+        x: 97
         y: 33
-        width: 24
-        height: 31
+        width: 26
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +260,10 @@ TextureImporter:
       name: Reachable_Boss
       rect:
         serializedVersion: 2
-        x: 67
+        x: 97
         y: 65
-        width: 24
-        height: 31
+        width: 26
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: Cleared_Combat
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 8
-        width: 24
-        height: 24
+        width: 26
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,10 +302,10 @@ TextureImporter:
       name: Cleared_Mystery
       rect:
         serializedVersion: 2
-        x: 26
+        x: 56
         y: 8
-        width: 19
-        height: 24
+        width: 21
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,10 +323,10 @@ TextureImporter:
       name: Cleared_Shop
       rect:
         serializedVersion: 2
-        x: 47
+        x: 77
         y: 9
-        width: 18
-        height: 23
+        width: 20
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,10 +344,10 @@ TextureImporter:
       name: Cleared_Boss
       rect:
         serializedVersion: 2
-        x: 67
+        x: 97
         y: 1
-        width: 24
-        height: 31
+        width: 26
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,12 +365,12 @@ TextureImporter:
       name: Hovered_Combat
       rect:
         serializedVersion: 2
-        x: 0
+        x: 30
         y: 104
         width: 26
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,12 +386,12 @@ TextureImporter:
       name: Hovered_Mystery
       rect:
         serializedVersion: 2
-        x: 26
+        x: 56
         y: 104
         width: 21
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -407,12 +407,12 @@ TextureImporter:
       name: Hovered_Shop
       rect:
         serializedVersion: 2
-        x: 47
+        x: 77
         y: 105
         width: 20
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -428,12 +428,12 @@ TextureImporter:
       name: Hovered_Boss
       rect:
         serializedVersion: 2
-        x: 67
+        x: 97
         y: 97
         width: 26
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -441,6 +441,90 @@ TextureImporter:
       bones: []
       spriteID: e09c024626ff3d24d95e4ccd6f40f403
       internalID: 647394035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hovered_Restpoint
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 100
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee20e972d91d9e74d8f6baa44ef48e60
+      internalID: 1158225662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reachable_Restpoint
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 68
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06c5d2d87355c6c4380a8a5778bf1096
+      internalID: -892586417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unreachable_Restpoint
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 36
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2b5ed09175efb840810c5c66f19eeda
+      internalID: -1763283954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cleared_Restpoint
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 4
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c35b3ac74ee72104ab28fde5e2e73728
+      internalID: 1202110436
       vertices: []
       indices: 
       edges: []
@@ -459,18 +543,22 @@ TextureImporter:
       Cleared_Boss: -1672081315
       Cleared_Combat: 1202719947
       Cleared_Mystery: -1162132569
+      Cleared_Restpoint: 1202110436
       Cleared_Shop: -323223572
       Hovered_Boss: 647394035
       Hovered_Combat: -1362446071
       Hovered_Mystery: -183375075
+      Hovered_Restpoint: 1158225662
       Hovered_Shop: -865636401
       Reachable_Boss: -1724828971
       Reachable_Combat: -1100653601
       Reachable_Mystery: -601846495
+      Reachable_Restpoint: -892586417
       Reachable_Shop: 2070105257
       Unreachable_Boss: -622201144
       Unreachable_Combat: -1707302033
       Unreachable_Mystery: 1710345884
+      Unreachable_Restpoint: -1763283954
       Unreachable_Shop: 890794497
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
