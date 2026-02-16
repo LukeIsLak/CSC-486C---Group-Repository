@@ -67,11 +67,11 @@ public class Bat : EnemyInterface
         BatStateManager env_bsm = FindObjectOfType<BatStateManager>();
         
         bsm = env_bsm;
-        bsm.entities.Add(this);
+        bsm.bats.Add(this);
     }
 
     public override void KillEnemy() {
-        bsm.entities.Remove(this);
+        bsm.bats.Remove(this);
         Destroy(this.gameObject);
     }
 
@@ -462,7 +462,7 @@ public class Bat : EnemyInterface
     public void UpdatePeckRebound() {
         UpdateMoveSpot(false);
 
-        if (!isMoving && isPeckRebounding) peckComplete = false;
+        if (!isMoving && isPecking == true && isPeckRebounding) peckComplete = false;
     }
 
     /****************************************************/
