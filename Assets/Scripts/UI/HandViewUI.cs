@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class HandViewUI : MonoBehaviour
 {
-    [SerializeField] private DeckSystems deckSystems;
-
-
     [Header("UI References")]
     [SerializeField] private CardViewUI cardViewPrefab;
     [SerializeField] private RectTransform handLocation;
@@ -16,8 +13,8 @@ public class HandViewUI : MonoBehaviour
     [SerializeField] private float selectedCardLift = 30f;
     [SerializeField] private float selectedScale = 1f;
 
-
     private List<CardViewUI> cards = new();
+    private DeckSystems deckSystems;
     private void OnEnable()
     {
         Hook(deckSystems);

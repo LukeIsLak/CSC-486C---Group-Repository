@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private HandViewUI handView;
+    [SerializeField] private InventoryUI inventoryView;
 
     public static UIManager instance { get; private set; }
 
@@ -19,6 +20,10 @@ public class UIManager : MonoBehaviour
         if(health != null ) healthBar.BindHealthUI(health);
 
         var deck = player.GetComponent<DeckSystems>();
-        if(deck != null) handView.BindDeckSystem(deck);
+        if (deck != null)
+        {
+            handView.BindDeckSystem(deck);
+            inventoryView.BindDeckSystem(deck);
+        }
     }
 }
