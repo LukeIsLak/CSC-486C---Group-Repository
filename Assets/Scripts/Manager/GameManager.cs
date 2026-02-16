@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         playerHealth.Init(playerData.maxHealth);
         deck.InitializeRandomDeck(cardsDB, 30); 
         UIManager.instance.BindPlayer(player);
+        UIManager.instance.HideInventoryView();
     }
 
 }

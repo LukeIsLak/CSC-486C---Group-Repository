@@ -7,8 +7,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private HandViewUI handView;
     [SerializeField] private InventoryUI inventoryView;
+    [SerializeField] private GameObject CombatPanel;
 
     public static UIManager instance { get; private set; }
+
 
     private void Awake()
     {
@@ -26,4 +28,25 @@ public class UIManager : MonoBehaviour
             inventoryView.BindDeckSystem(deck);
         }
     }
+    private void ShowCombatView()
+    {
+        CombatPanel.SetActive(true);
+    }
+
+    private void HideCombatView()
+    {
+        CombatPanel.SetActive(false);
+    }
+    public void ShowInventoryView() 
+    {
+        HideCombatView();
+        inventoryView.ShowInventory(); 
+    }
+    public void HideInventoryView()
+    {
+        inventoryView.HideInventory();
+        ShowCombatView();
+    }
+
+
 }

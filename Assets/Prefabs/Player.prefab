@@ -187,6 +187,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5e768046-dad2-4882-8194-60b6eaa12114
     m_ActionName: Player/Use Card[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8382735831833828628}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnToggleInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8a9c63ee-fb5c-4fc9-af10-501e2c2c94c8
+    m_ActionName: Player/InventoryInCombat[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -273,7 +289,6 @@ MonoBehaviour:
   deckSize: 15
   currentDeckSize: 0
   discard: []
-  inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
 --- !u!114 &-201263358416133198
 MonoBehaviour:
   m_ObjectHideFlags: 0

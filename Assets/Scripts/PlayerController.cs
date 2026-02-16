@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private float rotationX; 
     private float verticalVelocity;
-
+    private bool bInventoryOpen;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -78,5 +78,21 @@ public class PlayerController : MonoBehaviour
 
         // Horizontal look ( move body)
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    public void OnToggleInventory(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        bInventoryOpen = !bInventoryOpen;
+        if (bInventoryOpen) 
+        {
+            UIManager.instance?.ShowInventoryView();
+        }
+        else
+        {
+            UIManager.instance?.HideInventoryView();
+        }
+
     }
 }
