@@ -314,7 +314,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  dashTime: 1.5
+  dashTime: 0.15
   dashSpeed: 3
   dashCD: 2
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
