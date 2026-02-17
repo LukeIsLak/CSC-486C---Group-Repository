@@ -67,11 +67,11 @@ public class Bat : EnemyInterface
         BatStateManager env_bsm = FindObjectOfType<BatStateManager>();
         
         bsm = env_bsm;
-        bsm.bats.Add(this);
+        bsm.entities.Add(this);
     }
 
     public override void KillEnemy() {
-        bsm.bats.Remove(this);
+        bsm.entities.Remove(this);
         Destroy(this.gameObject);
     }
 
