@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private RectTransform inventoryLocation;
     [SerializeField] private CardViewUI cardViewPrefab;
+    [SerializeField] private ScrollRect scrollRect; // For forcing showing item from the top
     private List<CardViewUI> cards = new();
     private DeckSystems deckSystems;
 
@@ -39,10 +41,16 @@ public class InventoryUI : MonoBehaviour
     {
         gameObject.SetActive(true);
         BuildInventoryUI();
+        Canvas.ForceUpdateCanvases();
+        scrollRect.verticalNormalizedPosition = 1f; // top
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     public void HideInventory()
     {
         ClearInventoryUI();
         gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

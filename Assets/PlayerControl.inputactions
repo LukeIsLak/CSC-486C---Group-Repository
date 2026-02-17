@@ -3,7 +3,7 @@
     "name": "PlayerControl",
     "maps": [
         {
-            "name": "Player",
+            "name": "Combat",
             "id": "3ece54ad-d2a0-47ea-9183-2da454a6f9e2",
             "actions": [
                 {
@@ -255,6 +255,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "InventoryInCombat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "545ae3d7-598b-40bc-9d9a-715a363702be",
+            "actions": [
+                {
+                    "name": "Scrolling",
+                    "type": "Value",
+                    "id": "fe939476-de9d-4fcf-95ab-6bee775ff86a",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0ab1ab1d-cf35-4a93-98a9-6a2cb7ca9a01",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scrolling",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

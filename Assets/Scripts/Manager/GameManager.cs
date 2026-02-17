@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
         deck.InitializeRandomDeck(cardsDB, 30); 
         UIManager.instance.BindPlayer(player);
         UIManager.instance.HideInventoryView();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 }

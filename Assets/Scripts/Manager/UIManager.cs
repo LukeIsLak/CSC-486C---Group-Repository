@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private InventoryUI inventoryView;
     [SerializeField] private GameObject CombatPanel;
 
+    private PlayerInput playerInput;
     public static UIManager instance { get; private set; }
 
 
@@ -20,7 +22,7 @@ public class UIManager : MonoBehaviour
     {
         var health = player.GetComponent<Health>();
         if(health != null ) healthBar.BindHealthUI(health);
-
+        playerInput = player.GetComponent<PlayerInput>();
         var deck = player.GetComponent<DeckSystems>();
         if (deck != null)
         {
@@ -40,11 +42,13 @@ public class UIManager : MonoBehaviour
     public void ShowInventoryView() 
     {
         HideCombatView();
+        playerInput.SwitchCurrentActionMap("UI");
         inventoryView.ShowInventory(); 
     }
     public void HideInventoryView()
     {
         inventoryView.HideInventory();
+        playerInput.SwitchCurrentActionMap("Combat");
         ShowCombatView();
     }
 

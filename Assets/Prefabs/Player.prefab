@@ -203,9 +203,13 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8a9c63ee-fb5c-4fc9-af10-501e2c2c94c8
     m_ActionName: Player/InventoryInCombat[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fe939476-de9d-4fcf-95ab-6bee775ff86a
+    m_ActionName: UI/Scrolling[/Mouse/scroll/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: 3ece54ad-d2a0-47ea-9183-2da454a6f9e2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &8382735831833828628
