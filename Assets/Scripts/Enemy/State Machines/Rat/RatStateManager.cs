@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RatStates : StateMachine<Ratm RatStates> {
+public enum RatStates {
     Spawn,
     Idle,
     Wander,
@@ -12,7 +12,7 @@ public enum RatStates : StateMachine<Ratm RatStates> {
     Hit
 }
 
-public class RatStateManager : MonoBehaviour
+public class RatStateManager : StateMachine<Rat, RatStates>
 {
     public void Awake() {
         /*Spawn*/
@@ -47,10 +47,12 @@ public class RatStateManager : MonoBehaviour
         }
     }
 
-    public override void CheckUpdate(Rat b) {
+    public override void CheckUpdate(Rat r) {
         var currentState = r.currentState;
         if (whileStates.TryGetValue(currentState, out var whileFunc)) {
-            whileFunc(b);
+            whileFunc(r);
         }
     }
+
+    public override void EnterUniversal(Rat r) {}
 }
