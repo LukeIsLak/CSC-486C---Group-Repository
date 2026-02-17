@@ -66,7 +66,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5328624486718827913}
-        m_TargetAssemblyTypeName: FogHandlerr, Assembly-CSharp
+        m_TargetAssemblyTypeName: FogHandler, Assembly-CSharp
         m_MethodName: FogUpdated
         m_Mode: 1
         m_Arguments:
