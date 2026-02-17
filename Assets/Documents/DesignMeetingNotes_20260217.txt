@@ -1,0 +1,59 @@
+Design Meeting Notes
+Led by: Jonah Carroll Dullaert
+Date: 2026-02-17
+
+Present: Jonah, Nick, Nathan, Will, Justin
+
+-- Cards --
+* Elemental as justification for functionality.
+* Emergently synergized - different kinds of attacks work well with each other.
+* 18-19 cards will be created for this alpha.
+* Card types:
+ * AOE explosive projectiles - fireball (explodes on anything, burn DOT), spark (fizzles on walls, explodes on enemies, stun)
+ * AOE pusher projectiles - tidal wave (wave carries enemies to wall, deals damage continuously)
+ * AOE snare traps - bramble snare 
+ * Player AOE - life steal
+ * AOE vacuum grenades - void hole
+ * Homing attacks - astral dagger (single target), lightning bolt (ricocheting / chain lightning on multiple targets within range)
+
+-- Inventory/Deck System --
+* Inventory has active deck, and a buffer.
+* At the end of an encounter, any cards picked up are then shown and the game asks the player which they want to incorporate into the deck.
+* If player selects new additions and has less than maximum deck size, new cards are added without issue. If exceeding maximum, also prompted to discard cards to make space.
+* Card removal from active deck without replacement with another card is a privileged action that can only occur through merchants / NPCs.
+
+-- Merchants --
+* Buy cards / buy health (and mana) max increases
+* Pay to have cards removed from deck
+
+-- Mystery Encounters --
+* Random selection from a pool of possible events:
+ * Decrease maximum HP to discard a card of one's choosing 
+ * Randomly transported to another node on the same layer of map (that node is marked as cleared, and player progresses down)
+ * Pay gold to increase maximum health
+ * Pay with health to gain gold (maximum stays the same)
+ * Unguarded cache of gold
+ * Unguarded random card
+ * Combat encounter (lol)
+
+-- Player Incentives --
+* Traversing the map in specific ways:
+ * Going to shops to get rid of cards, buy new cards, recover health
+ * Going to rest points to recover health
+ * Going to mystery encounters to potentially get new loot
+* Strategies for combat encounters:
+ * Dungeons can be cleared without defeating all enemies - there's an "exit door."
+ * Rushing through to exit without killing anything = clear node, but no rewards gained and encounters only get harder.
+ * One reward per each: Minimum kill threshold, complete wipe of encounter, both prior criteria under time limit.
+ * Specific groups of enemies are tied to chests in dungeons, once they've all been killed the chest opens (RoR2 Void Seed)
+ * Enemies drop gold on kill?
+
+-- Questboard --
+* Minimum three options for dungeon quests.
+* Information visible: "difficulty," gold payout.
+* Difficulty characterized through skull ratings, 1-5, determined based on number of layers and number/frequency of rest points.
+
+-- Votes, post meeting --
+1. Do we do a mana system for card usage? Y/N
+2. Is there a hard limit on the maximum number of cards the player can possess? Y/N
+3. How are cards drawn from the deck during encounters? Use entire hand, get new hand / Use a card, get a new card a few seconds later
