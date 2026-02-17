@@ -4660,6 +4660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5941285783691745774, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7654491125290211153, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

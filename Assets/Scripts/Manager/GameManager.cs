@@ -13,11 +13,9 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-
     private void Start()
     {
         GameObject player = Instantiate(playerPrefab);
-
 
         var deck = player.GetComponent<DeckSystems>();
         var playerHealth = player.GetComponent<Health>();
@@ -35,5 +33,4 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
 }
