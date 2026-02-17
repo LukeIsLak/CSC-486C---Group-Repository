@@ -18,10 +18,12 @@ public class EnemyInterface : MonoBehaviour
     }
 
     public virtual void initialize() {
+        /*Initialize enemy data*/
         curHealth = enemyData.baseHealth * playerData.baseHealth;
         moveSpeed = enemyData.baseMoveSpeed * playerData.baseSpeed;
     }
 
+    /*This has the intention of being overwritten in extended classes*/
     public virtual void KillEnemy() {
         Destroy(this.gameObject);
     }
