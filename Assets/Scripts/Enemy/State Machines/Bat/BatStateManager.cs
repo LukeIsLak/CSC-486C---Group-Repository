@@ -35,16 +35,6 @@ public enum BatStates {
 
 public class BatStateManager : StateMachine<Bat, BatStates>
 {
-    // public List<Bat> bats;
-    // //XXX maybe move this to a scriptable object??
-    // //XXX make an any aspect, so any state can transition into it
-    // //XXX I would eventually like to move out of this, since this is not memory efficient, but for now
-    // //XXX find a way to speed things up, N calculation for each bat in N*M lookup, more efficient way?
-    // public Dictionary<BatStates, List<(BatStates toState, Func<Bat, bool> condition)>> conditionLookup = new Dictionary<BatStates, List<(BatStates, Func<Bat, bool>)>>();
-    // public Dictionary<BatStates, Action<Bat>> enterStates = new Dictionary<BatStates, Action<Bat>>();
-    // public Dictionary<BatStates, Action<Bat>> whileStates = new Dictionary<BatStates, Action<Bat>>();
-    // public Dictionary<BatStates, Action<Bat>> exitStates = new Dictionary<BatStates, Action<Bat>>();
-
     public void Awake() {
 
         /*Spawn*/
@@ -64,9 +54,6 @@ public class BatStateManager : StateMachine<Bat, BatStates>
         AddExitState(BatStates.Perched, ExitPerchedState);
     
         /*Flutter*/
-
-        //XXX maybe make a function were if the player goes out of range to wander away and then
-
         AddTransition(BatStates.Flutter, BatStates.PeckAttacking, FlutterToPeckCondition);
         AddTransition(BatStates.Flutter, BatStates.SwoopAttacking, FlutterToSwoopCondition);
         AddTransition(BatStates.Flutter, BatStates.Perching, FlutterToPerching);

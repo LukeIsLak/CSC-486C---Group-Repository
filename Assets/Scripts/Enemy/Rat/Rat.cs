@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Rat : EnemyInterface
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Rat Base Fields")]
+    public Animator anim;
+    public Rigidbody rb;
+    public RatBaseData rd;
+    public Transform playerTransform;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // [Header("State Checkers")]
+
+    [Header("Misc. Variables")]
+    public RatStates currentState;
 }
