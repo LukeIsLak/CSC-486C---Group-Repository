@@ -579,10 +579,14 @@ public class Bat : EnemyInterface
         float step = moveSpeed * speedModifier * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, desiredPos, step);
 
-        if (debug) Debug.DrawRay(origin, repulsion, Color.magenta);
-        if (debug) Debug.DrawLine(origin, desiredPos, Color.cyan);
+        /* If we want to debug the steer*/
+        if (debug) 
+        { 
+            Debug.DrawRay(origin, repulsion, Color.magenta);
+            Debug.DrawLine(origin, desiredPos, Color.cyan);
+        }
 
-        // rotate to face movement
+        /* Rotate parent object to face where we are moving */
         Vector3 toTarget = desiredPos - transform.position;
         if (toTarget.sqrMagnitude > 1e-6f)
         {
@@ -606,7 +610,7 @@ public class Bat : EnemyInterface
     public void OnTriggerEnter(Collider other) {
         if (isAttacking && other.CompareTag("Player")) {
             Health h = other.GetComponent<Health>();
-            if (h != null) h.TakeDamage(10f); // XXX eventually 
+            if (h != null) h.TakeDamage(10f); //TODO: LK - eventually, when we figure out the base values, replace this!
             isAttacking = false;
         }
     }
