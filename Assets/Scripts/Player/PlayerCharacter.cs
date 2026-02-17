@@ -14,6 +14,11 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private float attackHitStopDuration = 0.03f;
     [SerializeField] private LayerMask enemyLayer;
 
+    [Header("Dash")]
+    [SerializeField] private float dashTime = 1.0f;
+    [SerializeField] private float dashSpeed = 1.0f;
+    [SerializeField] private float dashCD = 2.0f;
+
     [Header("Animation State")]
     [SerializeField] private const string ATTACK1 = "Attack 1";
     [SerializeField] private const string ATTACK2 = "Attack 2";
@@ -26,11 +31,16 @@ public class PlayerCharacter : MonoBehaviour
     private Animator swordAnimator;
     private Camera cam;
     private Coroutine hitStopCoroutine;
+    private PlayerController playerController;
     private string currentAnimationState;
     private bool isAttacking;
     private float lastAttackTime;
     private int comboIndex = 0;
 
+    //For dashing
+    private bool isDashing;
+    private float nextDashTime;
+    private Coroutine dashCoroutine;
     // For checking when to queue and queue next attack
     private bool canQueue;
     private bool queuedNextAttack;
@@ -38,6 +48,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
+        playerController = GetComponent<PlayerController>();    
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -141,13 +152,46 @@ public class PlayerCharacter : MonoBehaviour
         canQueue = false;
     }
 
-    private void Update()
+    public void OnDash(InputAction.CallbackContext context)
     {
-        //// for testing player health
-        //if (Input.GetKeyDown(KeyCode.F)) 
-        //{
-        //    healthComponent.TakeDamage(10);
-        //}
+        if (!context.performed) return;
+        if (isDashing) return;
+        if (Time.time < nextDashTime) return;    
+        if (dashCoroutine != null) StopCoroutine(dashCoroutine);
+
+        dashCoroutine = StartCoroutine(Dash());
+
     }
 
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        nextDashTime = Time.time + dashCD;
+        float startTime = Time.time;
+        while(Time.time < startTime + dashTime)
+        {
+            playerController.controller.Move(playerController.speed * GetDashDirection() * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        isDashing = false;
+        dashCoroutine = null;
+    }
+
+    private Vector3 GetDashDirection()
+    {
+        Vector3 forward = cam.transform.forward;
+        Vector3 right = cam.transform.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        Vector3 direction = forward*playerController.moveDirection.y + right*playerController.moveDirection.x;
+
+        if(direction.sqrMagnitude > 0.01f)
+        {
+            return direction.normalized;
+        }
+
+        return forward;
+    }
 }
