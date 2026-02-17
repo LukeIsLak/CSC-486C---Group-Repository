@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "8ed936fa-8c6b-498e-a618-cf01f9e4bc52",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -257,6 +266,17 @@
                     "action": "InventoryInCombat",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c5ea6c1-33fd-49ea-b71f-4a6ca1873a81",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -265,24 +285,24 @@
             "id": "545ae3d7-598b-40bc-9d9a-715a363702be",
             "actions": [
                 {
-                    "name": "Scrolling",
-                    "type": "Value",
-                    "id": "fe939476-de9d-4fcf-95ab-6bee775ff86a",
-                    "expectedControlType": "Axis",
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "e449e80f-7867-4dde-85bd-0b2d98172988",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "0ab1ab1d-cf35-4a93-98a9-6a2cb7ca9a01",
-                    "path": "<Mouse>/scroll/y",
+                    "id": "a1f6de21-e0b0-4663-945e-7584e0f16df2",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scrolling",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -204,12 +204,40 @@ MonoBehaviour:
     m_ActionId: 8a9c63ee-fb5c-4fc9-af10-501e2c2c94c8
     m_ActionName: Player/InventoryInCombat[/Keyboard/tab]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fe939476-de9d-4fcf-95ab-6bee775ff86a
-    m_ActionName: UI/Scrolling[/Mouse/scroll/y]
+      m_Calls:
+      - m_Target: {fileID: 8382735831833828628}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnTogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8ed936fa-8c6b-498e-a618-cf01f9e4bc52
+    m_ActionName: Combat/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8382735831833828628}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnTogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e449e80f-7867-4dde-85bd-0b2d98172988
+    m_ActionName: UI/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 3ece54ad-d2a0-47ea-9183-2da454a6f9e2
+  m_DefaultActionMap: Combat
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &8382735831833828628

@@ -8,7 +8,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private HandViewUI handView;
     [SerializeField] private InventoryUI inventoryView;
+    [SerializeField] private PauseUI pauseView;
     [SerializeField] private GameObject CombatPanel;
+
+    public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
     public static UIManager instance { get; private set; }
@@ -41,16 +44,25 @@ public class UIManager : MonoBehaviour
     }
     public void ShowInventoryView() 
     {
+        isInventoryOpen = true;
         HideCombatView();
         playerInput.SwitchCurrentActionMap("UI");
         inventoryView.ShowInventory(); 
     }
     public void HideInventoryView()
     {
+        isInventoryOpen = false;
         inventoryView.HideInventory();
         playerInput.SwitchCurrentActionMap("Combat");
         ShowCombatView();
     }
 
-
+    public void ShowPauseView()
+    {
+        pauseView.ShowPauseUI();
+    }
+    public void HidePauseView()
+    {
+        pauseView.HidePauseUI();
+    }
 }
