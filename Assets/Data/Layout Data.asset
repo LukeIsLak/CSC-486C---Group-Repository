@@ -19,9 +19,10 @@ MonoBehaviour:
   useSeed: 1
   shouldGenerate: 0
   shouldDoProgress: 0
-  currentEncounter: {fileID: 11400000, guid: 007c3c4f7b4045a4cbdf1083d185fcce, type: 2}
+  currentEncounter: {fileID: 11400000, guid: 9ea248889b36f144c9b059b555a84738, type: 2}
   completedIndices: 00000000
   FogUpdated: {fileID: 11400000, guid: 53b5e16dded829045b198432f3c140d9, type: 2}
-  layersRevealed: 2
+  layersRevealed: 0
+  lookAhead: 2
   layerDistance: 4
   encounterSep: 4

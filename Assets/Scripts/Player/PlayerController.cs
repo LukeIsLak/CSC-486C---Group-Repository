@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
-    
+
     [SerializeField] public float speed = 5f;
     [SerializeField] private float jumpForce = 2f;
     [SerializeField] private float gravity = -9.81f;
@@ -13,20 +13,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float ySensitivity = 100f;
     [SerializeField] private float rotationXlimit = 80f;
     [SerializeField] private CharacterData characterData;
-    private CharacterController controller;
+    
+    [HideInInspector] public CharacterController controller;
     private Camera camera;
-    private Vector2 moveDirection;
+    public Vector2 moveDirection;
     private Vector2 lookValue;
 
-    private float rotationX; 
+    private float rotationX;
     private float verticalVelocity;
+
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         camera = GetComponentInChildren<Camera>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
     }
     // Update is called once per frame
     void Update()
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.performed && controller.isGrounded)
+        if (context.performed && controller.isGrounded)
         {
             verticalVelocity = jumpForce;
         }
@@ -78,5 +79,32 @@ public class PlayerController : MonoBehaviour
 
         // Horizontal look ( move body)
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    public void OnToggleInventory(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (UIManager.instance.isInventoryOpen)
+        {
+            UIManager.instance?.HideInventoryView();
+        }
+        else
+        {
+            UIManager.instance?.ShowInventoryView();
+        }
+
+    }
+
+    public void OnTogglePause(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (PauseManager.instance.isPause)
+        {
+            PauseManager.instance?.Resume();
+        }
+        else
+        {
+            PauseManager.instance?.Pause();
+        }
     }
 }

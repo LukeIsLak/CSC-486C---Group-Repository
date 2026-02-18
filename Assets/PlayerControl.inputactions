@@ -3,7 +3,7 @@
     "name": "PlayerControl",
     "maps": [
         {
-            "name": "Player",
+            "name": "Combat",
             "id": "3ece54ad-d2a0-47ea-9183-2da454a6f9e2",
             "actions": [
                 {
@@ -55,6 +55,33 @@
                     "name": "Use Card",
                     "type": "Button",
                     "id": "5e768046-dad2-4882-8194-60b6eaa12114",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryInCombat",
+                    "type": "Button",
+                    "id": "8a9c63ee-fb5c-4fc9-af10-501e2c2c94c8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "8ed936fa-8c6b-498e-a618-cf01f9e4bc52",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "68475c38-a7e2-4743-850c-34404ca2fa64",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -235,6 +262,87 @@
                     "processors": "",
                     "groups": "",
                     "action": "Use Card",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca63e036-d708-4123-8bb9-2f07267e71c0",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryInCombat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c5ea6c1-33fd-49ea-b71f-4a6ca1873a81",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c161a78-a645-4462-88ba-904fe36e9ed5",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "545ae3d7-598b-40bc-9d9a-715a363702be",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "e449e80f-7867-4dde-85bd-0b2d98172988",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryInCombat",
+                    "type": "Button",
+                    "id": "c91fa945-c01e-47f8-9096-0bf8ce2483e6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a1f6de21-e0b0-4663-945e-7584e0f16df2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d33a940-7a6e-405f-a42f-c4427b780800",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryInCombat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

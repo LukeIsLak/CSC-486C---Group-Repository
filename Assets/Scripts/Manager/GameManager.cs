@@ -13,18 +13,24 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-
     private void Start()
     {
         GameObject player = Instantiate(playerPrefab);
-
 
         var deck = player.GetComponent<DeckSystems>();
         var playerHealth = player.GetComponent<Health>();
 
         playerHealth.Init(playerData.maxHealth);
-        deck.InitializeRandomDeck(cardsDB, 30); 
-        UIManager.instance.BindPlayer(player);
-    }
 
+        deck.InitializeRandomDeck(cardsDB, 30); 
+
+        UIManager.instance.BindPlayer(player);
+        UIManager.instance.HideInventoryView();
+        UIManager.instance.HidePauseView();
+
+        PauseManager.instance.BindPlayer(player);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 }
