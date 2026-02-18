@@ -11,7 +11,13 @@ public class PauseManager : MonoBehaviour
     private PlayerInput playerInput;
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     public void BindPlayer(GameObject player)
     {

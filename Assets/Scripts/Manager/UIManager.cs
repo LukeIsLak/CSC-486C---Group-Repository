@@ -19,7 +19,13 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     public void BindPlayer(GameObject player)
     {
@@ -31,7 +37,7 @@ public class UIManager : MonoBehaviour
         var deck = player.GetComponent<DeckSystems>();
         if (deck != null)
         {
-            handView.BindDeckSystem(deck);
+            handView.BindDeckSystem(deck);  
             inventoryView.BindDeckSystem(deck);
         }
     }
