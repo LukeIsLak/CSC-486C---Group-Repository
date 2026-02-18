@@ -40,6 +40,15 @@ public class PlayerCharacter : MonoBehaviour
     //For dashing
     private bool isDashing;
     private float nextDashTime;
+
+    public float nextDashRemaining
+    {
+        get
+        {
+            if (Time.time >= nextDashTime) return 1f;
+            return 1 - (nextDashTime - Time.time)/dashCD;
+        }
+    }
     private Coroutine dashCoroutine;
     // For checking when to queue and queue next attack
     private bool canQueue;
@@ -166,7 +175,7 @@ public class PlayerCharacter : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
-        nextDashTime = Time.time + dashCD;
+        nextDashTime = Time.time + dashCD + dashTime;
         float startTime = Time.time;
         while(Time.time < startTime + dashTime)
         {

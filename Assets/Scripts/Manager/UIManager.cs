@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private InventoryUI inventoryView;
     [SerializeField] private PauseUI pauseView;
     [SerializeField] private GameObject CombatPanel;
-
+    [SerializeField] private StaminaUI staminaView;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
     {
         var health = player.GetComponent<Health>();
         if(health != null ) healthBar.BindHealthUI(health);
+        var playerCharacter = player.GetComponent<PlayerCharacter>();
+        if(playerCharacter != null) staminaView.BindPlayerUI(playerCharacter);
         playerInput = player.GetComponent<PlayerInput>();
         var deck = player.GetComponent<DeckSystems>();
         if (deck != null)
