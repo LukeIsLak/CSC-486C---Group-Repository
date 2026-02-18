@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CharacterData playerData;
     [SerializeField] private CardsDatabase cardsDB;
     public static GameManager instance { get; private set; }
+    public PlayerInventory inventory;
 
     private void Awake()
     {
@@ -17,12 +18,13 @@ public class GameManager : MonoBehaviour
     {
         GameObject player = Instantiate(playerPrefab);
 
-        var deck = player.GetComponent<DeckSystems>();
+        //var deck = player.GetComponent<DeckSystems>();
         var playerHealth = player.GetComponent<Health>();
 
         playerHealth.Init(playerData.maxHealth);
 
-        deck.InitializeRandomDeck(cardsDB, 30); 
+        //deck.InitializeRandomDeck(cardsDB, 30); 
+        inventory.InitializeRandomDeck(cardsDB, 30);
 
         UIManager.instance.BindPlayer(player);
         UIManager.instance.HideInventoryView();
