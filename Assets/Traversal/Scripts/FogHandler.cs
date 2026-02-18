@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FogHandlerr : MonoBehaviour
+public class FogHandler : MonoBehaviour
 {
     public LayoutData layoutData;
     public GameObject fogPrefab;
@@ -29,8 +29,7 @@ public class FogHandlerr : MonoBehaviour
         // Place fog at unrevealed layers
         for (int i = 0; i <= layoutData.depth; i++)
         {
-            // if (i < layoutData.layersRevealed) continue;
-            if (i < layoutData.completedIndices.Count + 2) continue; // player sees 2 for now.
+            if (i < layoutData.layersRevealed) continue;
             fogLayer = new List<GameObject>();
             
             float offsetZ = -i * layoutData.layerDistance;
@@ -48,6 +47,13 @@ public class FogHandlerr : MonoBehaviour
 
     public void FogUpdated()
     {
-        
+        if (fogLayerList.Count == 0) return;
+
+        foreach (GameObject fog in fogLayerList[0])
+        {
+            fog.GetComponent<FogObject>().DoFadeAndDelete();
+        }
+        fogLayerList[0].Clear();
+        fogLayerList.RemoveAt(0);
     }
 }
