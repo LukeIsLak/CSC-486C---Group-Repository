@@ -6,9 +6,9 @@ using UnityEngine;
 public class LayoutData : ScriptableObject
 {
     [Header("Generation Parameters")]
-    public int              depth,
-                            maxWidth,
-                            randomSeed;
+    public int              depth;
+    public int              maxWidth;
+    public int              randomSeed;
     public float            complexity;
     public bool             useSeed;
 
