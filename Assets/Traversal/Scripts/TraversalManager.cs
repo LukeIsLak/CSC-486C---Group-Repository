@@ -50,7 +50,6 @@ public class TraversalManager : MonoBehaviour
         {
             layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
             layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
-            traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
             dungeonData.dungeonSeed = (int)System.DateTime.Now.Ticks;
             EnterEncounter.Raise();

@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.IO;
+using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class SceneTransitionManager : MonoBehaviour
 {
     [Header("Scenes")]
     public SceneField   lobbyScene;
-    public SceneField   merchantScene;
-    public SceneField   treasureScene;
-    public SceneField   dungeonScene;
-    public SceneField   bossScene;
     public SceneField   layoutScene;
     public SceneField   menuScene;
 
     [Header("Data")]
     public LayoutData   layoutData;
+
+    public float fadeTime = 1;
+    public float steps = 30f;
+    public RawImage image;
 
     /* Added this back... Assuming it will be ever-present */
     public static SceneTransitionManager instance;
@@ -31,6 +34,13 @@ public class SceneTransitionManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Start()
+    {
+        Color curColor = image.material.color;
+        curColor.a = 1f;
+        image.material.color = curColor;
+    }
+
     /**********************************
     ************ Traversal ************
     **********************************/
@@ -41,16 +51,15 @@ public class SceneTransitionManager : MonoBehaviour
         Cursor.visible = true;
     }
 
+
     public void SceneSwapToLobby()
     {
-        ForceMouseOn();
         SceneManager.LoadScene(lobbyScene);
     }
     
     public void SceneSwapToMapLayout()
     {   
-        ForceMouseOn();
-        SceneManager.LoadScene(layoutScene);
+        DoLoadWithFade(layoutScene, true, true);
     }
 
     public void SceneSwapToEncounter()
@@ -59,13 +68,83 @@ public class SceneTransitionManager : MonoBehaviour
 
         if (encType.scene == null)
         Debug.Log("Nothing to do for you with this encounter type.");
-        ForceMouseOn();
-        SceneManager.LoadScene(encType.scene);
+        DoLoadWithFade(encType.scene, true, true);
     }
 
     public void SceneSwapToMainMenu()
     {
-        ForceMouseOn();
         SceneManager.LoadScene(menuScene);
     }
+
+    
+
+    /**********************************
+    ************ Fade Logic ************
+    **********************************/
+    private void DoLoadWithFade(SceneField scene, bool fadeIn, bool fadeOut)
+    {
+       StartCoroutine(LoadWithFade(scene, fadeIn, fadeOut)); 
+    }  
+
+    private IEnumerator LoadWithFade(SceneField scene, bool fadeIn, bool fadeOut)
+    {
+        if (fadeIn)
+        {
+            StartCoroutine(FadeIn());
+            yield return new WaitForSeconds(fadeTime + 0.1f);
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene(scene);
+        }
+        // Check if should fade out, then do it if so.
+        if (fadeOut) 
+        { 
+            StartCoroutine(FadeOut());
+        } 
+        else
+        {
+            Color curColor = image.color;
+            curColor.a = 0f;
+            image.color = curColor;
+        }
+    }
+    private IEnumerator FadeIn()
+    {
+        float delay = fadeTime / 30;
+        float dec   = 1f / 30;
+        // Force to transparent
+        Color curColor = image.color;
+        curColor.a = 0f;
+
+        while (curColor.a < 1)
+        {
+            curColor.a += dec;
+            image.color = curColor;
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    private IEnumerator FadeOut()
+    {
+        float delay = fadeTime / steps;
+        float dec   = 1f / steps;
+        Color curColor = image.color;
+        curColor.a = 1f;
+
+        while (curColor.a > 0)
+        {
+            curColor.a -= dec;
+            image.color = curColor;
+            yield return new WaitForSeconds(delay);
+        }
+    }
 }
+
+

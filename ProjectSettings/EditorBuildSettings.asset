@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Encounters/Boss.unity
     guid: 4d926dc355c866749af1aac66a562c7f
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Rest.unity
+    guid: 3f4f66878de8baa43a0c2e08404584f4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8fd327be986849746ad2d8ff3f4bc4fd, type: 2}
