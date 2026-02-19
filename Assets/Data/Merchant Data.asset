@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: Merchant Data
   m_EditorClassIdentifier: 
   dialogue: Let's make a deal.
-  wares: []
+  wares:
+  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
+  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
+  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
+  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
+  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
