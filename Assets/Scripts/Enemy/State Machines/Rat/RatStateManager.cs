@@ -4,8 +4,10 @@ using UnityEngine;
 
 public enum RatStates {
     Spawn,
-    Idle,
-    Wander,
+    ColonyIdle,
+    ConolyWander,
+    LonerIdle,
+    LonerWander,
     AgroApproach,
     Leap,
     RunAway,
@@ -53,6 +55,25 @@ public class RatStateManager : StateMachine<Rat, RatStates>
             whileFunc(r);
         }
     }
+
+    /******************************/
+    /*   Transitions Conditions   */ 
+    /******************************/
+    public bool SpawnToIdle(Rat r) {
+        return true;
+    }
+
+    /******************************/
+    /*   Enter State Functions    */
+    /******************************/
+
+    /******************************/
+    /*   While State Functions    */
+    /******************************/
+
+    /******************************/
+    /*    Exit State Functions    */
+    /******************************/
 
     public override void EnterUniversal(Rat r) {}
 }
