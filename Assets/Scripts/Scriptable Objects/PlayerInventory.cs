@@ -8,6 +8,7 @@ public class PlayerInventory : ScriptableObject
     
     public int currency;
     public List<CardInstance> playerdeck = new();
+    public List<CardInstance> buffer = new();
 
     // Start is called before the first frame update
     void Start()
@@ -52,5 +53,13 @@ public class PlayerInventory : ScriptableObject
             return true;
         }
         return false;
+    }
+
+    public void AddToBuffer(CardInstance card){
+        buffer.Add(card);
+    }
+
+    void clearBuffer(){
+        buffer.Clear();
     }
 }

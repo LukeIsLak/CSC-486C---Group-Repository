@@ -35,9 +35,6 @@ public class DeckSystems : MonoBehaviour
     // used in combat (cards left in deck during level, ex. doesnt not include hand)
     public int currentDeckSize;
 
-    // the maximum amount of cards a player can have in a deck
-    const int MAXDECKSIZE = 30;
-
     //store any card that has been used
     public List<CardInstance> discard = new List<CardInstance>();
     
@@ -49,18 +46,20 @@ public class DeckSystems : MonoBehaviour
     
     public PlayerInventory inventory;
 
+    const float TIMETODRAWNEWCARD = 5f;
+
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
     void Update()
     {
         // might want to put a delay on this
-        if (hand.Count == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
-            for (int i = 0; i < MAXHANDSIZE; i++)
-            {
-                if (currentDeckSize > 0) { // in case a full hand isnt avalible
-                    drawCard();
-                }
-            }
-        }
+        //if (hand.Count == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
+            //for (int i = 0; i < MAXHANDSIZE; i++)
+            //{
+                //if (currentDeckSize > 0) { // in case a full hand isnt avalible
+                    //drawCard();
+                //}
+            //}
+        //}
     }
 
     void start(){
@@ -248,6 +247,8 @@ public class DeckSystems : MonoBehaviour
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
 
         NotifyHandContentsChanged();
+
+        StartCoroutine(newCardTimer());
     }
 
     /// <summary>
@@ -367,6 +368,13 @@ public class DeckSystems : MonoBehaviour
         else if (value < -0.1f)
         {
             ChangeHandIndex(-1);
+        }
+    }
+
+    IEnumerator newCardTimer(){
+        if (deck.Count > 0){
+            yield return WaitForSecond(TIMETODRAWNEWCARD);
+            drawCard();
         }
     }
 }
