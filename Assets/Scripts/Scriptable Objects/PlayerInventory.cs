@@ -24,13 +24,15 @@ public class PlayerInventory : ScriptableObject
     // call this in game manager
     public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
     {
+        Debug.Log("im here");
         for (int i = 0; i < deckSize; i++)
         {
             Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
             playerdeck.Add(new CardInstance(pick));
+            Debug.Log("doobedo");
         }
     }
-    
+
     /// <summary>
     /// used to add currency to a players inventory
     /// </summary>
