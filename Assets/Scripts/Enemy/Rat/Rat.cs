@@ -31,6 +31,7 @@ public class Rat : EnemyInterface
     public bool isLoner = false;
     public int? ratColonyNum = null;
     public Vector3? colonyMoveSpot = null;
+    public bool doneWandering = false;
     public LayerMask ratMask = ~0;
     public float colonyDist = 5f;
 
@@ -41,6 +42,8 @@ public class Rat : EnemyInterface
     public float leapDuration = 0.5f;
     public float leapCooldown = 3f;
 
+    public float wanderRadius = 4f;
+
 
     public override void initialize() {
         playerTransform = GameObject.FindWithTag("Player").transform;
@@ -49,10 +52,6 @@ public class Rat : EnemyInterface
 
         nma.updatePosition = false;
         nma.updateRotation = false;
-    }
-
-    public void FindWanderSpot() {
-
     }
 
     public void UpdateColonyMove() {
@@ -105,9 +104,32 @@ public class Rat : EnemyInterface
         }
     }
 
-    public void OnTriggerEnter(Collider other) {
+    public void OnTriggerZone(Collider other, TriggerZone zone, bool entered) {
         Rat or = other.gameObject.GetComponent<Rat>();
-        if (isLoner && or != null) {
+        if (or == null) return;
+
+        if (entered) {
+            if (zone == TriggerZone.Inner) {
+                // XXX to be added
+            }
+            else {
+                OnTriggerEnterOuter(other, or);
+            }
+        }
+
+        else {
+            if (zone == TriggerZone.Inner) {
+                // XXX to be added
+            }
+            else {
+                OnTriggerExitOuter(other, or);
+            }
+        }
+
+    }
+
+    public void OnTriggerEnterOuter(Collider other, Rat or) {
+        if (isLoner) {
             if (or.ratColonyNum != null) {
                 ratColonyNum = or.ratColonyNum.Value;
                 isLoner = false;
@@ -122,9 +144,8 @@ public class Rat : EnemyInterface
         }
     }
     
-    public void OnTriggerExit(Collider other) {
-        Rat or = other.gameObject.GetComponent<Rat>();
-        if (or != null && ratColonyNum != null && or.ratColonyNum.Value == ratColonyNum.Value) {
+    public void OnTriggerExitOuter(Collider other, Rat or) {
+        if (ratColonyNum != null && or.ratColonyNum.Value == ratColonyNum.Value) {
             // XXX maybe I do this with a Collider[] hits = Physics.OverlapSphere(transform.position, neighbourRadius, ratMask);
             foreach(Rat r in rcm.ratColonies[ratColonyNum.Value]) {
                 if (r == this) continue;

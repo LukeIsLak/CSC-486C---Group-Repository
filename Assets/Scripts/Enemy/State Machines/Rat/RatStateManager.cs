@@ -16,6 +16,7 @@ public enum RatStates {
 
 public class RatStateManager : StateMachine<Rat, RatStates>
 {
+    public RatColonyManager rcm;
     public void Awake() {
         /*Spawn*/
 
