@@ -67,11 +67,11 @@ public class Bat : EnemyInterface
         BatStateManager env_bsm = FindObjectOfType<BatStateManager>();
         
         bsm = env_bsm;
-        bsm.bats.Add(this);
+        bsm.entities.Add(this);
     }
 
     public override void KillEnemy() {
-        bsm.bats.Remove(this);
+        bsm.entities.Remove(this);
         Destroy(this.gameObject);
     }
 
@@ -138,7 +138,9 @@ public class Bat : EnemyInterface
     }
 
     private Vector3? findCeilingPoint(List<RaycastHit> hits) {
-        if (hits.Count == 0) return null; 
+        if (hits.Count == 0) return null;
+
+        /*Maps a hitScore calculator for each possible perch point*/
         List<KeyValuePair<int, float>> hitScores = hits.Select((x, i) => new KeyValuePair<int, float>(
                                                 i,
                                                 (Vector3.Angle(x.normal, -transform.up.normalized) * bd.normalWeight) + 
@@ -146,9 +148,13 @@ public class Bat : EnemyInterface
                                                 (Vector3.Angle(transform.position - x.point, transform.up.normalized) * bd.upAngleWeight))).ToList();
         float sum = hitScores.Sum(x => x.Value);
         hitScores.Sort((a, b) => a.Value.CompareTo(b.Value));
+
+        /*Normalize each hitScore*/
         List<KeyValuePair<int, float>> hitPercentages = hitScores.Select(x => new KeyValuePair<int, float>(x.Key, x.Value / sum)).ToList();
         float r = UnityEngine.Random.value;
         float cumulative = 0;
+
+        /*Randomly pick a perch point given normalized weights*/
         for (int i = 0; i < hitPercentages.Count; i++) 
         {
             cumulative += hitPercentages[i].Value;
@@ -164,9 +170,12 @@ public class Bat : EnemyInterface
             /*Line to decided perch point*/
             Debug.DrawLine(p, transform.position, new Color(1f, 0f, 1f, 1f), 5f);
         
+            /*Calculate a cubic bezier path to the perch point*/
             targetPath = calculatePathCube(transform.position, (p + new Vector3(0f, bd.pearchYOffset, 0f)));
             currentPathIndex = 0;
             isMoving = targetPath.Count > 0;
+
+            /*Debug the perch point*/
             if (debug && targetPath.Count > 0) {
                 Debug.DrawLine(targetPath[0], transform.position, new Color(0f, 1f, 1f, 1f), 5f);
                 for (int i = 1; i < targetPath.Count - 1; i++) {
@@ -332,51 +341,47 @@ public class Bat : EnemyInterface
     {
         if (!isFluttering || playerTransform == null) return;
 
-        // Advance angle
+        /*Change the angle*/
         // TODO: LK - Change flutter to move distance per second instead of angle per second
         flutterAngleDeg += moveSpeed * speedModifier * bd.flutterAngularSpeed * direction * Time.deltaTime;
         if (flutterAngleDeg >= 360f) flutterAngleDeg -= 360f;
         if (flutterAngleDeg <= 0f) flutterAngleDeg += 360f;
 
-        // Smooth radial jitter
         float jitter = (Mathf.PerlinNoise(flutterJitterSeed, Time.time * 0.5f) - 0.5f) * 2f * bd.flutterRadialJitter;
         float radius = Mathf.Max(0.1f, bd.flutterRadius + jitter);
 
-        // Vertical bob
+        /*Vertical bob*/
         float vertBob = Mathf.Sin(Time.time * bd.verticalBobSpeed + flutterJitterSeed) * bd.verticalBobAmplitude;
 
         float angleRad = flutterAngleDeg * Mathf.Deg2Rad;
         Vector3 center = playerTransform.position;
-
-        // Unit vectors for orbit
         Vector3 baseDir = new Vector3(Mathf.Cos(angleRad), 0f, Mathf.Sin(angleRad));
         Vector3 sideDir = new Vector3(-baseDir.z, 0f, baseDir.x); // perpendicular in XZ
 
-        // Perlin-based squiggle evolving with angle and time
+        /*Squiggle noise changing with angle and time*/
         float noiseU = angleRad * 0.5f + flutterJitterSeed;
         float noiseV = Time.time * bd.horizontalBobSpeed + flutterJitterSeed;
         float squig = (Mathf.PerlinNoise(noiseU, noiseV) - 0.5f) * 2f; // in [-1,1]
 
-        // Small radial modulation so circle breathes
+        /* Small radial movementss so circle breathes in and out*/
         float radialMod = squig * (bd.horizontalBobAmplitude * 0.25f);
         Vector3 baseOrbit = baseDir * (radius + radialMod);
 
-        // Lateral squiggle perpendicular to orbit (produces wavy circle)
+        /*Lateral squiggle perpendicular to orbit (produces wavy circle)*/
         Vector3 lateralTarget = sideDir * (squig * bd.horizontalBobAmplitude);
         lateralTarget[1] += bd.flutterBaseHeight;
-        // exponential smoothing: alpha in (0,1) per-frame derived from smoothing rate
         float alpha = 1f - Mathf.Exp(-bd.lateralSmoothing * Time.deltaTime);
         Vector3 lateralOffset = Vector3.Lerp(prevLateralOffset, lateralTarget, alpha);
         prevLateralOffset = lateralOffset;
 
-        // Combine into target position (horizontal orbit + lateral squiggle + vertical bob)
+        /*Combine into target position (horizontal orbit + lateral squiggle + vertical bob)*/
         Vector3 targetPos = center + baseOrbit + lateralOffset + new Vector3(0f, vertBob, 0f);
 
-        // Move smoothly toward targetPos
+        /*Move toward targetPos*/
         float step = moveSpeed * speedModifier * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
 
-        // Smoothly face movement direction
+        /*Face movement direction*/
         Vector3 toTarget = (targetPos - transform.position);
         if (toTarget.sqrMagnitude > 1e-6f)
         {
@@ -403,9 +408,11 @@ public class Bat : EnemyInterface
         Vector3 start = transform.position;
         Vector3 end = playerTransform.position;
 
+        /*Make specific bezier cube values for arched curve*/
         Vector3 p1 = new Vector3(start.x, end.y, start.z);
         Vector3 p2 = (p1 + end) * 0.5f;
 
+        /*Find the target via a bezier cube path*/
         targetPath = calculatePathCube(start, end, p1, p2);
         
         currentPathIndex = 0;
@@ -431,6 +438,8 @@ public class Bat : EnemyInterface
 
         Vector3 start = transform.position;
         Vector3 end;
+        // TODO: LK - This should eventually be fully implemented
+        /*If we completed the peck*/
         if (interruptPosition == null) {
             Vector3 horizontalDir = peckStartPosition.Value - transform.position;
             horizontalDir.y = 0f;
@@ -439,6 +448,7 @@ public class Bat : EnemyInterface
             reboundTarget.y = _reboundHeight;
             end = reboundTarget;
         }
+        /*If we did not complete the peck*/
         else {
             Vector3 awayDir = transform.position - interruptPosition.Value;
             awayDir.y = 0f;
@@ -518,7 +528,7 @@ public class Bat : EnemyInterface
     /*          Beginning Of Misc. Movement             */
     /****************************************************/
 
-    // XXX this steer function... sucks... please improve it!
+    // TODO: LK - this steer function... sucks... please improve it!
     public void steer()
     {
         Vector3 origin = transform.position;
@@ -579,10 +589,14 @@ public class Bat : EnemyInterface
         float step = moveSpeed * speedModifier * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, desiredPos, step);
 
-        if (debug) Debug.DrawRay(origin, repulsion, Color.magenta);
-        if (debug) Debug.DrawLine(origin, desiredPos, Color.cyan);
+        /* If we want to debug the steer*/
+        if (debug) 
+        { 
+            Debug.DrawRay(origin, repulsion, Color.magenta);
+            Debug.DrawLine(origin, desiredPos, Color.cyan);
+        }
 
-        // rotate to face movement
+        /* Rotate parent object to face where we are moving */
         Vector3 toTarget = desiredPos - transform.position;
         if (toTarget.sqrMagnitude > 1e-6f)
         {
@@ -606,7 +620,7 @@ public class Bat : EnemyInterface
     public void OnTriggerEnter(Collider other) {
         if (isAttacking && other.CompareTag("Player")) {
             Health h = other.GetComponent<Health>();
-            if (h != null) h.TakeDamage(10f); // XXX eventually 
+            if (h != null) h.TakeDamage(10f); //TODO: LK - eventually, when we figure out the base values, replace this!
             isAttacking = false;
         }
     }

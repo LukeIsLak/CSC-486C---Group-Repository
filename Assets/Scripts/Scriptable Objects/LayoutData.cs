@@ -5,26 +5,39 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Data/LayoutData")]
 public class LayoutData : ScriptableObject
 {
-    public int              depth,
-                            maxWidth,
-                            randomSeed;
+    [Header("Generation Parameters")]
+    public int              depth;
+    public int              maxWidth;
+    public int              randomSeed;
     public float            complexity;
-    public bool             useSeed,
-                            shouldGenerate,
-                            shouldDoProgress;
+    public bool             useSeed;
+
+    [Header("Traversal")]
     public EncounterInfo    currentEncounter;
     public List<int>        completedIndices = new List<int>(); // For regeneration!
 
     [Header("Fog Of War")]
     public GameEvent        FogUpdated;
-    public int              layersRevealed = 2;
+    public int              layersRevealed  = 0;
+    public int              lookAhead       = 2;
 
+    public void InitializeStates()
+    {
+        // Traversal initial state
+        completedIndices.Clear();
+        completedIndices.Add(0);
+
+        // Fog of war initial state
+        layersRevealed = 1;
+    }
     public void AddRevealed(int n)
     {
         layersRevealed += n;
-        FogUpdated.Raise();
+        for (int i =  0; i < n; i++)
+        {
+            FogUpdated.Raise();            
+        }
     }
-
 
     [Header("Visualization")]
     public int              layerDistance = 4;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rat : EnemyInterface
+public class OldRat : EnemyInterface
 {
     public float detectionRadius    = 5;
     public float leapRadius         = 2;

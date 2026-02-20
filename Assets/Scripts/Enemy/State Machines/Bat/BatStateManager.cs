@@ -33,18 +33,8 @@ public enum BatStates {
     Wander
 }
 
-public class BatStateManager : MonoBehaviour
+public class BatStateManager : StateMachine<Bat, BatStates>
 {
-    public List<Bat> bats;
-    //XXX maybe move this to a scriptable object??
-    //XXX make an any aspect, so any state can transition into it
-    //XXX I would eventually like to move out of this, since this is not memory efficient, but for now
-    //XXX find a way to speed things up, N calculation for each bat in N*M lookup, more efficient way?
-    public Dictionary<BatStates, List<(BatStates toState, Func<Bat, bool> condition)>> conditionLookup = new Dictionary<BatStates, List<(BatStates, Func<Bat, bool>)>>();
-    public Dictionary<BatStates, Action<Bat>> enterStates = new Dictionary<BatStates, Action<Bat>>();
-    public Dictionary<BatStates, Action<Bat>> whileStates = new Dictionary<BatStates, Action<Bat>>();
-    public Dictionary<BatStates, Action<Bat>> exitStates = new Dictionary<BatStates, Action<Bat>>();
-
     public void Awake() {
 
         /*Spawn*/
@@ -64,9 +54,6 @@ public class BatStateManager : MonoBehaviour
         AddExitState(BatStates.Perched, ExitPerchedState);
     
         /*Flutter*/
-
-        //XXX maybe make a function were if the player goes out of range to wander away and then
-
         AddTransition(BatStates.Flutter, BatStates.PeckAttacking, FlutterToPeckCondition);
         AddTransition(BatStates.Flutter, BatStates.SwoopAttacking, FlutterToSwoopCondition);
         AddTransition(BatStates.Flutter, BatStates.Perching, FlutterToPerching);
@@ -96,14 +83,7 @@ public class BatStateManager : MonoBehaviour
         AddExitState(BatStates.SwoopAttacking, ExitSwoopAttackState);
     }
 
-    void Update() {
-        foreach (Bat bat in bats) { 
-            CheckTransition(bat);
-            CheckUpdate(bat);
-        }
-    }
-
-    public void CheckTransition(Bat b) {
+    public override void CheckTransition(Bat b) {
         BatStates currentState = b.currentState;
         if (!conditionLookup.TryGetValue(currentState, out var transitions)) {
             Debug.Log("No transitions exist from the current state!");
@@ -116,46 +96,17 @@ public class BatStateManager : MonoBehaviour
                 EnterUniversal(b);
                 if (enterStates.TryGetValue(toState, out var enterFunc)) enterFunc(b);
                 
-                CheckExit(b);
-                
                 b.currentState = toState;
                 break;
             }
         }
     }
 
-    public void CheckUpdate(Bat b) {
+    public override void CheckUpdate(Bat b) {
         var currentState = b.currentState;
         if (whileStates.TryGetValue(currentState, out var whileFunc)) {
             whileFunc(b);
         }
-    }
-
-    public void CheckExit(Bat b) {
-        var currentState = b.currentState;
-        if (exitStates.TryGetValue(currentState, out var exitFunc)) {
-            exitFunc(b);
-        }
-    }
-
-    public void AddTransition(BatStates from, BatStates to, Func<Bat, bool> condition) {
-        if (!conditionLookup.TryGetValue(from, out var list)) {
-            list = new List<(BatStates, Func<Bat, bool>)>();
-            conditionLookup[from] = list;
-        }
-        list.Add((to, condition));
-    }
-
-    public void AddEnterState(BatStates state, Action<Bat> f) {
-        enterStates[state] = f;
-    }
-    /*Seems redundant, but makes organization much easier*/
-    public void AddWhileState(BatStates state, Action<Bat> f) {
-        whileStates[state] = f;
-    }
-    /*Seems redundant, but makes organization much easier*/
-    public void AddExitState(BatStates state, Action<Bat> f) {
-        exitStates[state] = f;
     }
 
     /******************************/
@@ -209,7 +160,7 @@ public class BatStateManager : MonoBehaviour
     /*   Enter State Functions    */
     /******************************/
 
-    public void EnterUniversal(Bat b) {
+    public override void EnterUniversal(Bat b) {
         b.ChangeCurrentSpeed();
     }
 

@@ -271,6 +271,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+--- !u!1 &1531277652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2290026072841453341, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+  m_PrefabInstance: {fileID: 3774165025323260654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1531277656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531277652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136d31e73aeabe84b8b2a9aa4c495781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
+--- !u!114 &1531277657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531277652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 13ec22a1b42ff784d91881f6de58e85a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1531277656}
+        m_TargetAssemblyTypeName: TraversalStateUpdater, Assembly-CSharp
+        m_MethodName: DoFogReceding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3774165025323260654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -326,7 +372,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2290026072841453341, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1531277656}
+    - targetCorrespondingSourceObject: {fileID: 2290026072841453341, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1531277657}
   m_SourcePrefab: {fileID: 100100000, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
 --- !u!1001 &4797681890916358895
 PrefabInstance:
@@ -341,29 +393,9 @@ PrefabInstance:
       value: TraversalManager
       objectReference: {fileID: 0}
     - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
-      propertyPath: ExitToMenu
-      value: 
-      objectReference: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
-    - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
-      propertyPath: layoutData
-      value: 
-      objectReference: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
-    - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
-      propertyPath: dungeonData
-      value: 
-      objectReference: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
-    - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
       propertyPath: sceneCamera
       value: 
       objectReference: {fileID: 314000598}
-    - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
-      propertyPath: EnterEncounter
-      value: 
-      objectReference: {fileID: 11400000, guid: bd10d720d2ae37d40beb52c0770b1d02, type: 2}
-    - target: {fileID: 6367830794460400418, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
-      propertyPath: playerOnMapPrefab
-      value: 
-      objectReference: {fileID: 8671957000330676690, guid: b23e451c849f1274caa828a5ee4e2215, type: 3}
     - target: {fileID: 7284723983683458099, guid: ed016ffb0441b22438d83b54f0fd8eb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
