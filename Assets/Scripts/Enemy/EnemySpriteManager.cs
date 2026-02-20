@@ -4,15 +4,47 @@ public class EnemySpriteManager : MonoBehaviour
 {
     [Header("References")]
     public Transform playerTransform;
+    public Animator anim;
     public float rotatorXawOffsetDeg;
     public float rotatorLerpSpeed = 1;
+
+    public bool isFront = false;
+    public bool isSide  = false;
+    public bool isBack  = false;
 
     void Start() {
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     void Update() {
+        CheckSpriteRotation();
         RotateToFacePlayer();
+    }
+
+    private void CheckSpriteRotation() {
+        isFront = false;
+        isSide = false;
+        isBack = false;
+        Transform parent =   transform.parent != null ? transform.parent : transform;
+        Quaternion parentRot = parent.rotation;
+
+        Vector3 dirParRot   = parentRot * Vector3.forward;
+        Vector3 dirToPlayer = playerTransform.position - parent.position;
+        dirParRot.y     = 0f;
+        dirToPlayer.y   = 0f;
+        dirParRot   = dirParRot.normalized;
+        dirToPlayer = dirToPlayer.normalized;
+
+
+        float angle = Vector3.Angle(dirParRot, dirToPlayer);
+
+        if (angle < 45) isFront = true;
+        else if (angle < 135) isSide = true;
+        else isBack = true;
+
+        anim.SetBool("isFront", isFront);
+        anim.SetBool("isSide", isSide);
+        anim.SetBool("isBack", isBack);
     }
 
     private void RotateToFacePlayer()
