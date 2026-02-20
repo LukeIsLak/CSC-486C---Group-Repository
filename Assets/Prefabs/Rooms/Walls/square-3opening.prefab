@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3310628541155938507}
   m_Layer: 0
-  m_Name: square-3opening 1
+  m_Name: square-3opening
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
