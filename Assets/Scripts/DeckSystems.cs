@@ -373,7 +373,7 @@ public class DeckSystems : MonoBehaviour
 
     IEnumerator newCardTimer(){
         if (deck.Count > 0){
-            yield return WaitForSecond(TIMETODRAWNEWCARD);
+            yield return new WaitForSeconds(TIMETODRAWNEWCARD);
             drawCard();
         }
     }
