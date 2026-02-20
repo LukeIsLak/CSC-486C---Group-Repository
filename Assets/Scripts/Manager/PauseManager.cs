@@ -30,7 +30,8 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0.0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        playerInput.SwitchCurrentActionMap("UI");
+
+        if (playerInput != null) playerInput.SwitchCurrentActionMap("UI");
         UIManager.instance.ShowPauseView();
 
     }
@@ -41,7 +42,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1.0f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerInput.SwitchCurrentActionMap("Combat");
+        if (playerInput != null) playerInput.SwitchCurrentActionMap("Combat");
         UIManager.instance.HidePauseView();
     }
 }
