@@ -1357,8 +1357,8 @@ MonoBehaviour:
   handView: {fileID: 656118640726382575}
   inventoryView: {fileID: 6197321459651531734}
   pauseView: {fileID: 5018102146981094155}
-  CombatPanel: {fileID: 4330623882492308119}
-  staminaView: {fileID: 0}
+  combatPanel: {fileID: 4330623882492308119}
+  staminaView: {fileID: 7999061897545407878}
 --- !u!1 &5382403916231375189
 GameObject:
   m_ObjectHideFlags: 0
