@@ -121,7 +121,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool ColonyIdleToAgroApproach(Rat r) {
-        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.detectionRadius;
     }
 
     /*From ColonyWandering Transitions*/
@@ -130,7 +130,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool ColonyWanderToAgroApproach(Rat r) {
-        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.detectionRadius;
     }
 
     /*From LonerIdle Transitions*/
@@ -143,7 +143,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool LonerIdleToAgroApproach(Rat r) {
-        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.detectionRadius;
     }
 
 
@@ -153,56 +153,56 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool LonerWanderToAgroApproach(Rat r) {
-        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.detectionRadius;
     }
 
     /*From AgroApproach Transitions*/
     public bool AgroApproachToColonyWander(Rat r) {
         return     !r.isLoner 
                 && r.isWandering
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.rd.detectionRadius;
     }
 
     public bool AgroApproachToColonyIdle(Rat r) {
         return     !r.isLoner 
                 && !r.isWandering
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.rd.detectionRadius;
     }
 
     public bool AgroApproachToLonerIdle(Rat r) {
         return     r.isLoner
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.rd.detectionRadius;
     }
 
     public bool AgroApproachToLeap(Rat r) {
         return     r.canLeap 
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.leapRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.leapRadius;
     }
 
     /*From Leap Transitions*/
     public bool LeapToAgroApproach(Rat r) {
         return     r.doneLeap
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.leapRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.leapRadius;
     }
 
     public bool LeapToColonyWander(Rat r) {
         return     r.doneLeap
                 && !r.isLoner 
                 && r.isWandering
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.rd.detectionRadius;
     }
 
     public bool LeapToColonyIdle(Rat r) {
         return     r.doneLeap
                 && !r.isLoner 
                 && !r.isWandering
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.rd.detectionRadius;
     }
 
     public bool LeapToLonerIdle(Rat r) {
         return     r.doneLeap
                 && r.isLoner
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.rd.detectionRadius;
     }
 
     /******************************/

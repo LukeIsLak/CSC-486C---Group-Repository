@@ -229,7 +229,6 @@ GameObject:
   - component: {fileID: 664699341}
   - component: {fileID: 664699344}
   - component: {fileID: 664699345}
-  - component: {fileID: 664699346}
   m_Layer: 6
   m_Name: Rat
   m_TagString: Untagged
@@ -283,6 +282,8 @@ MonoBehaviour:
   rcm: {fileID: 1976466581}
   rsm: {fileID: 0}
   nma: {fileID: 664699345}
+  outerCol: {fileID: 1402380221}
+  innerCol: {fileID: 1711488665}
   isIdle: 0
   isWandering: 0
   canWander: 0
@@ -299,11 +300,11 @@ MonoBehaviour:
   cohesionWeight: 1
   wanderWeight: 0.3
   destStopDist: 2
-  leapRadius: 2
+  leapRadius: 3
   leapSpeedRatio: 4
-  leapForce: 20
-  leapYIncrease: 0.25
-  leapDuration: 0.5
+  leapForce: 40
+  leapYIncrease: 5
+  leapDuration: 2
   leapCooldown: 3
   curLeapDir: {x: 0, y: 0, z: 0}
   currentState: 0
@@ -316,6 +317,7 @@ MonoBehaviour:
     m_Bits: 64
   colonyDist: 3
   neighbourRadius: 5
+  neighbourStopRadius: 2
   wanderRadius: 10
   idleDuration: 2
   minMoveWait: 0.25
@@ -331,7 +333,7 @@ Transform:
   m_GameObject: {fileID: 664699340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.82, y: 3.34, z: -0.3}
+  m_LocalPosition: {x: -4.82, y: 3.721, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -389,34 +391,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &664699346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664699340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 8cdc727c621aa2e4398feaf343868cf1, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 664699340}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &722307871
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +783,6 @@ GameObject:
   - component: {fileID: 967176538}
   - component: {fileID: 967176537}
   - component: {fileID: 967176536}
-  - component: {fileID: 967176541}
   m_Layer: 6
   m_Name: Rat (1)
   m_TagString: Untagged
@@ -912,6 +885,8 @@ MonoBehaviour:
   rcm: {fileID: 1976466581}
   rsm: {fileID: 0}
   nma: {fileID: 967176536}
+  outerCol: {fileID: 1651478549}
+  innerCol: {fileID: 722307873}
   isIdle: 0
   isWandering: 0
   canWander: 0
@@ -928,11 +903,11 @@ MonoBehaviour:
   cohesionWeight: 1
   wanderWeight: 0.3
   destStopDist: 2
-  leapRadius: 2
+  leapRadius: 3
   leapSpeedRatio: 4
-  leapForce: 60
-  leapYIncrease: 2
-  leapDuration: 0.5
+  leapForce: 40
+  leapYIncrease: 5
+  leapDuration: 2
   leapCooldown: 3
   curLeapDir: {x: 0, y: 0, z: 0}
   currentState: 0
@@ -945,6 +920,7 @@ MonoBehaviour:
     m_Bits: 64
   colonyDist: 3
   neighbourRadius: 5
+  neighbourStopRadius: 2
   wanderRadius: 10
   idleDuration: 2
   minMoveWait: 0.25
@@ -960,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 967176535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.56, y: 3.34, z: 2.48}
+  m_LocalPosition: {x: -7.56, y: 3.721, z: 2.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -969,34 +945,6 @@ Transform:
   - {fileID: 722307872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &967176541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967176535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 8cdc727c621aa2e4398feaf343868cf1, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1078992464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}

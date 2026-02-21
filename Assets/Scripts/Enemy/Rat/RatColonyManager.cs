@@ -52,7 +52,7 @@ public class RatColonyManager : MonoBehaviour
         Vector3 midPoint = (centroid + ratMPos) * 0.5f;
 
 
-        Vector3 wanderSpot = PickWanderSpotOnNavMesh(midPoint, ratMaster.wanderRadius);
+        Vector3 wanderSpot = PickWanderSpotOnNavMesh(midPoint, ratMaster.rd.wanderRadius);
 
         foreach(Rat r in ratColonies[i]) {
             r.colonyMoveSpot = wanderSpot;
@@ -74,7 +74,6 @@ public class RatColonyManager : MonoBehaviour
     }
 
     public void AddRatColony(List<Rat> newRats) {
-        print("Adding Rat Colony");
         ratColonies.Add(newRats);
         foreach (Rat r in newRats) r.ratColonyNum = ratColonies.Count - 1;
     }
@@ -87,6 +86,7 @@ public class RatColonyManager : MonoBehaviour
                 or.isLoner = true;
                 or.ratColonyNum = -1;
             }
+            RemoveAndUpdateColony(i);
         }
         else if (r.isRatMaster) {
             ratColonies[i][0].isRatMaster = true;
