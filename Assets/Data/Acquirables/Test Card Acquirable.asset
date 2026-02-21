@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: Test Item
   itemDescription: 
   icon: {fileID: 328199383, guid: ceef31a104165ba419a575d05fbad1c9, type: 3}
+  playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   card: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
