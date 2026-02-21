@@ -320,6 +320,7 @@ public class Rat : EnemyInterface
     }
 
     private IEnumerator Leap() {
+        anim.SetBool("isAttack", true);
         isLeaping = true;
         canLeap = false;
         nma.isStopped = true;
@@ -329,6 +330,7 @@ public class Rat : EnemyInterface
         yield return new WaitForSeconds(rd.leapDuration);
         isLeaping = false;
         doneLeap = true;
+        anim.SetBool("isAttack", false);
     }
 
     private IEnumerator LeapCooldown() {
