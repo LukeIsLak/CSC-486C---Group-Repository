@@ -675,7 +675,7 @@ public class Bat : EnemyInterface
     }
 
     /****************************************************/
-    /*                End Of Debuggers                  */
+    /*             End Of Event Listeners               */
     /****************************************************/
 
 

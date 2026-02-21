@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RatColonyManager : MonoBehaviour
 {
-    public List<List<Rat>> ratColonies = new List<List<Rat>>();
-    public List<bool> ratColoniesMoving = new List<bool>();
+    [SerializeField] public List<List<Rat>> ratColonies = new List<List<Rat>>();
+    [SerializeField] public List<Vector3> colonyMoveSpot = new List<Vector3>();
+    [SerializeField] public List<bool> ratColoniesMoving = new List<bool>();
 
     public Rat GetRatMaster(int i) {
         foreach (Rat r in ratColonies[i]) if (r.isRatMaster) return r;
@@ -13,15 +15,19 @@ public class RatColonyManager : MonoBehaviour
     }
 
     public Vector3 PickWanderSpotOnNavMesh(Vector3 origin, float radius, int maxAttempts = 12) {
-        UnityEngine.AI.NavMeshHit hit;
+        NavMeshHit hit;
+        NavMeshPath path = new NavMeshPath();
+
         for (int i = 0; i < maxAttempts; i++) {
-            /*Pick a random point in a 2D circle*/
             Vector3 cand = origin + Random.insideUnitSphere * radius;
             cand.y = origin.y;
-            
-            /*Try to snap that random position to a */
-            if (UnityEngine.AI.NavMesh.SamplePosition(cand, out hit, Mathf.Max(1f, radius * 0.25f), UnityEngine.AI.NavMesh.AllAreas)) {
-                return hit.position;
+
+            /*Snap to nearest NavMesh*/
+            if (NavMesh.SamplePosition(cand, out hit, Mathf.Max(1f, radius * 0.25f), NavMesh.AllAreas)) {
+                /*Verify a complete path exists from the source to this point*/
+                if (NavMesh.CalculatePath(origin, hit.position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete) {
+                    return hit.position;
+                }
             }
         }
 
@@ -31,9 +37,10 @@ public class RatColonyManager : MonoBehaviour
             // Pick a random spot in the room
                 // if outside radius
                     // take dir, go in the max radius of magnitude in dir
-        if (UnityEngine.AI.NavMesh.SamplePosition(origin, out hit, radius, UnityEngine.AI.NavMesh.AllAreas)) return hit.position;
+        if (NavMesh.SamplePosition(origin, out hit, radius, UnityEngine.AI.NavMesh.AllAreas)) return hit.position;
         return origin;
     }
+    
 
     public void DetermineColonyMoveSpot(int i) {
         Rat ratMaster = GetRatMaster(i);
@@ -44,7 +51,7 @@ public class RatColonyManager : MonoBehaviour
         Vector3 ratMPos = ratMaster.gameObject.transform.position;
         Vector3 midPoint = (centroid + ratMPos) * 0.5f;
 
-        //XXX rats within a colony must be able to see another rat without something in the way
+
         Vector3 wanderSpot = PickWanderSpotOnNavMesh(midPoint, ratMaster.wanderRadius);
 
         foreach(Rat r in ratColonies[i]) {
@@ -53,6 +60,8 @@ public class RatColonyManager : MonoBehaviour
             if (r.nma != null && r.nma.isOnNavMesh) {
                 r.nma.SetDestination(wanderSpot);
                 r.nma.isStopped = false;
+                r.nma.updatePosition = true;
+                r.nma.updateRotation = true;
             }
         }
     }
@@ -65,6 +74,7 @@ public class RatColonyManager : MonoBehaviour
     }
 
     public void AddRatColony(List<Rat> newRats) {
+        print("Adding Rat Colony");
         ratColonies.Add(newRats);
         foreach (Rat r in newRats) r.ratColonyNum = ratColonies.Count - 1;
     }
@@ -75,7 +85,7 @@ public class RatColonyManager : MonoBehaviour
             foreach (Rat or in ratColonies[i]) {
                 or.isRatMaster = false;
                 or.isLoner = true;
-                or.ratColonyNum = null;
+                or.ratColonyNum = -1;
             }
         }
         else if (r.isRatMaster) {

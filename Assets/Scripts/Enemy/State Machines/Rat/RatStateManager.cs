@@ -5,7 +5,7 @@ using UnityEngine;
 public enum RatStates {
     Spawn,
     ColonyIdle,
-    ConolyWander,
+    ColonyWander,
     LonerIdle,
     LonerWander,
     AgroApproach,
@@ -19,10 +19,29 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     public RatColonyManager rcm;
     public void Awake() {
         /*Spawn*/
+        AddTransition(RatStates.Spawn, RatStates.ColonyIdle, SpawnToColonyIdle);
+        AddTransition(RatStates.Spawn, RatStates.LonerIdle, SpawnToLonerIdle);
 
-        /*Idle*/
+        /*ColonyIdle*/
+        AddTransition(RatStates.ColonyIdle, RatStates.ColonyWander, ColonyIdleToColonyWander);
+        AddTransition(RatStates.ColonyIdle, RatStates.LonerIdle, ColonyIdleToLonerIdle);
 
-        /*Wander*/
+        AddEnterState(RatStates.ColonyIdle, EnterColonyIdleState);
+
+        /*ColonyWander*/
+        AddTransition(RatStates.ColonyWander, RatStates.ColonyIdle, ColonyWanderToColonyIdle);
+
+        AddEnterState(RatStates.ColonyWander, EnterColonyWanderState);
+        AddWhileState(RatStates.ColonyWander, WhileColonyWanderState);
+
+        /*LonerIdle*/
+        AddTransition(RatStates.LonerIdle, RatStates.LonerWander, ColonyIdleToColonyWander);
+        AddTransition(RatStates.LonerIdle, RatStates.ColonyIdle, ColonyIdleToLonerIdle);
+
+        AddEnterState(RatStates.LonerIdle, EnterLonerIdleState);
+
+        /*LonerWander*/
+        AddTransition(RatStates.LonerWander, RatStates.LonerIdle, LonerWanderToLonerIdle);
 
         /*AgroApproach*/
 
@@ -60,17 +79,73 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     /******************************/
     /*   Transitions Conditions   */ 
     /******************************/
-    public bool SpawnToIdle(Rat r) {
-        return true;
+
+    /*From Spawn Transitions*/
+    public bool SpawnToColonyIdle(Rat r) {
+        return !r.isLoner;
+    }
+
+    public bool SpawnToLonerIdle(Rat r) {
+        return r.isLoner;
+    }
+
+    /*From ColonyIdle Transitions*/
+    public bool ColonyIdleToColonyWander(Rat r) {
+        return r.canWander;
+    }
+
+    public bool ColonyIdleToLonerIdle(Rat r) {
+        return r.isLoner;
+    }
+
+    /*From ColonyWandering Transitions*/
+    public bool ColonyWanderToColonyIdle(Rat r) {
+        return r.doneWandering;
+    }
+
+    /*From LonerIdle Transitions*/
+    public bool LonerIdleToLonerWander(Rat r) {
+        return r.canWander;
+    }
+
+    public bool LonerIdleToColonyIdle(Rat r) {
+        return !r.isLoner;
+    }
+
+
+    /*From LonerWadnering Transitions*/
+    public bool LonerWanderToLonerIdle(Rat r) {
+        return r.doneWandering;
     }
 
     /******************************/
     /*   Enter State Functions    */
     /******************************/
 
+    public void EnterColonyIdleState(Rat r) {
+        r.doneWandering = false;
+        if (!r.isIdle) r.StartIdleDuration();
+    }
+
+    public void EnterColonyWanderState(Rat r) {
+        if (!r.isMoving) r.StartWanderStagger();
+    }
+
+    public void EnterLonerIdleState(Rat r) {
+        if (!r.isIdle) r.StartIdleDuration();
+    }
+
+    public void EnterLonerWanderState(Rat r) {
+        
+    }
+
     /******************************/
     /*   While State Functions    */
     /******************************/
+
+    public void WhileColonyWanderState(Rat r) {
+        if (r.isMoving) r.UpdateColonyMove();
+    }
 
     /******************************/
     /*    Exit State Functions    */
