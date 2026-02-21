@@ -4712,6 +4712,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2626449438788970428, guid: aa7f194004cc1584a9ab423201067489, type: 3}
+      propertyPath: cardsDB
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bc7b805fceeb8d48baf00406c795b4e, type: 2}
+    - target: {fileID: 2626449438788970428, guid: aa7f194004cc1584a9ab423201067489, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}

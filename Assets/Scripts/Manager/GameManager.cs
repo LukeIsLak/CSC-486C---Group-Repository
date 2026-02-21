@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         playerHealth.Init(playerData.maxHealth);
 
         //deck.InitializeRandomDeck(cardsDB, 30);
-        Debug.Log("I try thing");
+        //Debug.Log("I try thing");
         inventory.InitializeRandomDeck(cardsDB, 30);
     }
 

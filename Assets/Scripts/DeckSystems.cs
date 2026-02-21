@@ -62,7 +62,8 @@ public class DeckSystems : MonoBehaviour
         //}
     }
 
-    void start(){
+    void Start(){
+        //Debug.Log("done");
         loadDeck(inventory.playerdeck);
     }
 

@@ -13,7 +13,7 @@ public class PlayerInventory : ScriptableObject
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,7 +30,6 @@ public class PlayerInventory : ScriptableObject
         {
             Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
             playerdeck.Add(new CardInstance(pick));
-            Debug.Log("doobedo");
         }
     }
 
