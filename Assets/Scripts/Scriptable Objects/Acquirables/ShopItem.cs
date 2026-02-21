@@ -7,7 +7,7 @@ using UnityEngine;
 public class ShopItem : ScriptableObject
 {
     [Header("Data")]
-    // Player gold container
+    public PlayerInventory playerInventory;
 
     [Header("Item Info")]
     public int price = 0;
@@ -17,13 +17,8 @@ public class ShopItem : ScriptableObject
     public bool TryPurchase()
     {
         if (!acquirable) return false;
-        /*
-        if player gold < price return false
-
-        player gold -= price
-        acquirable.acquire()
-        return true
-        */
+        if (!playerInventory.subtractCurrency(price)) return false; // Can't afford, no substraction
+        acquirable.Acquire();
         return true;
     }
 }

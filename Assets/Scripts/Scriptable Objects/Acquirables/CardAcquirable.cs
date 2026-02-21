@@ -8,9 +8,12 @@ public class CardAcquirable : Acquirable
 {
     [Header("Data")]
     // Player inventory
+    public PlayerInventory playerInventory;
     public Cards card; // Or should it be a cardinstance?
+
     public override void Acquire()
     {
-        // add this card to player inventory buffer
+        playerInventory.AddToBuffer(new CardInstance(card)); // Make a card instance here!
+        // Assign UID when?
     }
 }

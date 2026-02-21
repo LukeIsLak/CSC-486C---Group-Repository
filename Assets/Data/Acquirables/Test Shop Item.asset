@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8674752e50ab542ad883a410ef196f, type: 3}
   m_Name: Test Shop Item
   m_EditorClassIdentifier: 
+  playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   price: 0
   acquirable: {fileID: 11400000, guid: d5e4f50c7a0aa2d43a43807cb605cce2, type: 2}

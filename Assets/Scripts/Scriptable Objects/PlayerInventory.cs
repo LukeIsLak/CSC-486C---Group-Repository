@@ -47,7 +47,7 @@ public class PlayerInventory : ScriptableObject
     /// <param name="amount"></param>
     /// <returns> returns a bool if a player can "pay" for the amount given, if true that amount will be taken out </returns>
     public bool subtractCurrency(int amount) {
-        if (currency - amount > 0) { 
+        if (currency - amount >= 0) { 
             currency -= amount;
             return true;
         }
