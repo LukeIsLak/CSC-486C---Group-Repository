@@ -25,11 +25,14 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         /*ColonyIdle*/
         AddTransition(RatStates.ColonyIdle, RatStates.ColonyWander, ColonyIdleToColonyWander);
         AddTransition(RatStates.ColonyIdle, RatStates.LonerIdle, ColonyIdleToLonerIdle);
+        AddTransition(RatStates.ColonyIdle, RatStates.AgroApproach, ColonyIdleToAgroApproach);
 
         AddEnterState(RatStates.ColonyIdle, EnterColonyIdleState);
 
         /*ColonyWander*/
+        // XXX maybe add LonerWander
         AddTransition(RatStates.ColonyWander, RatStates.ColonyIdle, ColonyWanderToColonyIdle);
+        AddTransition(RatStates.ColonyWander, RatStates.AgroApproach, ColonyWanderToAgroApproach);
 
         AddEnterState(RatStates.ColonyWander, EnterColonyWanderState);
         AddWhileState(RatStates.ColonyWander, WhileColonyWanderState);
@@ -37,15 +40,34 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         /*LonerIdle*/
         AddTransition(RatStates.LonerIdle, RatStates.LonerWander, ColonyIdleToColonyWander);
         AddTransition(RatStates.LonerIdle, RatStates.ColonyIdle, ColonyIdleToLonerIdle);
+        AddTransition(RatStates.LonerIdle, RatStates.AgroApproach, LonerIdleToAgroApproach);
 
         AddEnterState(RatStates.LonerIdle, EnterLonerIdleState);
 
         /*LonerWander*/
         AddTransition(RatStates.LonerWander, RatStates.LonerIdle, LonerWanderToLonerIdle);
+        AddTransition(RatStates.LonerWander, RatStates.AgroApproach, LonerWanderToAgroApproach);
 
         /*AgroApproach*/
+        AddTransition(RatStates.AgroApproach, RatStates.ColonyWander, AgroApproachToColonyWander);
+        AddTransition(RatStates.AgroApproach, RatStates.ColonyIdle, AgroApproachToColonyIdle);
+        // AddTransition(RatStates.AgroApproach, RatStates.LonerWander, AgroApproachToLonerWander);
+        AddTransition(RatStates.AgroApproach, RatStates.LonerIdle, AgroApproachToLonerIdle);
+        AddTransition(RatStates.AgroApproach, RatStates.Leap, AgroApproachToLeap);
+
+        AddEnterState(RatStates.AgroApproach, EnterAgroApproachState);
+        AddWhileState(RatStates.AgroApproach, WhileAgroApproachState);
+        AddExitState(RatStates.AgroApproach, ExitAgroApproachState);
 
         /*Leap*/
+        AddTransition(RatStates.Leap, RatStates.AgroApproach, LeapToAgroApproach);
+        AddTransition(RatStates.Leap, RatStates.ColonyWander, LeapToColonyWander);
+        AddTransition(RatStates.Leap, RatStates.ColonyIdle, LeapToColonyIdle);
+        // AddTransition(RatStates.Leap, RatStates.LonerWander, AgroApproachToLonerWander);
+        AddTransition(RatStates.Leap, RatStates.LonerIdle, LeapToLonerIdle);
+
+        AddEnterState(RatStates.Leap, EnterLeapState);
+        AddExitState(RatStates.Leap, ExitLeapState);
 
         /*RunAway*/
     }
@@ -98,9 +120,17 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         return r.isLoner;
     }
 
+    public bool ColonyIdleToAgroApproach(Rat r) {
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
+    }
+
     /*From ColonyWandering Transitions*/
     public bool ColonyWanderToColonyIdle(Rat r) {
         return r.doneWandering;
+    }
+
+    public bool ColonyWanderToAgroApproach(Rat r) {
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
     }
 
     /*From LonerIdle Transitions*/
@@ -112,10 +142,67 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         return !r.isLoner;
     }
 
+    public bool LonerIdleToAgroApproach(Rat r) {
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
+    }
+
 
     /*From LonerWadnering Transitions*/
     public bool LonerWanderToLonerIdle(Rat r) {
         return r.doneWandering;
+    }
+
+    public bool LonerWanderToAgroApproach(Rat r) {
+        return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.detectionRadius;
+    }
+
+    /*From AgroApproach Transitions*/
+    public bool AgroApproachToColonyWander(Rat r) {
+        return     !r.isLoner 
+                && r.isWandering
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+    }
+
+    public bool AgroApproachToColonyIdle(Rat r) {
+        return     !r.isLoner 
+                && !r.isWandering
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+    }
+
+    public bool AgroApproachToLonerIdle(Rat r) {
+        return     r.isLoner
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+    }
+
+    public bool AgroApproachToLeap(Rat r) {
+        return     r.canLeap 
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.leapRadius;
+    }
+
+    /*From Leap Transitions*/
+    public bool LeapToAgroApproach(Rat r) {
+        return     r.doneLeap
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.leapRadius;
+    }
+
+    public bool LeapToColonyWander(Rat r) {
+        return     r.doneLeap
+                && !r.isLoner 
+                && r.isWandering
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+    }
+
+    public bool LeapToColonyIdle(Rat r) {
+        return     r.doneLeap
+                && !r.isLoner 
+                && !r.isWandering
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
+    }
+
+    public bool LeapToLonerIdle(Rat r) {
+        return     r.doneLeap
+                && r.isLoner
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) > r.detectionRadius;
     }
 
     /******************************/
@@ -139,6 +226,14 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         
     }
 
+    public void EnterAgroApproachState(Rat r) {
+        r.isAgro = true;
+    }
+
+    public void EnterLeapState(Rat r) {
+        r.StartLeap();
+    }
+
     /******************************/
     /*   While State Functions    */
     /******************************/
@@ -147,9 +242,21 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         if (r.isMoving) r.UpdateColonyMove();
     }
 
+    public void WhileAgroApproachState(Rat r) {
+        r.UpdateAgroApproach();
+    }
+
     /******************************/
     /*    Exit State Functions    */
     /******************************/
+
+    public void ExitAgroApproachState(Rat r) {
+        r.isAgro = false;
+    }
+
+    public void ExitLeapState(Rat r) {
+        r.StartLeapCooldown();
+    }
 
     public override void EnterUniversal(Rat r) {}
 }

@@ -22,10 +22,12 @@ public class Rat : EnemyInterface
     public bool isWandering     = false;
     public bool canWander       = false;
     public bool doneWandering   = false;
+    public bool isAgro          = false;
     public bool isLeaping       = false;
     public bool canLeap         = true;
-
+    public bool doneLeap        = false;
     public bool isMoving        = false;
+    public bool checkPlayerPath = true;
 
     [Header("Navigation Weight Values")]
     public float navWeight          = 1.5f;
@@ -34,6 +36,16 @@ public class Rat : EnemyInterface
     public float cohesionWeight     = 1f;
     public float wanderWeight       = 0.3f;
     public float destStopDist       = 1f;
+
+    [Header("Leaping Values")]
+    public float leapRadius     = 2f;
+    public float leapSpeedRatio = 4f;
+    public float leapForce      = 20f;
+    public float leapYIncrease  = 0.25f;
+    public float leapDuration = 0.5f;
+    public float leapCooldown = 3f;
+    public Vector3 curLeapDir;
+    // public Vector3 desiredVel;
 
     [Header("Misc. Variables")]
     public RatStates currentState;
@@ -46,16 +58,14 @@ public class Rat : EnemyInterface
 
     public float neighbourRadius = 5f;
 
-    public Vector3 curLeapDir;
-    public float leapForce = 20f;
-    public float leapDuration = 0.5f;
-    public float leapCooldown = 3f;
-
     public float wanderRadius = 4f;
 
     public float idleDuration = 2f;
     public float minMoveWait = 0.25f;
     public float maxMoveWait = 0.75f;
+
+    public float checkPlayerUpdate = 0.1f;
+    public float detectionRadius = 5f;
 
     public override void initialize() {
         // curHealth = rd.baseHealth * playerData.maxHealth;
@@ -76,16 +86,15 @@ public class Rat : EnemyInterface
         nma.updateRotation = false;
     }
 
-    public void UpdateColonyMove() {
-        Debug.Log("Test");
-        Vector3 navDir = nma.desiredVelocity;
+    private void SteerForce(out Vector3 separation, out Vector3 alignment, out Vector3 cohesionCenter, out int count) {
         Collider[] hits = Physics.OverlapSphere(transform.position, neighbourRadius, ratMask);
     
-        Vector3 separation      = Vector3.zero;
-        Vector3 alignment       = Vector3.zero;
-        Vector3 cohesionCenter  = Vector3.zero;
-        int count = 0;
+        separation      = Vector3.zero;
+        alignment       = Vector3.zero;
+        cohesionCenter  = Vector3.zero;
+        count = 0;
 
+        count = 0;
         foreach (Collider h in hits) {
             if (h.transform == transform) continue;
             Rat other = h.gameObject.GetComponent<Rat>();
@@ -102,6 +111,23 @@ public class Rat : EnemyInterface
             cohesionCenter += other.transform.position;
             count ++;
         }
+    }
+    public void UpdateColonyMove() {
+        UpdateMove();
+        if (nma != null && IsAgentAtDestination(nma)) FinishWander();
+    }
+    public void UpdateAgroApproach() {
+        UpdatePlayerPath();
+        UpdateMove();
+    }
+
+    private void UpdateMove() {
+        Vector3 navDir = nma.desiredVelocity;
+
+        Vector3 separation, alignment, cohesionCenter;
+        int count = 0;
+
+        SteerForce(out separation, out alignment, out cohesionCenter, out count);
 
         Vector3 alignmentForce  = Vector3.zero;
         Vector3 cohesionForce   = Vector3.zero;
@@ -129,9 +155,6 @@ public class Rat : EnemyInterface
             Quaternion rot = Quaternion.LookRotation(velocity);
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, 10f * Time.deltaTime);
         }
-        if (nma != null && IsAgentAtDestination(nma)) {
-            FinishWander();
-        }
     }
 
     private bool IsAgentAtDestination(NavMeshAgent agent) {
@@ -146,10 +169,6 @@ public class Rat : EnemyInterface
         Vector3 dest = agent.destination;
         return Vector3.Distance(transform.position, dest) <= destStopDist;
     }
-
-    // public void UpdateAgroApproach() {
-
-    // }
 
     public void OnTriggerZone(Collider other, TriggerZone zone, TriggerType type) {
         Rat or = other.gameObject.GetComponent<Rat>();
@@ -192,6 +211,17 @@ public class Rat : EnemyInterface
                 ratColonyNum = or.ratColonyNum;
                 isRatMaster = false;
                 isLoner = false;
+
+                canWander = or.canWander;
+                isWandering = or.isWandering;
+
+                if (isWandering && or.nma != null && or.nma.isOnNavMesh) {
+                    colonyMoveSpot = or.colonyMoveSpot;
+                    nma.SetDestination(colonyMoveSpot);
+                    nma.isStopped = false;
+                    nma.updatePosition = true;
+                    nma.updateRotation = true;
+                }
             }
             else {
                 // XXX if both rats are null handle this!
@@ -237,12 +267,39 @@ public class Rat : EnemyInterface
         StartCoroutine(StaggerMove());
     }
 
-    public void StartLeapDuration() {
-        StartCoroutine(Leap());
-    }
-
     public void StartIdleDuration() {
         StartCoroutine(Idle());
+    }
+
+    public void UpdatePlayerPath() {
+        if (checkPlayerPath) StartCoroutine(DelayCalcPlayerPath());
+    }
+
+    public void StartLeap() {
+        Vector3 posDiff     = playerTransform.position - transform.position;
+        if (posDiff.magnitude == 0) return;
+        Vector3 direction   = posDiff / posDiff.magnitude;
+
+        // Preserve y velocity
+        float velocityY     = rb.velocity.y;
+
+        // Set forward to always face player
+        transform.forward   = direction;
+
+
+        if (direction.magnitude == 0) return;
+        direction = direction / direction.magnitude;
+        if (posDiff.magnitude < leapRadius && canLeap)
+        {
+            curLeapDir = direction;
+            curLeapDir[1] += leapYIncrease;
+            StartCoroutine(Leap());
+            return;
+        }
+    }
+
+    public void StartLeapCooldown() {
+        StartCoroutine(LeapCooldown());
     }
 
     private IEnumerator StaggerMove() {
@@ -254,12 +311,18 @@ public class Rat : EnemyInterface
 
     private IEnumerator Leap() {
         isLeaping = true;
+        canLeap = false;
+        nma.isStopped = true;
+        nma.updatePosition = false;
+        nma.updateRotation = false;
         rb.AddForce(curLeapDir * leapForce);
         yield return new WaitForSeconds(leapDuration);
         isLeaping = false;
+        doneLeap = true;
     }
 
     private IEnumerator LeapCooldown() {
+        doneLeap = false;
         yield return new WaitForSeconds(leapCooldown);
         canLeap = true;
     }
@@ -270,5 +333,12 @@ public class Rat : EnemyInterface
         isIdle = false;
         canWander = true;
         if (!isLoner && isRatMaster) rcm.DetermineColonyMoveSpot(ratColonyNum);
+    }
+
+    private IEnumerator DelayCalcPlayerPath() {
+        checkPlayerPath = false;
+        nma.SetDestination(playerTransform.position);
+        yield return new WaitForSeconds(checkPlayerUpdate);
+        checkPlayerPath = true;
     }
 }
