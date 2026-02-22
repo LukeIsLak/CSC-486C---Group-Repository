@@ -5,12 +5,16 @@ public class EnemySpriteManager : MonoBehaviour
     [Header("References")]
     public Transform playerTransform;
     public Animator anim;
+    public SpriteRenderer sprite;
     public float rotatorXawOffsetDeg;
     public float rotatorLerpSpeed = 1;
 
     public bool isFront = false;
     public bool isSide  = false;
     public bool isBack  = false;
+    public bool isLeft = false;
+
+    public bool sideFaceLeft = false;
 
     void Start() {
         playerTransform = GameObject.FindWithTag("Player").transform;
@@ -25,9 +29,10 @@ public class EnemySpriteManager : MonoBehaviour
         isFront = false;
         isSide = false;
         isBack = false;
-        Transform parent =   transform.parent != null ? transform.parent : transform;
-        Quaternion parentRot = parent.rotation;
+        Transform parent        = transform.parent != null ? transform.parent : transform;
+        Quaternion parentRot    = parent.rotation;
 
+        // XXX maybe store this so it isn't
         Vector3 dirParRot   = parentRot * Vector3.forward;
         Vector3 dirToPlayer = playerTransform.position - parent.position;
         dirParRot.y     = 0f;
@@ -45,6 +50,15 @@ public class EnemySpriteManager : MonoBehaviour
         anim.SetBool("isFront", isFront);
         anim.SetBool("isSide", isSide);
         anim.SetBool("isBack", isBack);
+
+        if (isSide) {
+            float crossY = Vector3.Cross(dirParRot, dirToPlayer).y;
+            isLeft = crossY < 0f;
+            sprite.flipX = isLeft != sideFaceLeft;
+        }
+        else {
+            sprite.flipX = false;
+        }
     }
 
     private void RotateToFacePlayer()
