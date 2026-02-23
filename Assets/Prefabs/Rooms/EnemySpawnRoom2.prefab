@@ -136,6 +136,62 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2126378740915893111}
     m_Modifications:
+    - target: {fileID: 4193226093111424671, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4193226093111424671, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4193226093111424671, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4193226093111424671, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4193226093111424671, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641014795875588567, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641014795875588567, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641014795875588567, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641014795875588567, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749621212837282922, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749621212837282922, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749621212837282922, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749621212837282922, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749621212837282922, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 5069469856988186490, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -179,6 +235,26 @@ PrefabInstance:
     - target: {fileID: 5553377412167015872, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
       propertyPath: m_Name
       value: square-1door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142490378639762708, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142490378639762708, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142490378639762708, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142490378639762708, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142490378639762708, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
