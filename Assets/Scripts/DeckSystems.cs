@@ -363,6 +363,9 @@ public class DeckSystems : MonoBehaviour
         if (cardsToDraw > 0){
             StartCoroutine(newCardTimer());
         }
+
+        //can still cause some issues with consiten uses of cards ex. 2 then 3 sec break then 2. look in to reseting this after all coroutines are finished
+        drawFlag = false;
     }
 
 }
