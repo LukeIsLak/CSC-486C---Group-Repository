@@ -188,10 +188,16 @@ public class Rat : EnemyInterface
     /*           Beginning of Movement Methods          */
     /****************************************************/
 
+    public void UpdateLonerMove() {
+        UpdateMove();
+        if (nma != null && IsAgentAtDestination(nma)) FinishWander();
+    }
+    // TODO: LK - seems redundant for now, if it stays combine with above
     public void UpdateColonyMove() {
         UpdateMove();
         if (nma != null && IsAgentAtDestination(nma)) FinishWander();
     }
+
     public void UpdateAgroApproach() {
         UpdatePlayerPath();
         UpdateMove();
@@ -225,8 +231,9 @@ public class Rat : EnemyInterface
                 //XXX outer say eventually?
                 return;
             case TriggerType.Exit:
-                if (zone == TriggerZone.Inner) OnTriggerEnterInner(other, or);
-                else OnTriggerEnterOuter(other, or);
+                // if (zone == TriggerZone.Inner) OnTriggerExitInner(other, or);
+                // else OnTriggerExitOuter(other, or);
+                if (zone == TriggerZone.Outer) OnTriggerExitOuter(other, or);
                 return;
             default:
                 return;
@@ -246,19 +253,20 @@ public class Rat : EnemyInterface
         if (isLoner) {
             if (or.ratColonyNum != -1) {
                 ratColonyNum = or.ratColonyNum;
+                rcm.AddRatToColony(this, ratColonyNum);
                 isRatMaster = false;
                 isLoner = false;
 
                 canWander = or.canWander;
                 isWandering = or.isWandering;
 
-                if (isWandering && or.nma != null && or.nma.isOnNavMesh) {
+                if (isWandering) {
                     colonyMoveSpot = or.colonyMoveSpot;
                     nma.SetDestination(colonyMoveSpot);
-                    nma.isStopped = false;
-                    nma.updatePosition = true;
-                    nma.updateRotation = true;
                 }
+                nma.isStopped = !isWandering;
+                nma.updatePosition = isWandering;
+                nma.updateRotation = isWandering;
             }
             else {
                 // XXX if both rats are null handle this!
@@ -385,7 +393,12 @@ public class Rat : EnemyInterface
         yield return new WaitForSeconds(rd.idleDuration);
         isIdle = false;
         canWander = true;
-        if (!isLoner && isRatMaster) {
+        if (isLoner) {
+            float addIdle = Random.Range(rd.minAddIdleWait, rd.maxAddIdleWait);
+            yield return new WaitForSeconds(addIdle);
+            rcm.DetermineLonerMoveSpot(this);
+        }
+        else if (isRatMaster) {
             /*The idea here is too provide the colony some time and to stagger the colonies*/
             float addIdle = Random.Range(rd.minAddIdleWait, rd.maxAddIdleWait);
             yield return new WaitForSeconds(addIdle);

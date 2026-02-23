@@ -32,6 +32,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         /*ColonyWander*/
         // XXX maybe add LonerWander
         AddTransition(RatStates.ColonyWander, RatStates.ColonyIdle, ColonyWanderToColonyIdle);
+        AddTransition(RatStates.ColonyWander, RatStates.LonerWander, ColonyWanderToLonerWander);
         AddTransition(RatStates.ColonyWander, RatStates.AgroApproach, ColonyWanderToAgroApproach);
 
         AddEnterState(RatStates.ColonyWander, EnterColonyWanderState);
@@ -46,9 +47,14 @@ public class RatStateManager : StateMachine<Rat, RatStates>
 
         /*LonerWander*/
         AddTransition(RatStates.LonerWander, RatStates.LonerIdle, LonerWanderToLonerIdle);
+        AddTransition(RatStates.LonerWander, RatStates.ColonyWander, LonerWanderToColonyWander);
         AddTransition(RatStates.LonerWander, RatStates.AgroApproach, LonerWanderToAgroApproach);
 
+        AddEnterState(RatStates.LonerWander, EnterLonerWanderState);
+        AddWhileState(RatStates.LonerWander, WhileLonerWanderState);
+
         /*AgroApproach*/
+        // XXX do we want the colonywander here?
         AddTransition(RatStates.AgroApproach, RatStates.ColonyWander, AgroApproachToColonyWander);
         AddTransition(RatStates.AgroApproach, RatStates.ColonyIdle, AgroApproachToColonyIdle);
         // AddTransition(RatStates.AgroApproach, RatStates.LonerWander, AgroApproachToLonerWander);
@@ -129,6 +135,10 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         return r.doneWandering;
     }
 
+    public bool ColonyWanderToLonerWander(Rat r) {
+        return r.isLoner && r.isWandering;
+    }
+
     public bool ColonyWanderToAgroApproach(Rat r) {
         return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.detectionRadius;
     }
@@ -150,6 +160,10 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     /*From LonerWadnering Transitions*/
     public bool LonerWanderToLonerIdle(Rat r) {
         return r.doneWandering;
+    }
+
+    public bool LonerWanderToColonyWander(Rat r) {
+        return !r.isLoner && r.isWandering;
     }
 
     public bool LonerWanderToAgroApproach(Rat r) {
@@ -223,7 +237,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public void EnterLonerWanderState(Rat r) {
-        
+        if (!r.isMoving) r.StartWanderStagger();
     }
 
     public void EnterAgroApproachState(Rat r) {
@@ -240,6 +254,10 @@ public class RatStateManager : StateMachine<Rat, RatStates>
 
     public void WhileColonyWanderState(Rat r) {
         if (r.isMoving) r.UpdateColonyMove();
+    }
+
+    public void WhileLonerWanderState(Rat r) {
+        if (r.isMoving) r.UpdateLonerMove();
     }
 
     public void WhileAgroApproachState(Rat r) {

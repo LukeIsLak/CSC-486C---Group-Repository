@@ -80,6 +80,10 @@ public class RatColonyManager : MonoBehaviour
 
     }
 
+    public void AddRatToColony(Rat r, int i) {
+        ratColonies[i].Add(r);
+    }
+
     public void AddRatColony(List<Rat> newRats) {
         ratColonies.Add(newRats);
         foreach (Rat r in newRats) r.ratColonyNum = ratColonies.Count - 1;
