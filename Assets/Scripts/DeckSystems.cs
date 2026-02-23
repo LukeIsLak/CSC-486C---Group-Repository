@@ -47,45 +47,19 @@ public class DeckSystems : MonoBehaviour
     public PlayerInventory inventory;
 
     const float TIMETODRAWNEWCARD = 5f;
+    int cardsToDraw = 0;
+    bool drawFlag = false;
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
     void Update()
     {
-        // might want to put a delay on this
-        //if (hand.Count == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
-            //for (int i = 0; i < MAXHANDSIZE; i++)
-            //{
-                //if (currentDeckSize > 0) { // in case a full hand isnt avalible
-                    //drawCard();
-                //}
-            //}
-        //}
+
     }
 
     void Start(){
         //Debug.Log("done");
         loadDeck(inventory.playerdeck);
     }
-
-    // call this in game manager (moved to player inventory)
-    //public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
-    //{
-    //    deck.Clear();
-    //    hand.Clear();
-    //    discard.Clear();
-    //
-    //    for (int i = 0; i < deckSize; i++)
-    //    {
-    //        Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
-    //        addCardToDeck(new CardInstance(pick));
-    //    }
-    //
-    //    for (int i = 0; i < MAXHANDSIZE; i++) drawCard();
-    //
-    //    NotifyHandContentsChanged();
-    //    NotifyHandSelectionChanged();
-    //}
-
 
     /// <summary>
     /// adds the given card to the back of the deck, 
@@ -249,7 +223,12 @@ public class DeckSystems : MonoBehaviour
 
         NotifyHandContentsChanged();
 
-        StartCoroutine(newCardTimer());
+        cardsToDraw++;
+        if (!drawFlag){
+            drawFlag = true;
+            StartCoroutine(newCardTimer());
+        }
+        
     }
 
     /// <summary>
@@ -372,10 +351,18 @@ public class DeckSystems : MonoBehaviour
         }
     }
 
-    IEnumerator newCardTimer(){
+    IEnumerator newCardTimer() {
+        
         if (deck.Count > 0){
             yield return new WaitForSeconds(TIMETODRAWNEWCARD);
             drawCard();
         }
+
+        cardsToDraw--;
+
+        if (cardsToDraw > 0){
+            StartCoroutine(newCardTimer());
+        }
     }
+
 }
