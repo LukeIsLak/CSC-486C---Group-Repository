@@ -17,6 +17,7 @@ public class TraversalManager : MonoBehaviour
     [Header("Events")]
     public GameEvent EnterEncounter;
     public GameEvent ExitToMenu;
+    public GameEvent LayoutInitialized;
 
     private TraversableLayout traversableLayout;
     private bool respondToInputs = true;
@@ -32,15 +33,16 @@ public class TraversalManager : MonoBehaviour
         respondToInputs = true;
 
         sceneCamera.transform.position = lastFinished.transform.position + new Vector3(0f, 8, 0f);
+        LayoutInitialized.Raise();
     }
 
     void InitializeLayout()
     {
-        layoutData.shouldGenerate       = false;
         GameObject tmp = Instantiate(traversableLayoutPrefab);
         traversableLayout = tmp.GetComponent<TraversableLayout>();
         traversableLayout.Initialize();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -48,7 +50,6 @@ public class TraversalManager : MonoBehaviour
         {
             layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
             layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
-            traversableLayout.gameObject.SetActive(false);
             respondToInputs = false;
             dungeonData.dungeonSeed = (int)System.DateTime.Now.Ticks;
             EnterEncounter.Raise();

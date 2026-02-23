@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private HandViewUI handView;
     [SerializeField] private InventoryUI inventoryView;
     [SerializeField] private PauseUI pauseView;
-    [SerializeField] private GameObject CombatPanel;
-
+    [SerializeField] private GameObject combatPanel;
+    [SerializeField] private StaminaUI staminaView;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -19,41 +19,54 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
+        if (healthBar == null) healthBar = GetComponentInChildren<HealthBar>(true);
+        if(handView == null) handView = GetComponentInChildren<HandViewUI>(true);
+        if(inventoryView == null) inventoryView = GetComponentInChildren<InventoryUI>(true);
+        if(pauseView == null) pauseView = GetComponentInChildren<PauseUI>(true);
+        if (staminaView == null) staminaView = GetComponentInChildren<StaminaUI>(true);
     }
     public void BindPlayer(GameObject player)
     {
         var health = player.GetComponent<Health>();
         if(health != null ) healthBar.BindHealthUI(health);
+        var playerCharacter = player.GetComponent<PlayerCharacter>();
+        if(playerCharacter != null) staminaView.BindPlayerUI(playerCharacter);
         playerInput = player.GetComponent<PlayerInput>();
         var deck = player.GetComponent<DeckSystems>();
         if (deck != null)
         {
-            handView.BindDeckSystem(deck);
+            handView.BindDeckSystem(deck);  
             inventoryView.BindDeckSystem(deck);
         }
     }
-    private void ShowCombatView()
+    public void ShowCombatView()
     {
-        CombatPanel.SetActive(true);
+        combatPanel.SetActive(true);
     }
 
-    private void HideCombatView()
+    public void HideCombatView()
     {
-        CombatPanel.SetActive(false);
+        combatPanel.SetActive(false);
     }
     public void ShowInventoryView() 
     {
         isInventoryOpen = true;
         HideCombatView();
-        playerInput.SwitchCurrentActionMap("UI");
+        if(playerInput != null) playerInput.SwitchCurrentActionMap("UI");
         inventoryView.ShowInventory(); 
     }
     public void HideInventoryView()
     {
         isInventoryOpen = false;
         inventoryView.HideInventory();
-        playerInput.SwitchCurrentActionMap("Combat");
+        if (playerInput != null) playerInput.SwitchCurrentActionMap("Combat");
         ShowCombatView();
     }
 
