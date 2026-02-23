@@ -15,8 +15,8 @@ TagManager:
   - Enemy
   - NavMeshSurface
   - EnemyInvisible
-  - 
-  - 
+  - NavMeshObstacle
+  - Surface
   - 
   - 
   - 

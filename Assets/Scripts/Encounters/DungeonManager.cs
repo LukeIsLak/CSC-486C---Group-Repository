@@ -18,6 +18,7 @@ public class DungeonManager : MonoBehaviour
     
     [Header("Events")]
     public GameEvent EnterLayout;
+    public GameEvent GenerationComplete;
 
 
     private LevelGenerator  lg;
@@ -49,7 +50,9 @@ public class DungeonManager : MonoBehaviour
 
         /* Generate */
         lg.DoGeneration();              
-        lg.ClearGenerationObjects();    
+        lg.ClearGenerationObjects();
+
+        GenerationComplete.Raise();
     }
 
     void Update()

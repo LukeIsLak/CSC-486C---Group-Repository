@@ -9,6 +9,8 @@ public class EnemySpriteManager : MonoBehaviour
     public float rotatorXawOffsetDeg;
     public float rotatorLerpSpeed = 1;
 
+    public bool checkSide = false;
+
     public bool isFront = false;
     public bool isSide  = false;
     public bool isBack  = false;
@@ -21,7 +23,7 @@ public class EnemySpriteManager : MonoBehaviour
     }
 
     void Update() {
-        CheckSpriteRotation();
+        if (checkSide) CheckSpriteRotation();
         RotateToFacePlayer();
     }
 

@@ -242,6 +242,7 @@ MonoBehaviour:
   sprite: {fileID: 3416086164388169106}
   rotatorXawOffsetDeg: 0
   rotatorLerpSpeed: 10
+  checkSide: 1
   isFront: 0
   isSide: 0
   isBack: 0
@@ -348,6 +349,7 @@ GameObject:
   - component: {fileID: 2156385922286755932}
   - component: {fileID: 3693198263070883069}
   - component: {fileID: 5681783064450362064}
+  - component: {fileID: -4091834889055052740}
   m_Layer: 6
   m_Name: Rat
   m_TagString: Untagged
@@ -400,6 +402,7 @@ MonoBehaviour:
   nma: {fileID: 5681783064450362064}
   outerCol: {fileID: 1101515287149553060}
   innerCol: {fileID: 1641588425450268902}
+  isInitialized: 0
   isIdle: 0
   isWandering: 0
   canWander: 0
@@ -471,8 +474,8 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8633630617670396899}
-  m_Enabled: 1
-  m_AgentTypeID: 0
+  m_Enabled: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.6
   m_Speed: 3.5
   m_Acceleration: 8
@@ -484,5 +487,33 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.6
   m_BaseOffset: -0.3
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-4091834889055052740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633630617670396899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a2dc841c8556e544d8b4e1478d629d40, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5050423561288609642}
+        m_TargetAssemblyTypeName: Rat, Assembly-CSharp
+        m_MethodName: initialize_nma
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

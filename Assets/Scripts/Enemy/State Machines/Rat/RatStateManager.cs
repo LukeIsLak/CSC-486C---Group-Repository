@@ -110,11 +110,11 @@ public class RatStateManager : StateMachine<Rat, RatStates>
 
     /*From Spawn Transitions*/
     public bool SpawnToColonyIdle(Rat r) {
-        return !r.isLoner;
+        return r.isInitialized && !r.isLoner;
     }
 
     public bool SpawnToLonerIdle(Rat r) {
-        return r.isLoner;
+        return r.isInitialized && r.isLoner;
     }
 
     /*From ColonyIdle Transitions*/

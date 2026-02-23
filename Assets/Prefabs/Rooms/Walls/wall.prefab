@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9b950aa477913f646ba3a413fa50b6a1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -71,6 +75,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b950aa477913f646ba3a413fa50b6a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 598102265605406574}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b950aa477913f646ba3a413fa50b6a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2160794283855273050}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b950aa477913f646ba3a413fa50b6a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 102332783682511350}
   m_SourcePrefab: {fileID: 100100000, guid: 9b950aa477913f646ba3a413fa50b6a1, type: 3}
 --- !u!1 &8961435610606431401 stripped
 GameObject:
@@ -99,3 +109,50 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6281424698479989189, guid: 9b950aa477913f646ba3a413fa50b6a1, type: 3}
+--- !u!208 &2160794283855273050
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961435610606431401}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.0005, y: 0.030000001, z: 0.020000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.0295, y: 0, z: 0.020000001}
+  m_TimeToStationary: 0.5
+--- !u!114 &102332783682511350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961435610606431401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0

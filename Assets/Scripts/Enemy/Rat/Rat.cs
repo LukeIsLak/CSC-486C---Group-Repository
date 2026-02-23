@@ -21,6 +21,7 @@ public class Rat : EnemyInterface
 
     /*Unlike the states, these let the state manager know when it's time to change the state */
     [Header("State Checkers")]
+    public bool isInitialized   = false;
     public bool isIdle          = false;
     public bool isWandering     = false;
     public bool canWander       = false;
@@ -54,7 +55,6 @@ public class Rat : EnemyInterface
 
         playerTransform = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        nma = GetComponent<NavMeshAgent>();
 
         RatStateManager env_rsm     = FindObjectOfType<RatStateManager>();
         RatColonyManager env_rcm    = FindObjectOfType<RatColonyManager>();
@@ -62,13 +62,18 @@ public class Rat : EnemyInterface
         rcm = env_rcm;
         rsm = env_rsm;
         rsm.entities.Add(this);
-        // XXX set agent parameters here
+
+        outerCol.radius = rd.colonyDist;
+        innerCol.radius = rd.neighbourStopRadius;
+    }
+
+    public void initialize_nma() {
+        nma.enabled = true;
 
         nma.updatePosition = false;
         nma.updateRotation = false;
 
-        outerCol.radius = rd.colonyDist;
-        innerCol.radius = rd.neighbourStopRadius;
+        isInitialized = true;
     }
 
     public override void KillEnemy() {
@@ -260,13 +265,15 @@ public class Rat : EnemyInterface
                 canWander = or.canWander;
                 isWandering = or.isWandering;
 
-                if (isWandering) {
-                    colonyMoveSpot = or.colonyMoveSpot;
-                    nma.SetDestination(colonyMoveSpot);
+                if (isInitialized) {
+                    if (isWandering) {
+                        colonyMoveSpot = or.colonyMoveSpot;
+                        nma.SetDestination(colonyMoveSpot);
+                    }
+                    nma.isStopped = !isWandering;
+                    nma.updatePosition = isWandering;
+                    nma.updateRotation = isWandering;
                 }
-                nma.isStopped = !isWandering;
-                nma.updatePosition = isWandering;
-                nma.updateRotation = isWandering;
             }
             else {
                 // XXX if both rats are null handle this!

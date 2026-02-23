@@ -1,80 +1,185 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Unity.AI.Navigation;
-
-// XXX this is blocked until rooms are considered seperate meshes, since I need the meshes to be convesh mesh colliders
-// for this to work. I have other things I can do in the meantime.
 
 public class NavMeshSurfaceConstructor : MonoBehaviour
 {
-    [Header("Auto Collect")]
-    public LayerMask componentLayer;
+    [Header("Source NavMesh Settings")]
+    public LayerMask floorLayer;
+    public LayerMask floorNavLayer;
+    public float cellSize = 1f;
+    public float navmeshHeightOffset = 0.02f;
+    public string agentName;
+    public int agentTypeID;
 
-    [Header("Link Settings")]
-    public float maxLinkDistance = 3f;
-    public float linkWidth = 2f;
-    public float surfaceInset = 0.15f; // push endpoints onto navmesh
-    public bool bidirectional = true;
+    [Header("Build Settings")]
+    public bool buildOnStart = true;
+    public bool rebuild;
 
-    private List<Collider> components = new List<Collider>();
+    private NavMeshSurface surface;
+    private MeshFilter mf;
+    private MeshRenderer mr;
 
-    void Start()
-    {
-        CollectComponents();
-        CreateLinks();
+    public GameEvent doneNavMeshGeneration;
+
+    HashSet<Vector2Int> occupied = new HashSet<Vector2Int>();
+
+    public void Initialize() {
+        if (buildOnStart) Build();
     }
 
-    private void CollectComponents() {
-        components.Clear();
-        Collider[] all = FindObjectsOfType<Collider>();
-        foreach (Collider col in all) if (((1 << col.gameObject.layer) & componentLayer) != 0) components.Add(col);
+    void Update() {
+        if (rebuild) {
+            rebuild = false;
+            Build();
+        }
     }
 
-    void CreateLinks() {
-        for (int i = 0; i < components.Count; i++) {
-            for (int j = i + 1; j < components.Count; j++) {
-                Collider a = components[i];
-                Collider b = components[j];
+    public void Build() {
+        int? id = GetNavMeshAgentID(agentName); agentTypeID = id ?? 0;
+        agentTypeID = id ?? 0;
 
-                // TODO: LK - Eventually make this consider the room center so we don't get diagonal rooms connecting
-                Vector3 pointA = a.ClosestPoint(b.transform.position);
-                Vector3 pointB = b.ClosestPoint(pointA);
+        CollectCells();
+        Mesh mesh = GenerateMesh();
 
-                float dist = Vector3.Distance(pointA, pointB);
+        SetupComponents();
 
-                if (dist > maxLinkDistance) continue;
+        mf.sharedMesh = mesh;
 
-                CreateGapLink(pointA, pointB, a.name, b.name);
+        surface.agentTypeID = agentTypeID;
+        surface.BuildNavMesh();
+
+        doneNavMeshGeneration.Raise();
+    }
+
+    private void CollectCells() {
+        occupied.Clear();
+
+        Collider[] cols = FindObjectsOfType<Collider>();
+
+        foreach (var c in cols)
+        {
+            if (((1 << c.gameObject.layer) & floorLayer.value) == 0) continue;
+
+            Bounds b = c.bounds;
+
+            int minX = Mathf.FloorToInt(b.min.x / cellSize);
+            int maxX = Mathf.FloorToInt(b.max.x / cellSize);
+
+            int minZ = Mathf.FloorToInt(b.min.z / cellSize);
+            int maxZ = Mathf.FloorToInt(b.max.z / cellSize);
+
+            for (int x = minX; x < maxX; x++) {
+                for (int z = minZ; z < maxZ; z++) occupied.Add(new Vector2Int(x, z));
             }
         }
     }
 
-    void CreateGapLink(Vector3 pointA, Vector3 pointB, string nameA, string nameB) {
-        Vector3 dir = (pointB - pointA).normalized;
+    private Mesh GenerateMesh() {
+        List<Vector3> verts = new List<Vector3>();
+        List<int> tris = new List<int>();
 
-        /*Push endpoints slightly into each surface so they are on the navmesh*/
-        Vector3 start = pointA + dir * surfaceInset;
-        Vector3 end   = pointB - dir * surfaceInset;
+        float y = GetHeight();
 
-        /*Midpoint of the closest points becomes link object position*/
-        Vector3 mid = (start + end) * 0.5f;
+        foreach (Vector2Int cell in occupied) {
+            // Only create faces exposed to empty space
+            AddFaceIfEmpty(cell, Vector2Int.up, verts, tris, y);
+            AddFaceIfEmpty(cell, Vector2Int.down, verts, tris, y);
+            AddFaceIfEmpty(cell, Vector2Int.left, verts, tris, y);
+            AddFaceIfEmpty(cell, Vector2Int.right, verts, tris, y);
+        }
 
-        GameObject linkObj = new GameObject($"NavMeshLink_{nameA}_{nameB}");
+        Mesh m = new Mesh();
+        m.name = "CombinedNavMesh";
+        m.SetVertices(verts);
+        m.SetTriangles(tris, 0);
+        m.RecalculateNormals();
+        m.RecalculateBounds();
 
-        linkObj.transform.parent = transform;
-        linkObj.transform.position = mid;
-
-        /*Link should face the direction of the gap*/
-        linkObj.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
-
-        NavMeshLink link = linkObj.AddComponent<NavMeshLink>();
-
-        link.startPoint = linkObj.transform.InverseTransformPoint(start);
-        link.endPoint = linkObj.transform.InverseTransformPoint(end);
-
-        link.width = linkWidth;
-        link.bidirectional = bidirectional;
-
-        Debug.DrawLine(start, end, Color.green, 20f);
+        return m;
     }
+
+    private void AddFaceIfEmpty(Vector2Int cell, Vector2Int dir, List<Vector3> verts, List<int> tris, float y) {
+        if (occupied.Contains(cell + dir)) return;
+
+        Vector3 basePos = new Vector3(cell.x * cellSize, y, cell.y * cellSize);
+
+        Vector3 right = new Vector3(cellSize, 0, 0);
+        Vector3 forward = new Vector3(0, 0, cellSize);
+
+        Vector3 v0, v1, v2, v3;
+
+        if (dir == Vector2Int.up) {
+            v0 = basePos + forward + right;
+            v1 = basePos + forward;
+            v2 = basePos;
+            v3 = basePos + right;
+        }
+        else if (dir == Vector2Int.down) {
+            v0 = basePos;
+            v1 = basePos + right;
+            v2 = basePos + forward + right;
+            v3 = basePos + forward;
+        }
+        else if (dir == Vector2Int.left) {
+            v0 = basePos + forward;
+            v1 = basePos;
+            v2 = basePos + right;
+            v3 = basePos + forward + right;
+        }
+        else {
+            v0 = basePos + right;
+            v1 = basePos + forward + right;
+            v2 = basePos + forward;
+            v3 = basePos;
+        }
+
+        int start = verts.Count;
+
+        verts.Add(v0);
+        verts.Add(v1);
+        verts.Add(v2);
+        verts.Add(v3);
+
+        tris.Add(start + 0);
+        tris.Add(start + 1);
+        tris.Add(start + 2);
+
+        tris.Add(start + 0);
+        tris.Add(start + 2);
+        tris.Add(start + 3);
+    }
+
+    private float GetHeight() {
+        foreach (var c in FindObjectsOfType<Collider>()) if (((1 << c.gameObject.layer) & floorLayer) != 0) return c.bounds.center.y + navmeshHeightOffset;
+        return 0f;
+    }
+
+    private void SetupComponents() {
+        mf = GetComponent<MeshFilter>();
+        if (!mf) mf = gameObject.AddComponent<MeshFilter>();
+
+        mr = GetComponent<MeshRenderer>();
+        if (!mr) mr = gameObject.AddComponent<MeshRenderer>();
+
+        mr.enabled = false;
+
+        surface = GetComponent<NavMeshSurface>();
+        if (!surface) surface = gameObject.AddComponent<NavMeshSurface>();
+
+        surface.collectObjects = CollectObjects.All;
+        surface.layerMask = floorNavLayer;
+        surface.useGeometry = NavMeshCollectGeometry.RenderMeshes;
+    }
+
+    private int? GetNavMeshAgentID(string name) {
+        for (int i = 0; i < NavMesh.GetSettingsCount(); i++) { 
+            var settings = NavMesh.GetSettingsByIndex(i); 
+            if (name == NavMesh.GetSettingsNameFromID(settings.agentTypeID)) return settings.agentTypeID; 
+        } 
+        return null; 
+    }
+
 }
