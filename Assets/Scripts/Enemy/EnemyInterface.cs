@@ -8,18 +8,22 @@ public class EnemyInterface : MonoBehaviour
     [Header("Enemy Interface Variables")]
     public CharacterData playerData;
     public BaseEnemyData enemyData;
-    protected float curHealth;
-    protected float moveSpeed;
+    public EnemyEffects enemyEffects;
+    [SerializeField] protected float curHealth;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float speedModifier = 1;
 
     public void Awake() {
         initialize();
     }
 
     public virtual void initialize() {
-        curHealth = enemyData.baseHealth * playerData.maxHealth;
-        moveSpeed = enemyData.baseMoveSpeed * playerData.moveSpeed;
+        /*Initialize enemy data*/
+        curHealth = enemyData.baseHealth * playerData.baseHealth;
+        moveSpeed = enemyData.baseMoveSpeed * playerData.baseSpeed;
     }
 
+    /*This has the intention of being overwritten in extended classes*/
     public virtual void KillEnemy() {
         Destroy(this.gameObject);
     }

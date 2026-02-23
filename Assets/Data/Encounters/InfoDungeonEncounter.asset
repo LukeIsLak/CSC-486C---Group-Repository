@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81f052c2b98dda42891a27b3639edde, type: 3}
+  m_Name: InfoDungeonEncounter
+  m_EditorClassIdentifier: 
+  IND_ACCESSIBLE: 0
+  IND_INACCESSIBLE: 1
+  IND_COMPLETED: 2
+  IND_HOVERED: 3
+  stateSprites:
+  - {fileID: -1100653601, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  - {fileID: -1707302033, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  - {fileID: 1202719947, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  - {fileID: -1362446071, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  encounterWeights:
+  - {fileID: 11400000, guid: c4f495d16f909424e9ed067d57d0eb26, type: 2}
+  - {fileID: 11400000, guid: 15496984a4d9237428ac4c683c253f1d, type: 2}
+  - {fileID: 11400000, guid: 56b190006b1282a4789dd04c87363869, type: 2}
+  - {fileID: 11400000, guid: b90432f3dd92d5f45b2ab051982a4c47, type: 2}
+  scene:
+    m_SceneAsset: {fileID: 102900000, guid: 4a8a3683c26439a45bed34eb34bbd2c1, type: 3}
+    m_SceneName: Dungeon

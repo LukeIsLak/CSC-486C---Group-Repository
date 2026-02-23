@@ -35,39 +35,57 @@ public class DeckSystems : MonoBehaviour
     // used in combat (cards left in deck during level, ex. doesnt not include hand)
     public int currentDeckSize;
 
-    // the maximum amount of cards a player can have in a deck
-    const int MAXDECKSIZE = 30;
-
     //store any card that has been used
     public List<CardInstance> discard = new List<CardInstance>();
-
-    public PlayerInventory inventory;
     
     public event Action OnHandSelectionChanged;
     public event Action OnHandContentsChanged;
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
     private int nextUid = 0;
+    
+    public PlayerInventory inventory;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        loadDeck(inventory.playerDeck);
-    }
+    const float TIMETODRAWNEWCARD = 5f;
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
     void Update()
     {
         // might want to put a delay on this
-        if (hand.Count == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
-            for (int i = 0; i < MAXHANDSIZE; i++)
-            {
-                if (currentDeckSize > 0) { // in case a full hand isnt avalible
-                    drawCard();
-                }
-            }
-        }
+        //if (hand.Count == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
+            //for (int i = 0; i < MAXHANDSIZE; i++)
+            //{
+                //if (currentDeckSize > 0) { // in case a full hand isnt avalible
+                    //drawCard();
+                //}
+            //}
+        //}
     }
+
+    void Start(){
+        //Debug.Log("done");
+        loadDeck(inventory.playerdeck);
+    }
+
+    // call this in game manager (moved to player inventory)
+    //public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
+    //{
+    //    deck.Clear();
+    //    hand.Clear();
+    //    discard.Clear();
+    //
+    //    for (int i = 0; i < deckSize; i++)
+    //    {
+    //        Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
+    //        addCardToDeck(new CardInstance(pick));
+    //    }
+    //
+    //    for (int i = 0; i < MAXHANDSIZE; i++) drawCard();
+    //
+    //    NotifyHandContentsChanged();
+    //    NotifyHandSelectionChanged();
+    //}
+
 
     /// <summary>
     /// adds the given card to the back of the deck, 
@@ -230,10 +248,12 @@ public class DeckSystems : MonoBehaviour
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
 
         NotifyHandContentsChanged();
+
+        StartCoroutine(newCardTimer());
     }
 
     /// <summary>
-    /// Assumes that the discard pil is checked before being called
+    /// Assumes that the discard pill is checked before being called
     /// takes an amount of cards from discard pile (randomly) and puts them in to the players deck, player deck will be shuffled after
     /// </summary>
     /// <param name="amount"></param>
@@ -316,6 +336,8 @@ public class DeckSystems : MonoBehaviour
             addCardToDeck(deckList[0]);
             deckList.RemoveAt(0);
         }
+
+        NotifyHandContentsChanged();
     }
 
     private void ChangeHandIndex(int direction)
@@ -347,6 +369,13 @@ public class DeckSystems : MonoBehaviour
         else if (value < -0.1f)
         {
             ChangeHandIndex(-1);
+        }
+    }
+
+    IEnumerator newCardTimer(){
+        if (deck.Count > 0){
+            yield return new WaitForSeconds(TIMETODRAWNEWCARD);
+            drawCard();
         }
     }
 }

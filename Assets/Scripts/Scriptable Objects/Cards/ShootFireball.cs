@@ -46,7 +46,12 @@ public class ShootFireball : MonoBehaviour
             EnemyInterface enem = hit.GetComponent<EnemyInterface>();
             if (enem != null){
                 enem.Hit(dmg);
-                //Luke hasn't pushed this yet!
+            }
+            else {
+                enem = hit.GetComponentInParent<EnemyInterface>();
+                if (enem != null){
+                    enem.Hit(dmg);
+                }
             }
         }
 

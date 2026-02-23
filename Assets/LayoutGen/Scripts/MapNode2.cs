@@ -31,7 +31,7 @@ public class MapNode2 : MonoBehaviour
     public GenerationChoice2 choice;             // Choice made for generation
     private int numChildren;                    // Current number of children
     public List<MapNode2> outNodes;              // Nodes this one connects into
-    public EncounterType encounter;             // The encounter of the room
+    // public EncounterType encounter;             // The encounter of the room
     public float branchInProbability = 1f;    // To be attached to the branch later. Probability of merging into this node from another.
 
 
@@ -42,7 +42,7 @@ public class MapNode2 : MonoBehaviour
         choice      = GenerationChoice2.None;
         numChildren = 0;
         outNodes    = new List<MapNode2>();
-        encounter   = EncounterType.None;
+        // encounter   = EncounterType.None;
     }
 
     /*********************
@@ -50,7 +50,7 @@ public class MapNode2 : MonoBehaviour
     *********************/
 
     // Setters
-    public void SetEncounter(EncounterType e)   { encounter = e; }
+    // public void SetEncounter(EncounterType e)   { encounter = e; }
 
     // public void SetBranch(MapBranch b)          { branch = b; }
 
@@ -62,7 +62,7 @@ public class MapNode2 : MonoBehaviour
 
 
     // Getters
-    public EncounterType GetEncounter()         { return encounter; }
+    // public EncounterType GetEncounter()         { return encounter; }
 
     // public MapBranch GetBranch()                { return branch; }
 

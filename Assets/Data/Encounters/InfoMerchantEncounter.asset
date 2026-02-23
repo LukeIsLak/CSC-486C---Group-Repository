@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81f052c2b98dda42891a27b3639edde, type: 3}
+  m_Name: InfoMerchantEncounter
+  m_EditorClassIdentifier: 
+  IND_ACCESSIBLE: 0
+  IND_INACCESSIBLE: 1
+  IND_COMPLETED: 2
+  IND_HOVERED: 3
+  stateSprites:
+  - {fileID: 2070105257, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  - {fileID: 890794497, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  - {fileID: -323223572, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  - {fileID: -865636401, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
+  encounterWeights:
+  - {fileID: 11400000, guid: c4f495d16f909424e9ed067d57d0eb26, type: 2}
+  - {fileID: 11400000, guid: 56b190006b1282a4789dd04c87363869, type: 2}
+  - {fileID: 11400000, guid: 15496984a4d9237428ac4c683c253f1d, type: 2}
+  scene:
+    m_SceneAsset: {fileID: 102900000, guid: 10d0db9ea267c8a4ebff4a96f3d225b0, type: 3}
+    m_SceneName: Merchant

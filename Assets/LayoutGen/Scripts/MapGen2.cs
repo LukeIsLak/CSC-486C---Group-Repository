@@ -26,6 +26,7 @@ public class MapGen2 : MonoBehaviour
     public int maxWidth         = 3;            // Maximum number of branches in a single layer.
     public int randomSeed       = 0;            // The random seed to use in generation
     public bool useSetSeed      = false;        // Whether not to use to provided seed
+    public float complexity     = 0f;    // Chance of making an inexistent connection
 
 
     /*********************
@@ -77,6 +78,7 @@ public class MapGen2 : MonoBehaviour
     {
         Initialize();
         GenerateLayout();
+        DoComplexity();
         DoVisualization();
         return layersList;
     }
@@ -351,6 +353,37 @@ public class MapGen2 : MonoBehaviour
                 if (Random.Range(0f, 1f) <= rightNeighbour.branchInProbability) return;
             }
             node.choice &= GenerationChoice2.MergeLeft;      
+        }
+    }
+
+    private void DoComplexity()
+    {
+        for (int l = 0; l < numLayers - 1; l++)
+        {
+            List<MapNode2> curLayer = layersList[l];
+            for (int i = 0; i < curLayer.Count - 1; i++)
+            {
+                MapNode2 curNode = curLayer[i];
+                MapNode2 nextNode = curLayer[i + 1];
+                MapNode2 curChild = curNode.GetRightmostChild();
+                MapNode2 nextChild = nextNode.GetLeftmostChild();
+
+                bool canConnect = curChild != nextChild;
+
+                if (canConnect) 
+                {
+                    // Divide the choice to go either left or right
+                    float r = Random.Range(0f, 1f);
+                    if (r <= complexity/2)
+                    {
+                        nextNode.AddChildLeft(curChild);
+                    }
+                    else if (r <= complexity)
+                    {
+                        curNode.AddChildRight(nextChild);
+                    }  
+                }
+            }
         }
     }
 

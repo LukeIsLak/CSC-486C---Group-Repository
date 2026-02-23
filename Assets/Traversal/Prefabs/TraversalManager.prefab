@@ -45,3 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   traversableLayoutPrefab: {fileID: 3586655531442555394, guid: 1a3e8eb0918fc8c42a15ac3694c9447f, type: 3}
+  sceneCamera: {fileID: 0}
+  layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
+  dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
+  EnterEncounter: {fileID: 11400000, guid: bd10d720d2ae37d40beb52c0770b1d02, type: 2}
+  ExitToMenu: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
+  LayoutInitialized: {fileID: 11400000, guid: 13ec22a1b42ff784d91881f6de58e85a, type: 2}
