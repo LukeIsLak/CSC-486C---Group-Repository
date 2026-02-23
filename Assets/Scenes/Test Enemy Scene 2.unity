@@ -488,52 +488,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -27.231, z: 0}
---- !u!1 &918476266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 918476268}
-  - component: {fileID: 918476267}
-  m_Layer: 0
-  m_Name: Rat State Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &918476267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918476266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b90bed9c3d4be9e4485bcf2dd483fbf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entities: []
-  rcm: {fileID: 1976466581}
---- !u!4 &918476268
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918476266}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.316629, y: 2.9576325, z: 0.8956822}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1078992464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
@@ -1297,52 +1251,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 25.57, z: 0}
---- !u!1 &1976466580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1976466582}
-  - component: {fileID: 1976466581}
-  m_Layer: 0
-  m_Name: Rat Colony Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1976466581
+--- !u!114 &1976466581 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4398946616594005555, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+  m_PrefabInstance: {fileID: 1797720697915337050}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976466580}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b8c3941fae751140987a91848cddf08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colonyMoveSpot: []
-  ratColoniesMoving: 
---- !u!4 &1976466582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976466580}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.881313, y: 3.405686, z: -1.8160617}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2059638711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1404,6 +1323,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22fae4a37b4305f4390b7879197a9c0c, type: 3}
+--- !u!1001 &1104756418484764273
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6049098205943574301, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: rcm
+      value: 
+      objectReference: {fileID: 1976466581}
+    - target: {fileID: 8064361122621989485, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_Name
+      value: Rat State Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.316629
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9576325
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.8956822
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094674784650281286, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
 --- !u!1001 &1487268146010765490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1485,6 +1465,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22fae4a37b4305f4390b7879197a9c0c, type: 3}
+--- !u!1001 &1797720697915337050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.881313
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.405686
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.8160617
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259247241727816722, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+      propertyPath: m_Name
+      value: Rat Colony Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1497,8 +1534,8 @@ SceneRoots:
   - {fileID: 2059638711}
   - {fileID: 1863607138}
   - {fileID: 687694528}
-  - {fileID: 1976466582}
-  - {fileID: 918476268}
+  - {fileID: 1797720697915337050}
+  - {fileID: 1104756418484764273}
   - {fileID: 1871993223}
   - {fileID: 1132491005}
   - {fileID: 1663341394}
