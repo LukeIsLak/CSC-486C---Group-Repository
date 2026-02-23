@@ -54,15 +54,22 @@ public class RatColonyManager : MonoBehaviour
 
         Vector3 wanderSpot = PickWanderSpotOnNavMesh(midPoint, ratMaster.rd.wanderRadius);
 
-        foreach(Rat r in ratColonies[i]) {
-            r.colonyMoveSpot = wanderSpot;
+        foreach(Rat r in ratColonies[i]) SetMoveSpot(r, wanderSpot);
+    }
 
-            if (r.nma != null && r.nma.isOnNavMesh) {
-                r.nma.SetDestination(wanderSpot);
-                r.nma.isStopped = false;
-                r.nma.updatePosition = true;
-                r.nma.updateRotation = true;
-            }
+    public void DetermineLonerMoveSpot(Rat r) {
+        Vector3 wanderSpot = PickWanderSpotOnNavMesh(r.gameObject.transform.position, r.rd.wanderRadius);
+        SetMoveSpot(r, wanderSpot);
+    }
+
+    public void SetMoveSpot(Rat r, Vector3 wanderSpot) {
+        r.colonyMoveSpot = wanderSpot;
+
+        if (r.nma != null && r.nma.isOnNavMesh) {
+            r.nma.SetDestination(wanderSpot);
+            r.nma.isStopped = false;
+            r.nma.updatePosition = true;
+            r.nma.updateRotation = true;
         }
     }
 

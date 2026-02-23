@@ -182,7 +182,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     /*From Leap Transitions*/
     public bool LeapToAgroApproach(Rat r) {
         return     r.doneLeap
-                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.leapRadius;
+                && Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.detectionRadius;
     }
 
     public bool LeapToColonyWander(Rat r) {

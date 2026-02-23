@@ -49,8 +49,8 @@ public class Rat : EnemyInterface
     /****************************************************/
 
     public override void initialize() {
-        // curHealth = rd.baseHealth * playerData.maxHealth;
-        // moveSpeed = rd.baseMoveSpeed * playerData.baseSpeed;
+        curHealth = rd.baseHealth * playerData.maxHealth;
+        moveSpeed = rd.baseMoveSpeed * playerData.baseSpeed;
 
         playerTransform = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
@@ -71,11 +71,10 @@ public class Rat : EnemyInterface
         innerCol.radius = rd.neighbourStopRadius;
     }
 
-    public virtual void KillEnemy() {
+    public override void KillEnemy() {
         rcm.RemoveRat(this, ratColonyNum);
         Destroy(this.gameObject);
     }
-
 
     /****************************************************/
     /*             End Of Instance Methods              */
@@ -127,8 +126,13 @@ public class Rat : EnemyInterface
         Vector3 cohesionForce   = Vector3.zero;
 
         if (count > 0) {
-            alignmentForce = (alignment / count).normalized;
-            cohesionForce = ((cohesionCenter / count) - transform.position).normalized;
+            alignmentForce = (alignment / count);
+            alignmentForce.y = 0f;
+            if (alignmentForce.sqrMagnitude > 0f) alignmentForce = alignmentForce.normalized;
+
+            cohesionForce = ((cohesionCenter / count) - transform.position);
+            cohesionForce.y = 0f;
+            if (cohesionForce.sqrMagnitude > 0f) cohesionForce = cohesionForce.normalized;
         }
 
         Vector3 wander = Random.insideUnitSphere;
@@ -141,12 +145,14 @@ public class Rat : EnemyInterface
                                 + wander * rd.wanderWeight;
         
         Vector3 velocity = Vector3.ClampMagnitude(finalVelocity, moveSpeed);
-        transform.position += velocity * Time.deltaTime;
+        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime;
+        transform.position += planarMove;
 
-        nma.nextPosition = transform.position;
+        Vector3 agentNextPos = nma.nextPosition;
+        nma.nextPosition = new Vector3(transform.position.x, agentNextPos.y, transform.position.z);
 
         if (velocity.sqrMagnitude > 0f) {
-            Quaternion rot = Quaternion.LookRotation(velocity);
+            Quaternion rot = Quaternion.LookRotation(new Vector3(velocity.x, 0f, velocity.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, 10f * Time.deltaTime);
         }
     }
@@ -164,12 +170,23 @@ public class Rat : EnemyInterface
         return Vector3.Distance(transform.position, dest) <= rd.destStopDist;
     }
 
+    public void FinishWander() {
+        doneWandering = true;
+        isMoving = false;
+        nma.isStopped = true;
+        nma.updatePosition = false;
+        nma.updateRotation = false;
+    }
 
     /****************************************************/
     /*             End Of Helper Methods                */
     /****************************************************/
 
 
+
+    /****************************************************/
+    /*           Beginning of Movement Methods          */
+    /****************************************************/
 
     public void UpdateColonyMove() {
         UpdateMove();
@@ -179,6 +196,16 @@ public class Rat : EnemyInterface
         UpdatePlayerPath();
         UpdateMove();
     }
+
+    /****************************************************/
+    /*             End Of Movement Methods              */
+    /****************************************************/
+
+
+
+    /****************************************************/
+    /*              Beginning Of Triggers               */
+    /****************************************************/
 
     public void OnTriggerZone(Collider other, TriggerZone zone, TriggerType type) {
         Rat or = other.gameObject.GetComponent<Rat>();
@@ -265,13 +292,23 @@ public class Rat : EnemyInterface
         }
     }
 
-    public void FinishWander() {
-        doneWandering = true;
-        isMoving = false;
-        nma.isStopped = true;
-        nma.updatePosition = false;
-        nma.updateRotation = false;
+    private void OnCollisionEnter(Collision other) {
+        if (isLeaping && other.gameObject.CompareTag("Player")) {
+            Health h = other.gameObject.GetComponent<Health>();
+            if (h != null) h.TakeDamage(10f);
+            isLeaping = false; // XXX should use another thing here
+        }
     }
+
+    /****************************************************/
+    /*                End Of Triggers                   */
+    /****************************************************/
+
+
+
+    /****************************************************/
+    /*       Beginning Of Couroutines / Timers          */
+    /****************************************************/
 
     public void StartWanderStagger() {
         StartCoroutine(StaggerMove());
@@ -286,23 +323,19 @@ public class Rat : EnemyInterface
     }
 
     public void StartLeap() {
-        Vector3 posDiff     = playerTransform.position - transform.position;
-        if (posDiff.magnitude == 0) return;
-        Vector3 direction   = posDiff / posDiff.magnitude;
+        Vector3 toPlayer    = playerTransform.position - transform.position;
+        Vector3 horizontal  = new Vector3(toPlayer.x, 0f, toPlayer.z);
+        if (horizontal.sqrMagnitude == 0f) return;
 
         // Preserve y velocity
         float velocityY     = rb.velocity.y;
 
-        // Set forward to always face player
-        transform.forward   = direction;
+        transform.forward   = horizontal.normalized;
 
-
-        if (direction.magnitude == 0) return;
-        direction = direction / direction.magnitude;
-        if (posDiff.magnitude < rd.leapRadius && canLeap)
+        if (toPlayer.magnitude < rd.leapRadius && canLeap)
         {
-            curLeapDir = direction;
-            curLeapDir[1] += rd.leapYIncrease;
+            curLeapDir = horizontal;
+            curLeapDir.y = rd.leapYIncrease;
             StartCoroutine(Leap());
             return;
         }
@@ -321,15 +354,23 @@ public class Rat : EnemyInterface
 
     private IEnumerator Leap() {
         anim.SetBool("isAttack", true);
+
         isLeaping = true;
         canLeap = false;
         nma.isStopped = true;
         nma.updatePosition = false;
         nma.updateRotation = false;
-        rb.AddForce(curLeapDir * rd.leapForce);
+
+        rb.AddForce(curLeapDir * rd.leapForce, ForceMode.Impulse);
+
         yield return new WaitForSeconds(rd.leapDuration);
+
         isLeaping = false;
         doneLeap = true;
+        nma.isStopped = true;
+        nma.updatePosition = true;
+        nma.updateRotation = false;
+
         anim.SetBool("isAttack", false);
     }
 
@@ -344,7 +385,12 @@ public class Rat : EnemyInterface
         yield return new WaitForSeconds(rd.idleDuration);
         isIdle = false;
         canWander = true;
-        if (!isLoner && isRatMaster) rcm.DetermineColonyMoveSpot(ratColonyNum);
+        if (!isLoner && isRatMaster) {
+            /*The idea here is too provide the colony some time and to stagger the colonies*/
+            float addIdle = Random.Range(rd.minAddIdleWait, rd.maxAddIdleWait);
+            yield return new WaitForSeconds(addIdle);
+            rcm.DetermineColonyMoveSpot(ratColonyNum);
+        }
     }
 
     private IEnumerator DelayCalcPlayerPath() {
@@ -353,4 +399,9 @@ public class Rat : EnemyInterface
         yield return new WaitForSeconds(rd.checkPlayerUpdate);
         checkPlayerPath = true;
     }
+
+    /****************************************************/
+    /*           End Of Couroutines / Timers            */
+    /****************************************************/
+
 }

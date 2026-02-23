@@ -17,6 +17,10 @@ public class RatBaseData : BaseEnemyData
     public float wanderWeight       = 0.3f;
     public float destStopDist       = 1f;
 
+    [Header("Navigation Misc. Values")]
+    public float minAddIdleWait = 0f;
+    public float maxAddIdleWait = 2f;
+
     [Header("Leaping Values")]
     public float leapRadius     = 2f;
     public float leapSpeedRatio = 4f;

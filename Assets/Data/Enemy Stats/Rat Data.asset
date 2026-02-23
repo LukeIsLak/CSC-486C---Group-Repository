@@ -21,11 +21,13 @@ MonoBehaviour:
   cohesionWeight: 1
   wanderWeight: 0.3
   destStopDist: 1
-  leapRadius: 2
+  minAddIdleWait: 0
+  maxAddIdleWait: 2
+  leapRadius: 3
   leapSpeedRatio: 4
-  leapForce: 20
-  leapYIncrease: 0.25
-  leapDuration: 0.5
+  leapForce: 4
+  leapYIncrease: 1.75
+  leapDuration: 2
   leapCooldown: 3
   ratMask:
     serializedVersion: 2
@@ -34,8 +36,8 @@ MonoBehaviour:
   neighbourRadius: 5
   neighbourStopRadius: 2
   checkPlayerUpdate: 0.1
-  detectionRadius: 5
-  wanderRadius: 4
+  detectionRadius: 7
+  wanderRadius: 8
   idleDuration: 2
   minMoveWait: 0.25
   maxMoveWait: 0.75
