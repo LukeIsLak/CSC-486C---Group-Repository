@@ -37,7 +37,7 @@ MonoBehaviour:
   neighbourStopRadius: 2
   checkPlayerUpdate: 0.1
   detectionRadius: 7
-  wanderRadius: 3
+  wanderRadius: 6
   idleDuration: 2
   minMoveWait: 0.25
   maxMoveWait: 0.75

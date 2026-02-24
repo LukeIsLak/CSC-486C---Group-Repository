@@ -472,7 +472,10 @@ public class Bat : EnemyInterface
     public void UpdatePeckRebound() {
         UpdateMoveSpot(false);
 
-        if (!isMoving && isPecking == true && isPeckRebounding) peckComplete = false;
+        if (!isMoving && isPeckRebounding) {
+            peckComplete = false;
+            isPeckRebounding = false;
+        }
     }
 
     /****************************************************/
