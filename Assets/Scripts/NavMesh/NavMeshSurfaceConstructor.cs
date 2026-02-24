@@ -64,7 +64,7 @@ public class NavMeshSurfaceConstructor : MonoBehaviour
             if (((1 << c.gameObject.layer) & floorLayer.value) == 0) continue;
 
             Bounds b = c.bounds;
-
+            /*Create the bounds*/
             int minX = Mathf.FloorToInt(b.min.x / cellSize);
             int maxX = Mathf.FloorToInt(b.max.x / cellSize);
 
@@ -84,7 +84,7 @@ public class NavMeshSurfaceConstructor : MonoBehaviour
         float y = GetHeight();
 
         foreach (Vector2Int cell in occupied) {
-            // Only create faces exposed to empty space
+            /* Only create faces exposed to empty space */
             AddFaceIfEmpty(cell, Vector2Int.up, verts, tris, y);
             AddFaceIfEmpty(cell, Vector2Int.down, verts, tris, y);
             AddFaceIfEmpty(cell, Vector2Int.left, verts, tris, y);
@@ -111,6 +111,7 @@ public class NavMeshSurfaceConstructor : MonoBehaviour
 
         Vector3 v0, v1, v2, v3;
 
+        /*Create face given position*/
         if (dir == Vector2Int.up) {
             v0 = basePos + forward + right;
             v1 = basePos + forward;
@@ -174,6 +175,7 @@ public class NavMeshSurfaceConstructor : MonoBehaviour
         surface.useGeometry = NavMeshCollectGeometry.RenderMeshes;
     }
 
+    /*Get nav mesh via a name*/
     private int? GetNavMeshAgentID(string name) {
         for (int i = 0; i < NavMesh.GetSettingsCount(); i++) { 
             var settings = NavMesh.GetSettingsByIndex(i); 

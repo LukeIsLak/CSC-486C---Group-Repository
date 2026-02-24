@@ -100,12 +100,14 @@ public class RatColonyManager : MonoBehaviour
             RemoveAndUpdateColony(i);
         }
         else if (r.isRatMaster) {
+            /*Set next rat as the rat master*/
             ratColonies[i][0].isRatMaster = true;
         }
     }
 
     public void RemoveAndUpdateColony(int i) {
-        for (int j = i; j < ratColonies.Count; j++) foreach (Rat r in ratColonies[j]) r.ratColonyNum -= 1;
+        /*Adjust the index of each colony after the removed one*/
+        for (int j = i+1; j < ratColonies.Count; j++) foreach (Rat r in ratColonies[j]) r.ratColonyNum -= 1;
         ratColonies.RemoveAt(i);
     }
 }
