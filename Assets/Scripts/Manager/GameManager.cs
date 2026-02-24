@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CharacterData playerData;
     [SerializeField] private CardsDatabase cardsDB;
     public static GameManager instance { get; private set; }
+    public PlayerInventory inventory;
 
     private bool playerInitialized = false;
 
@@ -32,7 +33,9 @@ public class GameManager : MonoBehaviour
 
         playerHealth.Init(playerData.maxHealth);
 
-        deck.InitializeRandomDeck(cardsDB, 30);
+        //deck.InitializeRandomDeck(cardsDB, 30);
+        //Debug.Log("I try thing");
+        inventory.InitializeRandomDeck(cardsDB, 30);
     }
 
     private void InitializedPerScene(GameObject player)

@@ -35,9 +35,6 @@ public class DeckSystems : MonoBehaviour
     // used in combat (cards left in deck during level, ex. doesnt not include hand)
     public int currentDeckSize;
 
-    // the maximum amount of cards a player can have in a deck
-    const int MAXDECKSIZE = 30;
-
     //store any card that has been used
     public List<CardInstance> discard = new List<CardInstance>();
     
@@ -46,40 +43,23 @@ public class DeckSystems : MonoBehaviour
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
     private int nextUid = 0;
+    
+    public PlayerInventory inventory;
+
+    const float TIMETODRAWNEWCARD = 5f;
+    int cardsToDraw = 0;
+    bool drawFlag = false;
 
     // Update is called once per frame, will check if the player hand is empty, if that is the case then fill back up to 5 if possible
     void Update()
     {
-        // might want to put a delay on this
-        if (hand.Count == EMPTYHANDSIZE && currentDeckSize > 0) { // a check here to hopfully save some execution time by not trigering the loop
-            for (int i = 0; i < MAXHANDSIZE; i++)
-            {
-                if (currentDeckSize > 0) { // in case a full hand isnt avalible
-                    drawCard();
-                }
-            }
-        }
+
     }
 
-    // call this in game manager
-    public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
-    {
-        deck.Clear();
-        hand.Clear();
-        discard.Clear();
-
-        for (int i = 0; i < deckSize; i++)
-        {
-            Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
-            addCardToDeck(new CardInstance(pick));
-        }
-
-        for (int i = 0; i < MAXHANDSIZE; i++) drawCard();
-
-        NotifyHandContentsChanged();
-        NotifyHandSelectionChanged();
+    void Start(){
+        //Debug.Log("done");
+        loadDeck(inventory.playerdeck);
     }
-
 
     /// <summary>
     /// adds the given card to the back of the deck, 
@@ -242,10 +222,17 @@ public class DeckSystems : MonoBehaviour
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
 
         NotifyHandContentsChanged();
+
+        cardsToDraw++;
+        if (!drawFlag){
+            drawFlag = true;
+            StartCoroutine(newCardTimer());
+        }
+        
     }
 
     /// <summary>
-    /// Assumes that the discard pil is checked before being called
+    /// Assumes that the discard pill is checked before being called
     /// takes an amount of cards from discard pile (randomly) and puts them in to the players deck, player deck will be shuffled after
     /// </summary>
     /// <param name="amount"></param>
@@ -363,4 +350,22 @@ public class DeckSystems : MonoBehaviour
             ChangeHandIndex(-1);
         }
     }
+
+    IEnumerator newCardTimer() {
+        
+        if (deck.Count > 0){
+            yield return new WaitForSeconds(TIMETODRAWNEWCARD);
+            drawCard();
+        }
+
+        cardsToDraw--;
+
+        if (cardsToDraw > 0){
+            StartCoroutine(newCardTimer());
+        }
+
+        //can still cause some issues with consiten uses of cards ex. 2 then 3 sec break then 2. look in to reseting this after all coroutines are finished
+        drawFlag = false;
+    }
+
 }
