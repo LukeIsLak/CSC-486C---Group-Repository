@@ -12,7 +12,6 @@ public class TraversalManager : MonoBehaviour
 
     [Header("Data")]
     public LayoutData layoutData;
-    public DungeonData dungeonData;
 
     [Header("Events")]
     public GameEvent EnterEncounter;
@@ -51,7 +50,6 @@ public class TraversalManager : MonoBehaviour
             layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
             layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
             respondToInputs = false;
-            dungeonData.dungeonSeed = (int)System.DateTime.Now.Ticks;
             EnterEncounter.Raise();
         }
         if (respondToInputs && Input.GetKeyDown(KeyCode.R))

@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b85a17577b39a4b80b955d11ad8464, type: 3}
-  m_Name: Dungeon Data
+  m_Script: {fileID: 11500000, guid: 2f5f23d866a7c274c90d8b3584fbb657, type: 3}
+  m_Name: EncounterRandomContext
   m_EditorClassIdentifier: 
-  dungeonPoolSize: 10
-  dungeonIters: 2
-  dungeonItersPerSpecial: 1
-  dungeonSeed: -409286658
-  useSeed: 0
+  seed: 0

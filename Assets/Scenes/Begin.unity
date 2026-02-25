@@ -1204,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
+  encRandomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
 --- !u!4 &1853294646
 Transform:
   m_ObjectHideFlags: 0

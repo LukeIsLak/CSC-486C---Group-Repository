@@ -12,9 +12,11 @@ public class DungeonManager : MonoBehaviour
     public GameObject   Triple;                     // 3 connections
     public GameObject   Quad;                       // 4 connections
     public List<GameObject> specialPrefabs;
+    public float roomScale;
 
     [Header("Data")]
     public DungeonData dungeonData;
+    public RandomContext encRandomContext;
     
     [Header("Events")]
     public GameEvent EnterLayout;
@@ -31,6 +33,8 @@ public class DungeonManager : MonoBehaviour
 
     void SetupDungeon()
     {
+        if (!dungeonData.useSeed)
+        dungeonData.dungeonSeed = encRandomContext.GetNext();
         lg = Instantiate(dungeonGeneratorPrefab, transform).GetComponent<LevelGenerator>();
         lg.Single               = Single;
         lg.DoubleI              = DoubleI;
@@ -39,14 +43,14 @@ public class DungeonManager : MonoBehaviour
         lg.Quad                 = Quad;
         lg.specialPrefabs       = specialPrefabs;
         lg.useSpecialRooms      = true;
-        lg.roomScale            = 6f*2.5f;
+        lg.roomScale            = roomScale;
 
         /* Poll info from persistent data */
         lg.recentPoolSize       = dungeonData.dungeonPoolSize;
         lg.desiredIterations    = dungeonData.dungeonIters;
         lg.iterationsPerSpecial = dungeonData.dungeonItersPerSpecial;
         lg.randomSeed           = dungeonData.dungeonSeed;
-        lg.useSeed              = dungeonData.useSeed;
+        lg.useSeed              = true;
 
         /* Generate */
         lg.DoGeneration();              
