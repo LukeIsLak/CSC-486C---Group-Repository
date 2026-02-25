@@ -34,7 +34,7 @@ public class DungeonManager : MonoBehaviour
     void SetupDungeon()
     {
         if (!dungeonData.useSeed)
-        dungeonData.dungeonSeed = encRandomContext.GetNext();
+        dungeonData.dungeonSeed = encRandomContext.rnd.NextInt();
         lg = Instantiate(dungeonGeneratorPrefab, transform).GetComponent<LevelGenerator>();
         lg.Single               = Single;
         lg.DoubleI              = DoubleI;

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class MysteryManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [Header("Data")]
+    public RandomContext encRandomContext;
     public EncounterWeightList mysteryWeights;
     public GameEvent ExitEncounterToLayout;
     void Start()
@@ -42,7 +43,7 @@ public class MysteryManager : MonoBehaviour
         }
 
         // Determine which range r lands on
-        float r = Random.Range(0f, weightSum);
+        float r = encRandomContext.rnd.NextFloat(weightSum);
         foreach (var (key, value) in weights)
         {
             r -= value;

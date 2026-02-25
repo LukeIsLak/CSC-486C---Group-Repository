@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a6606f97368eb4695e821b2040c8b2, type: 3}
   m_Name: WeightTreasure
   m_EditorClassIdentifier: 
-  encounter: {fileID: 0}
+  encounter: {fileID: 11400000, guid: fa1db0c1b1ae9ad4cb50b30614168d05, type: 2}
   weight: 0

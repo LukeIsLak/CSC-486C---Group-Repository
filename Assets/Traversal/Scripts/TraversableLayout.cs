@@ -15,6 +15,7 @@ public class TraversableLayout : MonoBehaviour
     public LayoutData layoutData;
     public EncounterInfo firstEncounter;
     public EncounterInfo lastEncounter;
+    public GameEvent ClickSelected;
 
     // Data Structures
     private List<List<MapEncounter>> mapLayers;
@@ -247,6 +248,11 @@ public class TraversableLayout : MonoBehaviour
 
     public void ReceiveClick(MapEncounter enc)
     {
+        if (enc.isSelected)
+        {
+            ClickSelected.Raise();
+            return;
+        }
         if (enc.isAccessible)
         {
             // Debug.Log(enc.encounter);

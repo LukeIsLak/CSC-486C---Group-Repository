@@ -47,10 +47,7 @@ public class TraversalManager : MonoBehaviour
     {
         if (respondToInputs && Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
         {
-            layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
-            layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
-            respondToInputs = false;
-            EnterEncounter.Raise();
+            EnterSelectedEncounter();
         }
         if (respondToInputs && Input.GetKeyDown(KeyCode.R))
         {
@@ -86,5 +83,14 @@ public class TraversalManager : MonoBehaviour
         // Listeners
         CleanUpTraversal();
         Destroy(gameObject);
+    }
+
+    public void EnterSelectedEncounter()
+    {
+        if (!respondToInputs) return;
+        layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
+        layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
+        respondToInputs = false;
+        EnterEncounter.Raise();
     }
 }
