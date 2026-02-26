@@ -20,17 +20,17 @@ public class Bat : EnemyInterface
 
     /*Unlike the states, these let the state manager know when it's time to change the state */
     [Header("State Checkers")]
-    public bool isMoving = false;
-    public bool isFluttering = false;
-    public bool isPecking = false;
-    public bool isPeckRebounding = false;
-    public bool peckComplete = false;
-    public bool swoopComplete = false;
-    public bool shouldPerch = false;
-    public bool canLeavePerch = false;
-    public bool canAttack = false;
-    public bool isPerched = false;
-    public bool isAttacking = false;
+    public bool isMoving            = false;
+    public bool isFluttering        = false;
+    public bool isPecking           = false;
+    public bool isPeckRebounding    = false;
+    public bool peckComplete        = false;
+    public bool swoopComplete       = false;
+    public bool shouldPerch         = false;
+    public bool canLeavePerch       = false;
+    public bool canAttack           = false;
+    public bool isPerched           = false;
+    public bool isAttacking         = false;
 
     [Header("Bat motion")]
     public int currentPathIndex = 0;
@@ -472,7 +472,10 @@ public class Bat : EnemyInterface
     public void UpdatePeckRebound() {
         UpdateMoveSpot(false);
 
-        if (!isMoving && isPecking == true && isPeckRebounding) peckComplete = false;
+        if (!isMoving && isPeckRebounding) {
+            peckComplete = false;
+            isPeckRebounding = false;
+        }
     }
 
     /****************************************************/
@@ -609,6 +612,8 @@ public class Bat : EnemyInterface
     /*              End Of Misc. Movement               */
     /****************************************************/
 
+
+
     /****************************************************/
     /*                Beginning Of Misc.                */
     /****************************************************/
@@ -675,7 +680,7 @@ public class Bat : EnemyInterface
     }
 
     /****************************************************/
-    /*                End Of Debuggers                  */
+    /*             End Of Event Listeners               */
     /****************************************************/
 
 

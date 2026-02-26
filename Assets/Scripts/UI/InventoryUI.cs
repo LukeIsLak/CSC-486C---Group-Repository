@@ -43,14 +43,10 @@ public class InventoryUI : MonoBehaviour
         BuildInventoryUI();
         Canvas.ForceUpdateCanvases();
         scrollRect.verticalNormalizedPosition = 1f; // top
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
     public void HideInventory()
     {
         ClearInventoryUI();
         gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 }
