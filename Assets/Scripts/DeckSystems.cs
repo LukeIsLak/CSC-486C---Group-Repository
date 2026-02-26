@@ -59,6 +59,7 @@ public class DeckSystems : MonoBehaviour
     void Start(){
         //Debug.Log("done");
         loadDeck(inventory.playerdeck);
+        shuffleIncHand();
     }
 
     /// <summary>
@@ -161,12 +162,12 @@ public class DeckSystems : MonoBehaviour
         //make sure sizes are reset before loading deck
         deckSize = passedDeck.Count;
         currentDeckSize = 0;
-        nextUid = 0;
+        //nextUid = 0;
         //set the size of loaded deck
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
-            passedDeck[i].uid = nextUid++;
+            //passedDeck[i].uid = nextUid++;
             if (i < MAXHANDSIZE) {
                 hand.Add(passedDeck[i]);
             } else {

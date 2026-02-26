@@ -9,9 +9,9 @@ public class CardInstance
 
     //runtime state
     public int uid; // for ui tracking 
-    public CardInstance(Cards cardData)
+    public CardInstance(Cards cardData, int uid)
     {
         this.cardData = cardData;
-
+        this.uid = uid;
     }
 }

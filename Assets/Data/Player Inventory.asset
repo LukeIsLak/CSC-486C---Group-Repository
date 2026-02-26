@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Player Inventory
   m_EditorClassIdentifier: 
   currency: 0
+  playerdeck: []
+  buffer: []
+  nextUid: 0
