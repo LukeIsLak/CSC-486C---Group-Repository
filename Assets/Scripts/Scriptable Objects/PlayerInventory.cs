@@ -9,10 +9,15 @@ public class PlayerInventory : ScriptableObject
     public int currency;
     public List<CardInstance> playerdeck = new();
     public List<CardInstance> buffer = new();
+    public int nextUid = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        currency = 0;
+        playerdeck.Clear();
+        buffer.Clear();
+        nextUid = 0;
 
     }
 
@@ -25,11 +30,14 @@ public class PlayerInventory : ScriptableObject
     // call this in game manager
     public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
     {
-        Debug.Log("im here");
+        // here so the deck doesnt explode in size
+        playerdeck.Clear();
+        nextUid = 0;
+        //Debug.Log("im here");
         for (int i = 0; i < deckSize; i++)
         {
             Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
-            playerdeck.Add(new CardInstance(pick));
+            playerdeck.Add(new CardInstance(pick, nextUid++));
         }
     }
 
