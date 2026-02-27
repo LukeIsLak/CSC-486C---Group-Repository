@@ -12,7 +12,6 @@ public class TraversalManager : MonoBehaviour
 
     [Header("Data")]
     public LayoutData layoutData;
-    public DungeonData dungeonData;
 
     [Header("Events")]
     public GameEvent EnterEncounter;
@@ -48,11 +47,7 @@ public class TraversalManager : MonoBehaviour
     {
         if (respondToInputs && Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
         {
-            layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
-            layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
-            respondToInputs = false;
-            dungeonData.dungeonSeed = (int)System.DateTime.Now.Ticks;
-            EnterEncounter.Raise();
+            EnterSelectedEncounter();
         }
         if (respondToInputs && Input.GetKeyDown(KeyCode.R))
         {
@@ -88,5 +83,14 @@ public class TraversalManager : MonoBehaviour
         // Listeners
         CleanUpTraversal();
         Destroy(gameObject);
+    }
+
+    public void EnterSelectedEncounter()
+    {
+        if (!respondToInputs) return;
+        layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
+        layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
+        respondToInputs = false;
+        EnterEncounter.Raise();
     }
 }

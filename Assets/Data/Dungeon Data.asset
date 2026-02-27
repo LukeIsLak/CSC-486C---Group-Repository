@@ -16,4 +16,4 @@ MonoBehaviour:
   dungeonIters: 2
   dungeonItersPerSpecial: 1
   dungeonSeed: -409286658
-  useSeed: 1
+  useSeed: 0
