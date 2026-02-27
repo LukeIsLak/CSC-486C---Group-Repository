@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PauseUI pauseView;
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private StaminaUI staminaView;
+    [SerializeField] private GameObject merchantPanel;
+
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -49,6 +51,7 @@ public class UIManager : MonoBehaviour
     public void ShowCombatView()
     {
         combatPanel.SetActive(true);
+        
     }
 
     public void HideCombatView()
@@ -78,4 +81,15 @@ public class UIManager : MonoBehaviour
     {
         pauseView.HidePauseUI();
     }
+
+    public void ShowMerchantView()
+    {
+        merchantPanel.SetActive(true);
+    }
+
+    public void HideMerchantView()
+    {
+        merchantPanel.SetActive(false);
+    }
 }
+    

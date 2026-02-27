@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.BindPlayer(player);
         UIManager.instance.HideInventoryView();
         UIManager.instance.HidePauseView();
+        UIManager.instance.HideMerchantView();
         PauseManager.instance.BindPlayer(player);
     }
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.HidePauseView();
         UIManager.instance.HideInventoryView();
         UIManager.instance.HideCombatView();
+        UIManager.instance.HideMerchantView();
     }
 
     private void HandleCombatScene()
@@ -89,13 +91,11 @@ public class GameManager : MonoBehaviour
     }
     private void HandleMerchantScene() 
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            Debug.LogError("no player in the scene");
-            return;
-        }
-        InitializedPlayerOnce(player);
-        InitializedPerScene(player);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        UIManager.instance.HidePauseView();
+        UIManager.instance.HideInventoryView();
+        UIManager.instance.HideCombatView();
+        UIManager.instance.ShowMerchantView();
     }
 }
