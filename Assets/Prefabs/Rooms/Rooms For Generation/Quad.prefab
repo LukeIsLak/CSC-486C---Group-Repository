@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1be90879501aff4db034ae9ac34501f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddToRoomCountEvent: {fileID: 11400000, guid: 6e40abdd731a5424dbd4a14e5c18234a, type: 2}
   isTrapRoom: 0
   trapRoomObjects: {fileID: 0}
   regularRoomObjects: {fileID: 0}

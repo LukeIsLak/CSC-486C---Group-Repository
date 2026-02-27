@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DungeonRoomScript : MonoBehaviour
 {
+    public GameEvent AddToRoomCountEvent;
     public bool isTrapRoom;
 
     // If we contain everything needed to make each room type function in a prefab, 
@@ -12,6 +13,7 @@ public class DungeonRoomScript : MonoBehaviour
     public GameObject regularRoomObjects;
     public void Initialize()
     {
+        AddToRoomCountEvent.Raise();
         if (isTrapRoom) 
         {
             TrapRoomInit();
