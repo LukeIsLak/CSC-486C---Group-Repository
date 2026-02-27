@@ -168,10 +168,12 @@ public class DeckSystems : MonoBehaviour
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
             //passedDeck[i].uid = nextUid++;
-            if (i < MAXHANDSIZE) {
-                hand.Add(passedDeck[i]);
-            } else {
-                addCardToDeck(passedDeck[i]);
+            if (passedDeck[i].useable) {
+                if (i < MAXHANDSIZE) {
+                    hand.Add(passedDeck[i]);
+                } else {
+                    addCardToDeck(passedDeck[i]);
+                }
             }
         }
         NotifyHandContentsChanged();
@@ -210,7 +212,8 @@ public class DeckSystems : MonoBehaviour
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
 
-        //call needed card function
+        //call needed card function and set the cards usabilty to false
+        hand[currentHandIndex].useable = false;
         StartCoroutine(hand[currentHandIndex].cardData.Play(hand[currentHandIndex].cardData));
 
         // put card in discard and remove from hand
