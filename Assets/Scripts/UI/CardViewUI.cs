@@ -10,7 +10,7 @@ public class CardViewUI : MonoBehaviour
     public TextMeshProUGUI cardName;
     public void Init(Cards cardData)
     {
-        card = cardData;
+        card = cardData;    
         this.GetComponent<Image>().sprite = card.image;
         cardName.text = cardData.name;
     }
