@@ -10,6 +10,8 @@ public class AstralDagger : Cards
 
     private GameObject player;
 
+    
+
     public override IEnumerator Play(Cards card){
         player = GameObject.FindWithTag("Player");
 
