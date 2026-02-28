@@ -88,6 +88,8 @@ public class GameManager : MonoBehaviour
         }
         InitializedPlayerOnce(player);
         InitializedPerScene(player);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     private void HandleMerchantScene() 
     {
