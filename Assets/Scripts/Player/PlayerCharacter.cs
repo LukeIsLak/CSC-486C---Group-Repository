@@ -32,6 +32,7 @@ public class PlayerCharacter : MonoBehaviour
     private Camera cam;
     private Coroutine hitStopCoroutine;
     private PlayerController playerController;
+    private Chest currentChest;
     private string currentAnimationState;
     private bool isAttacking;
     private float lastAttackTime;
@@ -58,6 +59,11 @@ public class PlayerCharacter : MonoBehaviour
         swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
         playerController = GetComponent<PlayerController>();    
+    }
+
+    private void Update()
+    {
+        CheckChestInteractable();
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -202,5 +208,37 @@ public class PlayerCharacter : MonoBehaviour
         }
 
         return forward;
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        currentChest?.Open();
+       
+    }
+
+    private void CheckChestInteractable()
+    {
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 2.0f))
+        {
+            Chest chest = hit.collider.GetComponent<Chest>();
+            if (chest != null)
+            {
+                if(currentChest != chest)
+                {
+                    currentChest = chest;
+                    UIManager.instance.ShowInteract();
+                }
+                return;
+            }
+           
+        }
+
+
+        currentChest = null;
+        UIManager.instance.HideInteract();
     }
 }
