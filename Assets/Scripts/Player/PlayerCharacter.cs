@@ -225,7 +225,7 @@ public class PlayerCharacter : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 2.0f))
         {
             Chest chest = hit.collider.GetComponent<Chest>();
-            if (chest != null)
+            if (chest != null && !chest.isOpened)
             {
                 if(currentChest != chest)
                 {

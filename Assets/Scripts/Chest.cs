@@ -6,7 +6,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     [SerializeField] private ChestItems chestItems;
-    private bool isOpened;
+    public bool isOpened { get; private set; }
 
     public bool isTrapRoom;
 
