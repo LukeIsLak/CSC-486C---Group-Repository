@@ -33,6 +33,12 @@ public class UIManager : MonoBehaviour
         if(inventoryView == null) inventoryView = GetComponentInChildren<InventoryUI>(true);
         if(pauseView == null) pauseView = GetComponentInChildren<PauseUI>(true);
         if (staminaView == null) staminaView = GetComponentInChildren<StaminaUI>(true);
+        HideInventoryView();
+        HideCombatView();
+        HidePauseView();
+        HideMerchantView();
+        HideInteract();
+
     }
     public void BindPlayer(GameObject player)
     {

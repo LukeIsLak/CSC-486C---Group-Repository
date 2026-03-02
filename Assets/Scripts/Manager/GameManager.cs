@@ -46,9 +46,6 @@ public class GameManager : MonoBehaviour
     private void InitializedPerScene(GameObject player)
     {
         UIManager.instance.BindPlayer(player);
-        UIManager.instance.HideInventoryView();
-        UIManager.instance.HidePauseView();
-        UIManager.instance.HideMerchantView();
         PauseManager.instance.BindPlayer(player);
     }
 
@@ -78,10 +75,6 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         InitializedDeckOnce();
-        UIManager.instance.HidePauseView();
-        UIManager.instance.HideInventoryView();
-        UIManager.instance.HideCombatView();
-        UIManager.instance.HideMerchantView();
     }
 
     private void HandleCombatScene()
@@ -103,9 +96,6 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         InitializedDeckOnce(); // this will be remove when the game is in placed
-        UIManager.instance.HidePauseView();
-        UIManager.instance.HideInventoryView();
-        UIManager.instance.HideCombatView();
         UIManager.instance.ShowMerchantView();
     }
 }
