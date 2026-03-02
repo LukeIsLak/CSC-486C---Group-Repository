@@ -2206,6 +2206,7 @@ MonoBehaviour:
   staminaView: {fileID: 7999061897545407878}
   merchantPanel: {fileID: 2679024575373392906}
   interactPanel: {fileID: 8531926527384108391}
+  nodePanel: {fileID: 6739653715888183322}
 --- !u!1 &5382403916231375189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2903,10 +2904,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   containerLocation: {fileID: 8483197858530220161}
-  inventoryInNode: {fileID: 3630171002206521193}
+  inventoryInNode: {fileID: 6271802496633283965}
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   cardViewPrefab: {fileID: 8081956759663492939, guid: e2465ff249be8e64288eca3e9700354b, type: 3}
   scrollRect: {fileID: 1695536097943212610}
+  openDeckButton: {fileID: 8159082717970565097}
 --- !u!1 &6749552455572658833
 GameObject:
   m_ObjectHideFlags: 0

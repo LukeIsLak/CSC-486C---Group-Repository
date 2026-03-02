@@ -287,11 +287,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &184268309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8159082717970565097, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-  m_PrefabInstance: {fileID: 400250255}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &197148185
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,14 +855,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4705851828877972003, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: openDeckButton
-      value: 
-      objectReference: {fileID: 184268309}
-    - target: {fileID: 4705851828877972003, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: inventoryInNode
-      value: 
-      objectReference: {fileID: 1167927978}
     - target: {fileID: 5272061132759555729, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_Name
       value: UI Manager
@@ -878,22 +865,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7438601485183626159, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7654491125290211153, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7654491125290211153, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8483197858530220161, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8483197858530220161, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3795,11 +3766,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1167927978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6271802496633283965, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-  m_PrefabInstance: {fileID: 400250255}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1384328894
 Mesh:
   m_ObjectHideFlags: 0

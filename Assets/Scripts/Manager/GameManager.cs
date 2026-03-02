@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         InitializedDeckOnce();
+        UIManager.instance.ShowNodePanel();
     }
 
     private void HandleCombatScene()
