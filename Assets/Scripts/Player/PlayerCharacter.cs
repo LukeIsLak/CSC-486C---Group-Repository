@@ -13,6 +13,8 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private float attackRadius = 0.4f;
     [SerializeField] private float attackHitStopDuration = 0.03f;
     [SerializeField] private LayerMask enemyLayer;
+    // for increaseing player damage
+    public float attackMultiplier = 1.0f;
 
     [Header("Dash")]
     [SerializeField] private float dashTime = 1.0f;
@@ -123,7 +125,7 @@ public class PlayerCharacter : MonoBehaviour
             //Debug.Log($"Hit: {hit.collider.name} ");
 
             var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
-            if (enemyComponent != null) enemyComponent.Hit(attackDamage);
+            if (enemyComponent != null) enemyComponent.Hit(attackMultiplier * attackDamage);
             TriggerHitStop(attackHitStopDuration);
             
         }

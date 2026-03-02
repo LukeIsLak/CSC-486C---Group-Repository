@@ -127,11 +127,12 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     public void shuffleIncHand() {
         // add the cards in to the players deck
-        addCardToDeck(hand[HANDSLOT1INDEX]);
-        addCardToDeck(hand[HANDSLOT2INDEX]);
-        addCardToDeck(hand[HANDSLOT3INDEX]);
-        addCardToDeck(hand[HANDSLOT4INDEX]);
-        addCardToDeck(hand[HANDSLOT5INDEX]);
+        int looplength = MAXHANDSIZE;
+        if (deck.Count < MAXHANDSIZE){ looplength = deck.Count;}
+
+        for (int i = 0; i < looplength; i++){
+            addCardToDeck(hand[i]);
+        }
 
         //hand now empty
         hand.Clear();
@@ -140,11 +141,9 @@ public class DeckSystems : MonoBehaviour
         shuffleExcHand();
 
         //redraw the hand
-        drawCard();
-        drawCard();
-        drawCard();
-        drawCard();
-        drawCard();
+        for (int i = 0; i < looplength; i++) {
+            drawCard();
+        }
     }
 
     /// <summary>
@@ -169,7 +168,7 @@ public class DeckSystems : MonoBehaviour
         for (int i = 0; i < deckSize; i++) {
             //passedDeck[i].uid = nextUid++;
             if (passedDeck[i].useable) {
-                if (i < MAXHANDSIZE) {
+                if (hand.Count < MAXHANDSIZE) {
                     hand.Add(passedDeck[i]);
                 } else {
                     addCardToDeck(passedDeck[i]);
