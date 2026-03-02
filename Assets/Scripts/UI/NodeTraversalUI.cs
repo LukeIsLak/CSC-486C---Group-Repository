@@ -10,20 +10,23 @@ public class NodeTraversalUI : MonoBehaviour
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private CardViewUI cardViewPrefab;
     [SerializeField] private ScrollRect scrollRect; // For forcing showing item from the top
+    [SerializeField] private GameObject openDeckButton;
     private List<CardViewUI> cards = new();
 
     public void ShowDeckContainer()
     {
+        openDeckButton.SetActive(false);
         inventoryInNode.SetActive(true);
         BuildDeckUI();
         Canvas.ForceUpdateCanvases();
         scrollRect.verticalNormalizedPosition = 1f; // top
     }
 
-    public void HideDeckContainer() 
+    public void HideDeckContainer()
     {
-        ClearDeckUI();
         inventoryInNode.SetActive(false);
+        openDeckButton.SetActive(true);
+        ClearDeckUI();
     }
 
     private void BuildDeckUI()
@@ -33,7 +36,8 @@ public class NodeTraversalUI : MonoBehaviour
         {
 
             CardViewUI card = Instantiate(cardViewPrefab, containerLocation);
-            card.Init(instance.cardData);
+            
+            card.Init(instance.cardData, !instance.useable);
             cards.Add(card);
         }
 

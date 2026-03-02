@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 0}
   cardName: {fileID: 3609337567170460608}
+  cardImage: {fileID: 7678787111606987049}
 --- !u!114 &-6247513457569756132
 MonoBehaviour:
   m_ObjectHideFlags: 0
