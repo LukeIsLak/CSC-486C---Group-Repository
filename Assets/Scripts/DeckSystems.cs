@@ -169,7 +169,7 @@ public class DeckSystems : MonoBehaviour
         for (int i = 0; i < deckSize; i++) {
             //passedDeck[i].uid = nextUid++;
             if (passedDeck[i].useable) {
-                if (i < MAXHANDSIZE) {
+                if (hand.Count < MAXHANDSIZE) {
                     hand.Add(passedDeck[i]);
                 } else {
                     addCardToDeck(passedDeck[i]);
