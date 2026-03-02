@@ -17,12 +17,12 @@ public class Chest : MonoBehaviour
         UIManager.instance.HideInteract();
         if (!isTrapRoom)
         {
-            //chestItems.GetCard().Acquire();
+            chestItems.GetCard().Acquire();
             Debug.Log("Get Card");
         }
         else
         {
-            //chestItems.GetGold().Acquire();
+            chestItems.GetGold().Acquire();
             Debug.Log("Get Gold");
         }
 
