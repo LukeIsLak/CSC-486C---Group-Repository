@@ -20,6 +20,7 @@ public class TrapStart : MonoBehaviour
         if (started) return;
         started = true;
         foreach (TrapSequence seq in sequences) seq.Begin();
+        Destroy(gameObject);
     }
 
 }
