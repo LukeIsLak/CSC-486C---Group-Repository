@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: DoorFrameBottom
+    second: {fileID: 2100000, guid: b5972d64882bd52418ef4919813a37a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: DoorFrameTop
     second: {fileID: 2100000, guid: a4415cf95841d0d49ba27839789b7ceb, type: 2}
   - first:
