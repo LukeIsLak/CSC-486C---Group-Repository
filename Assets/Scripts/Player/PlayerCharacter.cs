@@ -241,6 +241,6 @@ public class PlayerCharacter : MonoBehaviour
 
 
         currentChest = null;
-        UIManager.instance.HideInteract();
+        UIManager.instance?.HideInteract();
     }
 }

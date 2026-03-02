@@ -22,6 +22,9 @@ public class DungeonManager : MonoBehaviour
     public GameEvent EnterLayout;
     public GameEvent GenerationComplete;
 
+    [Header("Local Parameters")]
+    public float trapRoomRatio;
+
 
     private LevelGenerator  lg;
 
@@ -57,8 +60,31 @@ public class DungeonManager : MonoBehaviour
         lg.ClearGenerationObjects();
 
         GenerationComplete.Raise();
+        DetermineTrapRooms();
+
     }
 
+    void DetermineTrapRooms()
+    {
+        List<DungeonRoomScript> rooms = new List<DungeonRoomScript>(FindObjectsByType<DungeonRoomScript>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)); 
+
+        int trapRoomsToCreate = (int)(trapRoomRatio * rooms.Count);
+
+        for (int i = 0; i < trapRoomsToCreate; i++)
+        {
+            DungeonRoomScript cur = rooms[encRandomContext.rnd.NextInt(0, rooms.Count)];
+            cur.SetTrapRoom();
+            cur.InitByType();
+            rooms.Remove(cur);
+        }
+
+        foreach (DungeonRoomScript cur in rooms)
+        {
+            cur.InitByType();
+        }
+
+
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
