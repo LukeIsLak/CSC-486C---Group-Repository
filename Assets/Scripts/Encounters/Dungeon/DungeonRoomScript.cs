@@ -11,9 +11,18 @@ public class DungeonRoomScript : MonoBehaviour
     // We can just instantiate things as needed.
     public GameObject trapRoomObjects; 
     public GameObject regularRoomObjects;
+
+    public void Start()
+    {
+        // TO DO: Determine decorated variant to use
+    }
     public void Initialize()
     {
         AddToRoomCountEvent.Raise();
+    }
+
+    public void InitByType()
+    {
         if (isTrapRoom) 
         {
             TrapRoomInit();
@@ -30,13 +39,15 @@ public class DungeonRoomScript : MonoBehaviour
     private void TrapRoomInit()
     {
         // Create necessary objects for trap room functionality
-        return;
+        if (!trapRoomObjects) return;
+        Instantiate(trapRoomObjects, transform);
     }
 
     private void RegularRoomInit()
     {
         // Create necessary objects for regular room functionality
-        return;
+        if (!regularRoomObjects) return;
+        Instantiate(regularRoomObjects, transform);
     }
 
 

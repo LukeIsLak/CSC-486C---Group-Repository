@@ -465,6 +465,7 @@ MonoBehaviour:
   encRandomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
   GenerationComplete: {fileID: 11400000, guid: aa210a09cbbffe449aac9f74e1af27e0, type: 2}
+  trapRoomRatio: 0.5
 --- !u!1001 &875977125674514967
 PrefabInstance:
   m_ObjectHideFlags: 0
