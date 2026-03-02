@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         InitializedDeckOnce(); // this will be remove when the game is in placed
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        UIManager.instance.ShowCombatView();
     }
     private void HandleMerchantScene() 
     {
