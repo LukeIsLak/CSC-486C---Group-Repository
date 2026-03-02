@@ -267,6 +267,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 68475c38-a7e2-4743-850c-34404ca2fa64
     m_ActionName: Combat/Dash[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3025714530200236336}
+        m_TargetAssemblyTypeName: PlayerCharacter, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f4a46ca2-7131-4e2e-be7c-efbff2cfbca3
+    m_ActionName: Combat/Interact[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Combat
@@ -346,14 +362,19 @@ MonoBehaviour:
   hand:
   - cardData: {fileID: 0}
     uid: 0
+    useable: 0
   - cardData: {fileID: 0}
     uid: 0
+    useable: 0
   - cardData: {fileID: 0}
     uid: 0
+    useable: 0
   - cardData: {fileID: 0}
     uid: 0
+    useable: 0
   - cardData: {fileID: 0}
     uid: 0
+    useable: 0
   currentHandIndex: 0
   deckSize: 15
   currentDeckSize: 0
