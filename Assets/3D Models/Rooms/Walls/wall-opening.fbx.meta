@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: DoorFrameTop
+    second: {fileID: 2100000, guid: a4415cf95841d0d49ba27839789b7ceb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: StoneWall
     second: {fileID: 2100000, guid: 70ea5dd669931124a8976d4a33d57ea5, type: 2}
   materials:
