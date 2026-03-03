@@ -42,7 +42,7 @@ public class DeckSystems : MonoBehaviour
     public event Action OnHandContentsChanged;
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
-    private int nextUid = 0;
+    //private int nextUid = 0;
     
     public PlayerInventory inventory;
 
