@@ -9,17 +9,29 @@ public class RewardSystem : MonoBehaviour
 
     public List<GameObject> rewardChests; // Assign via inspector.
 
+
     // Internal reference
-    private int totalRooms;
-    private int roomsCleared;
-    private bool timeFailed;
+    public int totalRooms;
+    public int roomsCleared;
+    public bool timeFailed;
 
     public void Initialize()
     {
         timeFailed = false;
+        if (partialRewardRatio == 0.0f) DoChestSpawn();
         // Hide chests if needed
         // start timer
     }
+
+    /*
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            RoomCleared();
+        }
+    }
+    */
     public void IncrementTotalRooms()
     {
         totalRooms++;
@@ -27,7 +39,7 @@ public class RewardSystem : MonoBehaviour
     public void RoomCleared()
     {
         roomsCleared++;
-        if (roomsCleared >= totalRooms * partialRewardRatio) DoChestSpawn();
+        if (roomsCleared == (int) (totalRooms * partialRewardRatio)) DoChestSpawn();
         if (roomsCleared == totalRooms)
         {
             DoChestSpawn();
@@ -36,9 +48,10 @@ public class RewardSystem : MonoBehaviour
     }
 
     public void DoChestSpawn()
-    {
-        // Reveal one chest from the list. There will be 3, and DoChestSpawn can only be done at most 3 times.
-        // The list contains referenced to instantiated chests that are currently not visible
-        return;
+    {   
+        if (rewardChests.Count == 0) return;
+        GameObject curChest = rewardChests[0];
+        rewardChests.RemoveAt(0);
+        curChest.SetActive(true);
     }
 }

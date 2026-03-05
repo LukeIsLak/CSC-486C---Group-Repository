@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2992979991592056582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2610599054633307048}
+  m_Layer: 0
+  m_Name: Octoroom-3door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2610599054633307048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992979991592056582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.3024664, y: 1.8984087, z: 2.8418002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2024963954176532480}
+  - {fileID: 2689020571461512570}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &926221004678078507
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2610599054633307048}
+    m_Modifications:
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3024664
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3984087
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.8418002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.69351995
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6935199
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.13794972
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.13794972
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1984772732865108625, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+      propertyPath: m_Name
+      value: Octroom-walls
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+--- !u!4 &2024963954176532480 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1207110817019723819, guid: 981f1142e31c4f74a8232b052df8b4ae, type: 3}
+  m_PrefabInstance: {fileID: 926221004678078507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1280240363659286680
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2610599054633307048}
+    m_Modifications:
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3024664
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3984087
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.8418002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.69351995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6935199
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.13794972
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.13794972
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602347355308126040, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+      propertyPath: m_Name
+      value: Octroom-singleWall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+--- !u!4 &2689020571461512570 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3788937021933303266, guid: aa0891f0c63187f429f1040d75a88a07, type: 3}
+  m_PrefabInstance: {fileID: 1280240363659286680}
+  m_PrefabAsset: {fileID: 0}
