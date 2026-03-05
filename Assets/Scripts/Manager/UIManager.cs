@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
         HideMerchantView();
         HideInteract();
         HideNodePanel();
-
     }
     public void BindPlayer(GameObject player)
     {
