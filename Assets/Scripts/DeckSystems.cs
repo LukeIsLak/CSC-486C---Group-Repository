@@ -235,7 +235,7 @@ public class DeckSystems : MonoBehaviour
     }
 
     /// <summary>
-    /// Assumes that the discard pill is checked before being called
+    /// Assumes that the discard pile is checked before being called
     /// takes an amount of cards from discard pile (randomly) and puts them in to the players deck, player deck will be shuffled after
     /// </summary>
     /// <param name="amount"></param>
@@ -372,4 +372,8 @@ public class DeckSystems : MonoBehaviour
         }
     }
 
+    // add last used card back in to the players deck
+    public void recallCard(){
+        addCardToDeck(discard[discard.Count-1]);
+    }
 }

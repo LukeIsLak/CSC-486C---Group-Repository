@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1fc45e546ab6934c84388dd51a16ae1, type: 3}
-  m_Name: Mana Shield
+  m_Script: {fileID: 11500000, guid: 0fbb407cfe1e545489b46d7efc39d99a, type: 3}
+  m_Name: Recall
   m_EditorClassIdentifier: 
-  name: Mana Shield
+  name: Recall
   image: {fileID: 0}
-  shieldHits: 3
