@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13, y: 13, z: 13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7184789646888268646}
@@ -52,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 10, y: 10.89, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3945344942153659235
 MonoBehaviour:
@@ -158,10 +158,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8046067593292445097, guid: bebefe60a2ae51340803e1ca45a7afdc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 568262327766433535}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bebefe60a2ae51340803e1ca45a7afdc, type: 3}
 --- !u!4 &4078624005156591102 stripped
 Transform:
@@ -173,42 +170,9 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7273668408935266291, guid: bebefe60a2ae51340803e1ca45a7afdc, type: 3}
   m_PrefabInstance: {fileID: 1662628634428183872}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8699696878163747049}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d49545e91a15ff4d95a0c2c03ac0323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8699696878163747049 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8046067593292445097, guid: bebefe60a2ae51340803e1ca45a7afdc, type: 3}
-  m_PrefabInstance: {fileID: 1662628634428183872}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &568262327766433535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8699696878163747049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 164095ff0a96c684ebaf127baaf8cd4c, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8350682023533028019}
-        m_TargetAssemblyTypeName: TrapDoors, Assembly-CSharp
-        m_MethodName: OnClear
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

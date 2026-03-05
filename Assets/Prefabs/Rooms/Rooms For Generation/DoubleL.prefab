@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AddToRoomCountEvent: {fileID: 11400000, guid: 6e40abdd731a5424dbd4a14e5c18234a, type: 2}
   isTrapRoom: 0
-  trapRoomObjects: {fileID: 0}
+  trapRoomObjects: {fileID: 3452522053420848015, guid: 558070836969bb84fb32ef5985da61a7, type: 3}
   regularRoomObjects: {fileID: 0}
 --- !u!114 &-5733916875564865696
 MonoBehaviour:
