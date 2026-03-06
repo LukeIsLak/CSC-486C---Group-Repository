@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class DungeonRoomScript : MonoBehaviour
 {
+    [Header("References")]
+    public RandomContext randomContext;
     public GameEvent AddToRoomCountEvent;
-    public bool isTrapRoom;
+    public List<GameObject> roomVariants;
 
-    // If we contain everything needed to make each room type function in a prefab, 
-    // We can just instantiate things as needed.
+    [Header("Room Config")]
     public GameObject trapRoomObjects; 
     public GameObject regularRoomObjects;
+    public bool isTrapRoom;
+    
 
     public void Start()
     {
         // TO DO: Determine decorated variant to use
+        if (roomVariants.Count == 0)
+        {
+            Debug.LogWarning("No room specified in DungeonRoom");
+            return;
+        }
+
+        int r = randomContext.rnd.NextInt(roomVariants.Count);
+        Instantiate(roomVariants[r], transform);
     }
+
     public void Initialize()
     {
         AddToRoomCountEvent.Raise();
