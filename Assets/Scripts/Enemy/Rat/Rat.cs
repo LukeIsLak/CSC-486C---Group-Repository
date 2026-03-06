@@ -77,6 +77,7 @@ public class Rat : EnemyInterface
     }
 
     public override void KillEnemy() {
+        if (trs != null) trs.RemoveEnemy();
         rcm.RemoveRat(this, ratColonyNum);
         Destroy(this.gameObject);
     }
