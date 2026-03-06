@@ -460,12 +460,12 @@ MonoBehaviour:
   specialPrefabs:
   - {fileID: 49450181928653073, guid: e6b91ebda48c8644c9c0c8f41b9ad47e, type: 3}
   - {fileID: 49450181928653073, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
-  roomScale: 15
+  roomScale: 34
   dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
   encRandomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
   GenerationComplete: {fileID: 11400000, guid: aa210a09cbbffe449aac9f74e1af27e0, type: 2}
-  trapRoomRatio: 0.5
+  trapRoomRatio: 1
 --- !u!1001 &875977125674514967
 PrefabInstance:
   m_ObjectHideFlags: 0

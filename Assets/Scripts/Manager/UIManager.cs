@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private StaminaUI staminaView;
     [SerializeField] private GameObject merchantPanel;
     [SerializeField] private GameObject interactPanel;
+    [SerializeField] private GameObject nodePanel;
+
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -33,6 +35,12 @@ public class UIManager : MonoBehaviour
         if(inventoryView == null) inventoryView = GetComponentInChildren<InventoryUI>(true);
         if(pauseView == null) pauseView = GetComponentInChildren<PauseUI>(true);
         if (staminaView == null) staminaView = GetComponentInChildren<StaminaUI>(true);
+        HideInventoryView();
+        HideCombatView();
+        HidePauseView();
+        HideMerchantView();
+        HideInteract();
+        HideNodePanel();
     }
     public void BindPlayer(GameObject player)
     {
@@ -100,6 +108,15 @@ public class UIManager : MonoBehaviour
     public void HideInteract()
     {
         interactPanel.SetActive(false);
+    }
+
+    public void ShowNodePanel()
+    {
+        nodePanel.SetActive(true);
+    }
+    public void HideNodePanel()
+    {
+        nodePanel.SetActive(false);
     }
 }
     

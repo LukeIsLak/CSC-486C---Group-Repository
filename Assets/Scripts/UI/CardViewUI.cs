@@ -8,10 +8,12 @@ public class CardViewUI : MonoBehaviour
 {
     public Cards card;
     public TextMeshProUGUI cardName;
-    public void Init(Cards cardData)
+    public Image cardImage;
+    public void Init(Cards cardData, bool isGrayOut = false)
     {
         card = cardData;    
-        this.GetComponent<Image>().sprite = card.image;
+        cardImage.sprite = card.image;
+        if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
         cardName.text = cardData.name;
     }
 }
