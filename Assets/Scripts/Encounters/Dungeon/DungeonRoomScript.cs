@@ -31,6 +31,7 @@ public class DungeonRoomScript : MonoBehaviour
     public void Initialize()
     {
         AddToRoomCountEvent.Raise();
+        InitByType();
     }
 
     public void InitByType()

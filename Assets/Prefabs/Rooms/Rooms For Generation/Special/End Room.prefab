@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partialRewardRatio: 0.5
-  fullRewardTime: 0
+  fullRewardTime: 25
   rewardChests:
   - {fileID: 3430797587982211269}
   - {fileID: 843928401869634347}
