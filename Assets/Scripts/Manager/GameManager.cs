@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public PlayerInventory inventory;
 
     private bool playerInitialized = false;
-
+    private bool inventoryInitialized = false;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -35,15 +35,17 @@ public class GameManager : MonoBehaviour
 
         //deck.InitializeRandomDeck(cardsDB, 30);
         //Debug.Log("I try thing");
+       
+    }
+    private void InitializedDeckOnce()
+    {
+        if(inventoryInitialized) return;
+        inventoryInitialized = true;
         inventory.InitializeRandomDeck(cardsDB, 30);
     }
-
     private void InitializedPerScene(GameObject player)
     {
         UIManager.instance.BindPlayer(player);
-        UIManager.instance.HideInventoryView();
-        UIManager.instance.HidePauseView();
-        UIManager.instance.HideMerchantView();
         PauseManager.instance.BindPlayer(player);
     }
 
@@ -72,10 +74,8 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        UIManager.instance.HidePauseView();
-        UIManager.instance.HideInventoryView();
-        UIManager.instance.HideCombatView();
-        UIManager.instance.HideMerchantView();
+        InitializedDeckOnce();
+        UIManager.instance.ShowNodePanel();
     }
 
     private void HandleCombatScene()
@@ -88,16 +88,16 @@ public class GameManager : MonoBehaviour
         }
         InitializedPlayerOnce(player);
         InitializedPerScene(player);
+        InitializedDeckOnce(); // this will be remove when the game is in placed
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        UIManager.instance.ShowCombatView();
     }
     private void HandleMerchantScene() 
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        UIManager.instance.HidePauseView();
-        UIManager.instance.HideInventoryView();
-        UIManager.instance.HideCombatView();
+        InitializedDeckOnce(); // this will be remove when the game is in placed
         UIManager.instance.ShowMerchantView();
     }
 }
