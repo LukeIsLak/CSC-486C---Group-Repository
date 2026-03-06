@@ -17,9 +17,38 @@ public class RewardSystem : MonoBehaviour
     public void Initialize()
     {
         timeFailed = false;
+<<<<<<< Updated upstream
         // Hide chests if needed
         // start timer
     }
+=======
+        if (partialRewardRatio == 0.0f) DoChestSpawn();
+        StartChestTimer();
+        // Hide chests if needed
+        // start timer
+    }
+
+    /*
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            RoomCleared();
+        }
+    }
+    */
+
+    private void StartChestTimer()
+    {
+        StartCoroutine(DoChestTimer());
+    }
+
+    private IEnumerator DoChestTimer()
+    {
+        yield return new WaitForSeconds(fullRewardTime);
+        timeFailed = true;
+    }
+>>>>>>> Stashed changes
     public void IncrementTotalRooms()
     {
         totalRooms++;

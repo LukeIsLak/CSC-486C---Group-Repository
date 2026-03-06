@@ -514,8 +514,15 @@ MonoBehaviour:
   DoubleL: {fileID: 7756927150861193097, guid: 2c22d5d0c990f45418d5b290a51ed742, type: 3}
   Triple: {fileID: 980087659377518473, guid: e1ce322d396e8b34a93c5fe4c6ae6d93, type: 3}
   Quad: {fileID: 406655217673623894, guid: f37bb35b53704a843846535f802cd18f, type: 3}
+<<<<<<< Updated upstream
   specialPrefabs: []
   roomScale: 15
+=======
+  specialPrefabs:
+  - {fileID: 49450181928653073, guid: e6b91ebda48c8644c9c0c8f41b9ad47e, type: 3}
+  - {fileID: 49450181928653073, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+  roomScale: 34
+>>>>>>> Stashed changes
   dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
   encRandomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}

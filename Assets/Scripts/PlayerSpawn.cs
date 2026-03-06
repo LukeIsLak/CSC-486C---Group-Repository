@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerSpawn : MonoBehaviour
 {
     public string playerTag;
+
+    void Start()
+    {
+        DoSpawn();
+    }
     public void DoSpawn()
     {
         GameObject player = GameObject.FindWithTag(playerTag);

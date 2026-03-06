@@ -31,10 +31,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6638085858235109928}
-  - {fileID: 6684926973877823866}
   - {fileID: 939478918949257050}
   - {fileID: 5854128200415182265}
+  - {fileID: 4470784776296348994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3502702967976371640
@@ -222,6 +221,7 @@ Transform:
   - {fileID: 3429601031079602709}
   m_Father: {fileID: 5188310367778011269}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream:Assets/Prefabs/Rooms/Rooms For Generation/End Room.prefab
 --- !u!1 &7335026843137500973
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,11 +433,15 @@ BoxCollider:
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &404037960674646020
+=======
+--- !u!1001 &1586607515765075864
+>>>>>>> Stashed changes:Assets/Prefabs/Rooms/Rooms For Generation/Special/End Room.prefab
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< Updated upstream:Assets/Prefabs/Rooms/Rooms For Generation/End Room.prefab
     m_TransformParent: {fileID: 5188310367778011269}
     m_Modifications:
     - target: {fileID: 1926205962670224033, guid: f5a5a022abc1535449fc86f254969511, type: 3}
@@ -541,6 +545,55 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6439812976875876734, guid: f5a5a022abc1535449fc86f254969511, type: 3}
+=======
+    m_TransformParent: {fileID: 939478918949257050}
+    m_Modifications:
+    - target: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_Name
+      value: Chest 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+>>>>>>> Stashed changes:Assets/Prefabs/Rooms/Rooms For Generation/Special/End Room.prefab
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -548,6 +601,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
+<<<<<<< Updated upstream:Assets/Prefabs/Rooms/Rooms For Generation/End Room.prefab
   m_SourcePrefab: {fileID: 100100000, guid: f5a5a022abc1535449fc86f254969511, type: 3}
 --- !u!4 &6684926973877823866 stripped
 Transform:
@@ -555,6 +609,162 @@ Transform:
   m_PrefabInstance: {fileID: 404037960674646020}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1893033648285881682
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+--- !u!1 &843928401869634347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+  m_PrefabInstance: {fileID: 1586607515765075864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5235851369878445618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+  m_PrefabInstance: {fileID: 1586607515765075864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3615928099123448950
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 939478918949257050}
+    m_Modifications:
+    - target: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_Name
+      value: Chest 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+--- !u!1 &3430797587982211269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+  m_PrefabInstance: {fileID: 3615928099123448950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7819343272679570908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+  m_PrefabInstance: {fileID: 3615928099123448950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3937096731002490878
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 939478918949257050}
+    m_Modifications:
+    - target: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_Name
+      value: Chest 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+--- !u!1 &3103437360237927245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2140053458167338163, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+  m_PrefabInstance: {fileID: 3937096731002490878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7498168661132050004 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6822311550884032938, guid: 741c5ec704d4d3144b8c1b75fbc86785, type: 3}
+  m_PrefabInstance: {fileID: 3937096731002490878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5398140541596544321
+>>>>>>> Stashed changes:Assets/Prefabs/Rooms/Rooms For Generation/Special/End Room.prefab
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -562,6 +772,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5188310367778011269}
     m_Modifications:
+<<<<<<< Updated upstream:Assets/Prefabs/Rooms/Rooms For Generation/End Room.prefab
     - target: {fileID: 5069469856988186490, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -606,15 +817,69 @@ PrefabInstance:
       propertyPath: m_Name
       value: square-1door
       objectReference: {fileID: 0}
+=======
+    - target: {fileID: 1706304612068091059, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_Name
+      value: OSingle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes:Assets/Prefabs/Rooms/Rooms For Generation/Special/End Room.prefab
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
+<<<<<<< Updated upstream:Assets/Prefabs/Rooms/Rooms For Generation/End Room.prefab
   m_SourcePrefab: {fileID: 100100000, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
 --- !u!4 &6638085858235109928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5069469856988186490, guid: 69c94ecba91c8ce458260c6e4e510c85, type: 3}
   m_PrefabInstance: {fileID: 1893033648285881682}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+--- !u!4 &4470784776296348994 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8422126207425908739, guid: 8cfb081117106394583f7b5fd5cd660a, type: 3}
+  m_PrefabInstance: {fileID: 5398140541596544321}
+>>>>>>> Stashed changes:Assets/Prefabs/Rooms/Rooms For Generation/Special/End Room.prefab
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6291568936936054457
 PrefabInstance:
