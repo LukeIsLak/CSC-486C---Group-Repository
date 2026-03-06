@@ -69,4 +69,22 @@ public class PlayerInventory : ScriptableObject
     void clearBuffer(){
         buffer.Clear();
     }
+
+    public void addCardToPlayersDeck(CardInstance card){
+        for (int i = 0; i < buffer.Count; i++){
+            if (buffer[i] == card){
+                buffer.RemoveAt(i);
+            }
+        }
+
+        playerdeck.Add(card);
+    }
+
+    public void removeCardFromPlayersDeck(CardInstance card){
+        for (int i = 0; i < playerdeck.Count; i++){
+            if (playerdeck[i] == card){
+                playerdeck.RemoveAt(i);
+            }
+        }
+    }
 }
