@@ -18,6 +18,8 @@ public class TrapRoomSpawner : MonoBehaviour
     public int currentWaveCount = 0;
     public int remainingEnemies;
 
+    public GameEvent uponCompletion;
+
     public float? delay = 1f;
 
     private void OnValidate() {
@@ -63,7 +65,7 @@ public class TrapRoomSpawner : MonoBehaviour
         
         if (remainingEnemies <= 0) {
             currentWaveCount += 1;
-            if (currentWaveCount + 1 >= totalWaveCount) return; //XXX done here so fix this
+            if (currentWaveCount + 1 >= totalWaveCount) uponCompletion.Raise();
             InstantiateWave(waves[currentWaveCount]);
         }
     }
