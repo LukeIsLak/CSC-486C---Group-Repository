@@ -163,7 +163,7 @@ MonoBehaviour:
   started: 0
   sequences:
   - {fileID: 8350682023533028019}
-  trs: {fileID: 0}
+  trs: {fileID: 7596533088010235272}
   trapDelay: 1.5
 --- !u!1 &3452522053420848015
 GameObject:
