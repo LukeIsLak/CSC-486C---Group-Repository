@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 5 Gold
   m_EditorClassIdentifier: 
   itemName: 5 Gold
-  itemDescription: Contents of a peasant's pouch.
-  icon: {fileID: 0}
+  itemDescription: A peasant's pouch.
+  icon: {fileID: 1834637613, guid: 57da179dc61a09f45bf89361c08f4e3d, type: 3}
   selectionWeight: 3
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   amount: 5
