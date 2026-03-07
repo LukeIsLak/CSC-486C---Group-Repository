@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7327189d6369afc4daef952eab66e291, type: 3}
-  m_Name: Test Card Acquirable
+  m_Name: Fireball
   m_EditorClassIdentifier: 
-  itemName: Test Item
+  itemName: Fireball
   itemDescription: Fireball
-  icon: {fileID: 328199383, guid: ceef31a104165ba419a575d05fbad1c9, type: 3}
+  icon: {fileID: -1901925811, guid: 6372a4d3ffed56044b4653817ab14450, type: 3}
   selectionWeight: 1
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   card: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}

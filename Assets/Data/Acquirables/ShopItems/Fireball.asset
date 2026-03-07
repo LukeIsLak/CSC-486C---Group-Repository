@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413af64010633f241b06333aadd43256, type: 3}
-  m_Name: 10 Gold
+  m_Script: {fileID: 11500000, guid: 7e8674752e50ab542ad883a410ef196f, type: 3}
+  m_Name: Fireball
   m_EditorClassIdentifier: 
-  itemName: 10 Gold
-  itemDescription: Not too shabby.
-  icon: {fileID: 1512752271, guid: 57da179dc61a09f45bf89361c08f4e3d, type: 3}
-  selectionWeight: 3
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  amount: 10
+  price: 0
+  acquirable: {fileID: 11400000, guid: d5e4f50c7a0aa2d43a43807cb605cce2, type: 2}
