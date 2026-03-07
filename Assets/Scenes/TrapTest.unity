@@ -210,67 +210,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
---- !u!1001 &183306219
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2842060578847035545, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_Name
-      value: NavMesh Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10.533118
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.81173944
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10.82591
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2947353170854740805, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8578545913301339438, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
-      propertyPath: doneNavMeshGeneration
-      value: 
-      objectReference: {fileID: 11400000, guid: a2dc841c8556e544d8b4e1478d629d40, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 85a2731ef529fca4bb74ff80c50e9844, type: 3}
 --- !u!1001 &274643267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,6 +262,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
+      propertyPath: rebuild
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
+      propertyPath: cellSize
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
+      propertyPath: agentName
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
+      propertyPath: floorLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
+      propertyPath: floorNavLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
+      propertyPath: doneNavMeshGeneration
+      value: 
+      objectReference: {fileID: 11400000, guid: a2dc841c8556e544d8b4e1478d629d40, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -586,7 +549,7 @@ MonoBehaviour:
   - {fileID: 1703939258}
   - {fileID: 105346228}
   minWaves: 1
-  maxWaves: 5
+  maxWaves: 1
   totalWaveCount: 0
   currentWaveCount: 0
   remainingEnemies: 0
@@ -919,4 +882,3 @@ SceneRoots:
   - {fileID: 2039437191}
   - {fileID: 1016629271}
   - {fileID: 274643267}
-  - {fileID: 183306219}

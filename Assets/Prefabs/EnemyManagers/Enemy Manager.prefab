@@ -154,6 +154,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+--- !u!114 &608348349669881366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4398946616594005555, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
+  m_PrefabInstance: {fileID: 3854372362086074405}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c3941fae751140987a91848cddf08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6378552156957473312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7924171890677592581, guid: 635b220feec752b4c84dba6e4a927e2c, type: 3}
@@ -167,6 +178,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2528491329887483328}
     m_Modifications:
+    - target: {fileID: 6049098205943574301, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
+      propertyPath: rcm
+      value: 
+      objectReference: {fileID: 608348349669881366}
     - target: {fileID: 8064361122621989485, guid: fb8725fc958bcfc458456b766a8a110d, type: 3}
       propertyPath: m_Name
       value: Rat State Manager

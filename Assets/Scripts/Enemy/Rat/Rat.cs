@@ -311,7 +311,7 @@ public class Rat : EnemyInterface
     private void OnCollisionEnter(Collision other) {
         if (isLeaping && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
-            if (h != null) h.TakeDamage(10f);
+            if (h != null) h.TakeDamage(rd.damage);
             isLeaping = false; // XXX should use another thing here
         }
     }

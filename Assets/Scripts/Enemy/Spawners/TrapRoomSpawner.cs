@@ -75,6 +75,5 @@ public class TrapRoomSpawner : MonoBehaviour
     private IEnumerator StartTrapSpawn(float trapDelay) {
         yield return new WaitForSeconds(trapDelay);
         Initialize();
-        print("Test");
     }
 }
