@@ -9,6 +9,7 @@ public class EnemyInterface : MonoBehaviour
     public CharacterData playerData;
     public BaseEnemyData enemyData;
     public EnemyEffects enemyEffects;
+    public TrapRoomSpawner trs;
     [SerializeField] protected float curHealth;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float speedModifier = 1;
@@ -25,6 +26,7 @@ public class EnemyInterface : MonoBehaviour
 
     /*This has the intention of being overwritten in extended classes*/
     public virtual void KillEnemy() {
+        if (trs != null) trs.RemoveEnemy();
         Destroy(this.gameObject);
     }
 

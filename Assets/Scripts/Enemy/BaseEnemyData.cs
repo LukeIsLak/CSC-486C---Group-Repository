@@ -8,4 +8,7 @@ public class BaseEnemyData : ScriptableObject
     [Header("Base Stats - In % Compared to Player")]
     public float baseHealth;
     public float baseMoveSpeed;
+
+    [Header("Damage Stats - In #")]
+    public float damage;
 }
