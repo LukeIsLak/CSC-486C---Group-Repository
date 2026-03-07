@@ -528,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
       propertyPath: cellSize
-      value: 250
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7173615128487034256, guid: 1065e33d490488f44a5b2430e664e8f7, type: 3}
       propertyPath: agentName
