@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Hinder
   itemDescription: Fireball
-  icon: {fileID: 328199383, guid: ceef31a104165ba419a575d05fbad1c9, type: 3}
+  icon: {fileID: 708049746, guid: 6372a4d3ffed56044b4653817ab14450, type: 3}
   selectionWeight: 1
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   card: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 20 Gold
   itemDescription: We're rich!
-  icon: {fileID: 0}
+  icon: {fileID: -936673623, guid: 57da179dc61a09f45bf89361c08f4e3d, type: 3}
   selectionWeight: 1
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   amount: 20

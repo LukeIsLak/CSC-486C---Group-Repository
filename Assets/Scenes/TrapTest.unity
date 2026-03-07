@@ -553,6 +553,7 @@ MonoBehaviour:
   totalWaveCount: 0
   currentWaveCount: 0
   remainingEnemies: 0
+  uponCompletion: {fileID: 0}
 --- !u!1 &1602023683
 GameObject:
   m_ObjectHideFlags: 0
