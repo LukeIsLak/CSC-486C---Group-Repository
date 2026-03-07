@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 793d1dd16c9fd2e4abde4d88da77598d, type: 3}
-  m_Name: BatWave
+  m_Script: {fileID: 11500000, guid: a678ad6e5cd0ecf4b83a9474cd70b8dd, type: 3}
+  m_Name: FreezeCardEffect
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 864461203881756215, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
-  enemyTypes: 00000000
-  enemyCounts: 05000000
-  spawnDelay: 0
-  orderedSpawn: 1
+  name: Freeze
+  type: 1
+  freezeDuration: 1.5
