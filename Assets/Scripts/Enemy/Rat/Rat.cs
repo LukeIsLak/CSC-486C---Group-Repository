@@ -61,7 +61,7 @@ public class Rat : EnemyInterface
         
         rcm = env_rcm;
         rsm = env_rsm;
-        rsm.entities.Add(this);
+        rsm.AddEntity(this);
 
         outerCol.radius = rd.colonyDist;
         innerCol.radius = rd.neighbourStopRadius;
@@ -79,6 +79,7 @@ public class Rat : EnemyInterface
     public override void KillEnemy() {
         if (trs != null) trs.RemoveEnemy();
         rcm.RemoveRat(this, ratColonyNum);
+        rsm.RemoveEntity(this);
         Destroy(this.gameObject);
     }
 
