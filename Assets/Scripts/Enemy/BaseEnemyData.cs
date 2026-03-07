@@ -11,4 +11,7 @@ public class BaseEnemyData : ScriptableObject
 
     [Header("Damage Stats - In #")]
     public float damage;
+
+    [Header("Status Effects")]
+    public float freezeMult = 1.5f;
 }
