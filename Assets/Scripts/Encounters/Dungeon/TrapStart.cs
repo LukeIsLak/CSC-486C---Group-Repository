@@ -8,6 +8,8 @@ public class TrapStart : MonoBehaviour
     public bool started = false;
 
     public List<TrapSequence> sequences;
+    public TrapRoomSpawner trs;
+    public float trapDelay = 1.5f;
 
     void OnTriggerEnter(Collider collider)
     {
@@ -19,8 +21,8 @@ public class TrapStart : MonoBehaviour
     {
         if (started) return;
         started = true;
+        trs.StartTrap(trapDelay);
         foreach (TrapSequence seq in sequences) seq.Begin();
         Destroy(gameObject);
     }
-
 }
