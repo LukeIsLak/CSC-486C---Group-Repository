@@ -22,6 +22,10 @@ public class EnemyInterface : MonoBehaviour
     public int numDamageOverTime    = 0;
     public int numFreeze            = 0;
 
+    [Header("Enemy Interface - Damage Over Time")]
+    public List<string> currentDoTNames  = new List<string>();
+    public List<int> currentDoTTicks     = new List<int>();
+
     public void Awake() {
         initialize();
     }
@@ -45,17 +49,72 @@ public class EnemyInterface : MonoBehaviour
 
     /*This has the intention of being overwritten in extended classes*/
     public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null) {
+        TakeDamage(damage);
 
         switch (status) {
             case StatusEffectType.DamageOverTime:
+                DamageOverTime dot = statusEffectData as DamageOverTime;
+                HandleDamageOverTime(dot);
                 break;
             case StatusEffectType.Freeze:
+                Freeze freeze = statusEffectData as Freeze;
+                HandleFreeze(freeze);
                 break;
             case StatusEffectType.Knockback:
+                //XXX to add
                 break;
             default:
                 break;
         }
-        TakeDamage(damage);
     }
+
+    /****************************************************/
+    /*           Beginning Of Status Methods            */
+    /****************************************************/
+
+    public void HandleDamageOverTime(DamageOverTime data) {
+        hasDamageOverTime = true;
+        int index = currentDoTNames.IndexOf(data.name);
+        if (index != -1 && !data.isStackable) {
+            currentDoTTicks[index] += data.totalTicks;
+        }
+        else {
+            numDamageOverTime += 1;
+            currentDoTNames.Add(data.name);
+            currentDoTTicks.Add(data.totalTicks);
+            StartCoroutine(StartDamageOverTime(data));
+        }
+    }
+
+    private IEnumerator StartDamageOverTime(DamageOverTime data) {
+        int index = currentDoTNames.IndexOf(data.name);
+        for (int i = 0; i < currentDoTTicks[index]; i++) {
+            TakeDamage(data.tickDamage);
+            yield return new WaitForSeconds(1f / data.ticksPerSecond);
+            index = currentDoTNames.IndexOf(data.name);
+        }
+
+        currentDoTNames.RemoveAt(index);
+        currentDoTTicks.RemoveAt(index);
+        if (--numDamageOverTime <= 0) hasDamageOverTime = false;
+    }
+
+    public void HandleFreeze(Freeze data) {
+        StartCoroutine(StartFreeze(data));
+    }
+
+    private IEnumerator StartFreeze(Freeze data) {
+        hasFreeze = true;
+        numFreeze += 1;
+
+        yield return new WaitForSeconds(data.freezeDuration);
+
+        if (--numFreeze <= 0) hasFreeze = false;
+    }
+
+    public void HandleKnockback() {}
+
+    /****************************************************/
+    /*              End Of Status Methods               */
+    /****************************************************/
 }
