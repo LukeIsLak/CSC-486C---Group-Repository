@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyInterface : MonoBehaviour
 {
 
-    [Header("Enemy Interface Variables")]
+    [Header("Enemy Interface - Base Variables")]
     public CharacterData playerData;
     public BaseEnemyData enemyData;
     public EnemyEffects enemyEffects;
@@ -13,6 +13,14 @@ public class EnemyInterface : MonoBehaviour
     [SerializeField] protected float curHealth;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float speedModifier = 1;
+
+    [Header("Enemy Interface - Effect Variables")]
+    public bool hasDamageOverTime   = false;
+    public bool hasFreeze           = false;
+    public bool hasKnockback        = false;
+
+    public int numDamageOverTime    = 0;
+    public int numFreeze            = 0;
 
     public void Awake() {
         initialize();
@@ -31,12 +39,23 @@ public class EnemyInterface : MonoBehaviour
     }
 
     public void TakeDamage(float amount) {
-        curHealth -= amount;
+        curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
         if (curHealth <= 0) KillEnemy();
     }
 
     /*This has the intention of being overwritten in extended classes*/
-    public virtual void Hit(float damage, float? weight = null, Vector3? colPoint = null) {
+    public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null) {
+
+        switch (status) {
+            case StatusEffectType.DamageOverTime:
+                break;
+            case StatusEffectType.Freeze:
+                break;
+            case StatusEffectType.Knockback:
+                break;
+            default:
+                break;
+        }
         TakeDamage(damage);
     }
 }
