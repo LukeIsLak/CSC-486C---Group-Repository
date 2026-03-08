@@ -19,8 +19,19 @@ public class RewardSystem : MonoBehaviour
     {
         timeFailed = false;
         if (partialRewardRatio == 0.0f) DoChestSpawn();
+        DoTimer();
         // Hide chests if needed
         // start timer
+    }
+
+    private void DoTimer()
+    {
+        StartCoroutine(StartTimer());
+    }
+    private IEnumerator StartTimer()
+    {
+        yield return new WaitForSeconds(fullRewardTime);
+        timeFailed = true;
     }
 
     /*

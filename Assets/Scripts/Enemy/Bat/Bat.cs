@@ -71,7 +71,8 @@ public class Bat : EnemyInterface
     }
 
     public override void KillEnemy() {
-        bsm.entities.Remove(this);
+        if (trs != null) trs.RemoveEnemy();
+        if (bsm != null) bsm.entities.Remove(this);
         Destroy(this.gameObject);
     }
 
@@ -625,7 +626,7 @@ public class Bat : EnemyInterface
     public void OnTriggerEnter(Collider other) {
         if (isAttacking && other.CompareTag("Player")) {
             Health h = other.GetComponent<Health>();
-            if (h != null) h.TakeDamage(10f); //TODO: LK - eventually, when we figure out the base values, replace this!
+            if (h != null) h.TakeDamage(bd.damage); //TODO: LK - eventually, when we figure out the base values, replace this!
             isAttacking = false;
         }
     }

@@ -390,6 +390,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 11400000, guid: 9b7570a54ad9409448bf314754504fad, type: 2}
   enemyEffects: {fileID: 0}
+  trs: {fileID: 0}
   curHealth: 0
   moveSpeed: 0
   speedModifier: 1
@@ -402,7 +403,7 @@ MonoBehaviour:
   nma: {fileID: 5681783064450362064}
   outerCol: {fileID: 1101515287149553060}
   innerCol: {fileID: 1641588425450268902}
-  isInitialized: 0
+  isInitialized: 1
   isIdle: 0
   isWandering: 0
   canWander: 0
@@ -474,7 +475,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8633630617670396899}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.6
   m_Speed: 3.5

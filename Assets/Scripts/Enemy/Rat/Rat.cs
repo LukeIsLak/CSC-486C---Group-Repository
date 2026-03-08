@@ -61,7 +61,7 @@ public class Rat : EnemyInterface
         
         rcm = env_rcm;
         rsm = env_rsm;
-        rsm.entities.Add(this);
+        rsm.AddEntity(this);
 
         outerCol.radius = rd.colonyDist;
         innerCol.radius = rd.neighbourStopRadius;
@@ -77,7 +77,11 @@ public class Rat : EnemyInterface
     }
 
     public override void KillEnemy() {
-        rcm.RemoveRat(this, ratColonyNum);
+        if (trs != null) trs.RemoveEnemy();
+        if(rsm != null) {
+            rcm.RemoveRat(this, ratColonyNum);
+            rsm.RemoveEntity(this);
+        }
         Destroy(this.gameObject);
     }
 
@@ -310,7 +314,7 @@ public class Rat : EnemyInterface
     private void OnCollisionEnter(Collision other) {
         if (isLeaping && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
-            if (h != null) h.TakeDamage(10f);
+            if (h != null) h.TakeDamage(rd.damage);
             isLeaping = false; // XXX should use another thing here
         }
     }

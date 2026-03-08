@@ -92,4 +92,7 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour
 
     //XXX do I even want this here?
     public abstract void EnterUniversal(TEntity entity);
+
+    public void AddEntity(TEntity f) { entities.Add(f); }
+    public void RemoveEntity(TEntity f) { entities.Remove(f); }
 }
