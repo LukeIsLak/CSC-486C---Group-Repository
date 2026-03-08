@@ -17,7 +17,8 @@ public class Chest : MonoBehaviour
         UIManager.instance.HideInteract();
         if (!isTrapRoom)
         {
-            chestItems.GetCard().Acquire();
+            var randomCard = chestItems.GetCard();
+            randomCard.Acquire();
             Debug.Log("Get Card");
         }
         else
