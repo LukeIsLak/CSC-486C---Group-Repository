@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8674752e50ab542ad883a410ef196f, type: 3}
-  m_Name: Test Shop Item
+  m_Script: {fileID: 11500000, guid: 793d1dd16c9fd2e4abde4d88da77598d, type: 3}
+  m_Name: BatWave
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 0
-  acquirable: {fileID: 11400000, guid: d5e4f50c7a0aa2d43a43807cb605cce2, type: 2}
+  enemyPrefabs:
+  - {fileID: 864461203881756215, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+  enemyTypes: 00000000
+  enemyCounts: 05000000
+  spawnDelay: 0
+  orderedSpawn: 1

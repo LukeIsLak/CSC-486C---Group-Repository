@@ -58,9 +58,8 @@ public class DungeonManager : MonoBehaviour
         /* Generate */
         lg.DoGeneration();              
         lg.ClearGenerationObjects();
-
-        GenerationComplete.Raise();
         DetermineTrapRooms();
+        GenerationComplete.Raise();
 
     }
 
@@ -74,17 +73,10 @@ public class DungeonManager : MonoBehaviour
         {
             DungeonRoomScript cur = rooms[encRandomContext.rnd.NextInt(0, rooms.Count)];
             cur.SetTrapRoom();
-            cur.InitByType();
             rooms.Remove(cur);
         }
-
-        foreach (DungeonRoomScript cur in rooms)
-        {
-            cur.InitByType();
-        }
-
-
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))

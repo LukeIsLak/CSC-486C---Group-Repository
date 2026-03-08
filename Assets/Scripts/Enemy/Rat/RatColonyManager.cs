@@ -90,8 +90,8 @@ public class RatColonyManager : MonoBehaviour
     }
 
     public void RemoveRat(Rat r, int i) {
-        ratColonies[i].Remove(r);
-        if (ratColonies.Count <= 1) {
+        if (r.isLoner || r.ratColonyNum <= 0) ratColonies[i].Remove(r);
+        if (ratColonies[i].Count <= 1) {
             foreach (Rat or in ratColonies[i]) {
                 or.isRatMaster = false;
                 or.isLoner = true;

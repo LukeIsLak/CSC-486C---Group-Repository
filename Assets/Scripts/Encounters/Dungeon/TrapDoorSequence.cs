@@ -10,7 +10,7 @@ public class TrapDoorSequence : TrapSequence
     {
         started = true;
         trapDoors.Lower();
-        StartCoroutine(RaiseAfterDelay());
+        // StartCoroutine(RaiseAfterDelay());
     }
 
     public void OnClear()
@@ -19,9 +19,9 @@ public class TrapDoorSequence : TrapSequence
         trapDoors.Raise();
     }
 
-    public IEnumerator RaiseAfterDelay()
-    {
-        yield return new WaitForSeconds(3f);
-        OnClear();
-    }
+    // public IEnumerator RaiseAfterDelay()
+    // {
+    //     yield return new WaitForSeconds(3f);
+    //     OnClear();
+    // }
 }
