@@ -14,95 +14,105 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currency: 0
   playerdeck:
-  - cardData: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
+  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
     uid: 0
     useable: 1
-  - cardData: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
+  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     uid: 1
     useable: 1
-  - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
     uid: 2
     useable: 1
-  - cardData: {fileID: 11400000, guid: a0d143abbdf46a34b8294ed63cfa0c24, type: 2}
+  - cardData: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
     uid: 3
-    useable: 0
-  - cardData: {fileID: 11400000, guid: a0d143abbdf46a34b8294ed63cfa0c24, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f931b201190e80b4085edaeeacf28aa7, type: 2}
     uid: 4
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
-    uid: 5
     useable: 1
   - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
-    uid: 6
+    uid: 5
     useable: 1
   - cardData: {fileID: 11400000, guid: a0d143abbdf46a34b8294ed63cfa0c24, type: 2}
+    uid: 6
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
     uid: 7
-    useable: 0
-  - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     uid: 8
     useable: 1
   - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     uid: 9
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: a0d143abbdf46a34b8294ed63cfa0c24, type: 2}
     uid: 10
     useable: 1
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
-    uid: 11
-    useable: 0
   - cardData: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
+    uid: 11
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     uid: 12
-    useable: 0
-  - cardData: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
     uid: 13
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
     uid: 14
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
     uid: 15
     useable: 1
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+  - cardData: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
     uid: 16
     useable: 1
-  - cardData: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
+  - cardData: {fileID: 11400000, guid: f931b201190e80b4085edaeeacf28aa7, type: 2}
     uid: 17
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
     uid: 18
-    useable: 0
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
     uid: 19
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
-    uid: 20
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
-    uid: 21
     useable: 1
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
-    uid: 22
-    useable: 0
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
-    uid: 23
-    useable: 1
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
-    uid: 24
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
-    uid: 25
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
-    uid: 26
-    useable: 0
   - cardData: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
-    uid: 27
-    useable: 0
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
-    uid: 28
+    uid: 20
     useable: 1
   - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+    uid: 21
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+    uid: 22
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+    uid: 23
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 24
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+    uid: 25
+    useable: 1
+  - cardData: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
+    uid: 26
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+    uid: 27
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
+    uid: 28
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f931b201190e80b4085edaeeacf28aa7, type: 2}
     uid: 29
     useable: 1
-  buffer: []
+  buffer:
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 0
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 0
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 0
+    useable: 1
   nextUid: 30
+  amountRemovalTokens: 0

@@ -55,15 +55,13 @@ public class NodeTraversalUI : MonoBehaviour
         {
             CardViewUI card = Instantiate(cardViewPrefab, bufferLocation);
 
-            card.Init(instance.cardData, !instance.useable);
+            card.Init(instance.cardData, !instance.useable, ()=> 
+            {
+                playerInventory.bufferToDeck(instance);
+                RefreshUI();
+            });
             bufferCards.Add(card);
         }
-    }
-
-    private void OnBufferCardClicked(CardInstance card)
-    {
-        playerInventory.bufferToDeck(card);
-
     }
 
     private void RefreshUI()
