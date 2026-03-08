@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         InitializedDeckOnce();
         UIManager.instance.ShowNodePanel();
         UIManager.instance.HideCombatView();
+        UIManager.instance.HideMerchantView();
 
     }
 
@@ -102,5 +103,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         InitializedDeckOnce(); // this will be remove when the game is in placed
         UIManager.instance.ShowMerchantView();
+        UIManager.instance.HideCombatView();
+        UIManager.instance.HideNodePanel();
     }
 }
