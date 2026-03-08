@@ -303,8 +303,8 @@ MonoBehaviour:
   speed: 5
   jumpForce: 5
   gravity: -10
-  xSensitivity: 50
-  ySensitivity: 50
+  xSensitivity: 0.1
+  ySensitivity: 0.1
   rotationXlimit: 80
   characterData: {fileID: 0}
   controller: {fileID: 0}
@@ -330,6 +330,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  attackMultiplier: 1
   dashTime: 0.15
   dashSpeed: 3
   dashCD: 2
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+  shield: 0
 --- !u!114 &7050272462483586888
 MonoBehaviour:
   m_ObjectHideFlags: 0
