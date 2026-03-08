@@ -11,6 +11,8 @@ public class PlayerInventory : ScriptableObject
     public List<CardInstance> buffer = new();
     public int nextUid = 0;
 
+    public int amountRemovalTokens = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class PlayerInventory : ScriptableObject
         playerdeck.Clear();
         buffer.Clear();
         nextUid = 0;
-
+        amountRemovalTokens = 0;
     }
 
     // Update is called once per frame
@@ -70,21 +72,32 @@ public class PlayerInventory : ScriptableObject
         buffer.Clear();
     }
 
-    public void addCardToPlayersDeck(CardInstance card){
+    public void bufferToDeck(CardInstance card){
         for (int i = 0; i < buffer.Count; i++){
             if (buffer[i] == card){
                 buffer.RemoveAt(i);
+                playerdeck.Add(card);
+                return; // end process as card was found
             }
         }
-
-        playerdeck.Add(card);
+        
     }
 
-    public void removeCardFromPlayersDeck(CardInstance card){
-        for (int i = 0; i < playerdeck.Count; i++){
-            if (playerdeck[i] == card){
-                playerdeck.RemoveAt(i);
+    // returns true if the player has a token and the card is removed from their deck, returns false if the play does not have a token or the card cant be found
+    public bool removeCardFromPlayersDeck(CardInstance card){
+        if (amountRemovalTokens > 0){
+            for (int i = 0; i < playerdeck.Count; i++){
+                if (playerdeck[i] == card){
+                    playerdeck.RemoveAt(i);
+                    return true;
+                }
             }
+            return false; // card was not found
         }
+        return false; // player does not have enough tokens to do this action
+    }
+
+    public void AddRemovalToken(){
+        amountRemovalTokens++;
     }
 }
