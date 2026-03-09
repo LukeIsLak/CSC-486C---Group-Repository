@@ -65,7 +65,10 @@ public class TrapRoomSpawner : MonoBehaviour
         
         if (remainingEnemies <= 0) {
             currentWaveCount += 1;
-            if (currentWaveCount + 1 >= totalWaveCount) uponCompletion.Raise();
+            if (currentWaveCount + 1 >= totalWaveCount) {
+                uponCompletion.Raise();
+                return;
+            }
             InstantiateWave(waves[currentWaveCount]);
         }
     }

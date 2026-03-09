@@ -78,10 +78,8 @@ public class Rat : EnemyInterface
 
     public override void KillEnemy() {
         if (trs != null) trs.RemoveEnemy();
-        if(rsm != null) {
-            rcm.RemoveRat(this, ratColonyNum);
-            rsm.RemoveEntity(this);
-        }
+        if (rcm != null) rcm.RemoveRat(this, ratColonyNum);
+        if(rsm != null) rsm.RemoveEntity(this);
         Destroy(this.gameObject);
     }
 
@@ -264,7 +262,6 @@ public class Rat : EnemyInterface
                 ratColonyNum = or.ratColonyNum;
                 rcm.AddRatToColony(this, ratColonyNum);
                 isRatMaster = false;
-                isLoner = false;
 
                 canWander = or.canWander;
                 isWandering = or.isWandering;

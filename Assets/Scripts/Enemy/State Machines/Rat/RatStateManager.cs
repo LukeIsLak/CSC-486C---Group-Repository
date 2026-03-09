@@ -81,7 +81,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     public override void CheckTransition(Rat r) {
         RatStates currentState = r.currentState;
         if (!conditionLookup.TryGetValue(currentState, out var transitions)) {
-            Debug.Log("No transitions exist from the current state!");
+            Debug.Log($"No transitions exist from the current state: {currentState}");
             return;
         }
 
@@ -119,7 +119,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
 
     /*From ColonyIdle Transitions*/
     public bool ColonyIdleToColonyWander(Rat r) {
-        return r.canWander;
+        return !r.isLoner && r.canWander;
     }
 
     public bool ColonyIdleToLonerIdle(Rat r) {
@@ -132,7 +132,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
 
     /*From ColonyWandering Transitions*/
     public bool ColonyWanderToColonyIdle(Rat r) {
-        return r.doneWandering;
+        return !r.isLoner && r.doneWandering;
     }
 
     public bool ColonyWanderToLonerWander(Rat r) {
@@ -145,7 +145,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
 
     /*From LonerIdle Transitions*/
     public bool LonerIdleToLonerWander(Rat r) {
-        return r.canWander;
+        return r.isLoner && r.canWander;
     }
 
     public bool LonerIdleToColonyIdle(Rat r) {
@@ -156,10 +156,9 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         return Vector3.Distance(r.gameObject.transform.position, r.playerTransform.position) <= r.rd.detectionRadius;
     }
 
-
     /*From LonerWadnering Transitions*/
     public bool LonerWanderToLonerIdle(Rat r) {
-        return r.doneWandering;
+        return r.isLoner && r.doneWandering;
     }
 
     public bool LonerWanderToColonyWander(Rat r) {

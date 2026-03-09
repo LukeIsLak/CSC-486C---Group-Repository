@@ -65,8 +65,8 @@ public class Wave : ScriptableObject
 
             int enemyTypeIndex = Random.Range(0, enemyPrefabs.Count);
             GameObject enemyPrefab = enemyPrefabs[index];
-            GameObject.Instantiate(enemyPrefab, spawnPoints[sp].position, Quaternion.identity);
-            enemyPrefab.GetComponent<EnemyInterface>().trs = trs;
+            GameObject newEnemy = GameObject.Instantiate(enemyPrefab, spawnPoints[sp].position, Quaternion.identity);
+            newEnemy.GetComponent<EnemyInterface>().trs = trs;
 
             switch (enemyTypes[index]) {
                 case EnemyType.Rat:
