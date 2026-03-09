@@ -67,9 +67,18 @@ public class GameManager : MonoBehaviour
             case SceneType.Merchant:
                 HandleMerchantScene();
                 break;
+            case SceneType.DoNothing:
+                HideUI();
+                break;
+
         }
     }
-
+    private void HideUI()
+    {
+        UIManager.instance.HideCombatView();
+        UIManager.instance.HideMerchantView();
+        UIManager.instance.HideNodePanel();
+    }
     private void HandleNodeTraversalScene()
     {
         Cursor.lockState = CursorLockMode.None;
