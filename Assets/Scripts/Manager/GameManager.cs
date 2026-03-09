@@ -67,15 +67,27 @@ public class GameManager : MonoBehaviour
             case SceneType.Merchant:
                 HandleMerchantScene();
                 break;
+            case SceneType.DoNothing:
+                HideUI();
+                break;
+
         }
     }
-
+    private void HideUI()
+    {
+        UIManager.instance.HideCombatView();
+        UIManager.instance.HideMerchantView();
+        UIManager.instance.HideNodePanel();
+    }
     private void HandleNodeTraversalScene()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         InitializedDeckOnce();
         UIManager.instance.ShowNodePanel();
+        UIManager.instance.HideCombatView();
+        UIManager.instance.HideMerchantView();
+
     }
 
     private void HandleCombatScene()
@@ -88,10 +100,11 @@ public class GameManager : MonoBehaviour
         }
         InitializedPlayerOnce(player);
         InitializedPerScene(player);
-        InitializedDeckOnce(); // this will be remove when the game is in placed
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         UIManager.instance.ShowCombatView();
+        UIManager.instance.HideNodePanel();
+        UIManager.instance.HideMerchantView();
     }
     private void HandleMerchantScene() 
     {
@@ -99,5 +112,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         InitializedDeckOnce(); // this will be remove when the game is in placed
         UIManager.instance.ShowMerchantView();
+        UIManager.instance.HideCombatView();
+        UIManager.instance.HideNodePanel();
     }
 }

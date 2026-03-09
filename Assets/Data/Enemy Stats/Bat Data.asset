@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 0.2
   baseMoveSpeed: 1.75
+  damage: 0
+  freezeMult: 1.5
   moveSpeed: 1
   flutterMoveSpeed: 1
   peckSpeed: 1
@@ -33,6 +35,9 @@ MonoBehaviour:
   normalWeight: 1
   heightWeight: 1
   upAngleWeight: 1
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   flutterRadius: 5
   flutterAngularSpeed: 3
   flutterRadialJitter: 0.5

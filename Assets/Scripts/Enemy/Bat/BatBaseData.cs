@@ -32,7 +32,8 @@ public class BatBaseData : BaseEnemyData
     public float heightWeight = 1f;
     public float upAngleWeight = 1f;
 
-    [Header("Flutter Parameters")]   
+    [Header("Flutter Parameters")]
+    public LayerMask wallLayerMask; 
     public float flutterRadius = 3f;                // average orbit radius
     public float flutterAngularSpeed = 90f;         // degrees per second
     public float flutterRadialJitter = 0.5f;        // random variation in radius

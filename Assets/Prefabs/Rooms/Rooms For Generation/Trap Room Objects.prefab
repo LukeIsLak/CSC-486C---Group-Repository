@@ -163,6 +163,7 @@ MonoBehaviour:
   started: 0
   sequences:
   - {fileID: 8350682023533028019}
+  - {fileID: 6078091010159603745}
   trs: {fileID: 7596533088010235272}
   trapDelay: 1.5
 --- !u!1 &3452522053420848015
@@ -200,6 +201,7 @@ Transform:
   - {fileID: 3078643690310156232}
   - {fileID: 8930087895033215594}
   - {fileID: 458371411292518357}
+  - {fileID: 2855444638272140361}
   - {fileID: 1366225744316691655}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,9 +281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleWaves:
-  - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
   - {fileID: 11400000, guid: 31884332833d4bc4c98452e4ec0d916e, type: 2}
-  possibleWavesWeights: 0100000001000000
+  possibleWavesWeights: 01000000
   waves: []
   spawnPoints:
   - {fileID: 8103054933748855330}
@@ -294,6 +295,79 @@ MonoBehaviour:
   currentWaveCount: 0
   remainingEnemies: 0
   uponCompletion: {fileID: 11400000, guid: 164095ff0a96c684ebaf127baaf8cd4c, type: 2}
+--- !u!1001 &1057578919886156863
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7184789646888268646}
+    m_Modifications:
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582436287556286492, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: m_Name
+      value: Chest Sequence
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+--- !u!4 &2855444638272140361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+  m_PrefabInstance: {fileID: 1057578919886156863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6078091010159603745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6554129433988400158, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+  m_PrefabInstance: {fileID: 1057578919886156863}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06a849a8a18ca649ae9007daa62afde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1662628634428183872
 PrefabInstance:
   m_ObjectHideFlags: 0
