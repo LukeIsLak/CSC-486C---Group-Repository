@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleWaves:
-  - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
+  - {fileID: 11400000, guid: 31884332833d4bc4c98452e4ec0d916e, type: 2}
   possibleWavesWeights: 01000000
   waves: []
   spawnPoints:

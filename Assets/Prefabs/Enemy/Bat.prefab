@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+  shield: 0
 --- !u!114 &5098527676356961825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,8 +63,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
-  enemyData: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
   enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
+  trs: {fileID: 0}
+  curHealth: 0
+  moveSpeed: 0
+  speedModifier: 1
+  hasDamageOverTime: 0
+  hasFreeze: 0
+  hasKnockback: 0
+  numDamageOverTime: 0
+  numFreeze: 0
+  currentDoTNames: []
+  currentDoTTicks: 
   anim: {fileID: 4090313962949258712}
   rb: {fileID: 6990128973608440802}
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
@@ -358,5 +370,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
+  anim: {fileID: 0}
+  sprite: {fileID: 0}
   rotatorXawOffsetDeg: 0
   rotatorLerpSpeed: 20
+  checkSide: 0
+  isFront: 0
+  isSide: 0
+  isBack: 0
+  isLeft: 0
+  sideFaceLeft: 0
