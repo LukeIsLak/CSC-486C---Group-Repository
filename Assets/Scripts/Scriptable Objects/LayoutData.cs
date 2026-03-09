@@ -11,6 +11,7 @@ public class LayoutData : ScriptableObject
     public int              randomSeed;
     public float            complexity;
     public bool             useSeed;
+    public float            minWidthFraction;
 
     [Header("Traversal")]
     public EncounterInfo    currentEncounter;

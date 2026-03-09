@@ -12,8 +12,6 @@ public class TestApp : MonoBehaviour
     void Start()
     {
         // RANDOMNESS INITIALIZATION
-        layoutData.depth            = 9;
-        layoutData.maxWidth         = 7;
         layoutData.randomSeed       = (int)System.DateTime.Now.Ticks;
         layoutData.useSeed          = true;
         layoutData.InitializeStates();

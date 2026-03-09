@@ -49,6 +49,7 @@ public class TraversableLayout : MonoBehaviour
         layoutGenerator.useSetSeed          = layoutData.useSeed;
         layoutGenerator.randomSeed          = layoutData.randomSeed;
         layoutGenerator.complexity          = layoutData.complexity;
+        layoutGenerator.minWidthFraction    = layoutData.minWidthFraction;
         genLayers = layoutGenerator.DoGeneration();
 
         // Do conversion to encounters, destroy generator

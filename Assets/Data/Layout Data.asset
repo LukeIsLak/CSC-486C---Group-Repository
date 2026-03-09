@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203e4ba975b70b348ba725244f6b4f59, type: 3}
   m_Name: Layout Data
   m_EditorClassIdentifier: 
-  depth: 12
-  maxWidth: 8
-  randomSeed: 1231405212
+  depth: 10
+  maxWidth: 5
+  randomSeed: 949213152
   complexity: 1
   useSeed: 1
+  minWidthFraction: 1
   currentEncounter: {fileID: 11400000, guid: ea0fe87bf11228e46a07d82c9cb127db, type: 2}
   completedIndices: 00000000
   FogUpdated: {fileID: 11400000, guid: 53b5e16dded829045b198432f3c140d9, type: 2}
