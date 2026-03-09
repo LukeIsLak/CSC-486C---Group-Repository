@@ -22,9 +22,8 @@ MonoBehaviour:
   - {fileID: -323223572, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   - {fileID: -865636401, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   encounterWeights:
-  - {fileID: 11400000, guid: c4f495d16f909424e9ed067d57d0eb26, type: 2}
-  - {fileID: 11400000, guid: 56b190006b1282a4789dd04c87363869, type: 2}
-  - {fileID: 11400000, guid: 15496984a4d9237428ac4c683c253f1d, type: 2}
+  - {fileID: 11400000, guid: 04028e59eb33c3c4893982c781856773, type: 2}
+  - {fileID: 11400000, guid: 6308f9aad1dcb1a4a9111eb1a0ef0085, type: 2}
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 10d0db9ea267c8a4ebff4a96f3d225b0, type: 3}
     m_SceneName: Merchant

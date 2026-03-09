@@ -300,9 +300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd11427f66547d4b8338d1af41256de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 5
-  gravity: -10
+  speed: 9
+  jumpForce: 10
+  gravity: -30
   xSensitivity: 0.1
   ySensitivity: 0.1
   rotationXlimit: 80
@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExitToLayout: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
   healthBar: {fileID: 0}
   shield: 0
 --- !u!114 &7050272462483586888
