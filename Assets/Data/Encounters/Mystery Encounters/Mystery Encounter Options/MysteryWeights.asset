@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc3937e88862c54ebb087da40e38f5c, type: 3}
+  m_Name: MysteryWeights
+  m_EditorClassIdentifier: 
+  encounterWeights:
+  - {fileID: 11400000, guid: 9b543ee934c3f284c87521f965d56060, type: 2}
+  - {fileID: 11400000, guid: ef604e8d40ef74c4aa90d8af617287c1, type: 2}
+  - {fileID: 11400000, guid: 939f7c987b6c25e419a4e9069966f998, type: 2}

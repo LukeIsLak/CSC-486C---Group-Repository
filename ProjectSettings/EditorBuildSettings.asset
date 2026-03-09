@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Encounters/Merchant.unity
     guid: 10d0db9ea267c8a4ebff4a96f3d225b0
   - enabled: 1
-    path: Assets/Scenes/Encounters/Treasure.unity
+    path: Assets/Scenes/Encounters/Mystery.unity
     guid: 173e6691b947bb14fb8d6b29c4536bad
   - enabled: 1
     path: Assets/Scenes/Encounters/Dungeon.unity
@@ -32,5 +32,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Encounters/Rest.unity
     guid: 3f4f66878de8baa43a0c2e08404584f4
+  - enabled: 1
+    path: Assets/Scenes/Encounters/Mystery Encounters/Treasure.unity
+    guid: 2b6335cc615339b4b98d0f2d27abdb2f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8fd327be986849746ad2d8ff3f4bc4fd, type: 2}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WeightDungeonToMystery
   m_EditorClassIdentifier: 
   encounter: {fileID: 11400000, guid: ea0fe87bf11228e46a07d82c9cb127db, type: 2}
-  weight: 0
+  weight: 1

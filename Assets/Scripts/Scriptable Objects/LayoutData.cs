@@ -24,6 +24,7 @@ public class LayoutData : ScriptableObject
     public void InitializeStates()
     {
         // Traversal initial state
+        if (randomSeed == 0) randomSeed = 1;
         completedIndices.Clear();
         completedIndices.Add(0);
 

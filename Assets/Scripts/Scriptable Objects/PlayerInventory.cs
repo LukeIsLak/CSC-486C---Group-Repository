@@ -9,11 +9,18 @@ public class PlayerInventory : ScriptableObject
     public int currency;
     public List<CardInstance> playerdeck = new();
     public List<CardInstance> buffer = new();
+    public int nextUid = 0;
+
+    public int amountRemovalTokens = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        currency = 0;
+        playerdeck.Clear();
+        buffer.Clear();
+        nextUid = 0;
+        amountRemovalTokens = 0;
     }
 
     // Update is called once per frame
@@ -25,11 +32,14 @@ public class PlayerInventory : ScriptableObject
     // call this in game manager
     public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
     {
-        Debug.Log("im here");
+        // here so the deck doesnt explode in size
+        playerdeck.Clear();
+        nextUid = 0;
+        //Debug.Log("im here");
         for (int i = 0; i < deckSize; i++)
         {
             Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
-            playerdeck.Add(new CardInstance(pick));
+            playerdeck.Add(new CardInstance(pick, nextUid++));
         }
     }
 
@@ -60,5 +70,34 @@ public class PlayerInventory : ScriptableObject
 
     void clearBuffer(){
         buffer.Clear();
+    }
+
+    public void bufferToDeck(CardInstance card){
+        for (int i = 0; i < buffer.Count; i++){
+            if (buffer[i] == card){
+                buffer.RemoveAt(i);
+                playerdeck.Add(card);
+                return; // end process as card was found
+            }
+        }
+        
+    }
+
+    // returns true if the player has a token and the card is removed from their deck, returns false if the play does not have a token or the card cant be found
+    public bool removeCardFromPlayersDeck(CardInstance card){
+        if (amountRemovalTokens > 0){
+            for (int i = 0; i < playerdeck.Count; i++){
+                if (playerdeck[i] == card){
+                    playerdeck.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false; // card was not found
+        }
+        return false; // player does not have enough tokens to do this action
+    }
+
+    public void AddRemovalToken(){
+        amountRemovalTokens++;
     }
 }

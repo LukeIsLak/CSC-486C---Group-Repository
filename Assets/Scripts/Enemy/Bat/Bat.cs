@@ -71,7 +71,8 @@ public class Bat : EnemyInterface
     }
 
     public override void KillEnemy() {
-        bsm.entities.Remove(this);
+        if (trs != null) trs.RemoveEnemy();
+        if (bsm != null) bsm.entities.Remove(this);
         Destroy(this.gameObject);
     }
 
@@ -293,7 +294,16 @@ public class Bat : EnemyInterface
         if (isMoving && targetPath.Count > 0) {
             Vector3 target = targetPath[currentPathIndex];
             float step = moveSpeed * speedModifier * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, target, step);
+            if (currentState != BatStates.Perching) {
+                RaycastHit hitInfo;
+                if (!IsPathClear(transform.position, target, out hitInfo, minRadius: 0.5f, maxTries: 10)) {
+                    // End the peck if a wall is hit
+                    isMoving = false;
+                    if (isPecking) peckComplete = true;
+                    return;
+                }
+            }
+            rb.MovePosition(Vector3.MoveTowards(transform.position, target, step));
 
             Vector3 toTarget = target - transform.position;
             if (toTarget.sqrMagnitude > 1e-6f) {
@@ -312,6 +322,21 @@ public class Bat : EnemyInterface
         }
 
         if (s) steer();
+    }
+
+    private bool IsPathClear(Vector3 from, Vector3 to, out RaycastHit hitInfo, float minRadius = 0.5f, int maxTries = 10) {
+        Vector3 dir = (to - from).normalized;
+        float dist = Vector3.Distance(from, to);
+        hitInfo = default;
+        for (int tries = 0; tries < maxTries; tries++)
+        {
+            if (!Physics.Raycast(from, dir, out hitInfo, dist, bd.wallLayerMask))
+                return true;
+            // Shorten the distance and try again
+            dist = Mathf.Max(minRadius, dist * 0.8f);
+            to = from + dir * dist;
+        }
+        return false;
     }
 
     /****************************************************/
@@ -341,50 +366,56 @@ public class Bat : EnemyInterface
     {
         if (!isFluttering || playerTransform == null) return;
 
-        /*Change the angle*/
-        // TODO: LK - Change flutter to move distance per second instead of angle per second
-        flutterAngleDeg += moveSpeed * speedModifier * bd.flutterAngularSpeed * direction * Time.deltaTime;
-        if (flutterAngleDeg >= 360f) flutterAngleDeg -= 360f;
-        if (flutterAngleDeg <= 0f) flutterAngleDeg += 360f;
+        /*Calculate the current angle from the bat to the player in XZ*/
+        Vector3 toBat = transform.position - playerTransform.position;
+        toBat.y = 0f;
+        float currentRadius = toBat.magnitude;
+        float angleRad = Mathf.Atan2(toBat.z, toBat.x);
 
-        float jitter = (Mathf.PerlinNoise(flutterJitterSeed, Time.time * 0.5f) - 0.5f) * 2f * bd.flutterRadialJitter;
-        float radius = Mathf.Max(0.1f, bd.flutterRadius + jitter);
+        /*Calculate how much angle to move this frame to achieve the desired arc length (distance per second)*/
+        float arcLength = moveSpeed * speedModifier * Time.deltaTime * direction;
+        float desiredRadius = Mathf.Max(0.1f, bd.flutterRadius + (Mathf.PerlinNoise(flutterJitterSeed, Time.time * 0.5f) - 0.5f) * 2f * bd.flutterRadialJitter);
 
-        /*Vertical bob*/
+        float deltaAngle = arcLength / desiredRadius; // radians
+
+        /*Next position to move*/
+        float nextAngle = angleRad + deltaAngle;
+        Vector3 nextPos = playerTransform.position + new Vector3(Mathf.Cos(nextAngle), 0f, Mathf.Sin(nextAngle)) * desiredRadius;
+
+        /*Check distance to a wall to prevent bats going through walls*/
+        float minRadius = 0.5f; //XXX eventually set this in bat data
+        float checkRadius = desiredRadius;
+        RaycastHit hitInfo;
+        if (!IsPathClear(transform.position, nextPos, out hitInfo, minRadius: 0.5f, maxTries: 10)) {
+            steer();
+            return;
+        }
+
+        Vector3 checkedNextPos = nextPos;
+
+        /* Add vertical bob and lateral offset as before */
         float vertBob = Mathf.Sin(Time.time * bd.verticalBobSpeed + flutterJitterSeed) * bd.verticalBobAmplitude;
-
-        float angleRad = flutterAngleDeg * Mathf.Deg2Rad;
-        Vector3 center = playerTransform.position;
-        Vector3 baseDir = new Vector3(Mathf.Cos(angleRad), 0f, Mathf.Sin(angleRad));
+        Vector3 baseDir = (checkedNextPos - playerTransform.position).normalized;
         Vector3 sideDir = new Vector3(-baseDir.z, 0f, baseDir.x); // perpendicular in XZ
 
-        /*Squiggle noise changing with angle and time*/
-        float noiseU = angleRad * 0.5f + flutterJitterSeed;
-        float noiseV = Time.time * bd.horizontalBobSpeed + flutterJitterSeed;
-        float squig = (Mathf.PerlinNoise(noiseU, noiseV) - 0.5f) * 2f; // in [-1,1]
-
-        /* Small radial movementss so circle breathes in and out*/
+        float angleForNoise = Mathf.Atan2(baseDir.z, baseDir.x);
+        float squig = (Mathf.PerlinNoise(angleForNoise * 0.5f + flutterJitterSeed, Time.time * bd.horizontalBobSpeed + flutterJitterSeed) - 0.5f) * 2f;
         float radialMod = squig * (bd.horizontalBobAmplitude * 0.25f);
-        Vector3 baseOrbit = baseDir * (radius + radialMod);
-
-        /*Lateral squiggle perpendicular to orbit (produces wavy circle)*/
         Vector3 lateralTarget = sideDir * (squig * bd.horizontalBobAmplitude);
         lateralTarget[1] += bd.flutterBaseHeight;
         float alpha = 1f - Mathf.Exp(-bd.lateralSmoothing * Time.deltaTime);
         Vector3 lateralOffset = Vector3.Lerp(prevLateralOffset, lateralTarget, alpha);
         prevLateralOffset = lateralOffset;
 
-        /*Combine into target position (horizontal orbit + lateral squiggle + vertical bob)*/
-        Vector3 targetPos = center + baseOrbit + lateralOffset + new Vector3(0f, vertBob, 0f);
+        Vector3 finalTarget = checkedNextPos + lateralOffset + new Vector3(0f, vertBob, 0f);
 
-        /*Move toward targetPos*/
+        /* Move toward the final target */
         float step = moveSpeed * speedModifier * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+        rb.MovePosition(Vector3.MoveTowards(transform.position, finalTarget, step));
 
-        /*Face movement direction*/
-        Vector3 toTarget = (targetPos - transform.position);
-        if (toTarget.sqrMagnitude > 1e-6f)
-        {
+        /* Face movement direction */
+        Vector3 toTarget = (finalTarget - transform.position);
+        if (toTarget.sqrMagnitude > 1e-6f) {
             Quaternion desired = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, desired, bd.flutterTurnSpeed * Time.deltaTime);
         }
@@ -590,7 +621,7 @@ public class Bat : EnemyInterface
         // move by a step towards the desired direction (clamped by maxSteerDistance)
         Vector3 desiredPos = origin + desiredDir * Mathf.Min(bd.maxSteerDistance, moveSpeed * speedModifier);
         float step = moveSpeed * speedModifier * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, desiredPos, step);
+        rb.MovePosition(Vector3.MoveTowards(transform.position, desiredPos, step));
 
         /* If we want to debug the steer*/
         if (debug) 
@@ -625,7 +656,7 @@ public class Bat : EnemyInterface
     public void OnTriggerEnter(Collider other) {
         if (isAttacking && other.CompareTag("Player")) {
             Health h = other.GetComponent<Health>();
-            if (h != null) h.TakeDamage(10f); //TODO: LK - eventually, when we figure out the base values, replace this!
+            if (h != null) h.TakeDamage(bd.damage); //TODO: LK - eventually, when we figure out the base values, replace this!
             isAttacking = false;
         }
     }

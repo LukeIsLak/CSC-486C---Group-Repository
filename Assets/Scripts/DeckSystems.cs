@@ -42,7 +42,7 @@ public class DeckSystems : MonoBehaviour
     public event Action OnHandContentsChanged;
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
-    private int nextUid = 0;
+    //private int nextUid = 0;
     
     public PlayerInventory inventory;
 
@@ -59,6 +59,7 @@ public class DeckSystems : MonoBehaviour
     void Start(){
         //Debug.Log("done");
         loadDeck(inventory.playerdeck);
+        shuffleIncHand();
     }
 
     /// <summary>
@@ -126,11 +127,12 @@ public class DeckSystems : MonoBehaviour
     /// </summary>
     public void shuffleIncHand() {
         // add the cards in to the players deck
-        addCardToDeck(hand[HANDSLOT1INDEX]);
-        addCardToDeck(hand[HANDSLOT2INDEX]);
-        addCardToDeck(hand[HANDSLOT3INDEX]);
-        addCardToDeck(hand[HANDSLOT4INDEX]);
-        addCardToDeck(hand[HANDSLOT5INDEX]);
+        int looplength = MAXHANDSIZE;
+        if (deck.Count < MAXHANDSIZE){ looplength = deck.Count;}
+
+        for (int i = 0; i < looplength; i++){
+            addCardToDeck(hand[i]);
+        }
 
         //hand now empty
         hand.Clear();
@@ -139,11 +141,9 @@ public class DeckSystems : MonoBehaviour
         shuffleExcHand();
 
         //redraw the hand
-        drawCard();
-        drawCard();
-        drawCard();
-        drawCard();
-        drawCard();
+        for (int i = 0; i < looplength; i++) {
+            drawCard();
+        }
     }
 
     /// <summary>
@@ -161,16 +161,18 @@ public class DeckSystems : MonoBehaviour
         //make sure sizes are reset before loading deck
         deckSize = passedDeck.Count;
         currentDeckSize = 0;
-        nextUid = 0;
+        //nextUid = 0;
         //set the size of loaded deck
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
-            passedDeck[i].uid = nextUid++;
-            if (i < MAXHANDSIZE) {
-                hand.Add(passedDeck[i]);
-            } else {
-                addCardToDeck(passedDeck[i]);
+            //passedDeck[i].uid = nextUid++;
+            if (passedDeck[i].useable) {
+                if (hand.Count < MAXHANDSIZE) {
+                    hand.Add(passedDeck[i]);
+                } else {
+                    addCardToDeck(passedDeck[i]);
+                }
             }
         }
         NotifyHandContentsChanged();
@@ -209,7 +211,8 @@ public class DeckSystems : MonoBehaviour
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
 
-        //call needed card function
+        //call needed card function and set the cards usabilty to false
+        hand[currentHandIndex].useable = false;
         StartCoroutine(hand[currentHandIndex].cardData.Play(hand[currentHandIndex].cardData));
 
         // put card in discard and remove from hand
@@ -232,7 +235,7 @@ public class DeckSystems : MonoBehaviour
     }
 
     /// <summary>
-    /// Assumes that the discard pill is checked before being called
+    /// Assumes that the discard pile is checked before being called
     /// takes an amount of cards from discard pile (randomly) and puts them in to the players deck, player deck will be shuffled after
     /// </summary>
     /// <param name="amount"></param>
@@ -364,8 +367,13 @@ public class DeckSystems : MonoBehaviour
             StartCoroutine(newCardTimer());
         }
 
-        //can still cause some issues with consiten uses of cards ex. 2 then 3 sec break then 2. look in to reseting this after all coroutines are finished
-        drawFlag = false;
+        if (cardsToDraw == 0){
+            drawFlag = false;
+        }
     }
 
+    // add last used card back in to the players deck
+    public void recallCard(){
+        addCardToDeck(discard[discard.Count-1]);
+    }
 }

@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
-  cardsDB: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
+  cardsDB: {fileID: 11400000, guid: 3bc7b805fceeb8d48baf00406c795b4e, type: 2}
+  inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
 --- !u!114 &6154478789939588589
 MonoBehaviour:
   m_ObjectHideFlags: 0

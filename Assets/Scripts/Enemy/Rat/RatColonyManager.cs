@@ -10,6 +10,7 @@ public class RatColonyManager : MonoBehaviour
     [SerializeField] public List<bool> ratColoniesMoving = new List<bool>();
 
     public Rat GetRatMaster(int i) {
+        if (i < 0 || i >= ratColonies.Count) return null;
         foreach (Rat r in ratColonies[i]) if (r.isRatMaster) return r;
         return null;
     }
@@ -43,6 +44,7 @@ public class RatColonyManager : MonoBehaviour
     
 
     public void DetermineColonyMoveSpot(int i) {
+        if (i < 0 || i >= ratColonies.Count) return;
         Rat ratMaster = GetRatMaster(i);
         if (ratMaster == null) return; // XXX eventually handle this logic
 
@@ -81,22 +83,37 @@ public class RatColonyManager : MonoBehaviour
     }
 
     public void AddRatToColony(Rat r, int i) {
+        if (r.ratColonyNum != -1) return;
         ratColonies[i].Add(r);
+        r.ratColonyNum = i;
+        r.isLoner = false;
     }
 
     public void AddRatColony(List<Rat> newRats) {
-        ratColonies.Add(newRats);
-        foreach (Rat r in newRats) r.ratColonyNum = ratColonies.Count - 1;
+        List<Rat> filteredRats = new List<Rat>();
+        foreach (Rat r in newRats) if (r.ratColonyNum == -1) filteredRats.Add(r);
+        
+        if (filteredRats.Count == 0) return; // No valid rats to add
+        ratColonies.Add(filteredRats);
+        int newIndex = ratColonies.Count - 1;
+        foreach (Rat r in filteredRats) {
+            r.ratColonyNum = newIndex;
+            r.isLoner = false;
+        }
     }
 
     public void RemoveRat(Rat r, int i) {
+        if (r.isLoner || r.ratColonyNum < 0) return;
         ratColonies[i].Remove(r);
-        if (ratColonies.Count <= 1) {
+        if (ratColonies[i].Count < 2) {
+            print("Removal of a colony");
             foreach (Rat or in ratColonies[i]) {
-                or.isRatMaster = false;
-                or.isLoner = true;
-                or.ratColonyNum = -1;
+                print(or);
+                or.isRatMaster     = false;
+                or.isLoner         = true;
+                or.ratColonyNum    = -1;
             }
+
             RemoveAndUpdateColony(i);
         }
         else if (r.isRatMaster) {
@@ -107,7 +124,7 @@ public class RatColonyManager : MonoBehaviour
 
     public void RemoveAndUpdateColony(int i) {
         /*Adjust the index of each colony after the removed one*/
-        for (int j = i+1; j < ratColonies.Count; j++) foreach (Rat r in ratColonies[j]) r.ratColonyNum -= 1;
+        for (int j = i+1; j < ratColonies.Count; j++) foreach (Rat r in ratColonies[j]) if (!r.isLoner) r.ratColonyNum -= 1;
         ratColonies.RemoveAt(i);
     }
 }

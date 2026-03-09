@@ -12,7 +12,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private StaminaUI staminaView;
     [SerializeField] private GameObject merchantPanel;
-
+    [SerializeField] private GameObject interactPanel;
+    [SerializeField] private GameObject nodePanel;
+    [SerializeField] private ChestUI chestUI;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -33,6 +35,13 @@ public class UIManager : MonoBehaviour
         if(inventoryView == null) inventoryView = GetComponentInChildren<InventoryUI>(true);
         if(pauseView == null) pauseView = GetComponentInChildren<PauseUI>(true);
         if (staminaView == null) staminaView = GetComponentInChildren<StaminaUI>(true);
+        if (chestUI == null) chestUI = GetComponentInChildren<ChestUI>(true);
+        HideInventoryView();
+        HideCombatView();
+        HidePauseView();
+        HideMerchantView();
+        HideInteract();
+        HideNodePanel();
     }
     public void BindPlayer(GameObject player)
     {
@@ -90,6 +99,30 @@ public class UIManager : MonoBehaviour
     public void HideMerchantView()
     {
         merchantPanel.SetActive(false);
+    }
+
+    public void ShowInteract()
+    {
+        interactPanel.SetActive(true);
+    }
+
+    public void HideInteract()
+    {
+        interactPanel.SetActive(false);
+    }
+
+    public void ShowNodePanel()
+    {
+        nodePanel.SetActive(true);
+    }
+    public void HideNodePanel()
+    {
+        nodePanel.SetActive(false);
+    }
+
+    public void ShowChestUI(Acquirable cardData)
+    {
+        chestUI.ShowUI(cardData);
     }
 }
     
