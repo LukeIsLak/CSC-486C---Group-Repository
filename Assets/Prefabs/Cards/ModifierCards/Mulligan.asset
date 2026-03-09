@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Mulligan
   m_EditorClassIdentifier: 
   name: Mulligan
-  image: {fileID: 1694671016, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
+  image: {fileID: -481236402, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   value: 2
