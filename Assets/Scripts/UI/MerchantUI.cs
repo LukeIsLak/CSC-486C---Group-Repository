@@ -22,7 +22,7 @@ public class MerchantUI : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private void RebuildUI()
+    public void RebuildUI()
     {
         ClearUI();
         if (merchantData == null) return;
