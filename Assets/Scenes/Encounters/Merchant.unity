@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneType: 2
+  doRefresh: 0
 --- !u!4 &295507952
 Transform:
   m_ObjectHideFlags: 0
@@ -198,8 +199,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   merchantData: {fileID: 11400000, guid: 1a198098bd63eff4986ee65ef7f77283, type: 2}
   shopItemDB: {fileID: 11400000, guid: 623a72fb94746d646b68b72e10df6eac, type: 2}
+  randomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
   MerchantPopulated: {fileID: 11400000, guid: 18cb661b223cec24eb8f257fd13f8536, type: 2}
+  shopItemCount: 5
 --- !u!4 &690068907
 Transform:
   m_ObjectHideFlags: 0

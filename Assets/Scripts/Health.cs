@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Health : MonoBehaviour
 {
+    [Header("Events")]
+    public GameEvent ExitToLayout;
+
+    [Header("Data")]
     [SerializeField] private HealthBar healthBar;
     public float maxHealth { get; private set; }
     public float currentHealth {  get; private set; }
@@ -53,7 +58,11 @@ public class Health : MonoBehaviour
     }
     private void Die()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        PlayerInput pi = gameObject.GetComponent<PlayerInput>();
+        pi.SwitchCurrentActionMap("UI");
+        ExitToLayout.Raise();
+
     }
 
 
