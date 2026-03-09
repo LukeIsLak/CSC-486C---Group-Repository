@@ -64,7 +64,7 @@ public class DeckSystems : MonoBehaviour
 
     /// <summary>
     /// adds the given card to the back of the deck, 
-    /// ASSUMPTION: when a card is colected the check for deck size happens, this function is for adding a used card back in to the deck
+    /// ASSUMPTION: when a card is collected the check for deck size happens, this function is for adding a used card back in to the deck
     /// </summary>
     /// <param name="card"></param>
     public void addCardToDeck(CardInstance card) {
@@ -102,7 +102,7 @@ public class DeckSystems : MonoBehaviour
     /// will suffle the player hand but will exclude any card assigned to the player hand, insperation: https://en.wikipedia.org/wiki/Fisher�Yates_shuffle
     /// </summary>
     public void shuffleExcHand() {
-        //temporary list to aid in suffeling (abbility to pull specific indexes) 
+        //temporary list to aid in suffling (abbility to pull specific indexes) 
         List<CardInstance> sortingList = new List<CardInstance>();
         int listSize = currentDeckSize;
         currentDeckSize = 0;
@@ -216,7 +216,7 @@ public class DeckSystems : MonoBehaviour
         StartCoroutine(hand[currentHandIndex].cardData.Play(hand[currentHandIndex].cardData));
 
         // put card in discard and remove from hand
-
+        string cardname = hand[currentHandIndex].cardData.name;
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
         //reflect change in hand size
@@ -226,11 +226,13 @@ public class DeckSystems : MonoBehaviour
 
         NotifyHandContentsChanged();
 
-        cardsToDraw++;
-        if (!drawFlag){
-            drawFlag = true;
-            StartCoroutine(newCardTimer());
-        }
+        if (cardname != "Recall"){ // as recall has its own process to fill its spot
+            cardsToDraw++;
+            if (!drawFlag){
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        } 
         
     }
 
@@ -372,8 +374,12 @@ public class DeckSystems : MonoBehaviour
         }
     }
 
-    // add last used card back in to the players deck
+    // add last used card back in to the players hand
     public void recallCard(){
-        addCardToDeck(discard[discard.Count-1]);
+        hand.Add(discard[discard.Count - 1]);
+
+        NotifyHandContentsChanged();
+
+        discard.RemoveAt(discard.Count - 1);
     }
 }
