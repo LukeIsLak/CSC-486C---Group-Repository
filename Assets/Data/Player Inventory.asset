@@ -19,7 +19,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
   - {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
   currency: 0
-  playerdeck: []
+  playerdeck:
+  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
+    uid: 0
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 1
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+    uid: 2
+    useable: 1
+  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
+    uid: 3
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 4
+    useable: 1
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 5
+    useable: 1
   buffer: []
-  nextUid: 30
-  amountRemovalTokens: 5
+  nextUid: 6
+  amountRemovalTokens: 0

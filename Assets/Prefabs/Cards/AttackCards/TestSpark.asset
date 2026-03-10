@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffb24b8aa0b34af29363e3189d1674e, type: 3}
   m_Name: TestSpark
   m_EditorClassIdentifier: 
-  name: Spark
-  image: {fileID: -1298059059, guid: ceef31a104165ba419a575d05fbad1c9, type: 3}
+  name: Frost Nova
+  image: {fileID: 1050318224, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 10
   dmgradius: 1
   aoeprojprefab: {fileID: 3828313729109400056, guid: e8f309518f62d4e43b9025b05a60b12a, type: 3}
