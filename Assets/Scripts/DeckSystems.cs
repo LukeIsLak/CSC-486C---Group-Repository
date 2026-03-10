@@ -166,12 +166,14 @@ public class DeckSystems : MonoBehaviour
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
-            //passedDeck[i].uid = nextUid++;
+
             if (passedDeck[i].useable) {
                 if (hand.Count < MAXHANDSIZE) {
                     hand.Add(passedDeck[i]);
+                    Debug.Log("hand" + passedDeck[i].cardData.name);
                 } else {
                     addCardToDeck(passedDeck[i]);
+                    Debug.Log("deck" + passedDeck[i].cardData.name);
                 }
             }
         }
@@ -376,10 +378,30 @@ public class DeckSystems : MonoBehaviour
 
     // add last used card back in to the players hand
     public void recallCard(){
-        hand.Add(discard[discard.Count - 1]);
+        if (discard.Count < 1){
+            hand.Add(discard[discard.Count - 1]);
 
+            NotifyHandContentsChanged();
+
+            discard.RemoveAt(discard.Count - 1);
+        } else {
+            cardsToDraw++;
+            if (!drawFlag){
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        }
+    }
+
+    public void drawCards(int amount){
+        if (hand.Count + amount > MAXHANDSIZE){
+            amount = MAXHANDSIZE - hand.Count;
+        }
+        for (int i = 0; i < amount; i++){
+            drawCard();
+        }
         NotifyHandContentsChanged();
 
-        discard.RemoveAt(discard.Count - 1);
+        //check if there should be a card draws
     }
 }
