@@ -86,11 +86,6 @@ public class DeckSystems : MonoBehaviour
         // remove first card from deck
         CardInstance card = deck.Dequeue();
 
-        //// check handslot is valid
-        //if (handslot < 0 || handslot > 4) { 
-        //    Debug.Log("error wrong value used on drawCard, value should be between 0-4");
-        //    return null;
-        //}
         currentDeckSize--;
         hand.Add(card);
         NotifyHandContentsChanged();
@@ -228,7 +223,7 @@ public class DeckSystems : MonoBehaviour
 
         NotifyHandContentsChanged();
 
-        if (cardname != "Recall"){ // as recall has its own process to fill its spot
+        if (cardname != "Recall" || cardname != "Greed"){ // as recall has its own process to fill its spot
             cardsToDraw++;
             if (!drawFlag){
                 drawFlag = true;
@@ -362,7 +357,9 @@ public class DeckSystems : MonoBehaviour
         
         if (deck.Count > 0){
             yield return new WaitForSeconds(TIMETODRAWNEWCARD);
-            drawCard();
+            if (cardsToDraw > 0){
+                drawCard();
+            }
         }
 
         cardsToDraw--;
@@ -393,7 +390,7 @@ public class DeckSystems : MonoBehaviour
         }
     }
 
-    public void drawCards(int amount){
+    public void GreedDrawCards(int amount){
         if (hand.Count + amount > MAXHANDSIZE){
             amount = MAXHANDSIZE - hand.Count;
         }
@@ -403,5 +400,13 @@ public class DeckSystems : MonoBehaviour
         NotifyHandContentsChanged();
 
         //check if there should be a card draws
+        if (hand.Count < MAXHANDSIZE){
+            cardsToDraw = MAXHANDSIZE - hand.Count;
+
+            if (!drawFlag){
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        }
     }
 }
