@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestFireball
   m_EditorClassIdentifier: 
   name: Fireball
-  image: {fileID: 328199383, guid: ceef31a104165ba419a575d05fbad1c9, type: 3}
+  image: {fileID: -2073127299, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 10
   dmgradius: 3
   aoeprojprefab: {fileID: 7573748999677751953, guid: 26c580f88a05c424bac381c95aba4b26, type: 3}
