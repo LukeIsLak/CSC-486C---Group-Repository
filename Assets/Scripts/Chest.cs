@@ -35,7 +35,9 @@ public class Chest : MonoBehaviour
         }
         else
         {
-            chestItems.GetGold().Acquire();
+            Acquirable goldItem = chestItems.GetGold();
+            goldItem.Acquire();
+            UIManager.instance.ShowChestUI(goldItem);
             Debug.Log("Get Gold");
         }
 
