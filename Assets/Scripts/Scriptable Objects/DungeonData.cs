@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Data/DungeonGen")]
 public class DungeonData : ScriptableObject
 {
+    [Header("Generation Parameters")]
     public int              dungeonPoolSize,
                             dungeonIters,
                             dungeonItersPerSpecial,

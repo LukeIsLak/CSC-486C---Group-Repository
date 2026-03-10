@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneType: 1
+  doRefresh: 0
 --- !u!4 &269752521
 Transform:
   m_ObjectHideFlags: 0
@@ -462,10 +463,10 @@ MonoBehaviour:
   - {fileID: 49450181928653073, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
   roomScale: 34
   dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
+  diffScale: {fileID: 11400000, guid: 85d548ea1711f3c48b702264a19bb777, type: 2}
   encRandomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
   GenerationComplete: {fileID: 11400000, guid: aa210a09cbbffe449aac9f74e1af27e0, type: 2}
-  trapRoomRatio: 1
 --- !u!1001 &875977125674514967
 PrefabInstance:
   m_ObjectHideFlags: 0

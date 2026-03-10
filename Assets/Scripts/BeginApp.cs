@@ -7,6 +7,7 @@ public class TestApp : MonoBehaviour
 {
     public GameEvent EnterLayout;
     public LayoutData layoutData;
+    public PlayerInventory inventory;
     public RandomContext encRandomContext;
 
     void Start()
@@ -18,6 +19,7 @@ public class TestApp : MonoBehaviour
         encRandomContext.ResetContext(layoutData.randomSeed == 0 ? 1 : layoutData.randomSeed);
 
         // PLAYER INITIALIZATION
+        inventory.Initialize();
 
 
         EnterLayout.Raise();

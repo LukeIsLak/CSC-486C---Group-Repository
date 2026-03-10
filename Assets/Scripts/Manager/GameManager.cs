@@ -39,9 +39,11 @@ public class GameManager : MonoBehaviour
     }
     private void InitializedDeckOnce()
     {
+        return;
         if(inventoryInitialized) return;
         inventoryInitialized = true;
-        inventory.InitializeRandomDeck(cardsDB, 30);
+        //inventory.InitializeRandomDeck(cardsDB, 15);
+        //inventory.Initialize();
     }
     private void InitializedPerScene(GameObject player)
     {
