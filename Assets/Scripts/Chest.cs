@@ -9,6 +9,8 @@ public class Chest : MonoBehaviour
     [SerializeField] private ChestItems chestItems;
     [SerializeField] private Mesh open;
     [SerializeField] private Mesh closed;
+    [SerializeField] private Transform cardSpawnPosition;
+    [SerializeField] private CardRewardDisplay cardPrefab;
     private MeshFilter meshFilter;
     public bool isOpened { get; private set; }
 
@@ -30,6 +32,8 @@ public class Chest : MonoBehaviour
         {
             Acquirable randomCard = chestItems.GetCard();
             randomCard.Acquire();
+            CardRewardDisplay card = Instantiate(cardPrefab, cardSpawnPosition);
+            card.Init(randomCard.itemDescription, randomCard.itemName, "10");
             UIManager.instance.ShowChestUI(randomCard);
             Debug.Log("Get Card");
         }
@@ -40,9 +44,6 @@ public class Chest : MonoBehaviour
             UIManager.instance.ShowChestUI(goldItem);
             Debug.Log("Get Gold");
         }
-
-        Debug.Log("Chest open");
-
     }
 
 }
