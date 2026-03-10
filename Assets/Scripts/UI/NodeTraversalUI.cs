@@ -13,14 +13,21 @@ public class NodeTraversalUI : MonoBehaviour
     [SerializeField] private ScrollRect playerDeckScrollRect; // For forcing showing item from the top
     [SerializeField] private ScrollRect bufferDeckScrollRect; // For forcing showing item from the top
     [SerializeField] private GameObject openDeckButton;
+    [SerializeField] private Button removeCardButton;
     private List<CardViewUI> playerDeckCards = new();
     private List<CardViewUI> bufferCards = new();
-    
 
+    private bool isRemoveMode = false;
+
+    private void Start()
+    {
+        removeCardButton.onClick.AddListener(ToggleRemoveMode);
+    }
     public void ShowDeckContainer()
     {
         openDeckButton.SetActive(false);
         inventoryInNode.SetActive(true);
+        removeCardButton.interactable = playerInventory.amountRemovalTokens > 0;
         BuildDeckUI();
         BuildBufferUI();
         Canvas.ForceUpdateCanvases();
@@ -34,7 +41,13 @@ public class NodeTraversalUI : MonoBehaviour
         openDeckButton.SetActive(true);
         ClearDeckUI();
     }
-
+    private void ToggleRemoveMode()
+    {
+        if (playerInventory.amountRemovalTokens <= 0) return;
+        isRemoveMode = !isRemoveMode;
+        RefreshUI();
+            
+    }
     private void BuildDeckUI()
     {
         // Create the UI for each card instance in hand 
@@ -42,12 +55,23 @@ public class NodeTraversalUI : MonoBehaviour
         {
 
             CardViewUI card = Instantiate(cardViewPrefab, playerDeckLocation);
-            
-            card.Init(instance.cardData, !instance.useable);
-            playerDeckCards.Add(card);
+            if(isRemoveMode)
+            {
+                card.Init(instance.cardData, !instance.useable, () =>
+                {
+                    playerInventory.removeCardFromPlayersDeck(instance);
+                    isRemoveMode = false;
+                    RefreshUI();}, false); 
+            }
+            else
+            {
+                card.Init(instance.cardData, !instance.useable, null, true);
+            }
+                playerDeckCards.Add(card);
         }
 
     }
+
 
     private void BuildBufferUI()
     {

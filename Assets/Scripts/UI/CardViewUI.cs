@@ -11,7 +11,7 @@ public class CardViewUI : MonoBehaviour
     public Image cardImage;
     public TextMeshProUGUI cardDamage;
     public Button button;
-    public void Init(Cards cardData, bool isGrayOut = false, System.Action onBuffercardClick = null, bool buttonDisable = false)
+    public void Init(Cards cardData, bool isGrayOut = false, System.Action onCardClick = null, bool buttonDisable = false)
     {
         card = cardData;    
         cardImage.sprite = card.image;
@@ -23,9 +23,9 @@ public class CardViewUI : MonoBehaviour
         {
             button.onClick.RemoveAllListeners();
             button.interactable = !buttonDisable;
-            if(onBuffercardClick != null)
+            if(onCardClick != null)
             {
-                button.onClick.AddListener(() => onBuffercardClick?.Invoke());
+                button.onClick.AddListener(() => onCardClick?.Invoke());
             }
         }
     }
