@@ -34,7 +34,7 @@ public class Chest : MonoBehaviour
             randomCard.Acquire();
             CardRewardDisplay card = Instantiate(cardPrefab, cardSpawnPosition);
             card.Init(randomCard.itemDescription, randomCard.itemName, "10");
-            UIManager.instance.ShowChestUI(randomCard);
+            StartCoroutine(PopUpUIRoutine(randomCard, card));
             Debug.Log("Get Card");
         }
         else
@@ -44,6 +44,14 @@ public class Chest : MonoBehaviour
             UIManager.instance.ShowChestUI(goldItem);
             Debug.Log("Get Gold");
         }
+    }
+
+    private IEnumerator PopUpUIRoutine(Acquirable randomCard, CardRewardDisplay card)
+    {
+        yield return new WaitForSeconds(2f);
+        UIManager.instance.ShowChestUI(randomCard);
+        Destroy(card.gameObject);
+
     }
 
 }
