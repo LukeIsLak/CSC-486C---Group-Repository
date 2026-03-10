@@ -9,6 +9,7 @@ public class CardViewUI : MonoBehaviour
     public Cards card;
     public TextMeshProUGUI cardName;
     public Image cardImage;
+    public TextMeshProUGUI cardDamage;
     public Button button;
     public void Init(Cards cardData, bool isGrayOut = false, System.Action onBuffercardClick = null, bool buttonDisable = false)
     {
@@ -16,6 +17,8 @@ public class CardViewUI : MonoBehaviour
         cardImage.sprite = card.image;
         if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
         cardName.text = cardData.name;
+        //cardDamage.text = cardData.
+
         if(button != null)
         {
             button.onClick.RemoveAllListeners();
