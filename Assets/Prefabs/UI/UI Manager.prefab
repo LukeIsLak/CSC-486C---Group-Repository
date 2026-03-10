@@ -1142,6 +1142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3068352400891444944}
   - component: {fileID: 7854174650607320607}
+  - component: {fileID: 3947579657256751724}
   m_Layer: 5
   m_Name: Merchant Panel
   m_TagString: Untagged
@@ -1185,6 +1186,34 @@ MonoBehaviour:
   merchantData: {fileID: 11400000, guid: 1a198098bd63eff4986ee65ef7f77283, type: 2}
   merchantItemPrefab: {fileID: 4755454325543711366, guid: 1d9b34fc85c5de344b8ea7059ad3cdc1, type: 3}
   contentLocation: {fileID: 4581040623455925017}
+--- !u!114 &3947579657256751724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2679024575373392906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 18cb661b223cec24eb8f257fd13f8536, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7854174650607320607}
+        m_TargetAssemblyTypeName: MerchantUI, Assembly-CSharp
+        m_MethodName: RebuildUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2816623470595347424
 GameObject:
   m_ObjectHideFlags: 0
