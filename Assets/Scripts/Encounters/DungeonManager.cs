@@ -16,14 +16,12 @@ public class DungeonManager : MonoBehaviour
 
     [Header("Data")]
     public DungeonData dungeonData;
+    public DifficultyScaling diffScale;
     public RandomContext encRandomContext;
     
     [Header("Events")]
     public GameEvent EnterLayout;
     public GameEvent GenerationComplete;
-
-    [Header("Local Parameters")]
-    public float trapRoomRatio;
 
 
     private LevelGenerator  lg;
@@ -67,7 +65,7 @@ public class DungeonManager : MonoBehaviour
     {
         List<DungeonRoomScript> rooms = new List<DungeonRoomScript>(FindObjectsByType<DungeonRoomScript>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)); 
 
-        int trapRoomsToCreate = (int)(trapRoomRatio * rooms.Count);
+        int trapRoomsToCreate = (int)(diffScale.trapRoomFraction * rooms.Count);
 
         for (int i = 0; i < trapRoomsToCreate; i++)
         {

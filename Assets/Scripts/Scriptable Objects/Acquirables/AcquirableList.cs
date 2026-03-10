@@ -9,7 +9,6 @@ public class AcquirableList : ScriptableObject
 
     public static Acquirable MakeWeightedChoice(List<Acquirable> items, RandomContext randomContext)
     {
-    {
         Dictionary<Acquirable, float> weights = new Dictionary<Acquirable, float>();
         float weightSum = 0;
 
@@ -43,6 +42,5 @@ public class AcquirableList : ScriptableObject
 
         // We shouldn't get here.
         return null;
-    }
     }
 }

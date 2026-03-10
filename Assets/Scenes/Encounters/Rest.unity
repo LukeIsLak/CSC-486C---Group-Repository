@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneType: 3
+  doRefresh: 1
 --- !u!1 &1349492136
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hinder
   m_EditorClassIdentifier: 
   name: Hinder
-  image: {fileID: -708883800, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
+  image: {fileID: 930042162, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   effectTime: 10
   enemyeffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
   enemySpeedChange: {fileID: 11400000, guid: 49689543c418cbe408e966af5245f709, type: 2}

@@ -128,7 +128,7 @@ public class DeckSystems : MonoBehaviour
     public void shuffleIncHand() {
         // add the cards in to the players deck
         int looplength = MAXHANDSIZE;
-        if (deck.Count < MAXHANDSIZE){ looplength = deck.Count;}
+        if (deck.Count + hand.Count < MAXHANDSIZE){ looplength = deck.Count + hand.Count;}
 
         for (int i = 0; i < looplength; i++){
             addCardToDeck(hand[i]);
