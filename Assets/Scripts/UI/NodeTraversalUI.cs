@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class NodeTraversalUI : MonoBehaviour
     [SerializeField] private ScrollRect bufferDeckScrollRect; // For forcing showing item from the top
     [SerializeField] private GameObject openDeckButton;
     [SerializeField] private Button removeCardButton;
+    [SerializeField] private TextMeshProUGUI tokenAmountUI;
     private List<CardViewUI> playerDeckCards = new();
     private List<CardViewUI> bufferCards = new();
 
@@ -30,6 +32,7 @@ public class NodeTraversalUI : MonoBehaviour
         removeCardButton.interactable = playerInventory.amountRemovalTokens > 0;
         BuildDeckUI();
         BuildBufferUI();
+        UpdateRemovalTokenUI();
         Canvas.ForceUpdateCanvases();
         playerDeckScrollRect.verticalNormalizedPosition = 1f; // top
         bufferDeckScrollRect.verticalNormalizedPosition = 1f;
@@ -61,7 +64,10 @@ public class NodeTraversalUI : MonoBehaviour
                 {
                     playerInventory.removeCardFromPlayersDeck(instance);
                     isRemoveMode = false;
-                    RefreshUI();}, false); 
+                    RefreshUI();
+                    playerInventory.amountRemovalTokens--;
+                    UpdateRemovalTokenUI();
+                }, false); 
             }
             else
             {
@@ -71,7 +77,10 @@ public class NodeTraversalUI : MonoBehaviour
         }
 
     }
-
+    private void UpdateRemovalTokenUI()
+    {
+        tokenAmountUI.text = playerInventory.amountRemovalTokens.ToString();
+    }
 
     private void BuildBufferUI()
     {
