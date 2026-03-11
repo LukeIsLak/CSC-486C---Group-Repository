@@ -30,10 +30,10 @@ public class Chest : MonoBehaviour
         UIManager.instance.HideInteract();
         if (!isTrapRoom)
         {
-            Acquirable randomCard = chestItems.GetCard();
+            CardAcquirable randomCard = (CardAcquirable)chestItems.GetCard();
             randomCard.Acquire();
             CardRewardDisplay card = Instantiate(cardPrefab, cardSpawnPosition);
-            card.Init(randomCard.itemDescription, randomCard.itemName, "10");
+            card.Init(randomCard.card);
             StartCoroutine(PopUpUIRoutine(randomCard, card));
             Debug.Log("Get Card");
         }

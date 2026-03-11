@@ -8,10 +8,12 @@ public class CardRewardDisplay : MonoBehaviour
     [SerializeField] private TextMeshPro descriptionText;
     [SerializeField] private TextMeshPro nameText;
     [SerializeField] private TextMeshPro damageText;
-    public void Init(string cardDescription, string cardName, string cardDamage)
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    public void Init(Cards card)
     {
-        descriptionText.text = cardDescription;
-        nameText.text = cardName;
-        damageText.text = "10";
+        descriptionText.text = card.descrption;
+        nameText.text = card.name;
+        damageText.text = card.effectValue.ToString();
+        spriteRenderer.sprite = card.image;
     }
 }

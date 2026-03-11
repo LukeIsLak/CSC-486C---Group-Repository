@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class Cards : ScriptableObject
 {
     public string name = null;
+    public string descrption = null;
+    public int effectValue;
     public Sprite image = null;
 
     public abstract IEnumerator Play(Cards card);
