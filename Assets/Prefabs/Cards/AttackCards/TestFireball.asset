@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: TestFireball
   m_EditorClassIdentifier: 
   name: Fireball
+  descrption: 
+  effectValue: 0
   image: {fileID: -2073127299, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 10
   dmgradius: 3
   aoeprojprefab: {fileID: 7573748999677751953, guid: 26c580f88a05c424bac381c95aba4b26, type: 3}
-  dmg: 20
+  dmg: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 0

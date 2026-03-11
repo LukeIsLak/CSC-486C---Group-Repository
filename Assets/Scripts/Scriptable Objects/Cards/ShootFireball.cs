@@ -7,6 +7,7 @@ public class ShootFireball : MonoBehaviour
     [SerializeField] private float projspeed = 10f;
     [SerializeField] private float dmgradius = 3f;
     [SerializeField] private float ttl = 5f;
+    [SerializeField] private DamageOverTime effect;
 
 
     private float dmg;
@@ -45,12 +46,12 @@ public class ShootFireball : MonoBehaviour
         {
             EnemyInterface enem = hit.GetComponent<EnemyInterface>();
             if (enem != null){
-                enem.Hit(dmg);
+                enem.Hit(dmg, effect.type, effect);
             }
             else {
                 enem = hit.GetComponentInParent<EnemyInterface>();
                 if (enem != null){
-                    enem.Hit(dmg);
+                    enem.Hit(dmg, effect.type, effect);
                 }
             }
         }
