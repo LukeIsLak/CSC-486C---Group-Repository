@@ -15,10 +15,12 @@ public class TestApp : MonoBehaviour
     void Start()
     {
         // RANDOMNESS INITIALIZATION
-        layoutData.randomSeed       = (int)System.DateTime.Now.Ticks;
+        int runSeed                 = (int)System.DateTime.Now.Ticks;
+        if (runSeed == 0)           runSeed = 1;
+        layoutData.randomSeed       = runSeed;
         layoutData.useSeed          = true;
         layoutData.InitializeStates();
-        encRandomContext.ResetContext(layoutData.randomSeed == 0 ? 1 : layoutData.randomSeed);
+        encRandomContext.ResetContext(runSeed);
 
         // PLAYER INITIALIZATION
         inventory.Initialize();

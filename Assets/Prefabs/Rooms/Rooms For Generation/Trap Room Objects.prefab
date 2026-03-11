@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5323805884830605802, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
+      propertyPath: isTrapRoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8582436287556286492, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
       propertyPath: m_Name
       value: Chest Sequence

@@ -9,6 +9,7 @@ public class TraversalManager : MonoBehaviour
     [Header("Required References")]
     public GameObject traversableLayoutPrefab;
     public Camera sceneCamera;
+    public PlayerInventory inventory;
 
     [Header("Data")]
     public LayoutData layoutData;
@@ -47,11 +48,11 @@ public class TraversalManager : MonoBehaviour
     {
         if (respondToInputs && Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
         {
-            EnterSelectedEncounter();
+            // EnterSelectedEncounter();
         }
         if (respondToInputs && Input.GetKeyDown(KeyCode.R))
         {
-            ExitToMenu.Raise();
+            // ExitToMenu.Raise();
         }
 
         if (Input.GetMouseButton(0))
@@ -92,5 +93,10 @@ public class TraversalManager : MonoBehaviour
         layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
         respondToInputs = false;
         EnterEncounter.Raise();
+    }
+
+    public void ClearInventoryBuffer()
+    {
+        inventory.clearBuffer();
     }
 }

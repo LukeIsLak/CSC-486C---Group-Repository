@@ -70,7 +70,7 @@ public class PlayerInventory : ScriptableObject
         buffer.Add(card);
     }
 
-    void clearBuffer(){
+    public void clearBuffer(){
         buffer.Clear();
     }
 
