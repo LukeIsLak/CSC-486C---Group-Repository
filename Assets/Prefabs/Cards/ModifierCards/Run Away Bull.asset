@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1c6940b366d534485660a7ef83b690, type: 3}
   m_Name: Run Away Bull
   m_EditorClassIdentifier: 
-  name: 
+  name: Runaway Bull
   descrption: 
   effectValue: 0
   image: {fileID: 0}
