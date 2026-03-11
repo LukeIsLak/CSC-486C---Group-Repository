@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e770f43642214e13b9b21c890aeee98, type: 3}
+  m_Name: TidalWave
+  m_EditorClassIdentifier: 
+  name: 
+  image: {fileID: 0}
+  wavePrefab: {fileID: 399922250164900069, guid: d39ce1e1c9b8e4b2b98fbacd4ff7c00b, type: 3}
