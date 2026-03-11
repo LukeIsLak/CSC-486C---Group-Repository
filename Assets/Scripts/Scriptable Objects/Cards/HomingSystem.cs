@@ -11,6 +11,8 @@ public class HomingSystem : MonoBehaviour
 
     private Transform target;
     private bool isActive = false;
+
+    public HashSet<EnemyInterface> ignoreEnemies;
     // Initialize the homing projectile
     public void Initialize()
     {
@@ -57,7 +59,10 @@ public class HomingSystem : MonoBehaviour
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
             if (distance < closestDistance && distance <= radius){
+                EnemyInterface enem = enemy.GetComponent<EnemyInterface>();
 
+                if (ignoreEnemis != null && ignoreEnemies.Contains(enem))
+                    continue;
                 closest = enemy.transform;
                 closestDistance = distance;
             }

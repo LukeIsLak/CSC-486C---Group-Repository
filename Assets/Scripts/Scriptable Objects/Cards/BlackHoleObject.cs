@@ -36,6 +36,7 @@ public class BlackHoleObject : MonoBehaviour
             else {
                 enem = other.GetComponentInParent<EnemyInterface>();
                 if (enem != null){
+                    //Pull towards
                 }
             }
         Debug.Log("In hitbox");
