@@ -208,22 +208,24 @@ public class DeckSystems : MonoBehaviour
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
 
-        //call needed card function and set the cards usabilty to false
-        hand[currentHandIndex].useable = false;
-        StartCoroutine(hand[currentHandIndex].cardData.Play(hand[currentHandIndex].cardData));
+        CardInstance curCard = hand[currentHandIndex];
 
-        // put card in discard and remove from hand
+        // put card in discard and remove from hand and set the cards usabilty to false
         string cardname = hand[currentHandIndex].cardData.name;
+        hand[currentHandIndex].useable = false;
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
-        //reflect change in hand size
+
+        //call needed card function 
+        StartCoroutine(curCard.cardData.Play(curCard.cardData));
 
         if(hand.Count == 0 ) currentHandIndex = 0;
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
 
         NotifyHandContentsChanged();
 
-        if (cardname != "Recall" || cardname != "Greed"){ // as recall has its own process to fill its spot
+        if (cardname != "Recall" && cardname != "Greed"){ // as recall has its own process to fill its spot
+            Debug.Log("named");
             cardsToDraw++;
             if (!drawFlag){
                 drawFlag = true;
@@ -391,16 +393,18 @@ public class DeckSystems : MonoBehaviour
     }
 
     public void GreedDrawCards(int amount){
-        if (hand.Count + amount > MAXHANDSIZE){
+        if (hand.Count + amount > MAXHANDSIZE){ // the -1 is needed because this runs as the discard is handled during this functions run time so the hand belives it still has this card in it
             amount = MAXHANDSIZE - hand.Count;
         }
+        Debug.Log(amount);
         for (int i = 0; i < amount; i++){
             drawCard();
+            Debug.Log("doing a draw");
         }
         NotifyHandContentsChanged();
 
         //check if there should be a card draws
-        if (hand.Count < MAXHANDSIZE){
+        if (hand.Count < MAXHANDSIZE){ 
             cardsToDraw = MAXHANDSIZE - hand.Count;
 
             if (!drawFlag){
