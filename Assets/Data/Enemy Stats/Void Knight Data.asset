@@ -16,10 +16,10 @@ MonoBehaviour:
   baseMoveSpeed: 5
   damage: 0
   freezeMult: 1.5
-  sightDistance: 20
+  sightDistance: 40
   sightAngle: 60
   viewMask: 0
   destStopDist: 1
   checkPlayerUpdate: 0.1
-  detectionRadius: 10
+  detectionRadius: 30
   wanderRadius: 4

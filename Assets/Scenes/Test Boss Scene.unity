@@ -188,6 +188,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -230,6 +234,10 @@ PrefabInstance:
     - target: {fileID: 7050272462483586888, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: inventoryContainer
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7545902890681713120, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8225715068774074998, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_Pivot.x
@@ -286,6 +294,14 @@ PrefabInstance:
     - target: {fileID: 8225715068774074998, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498486752961200364, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8774079750195045325, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_LocalPosition.x
@@ -934,10 +950,10 @@ MonoBehaviour:
   currentDoTNames: []
   currentDoTTicks: 
   anim: {fileID: 0}
-  rb: {fileID: 0}
+  rb: {fileID: 1060465760}
   vkd: {fileID: 11400000, guid: 4409d4b437777c74e82dc09b32f14286, type: 2}
   playerTransform: {fileID: 348140808}
-  vksm: {fileID: 0}
+  vksm: {fileID: 116639556}
   nma: {fileID: 1060465759}
   checkPlayerPath: 0
   moveDistMult: 2
@@ -945,8 +961,31 @@ MonoBehaviour:
   isStepping: 0
   canSeePlayer: 0
   currentState: 0
-  isInitialized: 0
+  isInitialized: 1
   isAgro: 0
+  minAgroToAttackTime: 0.5
+  maxAgroToAttackTime: 4
+  isAttacking: 0
+  delayCombo1: 0
+  combo1PlayerRange: 10
+  comboInBetweenTime: 3
+  minNumFireball: 5
+  maxNumFireball: 15
+  minDurFireballCast: 0.2
+  maxDurFireballCast: 0.4
+  fireball: {fileID: 4765867937132852493, guid: c73976c67d773034ca969d65af864ca2, type: 3}
+  minNumDivineJudgement: 3
+  maxNumDivineJudgement: 9
+  minDurDivineJudgementCast: 0.1
+  maxDurDivineJudgementCast: 0.15
+  minAttackWait: 0.5
+  maxAttackWait: 3
+  canAttack: 0
+  canDamage: 0
+  inAttackCombo1pt1: 0
+  inAttackCombo1pt2: 0
+  inAttackCombo1pt3: 0
+  AttackCombo1wait: 3
 --- !u!1 &1291605766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,7 +1268,7 @@ GameObject:
   - component: {fileID: 1696096942}
   - component: {fileID: 1696096941}
   - component: {fileID: 1696096940}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

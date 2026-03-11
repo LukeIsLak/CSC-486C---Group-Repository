@@ -32,16 +32,20 @@ public class VoidKnight : EnemyInterface
     public float maxAgroToAttackTime = 4.0f;
 
     public bool isAttacking = false;
+    public bool delayCombo1 = false;
 
     public float combo1PlayerRange = 10f;
+    public float comboInBetweenTime = 0.3f;
 
     // XXX add cast move speed?
+    // XXX cast start delay
 
     public int minNumFireball = 5;
     public int maxNumFireball = 15;
     public float minDurFireballCast = 0.1f;
     public float maxDurFireballCast = 0.3f;
     public GameObject fireball;
+    public GameObject divineJudgement;
 
     public int minNumDivineJudgement = 3;
     public int maxNumDivineJudgement = 9;
@@ -53,7 +57,8 @@ public class VoidKnight : EnemyInterface
     public float minAttackWait = 0.5f;
     public float maxAttackWait = 3f;
     public bool canAttack = false;
-    public VoidKnightAttacks nextAttack;
+    public bool canDamage = false;
+    public VoidKnightAttacks? nextAttack = null;
 
 
     public bool inAttackCombo1pt1 = false;
@@ -66,22 +71,12 @@ public class VoidKnight : EnemyInterface
     void Awake() {
         weightedAttacks = new List<VoidKnightWeightedAttacks> {
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackCombo1, 2f, () => 
-                Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
+                false),// Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackFireBall, 1f, () => true),
-            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackDivineJudgement, 1f, () => true)
+            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackDivineJudgement, 1f, () => false)
         };
-    }
 
-    public bool AttackCombo1Condition() {
-        return Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange;
-    }
-
-    // maybe boss has manapool as well?
-    public bool AttackFireBall() {
-        return true;
-    }
-    public bool AttackDivineJudgement() {
-        return true;
+        initialize();
     }
 
     public VoidKnightAttacks GetNextAttack() {
@@ -165,9 +160,10 @@ public class VoidKnight : EnemyInterface
         return Vector3.Distance(transform.position, dest) <= vkd.destStopDist;
     }
 
-    public void UpdateAgroMove() {
+    public void UpdateAgroMove(bool stepTillFalse = false) {
         UpdatePlayerPath();
-        isStepping = canStep();
+        if (!stepTillFalse) isStepping = canStep();
+        else if (isStepping) isStepping = canStep();
         if (isStepping) UpdateMove();
         canSeePlayer = CanSeePlayer();
         // if (nma != null && IsAgentAtDestination(nma)) XXX finish this!
@@ -205,6 +201,19 @@ public class VoidKnight : EnemyInterface
         checkPlayerPath = true;
     }
 
+    public void WaitToAttack() {
+        canAttack = false;
+        StartCoroutine(DelayAttack());
+    }
+
+    private IEnumerator DelayAttack() {
+        float delay = UnityEngine.Random.Range(minAgroToAttackTime, maxAgroToAttackTime);
+        yield return new WaitForSeconds(delay);
+
+        nextAttack = GetNextAttack();
+        canAttack = true;
+    }
+
     /******** Combo Attack ************/
     public void forceStep() {
         float c = (1 - 2 * moveThreshold);
@@ -230,10 +239,15 @@ public class VoidKnight : EnemyInterface
     }
 
     public void UpdateAttackCombo1(int step) {
-        isStepping = canStep();
-        if (isStepping) UpdateAgroMove();
-        if (!isStepping) {
-            switch (step) {
+        if (isStepping) isStepping = canStep();
+        if (isStepping) UpdateAgroMove(true);
+        if (!isStepping && !delayCombo1) StartCoroutine(WaitAttackCombo1(step));
+    }
+
+    private IEnumerator WaitAttackCombo1(int step) {
+        delayCombo1 = true;
+        yield return new WaitForSeconds(comboInBetweenTime);
+        switch (step) {
                 case 1: 
                     inAttackCombo1pt1 = false;
                     break;
@@ -243,8 +257,8 @@ public class VoidKnight : EnemyInterface
                 default:
                     inAttackCombo1pt3 = false;
                     break;
-            }
         }
+        delayCombo1 = false;
     }
 
 

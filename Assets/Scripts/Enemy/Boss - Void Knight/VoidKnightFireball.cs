@@ -13,6 +13,7 @@ public class VoidKnightFireball : MonoBehaviour
 
     public void Initialize(Vector3 direction) {
         dir = direction;
+        StartCoroutine(timeToLive(ttl));
     }
 
     // Update is called once per frame
