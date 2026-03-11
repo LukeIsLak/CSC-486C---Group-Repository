@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: AstralDagger
   m_EditorClassIdentifier: 
   name: AstralDagger
-  image: {fileID: 0}
+  descrption: 
+  effectValue: 0
+  image: {fileID: -1977755330, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   daggerPrefab: {fileID: 6807903892725110464, guid: 701b2dcc0b7b543848bfd8eecb538285, type: 3}

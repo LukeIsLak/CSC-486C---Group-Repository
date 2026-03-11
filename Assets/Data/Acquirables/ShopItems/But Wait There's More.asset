@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f91f1e455c0d743ffad3aeae6b2eb616, type: 3}
-  m_Name: ChainLightning
+  m_Script: {fileID: 11500000, guid: 7e8674752e50ab542ad883a410ef196f, type: 3}
+  m_Name: But Wait There's More
   m_EditorClassIdentifier: 
-  name: 
-  descrption: 
-  effectValue: 0
-  image: {fileID: -896222872, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
-  ChainLightningPrefab: {fileID: 0}
+  playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
+  price: 20
+  acquirable: {fileID: 11400000, guid: ef371b546f238a24c959b6527fe16fdb, type: 2}
