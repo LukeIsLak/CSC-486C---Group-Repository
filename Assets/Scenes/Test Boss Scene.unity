@@ -725,8 +725,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7506672, y: 0.3536973, z: 0.52307093}
-  m_Center: {x: -0.0061329603, y: 0.0066902637, z: -0.0182393}
+  m_Size: {x: 0.99987817, y: 1.2991934, z: 0.52307093}
+  m_Center: {x: 0.003452023, y: -0.014190912, z: -0.0182393}
 --- !u!1 &982661824
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +877,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &1060465760
@@ -940,6 +940,7 @@ MonoBehaviour:
   vksm: {fileID: 0}
   nma: {fileID: 1060465759}
   checkPlayerPath: 0
+  moveDistMult: 2
   moveThreshold: 0.5
   isStepping: 0
   canSeePlayer: 0

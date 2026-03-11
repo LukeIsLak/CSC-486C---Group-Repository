@@ -1,15 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // combine this with the bat one
-public struct VoidKnightAttacks {
-    public VoidKnightStates attack;
+public struct VoidKnightWeightedAttacks {
+    public VoidKnightAttacks attack;
     public float weight;
-    public VoidKnightAttacks(VoidKnightStates attack, float weight) {
+    public Func<bool> condition;
+    public VoidKnightWeightedAttacks(VoidKnightAttacks attack, float weight, Func<bool> condition) {
         this.attack = attack;
         this.weight = weight;
+        this.condition = condition;
     }
+}
+
+public enum VoidKnightAttacks {
+    AttackCombo1,
+    AttackFireBall,
+    AttackDivineJudgement,
+    AttackBehind
 }
 
 public enum VoidKnightStates {
@@ -24,6 +34,7 @@ public enum VoidKnightStates {
 
     AttackDash,                 // dash attack
 
+    AttackCombo1,
     AttackCombo1_pt1,           // combo attack
     AttackCombo1_pt2,
     AttackCombo1_pt3,
@@ -96,6 +107,7 @@ public class VoidKnightStateMachine : StateMachine<VoidKnight, VoidKnightStates>
 
     public void EnterAgroApproachState(VoidKnight v) {
         v.isAgro = true;
+        v.checkPlayerPath = true;
     }
 
     /******************************/
