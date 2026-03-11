@@ -1124,7 +1124,7 @@ GameObject:
   - component: {fileID: 724581062}
   m_Layer: 6
   m_Name: Bat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2945,7 +2945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3025714530200236336, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: enemyLayer.m_Bits
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3125711115449189636, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_Layer

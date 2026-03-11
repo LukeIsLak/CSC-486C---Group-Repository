@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootSpark : MonoBehaviour
+public class ShootFrostNova : MonoBehaviour
 {
     [SerializeField] private float projspeed = 10f;
     [SerializeField] private float dmgradius = 1f;
     [SerializeField] private float ttl = 5f;
 
 
-    private float dmg;
+    private float dmg = 8f;
     private Vector3 dir; 
 
     [SerializeField] private LayerMask enemylayer;
 
 
-    public void Init(Vector3 direct, Spark card){
+    public void Init(Vector3 direct, Cards card){
         //Needs a direction and damage amount
         dir = direct.normalized;
-        dmg = card.dmg;
     }
 
     void Start(){
