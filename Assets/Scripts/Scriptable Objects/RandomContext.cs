@@ -4,11 +4,11 @@ using UnityEngine;
 public class RandomContext : ScriptableObject
 {
     public Unity.Mathematics.Random rnd;
-    public int seed = 1;
+    public int seed;
 
     public void ResetContext()
     {
-        if (seed == 0) seed = 1;
+        if (seed == 0) Debug.Log("Seed 0 somehow.");
         rnd = new Unity.Mathematics.Random((uint)seed);
     }
     public void ResetContext(int seed)
