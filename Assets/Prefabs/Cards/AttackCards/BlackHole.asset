@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: BlackHole
   m_EditorClassIdentifier: 
   name: BlackHole
-  image: {fileID: 0}
+  descrption: 
+  effectValue: 0
+  image: {fileID: 877994683, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   blackHolePrefab: {fileID: 814989952815652038, guid: aeaf66525651e4f4893aac78237d7ee6, type: 3}

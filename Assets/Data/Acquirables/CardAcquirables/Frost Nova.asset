@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8674752e50ab542ad883a410ef196f, type: 3}
-  m_Name: Mana Shield
+  m_Script: {fileID: 11500000, guid: 7327189d6369afc4daef952eab66e291, type: 3}
+  m_Name: Frost Nova
   m_EditorClassIdentifier: 
+  itemName: Frost Nova
+  itemDescription: 
+  icon: {fileID: -1341897093, guid: 6372a4d3ffed56044b4653817ab14450, type: 3}
+  selectionWeight: 1
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
-  acquirable: {fileID: 11400000, guid: 98c94aa050787ec479717aa940725c82, type: 2}
+  card: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}

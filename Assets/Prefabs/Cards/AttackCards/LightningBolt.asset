@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: LightningBolt
   m_EditorClassIdentifier: 
   name: 
-  image: {fileID: 0}
+  descrption: 
+  effectValue: 0
+  image: {fileID: 436681993, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
+  range: 20
+  damage: 20
   lightningPrefab: {fileID: 0}
   enemylayer:
     serializedVersion: 2
