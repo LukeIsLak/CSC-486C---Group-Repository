@@ -49,11 +49,9 @@ public class EnemyInterface : MonoBehaviour
     }
 
     /*This has the intention of being overwritten in extended classes*/
-    public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null) {
+    public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
         if (curHealth <= 0) return;
         if (curHealth > 0) TakeDamage(damage);
-    public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
-        TakeDamage(damage);
 
         switch (status) {
             case StatusEffectType.DamageOverTime:
