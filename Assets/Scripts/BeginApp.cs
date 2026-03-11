@@ -25,12 +25,13 @@ public class TestApp : MonoBehaviour
         // PLAYER INITIALIZATION
         inventory.Initialize();
         // MAKE SURE PLAYER HAS FULL HEALTH
-        //player = GameObject.FindWithTag("Player");
-        //if (player == null) {
-        //    Debug.Log("theres a problem");
-        //}
-        //playerhealth = player.GetComponent(typeof(Health)) as Health;
-        //playerhealth.Heal(playerhealth.maxHealth);
+        player = GameObject.FindWithTag("Player");
+        if (player == null) {
+            Debug.Log("theres a problem");
+        } else {
+            playerhealth = player.GetComponent(typeof(Health)) as Health;
+            playerhealth.Heal(playerhealth.maxHealth);
+        }
 
 
         EnterLayout.Raise();
