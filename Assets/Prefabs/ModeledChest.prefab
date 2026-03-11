@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3370291706792684142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6551073264542736686}
+  m_Layer: 0
+  m_Name: CardSpawnPOint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6551073264542736686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3370291706792684142}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 778016704917766649}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &4658241559382742753
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,6 +44,7 @@ GameObject:
   - component: {fileID: 9089550931359115805}
   - component: {fileID: 7201389430892335771}
   - component: {fileID: 4574095477772361130}
+  - component: {fileID: 15699028525173309}
   m_Layer: 0
   m_Name: ModeledChest
   m_TagString: Untagged
@@ -32,7 +64,8 @@ Transform:
   m_LocalPosition: {x: 8.01, y: 0, z: 2.353}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6551073264542736686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &5084378185803652715
@@ -121,4 +154,22 @@ MonoBehaviour:
   chestItems: {fileID: 11400000, guid: 71717dc0aec034a44b16921750296f63, type: 2}
   open: {fileID: 4300000, guid: 5c509bc9e3ce92e418aac359ebdf4281, type: 3}
   closed: {fileID: 4300000, guid: 4b1205a7235860c479fc94aefe26ebf1, type: 3}
+  cardSpawnPosition: {fileID: 6551073264542736686}
+  cardPrefab: {fileID: 5194444464628649748, guid: 2f0c3496edfee6c45b6aabe72c36c4a2, type: 3}
   isTrapRoom: 0
+--- !u!208 &15699028525173309
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4658241559382742753}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.225, y: 0.36200002, z: 0.268}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.01, y: 0.002, z: 0.268}
+  m_TimeToStationary: 0.5
