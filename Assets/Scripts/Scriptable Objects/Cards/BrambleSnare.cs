@@ -9,7 +9,7 @@ public class BrambleSnare : Cards
     // Creates a thorny vine trap area that slows down enemies as they move through it. Enemies take DOT as they move through the area.
 
     public BrambleTrap bramblePrefab;
-    private float spawnDistance = 5f;
+    [SerializeField] private float spawnDistance = 5f;
 
     private GameObject player; // TODO : LK - I left this in for now, in case you guys want it
     private GameObject camera;

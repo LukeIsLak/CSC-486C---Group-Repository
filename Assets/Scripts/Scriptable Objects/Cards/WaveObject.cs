@@ -5,10 +5,10 @@ using UnityEngine;
 public class WaveObject : MonoBehaviour
 {
     private Vector3 dir;
-    private float dmg;
-    private float speed = 1f;
+    [SerializeField] private float dmg = 4f;
+    [SerializeField] private float speed = 1f;
 
-    private float ttl = 3f;
+    [SerializeField] private float ttl = 3f;
 
 
     public void Init(Vector3 direct, Cards card)

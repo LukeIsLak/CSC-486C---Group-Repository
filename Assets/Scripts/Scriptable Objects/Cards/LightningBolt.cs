@@ -5,9 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/LightningBolt")]
 public class LightningBolt : Cards
 {
-    private float range = 20f;
-    private float damage = 20f;
+    [SerializeField] private float range = 20f;
+    [SerializeField] private float damage = 20f;
 
+
+    [SerializeField] private LightningBoltObject lightningPrefab;
 
     [SerializeField] private LayerMask enemylayer;
     private GameObject player;
@@ -27,7 +29,7 @@ public class LightningBolt : Cards
     private void shootLightning(GameObject camera)
     {
         //Make raycast from the camera position and shoot it forward based on the range
-        Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+        Ray ray = new Ray(camera.transform.position + camera.transform.forward * 2f, camera.transform.forward);
 
         Vector3 endPoint = ray.origin + ray.direction * range;
 
@@ -48,6 +50,25 @@ public class LightningBolt : Cards
                 enemy = enemy.GetComponentInParent<EnemyInterface>();
                 enemy.Hit(damage);
             }
+        }
+        Debug.Log("Trying Lightning Bolt");
+        LightningBoltObject lightning = Instantiate(lightningPrefab);
+        LineRenderer line = lightning.GetComponent<LineRenderer>();
+        int points = 6;
+        line.positionCount = points;
+        Vector3 start = camera.transform.position + camera.transform.forward * 0.5f;
+        for (int i = 0; i < points; i++)
+        {
+            float t = (float)i / (points - 1);
+            Vector3 pos = Vector3.Lerp(start, endPoint, t);
+
+            pos += new Vector3(
+                Random.Range(-0.1f, 0.1f),
+                Random.Range(-0.1f, 0.1f),
+                Random.Range(-0.1f, 0.1f)
+            );
+
+            line.SetPosition(i, pos);
         }
     }
 

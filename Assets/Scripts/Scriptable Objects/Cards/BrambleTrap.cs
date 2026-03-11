@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BrambleTrap : MonoBehaviour
 {
-    private float slowAmount = 5f;
-    private float damage = 5f;
+    [SerializeField] private float slowAmount = 5f;
+    [SerializeField] private float damage = 5f;
 
-    private float ttl = 5f;
+    [SerializeField] private float ttl = 5f;
 
     void Start(){
         StartCoroutine(timeToLive(ttl));

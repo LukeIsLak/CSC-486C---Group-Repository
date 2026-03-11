@@ -6,7 +6,7 @@ public class BlackHoleObject : MonoBehaviour
 {
 
     private Vector3 direction;
-    private float speed = 2f;
+    [SerializeField] private float speed = 2f;
 
     [SerializeField]private float radius = 5f;
     [SerializeField] private float ttl = 5f;

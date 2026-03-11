@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DaggerObject : MonoBehaviour
 {
-    public float damage = 10f;
+
+    [SerializeField] public float damage = 10f;
 
     private void OnTriggerEnter(Collider other)
     {
