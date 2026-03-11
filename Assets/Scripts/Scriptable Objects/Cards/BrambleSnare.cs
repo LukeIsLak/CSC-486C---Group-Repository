@@ -18,11 +18,13 @@ public class BrambleSnare : Cards
         player = GameObject.FindWithTag("Player");
         camera = GameObject.FindWithTag("MainCamera");
         Debug.Log("Used card");
+        Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+        RaycastHit hit;
 
-        Vector3 startPos = player.transform.position + player.transform.forward * spawnDistance;
-        
-
-        BrambleTrap trap = Instantiate(bramblePrefab, startPos, Quaternion.identity);
+        if (Physics.Raycast(ray, out hit, 20f))
+        {
+            Instantiate(bramblePrefab, hit.point, Quaternion.identity);
+        }
 
         yield break;
 
