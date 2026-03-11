@@ -86,20 +86,21 @@ public class PlayerInventory : ScriptableObject
     }
 
     // returns true if the player has a token and the card is removed from their deck, returns false if the play does not have a token or the card cant be found
-    public bool removeCardFromPlayersDeck(CardInstance card){
-        if (amountRemovalTokens > 0){
-            for (int i = 0; i < playerdeck.Count; i++){
-                if (playerdeck[i] == card){
-                    playerdeck.RemoveAt(i);
-                    return true;
-                }
+    public void removeCardFromPlayersDeck(CardInstance card){
+        for (int i = 0; i < playerdeck.Count; i++){
+            if (playerdeck[i] == card){
+                playerdeck.RemoveAt(i);
             }
-            return false; // card was not found
         }
-        return false; // player does not have enough tokens to do this action
     }
 
     public void AddRemovalToken(){
         amountRemovalTokens++;
+    }
+
+    public void refreshCards(){
+        for (int i = 0; i < playerdeck.Count; i++){
+            playerdeck[i].useable = true;
+        }
     }
 }
