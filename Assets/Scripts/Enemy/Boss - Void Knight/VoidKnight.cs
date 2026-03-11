@@ -55,6 +55,12 @@ public class VoidKnight : EnemyInterface
     public bool canAttack = false;
     public VoidKnightAttacks nextAttack;
 
+
+    public bool inAttackCombo1pt1 = false;
+    public bool inAttackCombo1pt2 = false;
+    public bool inAttackCombo1pt3 = false;
+    public float AttackCombo1wait = 0.75f;
+
     public List<VoidKnightWeightedAttacks> weightedAttacks;
 
     void Awake() {
@@ -200,6 +206,46 @@ public class VoidKnight : EnemyInterface
     }
 
     /******** Combo Attack ************/
+    public void forceStep() {
+        float c = (1 - 2 * moveThreshold);
+        elapsedTime = (Mathf.Asin(c) / moveSpeed) + (2 * Mathf.PI / moveSpeed) + 0.001f;
+        isStepping = true;
+    }
+    public void StartAttackCombo1(int step) {
+        switch (step) {
+            case 1: 
+                inAttackCombo1pt1 = true;
+                break;
+            case 2:
+                inAttackCombo1pt2 = true;
+                break;
+            default:
+                inAttackCombo1pt3 = true;
+                break;
+        }
+        inAttackCombo1pt1 = true;
+        forceStep();
+        UpdatePlayerPath();
+        //XXX make sure I can see the player cause I want no obstacles
+    }
+
+    public void UpdateAttackCombo1(int step) {
+        isStepping = canStep();
+        if (isStepping) UpdateAgroMove();
+        if (!isStepping) {
+            switch (step) {
+                case 1: 
+                    inAttackCombo1pt1 = false;
+                    break;
+                case 2:
+                    inAttackCombo1pt2 = false;
+                    break;
+                default:
+                    inAttackCombo1pt3 = false;
+                    break;
+            }
+        }
+    }
 
 
     /******** Fireball Attack ********/
