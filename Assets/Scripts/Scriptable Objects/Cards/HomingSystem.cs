@@ -61,7 +61,7 @@ public class HomingSystem : MonoBehaviour
             if (distance < closestDistance && distance <= radius){
                 EnemyInterface enem = enemy.GetComponent<EnemyInterface>();
 
-                if (ignoreEnemis != null && ignoreEnemies.Contains(enem))
+                if (ignoreEnemies != null && ignoreEnemies.Contains(enem))
                     continue;
                 closest = enemy.transform;
                 closestDistance = distance;
