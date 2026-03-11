@@ -10,6 +10,8 @@ public class ChainLightningObject : MonoBehaviour
     private int maxChain = 5;
     private float ttl = 5f;
 
+    public HashSet<EnemyInterface> alreadyHit = new HashSet<EnemyInterface>();
+
     [SerializeField] private ChainLightningObject ChainLightningPrefab;
 
 
@@ -23,54 +25,36 @@ public class ChainLightningObject : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
-        HashSet<EnemyInterface> alreadyHit = new HashSet<EnemyInterface>();
         //Create a hashset to store the enemies already hit in the chain
         player = GameObject.FindWithTag("Player");
 
 
         if (enemy != null){
             enemy.Hit(damage);
-            StartChain(alreadyHit, enemy);
+            Destroy(this.gameObject);
+            ContinueChain(alreadyHit, enemy);
         }
         else 
         {
             enemy = other.GetComponentInParent<EnemyInterface>();
             enemy.Hit(damage);
-            if (chainNumber == 0)
-            {
-                StartChain(alreadyHit, enemy);
-            }
-            else 
-            {
-                ContinueChain(alreadyHit, enemy);
-            }
+            Destroy(this.gameObject);
+            ContinueChain(alreadyHit, enemy);
         }
-    }
-
-    private void StartChain(HashSet<EnemyInterface> alreadyHit, EnemyInterface enemy)
-    {
-        //Add the enemy to the chain and start to move towards the next enemy
-        alreadyHit.Add(enemy);
-        ChainLightningObject ChainLightning = Instantiate(ChainLightningPrefab, enemy.transform.position + enemy.transform.forward * 2f, enemy.transform.rotation);
-
-        HomingSystem homing = ChainLightning.GetComponent<HomingSystem>();
-        homing.Initialize();
-
-        chainNumber += 1;
-        
-
     }
 
     private void ContinueChain(HashSet<EnemyInterface> alreadyHit, EnemyInterface enemy)
     {
         //While the chain hasn't reached its cap, 
+        alreadyHit.Add(enemy);
         if (chainNumber < maxChain)
             {
-                ChainLightningObject ChainLightning = Instantiate(ChainLightningPrefab, enemy.transform.position + enemy.transform.forward * 2f, enemy.transform.rotation);
-
-                HomingSystem homing = ChainLightning.GetComponent<HomingSystem>();
+                ChainLightningObject next = Instantiate(ChainLightningPrefab, enemy.transform.position + enemy.transform.forward * 2f, enemy.transform.rotation);
+                next.alreadyHit = alreadyHit;
+                next.chainNumber = chainNumber + 1;
+                HomingSystem homing = next.GetComponent<HomingSystem>();
+                homing.ignoreEnemies = alreadyHit;
                 homing.Initialize();
-                chainNumber += 1;
             }
     }
 
