@@ -13,8 +13,21 @@ MonoBehaviour:
   m_Name: ShopItemDB
   m_EditorClassIdentifier: 
   items:
+  - {fileID: 11400000, guid: 9a1b48e643dc4534aa908d255335fab3, type: 2}
+  - {fileID: 11400000, guid: 3e4a1b2900ce2fa46a9c0782ccbdd222, type: 2}
+  - {fileID: 11400000, guid: 9e2e0904a6fa5124591135c7d9d6e148, type: 2}
+  - {fileID: 11400000, guid: 95b77f181281d2c48920326168c8de2a, type: 2}
+  - {fileID: 11400000, guid: 7ca804d08ce5b854d89894f28d1ed22a, type: 2}
   - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
+  - {fileID: 11400000, guid: cbcaa3033429aec40851a7f371f49fd0, type: 2}
+  - {fileID: 11400000, guid: 1af43996aaea0dc4b84542084dc1e020, type: 2}
   - {fileID: 11400000, guid: e796f2e263e155546a33300e312f2b97, type: 2}
   - {fileID: 11400000, guid: e25871c8daabd6641950dea5a84987f2, type: 2}
   - {fileID: 11400000, guid: 8e462409a7c4b904e9b3c114f87e7c0e, type: 2}
+  - {fileID: 11400000, guid: 03f070041e0edcf41a2c3072690fca27, type: 2}
   - {fileID: 11400000, guid: 41f88476c21f91243a36017fafecf3bd, type: 2}
+  - {fileID: 11400000, guid: 997daeece4119dc4abdf8a50a7ce20e1, type: 2}
+  - {fileID: 11400000, guid: 14d4f81f038731f41932ee804aeca3c3, type: 2}
+  - {fileID: 11400000, guid: 9f7be25137e3e714180f9e440ebd4446, type: 2}
+  - {fileID: 11400000, guid: bc55f9f447079854d92572be1ab3ede5, type: 2}
+  - {fileID: 11400000, guid: ceb8742b317c1b143a48806263a04d06, type: 2}

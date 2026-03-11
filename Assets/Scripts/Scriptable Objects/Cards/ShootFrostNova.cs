@@ -44,12 +44,14 @@ public class ShootFrostNova : MonoBehaviour
         {
             EnemyInterface enem = hit.GetComponent<EnemyInterface>();
             if (enem != null){
-                enem.Hit(dmg);
+                //Freeze and do damage
+                //enem.Hit(dmg);
             }
             else {
                 enem = hit.GetComponentInParent<EnemyInterface>();
                 if (enem != null){
-                    enem.Hit(dmg);
+                    //Freeze and do damage
+                    //enem.Hit(dmg);
                 }
             }
         }

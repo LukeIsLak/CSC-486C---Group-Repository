@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Card Removal Token
   itemDescription: 
-  icon: {fileID: 0}
+  icon: {fileID: 2070105257, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   selectionWeight: 1
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}

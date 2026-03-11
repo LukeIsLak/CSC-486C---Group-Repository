@@ -52,6 +52,8 @@ public class EnemyInterface : MonoBehaviour
     public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null) {
         if (curHealth <= 0) return;
         if (curHealth > 0) TakeDamage(damage);
+    public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
+        TakeDamage(damage);
 
         switch (status) {
             case StatusEffectType.DamageOverTime:
@@ -63,7 +65,8 @@ public class EnemyInterface : MonoBehaviour
                 HandleFreeze(freeze);
                 break;
             case StatusEffectType.Knockback:
-                //XXX to add
+                Knockback knockback = statusEffectData as Knockback;
+                if (knockbackOrigin != null) HandleKnockback(knockback, knockbackOrigin.Value);
                 break;
             default:
                 break;
@@ -114,7 +117,15 @@ public class EnemyInterface : MonoBehaviour
         if (--numFreeze <= 0) hasFreeze = false;
     }
 
-    public void HandleKnockback() {}
+    public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null) {
+            Vector3 direction = (transform.position - knockbackOrigin).normalized;
+            // direction.y = 0f; leave in if we want 
+            rb.AddForce(direction * data.knockbackForce, ForceMode.Impulse);
+            hasKnockback = true;
+        }
+    }
 
     /****************************************************/
     /*              End Of Status Methods               */

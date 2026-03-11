@@ -13,15 +13,20 @@ public class BrambleTrap : MonoBehaviour
         StartCoroutine(timeToLive(ttl));
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
+        if (enemy != null){
+                //enemy.Hit(dmg);
+            }
+            else {
+                enemy = other.GetComponentInParent<EnemyInterface>();
+                if (enemy != null){
+                    //enemy.Hit(dmg);
+                }
+            }
 
         //Implement slow and damage
-    }
-    void OnTrigggerExit()
-    {
-        //Remove slow and damage 
     }
 
     private IEnumerator timeToLive(float dur) {
