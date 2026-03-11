@@ -34,7 +34,7 @@ public class WaveObject : MonoBehaviour
                 //enemy.Hit(dmg);
             }
             else {
-                //enemy = hit.GetComponentInParent<EnemyInterface>();
+                enemy = other.GetComponentInParent<EnemyInterface>();
                 if (enemy != null){
                     //enemy.Hit(dmg);
                 }
