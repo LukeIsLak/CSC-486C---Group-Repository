@@ -498,7 +498,8 @@ MonoBehaviour:
   card: {fileID: 0}
   cardName: {fileID: 3609337567170460608}
   cardImage: {fileID: 7678787111606987049}
-  cardDamage: {fileID: 0}
+  cardDamage: {fileID: 2745017108816303485}
+  cardDescription: {fileID: 2550820185087177910}
   button: {fileID: -9145859616583957764}
 --- !u!114 &-6247513457569756132
 MonoBehaviour:
