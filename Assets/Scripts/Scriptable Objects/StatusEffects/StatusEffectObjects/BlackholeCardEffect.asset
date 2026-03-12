@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a678ad6e5cd0ecf4b83a9474cd70b8dd, type: 3}
-  m_Name: FreezeCardEffect
+  m_Script: {fileID: 11500000, guid: b7bcad5ca814ecb4a84299d9af15308b, type: 3}
+  m_Name: BlackholeCardEffect
   m_EditorClassIdentifier: 
-  name: FreezeNova
-  type: 1
-  freezeDuration: 3
+  name: Blackhole
+  type: 2
+  knockbackForce: -20

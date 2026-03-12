@@ -38,7 +38,7 @@ public class FrostNova : Cards
     public void handleAoE(Cards card)
     {
         //For AoE attacks, create the projectile and fire it forward based on the player position
-        ShootFrostNova proj = Instantiate(aoeprojprefab, player.transform.position + player.transform.forward * 2f, 
+        ShootFrostNova proj = Instantiate(aoeprojprefab, camera.transform.position + camera.transform.forward * 0.5f, 
         Quaternion.identity);
 
         if (proj == null)
