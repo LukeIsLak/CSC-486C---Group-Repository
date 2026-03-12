@@ -44,6 +44,7 @@ public class Rat : EnemyInterface
 
     [Header("Misc. Variables")]
     public RatStates currentState;
+    
 
     /****************************************************/
     /*          Beginning Of Instance Methods           */
@@ -153,7 +154,7 @@ public class Rat : EnemyInterface
                                 + wander * rd.wanderWeight;
         
         Vector3 velocity = Vector3.ClampMagnitude(finalVelocity, moveSpeed);
-        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime;
+        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime * speedModifier;
 
         // if (currentState == RatStates.AgroApproach) {
         //     Debug.Log("NavMeshAgent destination: " + nma.destination);
@@ -434,6 +435,21 @@ public class Rat : EnemyInterface
 
     /****************************************************/
     /*           End Of Couroutines / Timers            */
+    /****************************************************/
+
+
+
+    /****************************************************/
+    /*         Beginning Of Event Listeners             */
+    /****************************************************/
+
+    public void ApplySpeedModifier() 
+    {
+        speedModifier = enemyEffects.getEnemySpeedModifier();
+    }
+
+    /****************************************************/
+    /*             End Of Event Listeners               */
     /****************************************************/
 
 }

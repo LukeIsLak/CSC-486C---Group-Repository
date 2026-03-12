@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 6800915753969404803}
   - component: {fileID: 1102890631558432364}
   - component: {fileID: 8300452717123703922}
+  - component: {fileID: 5747227150658919177}
   m_Layer: 0
   m_Name: Void Knight
   m_TagString: Untagged
@@ -335,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 11400000, guid: 4409d4b437777c74e82dc09b32f14286, type: 2}
-  enemyEffects: {fileID: 0}
+  enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
   rs: {fileID: 0}
   curHealth: 0
   moveSpeed: 0
@@ -353,11 +354,13 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   vksm: {fileID: 0}
   nma: {fileID: 8300452717123703922}
+  currentMoveSpeed: 0
   checkPlayerPath: 0
   moveDistMult: 2
   moveThreshold: 0.5
   isStepping: 0
   canSeePlayer: 0
+  currentMoveDistMult: 0
   currentState: 0
   isInitialized: 1
   isAgro: 0
@@ -365,6 +368,8 @@ MonoBehaviour:
   maxAgroToAttackTime: 4
   isAttacking: 0
   delayCombo1: 0
+  comboMoveSpeed: 10
+  comboMoveMultDist: 10
   combo1PlayerRange: 10
   comboInBetweenTime: 3
   minNumFireball: 5
@@ -384,9 +389,10 @@ MonoBehaviour:
   inAttackCombo1pt1: 0
   inAttackCombo1pt2: 0
   inAttackCombo1pt3: 0
-  AttackCombo1wait: 3
   castSpawn: {fileID: 0}
   castDelay: 0.4
+  speedModifier: 1
+  OnDefeat: {fileID: 0}
 --- !u!54 &1102890631558432364
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -436,3 +442,31 @@ NavMeshAgent:
   m_BaseOffset: 2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5747227150658919177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8351082474959089942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 49689543c418cbe408e966af5245f709, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8351082474959089942}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
