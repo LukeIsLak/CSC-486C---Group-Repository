@@ -9,8 +9,6 @@ public class TestApp : MonoBehaviour
     public LayoutData layoutData;
     public PlayerInventory inventory;
     public RandomContext encRandomContext;
-    public GameObject player;
-    private Health playerhealth;
     public CharacterData characterData;
 
     void Start()

@@ -342,6 +342,7 @@ public class TraversableLayout : MonoBehaviour
         if (enc.isSelected)
         {
             ClickSelected.Raise();
+            respondToInputs = false;
             return;
         }
         if (enc.isAccessible)
