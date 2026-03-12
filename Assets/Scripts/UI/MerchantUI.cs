@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class MerchantUI : MonoBehaviour
@@ -8,8 +9,10 @@ public class MerchantUI : MonoBehaviour
     [SerializeField] private MerchantData merchantData;
     [SerializeField] private MerchantItemUI merchantItemPrefab;
     [SerializeField] private RectTransform contentLocation; //place for instantiate prefabs
-
-
+    [SerializeField] private TextMeshProUGUI goldNum;
+    [SerializeField] private PlayerInventory playerInventory;
+    [SerializeField] private ShopItem token;
+    [SerializeField] private TextMeshProUGUI tokenNum;
     private List<MerchantItemUI> merchantItemUIs = new();
     
     private HashSet<MerchantItemUI> purchasedSlot = new(); // use set for tracking purchased items
@@ -39,6 +42,8 @@ public class MerchantUI : MonoBehaviour
             item.Init(shopItem,TryBuying);
             merchantItemUIs.Add(item);
         }
+        UpdateGoldDisplay();
+        UpdateTokenDisplay();
     }
 
     private void TryBuying(ShopItem item, MerchantItemUI itemUI)
@@ -55,6 +60,7 @@ public class MerchantUI : MonoBehaviour
         {
             purchasedSlot.Add(itemUI);
             itemUI.SetPurchased(true);
+            UpdateGoldDisplay();
         }
         else
         {
@@ -70,4 +76,20 @@ public class MerchantUI : MonoBehaviour
         merchantItemUIs.Clear();
         purchasedSlot.Clear();
     }
+
+    private void UpdateGoldDisplay()
+    {
+        goldNum.text = playerInventory.currency.ToString();
+    }
+    private void UpdateTokenDisplay()
+    {
+       tokenNum.text = playerInventory.amountRemovalTokens.ToString();
+    }
+    public void BuyToken()
+    {
+        bool success = token.TryPurchase();
+        UpdateTokenDisplay();
+        UpdateGoldDisplay();
+    }
+        
 }
