@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4873140133858207481}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OTriple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,6 +41,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4873140133858207481}
     m_Modifications:
+    - target: {fileID: 536864903990149314, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1404822596013364090, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521330678981049990, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680349880693422778, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090886519749263363, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544433926859898011, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2610599054633307048, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.3024664
@@ -81,9 +105,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2678957507882226023, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2992979991592056582, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
       propertyPath: m_Name
       value: Octoroom-3door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992979991592056582, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123014533290967582, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322109902597273536, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3539878600331952863, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5460061320798428861, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873464100148138421, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886496258103811708, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332211704463031369, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609054455372238616, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055052285123210541, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069041175175160548, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484300795310534124, guid: d0542f55d8736394b9e05e1f29acbd63, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -146,6 +222,18 @@ PrefabInstance:
     - target: {fileID: 2296555112977844796, guid: d4cb5dd96104488458339b62e1becb14, type: 3}
       propertyPath: m_Name
       value: Octroom-floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296555112977844796, guid: d4cb5dd96104488458339b62e1becb14, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269514290685634800, guid: d4cb5dd96104488458339b62e1becb14, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059014589548788453, guid: d4cb5dd96104488458339b62e1becb14, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

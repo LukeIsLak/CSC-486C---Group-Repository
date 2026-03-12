@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5473761978391616915}
   - component: {fileID: 7050272462483586888}
   - component: {fileID: -201263358416133198}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -334,6 +334,7 @@ MonoBehaviour:
   dashTime: 0.15
   dashSpeed: 3
   dashCD: 2
+  runawayBullActive: 0
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
 --- !u!114 &5473761978391616915
 MonoBehaviour:
@@ -407,7 +408,7 @@ GameObject:
   - component: {fileID: 5814681223388982785}
   - component: {fileID: 5322622584924748688}
   - component: {fileID: 11630991510601649}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +491,7 @@ GameObject:
   - component: {fileID: 6532484783828699154}
   - component: {fileID: 521604548009380659}
   - component: {fileID: 4540606688409577427}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -623,6 +624,10 @@ PrefabInstance:
     - target: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
       propertyPath: m_Name
       value: RustySword
+      objectReference: {fileID: 0}
+    - target: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
