@@ -282,7 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleWaves:
   - {fileID: 11400000, guid: 31884332833d4bc4c98452e4ec0d916e, type: 2}
-  possibleWavesWeights: 01000000
+  - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
+  possibleWavesWeights: 0100000001000000
   waves: []
   spawnPoints:
   - {fileID: 8103054933748855330}
@@ -291,6 +292,7 @@ MonoBehaviour:
   - {fileID: 458371411292518357}
   minWaves: 1
   maxWaves: 1
+  hasWaves: 1
   totalWaveCount: 0
   currentWaveCount: 0
   remainingEnemies: 0

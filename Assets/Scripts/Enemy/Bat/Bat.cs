@@ -74,7 +74,7 @@ public class Bat : EnemyInterface
     }
 
     public override void KillEnemy() {
-        if (trs != null) trs.RemoveEnemy();
+        if (rs != null) rs.RemoveEnemy();
         if (bsm != null) bsm.entities.Remove(this);
         Destroy(this.gameObject);
     }

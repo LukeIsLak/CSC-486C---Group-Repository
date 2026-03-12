@@ -68,8 +68,9 @@ public class Rat : EnemyInterface
     }
 
     public void initialize_nma() {
+        //XXX this is a hack we need to fix this later!!!
+        transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
         nma.enabled = true;
-
         nma.updatePosition = false;
         nma.updateRotation = false;
 
@@ -77,7 +78,7 @@ public class Rat : EnemyInterface
     }
 
     public override void KillEnemy() {
-        if (trs != null) trs.RemoveEnemy();
+        if (rs != null) rs.RemoveEnemy();
         if (rcm != null) rcm.RemoveRat(this, ratColonyNum);
         if(rsm != null) rsm.RemoveEntity(this);
         Destroy(this.gameObject);
@@ -209,10 +210,14 @@ public class Rat : EnemyInterface
         UpdateMove();
         if (nma != null && IsAgentAtDestination(nma)) FinishWander();
     }
-
     public void UpdateAgroApproach() {
         UpdatePlayerPath();
         UpdateMove();
+
+        // // Sync agent position to Rigidbody position
+        // if (nma != null && nma.isOnNavMesh) {
+        //     nma.nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        // }
     }
 
     /****************************************************/

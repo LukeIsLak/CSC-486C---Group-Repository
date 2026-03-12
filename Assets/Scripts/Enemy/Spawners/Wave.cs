@@ -25,7 +25,7 @@ public class Wave : ScriptableObject
     }
 
 
-    public IEnumerator SpawnWaveDelay(List<Transform> spawnPoints, float delay, TrapRoomSpawner trs) {
+    public IEnumerator SpawnWaveDelay(List<Transform> spawnPoints, float delay, RoomSpawn rs) {
         if (enemyPrefabs == null || enemyCounts == null) yield break;
         int count = enemyCounts.Sum();
         Debug.Log(count);
@@ -66,7 +66,7 @@ public class Wave : ScriptableObject
             int enemyTypeIndex = Random.Range(0, enemyPrefabs.Count);
             GameObject enemyPrefab = enemyPrefabs[index];
             GameObject newEnemy = GameObject.Instantiate(enemyPrefab, spawnPoints[sp].position, Quaternion.identity);
-            newEnemy.GetComponent<EnemyInterface>().trs = trs;
+            newEnemy.GetComponent<EnemyInterface>().rs = rs;
 
             switch (enemyTypes[index]) {
                 case EnemyType.Rat:
