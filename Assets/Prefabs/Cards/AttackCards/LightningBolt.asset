@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de63fe8fa3b4e43e0be68566cae04c99, type: 3}
   m_Name: LightningBolt
   m_EditorClassIdentifier: 
-  name: 
-  descrption: 
+  name: LIGHTNING BOLT
+  descrption: Casts a bolt of lightning directly in front of you
   effectValue: 0
   image: {fileID: 436681993, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   range: 20

@@ -15,6 +15,9 @@ MonoBehaviour:
   name: Frost Nova
   descrption: 
   effectValue: 0
+  name: FROST NOVA
+  descrption: Explodes on contact and freezes enemies. Frozen enemies take 1.5x damage
+  effectValue: 0
   image: {fileID: 1050318224, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 10
   dmgradius: 1

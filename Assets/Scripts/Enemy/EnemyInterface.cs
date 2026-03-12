@@ -43,13 +43,16 @@ public class EnemyInterface : MonoBehaviour
     }
 
     public void TakeDamage(float amount) {
+        if(curHealth <= 0) return;
         curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
         if (curHealth <= 0) KillEnemy();
     }
 
     /*This has the intention of being overwritten in extended classes*/
     public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
+        if (curHealth <= 0) return;
         if (curHealth > 0) TakeDamage(damage);
+
         switch (status) {
             case StatusEffectType.DamageOverTime:
                 DamageOverTime dot = statusEffectData as DamageOverTime;

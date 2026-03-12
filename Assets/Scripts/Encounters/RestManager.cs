@@ -6,7 +6,7 @@ public class RestManager : MonoBehaviour
 {
     public GameEvent EnterLayout;
 
-    private GameObject player;
+    public GameObject player;
     private Health playerhealth;
     public PlayerInventory inventory;
     public int percentageHeal = 10;
@@ -14,7 +14,6 @@ public class RestManager : MonoBehaviour
     void Start()
     {
         // get references
-        player = GameObject.FindWithTag("Player");
         if (player == null) {
             Debug.Log("theres a problem");
         }

@@ -10,7 +10,7 @@ public class ControlsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainOptions.SetActive(true);
+        // MainOptions.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,8 +20,8 @@ public class ControlsMenu : MonoBehaviour
     }
 
     public void OnExitButton(){
-        Controls.SetActive(false);
         MainOptions.SetActive(true);
+        Controls.SetActive(false);
     }
 
     public void OnControlsButton(){

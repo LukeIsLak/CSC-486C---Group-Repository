@@ -8,7 +8,8 @@ public enum SceneType
     NodeTraversal,
     Combat,
     Merchant,
-    DoNothing
+    DoNothing,
+    ForceMouseOn
 
 }
 public class SceneContext : MonoBehaviour
