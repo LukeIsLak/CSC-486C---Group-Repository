@@ -208,6 +208,7 @@ public class VoidKnightStateMachine : StateMachine<VoidKnight, VoidKnightStates>
     }
 
     public void EnterAttackCombo1(VoidKnight v) {
+        v.ChangeMoveSpeed();
         v.anim.SetBool("isSwing", true);
     }
 
@@ -264,6 +265,7 @@ public class VoidKnightStateMachine : StateMachine<VoidKnight, VoidKnightStates>
     /******************************/
 
     public void ExitAttackCombo1(VoidKnight v) {
+        v.ChangeMoveSpeed();
         v.anim.SetBool("isSwing", false);
     }
 

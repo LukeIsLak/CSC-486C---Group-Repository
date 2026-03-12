@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0e9fb790603bd4d9db6a56304c853e, type: 3}
   m_Name: Void Knight Data
   m_EditorClassIdentifier: 
-  baseHealth: 10
+  baseHealth: 1
   baseMoveSpeed: 5
-  damage: 0
+  damage: 1
   freezeMult: 1.5
   sightDistance: 40
   sightAngle: 60

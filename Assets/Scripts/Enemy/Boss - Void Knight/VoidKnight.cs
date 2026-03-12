@@ -16,7 +16,8 @@ public class VoidKnight : EnemyInterface
     public VoidKnightStateMachine vksm;
     public NavMeshAgent nma;
 
-    //
+    public float currentMoveSpeed;
+
     [Header("MovementThreshold")]
     public bool checkPlayerPath = false;
     public float moveDistMult   = 2.0f;
@@ -24,6 +25,8 @@ public class VoidKnight : EnemyInterface
     public bool isStepping      = false;
     private float elapsedTime   = 0f;
     public bool canSeePlayer    = false;
+
+    public float currentMoveDistMult;
 
     public VoidKnightStates currentState;
     public bool isInitialized = false;
@@ -33,6 +36,8 @@ public class VoidKnight : EnemyInterface
 
     public bool isAttacking = false;
     public bool delayCombo1 = false;
+    public float comboMoveSpeed = 10f;
+    public float comboMoveMultDist = 10f;
 
     public float combo1PlayerRange = 10f;
     public float comboInBetweenTime = 0.3f;
@@ -65,7 +70,6 @@ public class VoidKnight : EnemyInterface
     public bool inAttackCombo1pt1 = false;
     public bool inAttackCombo1pt2 = false;
     public bool inAttackCombo1pt3 = false;
-    public float AttackCombo1wait = 0.75f;
 
     public Transform castSpawn;
     public float castDelay = 0.4f;
@@ -75,12 +79,25 @@ public class VoidKnight : EnemyInterface
     void Awake() {
         weightedAttacks = new List<VoidKnightWeightedAttacks> {
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackCombo1, 2f, () => 
-                false),// Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
-            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackFireBall, 1f, () => false),
+                Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
+            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackFireBall, 1f, () => true),
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackDivineJudgement, 1f, () => true)
         };
 
         initialize();
+    }
+
+    public void ChangeMoveSpeed() {
+        switch (currentState) {
+            case VoidKnightStates.AttackCombo1:
+                currentMoveSpeed = comboMoveSpeed;
+                currentMoveDistMult = comboMoveMultDist;
+                break;
+            default:
+                currentMoveSpeed = moveSpeed;
+                currentMoveDistMult = moveDistMult;
+                break;
+        }
     }
 
     public VoidKnightAttacks GetNextAttack() {
@@ -104,6 +121,8 @@ public class VoidKnight : EnemyInterface
     public override void initialize() {
         curHealth = vkd.baseHealth * playerData.maxHealth;
         moveSpeed = vkd.baseMoveSpeed * playerData.baseSpeed;
+        currentMoveSpeed = moveSpeed;
+        currentMoveDistMult = moveDistMult;
 
         playerTransform = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
@@ -126,9 +145,9 @@ public class VoidKnight : EnemyInterface
 
     private bool canStep() {
         elapsedTime += Time.deltaTime;
-        if (elapsedTime >= 2 * Mathf.PI / moveSpeed) elapsedTime = 0;
+        if (elapsedTime >= 2 * Mathf.PI / currentMoveSpeed) elapsedTime = 0;
         // sin(2*pi+s*p) > (1 - 2*t)
-        float sin = Mathf.Sin(2f * Mathf.PI + moveSpeed * elapsedTime);
+        float sin = Mathf.Sin(2f * Mathf.PI + currentMoveSpeed * elapsedTime);
         float thresh = 1 - 2 * moveThreshold;
         return sin >= thresh;
 
@@ -138,8 +157,8 @@ public class VoidKnight : EnemyInterface
         Vector3 navDir = nma.desiredVelocity;
         navDir.y = 0f;
         
-        Vector3 velocity = Vector3.ClampMagnitude(navDir, moveSpeed);
-        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * moveDistMult * Time.deltaTime;
+        Vector3 velocity = Vector3.ClampMagnitude(navDir, currentMoveSpeed);
+        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * currentMoveDistMult * Time.deltaTime;
         transform.position += planarMove;
 
         Vector3 agentNextPos = nma.nextPosition;
@@ -230,7 +249,7 @@ public class VoidKnight : EnemyInterface
     /******** Combo Attack ************/
     public void forceStep() {
         float c = (1 - 2 * moveThreshold);
-        elapsedTime = (Mathf.Asin(c) / moveSpeed) + (2 * Mathf.PI / moveSpeed) + 0.001f;
+        elapsedTime = (Mathf.Asin(c) / currentMoveSpeed) + (2 * Mathf.PI / currentMoveSpeed) + 0.001f;
         isStepping = true;
     }
     public void StartAttackCombo1(int step) {
@@ -247,6 +266,7 @@ public class VoidKnight : EnemyInterface
                 break;
         }
         forceStep();
+        checkPlayerPath = true;
         UpdatePlayerPath();
         //XXX make sure I can see the player cause I want no obstacles
     }
@@ -304,21 +324,23 @@ public class VoidKnight : EnemyInterface
     /******** Divine Judgement Attack ********/
 
     public void CastDivineJudgement() {
-        isAttacking = true;
         int count = UnityEngine.Random.Range(minNumDivineJudgement, maxNumDivineJudgement);
-        StartCoroutine(DivineJudgementAttack(count));
+        if (!isAttacking) StartCoroutine(DivineJudgementAttack(count));
     }
 
     private IEnumerator DivineJudgementAttack(int count) {
-        yield return new WaitForSeconds(castDelay);
-        for (int i = 0; i < count; i++) {
-            GameObject fb = Instantiate(divineJudgement, playerTransform.position, Quaternion.identity);
+        if (!isAttacking) {
+            isAttacking = true;
+            yield return new WaitForSeconds(castDelay);
+            for (int i = 0; i < count; i++) {
+                GameObject fb = Instantiate(divineJudgement, playerTransform.position, Quaternion.identity);
 
-            float cooldown = UnityEngine.Random.Range(minDurDivineJudgementCast, maxDurDivineJudgementCast);
-            yield return new WaitForSeconds(cooldown);
+                float cooldown = UnityEngine.Random.Range(minDurDivineJudgementCast, maxDurDivineJudgementCast);
+                yield return new WaitForSeconds(cooldown);
+            }
+
+            isAttacking = false;
         }
-
-        isAttacking = false;
     }
 
     // XXX since the divine judgement leaves the player vulnerable maybe is the player
