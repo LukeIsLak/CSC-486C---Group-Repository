@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2d4117b6c7e1e4e8aa369e11f3c12d, type: 3}
   m_Name: Haste
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
+  name: Haste
+=======
   name: HASTE
   descrption: 'Increases your movement speed for a set duration '
-  effectValue: 0
+  effectValue: 10
+>>>>>>> Stashed changes
   image: {fileID: -553130707, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   buffTime: 10

@@ -165,10 +165,10 @@ public class DeckSystems : MonoBehaviour
             if (passedDeck[i].useable) {
                 if (hand.Count < MAXHANDSIZE) {
                     hand.Add(passedDeck[i]);
-                    Debug.Log("hand" + passedDeck[i].cardData.name);
+                    //Debug.Log("hand" + passedDeck[i].cardData.name);
                 } else {
                     addCardToDeck(passedDeck[i]);
-                    Debug.Log("deck" + passedDeck[i].cardData.name);
+                    //Debug.Log("deck" + passedDeck[i].cardData.name);
                 }
             }
         }
@@ -225,7 +225,7 @@ public class DeckSystems : MonoBehaviour
         NotifyHandContentsChanged();
 
         if (cardname != "Recall" && cardname != "Greed"){ // as recall has its own process to fill its spot
-            Debug.Log("named");
+            //Debug.Log("named");
             cardsToDraw++;
             if (!drawFlag){
                 drawFlag = true;
@@ -399,7 +399,7 @@ public class DeckSystems : MonoBehaviour
         Debug.Log(amount);
         for (int i = 0; i < amount; i++){
             drawCard();
-            Debug.Log("doing a draw");
+            //Debug.Log("doing a draw");
         }
         NotifyHandContentsChanged();
 
