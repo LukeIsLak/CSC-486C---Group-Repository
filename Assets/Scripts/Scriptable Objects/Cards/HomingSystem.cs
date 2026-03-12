@@ -49,6 +49,7 @@ public class HomingSystem : MonoBehaviour
     Transform findNearestEnemy()
     //Find the nearest enemy to the object
     {
+        Debug.Log("in find nearest enemy");
         GameObject[] listOfEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         Transform closest = null;
         float closestDistance = Mathf.Infinity;

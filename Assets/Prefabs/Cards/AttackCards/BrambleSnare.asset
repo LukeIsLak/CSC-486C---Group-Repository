@@ -17,5 +17,5 @@ MonoBehaviour:
     it
   effectValue: 5
   image: {fileID: -1074723813, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
-  bramblePrefab: {fileID: 0}
+  bramblePrefab: {fileID: 6933832573868888725, guid: 1c9c48a28524a4d50af6a9f660a393f8, type: 3}
   spawnDistance: 5

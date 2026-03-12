@@ -12,6 +12,7 @@ public class ChainLightning : Cards
 
     public override IEnumerator Play(Cards card)
     {
+        //Change to a hitscan lighting bolt (same as lightning bolt code)
         player = GameObject.FindWithTag("Player");
 
         ChainLightningObject ChainLightning = Instantiate(ChainLightningPrefab, player.transform.position + player.transform.forward * 2f, player.transform.rotation);
