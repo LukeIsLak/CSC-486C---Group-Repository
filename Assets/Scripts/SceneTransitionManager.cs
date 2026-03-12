@@ -73,8 +73,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneSwapToMainMenu()
     {
-        DoLoadWithFade(menuScene, true, false);
-        ForceMouseOn();
+        SceneManager.LoadScene(menuScene);
     }
 
     
