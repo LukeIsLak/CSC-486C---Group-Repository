@@ -11,4 +11,14 @@ public abstract class Acquirable : ScriptableObject
     public float selectionWeight = 1;
 
     public abstract void Acquire();
+
+    public virtual string GetName()
+    {
+        return itemName;
+    }
+
+    public virtual string GetDescription()
+    {
+        return itemDescription;
+    }
 }
