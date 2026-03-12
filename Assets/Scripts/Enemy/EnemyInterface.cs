@@ -49,7 +49,11 @@ public class EnemyInterface : MonoBehaviour
 
     /*This has the intention of being overwritten in extended classes*/
     public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
-        TakeDamage(damage);
+        print(damage);
+        print(curHealth);
+        if (curHealth > 0) TakeDamage(damage);
+
+        Debug.Log(status);
 
         switch (status) {
             case StatusEffectType.DamageOverTime:
@@ -101,6 +105,7 @@ public class EnemyInterface : MonoBehaviour
     }
 
     public void HandleFreeze(Freeze data) {
+        print("Test");
         StartCoroutine(StartFreeze(data));
     }
 
@@ -108,9 +113,22 @@ public class EnemyInterface : MonoBehaviour
         hasFreeze = true;
         numFreeze += 1;
 
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+        List<Color> originalColors = new List<Color>();
+        foreach (SpriteRenderer sr in sprites) {
+            originalColors.Add(sr.color);
+            sr.color = Color.blue;
+        }
+
         yield return new WaitForSeconds(data.freezeDuration);
 
-        if (--numFreeze <= 0) hasFreeze = false;
+        if (--numFreeze <= 0) {
+            for (int i = 0; i < sprites.Length; i++) {
+                if (sprites[i] != null)
+                    sprites[i].color = originalColors[i];
+            }
+            hasFreeze = false;
+        }
     }
 
     public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
