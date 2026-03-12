@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dffb24b8aa0b34af29363e3189d1674e, type: 3}
-  m_Name: TestSpark
+  m_Name: FrostNova
   m_EditorClassIdentifier: 
   name: FROST NOVA
   descrption: Explodes on contact and freezes enemies. Frozen enemies take 1.5x damage

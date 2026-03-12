@@ -25,7 +25,7 @@ public class SlowTextReveal : MonoBehaviour
 
         foreach (char c in message)
         {
-            if (c == '\n') yield return new WaitForSecondsRealtime(1.5f);
+            if (c == '\n') yield return new WaitForSecondsRealtime(1f);
             curText += c;
             text.SetText(curText);
             yield return new WaitForSecondsRealtime(0.05f);

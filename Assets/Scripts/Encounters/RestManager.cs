@@ -10,6 +10,7 @@ public class RestManager : MonoBehaviour
     public int percentageHeal = 10;
     public CharacterData playerData;
     
+    private bool hasExited = false;
     void Start()
     {
         float healamount = playerData.maxHealth * (1f / (float)percentageHeal);
@@ -22,6 +23,8 @@ public class RestManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            if (hasExited) return;
+            hasExited = true;
             EnterLayout.Raise();
         }
     }
