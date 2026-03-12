@@ -49,12 +49,7 @@ public class EnemyInterface : MonoBehaviour
 
     /*This has the intention of being overwritten in extended classes*/
     public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
-        print(damage);
-        print(curHealth);
         if (curHealth > 0) TakeDamage(damage);
-
-        Debug.Log(status);
-
         switch (status) {
             case StatusEffectType.DamageOverTime:
                 DamageOverTime dot = statusEffectData as DamageOverTime;
@@ -133,11 +128,13 @@ public class EnemyInterface : MonoBehaviour
 
     public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
         Rigidbody rb = GetComponent<Rigidbody>();
+        print("get force");
+        
         if (rb != null) {
             Vector3 direction = (transform.position - knockbackOrigin).normalized;
             // direction.y = 0f; leave in if we want 
-            rb.AddForce(direction * data.knockbackForce, ForceMode.Impulse);
-            hasKnockback = true;
+            rb.AddForce(direction * data.knockbackForce, ForceMode.Force);
+            // hasKnockback = true;
         }
     }
 

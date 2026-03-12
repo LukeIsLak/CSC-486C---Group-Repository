@@ -152,11 +152,16 @@ public class Rat : EnemyInterface
                                 + wander * rd.wanderWeight;
         
         Vector3 velocity = Vector3.ClampMagnitude(finalVelocity, moveSpeed);
-        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime;
-        transform.position += planarMove;
+        Vector3 planarMove = new Vector3(velocity.x, velocity.y, velocity.z) * Time.deltaTime;
+        // Use Rigidbody for movement if available
+        if (rb != null && !rb.isKinematic) {
+            rb.MovePosition(rb.position + planarMove);
+        } else {
+            transform.position += planarMove;
+        }
 
         Vector3 agentNextPos = nma.nextPosition;
-        nma.nextPosition = new Vector3(transform.position.x, agentNextPos.y, transform.position.z);
+        nma.nextPosition = new Vector3(transform.position.x, nma.nextPosition.y, transform.position.z);
 
         if (velocity.sqrMagnitude > 0f) {
             Quaternion rot = Quaternion.LookRotation(new Vector3(velocity.x, 0f, velocity.z));
