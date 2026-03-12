@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0e9fb790603bd4d9db6a56304c853e, type: 3}
+  m_Name: Void Knight Data
+  m_EditorClassIdentifier: 
+  baseHealth: 1
+  baseMoveSpeed: 5
+  damage: 1
+  freezeMult: 1.5
+  sightDistance: 40
+  sightAngle: 60
+  viewMask: 0
+  destStopDist: 1
+  checkPlayerUpdate: 0.1
+  detectionRadius: 30
+  wanderRadius: 4

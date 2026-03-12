@@ -283,8 +283,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1673474964}
+  anim: {fileID: 0}
+  sprite: {fileID: 0}
   rotatorXawOffsetDeg: 0
   rotatorLerpSpeed: 10
+  checkSide: 0
+  isFront: 0
+  isSide: 0
+  isBack: 0
+  isLeft: 0
+  sideFaceLeft: 0
 --- !u!111 &71044097
 Animation:
   m_ObjectHideFlags: 0
@@ -826,8 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd290050fa23ab3479e9d2e429804fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bats:
-  - {fileID: 724581063}
+  entities: []
 --- !u!4 &528047906
 Transform:
   m_ObjectHideFlags: 0
@@ -1170,76 +1177,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
   enemyData: {fileID: 0}
+  enemyEffects: {fileID: 0}
+  trs: {fileID: 0}
+  curHealth: 0
+  moveSpeed: 8.75
+  speedModifier: 1
+  hasDamageOverTime: 0
+  hasFreeze: 0
+  hasKnockback: 0
+  numDamageOverTime: 0
+  numFreeze: 0
+  currentDoTNames: []
+  currentDoTTicks: 
   anim: {fileID: 71044095}
   rb: {fileID: 724581062}
-  radialSteps: 2
-  angularSteps: 20
-  coneAngle: 10
-  maxDistance: 10
-  maxColliderAngle: 37.2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  bd: {fileID: 0}
+  playerTransform: {fileID: 1673474964}
+  bsm: {fileID: 0}
   debug: 1
   debugPoint: 1
-  pearchYOffset: -0.25
-  normalWeight: 1
-  heightWeight: 1
-  upAngleWeight: 1
-  numPathPoint: 15
-  moveSpeed: 8.75
-  pointTolerance: 0.05
-  currentPathIndex: 0
   isMoving: 0
-  playerTransform: {fileID: 1673474964}
   isFluttering: 1
-  flutterRadius: 3
-  flutterAngularSpeed: 90
-  flutterRadialJitter: 0.5
-  verticalBobAmplitude: 0.4
-  verticalBobSpeed: 2
-  horizontalBobAmplitude: 0
-  horizontalBobSpeed: 2
-  flutterMoveSpeed: 8.75
-  flutterTurnSpeed: 5
-  flutterBaseHeight: 2
-  flutterAngleDeg: 0
-  flutterJitterSeed: 0
-  direction: 1
-  lateralSmoothing: 8
-  testPeck: 0
   isPecking: 0
   isPeckRebounding: 0
   peckComplete: 0
-  peckSpeed: 8.75
-  peckReboundSpeed: 10
-  reboundHeight: -2
-  reboundIncompleteHeight: 1
-  minRebountHeight: 1
-  reboundDistance: 5
-  reboundIncompleteDistance: 1
   swoopComplete: 0
-  swoopSpeed: 8.75
-  steerSteps: 5
-  steerAngularSteps: 10
-  steerViewAngle: 60
-  maxSteerDistance: 5
-  steerDistanceWeight: 2
-  steerDirectionWeight: 1
-  steerLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  playerSearchDistance: 5
-  isPerched: 0
-  attackAmount: 0
-  minAttackAmount: 1
-  maxAttackAmount: 3
-  canAttack: 0
   shouldPerch: 0
   canLeavePerch: 0
-  perchDuration: 2
+  canAttack: 0
+  isPerched: 0
   isAttacking: 0
-  attackCooldown: 2
+  currentPathIndex: 0
+  targetPath: []
+  flutterAngleDeg: 0
+  flutterJitterSeed: 0
+  direction: 1
+  attackAmount: 0
+  prevLateralOffset: {x: 0, y: 0, z: 0}
   currentState: 0
 --- !u!114 &724581064
 MonoBehaviour:
@@ -1254,6 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+  shield: 0
 --- !u!4 &724581065
 Transform:
   m_ObjectHideFlags: 0
