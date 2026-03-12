@@ -111,6 +111,6 @@ public class MapEncounter : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isHovered) traversableLayout?.ReceiveClick(this);
+        if (Input.GetMouseButtonDown(0) && isHovered) traversableLayout.ReceiveClick(this);
     }
 }

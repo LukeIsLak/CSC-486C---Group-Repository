@@ -7,6 +7,7 @@ public class ShootFireball : MonoBehaviour
     [SerializeField] private float projspeed = 10f;
     [SerializeField] private float dmgradius = 3f;
     [SerializeField] private float ttl = 5f;
+    [SerializeField] private DamageOverTime effect;
 
 
     private float dmg;
@@ -36,7 +37,7 @@ public class ShootFireball : MonoBehaviour
 
     void Impact(){
         //Using projectile information, deal damage to all objects in the area
-
+        List <EnemyInterface> seenEnemies = new List<EnemyInterface>();
         Collider[] impactArea = Physics.OverlapSphere(
             transform.position, dmgradius, enemylayer
         );
@@ -45,12 +46,16 @@ public class ShootFireball : MonoBehaviour
         {
             EnemyInterface enem = hit.GetComponent<EnemyInterface>();
             if (enem != null){
-                enem.Hit(dmg);
+                if (!seenEnemies.Contains(enem)) {
+                    enem.Hit(dmg, effect.type, effect);
+                    seenEnemies.Add(enem);
+                }
             }
             else {
                 enem = hit.GetComponentInParent<EnemyInterface>();
-                if (enem != null){
-                    enem.Hit(dmg);
+                if (!seenEnemies.Contains(enem)) {
+                    enem.Hit(dmg, effect.type, effect);
+                    seenEnemies.Add(enem);
                 }
             }
         }

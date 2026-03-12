@@ -17,10 +17,10 @@ public class OptionsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HideAll();
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         //If escape pressed down ever, Activate the Options menu
@@ -32,13 +32,13 @@ public class OptionsMenu : MonoBehaviour
         }
         
     }
+    */
 
-    private void EnableOptions(){
+    public void EnableOptions(){
         // Turn on the options and pause time
         Options.SetActive(true);
-        HideAll();
         MainOptions.SetActive(true);
-        Time.timeScale = 0f;
+        // Time.timeScale = 0f;
 
     }
 
@@ -46,21 +46,19 @@ public class OptionsMenu : MonoBehaviour
         //Hide the menus
         MainOptions.SetActive(false);
         ControlsMenu.SetActive(false);
+        Options.SetActive(false);
     }
 
 
     private void DisableOptions(){
         //Disable the menus and resume gameplay
-        MainOptions.SetActive(false);
-        Time.timeScale = 1f;
+        HideAll();
+        // Time.timeScale = 1f;
         string sceneName = SceneManager.GetActiveScene().name;
 
-        if (sceneName == "TitleScreen"){
-            //If it's the first scene then turn on the titlescreen
-            TitleScreen.SetActive(true);
-            Options.SetActive(false);
+        if (TitleScreen != null)
+        TitleScreen.SetActive(true);
 
-        }
     }
 
     public void OnExitButton(){
@@ -70,7 +68,8 @@ public class OptionsMenu : MonoBehaviour
     }
 
     public void OnOptionsButton(){
-        // On pressing options, switch ui to show the options menu and not the 
+        // On pressing options, switch ui to show the options menu and not the
+        if (TitleScreen != null)
         TitleScreen.SetActive(false);
         EnableOptions();
     }

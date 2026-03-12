@@ -76,7 +76,11 @@ public class GameManager : MonoBehaviour
             case SceneType.DoNothing:
                 HideUI();
                 break;
-
+            case SceneType.ForceMouseOn:
+                HideUI();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                break;
         }
     }
     private void HideUI()

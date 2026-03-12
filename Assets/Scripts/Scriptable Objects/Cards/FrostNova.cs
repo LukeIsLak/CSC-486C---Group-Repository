@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Cards/Spark")]
-public class Spark : Cards
+[CreateAssetMenu(menuName = "Cards/FrostNova")]
+public class FrostNova : Cards
 {
     [SerializeField] private float projspeed = 10f;
     [SerializeField] private float dmgradius = 1f;
 
-    [SerializeField] private ShootSpark aoeprojprefab;
+    [SerializeField] private ShootFrostNova aoeprojprefab;
     private GameObject player; // TODO : LK - I left this in for now, in case you guys want it
     private GameObject camera;
 
@@ -21,16 +21,13 @@ public class Spark : Cards
     public override IEnumerator Play(Cards card){
         player = GameObject.FindWithTag("Player");
         camera = GameObject.FindWithTag("MainCamera");
-        if (card is Spark sparkCard)
-        {
-            useSparkCard(sparkCard);
-            Debug.Log("Used card");
-        }
+        useSparkCard(card);
+        Debug.Log("Used card");
         yield break;
 
     }
 
-    public void useSparkCard(Spark card)
+    public void useSparkCard(Cards card)
     {
         //Switch case based on attacktype, will add more cases as more cards get developed
         handleAoE(card);
@@ -38,10 +35,10 @@ public class Spark : Cards
         
     }
 
-    public void handleAoE(Spark card)
+    public void handleAoE(Cards card)
     {
         //For AoE attacks, create the projectile and fire it forward based on the player position
-        ShootSpark proj = Instantiate(aoeprojprefab, player.transform.position + player.transform.forward * 2f, 
+        ShootFrostNova proj = Instantiate(aoeprojprefab, camera.transform.position + camera.transform.forward * 0.5f, 
         Quaternion.identity);
 
         if (proj == null)

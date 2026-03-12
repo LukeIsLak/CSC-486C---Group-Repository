@@ -43,13 +43,15 @@ public class EnemyInterface : MonoBehaviour
     }
 
     public void TakeDamage(float amount) {
+        if(curHealth <= 0) return;
         curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
         if (curHealth <= 0) KillEnemy();
     }
 
     /*This has the intention of being overwritten in extended classes*/
-    public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null) {
-        TakeDamage(damage);
+    public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
+        if (curHealth <= 0) return;
+        if (curHealth > 0) TakeDamage(damage);
 
         switch (status) {
             case StatusEffectType.DamageOverTime:
@@ -61,7 +63,8 @@ public class EnemyInterface : MonoBehaviour
                 HandleFreeze(freeze);
                 break;
             case StatusEffectType.Knockback:
-                //XXX to add
+                Knockback knockback = statusEffectData as Knockback;
+                if (knockbackOrigin != null) HandleKnockback(knockback, knockbackOrigin.Value);
                 break;
             default:
                 break;
@@ -107,12 +110,34 @@ public class EnemyInterface : MonoBehaviour
         hasFreeze = true;
         numFreeze += 1;
 
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+        List<Color> originalColors = new List<Color>();
+        foreach (SpriteRenderer sr in sprites) {
+            originalColors.Add(sr.color);
+            sr.color = Color.blue;
+        }
+
         yield return new WaitForSeconds(data.freezeDuration);
 
-        if (--numFreeze <= 0) hasFreeze = false;
+        if (--numFreeze <= 0) {
+            for (int i = 0; i < sprites.Length; i++) {
+                if (sprites[i] != null)
+                    sprites[i].color = originalColors[i];
+            }
+            hasFreeze = false;
+        }
     }
 
-    public void HandleKnockback() {}
+    public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (knockbackOrigin == null) return;
+        if (rb != null) {
+            Vector3 direction = (transform.position - knockbackOrigin).normalized;
+            // direction.y = 0f; leave in if we want 
+            rb.AddForce(direction * data.knockbackForce, ForceMode.Force);
+            // hasKnockback = true;
+        }
+    }
 
     /****************************************************/
     /*              End Of Status Methods               */

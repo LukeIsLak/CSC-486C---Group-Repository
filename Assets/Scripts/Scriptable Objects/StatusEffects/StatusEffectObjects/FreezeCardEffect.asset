@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a678ad6e5cd0ecf4b83a9474cd70b8dd, type: 3}
   m_Name: FreezeCardEffect
   m_EditorClassIdentifier: 
-  name: Freeze
+  name: FreezeNova
   type: 1
-  freezeDuration: 1.5
+  freezeDuration: 3
