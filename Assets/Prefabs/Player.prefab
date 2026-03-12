@@ -350,6 +350,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExitToLayout: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
   healthBar: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
+  maxHealth: 0
+  currentHealth: 0
   shield: 0
 --- !u!114 &7050272462483586888
 MonoBehaviour:
@@ -397,6 +400,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 11400000, guid: 80d20da5a49397e4081fca9d18df7a48, type: 2}
+--- !u!114 &1235413148540341114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843415185380909026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5473761978391616915}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: UpdateCurrentHealthSO
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7545902890681713120
 GameObject:
   m_ObjectHideFlags: 0

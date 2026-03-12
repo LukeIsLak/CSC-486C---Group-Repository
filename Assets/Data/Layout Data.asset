@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203e4ba975b70b348ba725244f6b4f59, type: 3}
   m_Name: Layout Data
   m_EditorClassIdentifier: 
-  depth: 10
+  depth: 12
   maxWidth: 5
-  randomSeed: -1497536498
+  randomSeed: 1024544531
   complexity: 1
   useSeed: 1
-  minWidthFraction: 1
+  minWidthFraction: 0.8
   restEncounter: {fileID: 11400000, guid: 0179983dc6e1aed4e99f665cb873ca11, type: 2}
-  distancesBetween: 020000000200000002000000
-  currentEncounter: {fileID: 11400000, guid: 9ea248889b36f144c9b059b555a84738, type: 2}
-  completedIndices: 0000000001000000
+  distancesBetween: 020000000300000003000000
+  currentEncounter: {fileID: 11400000, guid: 0179983dc6e1aed4e99f665cb873ca11, type: 2}
+  completedIndices: 00000000
   FogUpdated: {fileID: 11400000, guid: 53b5e16dded829045b198432f3c140d9, type: 2}
   layersRevealed: 3
   lookAhead: 2

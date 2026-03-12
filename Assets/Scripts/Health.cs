@@ -13,8 +13,8 @@ public class Health : MonoBehaviour
     [Header("Data")]
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private CharacterData playerData;
-    public float maxHealth { get; private set; }
-    public float currentHealth {  get; private set; }
+    public float maxHealth;
+    public float currentHealth;
 
     public int shield = 0;
 
@@ -69,5 +69,11 @@ public class Health : MonoBehaviour
     public void UpdateCurrentHealthSO()
     {
         playerData.currentHealth = this.currentHealth;   
+    }
+
+    public void UpdateCurrentHealth(float amount)
+    {
+        this.currentHealth = amount;
+        NotifyHealthChanged();
     }
 }
