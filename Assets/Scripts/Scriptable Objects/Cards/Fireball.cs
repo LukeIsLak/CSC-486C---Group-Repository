@@ -42,13 +42,13 @@ public class Fireball : Cards
     public void handleAoE(Fireball card)
     {
         //For AoE attacks, create the projectile and fire it forward based on the player position
-        ShootFireball proj = Instantiate(aoeprojprefab, player.transform.position + player.transform.forward * 2f, 
+        ShootFireball proj = Instantiate(aoeprojprefab, camera.transform.position + player.transform.forward * 2f, 
         Quaternion.identity);
 
         if (proj == null)
-{
-    Debug.LogError("Projectile prefab not assigned!");
-}
+        {
+            Debug.LogError("Projectile prefab not assigned!");
+        }
         
         proj.Init(camera.transform.forward, card);
     }
