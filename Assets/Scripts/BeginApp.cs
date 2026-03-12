@@ -25,7 +25,11 @@ public class TestApp : MonoBehaviour
         // PLAYER INITIALIZATION
         inventory.Initialize();
         // MAKE SURE PLAYER HAS FULL HEALTH
+<<<<<<< Updated upstream
         player = GameObject.FindWithTag("Player");
+=======
+        Debug.Log("I happen");
+>>>>>>> Stashed changes
         if (player == null) {
             Debug.Log("theres a problem");
         } else {

@@ -52,7 +52,7 @@ public class Health : MonoBehaviour
     public void Heal(float amount)
     {
         if (amount <= 0) return;
-
+        Debug.Log(amount);
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         NotifyHealthChanged();
     }

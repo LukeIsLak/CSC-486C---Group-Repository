@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d4be2e78a7b48cd9b05ebedd75309b, type: 3}
   m_Name: TestFireball
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   name: Fireball
+=======
+  name: FIREBALL
+  descrption: Deals damage on contact. Explodes against surfaces
+  effectValue: 20
+>>>>>>> Stashed changes
   image: {fileID: -2073127299, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 10
   dmgradius: 3
