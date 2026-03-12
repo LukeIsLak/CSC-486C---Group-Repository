@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fc45e546ab6934c84388dd51a16ae1, type: 3}
   m_Name: Mana Shield
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  name: Mana Shield
-=======
   name: MANA SHIELD
   descrption: Negate three hits from enemies
   effectValue: 3
->>>>>>> Stashed changes
   image: {fileID: -348492228, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   shieldHits: 3
