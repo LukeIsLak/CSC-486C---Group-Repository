@@ -165,10 +165,10 @@ public class DeckSystems : MonoBehaviour
             if (passedDeck[i].useable) {
                 if (hand.Count < MAXHANDSIZE) {
                     hand.Add(passedDeck[i]);
-                    Debug.Log("hand" + passedDeck[i].cardData.name);
+                    //Debug.Log("hand" + passedDeck[i].cardData.name);
                 } else {
                     addCardToDeck(passedDeck[i]);
-                    Debug.Log("deck" + passedDeck[i].cardData.name);
+                    //Debug.Log("deck" + passedDeck[i].cardData.name);
                 }
             }
         }
