@@ -538,6 +538,10 @@ PrefabInstance:
       value: FogOfWar
       objectReference: {fileID: 0}
     - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}

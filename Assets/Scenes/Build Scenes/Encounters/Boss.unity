@@ -1263,6 +1263,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3814586654985131698, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814586654985131698, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.03
+      objectReference: {fileID: 0}
     - target: {fileID: 4515992479925628554, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_Size.z
       value: 0.3
@@ -1279,6 +1287,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.039
       objectReference: {fileID: 0}
+    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
+      propertyPath: OnDefeat
+      value: 
+      objectReference: {fileID: 11400000, guid: 53c7e9606309a0142bd5710ad82d2065, type: 2}
     - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: castSpawn
       value: 

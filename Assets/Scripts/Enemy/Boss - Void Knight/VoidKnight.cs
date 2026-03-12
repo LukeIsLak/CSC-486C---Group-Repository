@@ -74,6 +74,8 @@ public class VoidKnight : EnemyInterface
     public Transform castSpawn;
     public float castDelay = 0.4f;
 
+    public GameEvent OnDefeat;
+
     public List<VoidKnightWeightedAttacks> weightedAttacks;
 
     void Awake() {
@@ -341,6 +343,12 @@ public class VoidKnight : EnemyInterface
 
             isAttacking = false;
         }
+    }
+
+    public override void KillEnemy() {
+        if (rs != null) rs.RemoveEnemy();
+        if (OnDefeat != null) OnDefeat.Raise();
+        Destroy(this.gameObject);
     }
 
     // XXX since the divine judgement leaves the player vulnerable maybe is the player
