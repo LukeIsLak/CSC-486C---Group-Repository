@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PauseUI : MonoBehaviour
 {
+    public OptionsMenu optionsMenu;
+    public GameEvent ExitToMainMenu;
     public void ShowPauseUI()
     {
         gameObject.SetActive(true);
@@ -12,6 +14,7 @@ public class PauseUI : MonoBehaviour
     public void HidePauseUI()
     {
         gameObject.SetActive(false);
+        optionsMenu.HideAll();
     }
 
     public void OnResumeClicked()
@@ -26,7 +29,14 @@ public class PauseUI : MonoBehaviour
 
     public void OnOptionsClicked()
     {
-        // show option panel
+        optionsMenu.gameObject.SetActive(true);
+        optionsMenu.EnableOptions();
+    }
+
+    public void OnExitClicked()
+    {
+        PauseManager.instance.Resume();
+        ExitToMainMenu.Raise();
     }
 
 }
