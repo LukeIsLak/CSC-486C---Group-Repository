@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7327189d6369afc4daef952eab66e291, type: 3}
   m_Name: Tidal Wave
   m_EditorClassIdentifier: 
-  itemName: Run Away Bull
+  itemName: Tidal Wave
   itemDescription: 
   icon: {fileID: 1203546508, guid: 6372a4d3ffed56044b4653817ab14450, type: 3}
   selectionWeight: 1
