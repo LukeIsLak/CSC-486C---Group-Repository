@@ -24,7 +24,7 @@ public class DungeonRoomScript : MonoBehaviour
             return;
         }
 
-        int r = randomContext.rnd.NextInt(roomVariants.Count);
+        int r = randomContext.NextInt(roomVariants.Count);
         Instantiate(roomVariants[r], transform);
     }
 
