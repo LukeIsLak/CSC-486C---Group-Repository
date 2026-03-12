@@ -158,7 +158,7 @@ MonoBehaviour:
   totalWaveCount: 0
   currentWaveCount: 0
   remainingEnemies: 0
-  uponCompletion: {fileID: 0}
+  uponCompletion: {fileID: 11400000, guid: 164095ff0a96c684ebaf127baaf8cd4c, type: 2}
   delay: 0
 --- !u!1 &4608850661636715043
 GameObject:

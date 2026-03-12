@@ -55,8 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb5d7c7e279cbd489146e3c321e04d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partialRewardRatio: 0.5
-  fullRewardTime: 25
+  partialRewardRatio: 0.2
+  fullRewardTime: 60
   rewardChests:
   - {fileID: 6455565902789561445}
   - {fileID: 6859850091773347321}

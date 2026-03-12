@@ -391,7 +391,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 9b7570a54ad9409448bf314754504fad, type: 2}
   enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
   rs: {fileID: 0}
-  curHealth: 0
+  curHealth: 10
   moveSpeed: 0
   speedModifier: 1
   hasDamageOverTime: 0
