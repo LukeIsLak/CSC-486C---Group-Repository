@@ -220,6 +220,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2316993420010597651, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304263765960618055, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7936416260374037736, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
       propertyPath: menuScene.m_SceneName
       value: TitleScreen

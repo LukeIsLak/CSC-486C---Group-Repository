@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5473761978391616915}
   - component: {fileID: 7050272462483586888}
   - component: {fileID: -201263358416133198}
+  - component: {fileID: 1235413148540341114}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -348,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExitToLayout: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
+  PlayerDeath: {fileID: 11400000, guid: 53c7e9606309a0142bd5710ad82d2065, type: 2}
   healthBar: {fileID: 0}
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   maxHealth: 0

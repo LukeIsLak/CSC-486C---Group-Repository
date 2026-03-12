@@ -8,13 +8,14 @@ using UnityEngine.InputSystem;
 public class Health : MonoBehaviour
 {
     [Header("Events")]
-    public GameEvent ExitToLayout;
+    public GameEvent PlayerDeath;
 
     [Header("Data")]
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private CharacterData playerData;
     public float maxHealth;
     public float currentHealth;
+    public bool hasDied = false;
 
     public int shield = 0;
 
@@ -59,10 +60,12 @@ public class Health : MonoBehaviour
     }
     private void Die()
     {
+        if (hasDied) return;
+        hasDied = true;
         //Destroy(gameObject);
         PlayerInput pi = gameObject.GetComponent<PlayerInput>();
         pi.SwitchCurrentActionMap("UI");
-        ExitToLayout.Raise();
+        PlayerDeath.Raise();
 
     }
 
