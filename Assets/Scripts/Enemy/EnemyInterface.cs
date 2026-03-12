@@ -100,7 +100,6 @@ public class EnemyInterface : MonoBehaviour
     }
 
     public void HandleFreeze(Freeze data) {
-        print("Test");
         StartCoroutine(StartFreeze(data));
     }
 
@@ -128,8 +127,7 @@ public class EnemyInterface : MonoBehaviour
 
     public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
         Rigidbody rb = GetComponent<Rigidbody>();
-        print("get force");
-        
+        if (knockbackOrigin == null) return;
         if (rb != null) {
             Vector3 direction = (transform.position - knockbackOrigin).normalized;
             // direction.y = 0f; leave in if we want 
