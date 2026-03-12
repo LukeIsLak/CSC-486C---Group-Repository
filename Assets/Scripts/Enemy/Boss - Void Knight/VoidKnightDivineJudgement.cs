@@ -10,8 +10,9 @@ public class DivineJudgementAttack : MonoBehaviour
     public float radius = 4f;
     public LayerMask playerLayer;
     public GameObject warningCirclePrefab;
+    public GameObject warning;
 
-    public SphereCollider hitbox;
+    public CapsuleCollider hitbox;
     private bool canDamage = false;
 
     void Start()
@@ -25,7 +26,7 @@ public class DivineJudgementAttack : MonoBehaviour
         if (warningCirclePrefab)
         {
             GameObject circle = Instantiate(warningCirclePrefab, transform.position, Quaternion.identity, transform);
-            circle.transform.localScale = Vector3.one * radius * 2f;
+            warning = circle;
         }
 
         hitbox.enabled = false;
@@ -39,6 +40,7 @@ public class DivineJudgementAttack : MonoBehaviour
         hitbox.enabled = true;
         canDamage = true;
         yield return new WaitForSeconds(lingerDuration);
+        Destroy(warning);
         Destroy(gameObject);
     }
 

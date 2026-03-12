@@ -9,17 +9,20 @@ public class VoidKnightFireball : MonoBehaviour
     [SerializeField] private float ttl = 5f;
     public LayerMask playerLayer;
     public float dmg;
-    public Vector3 dir;
-
+    public Vector3 dir;    
     public void Initialize(Vector3 direction) {
-        dir = direction;
+        dir = direction.normalized;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(dir);
         StartCoroutine(timeToLive(ttl));
     }
 
-    // Update is called once per frame
+    // Update is called once per frame    
     void Update()
     {
         transform.position += dir * projspeed * Time.deltaTime;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 10f * Time.deltaTime);
     }
 
     void OnCollisionEnter(Collision other) {

@@ -75,9 +75,9 @@ public class VoidKnight : EnemyInterface
     void Awake() {
         weightedAttacks = new List<VoidKnightWeightedAttacks> {
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackCombo1, 2f, () => 
-                Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
-            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackFireBall, 1f, () => true),
-            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackDivineJudgement, 1f, () => false)
+                false),// Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
+            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackFireBall, 1f, () => false),
+            new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackDivineJudgement, 1f, () => true)
         };
 
         initialize();
@@ -312,7 +312,7 @@ public class VoidKnight : EnemyInterface
     private IEnumerator DivineJudgementAttack(int count) {
         yield return new WaitForSeconds(castDelay);
         for (int i = 0; i < count; i++) {
-            GameObject fb = Instantiate(fireball, playerTransform.position, Quaternion.identity);
+            GameObject fb = Instantiate(divineJudgement, playerTransform.position, Quaternion.identity);
 
             float cooldown = UnityEngine.Random.Range(minDurDivineJudgementCast, maxDurDivineJudgementCast);
             yield return new WaitForSeconds(cooldown);
