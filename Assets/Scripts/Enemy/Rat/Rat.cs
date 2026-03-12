@@ -209,15 +209,18 @@ public class Rat : EnemyInterface
     public void UpdateColonyMove() {
         UpdateMove();
         if (nma != null && IsAgentAtDestination(nma)) FinishWander();
-    }
+    }    
     public void UpdateAgroApproach() {
-        UpdatePlayerPath();
-        UpdateMove();
+        if (nma == null || !nma.isOnNavMesh) return;
 
-        // // Sync agent position to Rigidbody position
-        // if (nma != null && nma.isOnNavMesh) {
-        //     nma.nextPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        // }
+        // Sync agent position to Rigidbody so desiredVelocity points correctly
+        nma.nextPosition = new Vector3(transform.position.x, nma.nextPosition.y, transform.position.z);
+
+        // Periodically recalculate path to player
+        UpdatePlayerPath();
+
+        // Move via Rigidbody using desiredVelocity from NavMeshAgent
+        UpdateMove();
     }
 
     /****************************************************/
