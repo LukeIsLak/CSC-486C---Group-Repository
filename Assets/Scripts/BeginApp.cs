@@ -26,13 +26,7 @@ public class TestApp : MonoBehaviour
         // PLAYER INITIALIZATION
         inventory.Initialize();
         // MAKE SURE PLAYER HAS FULL HEALTH
-        if (player == null) {
-            Debug.Log("theres a problem");
-        } else {
-            playerhealth = player.GetComponent(typeof(Health)) as Health;
-            playerhealth.Init(characterData.maxHealth, characterData.currentHealth);
-        }
-
+        characterData.currentHealth = characterData.maxHealth;
 
         EnterLayout.Raise();
 
