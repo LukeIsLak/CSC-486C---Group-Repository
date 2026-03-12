@@ -1297,7 +1297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: comboMoveSpeed
-      value: 1
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: divineJudgement

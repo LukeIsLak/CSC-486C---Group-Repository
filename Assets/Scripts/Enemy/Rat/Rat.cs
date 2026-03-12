@@ -68,9 +68,8 @@ public class Rat : EnemyInterface
     }
 
     public void initialize_nma() {
-        //XXX this is a hack we need to fix this later!!!
-        transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
         nma.enabled = true;
+
         nma.updatePosition = false;
         nma.updateRotation = false;
 
@@ -122,6 +121,7 @@ public class Rat : EnemyInterface
     }
 
     private void UpdateMove() {
+        nma.nextPosition = transform.position;
         Vector3 navDir = nma.desiredVelocity;
         navDir.y = 0f;
 
@@ -153,16 +153,18 @@ public class Rat : EnemyInterface
                                 + wander * rd.wanderWeight;
         
         Vector3 velocity = Vector3.ClampMagnitude(finalVelocity, moveSpeed);
-        Vector3 planarMove = new Vector3(velocity.x, velocity.y, velocity.z) * Time.deltaTime;
-        // Use Rigidbody for movement if available
-        if (rb != null && !rb.isKinematic) {
-            rb.MovePosition(rb.position + planarMove);
-        } else {
-            transform.position += planarMove;
-        }
+        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime;
+
+        // if (currentState == RatStates.AgroApproach) {
+        //     Debug.Log("NavMeshAgent destination: " + nma.destination);
+        //     Debug.Log("NavDir: " + navDir);
+        //     Debug.Log("NavDir * weight" + navDir * rd.navWeight);
+        //     Debug.Log("Velocity: " + velocity);
+        // }
+        transform.position += planarMove;
 
         Vector3 agentNextPos = nma.nextPosition;
-        nma.nextPosition = new Vector3(transform.position.x, nma.nextPosition.y, transform.position.z);
+        nma.nextPosition = new Vector3(transform.position.x, agentNextPos.y, transform.position.z);
 
         if (velocity.sqrMagnitude > 0f) {
             Quaternion rot = Quaternion.LookRotation(new Vector3(velocity.x, 0f, velocity.z));
@@ -184,9 +186,10 @@ public class Rat : EnemyInterface
     }
 
     public void FinishWander() {
+        canWander = false;
         doneWandering = true;
         isMoving = false;
-        nma.isStopped = true;
+        // nma.isStopped = true;
         nma.updatePosition = false;
         nma.updateRotation = false;
     }
@@ -209,17 +212,10 @@ public class Rat : EnemyInterface
     public void UpdateColonyMove() {
         UpdateMove();
         if (nma != null && IsAgentAtDestination(nma)) FinishWander();
-    }    
+    }
+
     public void UpdateAgroApproach() {
-        if (nma == null || !nma.isOnNavMesh) return;
-
-        // Sync agent position to Rigidbody so desiredVelocity points correctly
-        nma.nextPosition = new Vector3(transform.position.x, nma.nextPosition.y, transform.position.z);
-
-        // Periodically recalculate path to player
         UpdatePlayerPath();
-
-        // Move via Rigidbody using desiredVelocity from NavMeshAgent
         UpdateMove();
     }
 
@@ -264,7 +260,7 @@ public class Rat : EnemyInterface
         if (ratColonyNum == or.ratColonyNum && isMoving && or.doneWandering) {
             doneWandering = true;
             isMoving = false;
-            if (nma.isOnNavMesh) nma.isStopped = true;
+            // if (nma.isOnNavMesh) nma.isStopped = true;
         }
     }
 
@@ -284,7 +280,7 @@ public class Rat : EnemyInterface
                         colonyMoveSpot = or.colonyMoveSpot;
                         nma.SetDestination(colonyMoveSpot);
                     }
-                    nma.isStopped = !isWandering;
+                    // nma.isStopped = !isWandering;
                     nma.updatePosition = isWandering;
                     nma.updateRotation = isWandering;
                 }
@@ -306,19 +302,24 @@ public class Rat : EnemyInterface
     }
     
     public void OnTriggerExitOuter(Collider other, Rat or) {
-        if (ratColonyNum != -1 && or.ratColonyNum == ratColonyNum) {
-            // XXX maybe I do this with a Collider[] hits = Physics.OverlapSphere(transform.position, neighbourRadius, ratMask);
-            foreach(Rat r in rcm.ratColonies[ratColonyNum]) {
-                if (r == this) continue;
-                if (Vector3.Distance(r.gameObject.transform.position, transform.position) < rd.colonyDist) return;
-            }
-            
-            rcm.RemoveRat(this, ratColonyNum);
+        if (ratColonyNum < 0 || ratColonyNum >= rcm.ratColonies.Count) return;
+        if (or.ratColonyNum != ratColonyNum) return;
 
-            isLoner = true;
-            isRatMaster = false;
-            ratColonyNum = -1;
+        // Check if any other colony member is still within range
+        List<Rat> colony = rcm.ratColonies[ratColonyNum];
+        foreach (Rat r in colony) {
+            if (r == this) continue;
+            if (r == null) continue;
+            if (Vector3.Distance(r.gameObject.transform.position, transform.position) < rd.colonyDist) return;
         }
+        
+        int colonyToLeave = ratColonyNum;
+
+        isLoner = true;
+        isRatMaster = false;
+        ratColonyNum = -1;
+
+        rcm.RemoveRat(this, colonyToLeave);
     }
 
     private void OnCollisionEnter(Collision other) {
@@ -386,7 +387,7 @@ public class Rat : EnemyInterface
 
         isLeaping = true;
         canLeap = false;
-        nma.isStopped = true;
+        // nma.isStopped = true;
         nma.updatePosition = false;
         nma.updateRotation = false;
 
@@ -396,9 +397,6 @@ public class Rat : EnemyInterface
 
         isLeaping = false;
         doneLeap = true;
-        nma.isStopped = true;
-        nma.updatePosition = true;
-        nma.updateRotation = false;
 
         anim.SetBool("isAttack", false);
     }
