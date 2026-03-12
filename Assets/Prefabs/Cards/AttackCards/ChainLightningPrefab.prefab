@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3030658171595895255}
   - component: {fileID: 25456964977865804}
   - component: {fileID: 6355065046752603685}
+  - component: {fileID: -3840479584539066528}
   m_Layer: 0
   m_Name: ChainLightningPrefab
   m_TagString: Untagged
@@ -119,3 +120,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChainLightningPrefab: {fileID: 6355065046752603685}
+--- !u!114 &-3840479584539066528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4385831330015336454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91ac4089c049436d8226c11cc5887a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rotateSpeed: 200
+  radius: 50

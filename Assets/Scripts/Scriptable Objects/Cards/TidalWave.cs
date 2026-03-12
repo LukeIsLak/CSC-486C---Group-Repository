@@ -21,7 +21,7 @@ public class TidalWave : Cards
         //Send wave away from the player
         Vector3 startPos = player.transform.position + player.transform.forward * 2f;
 
-        WaveObject wave = Instantiate(wavePrefab, startPos, Quaternion.LookRotation(camera.transform.forward));
+        WaveObject wave = Instantiate(wavePrefab, startPos, Quaternion.LookRotation(player.transform.forward));
 
         wave.Init(player.transform.forward, card);
 

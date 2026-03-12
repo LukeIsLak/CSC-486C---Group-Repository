@@ -31,15 +31,17 @@ public class ChainLightningObject : MonoBehaviour
 
         if (enemy != null){
             enemy.Hit(damage);
-            Destroy(this.gameObject);
             ContinueChain(alreadyHit, enemy);
+            Destroy(this.gameObject);
+
         }
         else 
         {
             enemy = other.GetComponentInParent<EnemyInterface>();
             enemy.Hit(damage);
-            Destroy(this.gameObject);
             ContinueChain(alreadyHit, enemy);
+            Destroy(this.gameObject);
+
         }
     }
 
@@ -49,7 +51,7 @@ public class ChainLightningObject : MonoBehaviour
         alreadyHit.Add(enemy);
         if (chainNumber < maxChain)
             {
-                ChainLightningObject next = Instantiate(ChainLightningPrefab, enemy.transform.position + enemy.transform.forward * 2f, enemy.transform.rotation);
+                ChainLightningObject next = Instantiate(ChainLightningPrefab, enemy.transform.position + Vector3.up * 1.5f, enemy.transform.rotation);
                 next.alreadyHit = alreadyHit;
                 next.chainNumber = chainNumber + 1;
                 HomingSystem homing = next.GetComponent<HomingSystem>();
