@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ca408856da3604db9b3361a281178a, type: 3}
   m_Name: But Wait Theres More
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  name: But Wait, There's More
-=======
   name: BUT WAIT, THERE'S MORE
   descrption: Randomly shuffle two cards from the discard pile back into the deck
   effectValue: 2
->>>>>>> Stashed changes
   image: {fileID: 1359112339, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   value: 2
