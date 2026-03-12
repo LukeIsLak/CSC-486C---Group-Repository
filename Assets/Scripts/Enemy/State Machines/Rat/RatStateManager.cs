@@ -244,17 +244,11 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         r.isMoving = true;
         r.checkPlayerPath = true;
 
-        // Ensure the NavMeshAgent is synchronized with the Rigidbody
-        if (r.nma != null && r.nma.isOnNavMesh) {
-            r.nma.nextPosition = r.rb.position; // Synchronize NavMeshAgent with Rigidbody
-            r.nma.isStopped = false;
-            r.nma.updatePosition = false;
-            r.nma.updateRotation = false;
-            r.nma.SetDestination(r.playerTransform.position);
-        }
-
-        // Reset Rigidbody velocity to ensure smooth movement
-        r.rb.velocity = Vector3.zero;
+            // r.nma.nextPosition = r.rb.position; // Synchronize NavMeshAgent with Rigidbody
+            // r.nma.isStopped = false;
+            // r.nma.updatePosition = false;
+            // r.nma.updateRotation = false;
+        r.nma.SetDestination(r.playerTransform.position);
     }
 
     public void EnterLeapState(Rat r) {
@@ -268,20 +262,20 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     public void WhileColonyWanderState(Rat r) {
         if (r.isMoving) {
             r.UpdateColonyMove();
-            r.nma.nextPosition = r.rb.position; // Synchronize NavMeshAgent with Rigidbody
+            r.nma.nextPosition = r.gameObject.transform.position; // Synchronize NavMeshAgent with Rigidbody
         }
     }
 
     public void WhileLonerWanderState(Rat r) {
         if (r.isMoving) {
             r.UpdateLonerMove();
-            r.nma.nextPosition = r.rb.position; // Synchronize NavMeshAgent with Rigidbody
+            r.nma.nextPosition = r.gameObject.transform.position; // Synchronize NavMeshAgent with Rigidbody
         }
     }
 
     public void WhileAgroApproachState(Rat r) {
         r.UpdateAgroApproach();
-        r.nma.nextPosition = r.rb.position; // Synchronize NavMeshAgent with Rigidbody
+        r.nma.nextPosition = r.gameObject.transform.position; // Synchronize NavMeshAgent with Rigidbody
     }
 
     /******************************/

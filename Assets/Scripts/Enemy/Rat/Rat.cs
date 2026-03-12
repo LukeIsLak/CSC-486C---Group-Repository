@@ -163,6 +163,7 @@ public class Rat : EnemyInterface
         //     Debug.Log("Velocity: " + velocity);
         // }
         transform.position += planarMove;
+        nma.nextPosition = transform.position;
 
         Vector3 agentNextPos = nma.nextPosition;
         nma.nextPosition = new Vector3(transform.position.x, agentNextPos.y, transform.position.z);
@@ -282,8 +283,8 @@ public class Rat : EnemyInterface
                         nma.SetDestination(colonyMoveSpot);
                     }
                     // nma.isStopped = !isWandering;
-                    nma.updatePosition = isWandering;
-                    nma.updateRotation = isWandering;
+                    // nma.updatePosition = isWandering;
+                    // nma.updateRotation = isWandering;
                 }
             }
             else {
@@ -398,6 +399,8 @@ public class Rat : EnemyInterface
 
         isLeaping = false;
         doneLeap = true;
+
+        nma.nextPosition = transform.position;
 
         anim.SetBool("isAttack", false);
     }

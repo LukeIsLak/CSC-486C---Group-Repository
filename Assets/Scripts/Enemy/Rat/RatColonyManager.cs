@@ -70,8 +70,8 @@ public class RatColonyManager : MonoBehaviour
         if (r.nma != null && r.nma.isOnNavMesh) {
             r.nma.SetDestination(wanderSpot);
             r.nma.isStopped = false;
-            r.nma.updatePosition = true;
-            r.nma.updateRotation = true;
+            // r.nma.updatePosition = true;
+            // r.nma.updateRotation = true;
         }
     }
 
