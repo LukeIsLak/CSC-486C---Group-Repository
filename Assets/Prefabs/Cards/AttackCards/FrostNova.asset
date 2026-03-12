@@ -12,13 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffb24b8aa0b34af29363e3189d1674e, type: 3}
   m_Name: TestSpark
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  name: Frost Nova
-=======
   name: FROST NOVA
   descrption: Explodes on contact and freezes enemies. Frozen enemies take 1.5x damage
   effectValue: 20
->>>>>>> Stashed changes
   image: {fileID: 1050318224, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 10
   dmgradius: 1
