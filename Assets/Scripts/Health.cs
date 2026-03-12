@@ -70,4 +70,10 @@ public class Health : MonoBehaviour
     {
         playerData.currentHealth = this.currentHealth;   
     }
+
+    public void UpdateCurrentHealth(float amount)
+    {
+        this.currentHealth = amount;
+        NotifyHealthChanged();
+    }
 }
