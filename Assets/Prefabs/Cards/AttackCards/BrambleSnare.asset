@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3030f7a95a324199b8edc791dadc818, type: 3}
   m_Name: BrambleSnare
   m_EditorClassIdentifier: 
-  name: 
-  descrption: 
+  name: BRAMBLE SNARE
+  descrption: Creates a trap area that slows + damages enemies as they move through
+    it
   effectValue: 0
   image: {fileID: -1074723813, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   bramblePrefab: {fileID: 0}

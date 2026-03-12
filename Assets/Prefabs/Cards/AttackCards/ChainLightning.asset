@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91f1e455c0d743ffad3aeae6b2eb616, type: 3}
   m_Name: ChainLightning
   m_EditorClassIdentifier: 
-  name: 
-  descrption: 
+  name: CHAIN LIGHTNING
+  descrption: Casts a tracking bolt of lightning that can chain to close enemies
   effectValue: 0
   image: {fileID: -896222872, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   ChainLightningPrefab: {fileID: 0}
