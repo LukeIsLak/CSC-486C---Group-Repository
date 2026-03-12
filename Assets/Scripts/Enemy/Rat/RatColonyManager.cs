@@ -77,9 +77,11 @@ public class RatColonyManager : MonoBehaviour
 
     public Vector3 Centroid(int i) {
         Vector3 c = Vector3.zero;
-        foreach (Rat r in ratColonies[i]) c += r.gameObject.transform.position;
+        foreach (Rat r in ratColonies[i])
+        {
+            if (r != null) c += r.gameObject.transform.position;
+        }
         return c /= ratColonies[i].Count;
-
     }
 
     public void AddRatToColony(Rat r, int i) {

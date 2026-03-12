@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686f332134155294ab21c80fc0609c86, type: 3}
   m_Name: Rat Data
   m_EditorClassIdentifier: 
-  baseHealth: 0
-  baseMoveSpeed: 0
+  baseHealth: 0.25
+  baseMoveSpeed: 3
+  damage: 5
+  freezeMult: 1.5
   moveSpeed: 3
   navWeight: 1.5
   separationWeight: 2
