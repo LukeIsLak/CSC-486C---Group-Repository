@@ -39,6 +39,7 @@ public class VoidKnight : EnemyInterface
 
     // XXX add cast move speed?
     // XXX cast start delay
+    // XXX on death raise event
 
     public int minNumFireball = 5;
     public int maxNumFireball = 15;
@@ -66,12 +67,15 @@ public class VoidKnight : EnemyInterface
     public bool inAttackCombo1pt3 = false;
     public float AttackCombo1wait = 0.75f;
 
+    public Transform castSpawn;
+    public float castDelay = 0.4f;
+
     public List<VoidKnightWeightedAttacks> weightedAttacks;
 
     void Awake() {
         weightedAttacks = new List<VoidKnightWeightedAttacks> {
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackCombo1, 2f, () => 
-                false),// Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
+                Vector3.Distance(transform.position, playerTransform.position) <= combo1PlayerRange),
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackFireBall, 1f, () => true),
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackDivineJudgement, 1f, () => false)
         };
@@ -169,6 +173,15 @@ public class VoidKnight : EnemyInterface
         // if (nma != null && IsAgentAtDestination(nma)) XXX finish this!
     }
 
+    public void OnTriggerEnter(Collider other) {
+        if (isAttacking && other.CompareTag("Player")) {
+            print("Test");
+            Health h = other.GetComponent<Health>();
+            if (h != null) h.TakeDamage(vkd.damage); //TODO: LK - eventually, when we figure out the base values, replace this!
+            isAttacking = false;
+        }
+    }
+
     private bool CanSeePlayer() {
         if (playerTransform == null) return false; //XXX we should never get here!
 
@@ -221,6 +234,7 @@ public class VoidKnight : EnemyInterface
         isStepping = true;
     }
     public void StartAttackCombo1(int step) {
+        isAttacking = true;
         switch (step) {
             case 1: 
                 inAttackCombo1pt1 = true;
@@ -232,7 +246,6 @@ public class VoidKnight : EnemyInterface
                 inAttackCombo1pt3 = true;
                 break;
         }
-        inAttackCombo1pt1 = true;
         forceStep();
         UpdatePlayerPath();
         //XXX make sure I can see the player cause I want no obstacles
@@ -259,28 +272,32 @@ public class VoidKnight : EnemyInterface
                     break;
         }
         delayCombo1 = false;
+        isAttacking = false;
     }
 
 
     /******** Fireball Attack ********/
 
     public void CastFireBall() {
-        isAttacking = true;
         int count = UnityEngine.Random.Range(minNumFireball, maxNumFireball);
-        StartCoroutine(FireballAttack(count));
+        if (!isAttacking) StartCoroutine(FireballAttack(count));
     }
 
     private IEnumerator FireballAttack(int count) {
-        for (int i = 0; i < count; i++) {
-            GameObject fb = Instantiate(fireball, transform.position, Quaternion.identity);
-            Vector3 direction = (playerTransform.position - transform.position).normalized;
-            fb.GetComponent<VoidKnightFireball>().Initialize(direction);
+        if (!isAttacking) {
+            isAttacking = true;
+            yield return new WaitForSeconds(castDelay);
+            for (int i = 0; i < count; i++) {
+                GameObject fb = Instantiate(fireball, castSpawn.position, Quaternion.identity);
+                Vector3 direction = (playerTransform.position - castSpawn.position).normalized;
+                fb.GetComponent<VoidKnightFireball>().Initialize(direction);
 
-            float cooldown = UnityEngine.Random.Range(minDurFireballCast, maxDurFireballCast);
-            yield return new WaitForSeconds(cooldown);
+                float cooldown = UnityEngine.Random.Range(minDurFireballCast, maxDurFireballCast);
+                yield return new WaitForSeconds(cooldown);
+            }
+
+            isAttacking = false;
         }
-
-        isAttacking = false;
     }
 
 
@@ -293,6 +310,7 @@ public class VoidKnight : EnemyInterface
     }
 
     private IEnumerator DivineJudgementAttack(int count) {
+        yield return new WaitForSeconds(castDelay);
         for (int i = 0; i < count; i++) {
             GameObject fb = Instantiate(fireball, playerTransform.position, Quaternion.identity);
 

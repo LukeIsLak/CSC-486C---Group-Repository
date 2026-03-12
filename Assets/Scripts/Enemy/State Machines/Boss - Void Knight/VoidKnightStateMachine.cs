@@ -78,17 +78,21 @@ public class VoidKnightStateMachine : StateMachine<VoidKnight, VoidKnightStates>
         AddWhileState(VoidKnightStates.AttackCombo1_pt2, WhileAttackComboPt2);
         AddWhileState(VoidKnightStates.AttackCombo1_pt3, WhileAttackComboPt3);
 
+        AddExitState(VoidKnightStates.AttackCombo1_pt3, ExitAttackCombo1);
+
         /*Fireball Attack*/
         AddTransition(VoidKnightStates.AttackFireBall, VoidKnightStates.AgroApproach, AttackFireBallToAgroApproach);
         AddTransition(VoidKnightStates.AttackFireBall, VoidKnightStates.Idle, AttackFireBallToIdle);
 
         AddEnterState(VoidKnightStates.AttackFireBall, EnterAttackFireBall);
+        AddExitState(VoidKnightStates.AttackFireBall, ExitAttackFireball);
 
         /*Divine Judgement Attack*/
         AddTransition(VoidKnightStates.AttackDivineJudgement, VoidKnightStates.AgroApproach, AttackDivineJudgementToAgroApproach);
         AddTransition(VoidKnightStates.AttackDivineJudgement, VoidKnightStates.Idle, AttackDivineJudgementToIdle);
 
         AddEnterState(VoidKnightStates.AttackDivineJudgement, EnterAttackDivineJudgement);
+        AddExitState(VoidKnightStates.AttackDivineJudgement, ExitAttackDivineJudgement);
     }
 
     public override void CheckTransition(VoidKnight v) {
@@ -204,26 +208,34 @@ public class VoidKnightStateMachine : StateMachine<VoidKnight, VoidKnightStates>
     }
 
     public void EnterAttackCombo1(VoidKnight v) {
-
+        v.anim.SetBool("isSwing", true);
     }
 
     public void EnterAttackCombo1Pt1(VoidKnight v) {
+        v.isAttacking = true;
+        v.anim.SetTrigger("resetSwing");
         v.StartAttackCombo1(1);
     }
 
     public void EnterAttackCombo1Pt2(VoidKnight v) {
+        v.isAttacking = true;
+        v.anim.SetTrigger("resetSwing");
         v.StartAttackCombo1(2);
     }
 
     public void EnterAttackCombo1Pt3(VoidKnight v) {
+        v.isAttacking = true;
+        v.anim.SetTrigger("resetSwing");
         v.StartAttackCombo1(3);
     }
 
     public void EnterAttackFireBall(VoidKnight v) {
+        v.anim.SetBool("isCasting", true);
         v.CastFireBall();
     }
 
     public void EnterAttackDivineJudgement(VoidKnight v) {
+        v.anim.SetBool("isCasting", true);
         v.CastDivineJudgement();
     }
 
@@ -250,4 +262,16 @@ public class VoidKnightStateMachine : StateMachine<VoidKnight, VoidKnightStates>
     /******************************/
     /*    Exit State Functions    */
     /******************************/
+
+    public void ExitAttackCombo1(VoidKnight v) {
+        v.anim.SetBool("isSwing", false);
+    }
+
+    public void ExitAttackFireball(VoidKnight v) {
+        v.anim.SetBool("isCasting", false);
+    }
+
+    public void ExitAttackDivineJudgement(VoidKnight v) {
+        v.anim.SetBool("isCasting", false);
+    }
 }
