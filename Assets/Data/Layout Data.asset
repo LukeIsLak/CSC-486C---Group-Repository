@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   depth: 10
   maxWidth: 5
-  randomSeed: 949213152
+  randomSeed: -1543533262
   complexity: 1
   useSeed: 1
   minWidthFraction: 1
-  currentEncounter: {fileID: 11400000, guid: ea0fe87bf11228e46a07d82c9cb127db, type: 2}
+  restEncounter: {fileID: 11400000, guid: 0179983dc6e1aed4e99f665cb873ca11, type: 2}
+  distancesBetween: 010000000200000003000000
+  currentEncounter: {fileID: 11400000, guid: 0179983dc6e1aed4e99f665cb873ca11, type: 2}
   completedIndices: 00000000
   FogUpdated: {fileID: 11400000, guid: 53b5e16dded829045b198432f3c140d9, type: 2}
   layersRevealed: 3

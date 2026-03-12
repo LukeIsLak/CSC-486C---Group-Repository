@@ -138,17 +138,105 @@ public class TraversableLayout : MonoBehaviour
     private void PlaceEncounters(List<List<MapEncounter>> mapLayers)
     {
         if (mapLayers.Count == 0) return;
+        
+        // START ENCOUNTER
         mapLayers[0][0].SetEncounter(firstEncounter);
+
+
+        // FORCED REST LAYERS
+        PlaceRestEncounters(mapLayers);
+
+        // FINAL ENCOUNTER
+        mapLayers[mapLayers.Count -1][0].SetEncounter(lastEncounter);
+
+
+        // EVERYTHING THAT ISN'T SET
         foreach (List<MapEncounter> layer in mapLayers)
         {   foreach (MapEncounter enc in layer)
             {
-                if (enc.parents.Count == 0) continue; // For the first node.
+                // Skip first encounter and already set encounters
+                if (enc.parents.Count == 0 || enc.encounter != null) continue;
                 enc.encounter = ChooseEncounterFromWeights(enc.parents);
             }
         }
-        mapLayers[mapLayers.Count -1][0].SetEncounter(lastEncounter);
     }
 
+    // Place rest encounters according to the distances between in layoutData
+    private void PlaceRestEncounters(List<List<MapEncounter>> mapLayers)
+    {
+        if (layoutData.distancesBetween.Count == 0) return;
+        int curIndex = 0;
+        int curSep  = 0;
+
+        // Handle each distance
+        foreach (int sep in layoutData.distancesBetween)
+        {
+            curSep = sep;
+
+            // Doesn't make sense to have 0 or negative sep
+            if (curSep <= 0)
+            {
+                Debug.Log("sep negative or zero; skipping value");
+            }
+
+            // Increment current layer index
+            curIndex += curSep;
+            
+            // No layers remaining
+            if (curIndex >= mapLayers.Count)
+            {
+                Debug.Log("Sum of seps larger than map layers; finishing rest placement");
+                return;
+            }
+
+            // No previous layer from layer 0
+            if (curIndex == 0) continue;
+
+
+            // Randomly select one child encounter to be a rest
+            List<MapEncounter> curLayer = mapLayers[curIndex - 1];
+            MakeRestEncounterLayerAtNext(curLayer);
+        
+        }
+        
+        // Check if last sep 0
+        if (curSep <= 0)
+        {
+            Debug.Log("Last sep 0 but layers remain; placing no rests");
+            return;
+        }
+
+        // If there's more layers than the sum of distancesBetween, use lastSep for the rest
+        curIndex += curSep;
+        while (curIndex < mapLayers.Count)
+        {
+            MakeRestEncounterLayerAtNext(mapLayers[curIndex - 1]);
+            curIndex += curSep;
+        }
+        
+
+    }
+
+    private void MakeRestEncounterLayerAtNext(List<MapEncounter> curLayer)
+    {
+        foreach (MapEncounter mapEnc in curLayer)
+        {
+            // If rest in chidren, continue
+            bool childIsRest = false;
+            foreach (MapEncounter childEnc in mapEnc.children)
+            {
+                if (childEnc.encounter == layoutData.restEncounter)
+                {
+                    childIsRest = true;
+                    break;
+                }
+            }
+            if (childIsRest) continue;
+
+            // Randomly select a child to become a rest encounter
+            mapEnc.children[Random.Range(0, mapEnc.children.Count)].encounter = layoutData.restEncounter;
+        } 
+    }
     private EncounterInfo ChooseEncounterFromWeights(List<MapEncounter> parents)
     {
         Dictionary<EncounterInfo, float> weights = new Dictionary<EncounterInfo, float>();

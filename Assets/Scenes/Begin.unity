@@ -233,6 +233,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51de2cc1598dab444ac279c1b5463c62, type: 3}
+--- !u!1 &1432586729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+  m_PrefabInstance: {fileID: 1879236145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1853294644
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +271,7 @@ MonoBehaviour:
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
   inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   encRandomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
+  player: {fileID: 1432586729}
 --- !u!4 &1853294646
 Transform:
   m_ObjectHideFlags: 0
@@ -315,7 +321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8498486752961200364, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8774079750195045325, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_IsActive
