@@ -181,7 +181,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -366,7 +366,7 @@ Transform:
   m_GameObject: {fileID: 8633630617670396899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.82, y: 3.721, z: -0.3}
+  m_LocalPosition: {x: -4.82, y: 0.3, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -390,10 +390,17 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 11400000, guid: 9b7570a54ad9409448bf314754504fad, type: 2}
   enemyEffects: {fileID: 0}
-  trs: {fileID: 0}
+  rs: {fileID: 0}
   curHealth: 0
   moveSpeed: 0
   speedModifier: 1
+  hasDamageOverTime: 0
+  hasFreeze: 0
+  hasKnockback: 0
+  numDamageOverTime: 0
+  numFreeze: 0
+  currentDoTNames: []
+  currentDoTTicks: 
   anim: {fileID: 5652962033149474173}
   rb: {fileID: 3693198263070883069}
   rd: {fileID: 11400000, guid: 9b7570a54ad9409448bf314754504fad, type: 2}

@@ -50,7 +50,7 @@ MonoBehaviour:
   AddToRoomCountEvent: {fileID: 11400000, guid: 6e40abdd731a5424dbd4a14e5c18234a, type: 2}
   roomVariants: []
   trapRoomObjects: {fileID: 3452522053420848015, guid: 558070836969bb84fb32ef5985da61a7, type: 3}
-  regularRoomObjects: {fileID: 0}
+  regularRoomObjects: {fileID: 2487751994428010116, guid: ddca8e3060695d64c9c70f4f7f193519, type: 3}
   isTrapRoom: 0
 --- !u!114 &-2927085867358724646
 MonoBehaviour:
@@ -88,6 +88,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5188310367778011269}
     m_Modifications:
+    - target: {fileID: 1540535662898024827, guid: 4ba13be48056179418bd1aa74e6931c4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446933063932838766, guid: 4ba13be48056179418bd1aa74e6931c4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4873140133858207481, guid: 4ba13be48056179418bd1aa74e6931c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -131,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 7480614484713212938, guid: 4ba13be48056179418bd1aa74e6931c4, type: 3}
       propertyPath: m_Name
       value: OSingle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730637592976662946, guid: 4ba13be48056179418bd1aa74e6931c4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

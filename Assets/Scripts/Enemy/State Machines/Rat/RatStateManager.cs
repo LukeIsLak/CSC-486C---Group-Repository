@@ -241,6 +241,16 @@ public class RatStateManager : StateMachine<Rat, RatStates>
 
     public void EnterAgroApproachState(Rat r) {
         r.isAgro = true;
+        r.isMoving = true;
+        r.checkPlayerPath = true;
+
+        // Make sure the agent is not stopped
+        if (r.nma != null && r.nma.isOnNavMesh) {
+            r.nma.isStopped = false;
+            r.nma.updatePosition = false;
+            r.nma.updateRotation = false;
+            r.nma.SetDestination(r.playerTransform.position);
+        }
     }
 
     public void EnterLeapState(Rat r) {
