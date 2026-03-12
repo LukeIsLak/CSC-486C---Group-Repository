@@ -9,7 +9,7 @@ public class TestApp : MonoBehaviour
     public LayoutData layoutData;
     public PlayerInventory inventory;
     public RandomContext encRandomContext;
-    private GameObject player;
+    public GameObject player;
     private Health playerhealth;
 
     void Start()
@@ -25,7 +25,6 @@ public class TestApp : MonoBehaviour
         // PLAYER INITIALIZATION
         inventory.Initialize();
         // MAKE SURE PLAYER HAS FULL HEALTH
-        player = GameObject.FindWithTag("Player");
         if (player == null) {
             Debug.Log("theres a problem");
         } else {
