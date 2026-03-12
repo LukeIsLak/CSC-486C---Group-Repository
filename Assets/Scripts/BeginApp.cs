@@ -11,6 +11,7 @@ public class TestApp : MonoBehaviour
     public RandomContext encRandomContext;
     public GameObject player;
     private Health playerhealth;
+    public CharacterData characterData;
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class TestApp : MonoBehaviour
             Debug.Log("theres a problem");
         } else {
             playerhealth = player.GetComponent(typeof(Health)) as Health;
-            playerhealth.Heal(playerhealth.maxHealth);
+            playerhealth.Init(characterData.maxHealth, characterData.currentHealth);
         }
 
 
