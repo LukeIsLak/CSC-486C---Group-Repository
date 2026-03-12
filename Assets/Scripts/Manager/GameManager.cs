@@ -29,13 +29,8 @@ public class GameManager : MonoBehaviour
         playerInitialized = true;
         
         var deck = player.GetComponent<DeckSystems>();
-        var playerHealth = player.GetComponent<Health>();
-
-        playerHealth.Init(playerData.maxHealth);
-
         //deck.InitializeRandomDeck(cardsDB, 30);
         //Debug.Log("I try thing");
-       
     }
     private void InitializedDeckOnce()
     {

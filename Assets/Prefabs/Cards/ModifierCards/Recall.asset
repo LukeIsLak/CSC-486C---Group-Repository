@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: RECALL
   descrption: Recall your last used card into deck
-  effectValue: 0
+  effectValue: 1
   image: {fileID: 1858401742, guid: c56240a0befec8b47bd8a88892eef643, type: 3}

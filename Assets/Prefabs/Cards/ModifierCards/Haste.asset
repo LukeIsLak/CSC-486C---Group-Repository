@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: HASTE
   descrption: 'Increases your movement speed for a set duration '
-  effectValue: 0
+  effectValue: 10
   image: {fileID: -553130707, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   buffTime: 10

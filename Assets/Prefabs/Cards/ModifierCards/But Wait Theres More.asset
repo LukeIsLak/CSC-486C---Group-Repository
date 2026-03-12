@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: BUT WAIT, THERE'S MORE
   descrption: Randomly shuffle two cards from the discard pile back into the deck
-  effectValue: 0
+  effectValue: 2
   image: {fileID: 1359112339, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   value: 2

@@ -10,6 +10,6 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         health = GetComponent<Health>();
-        health.Init(enemyData.maxHealth);
+        health.Init(enemyData.maxHealth, enemyData.currentHealth);
     }
 }

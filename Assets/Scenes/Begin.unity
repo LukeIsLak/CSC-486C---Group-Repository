@@ -272,6 +272,7 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   encRandomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
   player: {fileID: 1432586729}
+  characterData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
 --- !u!4 &1853294646
 Transform:
   m_ObjectHideFlags: 0

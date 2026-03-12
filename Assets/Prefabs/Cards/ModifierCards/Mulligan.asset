@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: MULLIGAN
   descrption: Randomly swap 2 cards in the current hand with cards in the deck
-  effectValue: 0
+  effectValue: 2
   image: {fileID: -481236402, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   value: 2

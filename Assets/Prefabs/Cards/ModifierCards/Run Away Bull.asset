@@ -15,6 +15,6 @@ MonoBehaviour:
   name: RUNAWAY BULL
   descrption: For a temporary amount of time, dashes  push enemies away slightly
     and inflict damage
-  effectValue: 0
+  effectValue: 10
   image: {fileID: -89600445, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   buffTime: 10
