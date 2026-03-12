@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3828313729109400056}
   - component: {fileID: -4211245802234121258}
   m_Layer: 0
-  m_Name: SparkPreFab
+  m_Name: FrostNovaPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 271.42468, y: -24.053883, z: -7.1609178}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,10 +96,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1975
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -122,6 +122,8 @@ MonoBehaviour:
   projspeed: 10
   dmgradius: 1
   ttl: 5
+  effect: {fileID: 11400000, guid: e52d2b47cb1ffc9448bc161208f55534, type: 2}
+  dmg: 1
   enemylayer:
     serializedVersion: 2
     m_Bits: 64

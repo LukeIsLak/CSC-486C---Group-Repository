@@ -110,18 +110,32 @@ public class EnemyInterface : MonoBehaviour
         hasFreeze = true;
         numFreeze += 1;
 
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+        List<Color> originalColors = new List<Color>();
+        foreach (SpriteRenderer sr in sprites) {
+            originalColors.Add(sr.color);
+            sr.color = Color.blue;
+        }
+
         yield return new WaitForSeconds(data.freezeDuration);
 
-        if (--numFreeze <= 0) hasFreeze = false;
+        if (--numFreeze <= 0) {
+            for (int i = 0; i < sprites.Length; i++) {
+                if (sprites[i] != null)
+                    sprites[i].color = originalColors[i];
+            }
+            hasFreeze = false;
+        }
     }
 
     public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
         Rigidbody rb = GetComponent<Rigidbody>();
+        if (knockbackOrigin == null) return;
         if (rb != null) {
             Vector3 direction = (transform.position - knockbackOrigin).normalized;
             // direction.y = 0f; leave in if we want 
-            rb.AddForce(direction * data.knockbackForce, ForceMode.Impulse);
-            hasKnockback = true;
+            rb.AddForce(direction * data.knockbackForce, ForceMode.Force);
+            // hasKnockback = true;
         }
     }
 

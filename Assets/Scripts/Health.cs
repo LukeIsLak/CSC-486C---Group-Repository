@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
 
     [Header("Data")]
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private CharacterData playerData;
     public float maxHealth { get; private set; }
     public float currentHealth {  get; private set; }
 
@@ -20,10 +21,10 @@ public class Health : MonoBehaviour
     public event Action<float, float> OnHealthChanged;
     
     private void NotifyHealthChanged() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
-    public void Init(float maxHealth)
+    public void Init(float maxHealth, float currentHealth)
     {
         this.maxHealth = maxHealth;
-        currentHealth = maxHealth;
+        this.currentHealth = currentHealth;
         NotifyHealthChanged();
     }
 
@@ -52,7 +53,7 @@ public class Health : MonoBehaviour
     public void Heal(float amount)
     {
         if (amount <= 0) return;
-
+        Debug.Log(amount);
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         NotifyHealthChanged();
     }
@@ -65,5 +66,8 @@ public class Health : MonoBehaviour
 
     }
 
-
+    public void UpdateCurrentHealthSO()
+    {
+        playerData.currentHealth = this.currentHealth;   
+    }
 }

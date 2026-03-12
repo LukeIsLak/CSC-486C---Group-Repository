@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mana Shield
   m_EditorClassIdentifier: 
   name: MANA SHIELD
-  descrption: Negate x number of hits from enemies
-  effectValue: 0
+  descrption: Negate three hits from enemies
+  effectValue: 3
   image: {fileID: -348492228, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   shieldHits: 3

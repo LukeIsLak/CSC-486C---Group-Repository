@@ -14,27 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHand:
   - {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
-  - {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+  - {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
   - {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
   - {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
   - {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
-  currency: 50
+  currency: 0
   playerdeck:
   - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     uid: 0
-    useable: 1
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    useable: 0
+  - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
     uid: 1
-    useable: 1
+    useable: 0
   - cardData: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
     uid: 2
     useable: 1
   - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     uid: 3
-    useable: 1
+    useable: 0
   - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
     uid: 4
     useable: 1
   buffer: []
-  nextUid: 8
+  nextUid: 5
   amountRemovalTokens: 0

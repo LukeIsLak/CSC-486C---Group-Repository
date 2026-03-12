@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: FIREBALL
   descrption: Deals damage on contact. Explodes against surfaces
-  effectValue: 0
+  effectValue: 20
   image: {fileID: -2073127299, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 10
   dmgradius: 3

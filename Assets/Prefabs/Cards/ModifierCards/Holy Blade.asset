@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: HOLY BLADE
   descrption: Increase damage of your weapon for a certain amount of time
-  effectValue: 0
+  effectValue: 10
   image: {fileID: -1342628124, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   buffTime: 10
   increaseAmount: 0.2

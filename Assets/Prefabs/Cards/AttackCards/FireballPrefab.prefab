@@ -122,6 +122,7 @@ MonoBehaviour:
   projspeed: 10
   dmgradius: 3
   ttl: 5
+  effect: {fileID: 11400000, guid: 3c8a4643113a6844bad6dcf16d5dd445, type: 2}
   enemylayer:
     serializedVersion: 2
     m_Bits: 64

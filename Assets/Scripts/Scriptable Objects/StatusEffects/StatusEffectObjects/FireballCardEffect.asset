@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b2d4117b6c7e1e4e8aa369e11f3c12d, type: 3}
-  m_Name: Haste
+  m_Script: {fileID: 11500000, guid: b5718ba391cc3c547bac68b740de5433, type: 3}
+  m_Name: FireballCardEffect
   m_EditorClassIdentifier: 
-  name: HASTE
-  descrption: 'Increases your movement speed for a set duration '
-  effectValue: 10
-  image: {fileID: -553130707, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
-  buffTime: 10
+  name: Fireball
+  type: 0
+  ticksPerSecond: 2
+  tickDamage: 1
+  totalTicks: 10
+  isStackable: 1

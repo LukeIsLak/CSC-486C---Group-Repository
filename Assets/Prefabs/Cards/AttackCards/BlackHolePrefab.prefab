@@ -95,16 +95,16 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1975
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &814989952815652038
 MonoBehaviour:
@@ -118,5 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44751a44bb884e578bc8301691a8817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
   radius: 5
   ttl: 5
+  effect: {fileID: 11400000, guid: 47a0279ae0783b746b3e11236ebe334d, type: 2}
