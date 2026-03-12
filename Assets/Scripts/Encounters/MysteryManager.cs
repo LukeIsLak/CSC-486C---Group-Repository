@@ -43,7 +43,7 @@ public class MysteryManager : MonoBehaviour
         }
 
         // Determine which range r lands on
-        float r = encRandomContext.rnd.NextFloat(weightSum);
+        float r = encRandomContext.NextFloat(weightSum);
         foreach (var (key, value) in weights)
         {
             r -= value;

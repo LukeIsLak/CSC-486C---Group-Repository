@@ -35,7 +35,7 @@ public class DungeonManager : MonoBehaviour
     void SetupDungeon()
     {
         if (!dungeonData.useSeed)
-        dungeonData.dungeonSeed = encRandomContext.rnd.NextInt();
+        dungeonData.dungeonSeed = encRandomContext.NextInt();
         lg = Instantiate(dungeonGeneratorPrefab, transform).GetComponent<LevelGenerator>();
         lg.Single               = Single;
         lg.DoubleI              = DoubleI;
@@ -69,7 +69,7 @@ public class DungeonManager : MonoBehaviour
 
         for (int i = 0; i < trapRoomsToCreate; i++)
         {
-            DungeonRoomScript cur = rooms[encRandomContext.rnd.NextInt(0, rooms.Count)];
+            DungeonRoomScript cur = rooms[encRandomContext.NextInt(0, rooms.Count)];
             cur.SetTrapRoom();
             rooms.Remove(cur);
         }

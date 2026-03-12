@@ -33,7 +33,7 @@ public class ShopItemList : ScriptableObject
         }
 
         // Determine which range r lands on
-        float r = randomContext.rnd.NextFloat(weightSum);
+        float r = randomContext.NextFloat(weightSum);
         foreach (var (key, value) in weights)
         {
             r -= value;
