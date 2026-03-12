@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8652888968531217007
 Transform:
@@ -117,6 +117,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8652888968531217007}
     m_Modifications:
+    - target: {fileID: 1700562496300324074, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2435008727307982583, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983026466987867097, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7364625894379622962, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.43
@@ -160,6 +172,10 @@ PrefabInstance:
     - target: {fileID: 7890228034489567368, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
       propertyPath: m_Name
       value: Torch
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890228034489567368, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -253,6 +269,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8652888968531217007}
     m_Modifications:
+    - target: {fileID: 1700562496300324074, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2435008727307982583, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983026466987867097, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7364625894379622962, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.14
@@ -296,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 7890228034489567368, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
       propertyPath: m_Name
       value: Torch (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890228034489567368, guid: 5c5833fe54444cd4585485c5f2f7fdd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

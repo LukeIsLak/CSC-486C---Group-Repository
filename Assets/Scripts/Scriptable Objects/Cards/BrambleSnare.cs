@@ -23,7 +23,11 @@ public class BrambleSnare : Cards
 
         if (Physics.Raycast(ray, out hit, 20f))
         {
-            Instantiate(bramblePrefab, hit.point, Quaternion.identity);
+            //Ensure that the trap is placed on the floor
+            if (Physics.Raycast(hit.point + Vector3.up * 2f, Vector3.down, out hit, 10f))
+            {
+                Instantiate(bramblePrefab, hit.point, Quaternion.identity);
+            }
         }
 
         yield break;

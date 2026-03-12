@@ -16,4 +16,4 @@ MonoBehaviour:
   descrption: Casts a tracking bolt of lightning that can chain to close enemies
   effectValue: 10
   image: {fileID: -896222872, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
-  ChainLightningPrefab: {fileID: 0}
+  ChainLightningPrefab: {fileID: 6355065046752603685, guid: 0f90f2c53358c43b78fa431333a916d3, type: 3}

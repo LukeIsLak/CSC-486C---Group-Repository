@@ -5,7 +5,7 @@ using UnityEngine;
 public class BrambleTrap : MonoBehaviour
 {
     [SerializeField] private float slowAmount = 5f;
-    [SerializeField] private float damage = 5f;
+    [SerializeField] private float damage = 2f;
 
     [SerializeField] private float ttl = 5f;
 
@@ -13,16 +13,17 @@ public class BrambleTrap : MonoBehaviour
         StartCoroutine(timeToLive(ttl));
     }
 
+    //Change this function later to prevent double hits
     void OnTriggerStay(Collider other)
     {
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
         if (enemy != null){
-                //enemy.Hit(dmg);
+                enemy.Hit(damage);
             }
             else {
                 enemy = other.GetComponentInParent<EnemyInterface>();
                 if (enemy != null){
-                    //enemy.Hit(dmg);
+                    enemy.Hit(damage);
                 }
             }
 
