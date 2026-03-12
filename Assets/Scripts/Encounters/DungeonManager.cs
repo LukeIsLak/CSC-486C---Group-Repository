@@ -79,7 +79,7 @@ public class DungeonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            EnterLayout.Raise();
+            //EnterLayout.Raise();
         }
     }
 }

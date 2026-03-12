@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5f23d866a7c274c90d8b3584fbb657, type: 3}
   m_Name: EncounterRandomContext
   m_EditorClassIdentifier: 
-  rnd:
-    state: 796061318
-  seed: 1
+  seed: 3179293508
+  state: 2590307771
