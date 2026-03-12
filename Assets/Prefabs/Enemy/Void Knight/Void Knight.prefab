@@ -356,7 +356,7 @@ MonoBehaviour:
   nma: {fileID: 8300452717123703922}
   currentMoveSpeed: 0
   checkPlayerPath: 0
-  moveDistMult: 2
+  moveDistMult: 5
   moveThreshold: 0.5
   isStepping: 0
   canSeePlayer: 0
@@ -368,31 +368,30 @@ MonoBehaviour:
   maxAgroToAttackTime: 4
   isAttacking: 0
   delayCombo1: 0
-  comboMoveSpeed: 10
-  comboMoveMultDist: 10
+  comboMoveSpeed: 40
+  comboMoveMultDist: 20
   combo1PlayerRange: 10
-  comboInBetweenTime: 3
+  comboInBetweenTime: 0.6
   minNumFireball: 5
   maxNumFireball: 15
   minDurFireballCast: 0.2
   maxDurFireballCast: 0.4
   fireball: {fileID: 4765867937132852493, guid: c73976c67d773034ca969d65af864ca2, type: 3}
-  divineJudgement: {fileID: 0}
+  divineJudgement: {fileID: 4096687424845127648, guid: 57c9eb6840514a34cb131844a4940cf6, type: 3}
   minNumDivineJudgement: 3
   maxNumDivineJudgement: 9
-  minDurDivineJudgementCast: 0.1
-  maxDurDivineJudgementCast: 0.15
-  minAttackWait: 0.5
-  maxAttackWait: 3
+  minDurDivineJudgementCast: 0.3
+  maxDurDivineJudgementCast: 0.7
+  minAttackWait: 0.3
+  maxAttackWait: 2.5
   canAttack: 0
   canDamage: 0
   inAttackCombo1pt1: 0
   inAttackCombo1pt2: 0
   inAttackCombo1pt3: 0
-  castSpawn: {fileID: 0}
-  castDelay: 0.4
-  speedModifier: 1
-  OnDefeat: {fileID: 0}
+  castSpawn: {fileID: 5196187500254166737}
+  castDelay: 1
+  OnDefeat: {fileID: 11400000, guid: 53c7e9606309a0142bd5710ad82d2065, type: 2}
 --- !u!54 &1102890631558432364
 Rigidbody:
   m_ObjectHideFlags: 0

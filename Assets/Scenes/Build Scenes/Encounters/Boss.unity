@@ -811,11 +811,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 420664090}
   m_SourcePrefab: {fileID: 100100000, guid: 6d76c35187af15a4db1382ba9b79d475, type: 3}
---- !u!4 &581407443 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5196187500254166737, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-  m_PrefabInstance: {fileID: 989527085}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &675223509 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6d76c35187af15a4db1382ba9b79d475, type: 3}
@@ -1265,11 +1260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3814586654985131698, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814586654985131698, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4515992479925628554, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_Size.z
@@ -1288,52 +1283,8 @@ PrefabInstance:
       value: 0.039
       objectReference: {fileID: 0}
     - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: OnDefeat
-      value: 
-      objectReference: {fileID: 11400000, guid: 53c7e9606309a0142bd5710ad82d2065, type: 2}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: castSpawn
-      value: 
-      objectReference: {fileID: 581407443}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: moveDistMult
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: maxAttackWait
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: minAttackWait
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: comboMoveSpeed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: divineJudgement
-      value: 
-      objectReference: {fileID: 4096687424845127648, guid: 57c9eb6840514a34cb131844a4940cf6, type: 3}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: AttackCombo1wait
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: comboMoveMultDist
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: comboInBetweenTime
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: maxDurDivineJudgementCast
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6800915753969404803, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
-      propertyPath: minDurDivineJudgementCast
-      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8300452717123703922, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_BaseOffset
