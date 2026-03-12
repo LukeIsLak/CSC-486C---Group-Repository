@@ -15,7 +15,7 @@ MonoBehaviour:
   name: BRAMBLE SNARE
   descrption: Creates a trap area that slows + damages enemies as they move through
     it
-  effectValue: 0
+  effectValue: 5
   image: {fileID: -1074723813, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   bramblePrefab: {fileID: 0}
   spawnDistance: 5

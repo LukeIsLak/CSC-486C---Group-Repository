@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbb407cfe1e545489b46d7efc39d99a, type: 3}
   m_Name: Recall
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
+  name: Recall
+=======
   name: RECALL
   descrption: Recall your last used card into deck
-  effectValue: 0
+  effectValue: 1
+>>>>>>> Stashed changes
   image: {fileID: 1858401742, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
