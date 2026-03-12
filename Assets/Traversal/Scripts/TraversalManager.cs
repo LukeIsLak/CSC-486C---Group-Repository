@@ -46,11 +46,12 @@ public class TraversalManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (respondToInputs && Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
+        if (!respondToInputs) return;
+        if (Input.GetKeyDown(KeyCode.Return) && traversableLayout.curSelectedEncounter)
         {
             // EnterSelectedEncounter();
         }
-        if (respondToInputs && Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             // ExitToMenu.Raise();
         }
@@ -88,7 +89,6 @@ public class TraversalManager : MonoBehaviour
 
     public void EnterSelectedEncounter()
     {
-        if (!respondToInputs) return;
         layoutData.currentEncounter = traversableLayout.curSelectedEncounter.encounter;
         layoutData.completedIndices.Add(traversableLayout.curSelectedEncounter.index);
         respondToInputs = false;
@@ -98,5 +98,11 @@ public class TraversalManager : MonoBehaviour
     public void ClearInventoryBuffer()
     {
         inventory.clearBuffer();
+    }
+
+    public void ToggleInputs()
+    {
+        respondToInputs = !respondToInputs;
+        traversableLayout.respondToInputs = respondToInputs;
     }
 }

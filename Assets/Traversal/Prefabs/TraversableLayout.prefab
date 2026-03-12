@@ -51,6 +51,7 @@ MonoBehaviour:
   firstEncounter: {fileID: 11400000, guid: 0feaa69d8f5e1024d83c3dc0291d1f29, type: 2}
   lastEncounter: {fileID: 11400000, guid: 007c3c4f7b4045a4cbdf1083d185fcce, type: 2}
   ClickSelected: {fileID: 11400000, guid: 8d167369dce19e546afc0b95453ca8f0, type: 2}
+  respondToInputs: 1
   layerContainers: []
   prevSelectedEncounter: {fileID: 0}
   curSelectedEncounter: {fileID: 0}

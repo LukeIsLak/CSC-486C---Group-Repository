@@ -19,6 +19,8 @@ public class NodeTraversalUI : MonoBehaviour
     private List<CardViewUI> playerDeckCards = new();
     private List<CardViewUI> bufferCards = new();
 
+    public GameEvent ToggleNodeInventory;
+
     private bool isRemoveMode = false;
 
     private void Start()
@@ -36,6 +38,7 @@ public class NodeTraversalUI : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         playerDeckScrollRect.verticalNormalizedPosition = 1f; // top
         bufferDeckScrollRect.verticalNormalizedPosition = 1f;
+        ToggleNodeInventory.Raise();
     }
 
     public void HideDeckContainer()
@@ -43,6 +46,7 @@ public class NodeTraversalUI : MonoBehaviour
         inventoryInNode.SetActive(false);
         openDeckButton.SetActive(true);
         ClearDeckUI();
+        ToggleNodeInventory.Raise();
     }
     private void ToggleRemoveMode()
     {
