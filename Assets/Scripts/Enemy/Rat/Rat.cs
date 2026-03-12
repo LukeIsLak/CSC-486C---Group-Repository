@@ -68,8 +68,9 @@ public class Rat : EnemyInterface
     }
 
     public void initialize_nma() {
+        //XXX this is a hack we need to fix this later!!!
+        transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
         nma.enabled = true;
-
         nma.updatePosition = false;
         nma.updateRotation = false;
 
@@ -77,7 +78,7 @@ public class Rat : EnemyInterface
     }
 
     public override void KillEnemy() {
-        if (trs != null) trs.RemoveEnemy();
+        if (rs != null) rs.RemoveEnemy();
         if (rcm != null) rcm.RemoveRat(this, ratColonyNum);
         if(rsm != null) rsm.RemoveEntity(this);
         Destroy(this.gameObject);
@@ -152,11 +153,16 @@ public class Rat : EnemyInterface
                                 + wander * rd.wanderWeight;
         
         Vector3 velocity = Vector3.ClampMagnitude(finalVelocity, moveSpeed);
-        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime;
-        transform.position += planarMove;
+        Vector3 planarMove = new Vector3(velocity.x, velocity.y, velocity.z) * Time.deltaTime;
+        // Use Rigidbody for movement if available
+        if (rb != null && !rb.isKinematic) {
+            rb.MovePosition(rb.position + planarMove);
+        } else {
+            transform.position += planarMove;
+        }
 
         Vector3 agentNextPos = nma.nextPosition;
-        nma.nextPosition = new Vector3(transform.position.x, agentNextPos.y, transform.position.z);
+        nma.nextPosition = new Vector3(transform.position.x, nma.nextPosition.y, transform.position.z);
 
         if (velocity.sqrMagnitude > 0f) {
             Quaternion rot = Quaternion.LookRotation(new Vector3(velocity.x, 0f, velocity.z));
@@ -203,10 +209,17 @@ public class Rat : EnemyInterface
     public void UpdateColonyMove() {
         UpdateMove();
         if (nma != null && IsAgentAtDestination(nma)) FinishWander();
-    }
-
+    }    
     public void UpdateAgroApproach() {
+        if (nma == null || !nma.isOnNavMesh) return;
+
+        // Sync agent position to Rigidbody so desiredVelocity points correctly
+        nma.nextPosition = new Vector3(transform.position.x, nma.nextPosition.y, transform.position.z);
+
+        // Periodically recalculate path to player
         UpdatePlayerPath();
+
+        // Move via Rigidbody using desiredVelocity from NavMeshAgent
         UpdateMove();
     }
 

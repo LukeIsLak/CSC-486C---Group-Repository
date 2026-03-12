@@ -47,12 +47,15 @@ public class Bat : EnemyInterface
 
     [Header("Bat Transition Variables")]
     public int attackAmount = 0;
-    public BatAttacks? nextAttack;
-
-    [Header("Misc. Variables")]
+    public BatAttacks? nextAttack;    [Header("Misc. Variables")]
     [SerializeField] private Vector3 prevLateralOffset = Vector3.zero;
-    // [SerializeField] private float attackCooldownTimer = 0f;
     public BatStates currentState;
+
+    [Header("Path Abandonment")]
+    [SerializeField] private float abandonCheckInterval = 0.5f; // how often to check progress (seconds)
+    [SerializeField] private float abandonMinProgress   = 0.05f; // minimum distance that must be covered per interval
+    private float abandonTimer      = 0f;
+    private Vector3 lastCheckPos    = Vector3.zero;
 
     /****************************************************/
     /*          Beginning Of Instance Methods           */
@@ -71,7 +74,7 @@ public class Bat : EnemyInterface
     }
 
     public override void KillEnemy() {
-        if (trs != null) trs.RemoveEnemy();
+        if (rs != null) rs.RemoveEnemy();
         if (bsm != null) bsm.entities.Remove(this);
         Destroy(this.gameObject);
     }
@@ -172,11 +175,10 @@ public class Bat : EnemyInterface
             Debug.DrawLine(p, transform.position, new Color(1f, 0f, 1f, 1f), 5f);
         
             /*Calculate a cubic bezier path to the perch point*/
-            targetPath = calculatePathCube(transform.position, (p + new Vector3(0f, bd.pearchYOffset, 0f)));
-            currentPathIndex = 0;
-            isMoving = targetPath.Count > 0;
+            targetPath = calculatePathCube(transform.position, (p + new Vector3(0f, bd.pearchYOffset, 0f)));        currentPathIndex = 0;
+        isMoving = targetPath.Count > 0;
 
-            /*Debug the perch point*/
+        /*Debug the perch point*/
             if (debug && targetPath.Count > 0) {
                 Debug.DrawLine(targetPath[0], transform.position, new Color(0f, 1f, 1f, 1f), 5f);
                 for (int i = 1; i < targetPath.Count - 1; i++) {
@@ -288,11 +290,44 @@ public class Bat : EnemyInterface
         }
         // fallback (should not happen)
         return bd.weightedAttacks[0].attack;
+    }    void AbandonPath(string reason = "") {
+        if (debug) Debug.Log($"Bat abandoned path: {reason}");
+        isMoving = false;
+        if (isPecking) { peckComplete = true; isPecking = false; }
+        if (isPeckRebounding) isPeckRebounding = false;
+        if (currentState == BatStates.SwoopAttacking) swoopComplete = true;
+        abandonTimer = 0f;
+        lastCheckPos = transform.position;
+        // Reset velocity so bat doesn't keep drifting
+        if (rb != null) {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 
     void UpdateMoveSpot(bool s) {
         if (isMoving && targetPath.Count > 0) {
             Vector3 target = targetPath[currentPathIndex];
+
+            // Path abandonment: check periodically if the bat is making progress
+            abandonTimer += Time.deltaTime;
+            if (abandonTimer >= abandonCheckInterval) {
+                float progress = Vector3.Distance(transform.position, lastCheckPos);
+                float distNow  = Vector3.Distance(transform.position, target);
+                float distPrev = Vector3.Distance(lastCheckPos, target);
+
+                bool isStuck       = progress < abandonMinProgress;
+                bool isMovingAway  = distNow > distPrev + abandonMinProgress; // moving away from target
+
+                if (isStuck || isMovingAway) {
+                    AbandonPath(isStuck ? $"stuck (progress={progress:F3})" : $"moving away from target (dist {distPrev:F3} -> {distNow:F3})");
+                    return;
+                }
+                abandonTimer = 0f;
+                lastCheckPos = transform.position;
+            }
+
+            target = targetPath[currentPathIndex];
             float step = moveSpeed * speedModifier * Time.deltaTime;
             if (currentState != BatStates.Perching) {
                 RaycastHit hitInfo;
@@ -322,9 +357,7 @@ public class Bat : EnemyInterface
         }
 
         if (s) steer();
-    }
-
-    private bool IsPathClear(Vector3 from, Vector3 to, out RaycastHit hitInfo, float minRadius = 0.5f, int maxTries = 10) {
+    }    private bool IsPathClear(Vector3 from, Vector3 to, out RaycastHit hitInfo, float minRadius = 0.5f, int maxTries = 10) {
         Vector3 dir = (to - from).normalized;
         float dist = Vector3.Distance(from, to);
         hitInfo = default;
@@ -332,11 +365,18 @@ public class Bat : EnemyInterface
         {
             if (!Physics.Raycast(from, dir, out hitInfo, dist, bd.wallLayerMask))
                 return true;
-            // Shorten the distance and try again
             dist = Mathf.Max(minRadius, dist * 0.8f);
             to = from + dir * dist;
         }
         return false;
+    }
+
+    private void StartNewPath(List<Vector3> path) {
+        targetPath = path;
+        currentPathIndex = 0;
+        isMoving = path.Count > 0;
+        abandonTimer = 0f;
+        lastCheckPos = transform.position;
     }
 
     /****************************************************/
@@ -362,8 +402,8 @@ public class Bat : EnemyInterface
         nextAttack = GetRandomWeightedAttack();
     }
 
-    public void UpdateFlutter()
-    {
+        public void UpdateFlutter()
+        {
         if (!isFluttering || playerTransform == null) return;
 
         /*Calculate the current angle from the bat to the player in XZ*/
@@ -376,31 +416,34 @@ public class Bat : EnemyInterface
         float arcLength = moveSpeed * speedModifier * Time.deltaTime * direction;
         float desiredRadius = Mathf.Max(0.1f, bd.flutterRadius + (Mathf.PerlinNoise(flutterJitterSeed, Time.time * 0.5f) - 0.5f) * 2f * bd.flutterRadialJitter);
 
-        float deltaAngle = arcLength / desiredRadius; // radians
+        float deltaAngle = arcLength / desiredRadius;
 
         /*Next position to move*/
         float nextAngle = angleRad + deltaAngle;
         Vector3 nextPos = playerTransform.position + new Vector3(Mathf.Cos(nextAngle), 0f, Mathf.Sin(nextAngle)) * desiredRadius;
 
-        /*Check distance to a wall to prevent bats going through walls*/
-        float minRadius = 0.5f; //XXX eventually set this in bat data
-        float checkRadius = desiredRadius;
+        /*Check distance to a wall - if blocked, reverse direction and skip this frame*/
         RaycastHit hitInfo;
         if (!IsPathClear(transform.position, nextPos, out hitInfo, minRadius: 0.5f, maxTries: 10)) {
-            steer();
-            return;
+            direction *= -1f; // reverse orbit direction
+            // nudge slightly away from the wall if we have a hit point
+            if (hitInfo.collider != null) {
+                Vector3 awayFromWall = (transform.position - hitInfo.point).normalized;
+                awayFromWall.y = 0f;
+                rb.MovePosition(transform.position + awayFromWall * moveSpeed * speedModifier * Time.deltaTime);
+            }
+            return; // skip movement this frame
         }
 
         Vector3 checkedNextPos = nextPos;
 
-        /* Add vertical bob and lateral offset as before */
+        /* Add vertical bob and lateral offset */
         float vertBob = Mathf.Sin(Time.time * bd.verticalBobSpeed + flutterJitterSeed) * bd.verticalBobAmplitude;
         Vector3 baseDir = (checkedNextPos - playerTransform.position).normalized;
-        Vector3 sideDir = new Vector3(-baseDir.z, 0f, baseDir.x); // perpendicular in XZ
+        Vector3 sideDir = new Vector3(-baseDir.z, 0f, baseDir.x);
 
         float angleForNoise = Mathf.Atan2(baseDir.z, baseDir.x);
         float squig = (Mathf.PerlinNoise(angleForNoise * 0.5f + flutterJitterSeed, Time.time * bd.horizontalBobSpeed + flutterJitterSeed) - 0.5f) * 2f;
-        float radialMod = squig * (bd.horizontalBobAmplitude * 0.25f);
         Vector3 lateralTarget = sideDir * (squig * bd.horizontalBobAmplitude);
         lateralTarget[1] += bd.flutterBaseHeight;
         float alpha = 1f - Mathf.Exp(-bd.lateralSmoothing * Time.deltaTime);
@@ -408,6 +451,12 @@ public class Bat : EnemyInterface
         prevLateralOffset = lateralOffset;
 
         Vector3 finalTarget = checkedNextPos + lateralOffset + new Vector3(0f, vertBob, 0f);
+
+        /*Also check the final target (with vertical offset) for wall collisions*/
+        if (!IsPathClear(transform.position, finalTarget, out hitInfo, minRadius: 0.5f, maxTries: 10)) {
+            direction *= -1f;
+            return;
+        }
 
         /* Move toward the final target */
         float step = moveSpeed * speedModifier * Time.deltaTime;
@@ -518,10 +567,8 @@ public class Bat : EnemyInterface
     /****************************************************/
     /*          Beginning Of Swoop Methods              */
     /****************************************************/
-
     public void SwoopAttack() 
     {
-
         Vector3 start = transform.position;
         Vector3 playerPos = playerTransform.position;
 
@@ -535,7 +582,34 @@ public class Bat : EnemyInterface
 
         Vector3 p1 = 2 * playerPos - (start + end) / 2;
 
-        targetPath = calculatePathQuad(start, end, p1);
+        List<Vector3> candidatePath = calculatePathQuad(start, end, p1);
+
+        /*Pre-validate the entire swoop path - check each segment for wall collisions*/
+        RaycastHit hitInfo;
+        Vector3 prevPoint = start;
+        bool pathBlocked = false;
+        int blockedIndex = candidatePath.Count;
+
+        for (int i = 0; i < candidatePath.Count; i++) {
+            if (!IsPathClear(prevPoint, candidatePath[i], out hitInfo, minRadius: 0.3f, maxTries: 5)) {
+                pathBlocked = true;
+                blockedIndex = i;
+                break;
+            }
+            prevPoint = candidatePath[i];
+        }
+
+        /*If path is blocked, trim the path to just before the wall*/
+        if (pathBlocked) {
+            if (blockedIndex == 0) {
+                /*Wall is immediately in front - cancel the swoop entirely*/
+                swoopComplete = true;
+                return;
+            }
+            targetPath = candidatePath.GetRange(0, blockedIndex);
+        } else {
+            targetPath = candidatePath;
+        }
 
         currentPathIndex = 0;
         isMoving = true;
@@ -546,6 +620,16 @@ public class Bat : EnemyInterface
 
     public void UpdateSwoop()
     {
+        /*Per-step wall check during swoop*/
+        if (isMoving && targetPath.Count > 0 && currentPathIndex < targetPath.Count) {
+            RaycastHit hitInfo;
+            if (!IsPathClear(transform.position, targetPath[currentPathIndex], out hitInfo, minRadius: 0.3f, maxTries: 5)) {
+                isMoving = false;
+                swoopComplete = true;
+                return;
+            }
+        }
+
         UpdateMoveSpot(false);
 
         if (!isMoving) swoopComplete = true;

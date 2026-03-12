@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WeightMerchant
   m_EditorClassIdentifier: 
   encounter: {fileID: 11400000, guid: fca610a75f2aaa64ba0de23343610b17, type: 2}
-  weight: 100
+  weight: 2

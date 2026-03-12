@@ -20,6 +20,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private float dashTime = 1.0f;
     [SerializeField] private float dashSpeed = 1.0f;
     [SerializeField] private float dashCD = 2.0f;
+    public bool runawayBullActive = false;
 
     [Header("Animation State")]
     [SerializeField] private const string ATTACK1 = "Attack 1";
@@ -190,6 +191,16 @@ public class PlayerCharacter : MonoBehaviour
             playerController.controller.Move(playerController.speed * GetDashDirection() * dashSpeed * Time.deltaTime);
             yield return null;
         }
+        if(runawayBullActive){
+            if(Physics.SphereCast(cam.transform.position, attackRadius*5,cam.transform.forward,out RaycastHit hit, attackRange*5, enemyLayer)) {
+                Debug.Log($"Hit: {hit.collider.name} ");
+
+                var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
+                if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 100, StatusEffectType.Knockback); // need some numbers decided
+            
+            }
+        }
+
         isDashing = false;
         dashCoroutine = null;
     }

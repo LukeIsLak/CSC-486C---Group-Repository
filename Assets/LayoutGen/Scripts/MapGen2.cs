@@ -27,6 +27,7 @@ public class MapGen2 : MonoBehaviour
     public int randomSeed       = 0;            // The random seed to use in generation
     public bool useSetSeed      = false;        // Whether not to use to provided seed
     public float complexity     = 0f;    // Chance of making an inexistent connection
+    public float minWidthFraction = 0.5f;
 
 
     /*********************
@@ -226,7 +227,7 @@ public class MapGen2 : MonoBehaviour
         if (distanceToEnd < 15) curMax = (int)Mathf.Min(curMax, (int)Mathf.Pow(2, distanceToEnd));
 
         // Tend to be half full at least
-        curMin      = Mathf.Max(curMin, (maxWidth + maxWidth % 2)/2);
+        curMin      = Mathf.Max(curMin, (int)(maxWidth * minWidthFraction));
         // Clamp to max
         curMin      = Mathf.Min(curMax, curMin);    
 

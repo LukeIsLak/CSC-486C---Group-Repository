@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbee20ff47a419744a60f28c2ecc36c5, type: 3}
   m_Name: Mulligan
   m_EditorClassIdentifier: 
-  name: Mulligan
-  image: {fileID: 1694671016, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
+  name: MULLIGAN
+  descrption: Randomly swap 2 cards in the current hand with cards in the deck
+  effectValue: 2
+  image: {fileID: -481236402, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   value: 2

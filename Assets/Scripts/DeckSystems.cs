@@ -64,7 +64,7 @@ public class DeckSystems : MonoBehaviour
 
     /// <summary>
     /// adds the given card to the back of the deck, 
-    /// ASSUMPTION: when a card is colected the check for deck size happens, this function is for adding a used card back in to the deck
+    /// ASSUMPTION: when a card is collected the check for deck size happens, this function is for adding a used card back in to the deck
     /// </summary>
     /// <param name="card"></param>
     public void addCardToDeck(CardInstance card) {
@@ -86,11 +86,6 @@ public class DeckSystems : MonoBehaviour
         // remove first card from deck
         CardInstance card = deck.Dequeue();
 
-        //// check handslot is valid
-        //if (handslot < 0 || handslot > 4) { 
-        //    Debug.Log("error wrong value used on drawCard, value should be between 0-4");
-        //    return null;
-        //}
         currentDeckSize--;
         hand.Add(card);
         NotifyHandContentsChanged();
@@ -102,7 +97,7 @@ public class DeckSystems : MonoBehaviour
     /// will suffle the player hand but will exclude any card assigned to the player hand, insperation: https://en.wikipedia.org/wiki/Fisher�Yates_shuffle
     /// </summary>
     public void shuffleExcHand() {
-        //temporary list to aid in suffeling (abbility to pull specific indexes) 
+        //temporary list to aid in suffling (abbility to pull specific indexes) 
         List<CardInstance> sortingList = new List<CardInstance>();
         int listSize = currentDeckSize;
         currentDeckSize = 0;
@@ -128,7 +123,7 @@ public class DeckSystems : MonoBehaviour
     public void shuffleIncHand() {
         // add the cards in to the players deck
         int looplength = MAXHANDSIZE;
-        if (deck.Count < MAXHANDSIZE){ looplength = deck.Count;}
+        if (deck.Count + hand.Count < MAXHANDSIZE){ looplength = deck.Count + hand.Count;}
 
         for (int i = 0; i < looplength; i++){
             addCardToDeck(hand[i]);
@@ -166,12 +161,14 @@ public class DeckSystems : MonoBehaviour
 
         // loop through hand first then move on to the deck
         for (int i = 0; i < deckSize; i++) {
-            //passedDeck[i].uid = nextUid++;
+
             if (passedDeck[i].useable) {
                 if (hand.Count < MAXHANDSIZE) {
                     hand.Add(passedDeck[i]);
+                    //Debug.Log("hand" + passedDeck[i].cardData.name);
                 } else {
                     addCardToDeck(passedDeck[i]);
+                    //Debug.Log("deck" + passedDeck[i].cardData.name);
                 }
             }
         }
@@ -211,26 +208,30 @@ public class DeckSystems : MonoBehaviour
         if (hand.Count == 0) return;
         if(currentHandIndex < 0 || currentHandIndex >= hand.Count) return;
 
-        //call needed card function and set the cards usabilty to false
+        CardInstance curCard = hand[currentHandIndex];
+
+        // put card in discard and remove from hand and set the cards usabilty to false
+        string cardname = hand[currentHandIndex].cardData.name;
         hand[currentHandIndex].useable = false;
-        StartCoroutine(hand[currentHandIndex].cardData.Play(hand[currentHandIndex].cardData));
-
-        // put card in discard and remove from hand
-
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
-        //reflect change in hand size
+
+        //call needed card function 
+        StartCoroutine(curCard.cardData.Play(curCard.cardData));
 
         if(hand.Count == 0 ) currentHandIndex = 0;
         else if(currentHandIndex >=  hand.Count) currentHandIndex = hand.Count - 1;
 
         NotifyHandContentsChanged();
 
-        cardsToDraw++;
-        if (!drawFlag){
-            drawFlag = true;
-            StartCoroutine(newCardTimer());
-        }
+        if (cardname != "Recall" && cardname != "Greed"){ // as recall has its own process to fill its spot
+            //Debug.Log("named");
+            cardsToDraw++;
+            if (!drawFlag){
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        } 
         
     }
 
@@ -358,7 +359,9 @@ public class DeckSystems : MonoBehaviour
         
         if (deck.Count > 0){
             yield return new WaitForSeconds(TIMETODRAWNEWCARD);
-            drawCard();
+            if (cardsToDraw > 0){
+                drawCard();
+            }
         }
 
         cardsToDraw--;
@@ -372,8 +375,42 @@ public class DeckSystems : MonoBehaviour
         }
     }
 
-    // add last used card back in to the players deck
+    // add last used card back in to the players hand
     public void recallCard(){
-        addCardToDeck(discard[discard.Count-1]);
+        if (discard.Count < 1){
+            hand.Add(discard[discard.Count - 1]);
+
+            NotifyHandContentsChanged();
+
+            discard.RemoveAt(discard.Count - 1);
+        } else {
+            cardsToDraw++;
+            if (!drawFlag){
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        }
+    }
+
+    public void GreedDrawCards(int amount){
+        if (hand.Count + amount > MAXHANDSIZE){ // the -1 is needed because this runs as the discard is handled during this functions run time so the hand belives it still has this card in it
+            amount = MAXHANDSIZE - hand.Count;
+        }
+        Debug.Log(amount);
+        for (int i = 0; i < amount; i++){
+            drawCard();
+            //Debug.Log("doing a draw");
+        }
+        NotifyHandContentsChanged();
+
+        //check if there should be a card draws
+        if (hand.Count < MAXHANDSIZE){ 
+            cardsToDraw = MAXHANDSIZE - hand.Count;
+
+            if (!drawFlag){
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        }
     }
 }

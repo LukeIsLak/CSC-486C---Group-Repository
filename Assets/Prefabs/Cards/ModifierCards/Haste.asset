@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2d4117b6c7e1e4e8aa369e11f3c12d, type: 3}
   m_Name: Haste
   m_EditorClassIdentifier: 
-  name: Haste
-  image: {fileID: -1179530230, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
+  name: HASTE
+  descrption: 'Increases your movement speed for a set duration '
+  effectValue: 10
+  image: {fileID: -553130707, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   buffTime: 10

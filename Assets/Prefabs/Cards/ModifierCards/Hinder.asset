@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a5b4a63bd82654e8e4230fcee3d1f4, type: 3}
   m_Name: Hinder
   m_EditorClassIdentifier: 
-  name: Hinder
-  image: {fileID: -708883800, guid: 32565b9c659339b4a8b0f27f1b8beaee, type: 3}
+  name: HINDER
+  descrption: Enemies are temporarily slowed on hit for a set duration
+  effectValue: 10
+  image: {fileID: 930042162, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   effectTime: 10
   enemyeffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
   enemySpeedChange: {fileID: 11400000, guid: 49689543c418cbe408e966af5245f709, type: 2}

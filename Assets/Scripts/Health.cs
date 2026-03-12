@@ -3,10 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Health : MonoBehaviour
 {
+    [Header("Events")]
+    public GameEvent ExitToLayout;
+
+    [Header("Data")]
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private CharacterData playerData;
     public float maxHealth { get; private set; }
     public float currentHealth {  get; private set; }
 
@@ -15,10 +21,10 @@ public class Health : MonoBehaviour
     public event Action<float, float> OnHealthChanged;
     
     private void NotifyHealthChanged() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
-    public void Init(float maxHealth)
+    public void Init(float maxHealth, float currentHealth)
     {
         this.maxHealth = maxHealth;
-        currentHealth = maxHealth;
+        this.currentHealth = currentHealth;
         NotifyHealthChanged();
     }
 
@@ -47,14 +53,21 @@ public class Health : MonoBehaviour
     public void Heal(float amount)
     {
         if (amount <= 0) return;
-
+        Debug.Log(amount);
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         NotifyHealthChanged();
     }
     private void Die()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        PlayerInput pi = gameObject.GetComponent<PlayerInput>();
+        pi.SwitchCurrentActionMap("UI");
+        ExitToLayout.Raise();
+
     }
 
-
+    public void UpdateCurrentHealthSO()
+    {
+        playerData.currentHealth = this.currentHealth;   
+    }
 }

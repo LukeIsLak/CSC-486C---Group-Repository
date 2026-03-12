@@ -7,9 +7,13 @@ public enum SceneType
 {
     NodeTraversal,
     Combat,
-    Merchant
+    Merchant,
+    DoNothing,
+    ForceMouseOn
+
 }
 public class SceneContext : MonoBehaviour
 {
     public SceneType sceneType;
+    public bool doRefresh;
 }

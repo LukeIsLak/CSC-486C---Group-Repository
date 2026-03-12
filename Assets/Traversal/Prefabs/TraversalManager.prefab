@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7284723983683458099}
   - component: {fileID: 6367830794460400418}
+  - component: {fileID: 575460039633128520}
   - component: {fileID: 4374788087702025242}
+  - component: {fileID: -9004379545313436538}
   m_Layer: 0
   m_Name: TraversalManager
   m_TagString: Untagged
@@ -47,10 +49,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traversableLayoutPrefab: {fileID: 3586655531442555394, guid: 1a3e8eb0918fc8c42a15ac3694c9447f, type: 3}
   sceneCamera: {fileID: 0}
+  inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
   EnterEncounter: {fileID: 11400000, guid: bd10d720d2ae37d40beb52c0770b1d02, type: 2}
   ExitToMenu: {fileID: 11400000, guid: 20ec28cb62e98684ea900717317c51fa, type: 2}
   LayoutInitialized: {fileID: 11400000, guid: 13ec22a1b42ff784d91881f6de58e85a, type: 2}
+--- !u!114 &575460039633128520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960965781143065970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8d167369dce19e546afc0b95453ca8f0, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6367830794460400418}
+        m_TargetAssemblyTypeName: TraversalManager, Assembly-CSharp
+        m_MethodName: ClearInventoryBuffer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4374788087702025242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +101,34 @@ MonoBehaviour:
       - m_Target: {fileID: 6367830794460400418}
         m_TargetAssemblyTypeName: TraversalManager, Assembly-CSharp
         m_MethodName: EnterSelectedEncounter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-9004379545313436538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960965781143065970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e1c65894eff9f7048ab83f076c356f47, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6367830794460400418}
+        m_TargetAssemblyTypeName: TraversalManager, Assembly-CSharp
+        m_MethodName: ToggleInputs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

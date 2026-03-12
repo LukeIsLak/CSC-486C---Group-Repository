@@ -29,19 +29,16 @@ public class GameManager : MonoBehaviour
         playerInitialized = true;
         
         var deck = player.GetComponent<DeckSystems>();
-        var playerHealth = player.GetComponent<Health>();
-
-        playerHealth.Init(playerData.maxHealth);
-
         //deck.InitializeRandomDeck(cardsDB, 30);
         //Debug.Log("I try thing");
-       
     }
     private void InitializedDeckOnce()
     {
+        return;
         if(inventoryInitialized) return;
         inventoryInitialized = true;
-        inventory.InitializeRandomDeck(cardsDB, 30);
+        //inventory.InitializeRandomDeck(cardsDB, 15);
+        //inventory.Initialize();
     }
     private void InitializedPerScene(GameObject player)
     {
@@ -54,8 +51,12 @@ public class GameManager : MonoBehaviour
         SceneContext context = FindObjectOfType<SceneContext>();
         if(context == null)
         {
-            Debug.LogError("No SceneType in scene");
+            Debug.LogWarning("No SceneType in scene");
+            HideUI();
+            return;
+
         }
+        //if (context.doRefresh) inventory.refreshCards();
         switch (context.sceneType)
         {
             case SceneType.NodeTraversal:
@@ -67,9 +68,22 @@ public class GameManager : MonoBehaviour
             case SceneType.Merchant:
                 HandleMerchantScene();
                 break;
+            case SceneType.DoNothing:
+                HideUI();
+                break;
+            case SceneType.ForceMouseOn:
+                HideUI();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                break;
         }
     }
-
+    private void HideUI()
+    {
+        UIManager.instance.HideCombatView();
+        UIManager.instance.HideMerchantView();
+        UIManager.instance.HideNodePanel();
+    }
     private void HandleNodeTraversalScene()
     {
         Cursor.lockState = CursorLockMode.None;

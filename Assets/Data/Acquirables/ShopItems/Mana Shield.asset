@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Mana Shield
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 0
+  price: 20
   acquirable: {fileID: 11400000, guid: 98c94aa050787ec479717aa940725c82, type: 2}
