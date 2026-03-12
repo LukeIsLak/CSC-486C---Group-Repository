@@ -30,7 +30,7 @@ MonoBehaviour:
   maxColliderAngle: 37
   layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1920
   pearchYOffset: -0.25
   normalWeight: 1
   heightWeight: 1
