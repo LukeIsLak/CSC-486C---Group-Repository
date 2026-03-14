@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b85a17577b39a4b80b955d11ad8464, type: 3}
   m_Name: Dungeon Data
   m_EditorClassIdentifier: 
-  dungeonPoolSize: 2
+  dungeonPoolSize: 5
   dungeonIters: 1
   dungeonItersPerSpecial: 1
-  dungeonSeed: -1191932139
+  dungeonSeed: 513895826
   useSeed: 0
