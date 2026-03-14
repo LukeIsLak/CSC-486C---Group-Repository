@@ -74,6 +74,8 @@ public class VoidKnight : EnemyInterface
     public Transform castSpawn;
     public float castDelay = 0.4f;
 
+    public GameEvent OnDefeat;
+
     public List<VoidKnightWeightedAttacks> weightedAttacks;
 
     void Awake() {
@@ -158,7 +160,7 @@ public class VoidKnight : EnemyInterface
         navDir.y = 0f;
         
         Vector3 velocity = Vector3.ClampMagnitude(navDir, currentMoveSpeed);
-        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * currentMoveDistMult * Time.deltaTime;
+        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * currentMoveDistMult * Time.deltaTime * speedModifier;
         transform.position += planarMove;
 
         Vector3 agentNextPos = nma.nextPosition;
@@ -342,6 +344,25 @@ public class VoidKnight : EnemyInterface
             isAttacking = false;
         }
     }
+
+    public override void KillEnemy() {
+        if (rs != null) rs.RemoveEnemy();
+        if (OnDefeat != null) OnDefeat.Raise();
+        Destroy(this.gameObject);
+    }
+
+    /****************************************************/
+    /*         Beginning Of Event Listeners             */
+    /****************************************************/
+
+    public void ApplySpeedModifier() 
+    {
+        speedModifier = enemyEffects.getEnemySpeedModifier();
+    }
+
+    /****************************************************/
+    /*             End Of Event Listeners               */
+    /****************************************************/
 
     // XXX since the divine judgement leaves the player vulnerable maybe is the player
     // is within range add a slash attack?

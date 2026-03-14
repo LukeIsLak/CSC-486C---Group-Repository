@@ -7,14 +7,15 @@ public class RestManager : MonoBehaviour
     public GameEvent EnterLayout;
 
     public PlayerInventory inventory;
-    public int percentageHeal = 10;
+    public float percentageHeal = 0.33f;
     public CharacterData playerData;
     
     private bool hasExited = false;
     void Start()
     {
-        float healamount = playerData.maxHealth * (1f / (float)percentageHeal);
+        float healamount = playerData.maxHealth * percentageHeal;
         playerData.currentHealth += healamount;
+        if (playerData.currentHealth > playerData.maxHealth) playerData.currentHealth = playerData.maxHealth;
         // refresh cards
         inventory.refreshCards();
     }

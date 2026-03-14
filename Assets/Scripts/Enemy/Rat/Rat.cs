@@ -44,6 +44,7 @@ public class Rat : EnemyInterface
 
     [Header("Misc. Variables")]
     public RatStates currentState;
+    
 
     /****************************************************/
     /*          Beginning Of Instance Methods           */
@@ -153,7 +154,7 @@ public class Rat : EnemyInterface
                                 + wander * rd.wanderWeight;
         
         Vector3 velocity = Vector3.ClampMagnitude(finalVelocity, moveSpeed);
-        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime;
+        Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime * speedModifier;
 
         // if (currentState == RatStates.AgroApproach) {
         //     Debug.Log("NavMeshAgent destination: " + nma.destination);
@@ -162,6 +163,7 @@ public class Rat : EnemyInterface
         //     Debug.Log("Velocity: " + velocity);
         // }
         transform.position += planarMove;
+        nma.nextPosition = transform.position;
 
         Vector3 agentNextPos = nma.nextPosition;
         nma.nextPosition = new Vector3(transform.position.x, agentNextPos.y, transform.position.z);
@@ -281,8 +283,8 @@ public class Rat : EnemyInterface
                         nma.SetDestination(colonyMoveSpot);
                     }
                     // nma.isStopped = !isWandering;
-                    nma.updatePosition = isWandering;
-                    nma.updateRotation = isWandering;
+                    // nma.updatePosition = isWandering;
+                    // nma.updateRotation = isWandering;
                 }
             }
             else {
@@ -398,6 +400,8 @@ public class Rat : EnemyInterface
         isLeaping = false;
         doneLeap = true;
 
+        nma.nextPosition = transform.position;
+
         anim.SetBool("isAttack", false);
     }
 
@@ -434,6 +438,21 @@ public class Rat : EnemyInterface
 
     /****************************************************/
     /*           End Of Couroutines / Timers            */
+    /****************************************************/
+
+
+
+    /****************************************************/
+    /*         Beginning Of Event Listeners             */
+    /****************************************************/
+
+    public void ApplySpeedModifier() 
+    {
+        speedModifier = enemyEffects.getEnemySpeedModifier();
+    }
+
+    /****************************************************/
+    /*             End Of Event Listeners               */
     /****************************************************/
 
 }

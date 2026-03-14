@@ -27,7 +27,8 @@ public class FogHandler : MonoBehaviour
         float startX = -layoutData.maxWidth * layoutData.encounterSep / 2 + 0.5f * layoutData.encounterSep;
         
         // Place fog at unrevealed layers
-        for (int i = 0; i <= layoutData.depth; i++)
+        // XXX Eventually remove magic 4 here 
+        for (int i = 0; i <= layoutData.depth + 4; i++)
         {
             if (i < layoutData.layersRevealed) continue;
             fogLayer = new List<GameObject>();

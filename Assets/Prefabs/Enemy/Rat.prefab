@@ -389,9 +389,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 11400000, guid: 9b7570a54ad9409448bf314754504fad, type: 2}
-  enemyEffects: {fileID: 0}
+  enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
   rs: {fileID: 0}
-  curHealth: 0
+  curHealth: 10
   moveSpeed: 0
   speedModifier: 1
   hasDamageOverTime: 0
@@ -427,6 +427,7 @@ MonoBehaviour:
   colonyMoveSpot: {x: 0, y: 0, z: 0}
   curLeapDir: {x: 0, y: 0, z: 0}
   currentState: 0
+  speedModifier: 1
 --- !u!95 &2156385922286755932
 Animator:
   serializedVersion: 5
@@ -509,13 +510,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: a2dc841c8556e544d8b4e1478d629d40, type: 2}
+  Event: {fileID: 11400000, guid: 49689543c418cbe408e966af5245f709, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5050423561288609642}
+      - m_Target: {fileID: 8633630617670396899}
         m_TargetAssemblyTypeName: Rat, Assembly-CSharp
-        m_MethodName: initialize_nma
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
