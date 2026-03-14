@@ -50,7 +50,7 @@ public class RewardSystem : MonoBehaviour
     public void RoomCleared()
     {
         roomsCleared++;
-        if (roomsCleared == (int) (totalRooms * partialRewardRatio)) DoChestSpawn();
+        if (roomsCleared == Mathf.Ceil (totalRooms * partialRewardRatio)) DoChestSpawn();
         if (roomsCleared == totalRooms)
         {
             DoChestSpawn();
