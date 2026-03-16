@@ -30,7 +30,6 @@ public class RatStateManager : StateMachine<Rat, RatStates>
         AddEnterState(RatStates.ColonyIdle, EnterColonyIdleState);
 
         /*ColonyWander*/
-        // XXX maybe add LonerWander
         AddTransition(RatStates.ColonyWander, RatStates.ColonyIdle, ColonyWanderToColonyIdle);
         AddTransition(RatStates.ColonyWander, RatStates.LonerWander, ColonyWanderToLonerWander);
         AddTransition(RatStates.ColonyWander, RatStates.AgroApproach, ColonyWanderToAgroApproach);
@@ -123,7 +122,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool ColonyIdleToLonerIdle(Rat r) {
-        return r.isLoner;
+        return r.isLoner && r.isIdle;
     }
 
     public bool ColonyIdleToAgroApproach(Rat r) {
@@ -136,7 +135,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool ColonyWanderToLonerWander(Rat r) {
-        return r.isLoner && r.isWandering;
+        return r.isLoner && r.isMoving;
     }
 
     public bool ColonyWanderToAgroApproach(Rat r) {
@@ -149,7 +148,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool LonerIdleToColonyIdle(Rat r) {
-        return !r.isLoner;
+        return !r.isLoner && r.isIdle;
     }
 
     public bool LonerIdleToAgroApproach(Rat r) {
@@ -162,7 +161,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public bool LonerWanderToColonyWander(Rat r) {
-        return !r.isLoner && r.isWandering;
+        return !r.isLoner && r.isMoving;
     }
 
     public bool LonerWanderToAgroApproach(Rat r) {
@@ -228,7 +227,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public void EnterColonyWanderState(Rat r) {
-        if (!r.isMoving) r.StartWanderStagger();
+        if (!r.waitToMove && !r.isMoving) r.StartWanderStagger();
     }
 
     public void EnterLonerIdleState(Rat r) {
@@ -236,7 +235,7 @@ public class RatStateManager : StateMachine<Rat, RatStates>
     }
 
     public void EnterLonerWanderState(Rat r) {
-        if (!r.isMoving) r.StartWanderStagger();
+        if (!r.waitToMove && !r.isMoving) r.StartWanderStagger();
     }
 
     public void EnterAgroApproachState(Rat r) {
