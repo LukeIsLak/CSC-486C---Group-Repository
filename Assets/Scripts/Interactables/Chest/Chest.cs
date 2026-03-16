@@ -6,7 +6,11 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
+    [Header("Data")]
     [SerializeField] private ChestItems chestItems;
+    public List<GameObject> sequenceObjects;
+
+    [Header("Opening Animation")]
     [SerializeField] private Mesh open;
     [SerializeField] private Mesh closed;
     [SerializeField] private Transform cardSpawnPosition;
@@ -14,7 +18,7 @@ public class Chest : MonoBehaviour
     private MeshFilter meshFilter;
     public bool isOpened { get; private set; }
 
-    public bool isTrapRoom;
+    public bool isGoldChest;
 
     void Awake()
     {
@@ -28,7 +32,7 @@ public class Chest : MonoBehaviour
         meshFilter.sharedMesh = open;
         meshFilter.sharedMesh.RecalculateBounds();
         UIManager.instance.HideInteract();
-        if (!isTrapRoom)
+        if (!isGoldChest)
         {
             CardAcquirable randomCard = (CardAcquirable)chestItems.GetCard();
             randomCard.Acquire();
@@ -43,6 +47,13 @@ public class Chest : MonoBehaviour
             goldItem.Acquire();
             UIManager.instance.ShowChestUI(goldItem);
             Debug.Log("Get Gold");
+        }
+
+        // Begin all trap sequences 
+        foreach (GameObject so in sequenceObjects)
+        {
+            ITrapSequence s = so.GetComponent<ITrapSequence>();
+            s?.Begin();
         }
     }
 

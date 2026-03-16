@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestSequence : TrapSequence
+public class ChestSequence : MonoBehaviour, ITrapSequence
 {
     // Start is called before the first frame update
     public bool started = false;
@@ -14,7 +14,7 @@ public class ChestSequence : TrapSequence
         started = false;
     }
 
-    public override void Begin()
+    public void Begin()
     {
         started = true;
     }
