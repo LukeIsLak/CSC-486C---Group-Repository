@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapDoorSequence : TrapSequence
+public class TrapDoorSequence : MonoBehaviour, ITrapSequence
 {
     public bool started = false;
     public DoorMover trapDoors;
-    public override void Begin()
+    public void Begin()
     {
         started = true;
         trapDoors.Lower();

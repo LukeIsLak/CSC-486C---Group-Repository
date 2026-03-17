@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TrapRoomSpawner : RoomSpawn
+public class TrapRoomSpawner : RoomSpawn, ITrapSequence
 {
+    public float trapDelay = 1.5f;
     public void Initialize() {
         totalWaveCount = Random.Range(minWaves, maxWaves);
         waves = new List<Wave>();
@@ -15,7 +16,7 @@ public class TrapRoomSpawner : RoomSpawn
         InstantiateWave(waves[currentWaveCount]);
     }
 
-    public void StartTrap(float trapDelay) {
+    public void Begin() {
         StartCoroutine(StartTrapSpawn(trapDelay));
     }
 
