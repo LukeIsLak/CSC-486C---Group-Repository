@@ -15,14 +15,12 @@ public class StaminaUI : MonoBehaviour
 
         if (this.character != null)
         {
-
             this.character.OnDashNotify -= HandleStaminaBarColor;
         }
         this.character = character;
 
         if (this.character != null)
         {
-            Debug.Log("Character bound to stamina UI");
             this.character.OnDashNotify += HandleStaminaBarColor;
             HandleStaminaBarColor(this.character.nextDashRemaining >= 1f);
         }

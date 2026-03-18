@@ -45,7 +45,7 @@ public class PlayerCharacter : MonoBehaviour
     //For dashing
     private bool isDashing;
     private float nextDashTime;
-    public System.Action<bool> OnDashNotify;
+    public event System.Action<bool> OnDashNotify;
     private bool lastDashState = true;
 
     public float nextDashRemaining
