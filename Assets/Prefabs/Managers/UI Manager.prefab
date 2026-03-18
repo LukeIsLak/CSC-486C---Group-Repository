@@ -2024,7 +2024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaFill: {fileID: 1808644871676342120}
-  readyColor: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0.5019608}
+  readyColor: {r: 0.801, g: 0.801, b: 0.801, a: 1}
   recoveringColor: {r: 0.8784314, g: 0.89411765, b: 0.36078432, a: 1}
 --- !u!1 &3158273435969866226
 GameObject:
