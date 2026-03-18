@@ -20,8 +20,10 @@ public class Health : MonoBehaviour
     public int shield = 0;
 
     public event Action<float, float> OnHealthChanged;
+    public event Action<int> OnShieldChanged;
     
     private void NotifyHealthChanged() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    private void NotifyShieldChanged() => OnShieldChanged?.Invoke(shield);
     public void Init(float maxHealth, float currentHealth)
     {
         this.maxHealth = maxHealth;
@@ -36,6 +38,7 @@ public class Health : MonoBehaviour
         //one of the cards gives the player a sheild that will block attacks, this will check if there is a shield active
         if (shield > 0) {
             shield--;
+            NotifyShieldChanged();
             return;
         }
 
@@ -49,6 +52,11 @@ public class Health : MonoBehaviour
             return;
         }
         NotifyHealthChanged();
+    }
+    public void AddShield(int amount)
+    {
+        shield += amount;
+        NotifyShieldChanged();
     }
 
     public void Heal(float amount)

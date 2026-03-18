@@ -18,8 +18,8 @@ public class ManaShield : Cards
         }
 
         playerhealth = player.GetComponent(typeof(Health)) as Health;
-        
-        playerhealth.shield = shieldHits;
+
+        playerhealth.AddShield(shieldHits);
 
         yield return new WaitForSeconds(0.5f);
     }
