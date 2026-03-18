@@ -835,14 +835,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 5570779764840340953, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: shieldUI
-      value: 
-      objectReference: {fileID: 2039071508}
-    - target: {fileID: 5899445668823216528, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 250
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4515,17 +4507,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2039071508 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1338401412435457063, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-  m_PrefabInstance: {fileID: 400250255}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52b7fa801de3a3429795bb03972f8f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &2064039921
 Mesh:
   m_ObjectHideFlags: 0
