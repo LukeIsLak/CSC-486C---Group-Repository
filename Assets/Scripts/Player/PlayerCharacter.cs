@@ -192,11 +192,11 @@ public class PlayerCharacter : MonoBehaviour
             yield return null;
         }
         if(runawayBullActive){
-            if(Physics.SphereCast(cam.transform.position, attackRadius*5,cam.transform.forward,out RaycastHit hit, attackRange*5, enemyLayer)) {
-                Debug.Log($"Hit: {hit.collider.name} ");
+            if(Physics.SphereCast(cam.transform.position, 3f,cam.transform.forward,out RaycastHit hit, 3f, enemyLayer)) {
+                //Debug.Log($"Hit: {hit.collider.name} ");
 
                 var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
-                if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 100, StatusEffectType.Knockback); // need some numbers decided
+                if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 30, StatusEffectType.Knockback); // need some numbers decided
             
             }
         }
