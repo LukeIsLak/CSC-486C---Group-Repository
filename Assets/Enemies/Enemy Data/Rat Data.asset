@@ -17,12 +17,12 @@ MonoBehaviour:
   damage: 5
   freezeMult: 1.5
   moveSpeed: 3
-  navWeight: 1.5
-  separationWeight: 2
+  navWeight: 3
+  separationWeight: 1
   alignmentWeight: 1
   cohesionWeight: 1
   wanderWeight: 0.3
-  destStopDist: 1
+  destStopDist: 2
   minAddIdleWait: 0
   maxAddIdleWait: 2
   leapRadius: 3
@@ -43,3 +43,6 @@ MonoBehaviour:
   idleDuration: 2
   minMoveWait: 0.25
   maxMoveWait: 0.75
+  colonyJoinRadius: 5
+  colonyLeaveRadius: 10
+  colonyFinishRadius: 2
