@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BatWave
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 8633630617670396899, guid: 22fae4a37b4305f4390b7879197a9c0c, type: 3}
-  enemyTypes: 01000000
+  - {fileID: 864461203881756215, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+  enemyTypes: 00000000
   enemyCounts: 05000000
   spawnDelay: 0
   orderedSpawn: 1
