@@ -27,7 +27,7 @@ public class DoorMover : MonoBehaviour
             float t = elapsed / time;
             transform.position = Vector3.Lerp(start, end, t);
             elapsed += Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         transform.position = end;
     }

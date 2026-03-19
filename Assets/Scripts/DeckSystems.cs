@@ -377,12 +377,12 @@ public class DeckSystems : MonoBehaviour
 
     // add last used card back in to the players hand
     public void recallCard(){
-        if (discard.Count < 1){
-            hand.Add(discard[discard.Count - 1]);
+        if (discard.Count > 1){
+            hand.Add(discard[discard.Count - 2]);
 
             NotifyHandContentsChanged();
 
-            discard.RemoveAt(discard.Count - 1);
+            discard.RemoveAt(discard.Count - 2);
         } else {
             cardsToDraw++;
             if (!drawFlag){

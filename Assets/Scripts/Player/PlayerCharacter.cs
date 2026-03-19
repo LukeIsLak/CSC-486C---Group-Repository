@@ -30,6 +30,7 @@ public class PlayerCharacter : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private CharacterData playerData;
+    [SerializeField] private GameEvent PlayerInteractEvent;
 
     private Animator swordAnimator;
     private Camera cam;
@@ -44,6 +45,8 @@ public class PlayerCharacter : MonoBehaviour
     //For dashing
     private bool isDashing;
     private float nextDashTime;
+    public event System.Action<bool> OnDashNotify;
+    private bool lastDashState = true;
 
     public float nextDashRemaining
     {
@@ -67,6 +70,7 @@ public class PlayerCharacter : MonoBehaviour
     private void Update()
     {
         CheckChestInteractable();
+        CheckDashStateForUI();
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -184,7 +188,7 @@ public class PlayerCharacter : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
-        nextDashTime = Time.time + dashCD + dashTime;
+        nextDashTime = Time.time + dashCD;
         float startTime = Time.time;
         while(Time.time < startTime + dashTime)
         {
@@ -192,18 +196,28 @@ public class PlayerCharacter : MonoBehaviour
             yield return null;
         }
         if(runawayBullActive){
-            if(Physics.SphereCast(cam.transform.position, attackRadius*5,cam.transform.forward,out RaycastHit hit, attackRange*5, enemyLayer)) {
-                Debug.Log($"Hit: {hit.collider.name} ");
+            if(Physics.SphereCast(cam.transform.position, 3f,cam.transform.forward,out RaycastHit hit, 3f, enemyLayer)) {
+                //Debug.Log($"Hit: {hit.collider.name} ");
 
                 var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
-                if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 100, StatusEffectType.Knockback); // need some numbers decided
+                if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 30, StatusEffectType.Knockback); // need some numbers decided
             
             }
         }
-
         isDashing = false;
         dashCoroutine = null;
     }
+    private void CheckDashStateForUI() 
+    {
+        bool isReady = nextDashRemaining >= 1f;
+
+        if (isReady != lastDashState)
+        {
+            lastDashState = isReady;
+            OnDashNotify?.Invoke(isReady);
+        }
+    }
+
 
     private Vector3 GetDashDirection()
     {
@@ -228,6 +242,7 @@ public class PlayerCharacter : MonoBehaviour
         if (!context.performed) return;
 
         currentChest?.Open();
+        PlayerInteractEvent.Raise();
        
     }
 

@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject interactPanel;
     [SerializeField] private GameObject nodePanel;
     [SerializeField] private ChestUI chestUI;
+    [SerializeField] private ShieldUI shieldUI;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
         if(pauseView == null) pauseView = GetComponentInChildren<PauseUI>(true);
         if (staminaView == null) staminaView = GetComponentInChildren<StaminaUI>(true);
         if (chestUI == null) chestUI = GetComponentInChildren<ChestUI>(true);
+        if (shieldUI == null) shieldUI = GetComponentInChildren<ShieldUI>(true);
         HideInventoryView();
         HideCombatView();
         HidePauseView();
@@ -46,7 +48,12 @@ public class UIManager : MonoBehaviour
     public void BindPlayer(GameObject player)
     {
         var health = player.GetComponent<Health>();
-        if(health != null ) healthBar.BindHealthUI(health);
+        if (health != null)
+        {   
+            shieldUI.BindHealthUI(health);
+            healthBar.BindHealthUI(health);
+        }
+
         var playerCharacter = player.GetComponent<PlayerCharacter>();
         if(playerCharacter != null) staminaView.BindPlayerUI(playerCharacter);
         playerInput = player.GetComponent<PlayerInput>();

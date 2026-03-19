@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapStart : MonoBehaviour
+public class TrapTriggerStarter : MonoBehaviour
 {
     public string playerTag;
     public bool started = false;
 
-    public List<TrapSequence> sequences;
-    public TrapRoomSpawner trs;
-    public float trapDelay = 1.5f;
+    public List<GameObject> sequencesObjects;
 
     void OnTriggerEnter(Collider collider)
     {
@@ -21,8 +19,11 @@ public class TrapStart : MonoBehaviour
     {
         if (started) return;
         started = true;
-        trs.StartTrap(trapDelay);
-        foreach (TrapSequence seq in sequences) seq.Begin();
+        foreach (GameObject so in sequencesObjects)
+        {
+            ITrapSequence s = so.GetComponent<ITrapSequence>();
+            s?.Begin();
+        }
         Destroy(gameObject);
     }
 }
