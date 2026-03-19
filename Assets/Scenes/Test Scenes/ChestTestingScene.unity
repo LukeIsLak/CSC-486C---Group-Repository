@@ -783,10 +783,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4013527029263919619, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_Name
-      value: Crosshair
-      objectReference: {fileID: 0}
     - target: {fileID: 4014179157516273961, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -835,22 +831,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4330623882492308119, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5028816676097569061, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_Color.b
-      value: 0.875089
-      objectReference: {fileID: 0}
-    - target: {fileID: 5028816676097569061, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8962264
-      objectReference: {fileID: 0}
-    - target: {fileID: 5028816676097569061, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_Color.r
-      value: 0.877994
-      objectReference: {fileID: 0}
     - target: {fileID: 5272061132759555729, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_Name
       value: UI Manager
@@ -861,6 +841,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7438601485183626159, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349646633842106228, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349646633842106228, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3342,8 +3330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExitToLayout: {fileID: 0}
+  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
+  playerData: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  hasDied: 0
   shield: 0
 --- !u!43 &867298706
 Mesh:

@@ -1663,7 +1663,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 480, y: 100}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -1299.9999, y: -1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1088199199688048129
 MonoBehaviour:
@@ -3074,7 +3074,7 @@ GameObject:
   - component: {fileID: 428673578401948310}
   - component: {fileID: 5028816676097569061}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3120,7 +3120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.877994, g: 0.8962264, b: 0.875089, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3343,7 +3343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5675059345156270939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4318,7 +4318,7 @@ MonoBehaviour:
   pauseView: {fileID: 5018102146981094155}
   combatPanel: {fileID: 4330623882492308119}
   staminaView: {fileID: 7999061897545407878}
-  merchantPanel: {fileID: 0}
+  merchantPanel: {fileID: 6962926922944430101}
   interactPanel: {fileID: 8531926527384108391}
   nodePanel: {fileID: 6739653715888183322}
   chestUI: {fileID: 7080628301873587033}
@@ -5385,7 +5385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6906845264107069948
 RectTransform:
   m_ObjectHideFlags: 0
