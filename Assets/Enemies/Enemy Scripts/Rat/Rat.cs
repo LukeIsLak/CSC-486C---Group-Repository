@@ -16,23 +16,24 @@ public class Rat : EnemyInterface
     public RatColonyManager rcm;
     public RatStateManager rsm;
     public NavMeshAgent nma;
-    public SphereCollider outerCol;
-    public SphereCollider innerCol;
+    // public SphereCollider outerCol;
+    // public SphereCollider innerCol;
 
     /*Unlike the states, these let the state manager know when it's time to change the state */
     [Header("State Checkers")]
-    public bool isInitialized   = false;
-    public bool isIdle          = false;
-    public bool isWandering     = false;
-    public bool canWander       = false;
-    public bool doneWandering   = false;
-    public bool isAgro          = false;
-    public bool isLeaping       = false;
-    public bool canLeap         = true;
-    public bool doneLeap        = false;
-    public bool waitToMove      = false;
-    public bool isMoving        = false;
-    public bool checkPlayerPath = true;
+    public bool startInitialized    = false;
+    public bool isInitialized       = false;
+    public bool isIdle              = false;
+    public bool isWandering         = false;
+    public bool canWander           = false;
+    public bool doneWandering       = false;
+    public bool isAgro              = false;
+    public bool isLeaping           = false;
+    public bool canLeap             = true;
+    public bool doneLeap            = false;
+    public bool waitToMove          = false;
+    public bool isMoving            = false;
+    public bool checkPlayerPath     = true;
 
     [Header("Rat Colony Values")]
     public bool isRatMaster = false;
@@ -66,11 +67,28 @@ public class Rat : EnemyInterface
         rsm.AddEntity(this);
         rcm.AddRatEntity(this);
 
-        outerCol.radius = rd.colonyDist;
-        innerCol.radius = rd.neighbourStopRadius;
+        // outerCol.radius = rd.colonyDist;
+        // innerCol.radius = rd.neighbourStopRadius;
     }
 
     public void initialize_nma() {
+        if (!startInitialized) StartCoroutine(delay_navmesh());
+    }
+
+    private IEnumerator delay_navmesh() {
+        startInitialized = true;
+        yield return new WaitForSeconds(0.5f);
+
+        if (!nma.isOnNavMesh) {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas)) {
+                transform.position = hit.position;
+            } else {
+                Debug.LogWarning($"{gameObject.name}: Could not find NavMesh nearby at {transform.position}!");
+                gameObject.SetActive(false);
+            }
+        }
+
         nma.enabled = true;
 
         nma.updatePosition = false;
@@ -124,6 +142,18 @@ public class Rat : EnemyInterface
     }
 
     private void UpdateMove() {
+        if (!nma.isOnNavMesh) {
+            Debug.LogWarning($"{gameObject.name}: Is not on a NavMesh!");
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas)) {
+                transform.position = hit.position;
+            } else {
+                Debug.LogWarning($"{gameObject.name}: Could not find NavMesh nearby at {transform.position}!");
+                // Optionally, disable the rat or destroy it here
+                gameObject.SetActive(false);
+                return;
+            }
+        }
         nma.nextPosition = transform.position;
         Vector3 navDir = nma.desiredVelocity;
         navDir.y = 0f;
