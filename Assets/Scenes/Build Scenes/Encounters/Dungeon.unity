@@ -461,6 +461,7 @@ MonoBehaviour:
   specialPrefabs:
   - {fileID: 49450181928653073, guid: e6b91ebda48c8644c9c0c8f41b9ad47e, type: 3}
   - {fileID: 49450181928653073, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+  - {fileID: 49450181928653073, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
   roomScale: 34
   dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
   diffScale: {fileID: 11400000, guid: 85d548ea1711f3c48b702264a19bb777, type: 2}

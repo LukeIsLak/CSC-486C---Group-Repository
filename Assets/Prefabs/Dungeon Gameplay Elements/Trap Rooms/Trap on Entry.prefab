@@ -161,11 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTag: Player
   started: 0
-  sequences:
-  - {fileID: 8350682023533028019}
-  - {fileID: 6078091010159603745}
-  trs: {fileID: 7596533088010235272}
-  trapDelay: 1.5
+  sequencesObjects: []
 --- !u!1 &3452522053420848015
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +293,7 @@ MonoBehaviour:
   remainingEnemies: 0
   uponCompletion: {fileID: 11400000, guid: 164095ff0a96c684ebaf127baaf8cd4c, type: 2}
   delay: 1
+  trapDelay: 1.5
 --- !u!1001 &1057578919886156863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -359,17 +356,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2958255454993530998, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
   m_PrefabInstance: {fileID: 1057578919886156863}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6078091010159603745 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6554129433988400158, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
-  m_PrefabInstance: {fileID: 1057578919886156863}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06a849a8a18ca649ae9007daa62afde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1662628634428183872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -432,14 +418,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3425261309166436542, guid: bebefe60a2ae51340803e1ca45a7afdc, type: 3}
   m_PrefabInstance: {fileID: 1662628634428183872}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8350682023533028019 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7273668408935266291, guid: bebefe60a2ae51340803e1ca45a7afdc, type: 3}
-  m_PrefabInstance: {fileID: 1662628634428183872}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d49545e91a15ff4d95a0c2c03ac0323, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
