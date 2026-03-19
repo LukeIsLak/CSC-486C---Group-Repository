@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203e4ba975b70b348ba725244f6b4f59, type: 3}
   m_Name: Layout Data
   m_EditorClassIdentifier: 
-  depth: 12
+  depth: 9
   maxWidth: 5
-  randomSeed: 1024544531
-  complexity: 1
+  randomSeed: 1164869229
+  complexity: 0.5
   useSeed: 1
   minWidthFraction: 0.8
   restEncounter: {fileID: 11400000, guid: 0179983dc6e1aed4e99f665cb873ca11, type: 2}
