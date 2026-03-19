@@ -451,7 +451,11 @@ PrefabInstance:
     - target: {fileID: 2235089538205288992, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 59e51cf9dd8034a4790811fcd95c471d, type: 3}
+      objectReference: {fileID: 1150673242, guid: f7f558ff95ea35042a9a5d9e35d05f03, type: 3}
+    - target: {fileID: 3329419591955412040, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 372509883, guid: f7f558ff95ea35042a9a5d9e35d05f03, type: 3}
     - target: {fileID: 4014179157516273961, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
