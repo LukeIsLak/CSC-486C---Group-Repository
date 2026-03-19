@@ -49,8 +49,11 @@ MonoBehaviour:
   randomContext: {fileID: 11400000, guid: f0056c0052a8b0441a735d538dc4a25b, type: 2}
   AddToRoomCountEvent: {fileID: 11400000, guid: 6e40abdd731a5424dbd4a14e5c18234a, type: 2}
   roomVariants: []
-  trapRoomObjects: {fileID: 3452522053420848015, guid: 558070836969bb84fb32ef5985da61a7, type: 3}
-  regularRoomObjects: {fileID: 2487751994428010116, guid: ddca8e3060695d64c9c70f4f7f193519, type: 3}
+  trapRoomObjects:
+  - {fileID: 6178881450353192458, guid: 6d3e41fd059881743b8a4d86cc1da82a, type: 3}
+  - {fileID: 3452522053420848015, guid: 558070836969bb84fb32ef5985da61a7, type: 3}
+  regularRoomObjects:
+  - {fileID: 2487751994428010116, guid: ddca8e3060695d64c9c70f4f7f193519, type: 3}
   isTrapRoom: 0
 --- !u!114 &-5733916875564865696
 MonoBehaviour:
