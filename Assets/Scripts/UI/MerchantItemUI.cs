@@ -14,7 +14,7 @@ public class MerchantItemUI : MonoBehaviour
 
     public void Init(ShopItem shopitem, System.Action<ShopItem, MerchantItemUI> onBuyClicked)
     {
-        description.text = shopitem.acquirable.itemDescription;
+        description.text = shopitem.acquirable.GetName();
         //nameText.text = shopitem.acquirable.itemName;
         icon.sprite = shopitem.acquirable.icon;
         priceText.text = shopitem.price.ToString();

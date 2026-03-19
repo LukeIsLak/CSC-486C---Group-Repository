@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float speed = 5f;
     [SerializeField] private float jumpForce = 2f;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float xSensitivity = 100f;
-    [SerializeField] private float ySensitivity = 100f;
+    [SerializeField] private float xSensitivity = 0.1f;
+    [SerializeField] private float ySensitivity = 0.1f;
     [SerializeField] private float rotationXlimit = 80f;
     [SerializeField] private CharacterData characterData;
     
@@ -69,8 +69,8 @@ public class PlayerController : MonoBehaviour
 
     private void Look()
     {
-        float mouseX = lookValue.x * xSensitivity * Time.deltaTime;
-        float mouseY = lookValue.y * ySensitivity * Time.deltaTime;
+        float mouseX = lookValue.x * xSensitivity;
+        float mouseY = lookValue.y * ySensitivity;
 
         // Vertical look (move cam)
         rotationX -= mouseY;

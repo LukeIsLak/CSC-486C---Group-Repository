@@ -11,6 +11,14 @@ public class LayoutData : ScriptableObject
     public int              randomSeed;
     public float            complexity;
     public bool             useSeed;
+    public float            minWidthFraction;
+
+    [Header("Rest Encounter Placement")]
+    public EncounterInfo restEncounter;
+
+    // Distances between layers where the player can access rests
+    // from the previous layer no matter where they are
+    public List<int> distancesBetween;
 
     [Header("Traversal")]
     public EncounterInfo    currentEncounter;
@@ -24,6 +32,7 @@ public class LayoutData : ScriptableObject
     public void InitializeStates()
     {
         // Traversal initial state
+        if (randomSeed == 0) randomSeed = 1;
         completedIndices.Clear();
         completedIndices.Add(0);
 

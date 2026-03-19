@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793d1dd16c9fd2e4abde4d88da77598d, type: 3}
+  m_Name: BatWave
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 864461203881756215, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+  enemyTypes: 00000000
+  enemyCounts: 05000000
+  spawnDelay: 0
+  orderedSpawn: 1

@@ -7,22 +7,27 @@ public class TestApp : MonoBehaviour
 {
     public GameEvent EnterLayout;
     public LayoutData layoutData;
+    public PlayerInventory inventory;
+    [SerializeField]
+    private RandomContext encRandomContext;
+    public CharacterData characterData;
 
     void Start()
     {
-        // Transition from lobby to layout
-        layoutData.depth            = 9;
-        layoutData.maxWidth         = 7;
-        layoutData.randomSeed       = 0;
+        // RANDOMNESS INITIALIZATION
+        int runSeed                 = (int)System.DateTime.Now.Ticks;
+        if ((uint)runSeed == 0)     {Debug.Log("Seed 0"); runSeed = 1;}
+        layoutData.randomSeed       = runSeed;
         layoutData.useSeed          = true;
-
         layoutData.InitializeStates();
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            EnterLayout.Raise();
-        }
+        encRandomContext.ResetContext((uint)runSeed);
+
+        // PLAYER INITIALIZATION
+        inventory.Initialize();
+        // MAKE SURE PLAYER HAS FULL HEALTH
+        characterData.currentHealth = characterData.maxHealth;
+
+        EnterLayout.Raise();
+
     }
 }

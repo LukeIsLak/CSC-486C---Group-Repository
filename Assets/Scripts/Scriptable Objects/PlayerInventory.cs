@@ -6,31 +6,43 @@ using UnityEngine;
 public class PlayerInventory : ScriptableObject
 {
     
+    public List<Cards> startingHand;    // The hand the player begins with
     public int currency;
     public List<CardInstance> playerdeck = new();
     public List<CardInstance> buffer = new();
+    public int nextUid = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public int amountRemovalTokens = 0;
+
+    public void Initialize()
     {
+        currency = 0;
+        playerdeck.Clear();
+        buffer.Clear();
+        nextUid = 0;
+        amountRemovalTokens = 0;
+
+        foreach (Cards card in startingHand)
+        {
+            playerdeck.Add(new CardInstance(card, nextUid++));
+        }
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    // call this in game manager
+    // call this in game manager.. or doooont since we initialize with a fixed hand!
     public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
     {
-        Debug.Log("im here");
+        // here so the deck doesnt explode in size
+        playerdeck.Clear();
+        nextUid = 0;
+        //Debug.Log("im here");
         for (int i = 0; i < deckSize; i++)
         {
             Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
-            playerdeck.Add(new CardInstance(pick));
+            playerdeck.Add(new CardInstance(pick, nextUid++));
         }
+
+        
     }
 
     /// <summary>
@@ -58,7 +70,37 @@ public class PlayerInventory : ScriptableObject
         buffer.Add(card);
     }
 
-    void clearBuffer(){
+    public void clearBuffer(){
         buffer.Clear();
+    }
+
+    public void bufferToDeck(CardInstance card){
+        for (int i = 0; i < buffer.Count; i++){
+            if (buffer[i] == card){
+                buffer.RemoveAt(i);
+                playerdeck.Add(card);
+                return; // end process as card was found
+            }
+        }
+        
+    }
+
+    // returns true if the player has a token and the card is removed from their deck, returns false if the play does not have a token or the card cant be found
+    public void removeCardFromPlayersDeck(CardInstance card){
+        for (int i = 0; i < playerdeck.Count; i++){
+            if (playerdeck[i] == card){
+                playerdeck.RemoveAt(i);
+            }
+        }
+    }
+
+    public void AddRemovalToken(){
+        amountRemovalTokens++;
+    }
+
+    public void refreshCards(){
+        for (int i = 0; i < playerdeck.Count; i++){
+            playerdeck[i].useable = true;
+        }
     }
 }

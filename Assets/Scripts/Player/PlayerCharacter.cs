@@ -13,11 +13,14 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private float attackRadius = 0.4f;
     [SerializeField] private float attackHitStopDuration = 0.03f;
     [SerializeField] private LayerMask enemyLayer;
+    // for increaseing player damage
+    public float attackMultiplier = 1.0f;
 
     [Header("Dash")]
     [SerializeField] private float dashTime = 1.0f;
     [SerializeField] private float dashSpeed = 1.0f;
     [SerializeField] private float dashCD = 2.0f;
+    public bool runawayBullActive = false;
 
     [Header("Animation State")]
     [SerializeField] private const string ATTACK1 = "Attack 1";
@@ -27,11 +30,13 @@ public class PlayerCharacter : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private CharacterData playerData;
+    [SerializeField] private GameEvent PlayerInteractEvent;
 
     private Animator swordAnimator;
     private Camera cam;
     private Coroutine hitStopCoroutine;
     private PlayerController playerController;
+    private Chest currentChest;
     private string currentAnimationState;
     private bool isAttacking;
     private float lastAttackTime;
@@ -40,6 +45,8 @@ public class PlayerCharacter : MonoBehaviour
     //For dashing
     private bool isDashing;
     private float nextDashTime;
+    public event System.Action<bool> OnDashNotify;
+    private bool lastDashState = true;
 
     public float nextDashRemaining
     {
@@ -58,6 +65,12 @@ public class PlayerCharacter : MonoBehaviour
         swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
         playerController = GetComponent<PlayerController>();    
+    }
+
+    private void Update()
+    {
+        CheckChestInteractable();
+        CheckDashStateForUI();
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -117,7 +130,7 @@ public class PlayerCharacter : MonoBehaviour
             //Debug.Log($"Hit: {hit.collider.name} ");
 
             var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
-            if (enemyComponent != null) enemyComponent.Hit(attackDamage);
+            if (enemyComponent != null) enemyComponent.Hit(attackMultiplier * attackDamage);
             TriggerHitStop(attackHitStopDuration);
             
         }
@@ -175,16 +188,36 @@ public class PlayerCharacter : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
-        nextDashTime = Time.time + dashCD + dashTime;
+        nextDashTime = Time.time + dashCD;
         float startTime = Time.time;
         while(Time.time < startTime + dashTime)
         {
             playerController.controller.Move(playerController.speed * GetDashDirection() * dashSpeed * Time.deltaTime);
             yield return null;
         }
+        if(runawayBullActive){
+            if(Physics.SphereCast(cam.transform.position, attackRadius*5,cam.transform.forward,out RaycastHit hit, attackRange*5, enemyLayer)) {
+                Debug.Log($"Hit: {hit.collider.name} ");
+
+                var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
+                if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 100, StatusEffectType.Knockback); // need some numbers decided
+            
+            }
+        }
         isDashing = false;
         dashCoroutine = null;
     }
+    private void CheckDashStateForUI() 
+    {
+        bool isReady = nextDashRemaining >= 1f;
+
+        if (isReady != lastDashState)
+        {
+            lastDashState = isReady;
+            OnDashNotify?.Invoke(isReady);
+        }
+    }
+
 
     private Vector3 GetDashDirection()
     {
@@ -202,5 +235,35 @@ public class PlayerCharacter : MonoBehaviour
         }
 
         return forward;
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        currentChest?.Open();
+        PlayerInteractEvent.Raise();
+       
+    }
+
+    private void CheckChestInteractable()
+    {
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 2.0f))
+        {
+            Chest chest = hit.collider.GetComponent<Chest>();
+            if (chest != null && !chest.isOpened)
+            {
+                if(currentChest != chest)
+                {
+                    currentChest = chest;
+                    UIManager.instance.ShowInteract();
+                }
+                return;
+            }
+        }
+        currentChest = null;
+        UIManager.instance?.HideInteract();
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b14ebad74b77644881bee45d12f886a, type: 3}
+  m_Name: Holy Blade
+  m_EditorClassIdentifier: 
+  name: HOLY BLADE
+  descrption: Increase damage of your weapon for a certain amount of time
+  effectValue: 10
+  image: {fileID: -1342628124, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
+  buffTime: 10
+  increaseAmount: 0.2
