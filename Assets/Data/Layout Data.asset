@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203e4ba975b70b348ba725244f6b4f59, type: 3}
   m_Name: Layout Data
   m_EditorClassIdentifier: 
-  depth: 9
-  maxWidth: 5
+  depth: 4
+  maxWidth: 4
   randomSeed: 1164869229
   complexity: 0.5
   useSeed: 1
