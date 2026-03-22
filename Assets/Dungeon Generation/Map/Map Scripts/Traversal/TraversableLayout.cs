@@ -336,6 +336,25 @@ public class TraversableLayout : MonoBehaviour
         return lastCompleted;
     }
 
+    // Return a list of 
+    public List<(EncounterInfo encounter, int index)> GetNextEncounters(List<int> completedIndices)
+    {
+        List<(EncounterInfo encounter, int index)> result = new();
+        int l = 0;
+        foreach (int i in completedIndices)
+        {
+            mapLayers[l++][i].isCompleted = true;
+            // Debug.Log(l.ToString() + i.ToString());
+        }
+
+        foreach (MapEncounter child in mapLayers[--l][completedIndices[completedIndices.Count-1]].children)
+        {
+            child.isAccessible = true;
+            result.Add((child.encounter, child.index));
+        }
+        return result;
+    }
+
     public void ReceiveClick(MapEncounter enc)
     {
         if (!respondToInputs) return;
