@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1235413148540341114, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3025714530200236336, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: PlayerInteractEvent
       value: 
@@ -154,9 +158,13 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: PlayerCharacter, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 8382735831833828628, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: characterData
+      value: 
+      objectReference: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
     - target: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -78.5
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_LocalPosition.y
@@ -164,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38.9
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_LocalRotation.w
@@ -194,7 +202,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5473761978391616915, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -606,6 +615,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: End Room
       objectReference: {fileID: 0}
+    - target: {fileID: 1869678810193131756, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869678810193131756, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725580851336233818, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+      propertyPath: centerToCenter
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5188310367778011269, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
       propertyPath: m_LocalPosition.x
       value: -108
@@ -649,7 +670,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6154478575199772207, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
 --- !u!1 &1425398626
 GameObject:

@@ -10,28 +10,43 @@ public class EncounterDoorCreator : MonoBehaviour
     public LayoutData layoutData;
 
     [Header("Door Placement")]
+    public Transform doorParent;
     public List<GameObject> encounterDoors;
     public float centerToCenter;
     private TraversableLayout traversableLayout;
+
+    [Header("Layout Map")]
+    public Transform mapParent;
     void Start()
     {
         traversableLayout = Instantiate(traversableLayoutPrefab).GetComponent<TraversableLayout>();
-        traversableLayout.Initialize();
+        traversableLayout.InitializeUninteractable(true);
+        traversableLayout.DoProgress(layoutData.completedIndices);
+        traversableLayout.transform.SetParent(mapParent, false);
+        traversableLayout.UpdateAppearance();
         List<(EncounterInfo encounter, int index)> encIndxList = traversableLayout.GetNextEncounters(layoutData.completedIndices);
 
         foreach (var pair in encIndxList)
         {
-            GameObject curDoor = Instantiate(encounterDoorPrefab);
+            GameObject curDoor = Instantiate(encounterDoorPrefab, doorParent);
             Debug.Log(pair.index);
             curDoor.GetComponent<EncounterDoor>().Initialize(pair.encounter, pair.index, layoutData);
             encounterDoors.Add(curDoor);
         }
-        traversableLayout.DestroyEverything();
+        // traversableLayout.DestroyEverything();
         DoDoorPlacement(encounterDoors);
     }
 
     void DoDoorPlacement(List<GameObject> encounterDoors)
     {
-        
+        int count = encounterDoors.Count;
+        if (count == 0) return;
+
+        float start = (count - 1) * centerToCenter / 2;
+        int i = 0;
+        foreach (GameObject curDoor in encounterDoors)
+        {
+            curDoor.transform.localPosition = (start - centerToCenter * i++) * Vector3.left;
+        }
     }
 }

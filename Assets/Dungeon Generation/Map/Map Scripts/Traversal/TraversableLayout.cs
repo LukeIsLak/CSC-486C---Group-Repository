@@ -27,6 +27,7 @@ public class TraversableLayout : MonoBehaviour
     public MapEncounter prevSelectedEncounter;
     public MapEncounter curSelectedEncounter;
 
+    private bool visualize = true;
     void Awake()
     {
         mapLayers = new List<List<MapEncounter>>();
@@ -64,6 +65,36 @@ public class TraversableLayout : MonoBehaviour
         // Physical positioning
         DoLayerPlacement(mapLayers);
     }
+
+    public void InitializeUninteractable(bool draw)
+    {
+        visualize = draw;
+        // Reset to like-new
+        DestroyEverything();
+        respondToInputs = false;
+
+        // Do layout generation
+        layoutGenerator = Instantiate(layoutGeneratorPrefab, transform).GetComponent<MapGen>();
+        layoutGenerator.layersToGenerate    = layoutData.depth;
+        layoutGenerator.maxWidth            = layoutData.maxWidth;
+        layoutGenerator.useSetSeed          = layoutData.useSeed;
+        layoutGenerator.randomSeed          = layoutData.randomSeed;
+        layoutGenerator.complexity          = layoutData.complexity;
+        layoutGenerator.minWidthFraction    = layoutData.minWidthFraction;
+        genLayers = layoutGenerator.DoGeneration();
+
+        // Do conversion to encounters, destroy generator
+        mapLayers = LayoutToEncounters(genLayers);
+        layoutGenerator.ClearGenerationObjects();
+        Destroy(layoutGenerator.gameObject);
+
+        // Run encounter placement algorithm
+        PlaceEncounters(mapLayers);
+
+        // Physical positioning
+        DoLayerPlacement(mapLayers);
+    }
+
 
     // Reset as if never used
     public void DestroyEverything()
@@ -309,7 +340,7 @@ public class TraversableLayout : MonoBehaviour
     public void UpdateAppearance()
     { foreach (List<MapEncounter> curLayer in mapLayers)
         {   foreach (MapEncounter node in curLayer)
-            { node.UpdateAppearance(); }
+            { node.UpdateAppearance(visualize); }
         }
     }
 

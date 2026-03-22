@@ -68,7 +68,7 @@ public class SceneTransitionManager : MonoBehaviour
 
         if (encType.scene == null)
         Debug.Log("Nothing to do for you with this encounter type.");
-        DoLoadWithFade(encType.scene, false, true);
+        DoLoadWithFade(encType.scene, true, true);
     }
 
     public void SceneSwapToMainMenu()
@@ -106,6 +106,9 @@ public class SceneTransitionManager : MonoBehaviour
         }
         else
         {
+            Color curColor = image.color;
+            curColor.a = 1f;
+            image.color = curColor;
             SceneManager.LoadScene(scene);
         }
         // Check if should fade out, then do it if so.

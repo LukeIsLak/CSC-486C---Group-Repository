@@ -28,7 +28,7 @@ public class SpecTraversalManager : MonoBehaviour
     {
         GameObject tmp = Instantiate(traversableLayoutPrefab);
         traversableLayout = tmp.GetComponent<TraversableLayout>();
-        traversableLayout.Initialize();
+        traversableLayout.InitializeUninteractable(false);
     }
 
     void CleanUpTraversal()
