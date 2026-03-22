@@ -59,7 +59,7 @@ public class SceneTransitionManager : MonoBehaviour
     
     public void SceneSwapToMapLayout()
     {   
-        DoLoadWithFade(layoutScene, true, true);
+        DoLoadWithFade(layoutScene, true, false);
     }
 
     public void SceneSwapToEncounter()
@@ -68,7 +68,7 @@ public class SceneTransitionManager : MonoBehaviour
 
         if (encType.scene == null)
         Debug.Log("Nothing to do for you with this encounter type.");
-        DoLoadWithFade(encType.scene, true, true);
+        DoLoadWithFade(encType.scene, false, true);
     }
 
     public void SceneSwapToMainMenu()

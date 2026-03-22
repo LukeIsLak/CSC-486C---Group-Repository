@@ -21,7 +21,7 @@ MonoBehaviour:
   restEncounter: {fileID: 11400000, guid: 0179983dc6e1aed4e99f665cb873ca11, type: 2}
   distancesBetween: 020000000300000003000000
   currentEncounter: {fileID: 11400000, guid: 9ea248889b36f144c9b059b555a84738, type: 2}
-  completedIndices: 0000000001000000
+  completedIndices: 00000000
   FogUpdated: {fileID: 11400000, guid: 53b5e16dded829045b198432f3c140d9, type: 2}
   layersRevealed: 4
   lookAhead: 2
