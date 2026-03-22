@@ -27,6 +27,7 @@ public class TraversableLayout : MonoBehaviour
     public MapEncounter prevSelectedEncounter;
     public MapEncounter curSelectedEncounter;
 
+    private bool visualize = true;
     void Awake()
     {
         mapLayers = new List<List<MapEncounter>>();
@@ -64,6 +65,36 @@ public class TraversableLayout : MonoBehaviour
         // Physical positioning
         DoLayerPlacement(mapLayers);
     }
+
+    public void InitializeUninteractable(bool draw)
+    {
+        visualize = draw;
+        // Reset to like-new
+        DestroyEverything();
+        respondToInputs = false;
+
+        // Do layout generation
+        layoutGenerator = Instantiate(layoutGeneratorPrefab, transform).GetComponent<MapGen>();
+        layoutGenerator.layersToGenerate    = layoutData.depth;
+        layoutGenerator.maxWidth            = layoutData.maxWidth;
+        layoutGenerator.useSetSeed          = layoutData.useSeed;
+        layoutGenerator.randomSeed          = layoutData.randomSeed;
+        layoutGenerator.complexity          = layoutData.complexity;
+        layoutGenerator.minWidthFraction    = layoutData.minWidthFraction;
+        genLayers = layoutGenerator.DoGeneration();
+
+        // Do conversion to encounters, destroy generator
+        mapLayers = LayoutToEncounters(genLayers);
+        layoutGenerator.ClearGenerationObjects();
+        Destroy(layoutGenerator.gameObject);
+
+        // Run encounter placement algorithm
+        PlaceEncounters(mapLayers);
+
+        // Physical positioning
+        DoLayerPlacement(mapLayers);
+    }
+
 
     // Reset as if never used
     public void DestroyEverything()
@@ -309,7 +340,7 @@ public class TraversableLayout : MonoBehaviour
     public void UpdateAppearance()
     { foreach (List<MapEncounter> curLayer in mapLayers)
         {   foreach (MapEncounter node in curLayer)
-            { node.UpdateAppearance(); }
+            { node.UpdateAppearance(visualize); }
         }
     }
 
@@ -332,8 +363,27 @@ public class TraversableLayout : MonoBehaviour
         // Check for finish here!
         // if (prevselectedencounter = finalencounter)...
         MapEncounter lastCompleted = mapLayers[l][completedIndices[completedIndices.Count-1]];
-        playerOnMap = Instantiate(playerOnMapPrefab, lastCompleted.transform.position, lastCompleted.transform.rotation);
+        playerOnMap = Instantiate(playerOnMapPrefab, lastCompleted.transform.position, lastCompleted.transform.rotation, parent: transform);
         return lastCompleted;
+    }
+
+    // Return a list of 
+    public List<(EncounterInfo encounter, int index)> GetNextEncounters(List<int> completedIndices)
+    {
+        List<(EncounterInfo encounter, int index)> result = new();
+        int l = 0;
+        foreach (int i in completedIndices)
+        {
+            mapLayers[l++][i].isCompleted = true;
+            // Debug.Log(l.ToString() + i.ToString());
+        }
+
+        foreach (MapEncounter child in mapLayers[--l][completedIndices[completedIndices.Count-1]].children)
+        {
+            child.isAccessible = true;
+            result.Add((child.encounter, child.index));
+        }
+        return result;
     }
 
     public void ReceiveClick(MapEncounter enc)

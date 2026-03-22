@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.BindPlayer(player);
         PauseManager.instance.BindPlayer(player);
+        return;
         var playerHealth = player.GetComponent<Health>();
         playerHealth.Init(playerData.maxHealth, playerData.currentHealth);
         playerHealth.UpdateCurrentHealth(playerData.currentHealth);
