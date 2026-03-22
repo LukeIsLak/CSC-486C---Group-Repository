@@ -18,6 +18,7 @@ MonoBehaviour:
   complexity: 0.5
   useSeed: 1
   minWidthFraction: 0.8
+  firstEncounter: {fileID: 11400000, guid: 0feaa69d8f5e1024d83c3dc0291d1f29, type: 2}
   restEncounter: {fileID: 11400000, guid: 0179983dc6e1aed4e99f665cb873ca11, type: 2}
   distancesBetween: 02000000
   currentEncounter: {fileID: 11400000, guid: 9ea248889b36f144c9b059b555a84738, type: 2}

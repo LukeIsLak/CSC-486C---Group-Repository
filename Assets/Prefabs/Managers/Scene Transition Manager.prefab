@@ -56,7 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyScene:
     m_SceneAsset: {fileID: 102900000, guid: b3cbf916c04dc714da9f6201b6acfe9f, type: 3}
-    m_SceneName: Begin
+    m_SceneName: Initialization
   layoutScene:
     m_SceneAsset: {fileID: 102900000, guid: c4f8107961a3303448bd1eeaef29520f, type: 3}
     m_SceneName: SpecLayoutTraversal
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: ce5f1e5afdb1b4666ae89a412fc110ee, type: 3}
     m_SceneName: TitleScreen
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
-  fadeTime: 1
+  fadeTime: 0.3
   steps: 30
   image: {fileID: 6304263765960618055}
 --- !u!114 &2325324687929303005

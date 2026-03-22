@@ -363,7 +363,7 @@ public class TraversableLayout : MonoBehaviour
         // Check for finish here!
         // if (prevselectedencounter = finalencounter)...
         MapEncounter lastCompleted = mapLayers[l][completedIndices[completedIndices.Count-1]];
-        playerOnMap = Instantiate(playerOnMapPrefab, lastCompleted.transform.position, lastCompleted.transform.rotation);
+        playerOnMap = Instantiate(playerOnMapPrefab, lastCompleted.transform.position, lastCompleted.transform.rotation, parent: transform);
         return lastCompleted;
     }
 
