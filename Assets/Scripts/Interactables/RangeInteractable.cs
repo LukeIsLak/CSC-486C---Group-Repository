@@ -42,14 +42,14 @@ public class RangeInteractable : MonoBehaviour
 
     private void TurnOn()
     {
-        if (graphicsWithinRange != null) graphicsWithinRange.SetActive(true);
         onEnterRange.Invoke();
+        if (graphicsWithinRange != null) graphicsWithinRange.SetActive(true);
         playerInRange = true;
     }
     private void TurnOff()
     {
-        if (graphicsWithinRange != null) graphicsWithinRange.SetActive(false);
         onLeaveRange.Invoke();
+        if (graphicsWithinRange != null) graphicsWithinRange.SetActive(false);
         playerInRange = false;
     }
 }

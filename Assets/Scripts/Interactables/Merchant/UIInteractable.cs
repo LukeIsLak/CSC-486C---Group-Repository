@@ -18,6 +18,8 @@ public class UIInteractable : RangeInteractable
 
         Cursor.lockState    = CursorLockMode.None;
         Cursor.visible      = true;
+
+        graphicsWithinRange.SetActive(false);
     }
     public void CloseUI()
     {
@@ -28,6 +30,8 @@ public class UIInteractable : RangeInteractable
 
         Cursor.lockState    = CursorLockMode.Locked;
         Cursor.visible      = false;
+
+        graphicsWithinRange.SetActive(true);
     }
 
 }
