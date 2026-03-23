@@ -615,18 +615,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: End Room
       objectReference: {fileID: 0}
-    - target: {fileID: 1869678810193131756, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1869678810193131756, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3725580851336233818, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
-      propertyPath: centerToCenter
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5188310367778011269, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
       propertyPath: m_LocalPosition.x
       value: -108

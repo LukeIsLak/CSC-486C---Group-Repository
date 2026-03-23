@@ -15,6 +15,10 @@ public class TraversalStateUpdater : MonoBehaviour
         numToReveal = Mathf.Max(layoutData.completedIndices.Count + layoutData.lookAhead - layoutData.layersRevealed, 0);
     }
 
+    void Start()
+    {
+        DoFogReceding();
+    }
     public void DoFogReceding()
     {
         StartCoroutine(RevealNum());
