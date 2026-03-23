@@ -70,7 +70,7 @@ public class Wave : ScriptableObject
 
             switch (enemyTypes[index]) {
                 case EnemyType.Rat:
-                    enemyPrefab.GetComponent<Rat>().initialize_nma();
+                    newEnemy.GetComponent<Rat>().initialize_nma();
                     break;
                 case EnemyType.Bat:
                     break;

@@ -835,22 +835,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 7438601485183626159, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438601485183626159, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8349646633842106228, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8349646633842106228, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3317,7 +3301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7640d1714e729542b7e725640e81350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: caba222f74c6fcb45a64bbb0781b49ab, type: 2}
 --- !u!114 &778282493
 MonoBehaviour:
   m_ObjectHideFlags: 0

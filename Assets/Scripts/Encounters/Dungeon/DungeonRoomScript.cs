@@ -10,8 +10,8 @@ public class DungeonRoomScript : MonoBehaviour
     public List<GameObject> roomVariants;
 
     [Header("Room Config")]
-    public GameObject trapRoomObjects; 
-    public GameObject regularRoomObjects;
+    public List<GameObject> trapRoomObjects; 
+    public List<GameObject> regularRoomObjects;
     public bool isTrapRoom;
     
 
@@ -52,16 +52,16 @@ public class DungeonRoomScript : MonoBehaviour
     private void TrapRoomInit()
     {
         // Create necessary objects for trap room functionality
-        if (!trapRoomObjects) return;
-        Instantiate(trapRoomObjects, transform);
+        if (trapRoomObjects.Count == 0) return;
+        GameObject trapRoomObject = trapRoomObjects[randomContext.NextInt(trapRoomObjects.Count)];
+        Instantiate(trapRoomObject, transform);
     }
 
     private void RegularRoomInit()
     {
         // Create necessary objects for regular room functionality
-        if (!regularRoomObjects) return;
-        Instantiate(regularRoomObjects, transform);
+        if (regularRoomObjects.Count == 0) return;
+        GameObject regularRoomObject = regularRoomObjects[randomContext.NextInt(regularRoomObjects.Count)];
+        Instantiate(regularRoomObject, transform);
     }
-
-
 }

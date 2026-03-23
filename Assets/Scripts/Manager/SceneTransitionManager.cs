@@ -59,7 +59,7 @@ public class SceneTransitionManager : MonoBehaviour
     
     public void SceneSwapToMapLayout()
     {   
-        DoLoadWithFade(layoutScene, true, true);
+        DoLoadWithFade(layoutScene, true, false);
     }
 
     public void SceneSwapToEncounter()
@@ -106,6 +106,9 @@ public class SceneTransitionManager : MonoBehaviour
         }
         else
         {
+            Color curColor = image.color;
+            curColor.a = 1f;
+            image.color = curColor;
             SceneManager.LoadScene(scene);
         }
         // Check if should fade out, then do it if so.

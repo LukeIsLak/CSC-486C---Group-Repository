@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public SetPlayerInputScheme inputSchemeSetter;
     [SerializeField] private CharacterData playerData;
     [SerializeField] private CardsDatabase cardsDB;
     public static GameManager instance { get; private set; }
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
     private void InitializedPlayerOnce(GameObject player)
     {
         if (playerInitialized) return;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.BindPlayer(player);
         PauseManager.instance.BindPlayer(player);
+        return;
         var playerHealth = player.GetComponent<Health>();
         playerHealth.Init(playerData.maxHealth, playerData.currentHealth);
         playerHealth.UpdateCurrentHealth(playerData.currentHealth);
@@ -106,6 +109,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("no player in the scene");
             return;
         }
+        inputSchemeSetter.SetAllOff();
+        inputSchemeSetter.SetInputToCombat();
         InitializedPlayerOnce(player);
         InitializedPerScene(player);
         Cursor.lockState = CursorLockMode.Locked;

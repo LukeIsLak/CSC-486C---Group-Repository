@@ -16,27 +16,29 @@ public class Rat : EnemyInterface
     public RatColonyManager rcm;
     public RatStateManager rsm;
     public NavMeshAgent nma;
-    public SphereCollider outerCol;
-    public SphereCollider innerCol;
+    // public SphereCollider outerCol;
+    // public SphereCollider innerCol;
 
     /*Unlike the states, these let the state manager know when it's time to change the state */
     [Header("State Checkers")]
-    public bool isInitialized   = false;
-    public bool isIdle          = false;
-    public bool isWandering     = false;
-    public bool canWander       = false;
-    public bool doneWandering   = false;
-    public bool isAgro          = false;
-    public bool isLeaping       = false;
-    public bool canLeap         = true;
-    public bool doneLeap        = false;
-    public bool isMoving        = false;
-    public bool checkPlayerPath = true;
+    public bool startInitialized    = false;
+    public bool isInitialized       = false;
+    public bool isIdle              = false;
+    public bool isWandering         = false;
+    public bool canWander           = false;
+    public bool doneWandering       = false;
+    public bool isAgro              = false;
+    public bool isLeaping           = false;
+    public bool canLeap             = true;
+    public bool doneLeap            = false;
+    public bool waitToMove          = false;
+    public bool isMoving            = false;
+    public bool checkPlayerPath     = true;
 
     [Header("Rat Colony Values")]
     public bool isRatMaster = false;
-    public bool isLoner = false;
-    public int ratColonyNum = -1;
+    public bool isLoner     = true;
+    public int ratColonyId = -1;
     public Vector3 colonyMoveSpot;
 
     [Header("Leaping Values")]
@@ -63,12 +65,30 @@ public class Rat : EnemyInterface
         rcm = env_rcm;
         rsm = env_rsm;
         rsm.AddEntity(this);
+        rcm.AddRatEntity(this);
 
-        outerCol.radius = rd.colonyDist;
-        innerCol.radius = rd.neighbourStopRadius;
+        // outerCol.radius = rd.colonyDist;
+        // innerCol.radius = rd.neighbourStopRadius;
     }
 
     public void initialize_nma() {
+        if (!startInitialized) StartCoroutine(delay_navmesh());
+    }
+
+    private IEnumerator delay_navmesh() {
+        startInitialized = true;
+        yield return new WaitForSeconds(0.5f);
+
+        if (!nma.isOnNavMesh) {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas)) {
+                transform.position = hit.position;
+            } else {
+                Debug.LogWarning($"{gameObject.name}: Could not find NavMesh nearby at {transform.position}!");
+                gameObject.SetActive(false);
+            }
+        }
+
         nma.enabled = true;
 
         nma.updatePosition = false;
@@ -79,7 +99,7 @@ public class Rat : EnemyInterface
 
     public override void KillEnemy() {
         if (rs != null) rs.RemoveEnemy();
-        if (rcm != null) rcm.RemoveRat(this, ratColonyNum);
+        if (rcm != null) rcm.RemoveRat(this, ratColonyId);
         if(rsm != null) rsm.RemoveEntity(this);
         Destroy(this.gameObject);
     }
@@ -122,6 +142,18 @@ public class Rat : EnemyInterface
     }
 
     private void UpdateMove() {
+        if (!nma.isOnNavMesh) {
+            Debug.LogWarning($"{gameObject.name}: Is not on a NavMesh!");
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas)) {
+                transform.position = hit.position;
+            } else {
+                Debug.LogWarning($"{gameObject.name}: Could not find NavMesh nearby at {transform.position}!");
+                // Optionally, disable the rat or destroy it here
+                gameObject.SetActive(false);
+                return;
+            }
+        }
         nma.nextPosition = transform.position;
         Vector3 navDir = nma.desiredVelocity;
         navDir.y = 0f;
@@ -231,98 +263,89 @@ public class Rat : EnemyInterface
     /*              Beginning Of Triggers               */
     /****************************************************/
 
-    public void OnTriggerZone(Collider other, TriggerZone zone, TriggerType type) {
-        Rat or = other.gameObject.GetComponent<Rat>();
-        if (or == null && other.attachedRigidbody != null) {
-            /*If the rat is on the rigidbody root, use that instead*/
-            or = other.attachedRigidbody.GetComponentInParent<Rat>();
-        }
-        if (or == null) return;
+    // public void OnTriggerZone(Collider other, TriggerZone zone, TriggerType type) {
+    //     Rat or = other.gameObject.GetComponent<Rat>();
+    //     if (or == null && other.attachedRigidbody != null) {
+    //         /*If the rat is on the rigidbody root, use that instead*/
+    //         or = other.attachedRigidbody.GetComponentInParent<Rat>();
+    //     }
+    //     if (or == null) return;
 
-        switch (type) {
-            case TriggerType.Enter:
-                if (zone == TriggerZone.Inner) OnTriggerEnterInner(other, or);
-                else OnTriggerEnterOuter(other, or);
-                return;
-            case TriggerType.Stay:
-                if (zone == TriggerZone.Inner) OnTriggerStayInner(other, or);
-                //XXX outer say eventually?
-                return;
-            case TriggerType.Exit:
-                // if (zone == TriggerZone.Inner) OnTriggerExitInner(other, or);
-                // else OnTriggerExitOuter(other, or);
-                if (zone == TriggerZone.Outer) OnTriggerExitOuter(other, or);
-                return;
-            default:
-                return;
-        }
-    }
+    //     switch (type) {
+    //         case TriggerType.Enter:
+    //             if (zone == TriggerZone.Inner) OnTriggerEnterInner(other, or);
+    //             else OnTriggerEnterOuter(other, or);
+    //             return;
+    //         case TriggerType.Stay:
+    //             if (zone == TriggerZone.Inner) OnTriggerStayInner(other, or);
+    //             //XXX outer say eventually?
+    //             return;
+    //         case TriggerType.Exit:
+    //             // if (zone == TriggerZone.Inner) OnTriggerExitInner(other, or);
+    //             // else OnTriggerExitOuter(other, or);
+    //             if (zone == TriggerZone.Outer) OnTriggerExitOuter(other, or);
+    //             return;
+    //         default:
+    //             return;
+    //     }
+    // }
 
-    public void OnTriggerEnterInner(Collider other, Rat or) {
-        if (ratColonyNum == or.ratColonyNum && isMoving && or.doneWandering) {
-            doneWandering = true;
-            isMoving = false;
-            // if (nma.isOnNavMesh) nma.isStopped = true;
-        }
-    }
+    // public void OnTriggerEnterInner(Collider other, Rat or) {
+    //     if (ratColonyId == or.ratColonyId && isMoving && or.doneWandering) {
+    //         doneWandering = true;
+    //         isMoving = false;
+    //         // if (nma.isOnNavMesh) nma.isStopped = true;
+    //     }
+    // }
 
-    // XXX maybe make this a OnTriggerStay?
-    public void OnTriggerEnterOuter(Collider other, Rat or) {
-        if (isLoner) {
-            if (or.ratColonyNum != -1) {
-                ratColonyNum = or.ratColonyNum;
-                rcm.AddRatToColony(this, ratColonyNum);
-                isRatMaster = false;
+    // // XXX maybe make this a OnTriggerStay?
+    // public void OnTriggerEnterOuter(Collider other, Rat or) {
+    //     if (isLoner) {
+    //         if (ratColonyId == -1 && or.ratColonyId != -1) {
+    //             rcm.AddRatToColony(this, ratColonyId);
 
-                canWander = or.canWander;
-                isWandering = or.isWandering;
+    //             canWander = or.canWander;
+    //             isWandering = or.isWandering;
 
-                if (isInitialized) {
-                    if (isWandering) {
-                        colonyMoveSpot = or.colonyMoveSpot;
-                        nma.SetDestination(colonyMoveSpot);
-                    }
-                    // nma.isStopped = !isWandering;
-                    // nma.updatePosition = isWandering;
-                    // nma.updateRotation = isWandering;
-                }
-            }
-            else {
-                // XXX if both rats are null handle this!
-                // for simplicity, the one that checks first will be the rat master
-                List<Rat> newRatColony = new List<Rat>{this, or};
-                rcm.AddRatColony(newRatColony);
-                isRatMaster = true;
-                isLoner = false;
-            }
-        }
-    }
+    //             if (isInitialized) {
+    //                 if (isWandering) {
+    //                     colonyMoveSpot = or.colonyMoveSpot;
+    //                     nma.SetDestination(colonyMoveSpot);
+    //                 }
+    //                 // nma.isStopped = !isWandering;
+    //                 // nma.updatePosition = isWandering;
+    //                 // nma.updateRotation = isWandering;
+    //             }
+    //         }
+    //         else {
+    //             //because this is a race condition, whichever one is first will set it
+    //             if (ratColonyId != -1) {
+    //                 List<Rat> newRatColony = new List<Rat>{this, or};
+    //                 rcm.AddRatColony(newRatColony);
+    //             }
+    //         }
+    //     }
+    // }
 
-    public void OnTriggerStayInner(Collider other, Rat or) {
-        if (!isWandering) return;
-        if (ratColonyNum == or.ratColonyNum && isMoving && or.doneWandering) FinishWander();
-    }
+    // public void OnTriggerStayInner(Collider other, Rat or) {
+    //     if (!isWandering) return;
+    //     if (ratColonyId == or.ratColonyId && isMoving && or.doneWandering) FinishWander();
+    // }
     
-    public void OnTriggerExitOuter(Collider other, Rat or) {
-        if (ratColonyNum < 0 || ratColonyNum >= rcm.ratColonies.Count) return;
-        if (or.ratColonyNum != ratColonyNum) return;
+    // public void OnTriggerExitOuter(Collider other, Rat or) {
+    //     if (ratColonyId < 0 || ratColonyId >= rcm.ratColonies.Count) return;
+    //     if (or.ratColonyId != ratColonyId) return;
 
-        // Check if any other colony member is still within range
-        List<Rat> colony = rcm.ratColonies[ratColonyNum];
-        foreach (Rat r in colony) {
-            if (r == this) continue;
-            if (r == null) continue;
-            if (Vector3.Distance(r.gameObject.transform.position, transform.position) < rd.colonyDist) return;
-        }
-        
-        int colonyToLeave = ratColonyNum;
+    //     // Check if any other colony member is still within range
+    //     RatColony colony = rcm.ratColonies[ratColonyId];
+    //     foreach (Rat r in colony.members) {
+    //         if (r == this) continue;
+    //         if (r == null) continue;
+    //         if (Vector3.Distance(r.gameObject.transform.position, transform.position) < rd.colonyDist) return;
+    //     }
 
-        isLoner = true;
-        isRatMaster = false;
-        ratColonyNum = -1;
-
-        rcm.RemoveRat(this, colonyToLeave);
-    }
+    //     rcm.RemoveRat(this, ratColonyId);
+    // }
 
     private void OnCollisionEnter(Collision other) {
         if (isLeaping && other.gameObject.CompareTag("Player")) {
@@ -343,7 +366,7 @@ public class Rat : EnemyInterface
     /****************************************************/
 
     public void StartWanderStagger() {
-        StartCoroutine(StaggerMove());
+        if (!waitToMove) StartCoroutine(StaggerMove());
     }
 
     public void StartIdleDuration() {
@@ -378,9 +401,11 @@ public class Rat : EnemyInterface
     }
 
     private IEnumerator StaggerMove() {
+        waitToMove = true;
         float randWait = Random.Range(rd.minMoveWait, rd.maxMoveWait);
         yield return new WaitForSeconds(randWait);
         isMoving = true;
+        waitToMove = false;
 
     }
 
@@ -425,7 +450,7 @@ public class Rat : EnemyInterface
             /*The idea here is too provide the colony some time and to stagger the colonies*/
             float addIdle = Random.Range(rd.minAddIdleWait, rd.maxAddIdleWait);
             yield return new WaitForSeconds(addIdle);
-            rcm.DetermineColonyMoveSpot(ratColonyNum);
+            rcm.DetermineColonyMoveSpot(ratColonyId);
         }
     }
 

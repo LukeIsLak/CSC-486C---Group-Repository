@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3922899714032386891}
   - component: {fileID: 5328624486718827913}
   - component: {fileID: -2209449259414461117}
+  - component: {fileID: 6358338496402579408}
   m_Layer: 0
   m_Name: FogOfWar
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1023893467489899333}
@@ -77,6 +78,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6358338496402579408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290026072841453341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136d31e73aeabe84b8b2a9aa4c495781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
 --- !u!1 &4150032947594528536
 GameObject:
   m_ObjectHideFlags: 0

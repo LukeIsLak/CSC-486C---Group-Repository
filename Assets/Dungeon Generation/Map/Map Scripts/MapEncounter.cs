@@ -57,7 +57,7 @@ public class MapEncounter : MonoBehaviour
     public void SetEncounter(EncounterInfo enc)
     {
         encounter = enc;
-        UpdateAppearance();
+        UpdateAppearance(true);
     }
 
 
@@ -68,27 +68,28 @@ public class MapEncounter : MonoBehaviour
     public void SetIsAccessible(bool val)
     {
         isAccessible = val;
-        UpdateAppearance();
+        UpdateAppearance(true);
     }
     public void SetIsCompleted(bool val)
     {
         isCompleted = val;
         isAccessible = false;
-        UpdateAppearance();
+        UpdateAppearance(true);
     }
     public void SetIsHovered(bool val)
     {
         isHovered = val;
-        UpdateAppearance();
+        UpdateAppearance(true);
     }
     public void SetIsSelected(bool val)
     {
         isSelected = val;
-        UpdateAppearance();
+        UpdateAppearance(true);
     }
 
-    public void UpdateAppearance()
+    public void UpdateAppearance(bool draw)
     {
+        gameObject.SetActive(draw);
         UpdateLines();
 
         if (encounter == null) return;
