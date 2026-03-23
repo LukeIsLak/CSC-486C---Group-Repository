@@ -13,7 +13,7 @@ public class NodeTraversalUI : MonoBehaviour
     [SerializeField] private CardViewUI cardViewPrefab;
     [SerializeField] private ScrollRect playerDeckScrollRect; // For forcing showing item from the top
     [SerializeField] private ScrollRect bufferDeckScrollRect; // For forcing showing item from the top
-    [SerializeField] private GameObject openDeckButton;
+    //[SerializeField] private GameObject openDeckButton;
     [SerializeField] private Button removeCardButton;
     [SerializeField] private TextMeshProUGUI tokenAmountUI;
     private List<CardViewUI> playerDeckCards = new();
@@ -27,9 +27,19 @@ public class NodeTraversalUI : MonoBehaviour
     {
         removeCardButton.onClick.AddListener(ToggleRemoveMode);
     }
+
+    void OnEnable()
+    {
+        ShowDeckContainer();
+    }
+
+    void OnDisable()
+    {
+        HideDeckContainer();
+    }
     public void ShowDeckContainer()
     {
-        openDeckButton.SetActive(false);
+        // openDeckButton.SetActive(false);
         inventoryInNode.SetActive(true);
         removeCardButton.interactable = playerInventory.amountRemovalTokens > 0;
         BuildDeckUI();
@@ -44,7 +54,7 @@ public class NodeTraversalUI : MonoBehaviour
     public void HideDeckContainer()
     {
         inventoryInNode.SetActive(false);
-        openDeckButton.SetActive(true);
+        //openDeckButton.SetActive(true);
         ClearDeckUI();
         ToggleNodeInventory.Raise();
     }
