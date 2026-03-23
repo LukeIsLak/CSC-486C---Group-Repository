@@ -7,7 +7,7 @@ public class PauseManager : MonoBehaviour
 {
     public static PauseManager instance;
 
-    public bool isPause {  get; private set; }
+    public bool isPause = false;
     private PlayerInput playerInput;
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class PauseManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (playerInput != null) playerInput.SwitchCurrentActionMap("UI");
+        if (playerInput != null) playerInput.SwitchCurrentActionMap("Menu UI");
         UIManager.instance.ShowPauseView();
 
     }
