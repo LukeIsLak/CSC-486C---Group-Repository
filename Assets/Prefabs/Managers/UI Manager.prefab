@@ -28,15 +28,15 @@ RectTransform:
   m_GameObject: {fileID: 231366989902141616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 755810121351086253}
-  m_Father: {fileID: 6535585668288104020}
+  m_Father: {fileID: 6095358951177082917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1091889030697839045
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5018102146981094155}
         m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: OnExitClicked
         m_Mode: 1
@@ -215,15 +215,15 @@ RectTransform:
   m_GameObject: {fileID: 563593667236887304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6929074951624384119}
-  m_Father: {fileID: 6535585668288104020}
+  m_Father: {fileID: 6095358951177082917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 80}
+  m_AnchoredPosition: {x: 0, y: 20}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5239981575797378399
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5018102146981094155}
         m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: OnOptionsClicked
         m_Mode: 1
@@ -1137,7 +1137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6535585668288104020
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1151,10 +1151,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6095358951177082917}
-  - {fileID: 7030958127328224683}
-  - {fileID: 2821442442261449792}
-  - {fileID: 2185947095077638571}
-  - {fileID: 1874918711670160611}
   m_Father: {fileID: 1167582863157834111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2319,15 +2315,15 @@ RectTransform:
   m_GameObject: {fileID: 6566740802394364124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1152724281537817191}
-  m_Father: {fileID: 6535585668288104020}
+  m_Father: {fileID: 6095358951177082917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -320}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4133716123639780966
@@ -2992,7 +2988,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 7030958127328224683}
+  - {fileID: 2821442442261449792}
+  - {fileID: 2185947095077638571}
+  - {fileID: 1874918711670160611}
   m_Father: {fileID: 6535585668288104020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3102,15 +3102,15 @@ RectTransform:
   m_GameObject: {fileID: 9210537701925007243}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4087829838356627445}
-  m_Father: {fileID: 6535585668288104020}
+  m_Father: {fileID: 6095358951177082917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 280}
+  m_AnchoredPosition: {x: 0, y: 70}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2777604244336120437
@@ -3195,7 +3195,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5018102146981094155}
         m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
         m_MethodName: OnResumeClicked
         m_Mode: 1
@@ -3351,6 +3351,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1167582863157834111}
     m_Modifications:
+    - target: {fileID: 746343233514675445, guid: 5d790b622c5924259b307753ce9d7dc1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656570107892999413, guid: 5d790b622c5924259b307753ce9d7dc1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5080706298457549252, guid: 5d790b622c5924259b307753ce9d7dc1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3431,9 +3439,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5409720276813051253, guid: 5d790b622c5924259b307753ce9d7dc1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893597454225852907, guid: 5d790b622c5924259b307753ce9d7dc1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6671154097927109497, guid: 5d790b622c5924259b307753ce9d7dc1, type: 3}
       propertyPath: m_Name
       value: OptionsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671154097927109497, guid: 5d790b622c5924259b307753ce9d7dc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
