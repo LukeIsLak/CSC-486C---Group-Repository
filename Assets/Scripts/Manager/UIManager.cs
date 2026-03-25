@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ChestUI chestUI;
     [SerializeField] private ShieldUI shieldUI;
     [SerializeField] private Animator swordAnimator;
+    [SerializeField] private SwordAnimationEvent swordAnimationEvent;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -60,6 +61,7 @@ public class UIManager : MonoBehaviour
         {   
             staminaView.BindPlayerUI(playerCharacter);
             playerCharacter.SetSwordAnimator(swordAnimator);
+            swordAnimationEvent.BindPlayer(playerCharacter);
         }
         playerInput = player.GetComponent<PlayerInput>();
         var deck = player.GetComponent<DeckSystems>();

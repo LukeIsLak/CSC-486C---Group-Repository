@@ -5,28 +5,50 @@ using UnityEngine;
 public class SwordAnimationEvent : MonoBehaviour
 {   
     private PlayerCharacter character;
-    private void Awake()
+
+    public void BindPlayer(PlayerCharacter character)
     {
-        character = GetComponentInParent<PlayerCharacter>();
+        this.character = character;
     }
 
     public void AttackRayCast()
     {
+        if (character == null) 
+        { 
+            Debug.Log("character null"); 
+            return; 
+        }
+
         character.AttackRaycast();
     }
 
     public void EndAttack()
     {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
         character.EndAttack();
     }
 
     public void OpenComboWindow()
     {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
         character.OpenComboWindow();
     }
 
     public void CloseComboWindow()
     {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
         character.CloseComboWindow();
     }
 }
