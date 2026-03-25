@@ -2289,6 +2289,7 @@ MonoBehaviour:
   nodePanel: {fileID: 6739653715888183322}
   chestUI: {fileID: 7080628301873587033}
   shieldUI: {fileID: 1338401412435457063}
+  swordAnimator: {fileID: 703303935032456135}
 --- !u!1 &5671092485040696241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3665,6 +3666,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ebc1c80c988e7a46afbe3805a63e6b7, type: 3}
+--- !u!95 &703303935032456135 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7136748231178125107, guid: 6ebc1c80c988e7a46afbe3805a63e6b7, type: 3}
+  m_PrefabInstance: {fileID: 7694524790722956532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1610808577516413445 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8976461695471726321, guid: 6ebc1c80c988e7a46afbe3805a63e6b7, type: 3}

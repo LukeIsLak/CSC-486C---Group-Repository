@@ -63,7 +63,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool queuedNextAttack;
     private void Awake()
     {
-        swordAnimator = GetComponentInChildren<Animator>();
+        //swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
         playerController = GetComponent<PlayerController>();    
     }
@@ -272,5 +272,10 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (!context.performed) return;
         PlayerCloseInteractableMenu.Raise();
+    }
+
+    public void SetSwordAnimator(Animator swordAnimator)
+    {
+        this.swordAnimator = swordAnimator;
     }
 }
