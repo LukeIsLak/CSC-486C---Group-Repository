@@ -2290,6 +2290,7 @@ MonoBehaviour:
   chestUI: {fileID: 7080628301873587033}
   shieldUI: {fileID: 1338401412435457063}
   swordAnimator: {fileID: 703303935032456135}
+  swordAnimationEvent: {fileID: 778651944543409523}
 --- !u!1 &5671092485040696241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3664,7 +3665,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124381261388598046, guid: 6ebc1c80c988e7a46afbe3805a63e6b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 778651944543409523}
   m_SourcePrefab: {fileID: 100100000, guid: 6ebc1c80c988e7a46afbe3805a63e6b7, type: 3}
 --- !u!95 &703303935032456135 stripped
 Animator:
@@ -3676,6 +3680,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8976461695471726321, guid: 6ebc1c80c988e7a46afbe3805a63e6b7, type: 3}
   m_PrefabInstance: {fileID: 7694524790722956532}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1907248267630135274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124381261388598046, guid: 6ebc1c80c988e7a46afbe3805a63e6b7, type: 3}
+  m_PrefabInstance: {fileID: 7694524790722956532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &778651944543409523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907248267630135274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6c7fc4cbb1ce14e86732ea974a145d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8792387438008281549
 PrefabInstance:
   m_ObjectHideFlags: 0

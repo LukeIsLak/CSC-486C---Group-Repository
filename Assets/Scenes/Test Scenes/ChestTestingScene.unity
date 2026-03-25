@@ -752,10 +752,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5570779764840340953, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: swordAnimationEvent
+      value: 
+      objectReference: {fileID: 1345064508}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1907248267630135274, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1345064508}
   m_SourcePrefab: {fileID: 100100000, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
 --- !u!1 &409875139
 GameObject:
@@ -3497,6 +3504,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1345064503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1907248267630135274, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+  m_PrefabInstance: {fileID: 400250255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1345064508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345064503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6c7fc4cbb1ce14e86732ea974a145d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1384328894
 Mesh:
   m_ObjectHideFlags: 0
@@ -4577,7 +4601,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8498486752961200364, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
