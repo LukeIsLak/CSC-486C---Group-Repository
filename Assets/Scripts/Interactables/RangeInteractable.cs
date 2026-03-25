@@ -7,6 +7,8 @@ public class RangeInteractable : MonoBehaviour
 {
     public string playerTag;
     public UnityEvent onInteract;
+    public UnityEvent onEnterRange;
+    public UnityEvent onLeaveRange;
     public bool isOneTime = true;
     public bool activated;
     private bool playerInRange;
@@ -40,11 +42,13 @@ public class RangeInteractable : MonoBehaviour
 
     private void TurnOn()
     {
+        onEnterRange.Invoke();
         if (graphicsWithinRange != null) graphicsWithinRange.SetActive(true);
         playerInRange = true;
     }
     private void TurnOff()
     {
+        onLeaveRange.Invoke();
         if (graphicsWithinRange != null) graphicsWithinRange.SetActive(false);
         playerInRange = false;
     }

@@ -848,6 +848,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 463358431120810752, guid: 735e27980f05c6645b3afc48e96e8487, type: 3}
   m_PrefabInstance: {fileID: 6291568936936054457}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6795963379992619678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7986499012303902628}
+    m_Modifications:
+    - target: {fileID: 2290026072841453341, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_Name
+      value: FogOfWar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+--- !u!4 &7503256676198525397 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3922899714032386891, guid: 98f8eab82c39eb44199497b0ab3ef4c2, type: 3}
+  m_PrefabInstance: {fileID: 6795963379992619678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7037243231141880807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -900,14 +962,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Encounter Door Creator
       objectReference: {fileID: 0}
+    - target: {fileID: 8672562443137391371, guid: fdd5b7c0da3c20449a9c11daf80c3e44, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 465548358713766460, guid: fdd5b7c0da3c20449a9c11daf80c3e44, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1116032780465747011, guid: fdd5b7c0da3c20449a9c11daf80c3e44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7503256676198525397}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdd5b7c0da3c20449a9c11daf80c3e44, type: 3}
 --- !u!4 &7333851116643925511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 319295792950173152, guid: fdd5b7c0da3c20449a9c11daf80c3e44, type: 3}
+  m_PrefabInstance: {fileID: 7037243231141880807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7986499012303902628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1116032780465747011, guid: fdd5b7c0da3c20449a9c11daf80c3e44, type: 3}
   m_PrefabInstance: {fileID: 7037243231141880807}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7388609045291053620
