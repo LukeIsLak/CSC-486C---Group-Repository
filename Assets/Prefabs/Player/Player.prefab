@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7050272462483586888}
   - component: {fileID: -201263358416133198}
   - component: {fileID: 1235413148540341114}
+  - component: {fileID: 3072697508023899604}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -284,9 +285,25 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f4a46ca2-7131-4e2e-be7c-efbff2cfbca3
     m_ActionName: Combat/Interact[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3025714530200236336}
+        m_TargetAssemblyTypeName: PlayerCharacter, Assembly-CSharp
+        m_MethodName: OnCloseMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 012d1752-73cb-40ca-94d4-f47c4e15d829
+    m_ActionName: Interactable UI/Close Menu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Combat
+  m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &8382735831833828628
@@ -338,6 +355,7 @@ MonoBehaviour:
   runawayBullActive: 0
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   PlayerInteractEvent: {fileID: 11400000, guid: 63f35d9b82ff48c428018e7a5b854cfb, type: 2}
+  PlayerCloseInteractableMenu: {fileID: 11400000, guid: 77a76927987d6e34e80e3da06d6fab74, type: 2}
 --- !u!114 &5473761978391616915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +371,7 @@ MonoBehaviour:
   PlayerDeath: {fileID: 11400000, guid: 53c7e9606309a0142bd5710ad82d2065, type: 2}
   healthBar: {fileID: 0}
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
+  inputScheme: {fileID: 3072697508023899604}
   maxHealth: 0
   currentHealth: 0
   hasDied: 0
@@ -431,6 +450,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3072697508023899604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843415185380909026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617e616beb1c9547b6571107f4ec188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7545902890681713120
 GameObject:
   m_ObjectHideFlags: 0
