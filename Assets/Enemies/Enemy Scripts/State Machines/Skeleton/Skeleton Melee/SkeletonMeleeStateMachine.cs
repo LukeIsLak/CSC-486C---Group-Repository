@@ -16,14 +16,32 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
 {
     public void Awake() {
         /*Spawn*/
+        AddTransition(SkeletonMeleeStates.Spawn, SkeletonMeleeStates.SpawnWall, SpawnToWall);
+        AddTransition(SkeletonMeleeStates.Spawn, SkeletonMeleeStates.Idle, SpawnToIdle);
 
         /*SpawnWall*/
+        AddTransition(SkeletonMeleeStates.SpawnWall, SkeletonMeleeStates.AgroApproach, WallToAgroApproach);
 
         /*Idle*/
+        AddTransition(SkeletonMeleeStates.Idle, SkeletonMeleeStates.Wander, IdleToWander);
+        AddTransition(SkeletonMeleeStates.Idle, SkeletonMeleeStates.AgroApproach, IdleToAgroApproach);
 
         /*Wander*/
+        AddTransition(SkeletonMeleeStates.Wander, SkeletonMeleeStates.Idle, WanderToIdle);
+        AddTransition(SkeletonMeleeStates.Wander, SkeletonMeleeStates.AgroApproach, WanderToAgroApproach);
 
         /*AgroApproach*/
+        AddTransition(SkeletonMeleeStates.AgroApproach, SkeletonMeleeStates.DashAttack, AgroApproachToDash);
+        AddTransition(SkeletonMeleeStates.AgroApproach, SkeletonMeleeStates.SwingAttack, AgroApproachToSwing);
+        AddTransition(SkeletonMeleeStates.AgroApproach, SkeletonMeleeStates.Idle, AgroApproachToIdle);
+
+        /*DashAttack*/
+        AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.AgroApproach, DashToAgroApproach);
+        AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.Idle, DashToIdle);
+
+        /*SwingAttack*/    
+        AddTransition(SkeletonMeleeStates.SwingAttack, SkeletonMeleeStates.AgroApproach, SwingToAgroApproach);
+        AddTransition(SkeletonMeleeStates.SwingAttack, SkeletonMeleeStates.Idle, SwingToIdle);
     }
 
     public override void CheckTransition(SkeletonMelee sm) {
@@ -55,4 +73,68 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     public override void EnterUniversal(SkeletonMelee sm) {
 
     }
+
+    /******************************/
+    /*   Transitions Conditions   */ 
+    /******************************/
+
+    public bool SpawnToWall(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool SpawnToIdle(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool WallToAgroApproach(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool IdleToWander(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool IdleToAgroApproach(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool WanderToIdle(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool WanderToAgroApproach(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool AgroApproachToDash(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool AgroApproachToSwing(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool AgroApproachToIdle(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool DashToAgroApproach(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool DashToIdle(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool SwingToAgroApproach(SkeletonMelee sm) {
+        return false;
+    }
+
+    public bool SwingToIdle(SkeletonMelee sm) {
+        return false;
+    }
+
+    /******************************/
+    /*   Enter State Functions    */
+    /******************************/
 }

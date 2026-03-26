@@ -71,6 +71,7 @@ public class Wave : ScriptableObject
 
             switch (enemyTypes[index]) {
                 case EnemyType.SkeletonMelee:
+                    newEnemy.GetComponent<SkeletonMelee>().initialize_nma();
                     break;
                 case EnemyType.Rat:
                     newEnemy.GetComponent<Rat>().initialize_nma();
