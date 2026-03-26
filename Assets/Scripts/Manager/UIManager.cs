@@ -70,6 +70,7 @@ public class UIManager : MonoBehaviour
     public void ShowCombatView()
     {
         combatPanel.SetActive(true);
+        inputScheme.SetInputToCombat();
         
     }
 
@@ -81,14 +82,14 @@ public class UIManager : MonoBehaviour
     {
         isInventoryOpen = true;
         HideCombatView();
-        if(playerInput != null) inputScheme.SetInputToInteractableUI();
+        inputScheme.SetInputToInteractableUI();
         inventoryView.ShowInventory(); 
     }
     public void HideInventoryView()
     {
         isInventoryOpen = false;
         inventoryView.HideInventory();
-        if (playerInput != null)  inputScheme.SetInputToCombat();
+        inputScheme.SetInputToCombat();
         ShowCombatView();
     }
 

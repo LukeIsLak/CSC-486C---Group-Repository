@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1540405587882982134}
   - component: {fileID: 2626449438788970428}
   - component: {fileID: 6154478789939588589}
+  - component: {fileID: 1960798785286020385}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72666cc979cbda64da6fc634050f5422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputSchemeSetter: {fileID: 1960798785286020385}
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   cardsDB: {fileID: 11400000, guid: 3bc7b805fceeb8d48baf00406c795b4e, type: 2}
   inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
@@ -58,5 +60,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9d418f7f532ca048b87624fe167ba39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPause: 0
+--- !u!114 &1960798785286020385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140828422524807323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617e616beb1c9547b6571107f4ec188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
