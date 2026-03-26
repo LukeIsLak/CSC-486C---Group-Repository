@@ -337,6 +337,7 @@ MonoBehaviour:
   dashCD: 2
   runawayBullActive: 0
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
+  PlayerInteractEvent: {fileID: 11400000, guid: 63f35d9b82ff48c428018e7a5b854cfb, type: 2}
 --- !u!114 &5473761978391616915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +355,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   maxHealth: 0
   currentHealth: 0
+  hasDied: 0
   shield: 0
 --- !u!114 &7050272462483586888
 MonoBehaviour:

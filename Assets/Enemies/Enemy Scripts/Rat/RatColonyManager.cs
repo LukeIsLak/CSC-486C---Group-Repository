@@ -3,15 +3,128 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public class RatColony {
+    public int id;
+    public List<Rat> members = new List<Rat>();
+    public Vector3 colonyMoveSpot;
+    public bool ratColonyMoving = false;
+    public Rat ratMaster;
+}
+
 public class RatColonyManager : MonoBehaviour
 {
-    [SerializeField] public List<List<Rat>> ratColonies = new List<List<Rat>>();
-    [SerializeField] public List<Vector3> colonyMoveSpot = new List<Vector3>();
-    [SerializeField] public List<bool> ratColoniesMoving = new List<bool>();
+    [SerializeField] public List<RatColony> ratColonies = new List<RatColony>();
+    [SerializeField] public List<Rat> lonerRats = new List<Rat>();
+    [SerializeField] public List<Rat> ratEntities = new List<Rat>();
+    private int nextColonyId = 0;
+
+    void Update() {
+        UpdateColoniesAndLoners();
+        UpdateColonyWanderSpot();
+    }
+
+    public void UpdateColoniesAndLoners() {
+        //Prioritize loners joining existing colonies
+        List<Rat> joined = new List<Rat>();
+        foreach (Rat loner in lonerRats) {
+            bool joinedColony = false;
+            for (int c = 0; c < ratColonies.Count; c++) {
+                RatColony colony = ratColonies[c];
+                foreach (Rat member in colony.members) {
+                    if (Vector3.Distance(loner.transform.position, member.transform.position) <= loner.rd.colonyJoinRadius) {
+                        AddRatToColony(loner, c);
+                        joined.Add(loner);
+                        joinedColony = true;
+                        break;
+                    }
+                }
+                if (joinedColony) break;
+            }
+        }
+        foreach (Rat r in joined) lonerRats.Remove(r);
+
+        //Handle remaining loners forming new colonies
+        List<Rat> processed = new List<Rat>();
+        for (int i = 0; i < lonerRats.Count; i++) {
+            Rat r1 = lonerRats[i];
+            if (processed.Contains(r1)) continue;
+            List<Rat> nearbyLoners = new List<Rat> { r1 };
+            for (int j = i + 1; j < lonerRats.Count; j++) {
+                Rat r2 = lonerRats[j];
+                if (processed.Contains(r2)) continue;
+                float dist = Vector3.Distance(r1.transform.position, r2.transform.position);
+                if (dist <= r1.rd.colonyJoinRadius) {
+                    nearbyLoners.Add(r2);
+                }
+            }
+            if (nearbyLoners.Count > 1) {
+                // Form a new colony
+                CreateColony(nearbyLoners);
+                foreach (Rat r in nearbyLoners) processed.Add(r);
+                foreach (Rat r in nearbyLoners) lonerRats.Remove(r);
+            }
+        }
+
+        //Handle colony members leaving if too far from colony
+        for (int c = ratColonies.Count - 1; c >= 0; c--) {
+            RatColony colony = ratColonies[c];
+            Vector3 centroid = Centroid(c);
+            List<Rat> toRemove = new List<Rat>();
+            foreach (Rat r in colony.members) {
+                if (Vector3.Distance(r.transform.position, centroid) > r.rd.colonyLeaveRadius) {
+                    toRemove.Add(r);
+                }
+            }
+            foreach (Rat r in toRemove) {
+                SetRatToLoner(r);
+                lonerRats.Add(r);
+            }
+        }
+    }
+
+    public void UpdateColonyWanderSpot() {
+        foreach (RatColony rc in ratColonies) {
+            for (int i = 0; i < rc.members.Count; i++) {
+                for (int j = i+1; j < rc.members.Count; j++) {
+                    Rat r1 = rc.members[i];
+                    Rat r2 = rc.members[j];
+
+                    // XXX check the states here
+                    if (Vector3.Distance(r1.transform.position, r2.transform.position) < r1.rd.colonyFinishRadius) {
+                        if (r1.doneWandering && r2.isMoving) r2.FinishWander();
+                        if (r2.doneWandering && r1.isMoving) r1.FinishWander();
+                    }
+                }
+            }
+        }
+    }
+
+    public void AddRatEntity(Rat r) {
+        ratEntities.Add(r);
+        lonerRats.Add(r);
+    }
+
+    public void RemoveRatEntity(Rat r) {
+        ratEntities.Remove(r);
+    }
+
+    public RatColony CreateColony(List<Rat> initialMembers) {
+        RatColony colony = new RatColony { id = nextColonyId++ };
+        HashSet<Rat> uniqueMembers = new HashSet<Rat>(initialMembers); // Remove duplicates
+        colony.members.AddRange(uniqueMembers);
+        ratColonies.Add(colony);
+        foreach (Rat r in uniqueMembers) {
+            r.isLoner = false;
+            r.ratColonyId = colony.id;
+        }
+        colony.members[0].isRatMaster = true;
+        colony.ratMaster = colony.members[0];
+        return colony;
+    }
 
     public Rat GetRatMaster(int i) {
         if (i < 0 || i >= ratColonies.Count) return null;
-        foreach (Rat r in ratColonies[i]) if (r.isRatMaster) return r;
+        foreach (Rat r in ratColonies[i].members) if (r.isRatMaster) return r;
         return null;
     }
 
@@ -56,7 +169,7 @@ public class RatColonyManager : MonoBehaviour
 
         Vector3 wanderSpot = PickWanderSpotOnNavMesh(midPoint, ratMaster.rd.wanderRadius);
 
-        foreach(Rat r in ratColonies[i]) SetMoveSpot(r, wanderSpot);
+        foreach(Rat r in ratColonies[i].members) SetMoveSpot(r, wanderSpot);
     }
 
     public void DetermineLonerMoveSpot(Rat r) {
@@ -77,56 +190,67 @@ public class RatColonyManager : MonoBehaviour
 
     public Vector3 Centroid(int i) {
         Vector3 c = Vector3.zero;
-        foreach (Rat r in ratColonies[i])
+        foreach (Rat r in ratColonies[i].members)
         {
             if (r != null) c += r.gameObject.transform.position;
         }
-        return c /= ratColonies[i].Count;
+        return c /= ratColonies[i].members.Count;
     }
 
-    public void AddRatToColony(Rat r, int i) {
-        if (r.ratColonyNum != -1) return;
-        ratColonies[i].Add(r);
-        r.ratColonyNum = i;
-        r.isLoner = false;
+    public void SetRatToLoner(Rat r) {
+        if (!r.isLoner) {
+            if (r.ratColonyId >= 0) RemoveRat(r, r.ratColonyId);
+            r.isLoner = true;
+            r.ratColonyId = -1;
+        }
+    }
+
+    public void AddRatToColony(Rat r, int colonyId) {
+        if (colonyId < 0 || colonyId >= ratColonies.Count) return;
+        if (r.isLoner || r.ratColonyId != colonyId) {
+            SetRatToLoner(r); // Remove from previous colonies
+            if (!ratColonies[colonyId].members.Contains(r)) {
+                ratColonies[colonyId].members.Add(r);
+            }
+            r.ratColonyId = colonyId;
+            r.isLoner = false;
+            r.isRatMaster = false;
+        }
     }
 
     public void AddRatColony(List<Rat> newRats) {
         List<Rat> filteredRats = new List<Rat>();
-        foreach (Rat r in newRats) if (r.ratColonyNum == -1) filteredRats.Add(r);
-        
+        foreach (Rat r in newRats) if (r.ratColonyId == -1) filteredRats.Add(r);
         if (filteredRats.Count == 0) return; // No valid rats to add
-        ratColonies.Add(filteredRats);
-        int newIndex = ratColonies.Count - 1;
-        foreach (Rat r in filteredRats) {
-            r.ratColonyNum = newIndex;
-            r.isLoner = false;
-        }
+        CreateColony(filteredRats);
     }
 
     public void RemoveRat(Rat r, int i) {
-        if (r.isLoner || r.ratColonyNum < 0) return;
-        ratColonies[i].Remove(r);
-        if (ratColonies[i].Count < 2) {
-            print("Removal of a colony");
-            foreach (Rat or in ratColonies[i]) {
-                print(or);
+        if (r != null) RemoveRatEntity(r);
+        if (r.isLoner || r.ratColonyId < 0) {
+            lonerRats.Remove(r);
+            return;
+        }
+        ratColonies[i].members.Remove(r);
+        if (ratColonies[i].members.Count < 2) {
+            foreach (Rat or in ratColonies[i].members) {
                 or.isRatMaster     = false;
                 or.isLoner         = true;
-                or.ratColonyNum    = -1;
+                or.ratColonyId    = -1;
             }
 
             RemoveAndUpdateColony(i);
         }
         else if (r.isRatMaster) {
             /*Set next rat as the rat master*/
-            ratColonies[i][0].isRatMaster = true;
+            ratColonies[i].members[0].isRatMaster = true;
         }
     }
 
     public void RemoveAndUpdateColony(int i) {
         /*Adjust the index of each colony after the removed one*/
-        for (int j = i+1; j < ratColonies.Count; j++) foreach (Rat r in ratColonies[j]) if (!r.isLoner) r.ratColonyNum -= 1;
+        for (int j = i+1; j < ratColonies.Count; j++) foreach (Rat r in ratColonies[j].members) if (!r.isLoner) r.ratColonyId -= 1;
         ratColonies.RemoveAt(i);
+        nextColonyId--;
     }
 }

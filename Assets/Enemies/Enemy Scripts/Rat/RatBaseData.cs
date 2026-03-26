@@ -15,7 +15,7 @@ public class RatBaseData : BaseEnemyData
     public float alignmentWeight    = 1f;
     public float cohesionWeight     = 1f;
     public float wanderWeight       = 0.3f;
-    public float destStopDist       = 1f;
+    public float destStopDist       = 2f;
 
     [Header("Navigation Misc. Values")]
     public float minAddIdleWait = 0f;
@@ -44,4 +44,7 @@ public class RatBaseData : BaseEnemyData
     public float idleDuration = 2f;
     public float minMoveWait = 0.25f;
     public float maxMoveWait = 0.75f;
+    public float colonyJoinRadius = 5f;
+    public float colonyLeaveRadius = 10f;
+    public float colonyFinishRadius = 1.5f;
 }
