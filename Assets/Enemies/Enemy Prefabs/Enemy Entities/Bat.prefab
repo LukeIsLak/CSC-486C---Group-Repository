@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5098527676356961825}
   - component: {fileID: 6990128973608440802}
   - component: {fileID: 3914301402428138974}
+  - component: {fileID: -1637436571212063048}
   m_Layer: 6
   m_Name: Bat
   m_TagString: Enemy
@@ -48,9 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExitToLayout: {fileID: 0}
+  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
   playerData: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  hasDied: 0
   shield: 0
 --- !u!114 &5098527676356961825
 MonoBehaviour:
@@ -83,6 +87,7 @@ MonoBehaviour:
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
   playerTransform: {fileID: 0}
   bsm: {fileID: 0}
+  audioEmitter: {fileID: 0}
   debug: 1
   debugPoint: 1
   isMoving: 0
@@ -161,6 +166,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-1637436571212063048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864461203881756215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -718534289
+      Data2: 1342107268
+      Data3: -661144645
+      Data4: -1077074637
+    Path: event:/PlayerEvents/SoftSurfaceStrike
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &6866346708414613551
 GameObject:
   m_ObjectHideFlags: 0

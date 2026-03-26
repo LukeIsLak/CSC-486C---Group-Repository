@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using FMODUnity;
+
 
 // Require RigidBody maybe?
 
@@ -13,6 +15,8 @@ public class Bat : EnemyInterface
     public BatBaseData bd;
     public Transform playerTransform;
     public BatStateManager bsm;
+    public StudioEventEmitter audioEmitter;
+
 
     [Header("Debug Fields")]
     public bool debug = true;
@@ -65,6 +69,8 @@ public class Bat : EnemyInterface
     public override void initialize() {
         curHealth = bd.baseHealth * playerData.maxHealth;
         moveSpeed = bd.baseMoveSpeed * playerData.baseSpeed;
+        audioEmitter = GetComponent<StudioEventEmitter>();
+
 
         playerTransform = GameObject.FindWithTag("Player").transform;
         BatStateManager env_bsm = FindObjectOfType<BatStateManager>();
