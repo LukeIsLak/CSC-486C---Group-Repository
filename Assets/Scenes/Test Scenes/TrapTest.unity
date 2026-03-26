@@ -617,7 +617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5188310367778011269, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -108
+      value: -141.04
       objectReference: {fileID: 0}
     - target: {fileID: 5188310367778011269, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
       propertyPath: m_LocalPosition.y
@@ -659,7 +659,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6154478575199772207, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 3052351780061675309, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
@@ -1022,6 +1022,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1997630510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997630511}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1997630511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997630510}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -94.3645, y: 15.98, z: 18.673578}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2039437191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1166,3 +1197,4 @@ SceneRoots:
   - {fileID: 1425398628}
   - {fileID: 1179914064}
   - {fileID: 1103923372}
+  - {fileID: 1997630511}

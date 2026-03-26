@@ -752,9 +752,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 92819060007655876, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -220
+      objectReference: {fileID: 0}
+    - target: {fileID: 92819060007655876, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -445
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433386818359996009, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1433386818359996009, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592515192438137912, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989144029913946463, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400451208595742463, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400451208595742463, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8741037948270309398, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
       propertyPath: m_Name
       value: Deckbuilding Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986135849658200458, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986135849658200458, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -450
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
