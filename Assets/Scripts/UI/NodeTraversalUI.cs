@@ -14,15 +14,18 @@ public class NodeTraversalUI : MonoBehaviour
     [SerializeField] private CardViewUI cardViewPrefab;
     [SerializeField] private ScrollRect playerDeckScrollRect; // For forcing showing item from the top
     [SerializeField] private ScrollRect bufferDeckScrollRect; // For forcing showing item from the top
+    [SerializeField] private ScrollRect sideBoardScrollRect; // For forcing showing item from the top
     //[SerializeField] private GameObject openDeckButton;
     [SerializeField] private Button removeCardButton;
     [SerializeField] private TextMeshProUGUI tokenAmountUI;
     private List<CardViewUI> playerDeckCards = new();
     private List<CardViewUI> bufferCards = new();
+    private List<CardViewUI> sideBoardCards = new();
 
     public GameEvent ToggleNodeInventory;
 
     private bool isRemoveMode = false;
+    private string goingto = "player";
 
     private void Start()
     {
@@ -31,12 +34,12 @@ public class NodeTraversalUI : MonoBehaviour
 
     void OnEnable()
     {
-        ShowDeckContainer();
+        //ShowDeckContainer();
     }
 
     void OnDisable()
     {
-        HideDeckContainer();
+        //HideDeckContainer();
     }
     public void ShowDeckContainer()
     {
@@ -45,10 +48,12 @@ public class NodeTraversalUI : MonoBehaviour
         removeCardButton.interactable = playerInventory.amountRemovalTokens > 0;
         BuildDeckUI();
         BuildBufferUI();
+        BuildSideBoardUI();
         UpdateRemovalTokenUI();
         Canvas.ForceUpdateCanvases();
         playerDeckScrollRect.verticalNormalizedPosition = 1f; // top
         bufferDeckScrollRect.verticalNormalizedPosition = 1f;
+        //sideBoardScrollRect.verticalNormalizedPosition = 1f;
         ToggleNodeInventory.Raise();
     }
 
@@ -77,7 +82,8 @@ public class NodeTraversalUI : MonoBehaviour
             {
                 card.Init(instance.cardData, !instance.useable, () =>
                 {
-                    playerInventory.removeCardFromPlayersDeck(instance);
+                    //playerInventory.removeCardFromPlayersDeck(instance);
+                    playerInventory.cardTransfer(instance, "player", goingto);
                     isRemoveMode = false;
                     RefreshUI();
                     playerInventory.amountRemovalTokens--;
@@ -105,13 +111,12 @@ public class NodeTraversalUI : MonoBehaviour
 
             card.Init(instance.cardData, !instance.useable, ()=> 
             {
-                playerInventory.bufferToDeck(instance);
+                //playerInventory.bufferToDeck(instance);
+                playerInventory.cardTransfer(instance, "buffer", goingto);
                 RefreshUI();
             });
             bufferCards.Add(card);
         }
-        Debug.Log(bufferLocation.offsetMax);
-        Debug.Log(bufferLocation.offsetMin);
     }
 
     private void RefreshUI()
@@ -119,6 +124,7 @@ public class NodeTraversalUI : MonoBehaviour
         ClearDeckUI();
         BuildDeckUI();
         BuildBufferUI();
+        BuildSideBoardUI();
     }
     private void ClearDeckUI()
     {
@@ -134,13 +140,37 @@ public class NodeTraversalUI : MonoBehaviour
             Destroy(card.gameObject);
         }
         bufferCards.Clear();
+
+        foreach (var card in sideBoardCards)
+        {
+            Destroy(card.gameObject);
+        }
+        sideBoardCards.Clear();
     }
 
     private void BuildSideBoardUI() {
         foreach (var instance in playerInventory.sideboard) {
             CardViewUI card = Instantiate(cardViewPrefab, sideBoardLocation);
 
-            //card.Init(instance.cardData, !instance.useable, )
+            card.Init(instance.cardData, !instance.useable, ()=> 
+            {
+                playerInventory.cardTransfer(instance, "side", goingto);
+                RefreshUI();
+            });
+            sideBoardCards.Add(card);
         }
+        
+    }
+
+    public void OnDeckButton(){
+        goingto = "player";
+    }
+
+    public void OnBufferButton(){
+        goingto = "buffer";
+    }
+
+    public void OnSideButton(){
+        goingto = "side";
     }
 }
