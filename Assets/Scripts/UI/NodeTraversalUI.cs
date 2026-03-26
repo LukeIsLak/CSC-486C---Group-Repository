@@ -110,6 +110,8 @@ public class NodeTraversalUI : MonoBehaviour
             });
             bufferCards.Add(card);
         }
+        Debug.Log(bufferLocation.offsetMax);
+        Debug.Log(bufferLocation.offsetMin);
     }
 
     private void RefreshUI()
@@ -132,5 +134,13 @@ public class NodeTraversalUI : MonoBehaviour
             Destroy(card.gameObject);
         }
         bufferCards.Clear();
+    }
+
+    private void BuildSideBoardUI() {
+        foreach (var instance in playerInventory.sideboard) {
+            CardViewUI card = Instantiate(cardViewPrefab, sideBoardLocation);
+
+            //card.Init(instance.cardData, !instance.useable, )
+        }
     }
 }

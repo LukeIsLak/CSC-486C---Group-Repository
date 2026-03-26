@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
 {
+    Transform start;
+    
     public void OnBeginDrag(PointerEventData eventData) {
-        Debug.Log("begin drag");
+        start = transform;
     }
 
     public void OnDrag(PointerEventData eventData) {
@@ -14,6 +16,14 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        Debug.Log("End drag");
+        //if (transform.position.x > -50)
+    }
+
+    private void findLocation(Transform location){
+        //if (location.x > -175 && location.x <)
+    }
+
+    public void OnPointerEnter(PointerEventData pointerEventData) {
+        Debug.Log(name);
     }
 }
