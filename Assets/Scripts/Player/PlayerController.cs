@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && controller.isGrounded)
+        if (context.started && controller.isGrounded)
         {
             verticalVelocity = jumpForce;
         }
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnToggleInventory(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (!context.started) return;
         if (UIManager.instance.isInventoryOpen)
         {
             UIManager.instance?.HideInventoryView();
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnTogglePause(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (!context.started) return;
         if (PauseManager.instance.isPause)
         {
             PauseManager.instance?.Resume();

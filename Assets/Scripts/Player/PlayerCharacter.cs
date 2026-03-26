@@ -31,6 +31,7 @@ public class PlayerCharacter : MonoBehaviour
     [Header("References")]
     [SerializeField] private CharacterData playerData;
     [SerializeField] private GameEvent PlayerInteractEvent;
+    [SerializeField] private GameEvent PlayerCloseInteractableMenu;
 
     private Animator swordAnimator;
     private Camera cam;
@@ -265,5 +266,11 @@ public class PlayerCharacter : MonoBehaviour
         }
         currentChest = null;
         UIManager.instance?.HideInteract();
+    }
+
+    public void OnCloseMenu(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        PlayerCloseInteractableMenu.Raise();
     }
 }

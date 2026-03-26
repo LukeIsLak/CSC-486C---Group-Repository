@@ -18,7 +18,12 @@ public class MerchantItemUI : MonoBehaviour
         //nameText.text = shopitem.acquirable.itemName;
         icon.sprite = shopitem.acquirable.icon;
         priceText.text = shopitem.price.ToString();
-
+        TooltipTrigger tooltip = icon.GetComponent<TooltipTrigger>();
+        if (tooltip != null) 
+        {
+            CardAcquirable card = (CardAcquirable)shopitem.acquirable;
+            tooltip.SetContent(card.GetName(), card.GetDescription());
+        }
         if (buyButton != null) 
         {
             buyButton.onClick.RemoveAllListeners();

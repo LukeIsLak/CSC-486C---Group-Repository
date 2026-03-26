@@ -321,7 +321,7 @@
             ]
         },
         {
-            "name": "UI",
+            "name": "Menu UI",
             "id": "545ae3d7-598b-40bc-9d9a-715a363702be",
             "actions": [
                 {
@@ -363,6 +363,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "InventoryInCombat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interactable UI",
+            "id": "37a06e4b-3834-488e-877b-1ffa0d2af72a",
+            "actions": [
+                {
+                    "name": "Close Menu",
+                    "type": "Button",
+                    "id": "012d1752-73cb-40ca-94d4-f47c4e15d829",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "38a74975-7c8f-4d20-8df1-b35d8f388b83",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
