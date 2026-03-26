@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleWaves:
   - {fileID: 11400000, guid: 31884332833d4bc4c98452e4ec0d916e, type: 2}
-  possibleWavesWeights: 01000000
+  - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
+  possibleWavesWeights: 0100000002000000
   waves: []
   spawnPoints:
   - {fileID: 6862286725000435334}
@@ -451,6 +452,10 @@ PrefabInstance:
     - target: {fileID: 778016704917766649, guid: 3c34d1e483280b24baa6063a5a4d5dac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574095477772361130, guid: 3c34d1e483280b24baa6063a5a4d5dac, type: 3}
+      propertyPath: isGoldChest
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4574095477772361130, guid: 3c34d1e483280b24baa6063a5a4d5dac, type: 3}
       propertyPath: sequenceObjects.Array.size

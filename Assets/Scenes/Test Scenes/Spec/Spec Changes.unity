@@ -645,6 +645,78 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+--- !u!1001 &1186285211
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92977142050482609, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380453574429038149, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380453574429038149, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930491072944498025, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239023833603281028, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      propertyPath: m_Name
+      value: Merchant Booth
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5843235322369397072, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: 08ea4e495465af1489ca25afc8195f56, type: 3}
 --- !u!1001 &1222213112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -912,3 +984,4 @@ SceneRoots:
   - {fileID: 1590930355}
   - {fileID: 2105036264}
   - {fileID: 249538035}
+  - {fileID: 1186285211}

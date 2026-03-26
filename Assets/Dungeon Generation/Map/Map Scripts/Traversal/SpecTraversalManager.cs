@@ -23,6 +23,7 @@ public class SpecTraversalManager : MonoBehaviour
         MapEncounter lastFinished = traversableLayout.DoProgress(layoutData.completedIndices);
         // Assume selected encounter is set properly.
         playerInventory.ClearBuffer();
+        playerInventory.refreshCards();
         EnterSelectedEncounter();
     }
 
