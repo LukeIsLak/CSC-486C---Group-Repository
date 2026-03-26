@@ -8,6 +8,8 @@ public class BrambleSnare : Cards
     // Definition from Design Team:
     // Creates a thorny vine trap area that slows down enemies as they move through it. Enemies take DOT as they move through the area.
 
+    public BrambleGrenade grenadePrefab;
+
     public BrambleTrap bramblePrefab;
     [SerializeField] private float spawnDistance = 5f;
 
@@ -18,18 +20,10 @@ public class BrambleSnare : Cards
         player = GameObject.FindWithTag("Player");
         camera = GameObject.FindWithTag("MainCamera");
         Debug.Log("Used card");
-        Ray ray = new Ray(camera.transform.position, camera.transform.forward);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 20f))
-        {
-            //Ensure that the trap is placed on the floor
-            if (Physics.Raycast(hit.point + Vector3.up * 2f, Vector3.down, out hit, 10f))
-            {
-                Instantiate(bramblePrefab, hit.point, Quaternion.identity);
-            }
-        }
-
+        BrambleGrenade projectile = Instantiate(grenadePrefab, camera.transform.position + camera.transform.forward, player.transform.rotation);
+        projectile.Throw(camera.transform.forward);
+        
         yield break;
 
     }

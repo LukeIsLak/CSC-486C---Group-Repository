@@ -9,25 +9,37 @@ public class BrambleTrap : MonoBehaviour
 
     [SerializeField] private float ttl = 5f;
 
+    [SerializeField] private DamageOverTime effect1;
+
+
     void Start(){
         StartCoroutine(timeToLive(ttl));
     }
 
     //Change this function later to prevent double hits
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
+        List <EnemyInterface> seenEnemies = new List<EnemyInterface>();
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
         if (enemy != null){
-                enemy.Hit(damage);
-            }
+             if (!seenEnemies.Contains(enemy)) {
+                enemy.Hit(damage, effect1.type, effect1);
+                seenEnemies.Add(enemy);
+
+                }
+        }
             else {
                 enemy = other.GetComponentInParent<EnemyInterface>();
                 if (enemy != null){
-                    enemy.Hit(damage);
+                    if (!seenEnemies.Contains(enemy)) {
+                    enemy.Hit(damage, effect1.type, effect1);
+                    seenEnemies.Add(enemy);
+
+                    }
                 }
             }
 
-        //Implement slow and damage
+        //Implement slow
     }
 
     private IEnumerator timeToLive(float dur) {
