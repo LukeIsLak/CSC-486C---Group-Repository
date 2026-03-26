@@ -11,6 +11,7 @@ public class SpecTraversalManager : MonoBehaviour
 
     [Header("Data")]
     public LayoutData layoutData;
+    public PlayerInventory playerInventory;
 
     [Header("Events")]
     public GameEvent EnterEncounter;
@@ -21,6 +22,8 @@ public class SpecTraversalManager : MonoBehaviour
         InitializeLayout();
         MapEncounter lastFinished = traversableLayout.DoProgress(layoutData.completedIndices);
         // Assume selected encounter is set properly.
+        playerInventory.ClearBuffer();
+        playerInventory.refreshCards();
         EnterSelectedEncounter();
     }
 

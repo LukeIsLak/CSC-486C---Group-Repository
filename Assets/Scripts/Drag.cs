@@ -3,27 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
+public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    Transform start;
-    
+    Vector3 start;
+    public CardViewUI cardUI;
+    public CardInstance cardInstance;
+
+    void Start()
+    {
+        cardInstance = cardUI.cardInstance;
+    }
+
+    public Deck activeDeck;
+    public Deck bufferDeck;
+    public Deck sideboardDeck;
+
     public void OnBeginDrag(PointerEventData eventData) {
-        start = transform;
+        if (cardInstance == null || !cardInstance.deck) return;
+        if (cardInstance.deck == activeDeck) return;
+        //start = transform.position;
+        DragHandler.instance.HandleDragStart(gameObject);
     }
 
     public void OnDrag(PointerEventData eventData) {
+        if (cardInstance == null || !cardInstance.deck) return;
+
+        if (cardInstance.deck == activeDeck) return;
         transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData) {
+        if (cardInstance == null || !cardInstance.deck) return;
+        if (cardInstance.deck == activeDeck) return;
+        DragHandler.instance.HandleDragEnd(gameObject, cardInstance);
         //if (transform.position.x > -50)
-    }
-
-    private void findLocation(Transform location){
-        //if (location.x > -175 && location.x <)
-    }
-
-    public void OnPointerEnter(PointerEventData pointerEventData) {
-        Debug.Log(name);
+        //transform.position = start;
+        
     }
 }

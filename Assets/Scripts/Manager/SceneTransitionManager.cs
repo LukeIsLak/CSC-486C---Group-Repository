@@ -54,7 +54,8 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneSwapToLobby()
     {
-        SceneManager.LoadScene(lobbyScene);
+        DoLoadWithFade(lobbyScene, true, true);
+        // SceneManager.LoadScene(lobbyScene);
     }
     
     public void SceneSwapToMapLayout()

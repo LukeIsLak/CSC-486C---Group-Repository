@@ -28,6 +28,7 @@ public class BrambleGrenade : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         //When it lands, spawn the trap at that point
+        if (!other.gameObject.CompareTag("Surface")) return;
         Vector3 hitPoint = other.contacts[0].point;
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, other.contacts[0].normal);
         Instantiate(trapPrefab, hitPoint + Vector3.up * 0.02f, rotation);

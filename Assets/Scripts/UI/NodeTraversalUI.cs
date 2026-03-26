@@ -18,9 +18,9 @@ public class NodeTraversalUI : MonoBehaviour
     //[SerializeField] private GameObject openDeckButton;
     [SerializeField] private Button removeCardButton;
     [SerializeField] private TextMeshProUGUI tokenAmountUI;
-    private List<CardViewUI> playerDeckCards = new();
-    private List<CardViewUI> bufferCards = new();
-    private List<CardViewUI> sideBoardCards = new();
+    public List<CardViewUI> playerDeckCards = new();
+    public List<CardViewUI> bufferCards = new();
+    public List<CardViewUI> sideBoardCards = new();
 
     public GameEvent ToggleNodeInventory;
 
@@ -43,6 +43,7 @@ public class NodeTraversalUI : MonoBehaviour
     }
     public void ShowDeckContainer()
     {
+        ClearDeckUI();
         // openDeckButton.SetActive(false);
         inventoryInNode.SetActive(true);
         removeCardButton.interactable = playerInventory.amountRemovalTokens > 0;
@@ -74,16 +75,17 @@ public class NodeTraversalUI : MonoBehaviour
     private void BuildDeckUI()
     {
         // Create the UI for each card instance in hand 
-        foreach (var instance in playerInventory.playerdeck)
+        foreach (var instance in playerInventory.activeDeck.contents)
         {
 
             CardViewUI card = Instantiate(cardViewPrefab, playerDeckLocation);
+            /*
             if(isRemoveMode)
             {
                 card.Init(instance.cardData, !instance.useable, () =>
                 {
                     //playerInventory.removeCardFromPlayersDeck(instance);
-                    playerInventory.cardTransfer(instance, "player", goingto);
+                    //playerInventory.cardTransfer(instance, "player", goingto);
                     isRemoveMode = false;
                     RefreshUI();
                     playerInventory.amountRemovalTokens--;
@@ -94,7 +96,25 @@ public class NodeTraversalUI : MonoBehaviour
             {
                 card.Init(instance.cardData, !instance.useable, null, true);
             }
-                playerDeckCards.Add(card);
+            */
+            if(isRemoveMode)
+            {
+                card.Init(instance, !instance.useable, () =>
+                {
+                    //playerInventory.removeCardFromPlayersDeck(instance);
+                    //playerInventory.cardTransfer(instance, "player", goingto);
+                    playerInventory.activeDeck.RemoveCard(instance);
+                    playerInventory.amountRemovalTokens--;
+                    isRemoveMode = false;
+                    RefreshUI();
+                    UpdateRemovalTokenUI();
+                }, false); 
+            }
+            else
+            {
+                card.Init(instance, !instance.useable, null, true);
+            }
+            playerDeckCards.Add(card);
         }
 
     }
@@ -105,21 +125,27 @@ public class NodeTraversalUI : MonoBehaviour
 
     private void BuildBufferUI()
     {
-        foreach (var instance in playerInventory.buffer)
+        foreach (var instance in playerInventory.bufferDeck.contents)
         {
             CardViewUI card = Instantiate(cardViewPrefab, bufferLocation);
 
+            /*
             card.Init(instance.cardData, !instance.useable, ()=> 
             {
                 //playerInventory.bufferToDeck(instance);
-                playerInventory.cardTransfer(instance, "buffer", goingto);
-                RefreshUI();
+                //RefreshUI();
+            });
+            */
+            card.Init(instance, !instance.useable, ()=> 
+            {
+                //playerInventory.bufferToDeck(instance);
+                //RefreshUI();
             });
             bufferCards.Add(card);
         }
     }
 
-    private void RefreshUI()
+    public void RefreshUI()
     {
         ClearDeckUI();
         BuildDeckUI();
@@ -149,12 +175,19 @@ public class NodeTraversalUI : MonoBehaviour
     }
 
     private void BuildSideBoardUI() {
-        foreach (var instance in playerInventory.sideboard) {
+        foreach (var instance in playerInventory.sideboardDeck.contents) {
             CardViewUI card = Instantiate(cardViewPrefab, sideBoardLocation);
 
+            /*
             card.Init(instance.cardData, !instance.useable, ()=> 
             {
-                playerInventory.cardTransfer(instance, "side", goingto);
+                // playerInventory.cardTransfer(instance, "side", goingto);
+                RefreshUI();
+            });
+            */
+            card.Init(instance, !instance.useable, ()=> 
+            {
+                // playerInventory.cardTransfer(instance, "side", goingto);
                 RefreshUI();
             });
             sideBoardCards.Add(card);

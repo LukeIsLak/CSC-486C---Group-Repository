@@ -23,15 +23,15 @@ public class LineToOthers : MonoBehaviour
             line.transform.SetParent(transform);
             LineRenderer lr     = line.AddComponent<LineRenderer>();
             lr.material         = new Material(Shader.Find("Sprites/Default"));
-            lr.startWidth       = 0.05f;
-            lr.endWidth         = 0.05f;
+            lr.startWidth       = 0.01f;
+            lr.endWidth         = 0.01f;
             lr.positionCount    = 2;
             lr.useWorldSpace    = true;
 
             Vector3 startPos = transform.position;
-            startPos[1] -= 0.2f;
+            startPos -= 0.0f * transform.up;    
             Vector3 endPos = me.transform.position;
-            endPos[1] -= 0.2f;    
+            endPos -= 0.0f * transform.up;    
             lr.SetPosition(0, startPos);
             lr.SetPosition(1, endPos);
             lineRends.Add(lr);
@@ -46,9 +46,9 @@ public class LineToOthers : MonoBehaviour
             LineRenderer lr = lineRends[i];
             
             Vector3 startPos = transform.position;
-            startPos[1] -= 0.2f;
+            startPos -= 0.0f * transform.up;    
             Vector3 endPos = me.transform.position;
-            endPos[1] -= 0.2f;      
+            endPos -= 0.00f * transform.up;   
             lr.SetPosition(0, startPos);
             lr.SetPosition(1, endPos);
         }

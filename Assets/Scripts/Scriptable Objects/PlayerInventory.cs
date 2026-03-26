@@ -8,9 +8,14 @@ public class PlayerInventory : ScriptableObject
     
     public List<Cards> startingHand;    // The hand the player begins with
     public int currency;
-    public List<CardInstance> playerdeck = new();
-    public List<CardInstance> buffer = new();
-    public List<CardInstance> sideboard = new();
+    //private List<CardInstance> playerdeck = new();
+    //private List<CardInstance> buffer = new();
+    //private List<CardInstance> sideboard = new();
+
+    public Deck activeDeck;
+    public Deck bufferDeck;
+    public Deck sideboardDeck;
+
     public int nextUid = 0;
 
     public int amountRemovalTokens = 0;
@@ -21,14 +26,18 @@ public class PlayerInventory : ScriptableObject
     public void Initialize()
     {
         currency = 0;
-        playerdeck.Clear();
-        buffer.Clear();
+        // playerdeck.Clear();
+        activeDeck.contents.Clear();
+        // buffer.Clear();
+        bufferDeck.contents.Clear();
+        sideboardDeck.contents.Clear();
         nextUid = 0;
         amountRemovalTokens = 0;
 
         foreach (Cards card in startingHand)
         {
-            playerdeck.Add(new CardInstance(card, nextUid++));
+            // playerdeck.Add(new CardInstance(card, nextUid++));
+            activeDeck.AddCard(new CardInstance(card, nextUid++));
         }
 
     }
@@ -37,13 +46,15 @@ public class PlayerInventory : ScriptableObject
     public void InitializeRandomDeck(CardsDatabase cardsDB, int deckSize)
     {
         // here so the deck doesnt explode in size
-        playerdeck.Clear();
+        // playerdeck.Clear();
+        activeDeck.contents.Clear();
         nextUid = 0;
         //Debug.Log("im here");
         for (int i = 0; i < deckSize; i++)
         {
             Cards pick = cardsDB.allCards[Random.Range(0, cardsDB.allCards.Count)];
-            playerdeck.Add(new CardInstance(pick, nextUid++));
+            // playerdeck.Add(new CardInstance(pick, nextUid++));
+            activeDeck.AddCard(new CardInstance(pick, nextUid++));
         }
 
         
@@ -71,14 +82,17 @@ public class PlayerInventory : ScriptableObject
     }
 
     public void AddToBuffer(CardInstance card){
-        buffer.Add(card);
+        //buffer.Add(card);
+        bufferDeck.AddCard(card);
     }
 
-    public void clearBuffer(){
-        buffer.Clear();
+    public void ClearBuffer(){
+        // buffer.Clear();
+        bufferDeck.contents.Clear();
     }
 
     public void bufferToDeck(CardInstance card){
+        /*
         for (int i = 0; i < buffer.Count; i++){
             if (buffer[i] == card){
                 buffer.RemoveAt(i);
@@ -86,10 +100,14 @@ public class PlayerInventory : ScriptableObject
                 return; // end process as card was found
             }
         }
+        */
+
+        bufferDeck.TransferCard(card, activeDeck);
         
     }
 
     public void cardTransfer(CardInstance card, string curDeckLocation, string transferDeckLocation ) {
+        /*
         List<CardInstance> curDeck = new();
         List<CardInstance> transferDeck = new();
         int transferSizeCheck = 999;
@@ -148,15 +166,17 @@ public class PlayerInventory : ScriptableObject
                 return;
             }
         }
+        */
     }
 
     // returns true if the player has a token and the card is removed from their deck, returns false if the play does not have a token or the card cant be found
     public void removeCardFromPlayersDeck(CardInstance card){
-        for (int i = 0; i < playerdeck.Count; i++){
-            if (playerdeck[i] == card){
-                playerdeck.RemoveAt(i);
-            }
-        }
+        //for (int i = 0; i < playerdeck.Count; i++){
+        //    if (playerdeck[i] == card){
+        //        playerdeck.RemoveAt(i);
+        //    }
+        //}
+        activeDeck.RemoveCard(card);
     }
 
     public void AddRemovalToken(){
@@ -164,8 +184,10 @@ public class PlayerInventory : ScriptableObject
     }
 
     public void refreshCards(){
-        for (int i = 0; i < playerdeck.Count; i++){
-            playerdeck[i].useable = true;
-        }
+        //for (int i = 0; i < playerdeck.Count; i++){
+        //   playerdeck[i].useable = true;
+        //}
+        foreach (CardInstance card in activeDeck.contents)
+            card.useable = true;
     }
 }
