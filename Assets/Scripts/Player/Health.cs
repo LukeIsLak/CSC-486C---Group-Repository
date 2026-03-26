@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     [Header("Data")]
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private CharacterData playerData;
+    [SerializeField] private SetPlayerInputScheme inputScheme;
     public float maxHealth;
     public float currentHealth;
     public bool hasDied = false;
@@ -71,8 +72,7 @@ public class Health : MonoBehaviour
         if (hasDied) return;
         hasDied = true;
         //Destroy(gameObject);
-        PlayerInput pi = gameObject.GetComponent<PlayerInput>();
-        pi.SwitchCurrentActionMap("UI");
+        inputScheme.SetInputToInteractableUI();
         PlayerDeath.Raise();
 
     }
