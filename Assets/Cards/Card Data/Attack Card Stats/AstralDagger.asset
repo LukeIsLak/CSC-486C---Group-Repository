@@ -16,4 +16,4 @@ MonoBehaviour:
   descrption: Flies to the nearest enemy in vision
   effectValue: 10
   image: {fileID: -1977755330, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
-  daggerPrefab: {fileID: 6807903892725110464, guid: 701b2dcc0b7b543848bfd8eecb538285, type: 3}
+  daggerPrefab: {fileID: 8662212508750353322, guid: e05157af7d1a8c14f8c1d40ab20e18a7, type: 3}
