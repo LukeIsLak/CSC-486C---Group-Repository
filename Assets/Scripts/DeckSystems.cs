@@ -50,7 +50,7 @@ public class DeckSystems : MonoBehaviour
 
 
     void Start(){
-        loadDeck(inventory.playerdeck);
+        loadDeck(inventory.activeDeck.contents);
         shuffleIncHand();
     }
 

@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: a6baa921562ef2641acc5a3f28817d50
+guid: ba723c0ce52779e49a4793f9631f271c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - activeDeck: {instanceID: 0}
-  - bufferDeck: {instanceID: 0}
-  - sideboardDeck: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

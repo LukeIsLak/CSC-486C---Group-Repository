@@ -19,44 +19,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
   - {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
   currency: 0
-  playerdeck:
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
-    uid: 0
-    useable: 1
-  - cardData: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
-    uid: 3
-    useable: 1
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
-    uid: 4
-    useable: 0
-  - cardData: {fileID: 11400000, guid: 5cf1fb975b48a449dbffae81a134ae62, type: 2}
-    uid: 7
-    useable: 1
-  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
-    uid: 5
-    useable: 1
-  - cardData: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
-    uid: 6
-    useable: 1
-  - cardData: {fileID: 11400000, guid: cd79b2817f6b7f64a93fd5b8feedca3d, type: 2}
-    uid: 0
-    useable: 0
-  - cardData: {fileID: 11400000, guid: a620209f988d74d7ab067a6080b5aa9e, type: 2}
-    uid: 0
-    useable: 0
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
-    uid: 0
-    useable: 0
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
-    uid: 1
-    useable: 1
-  buffer:
-  - cardData: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
-    uid: 0
-    useable: 0
-  sideboard:
-  - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
-    uid: 0
-    useable: 0
-  nextUid: 8
-  amountRemovalTokens: 0
+  activeDeck: {fileID: 11400000, guid: eda48a0b12ddb0646b2fb379ccf35524, type: 2}
+  bufferDeck: {fileID: 11400000, guid: af6ae8c60be40de4bba33629bf0fb223, type: 2}
+  sideboardDeck: {fileID: 11400000, guid: 76889f6fc2b20e246b09716fddaeb2d1, type: 2}
+  nextUid: 7
+  amountRemovalTokens: 10
