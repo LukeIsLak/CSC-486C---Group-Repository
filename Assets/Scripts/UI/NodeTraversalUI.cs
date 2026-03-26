@@ -8,6 +8,7 @@ public class NodeTraversalUI : MonoBehaviour
 {
     [SerializeField] private RectTransform playerDeckLocation;
     [SerializeField] private RectTransform bufferLocation;
+    [SerializeField] private RectTransform sideBoardLocation;
     [SerializeField] private GameObject inventoryInNode;
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private CardViewUI cardViewPrefab;

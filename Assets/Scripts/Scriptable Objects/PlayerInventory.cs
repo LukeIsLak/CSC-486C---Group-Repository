@@ -10,9 +10,13 @@ public class PlayerInventory : ScriptableObject
     public int currency;
     public List<CardInstance> playerdeck = new();
     public List<CardInstance> buffer = new();
+    public List<CardInstance> sideboard = new();
     public int nextUid = 0;
 
     public int amountRemovalTokens = 0;
+
+    const int PLAYERDECKMAXSIZE = 15;
+    const int SIDEBOARDMAXSIZE = 3;
 
     public void Initialize()
     {
@@ -83,6 +87,67 @@ public class PlayerInventory : ScriptableObject
             }
         }
         
+    }
+
+    public void cardTransfer(CardInstance card, string curDeckLocation, string transferDeckLocation ) {
+        List<CardInstance> curDeck = new();
+        List<CardInstance> transferDeck = new();
+        int transferSizeCheck = 999;
+
+        switch (curDeckLocation) {
+            case "player":
+                curDeck = playerdeck;
+                break;
+            case "buffer":
+                curDeck = buffer;
+                break;
+            case "side":
+                curDeck = sideboard;
+                break;
+        }
+
+        switch (transferDeckLocation) {
+            case "player":
+                transferDeck = playerdeck;
+                transferSizeCheck = PLAYERDECKMAXSIZE;
+                break;
+            case "buffer":
+                transferDeck = buffer;
+                transferSizeCheck = 999; // large number as buff has no max size
+                break;
+            case "side":
+                transferDeck = sideboard;
+                transferSizeCheck = SIDEBOARDMAXSIZE;
+                break;
+        }
+
+        // check to see if transfer can happen
+        if (transferDeck.Count > transferSizeCheck){
+            return;
+        }
+
+        // wait for payment
+
+        for(int i = 0; i < curDeck.Count; i++) {
+            if (curDeck[i] == card){
+                curDeck.RemoveAt(i);
+                transferDeck.Add(card);
+
+                switch (curDeckLocation){
+                    case "player":
+                        playerdeck = curDeck;
+                        break;
+                    case "buffer":
+                        buffer = curDeck;
+                        break;
+                    case "side":
+                        sideboard = curDeck;
+                        break;
+                }
+
+                return;
+            }
+        }
     }
 
     // returns true if the player has a token and the card is removed from their deck, returns false if the play does not have a token or the card cant be found
