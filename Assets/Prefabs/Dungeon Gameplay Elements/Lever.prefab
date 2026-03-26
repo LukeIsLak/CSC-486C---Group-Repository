@@ -94,6 +94,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onEnterRange:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeaveRange:
+    m_PersistentCalls:
+      m_Calls: []
   isOneTime: 1
   activated: 0
   graphicsWithinRange: {fileID: 8313801919802155857}
@@ -110,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: f84fd059baffaea4b819562c99eb63c9, type: 2}
+  onStart: 0
 --- !u!135 &9124343091191462526
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -327,7 +334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

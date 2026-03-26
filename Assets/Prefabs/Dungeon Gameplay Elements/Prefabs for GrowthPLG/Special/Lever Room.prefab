@@ -45,6 +45,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever
       objectReference: {fileID: 0}
+    - target: {fileID: 5235262711789813303, guid: cd447a9d0450f5845904330b2d12b1bf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 7129220481598928491, guid: cd447a9d0450f5845904330b2d12b1bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.665

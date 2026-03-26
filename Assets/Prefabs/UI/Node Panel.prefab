@@ -648,7 +648,6 @@ MonoBehaviour:
   cardViewPrefab: {fileID: 8081956759663492939, guid: e2465ff249be8e64288eca3e9700354b, type: 3}
   playerDeckScrollRect: {fileID: 7891173870564473743}
   bufferDeckScrollRect: {fileID: 2465310214927516019}
-  openDeckButton: {fileID: 810145776821677604}
   removeCardButton: {fileID: 3741166658950016629}
   tokenAmountUI: {fileID: 6901130712427343486}
   ToggleNodeInventory: {fileID: 11400000, guid: e1c65894eff9f7048ab83f076c356f47, type: 2}
