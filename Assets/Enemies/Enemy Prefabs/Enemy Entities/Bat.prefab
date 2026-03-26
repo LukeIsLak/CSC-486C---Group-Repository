@@ -48,9 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExitToLayout: {fileID: 0}
+  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
   playerData: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  hasDied: 0
   shield: 0
 --- !u!114 &5098527676356961825
 MonoBehaviour:
@@ -213,7 +216,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.58, y: 0.19, z: 0.2}
+  m_Size: {x: 0.71, y: 0.4, z: 0.44}
   m_Center: {x: 0, y: 0.03, z: 0}
 --- !u!135 &1299156393600933110
 SphereCollider:
