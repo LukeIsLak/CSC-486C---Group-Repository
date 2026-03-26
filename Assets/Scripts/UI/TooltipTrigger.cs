@@ -23,13 +23,13 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerExit(PointerEventData eventData) 
     {   
         if(TooltipRoutine != null) StopCoroutine(TooltipRoutine);
-
-        TooltipUI.instance.Hide();
+        
+        TooltipUI.instance?.Hide();
     }
 
     private IEnumerator ShowTooltipDelay()
     {
         yield return new WaitForSeconds(delay);
-        TooltipUI.instance.Show(header, content);
+        TooltipUI.instance?.Show(header, content);
     }
 }
