@@ -11,9 +11,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PauseUI pauseView;
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private StaminaUI staminaView;
-    [SerializeField] private GameObject merchantPanel;
+    [SerializeField] private SetPlayerInputScheme inputScheme;
+    
+
+    // [SerializeField] private GameObject merchantPanel;
     [SerializeField] private GameObject interactPanel;
-    [SerializeField] private GameObject nodePanel;
+    // [SerializeField] private GameObject nodePanel;
     [SerializeField] private ChestUI chestUI;
     [SerializeField] private ShieldUI shieldUI;
     public bool isInventoryOpen {  get; private set; }
@@ -78,14 +81,14 @@ public class UIManager : MonoBehaviour
     {
         isInventoryOpen = true;
         HideCombatView();
-        if(playerInput != null) playerInput.SwitchCurrentActionMap("UI");
+        if(playerInput != null) inputScheme.SetInputToInteractableUI();
         inventoryView.ShowInventory(); 
     }
     public void HideInventoryView()
     {
         isInventoryOpen = false;
         inventoryView.HideInventory();
-        if (playerInput != null) playerInput.SwitchCurrentActionMap("Combat");
+        if (playerInput != null)  inputScheme.SetInputToCombat();
         ShowCombatView();
     }
 
@@ -100,12 +103,12 @@ public class UIManager : MonoBehaviour
 
     public void ShowMerchantView()
     {
-        merchantPanel.SetActive(true);
+        // merchantPanel.SetActive(true);
     }
 
     public void HideMerchantView()
     {
-        merchantPanel.SetActive(false);
+        // merchantPanel.SetActive(false);
     }
 
     public void ShowInteract()
@@ -120,11 +123,11 @@ public class UIManager : MonoBehaviour
 
     public void ShowNodePanel()
     {
-        nodePanel.SetActive(true);
+        // nodePanel.SetActive(true);
     }
     public void HideNodePanel()
     {
-        nodePanel.SetActive(false);
+        // nodePanel.SetActive(false);
     }
 
     public void ShowChestUI(Acquirable cardData)
