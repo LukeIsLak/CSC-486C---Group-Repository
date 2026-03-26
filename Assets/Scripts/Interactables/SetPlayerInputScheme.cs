@@ -32,6 +32,11 @@ public class SetPlayerInputScheme : MonoBehaviour
         if (!BindPlayerInput()) return;
         playerInput.SwitchCurrentActionMap("Interactable UI");
     }
+    public void SetToMenuUI()
+    {
+        if (!BindPlayerInput()) return;
+        playerInput.SwitchCurrentActionMap("Menu UI");
+    }
     public void SetInputToCombat()
     {
         if (!BindPlayerInput()) return;

@@ -737,10 +737,10 @@ public class Bat : EnemyInterface
 
     // }
 
-    public void OnTriggerEnter(Collider other) {
-        if (isAttacking && other.CompareTag("Player")) {
-            Health h = other.GetComponent<Health>();
-            if (h != null) h.TakeDamage(bd.damage); //TODO: LK - eventually, when we figure out the base values, replace this!
+    public void OnCollisionEnter(Collision other) {
+        if (isAttacking && other.gameObject.CompareTag("Player")) {
+            Health h = other.gameObject.GetComponent<Health>();
+            if (h != null) h.TakeDamage(bd.damage);
             isAttacking = false;
         }
     }
