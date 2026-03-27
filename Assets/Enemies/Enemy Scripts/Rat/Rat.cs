@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +17,7 @@ public class Rat : EnemyInterface
     public RatColonyManager rcm;
     public RatStateManager rsm;
     public NavMeshAgent nma;
+    public StudioEventEmitter audioEmitter;
     // public SphereCollider outerCol;
     // public SphereCollider innerCol;
 
@@ -58,6 +60,7 @@ public class Rat : EnemyInterface
 
         playerTransform = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+        audioEmitter = GetComponent<StudioEventEmitter>();
 
         RatStateManager env_rsm     = FindObjectOfType<RatStateManager>();
         RatColonyManager env_rcm    = FindObjectOfType<RatColonyManager>();

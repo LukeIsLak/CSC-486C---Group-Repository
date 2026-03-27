@@ -20,4 +20,4 @@ MonoBehaviour:
   encounterWeights: []
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 2b6335cc615339b4b98d0f2d27abdb2f, type: 3}
-    m_SceneName: Treasure
+    m_SceneName: MajorTreasure

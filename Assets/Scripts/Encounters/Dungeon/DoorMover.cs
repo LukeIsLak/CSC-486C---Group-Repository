@@ -8,6 +8,8 @@ public class DoorMover : MonoBehaviour
     public float moveDistance;
     public float moveTime;
 
+    public bool instant = false;
+
     public void Lower()
     {
         Vector3 curPos = transform.position;
@@ -21,13 +23,16 @@ public class DoorMover : MonoBehaviour
     }
     public IEnumerator MoveToPosition(Vector3 start, Vector3 end, float time)
     {
-        float elapsed = 0f;
-        while (elapsed < time)
+        if (!instant)
         {
+            float elapsed = 0f;
+            while (elapsed < time)
+            {
             float t = elapsed / time;
             transform.position = Vector3.Lerp(start, end, t);
             elapsed += Time.fixedDeltaTime;
             yield return null;
+            }
         }
         transform.position = end;
     }

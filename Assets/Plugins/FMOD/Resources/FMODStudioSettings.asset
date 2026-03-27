@@ -561,7 +561,10 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
+  - Desktop/Master
   Banks:
+  - Desktop/Music
+  - Desktop/PlayerAtkFX
   - Music
   - PlayerAtkFX
   BanksToLoad: []

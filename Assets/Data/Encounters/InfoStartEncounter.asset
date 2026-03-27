@@ -20,5 +20,5 @@ MonoBehaviour:
   encounterWeights:
   - {fileID: 11400000, guid: 09de037b03ad826418856743ec213f4b, type: 2}
   scene:
-    m_SceneAsset: {fileID: 0}
-    m_SceneName: 
+    m_SceneAsset: {fileID: 102900000, guid: 993cff91ebaef414d826f387f60121e8, type: 3}
+    m_SceneName: First Room

@@ -31,6 +31,7 @@ public class PlayerCharacter : MonoBehaviour
     [Header("References")]
     [SerializeField] private CharacterData playerData;
     [SerializeField] private GameEvent PlayerInteractEvent;
+    [SerializeField] private GameEvent PlayerCloseInteractableMenu;
 
     private Animator swordAnimator;
     private Camera cam;
@@ -130,7 +131,7 @@ public class PlayerCharacter : MonoBehaviour
             //Debug.Log($"Hit: {hit.collider.name} ");
 
             var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
-            if (enemyComponent != null) enemyComponent.Hit(attackMultiplier * attackDamage);
+            if (enemyComponent != null) enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); enemyComponent.Hit(attackMultiplier * attackDamage);
             TriggerHitStop(attackHitStopDuration);
             
         }
@@ -265,5 +266,11 @@ public class PlayerCharacter : MonoBehaviour
         }
         currentChest = null;
         UIManager.instance?.HideInteract();
+    }
+
+    public void OnCloseMenu(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        PlayerCloseInteractableMenu.Raise();
     }
 }

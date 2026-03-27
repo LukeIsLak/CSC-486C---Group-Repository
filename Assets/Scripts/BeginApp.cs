@@ -12,8 +12,11 @@ public class TestApp : MonoBehaviour
     private RandomContext encRandomContext;
     public CharacterData characterData;
 
+    public bool started;
+
     void Start()
     {
+        started = false;
         // RANDOMNESS INITIALIZATION
         int runSeed                 = (int)System.DateTime.Now.Ticks;
         if ((uint)runSeed == 0)     {Debug.Log("Seed 0"); runSeed = 1;}
@@ -22,12 +25,15 @@ public class TestApp : MonoBehaviour
         layoutData.InitializeStates();
         encRandomContext.ResetContext((uint)runSeed);
 
-        // PLAYER INITIALIZATION
-        inventory.Initialize();
         // MAKE SURE PLAYER HAS FULL HEALTH
         characterData.currentHealth = characterData.maxHealth;
 
+    }
+    public void Begin()
+    {
+        if (started) return;
+        started = true;
+        inventory.Initialize();
         EnterLayout.Raise();
-
     }
 }

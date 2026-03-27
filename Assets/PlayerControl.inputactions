@@ -321,22 +321,13 @@
             ]
         },
         {
-            "name": "UI",
+            "name": "Menu UI",
             "id": "545ae3d7-598b-40bc-9d9a-715a363702be",
             "actions": [
                 {
                     "name": "Pause",
                     "type": "Button",
                     "id": "e449e80f-7867-4dde-85bd-0b2d98172988",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "InventoryInCombat",
-                    "type": "Button",
-                    "id": "c91fa945-c01e-47f8-9096-0bf8ce2483e6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -354,15 +345,43 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interactable UI",
+            "id": "37a06e4b-3834-488e-877b-1ffa0d2af72a",
+            "actions": [
+                {
+                    "name": "Close Menu",
+                    "type": "Button",
+                    "id": "012d1752-73cb-40ca-94d4-f47c4e15d829",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "38a74975-7c8f-4d20-8df1-b35d8f388b83",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "0d33a940-7a6e-405f-a42f-c4427b780800",
+                    "id": "ee1080c9-da04-4f09-8780-240a13b3e553",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "InventoryInCombat",
+                    "action": "Close Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

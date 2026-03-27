@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WaveKnockback
   m_EditorClassIdentifier: 
   name: 
-  type: 0
-  knockbackForce: 0
+  type: 2
+  knockbackForce: 5
