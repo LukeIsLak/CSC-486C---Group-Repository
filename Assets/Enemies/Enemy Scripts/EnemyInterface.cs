@@ -14,6 +14,8 @@ public class EnemyInterface : MonoBehaviour
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float speedModifier = 1;
 
+    public bool isDead = false;
+
     [Header("Enemy Interface - Effect Variables")]
     public bool hasDamageOverTime   = false;
     public bool hasFreeze           = false;
@@ -96,10 +98,36 @@ public class EnemyInterface : MonoBehaviour
 
     private IEnumerator StartDamageOverTime(DamageOverTime data) {
         int index = currentDoTNames.IndexOf(data.name);
-        for (int i = 0; i < currentDoTTicks[index]; i++) {
+
+        GameObject particleInstanceBurst, particleInstanceOngoing;
+        ParticleSystem psB = null, psO = null;
+
+        if (data.hasBurstPart) {
+            particleInstanceBurst = Instantiate(data.burstPart, transform.position, Quaternion.identity, transform);
+            psB = particleInstanceBurst.GetComponent<ParticleSystem>();
+        }
+
+        if (data.hasOngoingPart) {
+            particleInstanceOngoing = Instantiate(data.ongoingPart, transform.position, Quaternion.identity, transform);
+            psO = particleInstanceOngoing.GetComponent<ParticleSystem>();
+        }
+        for (int i = 0; i < currentDoTTicks[index] || isDead; i++) {
             TakeDamage(data.tickDamage);
+            if (psB != null) {
+                psB.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+                psB.Play();
+            }
             yield return new WaitForSeconds(1f / data.ticksPerSecond);
             index = currentDoTNames.IndexOf(data.name);
+        }
+
+        if (psB != null) {
+            var emission = psB.emission;
+            emission.enabled = false;
+        }
+        if (psO != null) {
+            var emission = psO.emission;
+            emission.enabled = false;
         }
 
         currentDoTNames.RemoveAt(index);
