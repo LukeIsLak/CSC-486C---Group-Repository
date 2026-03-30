@@ -9,6 +9,13 @@ public class DaggerObject : MonoBehaviour
 
     [SerializeField] private DamageOverTime effect;
 
+    [SerializeField] private float ttl = 5f;
+
+
+    void Start(){
+        StartCoroutine(timeToLive(ttl));
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,5 +31,10 @@ public class DaggerObject : MonoBehaviour
             enemy.Hit(damage, effect.type, effect);
             Destroy(this.gameObject);
         }
+    }
+
+    private IEnumerator timeToLive(float dur) {
+        yield return new WaitForSeconds(dur);
+        Destroy(this.gameObject);
     }
 }

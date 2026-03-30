@@ -131,7 +131,7 @@ public class PlayerCharacter : MonoBehaviour
             //Debug.Log($"Hit: {hit.collider.name} ");
 
             var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
-            if (enemyComponent != null) enemyComponent.Hit(attackMultiplier * attackDamage);
+            if (enemyComponent != null) enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); enemyComponent.Hit(attackMultiplier * attackDamage);
             TriggerHitStop(attackHitStopDuration);
             
         }

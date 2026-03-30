@@ -97,7 +97,7 @@ public class TraversalManager : MonoBehaviour
 
     public void ClearInventoryBuffer()
     {
-        inventory.clearBuffer();
+        inventory.ClearBuffer();
     }
 
     public void ToggleInputs()

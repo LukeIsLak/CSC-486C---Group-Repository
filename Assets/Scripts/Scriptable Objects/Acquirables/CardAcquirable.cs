@@ -13,7 +13,7 @@ public class CardAcquirable : Acquirable
 
     public override void Acquire()
     {
-        playerInventory.AddToBuffer(new CardInstance(card ,playerInventory.nextUid++)); // Make a card instance here!
+        playerInventory.bufferDeck.AddCard(new CardInstance(card ,playerInventory.nextUid++)); // Make a card instance here!
         // Assign UID when?
     }
 

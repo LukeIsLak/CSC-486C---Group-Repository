@@ -123,3 +123,4 @@ MonoBehaviour:
   slowAmount: 5
   damage: 5
   ttl: 5
+  effect1: {fileID: 11400000, guid: 988cf5a043f134002b69a88ec6ecb5db, type: 2}

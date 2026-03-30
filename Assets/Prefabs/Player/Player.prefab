@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7050272462483586888}
   - component: {fileID: -201263358416133198}
   - component: {fileID: 1235413148540341114}
+  - component: {fileID: 3072697508023899604}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -290,7 +291,7 @@ MonoBehaviour:
     m_ActionName: Interactable UI/Close Menu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Combat
+  m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &8382735831833828628
@@ -358,6 +359,7 @@ MonoBehaviour:
   PlayerDeath: {fileID: 11400000, guid: 53c7e9606309a0142bd5710ad82d2065, type: 2}
   healthBar: {fileID: 0}
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
+  inputScheme: {fileID: 3072697508023899604}
   maxHealth: 0
   currentHealth: 0
   hasDied: 0
@@ -436,6 +438,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3072697508023899604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843415185380909026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617e616beb1c9547b6571107f4ec188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7545902890681713120
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +544,7 @@ GameObject:
   - component: {fileID: 6532484783828699154}
   - component: {fileID: 521604548009380659}
   - component: {fileID: 4540606688409577427}
+  - component: {fileID: 1998440037784963671}
   m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera

@@ -13,20 +13,22 @@ public class RestManager : MonoBehaviour
     private bool hasExited = false;
     void Start()
     {
-        float healamount = playerData.maxHealth * percentageHeal;
-        playerData.currentHealth += healamount;
-        if (playerData.currentHealth > playerData.maxHealth) playerData.currentHealth = playerData.maxHealth;
-        // refresh cards
+
         inventory.refreshCards();
+        StartCoroutine(TryHeal());
     }
 
-    void Update()
+
+    public IEnumerator TryHeal()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        float healamount = playerData.maxHealth * percentageHeal;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        while (!player)
         {
-            if (hasExited) return;
-            hasExited = true;
-            EnterLayout.Raise();
+            yield return null;
+            player = GameObject.FindGameObjectWithTag("Player");
         }
+        player.GetComponent<Health>().Heal(healamount);
     }
 }
