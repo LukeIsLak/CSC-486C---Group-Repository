@@ -143,6 +143,14 @@ public class EnemyInterface : MonoBehaviour
         hasFreeze = true;
         numFreeze += 1;
 
+        GameObject particleInstanceOngoing;
+        ParticleSystem psO = null;
+
+        if (numFreeze == 1 && data.hasOngoingPart) {
+            particleInstanceOngoing = Instantiate(data.ongoingPart, transform.position, Quaternion.identity, transform);
+            psO = particleInstanceOngoing.GetComponent<ParticleSystem>();
+        }
+
         SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
         List<Color> originalColors = new List<Color>();
         foreach (SpriteRenderer sr in sprites) {
@@ -157,6 +165,12 @@ public class EnemyInterface : MonoBehaviour
                 if (sprites[i] != null)
                     sprites[i].color = originalColors[i];
             }
+
+            if (psO != null) {
+                var emission = psO.emission;
+                emission.enabled = false;
+            }
+
             hasFreeze = false;
         }
     }
