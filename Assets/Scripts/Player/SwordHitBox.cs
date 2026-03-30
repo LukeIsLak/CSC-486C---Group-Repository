@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwordHitBox : MonoBehaviour
 {
     [SerializeField] private PlayerCharacter character;
+    [SerializeField] private Collider[] colliders;
     HashSet<GameObject> hits = new HashSet<GameObject>();
 
     bool canHit;
@@ -22,7 +23,7 @@ public class SwordHitBox : MonoBehaviour
         hits.Add(other.gameObject);
 
         var enemyComponent = other.GetComponentInParent<EnemyInterface>();
-        if (enemyComponent != null) enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); enemyComponent.Hit(character.attackMultiplier * character.GetAttackDamage());
+        if (enemyComponent != null) enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); enemyComponent.Hit(character.attackMultiplier * character.GetAttackDamage()); Debug.Log("EnemyHit");
         //TriggerHitStop(attackHitStopDuration);
 
     }
