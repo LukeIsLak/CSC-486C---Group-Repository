@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fe535a8b15cd5647a3f0a99e6d9256a, type: 3}
-  m_Name: Sideboard
+  m_Script: {fileID: 11500000, guid: 028275f783239c148bead00f9b4e6a01, type: 3}
+  m_Name: RoomShapeData
   m_EditorClassIdentifier: 
-  contents: []
-  maxSize: 3
-  useMaxSize: 1
+  possibleRooms:
+  - {fileID: 11400000, guid: 2d82879b380861c48861d323c9f6f448, type: 2}
