@@ -630,7 +630,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1968374471039253042, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 7615651993740324411, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 53c0adaf20902d442a5b37c0cdb68715, type: 3}
@@ -1002,6 +1002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1997630511}
+  - component: {fileID: 1997630512}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1024,6 +1025,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997630512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997630510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daeabfcab43abc841a7500e6247ffec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldDropPrefab: {fileID: 300120990534988418, guid: d2ad1c07fb6d3904ca6945de9ffe4d5a, type: 3}
+  amount: 1
 --- !u!1001 &2039437191
 PrefabInstance:
   m_ObjectHideFlags: 0
