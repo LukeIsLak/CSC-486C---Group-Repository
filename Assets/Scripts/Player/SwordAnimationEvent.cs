@@ -51,4 +51,24 @@ public class SwordAnimationEvent : MonoBehaviour
         }
         character.CloseComboWindow();
     }
+
+    public void EnableSwordHitbox()
+    {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
+        character.EnableSwordColider();
+    }
+
+    public void DisableSwordHitbox()
+    {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
+        character.DisableSwordColider();
+    }
 }
