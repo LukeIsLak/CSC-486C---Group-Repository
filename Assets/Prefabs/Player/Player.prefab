@@ -239,22 +239,6 @@ MonoBehaviour:
     m_ActionName: UI/Pause[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8382735831833828628}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnToggleInventory
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c91fa945-c01e-47f8-9096-0bf8ce2483e6
-    m_ActionName: UI/InventoryInCombat[/Keyboard/tab]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 3025714530200236336}
         m_TargetAssemblyTypeName: PlayerCharacter, Assembly-CSharp
         m_MethodName: OnDash
@@ -286,7 +270,19 @@ MonoBehaviour:
     m_ActionId: f4a46ca2-7131-4e2e-be7c-efbff2cfbca3
     m_ActionName: Combat/Interact[/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3025714530200236336}
+        m_TargetAssemblyTypeName: PlayerCharacter, Assembly-CSharp
+        m_MethodName: OnCloseMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 012d1752-73cb-40ca-94d4-f47c4e15d829
     m_ActionName: Interactable UI/Close Menu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
@@ -343,7 +339,7 @@ MonoBehaviour:
   runawayBullActive: 0
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   PlayerInteractEvent: {fileID: 11400000, guid: 63f35d9b82ff48c428018e7a5b854cfb, type: 2}
-  PlayerCloseInteractableMenu: {fileID: 0}
+  PlayerCloseInteractableMenu: {fileID: 11400000, guid: 77a76927987d6e34e80e3da06d6fab74, type: 2}
 --- !u!114 &5473761978391616915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,20 +376,24 @@ MonoBehaviour:
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    deck: {fileID: 0}
   currentHandIndex: 0
-  deckSize: 5
   currentDeckSize: 0
   discard: []
   inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
@@ -544,7 +544,6 @@ GameObject:
   - component: {fileID: 6532484783828699154}
   - component: {fileID: 521604548009380659}
   - component: {fileID: 4540606688409577427}
-  - component: {fileID: 1998440037784963671}
   m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera

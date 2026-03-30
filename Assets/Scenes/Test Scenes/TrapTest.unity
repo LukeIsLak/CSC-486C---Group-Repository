@@ -130,9 +130,77 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3025714530200236336, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: PlayerCloseInteractableMenu
+      value: 
+      objectReference: {fileID: 11400000, guid: 77a76927987d6e34e80e3da06d6fab74, type: 2}
     - target: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: 68475c38-a7e2-4743-850c-34404ca2fa64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: f4a46ca2-7131-4e2e-be7c-efbff2cfbca3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: 012d1752-73cb-40ca-94d4-f47c4e15d829
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: Combat/Dash[/Keyboard/leftShift]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: Combat/Interact[/Keyboard/f]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: Interactable UI/Close Menu[/Keyboard/escape]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 156170211}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 156170211}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDash
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnInteract
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCloseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerCharacter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerCharacter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156384564097499523, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,6 +247,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+--- !u!114 &156170211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3025714530200236336, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+  m_PrefabInstance: {fileID: 130722782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48740aea1a9d154289f956ba9187620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &274643267
 PrefabInstance:
   m_ObjectHideFlags: 0
