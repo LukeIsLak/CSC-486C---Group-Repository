@@ -10,13 +10,11 @@ public class MerchantManager : MonoBehaviour
     public RandomContext randomContext;
 
     [Header("Events")]
-    public GameEvent EnterLayout;
     public GameEvent MerchantPopulated;
 
     [Header("Parameters")]
     public int shopItemCount = 5;
 
-    private bool hasExited = false;
     void Start()
     {
         // For now, the merchant shows all items
@@ -27,15 +25,5 @@ public class MerchantManager : MonoBehaviour
             Debug.Log("Populating");
         }
         MerchantPopulated.Raise();
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (hasExited) return;
-            hasExited = true;
-            EnterLayout.Raise();
-        }
     }
 }

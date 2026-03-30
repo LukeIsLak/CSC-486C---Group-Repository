@@ -11,6 +11,8 @@ public class CardInstance
     public int uid; // for ui tracking 
     public bool useable; // to see if the card can be used or not
 
+    public Deck deck; // The deck I belong to
+
     public CardInstance(Cards cardData, int uid)
     {
         this.cardData = cardData;

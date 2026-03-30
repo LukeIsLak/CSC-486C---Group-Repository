@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5333174880353609941}
   m_Layer: 7
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: Surface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,7 +270,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5ace1b7b3d66b0741a81041ae12ee720, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ace1b7b3d66b0741a81041ae12ee720, type: 3}
+      propertyPath: m_TagString
+      value: Surface
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -381,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5061111357422937026, guid: 583de7e88ab56f34ca27aace72ae7d48, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6081841623230752201, guid: 583de7e88ab56f34ca27aace72ae7d48, type: 3}
       propertyPath: m_LocalScale.x

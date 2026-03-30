@@ -3,7 +3,10 @@ guid: a6baa921562ef2641acc5a3f28817d50
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - activeDeck: {instanceID: 0}
+  - bufferDeck: {instanceID: 0}
+  - sideboardDeck: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

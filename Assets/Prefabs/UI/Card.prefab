@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 8081956759663492939}
   - component: {fileID: -6247513457569756132}
   - component: {fileID: -9145859616583957764}
+  - component: {fileID: 5155605438558803857}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -496,6 +497,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 0}
+  cardInstance:
+    cardData: {fileID: 0}
+    uid: 0
+    useable: 0
+    deck: {fileID: 0}
   cardName: {fileID: 3609337567170460608}
   cardImage: {fileID: 7678787111606987049}
   cardDamage: {fileID: 2745017108816303485}
@@ -565,3 +571,24 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5155605438558803857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296036545033250586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4592a47e47a3cf042bf23aaa6986990d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardUI: {fileID: 8081956759663492939}
+  cardInstance:
+    cardData: {fileID: 0}
+    uid: 0
+    useable: 0
+    deck: {fileID: 0}
+  activeDeck: {fileID: 11400000, guid: eda48a0b12ddb0646b2fb379ccf35524, type: 2}
+  bufferDeck: {fileID: 11400000, guid: af6ae8c60be40de4bba33629bf0fb223, type: 2}
+  sideboardDeck: {fileID: 11400000, guid: 76889f6fc2b20e246b09716fddaeb2d1, type: 2}

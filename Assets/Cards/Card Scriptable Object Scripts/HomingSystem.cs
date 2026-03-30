@@ -33,7 +33,9 @@ public class HomingSystem : MonoBehaviour
 
     void goToEnemy(){
         //Find the direction vector from the target and current position
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = transform.forward;
+        if (target != null)
+        direction = (target.position - transform.position).normalized;
 
         //Make a quaternion in the desired direction and send the object that way.
         Quaternion targetRotation = Quaternion.LookRotation(direction);

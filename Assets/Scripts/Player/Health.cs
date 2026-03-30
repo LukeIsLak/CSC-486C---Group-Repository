@@ -25,10 +25,11 @@ public class Health : MonoBehaviour
     
     private void NotifyHealthChanged() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
     private void NotifyShieldChanged() => OnShieldChanged?.Invoke(shield);
+
     public void Init(float maxHealth, float currentHealth)
     {
-        this.maxHealth = maxHealth;
-        this.currentHealth = currentHealth;
+        this.maxHealth = playerData.maxHealth;
+        this.currentHealth = playerData.currentHealth;
         NotifyHealthChanged();
     }
 

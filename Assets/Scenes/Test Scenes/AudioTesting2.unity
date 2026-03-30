@@ -2238,6 +2238,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1637436571212063048, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/PlayerEvents/SoftSurfaceStrike
+      objectReference: {fileID: 0}
+    - target: {fileID: -1637436571212063048, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -1637436571212063048, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1637436571212063048, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: -718534289
+      objectReference: {fileID: 0}
+    - target: {fileID: -1637436571212063048, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1342107268
+      objectReference: {fileID: 0}
+    - target: {fileID: -1637436571212063048, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -661144645
+      objectReference: {fileID: 0}
+    - target: {fileID: -1637436571212063048, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -1077074637
+      objectReference: {fileID: 0}
     - target: {fileID: 864461203881756215, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
       propertyPath: m_Name
       value: Bat
@@ -2654,6 +2682,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3856491782874674905, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540606688409577427, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
