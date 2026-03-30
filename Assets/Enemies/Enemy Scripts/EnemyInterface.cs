@@ -18,6 +18,7 @@ public class EnemyInterface : MonoBehaviour
     public bool hasDamageOverTime   = false;
     public bool hasFreeze           = false;
     public bool hasKnockback        = false;
+    public bool isStopped           = false;
 
     public int numDamageOverTime    = 0;
     public int numFreeze            = 0;
@@ -65,6 +66,10 @@ public class EnemyInterface : MonoBehaviour
             case StatusEffectType.Knockback:
                 Knockback knockback = statusEffectData as Knockback;
                 if (knockbackOrigin != null) HandleKnockback(knockback, knockbackOrigin.Value);
+                break;
+            case StatusEffectType.Stop:
+                Stop stop = statusEffectData as Stop;
+                HandleStop(stop);
                 break;
             default:
                 break;
@@ -137,6 +142,19 @@ public class EnemyInterface : MonoBehaviour
             rb.AddForce(direction * data.knockbackForce, ForceMode.Force);
             // hasKnockback = true;
         }
+    }
+
+    public void HandleStop(Stop data) {
+        if (!isStopped) StartCoroutine(StartStop(data));
+    }
+
+    private IEnumerator StartStop(Stop data) {
+        isStopped = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null) rb.constraints = RigidbodyConstraints.FreezePosition;
+        yield return new WaitForSeconds(data.stopDuration);
+        if (rb != null) rb.constraints = RigidbodyConstraints.None;
+        isStopped = false;
     }
 
     /****************************************************/
