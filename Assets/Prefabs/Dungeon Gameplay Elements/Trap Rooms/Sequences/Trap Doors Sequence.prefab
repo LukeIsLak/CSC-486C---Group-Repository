@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 6
   moveTime: 0.5
-  instant: 1
 --- !u!1 &4077545948151157767
 GameObject:
   m_ObjectHideFlags: 0

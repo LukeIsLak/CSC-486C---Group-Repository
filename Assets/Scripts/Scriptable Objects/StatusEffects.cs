@@ -6,7 +6,6 @@ public enum StatusEffectType {
     DamageOverTime,
     Freeze,
     Knockback,
-    Stop,
     None
 }
 

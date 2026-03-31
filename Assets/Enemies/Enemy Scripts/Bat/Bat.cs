@@ -363,9 +363,7 @@ public class Bat : EnemyInterface
         }
 
         if (s) steer();
-    }    
-    
-    private bool IsPathClear(Vector3 from, Vector3 to, out RaycastHit hitInfo, float minRadius = 0.5f, int maxTries = 10) {
+    }    private bool IsPathClear(Vector3 from, Vector3 to, out RaycastHit hitInfo, float minRadius = 0.5f, int maxTries = 10) {
         Vector3 dir = (to - from).normalized;
         float dist = Vector3.Distance(from, to);
         hitInfo = default;

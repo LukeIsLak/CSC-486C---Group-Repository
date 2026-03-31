@@ -23,9 +23,9 @@ public class PlayerCharacter : MonoBehaviour
     public bool runawayBullActive = false;
 
     [Header("Animation State")]
-    [SerializeField] private const string ATTACK1 = "SwingA";
-    [SerializeField] private const string ATTACK2 = "SwingB";
-    [SerializeField] private const string ATTACK3 = "SwingC";
+    [SerializeField] private const string ATTACK1 = "Attack 1";
+    [SerializeField] private const string ATTACK2 = "Attack 2";
+    [SerializeField] private const string ATTACK3 = "Attack 3";
     [SerializeField] private const string ATTACKIDLE = "Idle";
 
     [Header("References")]
@@ -63,7 +63,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool queuedNextAttack;
     private void Awake()
     {
-        //swordAnimator = GetComponentInChildren<Animator>();
+        swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
         playerController = GetComponent<PlayerController>();    
     }
@@ -272,10 +272,5 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (!context.performed) return;
         PlayerCloseInteractableMenu.Raise();
-    }
-
-    public void SetSwordAnimator(Animator swordAnimator)
-    {
-        this.swordAnimator = swordAnimator;
     }
 }

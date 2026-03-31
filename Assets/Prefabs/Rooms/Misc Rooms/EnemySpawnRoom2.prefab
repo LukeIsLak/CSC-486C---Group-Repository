@@ -79,10 +79,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat
       objectReference: {fileID: 0}
-    - target: {fileID: 8472818207163890435, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 8955019538884190576, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.28
@@ -383,10 +379,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 7436137662389302209, guid: f5a5a022abc1535449fc86f254969511, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -409,10 +401,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8472818207163890435, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 8955019538884190576, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.28

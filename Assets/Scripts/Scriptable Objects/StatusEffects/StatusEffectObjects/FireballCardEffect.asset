@@ -17,8 +17,4 @@ MonoBehaviour:
   ticksPerSecond: 2
   tickDamage: 1
   totalTicks: 10
-  hasOngoingPart: 1
-  hasBurstPart: 1
   isStackable: 1
-  ongoingPart: {fileID: 9177868808344834693, guid: af28d039666dcec45845e76fe6e46941, type: 3}
-  burstPart: {fileID: 757420654859043977, guid: 9a9723199a266c6409b4868667534d3a, type: 3}

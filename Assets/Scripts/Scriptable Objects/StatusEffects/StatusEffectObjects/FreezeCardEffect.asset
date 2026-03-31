@@ -15,5 +15,3 @@ MonoBehaviour:
   name: FreezeNova
   type: 1
   freezeDuration: 3
-  hasOngoingPart: 1
-  ongoingPart: {fileID: 9177868808344834693, guid: 5f9c06277cac5c34cbc94942cec7697e, type: 3}

@@ -17,10 +17,9 @@ public class MerchantUI : MonoBehaviour
     
     private HashSet<MerchantItemUI> purchasedSlot = new(); // use set for tracking purchased items
 
-    
+    /*
     private void OnEnable()
     {
-        RebuildUI();
         Cursor.lockState    = CursorLockMode.None;
         Cursor.visible      = true;
     }
@@ -30,7 +29,7 @@ public class MerchantUI : MonoBehaviour
         Cursor.lockState    = CursorLockMode.Locked;
         Cursor.visible      = false;
     }
-    
+    */
 
     public void RebuildUI()
     {

@@ -538,7 +538,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -622,7 +622,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -720,17 +720,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 0}
   enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
-  rs: {fileID: 0}
   curHealth: 20
   moveSpeed: 8.75
   speedModifier: 1
-  hasDamageOverTime: 0
-  hasFreeze: 0
-  hasKnockback: 0
-  numDamageOverTime: 0
-  numFreeze: 0
-  currentDoTNames: []
-  currentDoTTicks: 
   anim: {fileID: 1485207965}
   rb: {fileID: 272308157}
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
@@ -772,8 +764,6 @@ MonoBehaviour:
   attackAmount: 0
   prevLateralOffset: {x: 0, y: 0, z: 0}
   currentState: 2
-  abandonCheckInterval: 0.5
-  abandonMinProgress: 0.05
 --- !u!54 &272308157
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -857,14 +847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
-  playerData: {fileID: 0}
-  inputScheme: {fileID: 0}
-  maxHealth: 0
-  currentHealth: 0
-  hasDied: 0
-  shield: 0
 --- !u!1 &280443531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,7 +1358,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1510,14 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
-  playerData: {fileID: 0}
-  inputScheme: {fileID: 0}
-  maxHealth: 0
-  currentHealth: 0
-  hasDied: 0
-  shield: 0
 --- !u!114 &443846365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,17 +1509,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 0}
   enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
-  rs: {fileID: 0}
   curHealth: 20
   moveSpeed: 8.75
   speedModifier: 1
-  hasDamageOverTime: 0
-  hasFreeze: 0
-  hasKnockback: 0
-  numDamageOverTime: 0
-  numFreeze: 0
-  currentDoTNames: []
-  currentDoTTicks: 
   anim: {fileID: 875742831}
   rb: {fileID: 443846363}
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
@@ -1585,8 +1553,6 @@ MonoBehaviour:
   attackAmount: 0
   prevLateralOffset: {x: 0, y: 0, z: 0}
   currentState: 2
-  abandonCheckInterval: 0.5
-  abandonMinProgress: 0.05
 --- !u!1 &445857465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,12 +1973,8 @@ MonoBehaviour:
   - {fileID: 2198971713089864924, guid: eaa0915f05bc7cc47b1dd196a2c318c5, type: 3}
   - {fileID: 2198971713089864924, guid: 1f5d6021bfe04f14eb9685e3602feddc, type: 3}
   - {fileID: 2198971713089864924, guid: 1f5d6021bfe04f14eb9685e3602feddc, type: 3}
-  roomScale: 0
   dungeonData: {fileID: 11400000, guid: f44b02a91637e0d4da405d888d341c68, type: 2}
-  diffScale: {fileID: 0}
-  encRandomContext: {fileID: 0}
   EnterLayout: {fileID: 11400000, guid: 10d01840db1995a4b9bb2dbe06637f17, type: 2}
-  GenerationComplete: {fileID: 0}
 --- !u!1 &632478711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,7 +2027,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2317,7 +2279,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2473,16 +2435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1160895292}
-  anim: {fileID: 0}
-  sprite: {fileID: 0}
   rotatorXawOffsetDeg: 0
   rotatorLerpSpeed: 20
-  checkSide: 0
-  isFront: 0
-  isSide: 0
-  isBack: 0
-  isLeft: 0
-  sideFaceLeft: 0
 --- !u!95 &842821884
 Animator:
   serializedVersion: 5
@@ -2540,7 +2494,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2654,16 +2608,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1160895292}
-  anim: {fileID: 0}
-  sprite: {fileID: 0}
   rotatorXawOffsetDeg: 0
   rotatorLerpSpeed: 20
-  checkSide: 0
-  isFront: 0
-  isSide: 0
-  isBack: 0
-  isLeft: 0
-  sideFaceLeft: 0
 --- !u!95 &875742831
 Animator:
   serializedVersion: 5
@@ -2721,7 +2667,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3291,24 +3237,18 @@ MonoBehaviour:
   hand:
   - cardData: {fileID: 0}
     uid: 0
-    useable: 0
   - cardData: {fileID: 0}
     uid: 0
-    useable: 0
   - cardData: {fileID: 0}
     uid: 0
-    useable: 0
   - cardData: {fileID: 0}
     uid: 0
-    useable: 0
   - cardData: {fileID: 0}
     uid: 0
-    useable: 0
   currentHandIndex: 0
   deckSize: 15
   currentDeckSize: 0
   discard: []
-  inventory: {fileID: 0}
 --- !u!114 &1160895295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3321,14 +3261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
-  playerData: {fileID: 0}
-  inputScheme: {fileID: 0}
-  maxHealth: 0
-  currentHealth: 0
-  hasDied: 0
-  shield: 0
 --- !u!114 &1160895296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3350,14 +3283,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackMultiplier: 1
-  dashTime: 1
-  dashSpeed: 1
-  dashCD: 2
-  runawayBullActive: 0
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
-  PlayerInteractEvent: {fileID: 0}
-  PlayerCloseInteractableMenu: {fileID: 0}
 --- !u!114 &1160895297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3377,8 +3303,6 @@ MonoBehaviour:
   ySensitivity: 50
   rotationXlimit: 80
   characterData: {fileID: 0}
-  controller: {fileID: 0}
-  moveDirection: {x: 0, y: 0}
 --- !u!114 &1160895298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3743,7 +3667,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3938,16 +3862,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1160895292}
-  anim: {fileID: 0}
-  sprite: {fileID: 0}
   rotatorXawOffsetDeg: 0
   rotatorLerpSpeed: 20
-  checkSide: 0
-  isFront: 0
-  isSide: 0
-  isBack: 0
-  isLeft: 0
-  sideFaceLeft: 0
 --- !u!95 &1289364510
 Animator:
   serializedVersion: 5
@@ -4005,7 +3921,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4089,7 +4005,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4788,19 +4704,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7558621632f4b49409a357339521b725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorLayer:
+  componentLayer:
     serializedVersion: 2
-    m_Bits: 0
-  floorNavLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  cellSize: 1
-  navmeshHeightOffset: 0.02
-  agentName: 
-  agentTypeID: 0
-  buildOnStart: 1
-  rebuild: 0
-  doneNavMeshGeneration: {fileID: 0}
+    m_Bits: 128
+  maxLinkDistance: 3
+  linkWidth: 2
+  surfaceInset: 0.15
+  bidirectional: 1
 --- !u!4 &1406578556
 Transform:
   m_ObjectHideFlags: 0
@@ -4870,16 +4780,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1160895292}
-  anim: {fileID: 0}
-  sprite: {fileID: 0}
   rotatorXawOffsetDeg: 0
   rotatorLerpSpeed: 20
-  checkSide: 0
-  isFront: 0
-  isSide: 0
-  isBack: 0
-  isLeft: 0
-  sideFaceLeft: 0
 --- !u!111 &1485207967
 Animation:
   m_ObjectHideFlags: 0
@@ -4916,7 +4818,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5016,7 +4918,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5173,7 +5075,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5553,14 +5455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
-  playerData: {fileID: 0}
-  inputScheme: {fileID: 0}
-  maxHealth: 0
-  currentHealth: 0
-  hasDied: 0
-  shield: 0
 --- !u!114 &1758966027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5576,17 +5471,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 0}
   enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
-  rs: {fileID: 0}
   curHealth: 20
   moveSpeed: 8.75
   speedModifier: 1
-  hasDamageOverTime: 0
-  hasFreeze: 0
-  hasKnockback: 0
-  numDamageOverTime: 0
-  numFreeze: 0
-  currentDoTNames: []
-  currentDoTTicks: 
   anim: {fileID: 842821884}
   rb: {fileID: 1758966025}
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
@@ -5628,8 +5515,6 @@ MonoBehaviour:
   attackAmount: 0
   prevLateralOffset: {x: 0, y: 0, z: 0}
   currentState: 2
-  abandonCheckInterval: 0.5
-  abandonMinProgress: 0.05
 --- !u!1 &1763374230
 GameObject:
   m_ObjectHideFlags: 0
@@ -5934,14 +5819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
-  playerData: {fileID: 0}
-  inputScheme: {fileID: 0}
-  maxHealth: 0
-  currentHealth: 0
-  hasDied: 0
-  shield: 0
 --- !u!114 &1853463119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5957,17 +5835,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   enemyData: {fileID: 0}
   enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
-  rs: {fileID: 0}
   curHealth: 20
   moveSpeed: 8.75
   speedModifier: 1
-  hasDamageOverTime: 0
-  hasFreeze: 0
-  hasKnockback: 0
-  numDamageOverTime: 0
-  numFreeze: 0
-  currentDoTNames: []
-  currentDoTTicks: 
   anim: {fileID: 1289364510}
   rb: {fileID: 1853463117}
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
@@ -6009,8 +5879,6 @@ MonoBehaviour:
   attackAmount: 0
   prevLateralOffset: {x: 0, y: 0, z: 0}
   currentState: 2
-  abandonCheckInterval: 0.5
-  abandonMinProgress: 0.05
 --- !u!1 &1873443518
 GameObject:
   m_ObjectHideFlags: 0
@@ -6671,7 +6539,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

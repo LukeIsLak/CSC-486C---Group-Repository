@@ -145,7 +145,6 @@ public class Rat : EnemyInterface
     }
 
     private void UpdateMove() {
-        if (isStopped) return;
         if (!nma.isOnNavMesh) {
             Debug.LogWarning($"{gameObject.name}: Is not on a NavMesh!");
             NavMeshHit hit;
