@@ -332,6 +332,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5835029582194423006, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+      propertyPath: m_Intensity
+      value: 16.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835029582194423006, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5965012107711759161, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
       propertyPath: m_Name
       value: Buffer deck
@@ -404,8 +412,10 @@ PrefabInstance:
     - {fileID: 2125447130701674756, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
     - {fileID: 1944532960986225310, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
     - {fileID: 8917382711273934568, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+    - {fileID: 5835029582194423006, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5353389370632892361, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+    - {fileID: 6457728383967059550, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
