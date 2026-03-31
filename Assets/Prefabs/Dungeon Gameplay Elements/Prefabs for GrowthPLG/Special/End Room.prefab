@@ -332,6 +332,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5835029582194423006, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+      propertyPath: m_Intensity
+      value: 16.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835029582194423006, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5965012107711759161, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
       propertyPath: m_Name
       value: Buffer deck
@@ -404,12 +412,11 @@ PrefabInstance:
     - {fileID: 2125447130701674756, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
     - {fileID: 1944532960986225310, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
     - {fileID: 8917382711273934568, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+    - {fileID: 5835029582194423006, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5353389370632892361, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7889962977675873450, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 749962379722003648}
+    - {fileID: 6457728383967059550, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2eace0307c6024baa60f34f0f8c91d, type: 3}
 --- !u!4 &7791730668275837821 stripped
@@ -479,68 +486,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4873140133858207481, guid: 4ba13be48056179418bd1aa74e6931c4, type: 3}
   m_PrefabInstance: {fileID: 659953758969325858}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &791975609610044892
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 7791730668275837821}
-    m_Modifications:
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.720001
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741037948270309398, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-      propertyPath: m_Name
-      value: Deckbuilding Table
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
---- !u!4 &749962379722003648 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 42167720068256028, guid: 01f8f33416751f141986b43e60ee6e22, type: 3}
-  m_PrefabInstance: {fileID: 791975609610044892}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &831310668855911592
 PrefabInstance:

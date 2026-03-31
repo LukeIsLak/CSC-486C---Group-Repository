@@ -7,25 +7,25 @@ public class DungeonRoomScript : MonoBehaviour
     [Header("References")]
     public RandomContext randomContext;
     public GameEvent AddToRoomCountEvent;
-    public List<GameObject> roomVariants;
 
     [Header("Room Config")]
-    public List<GameObject> trapRoomObjects; 
-    public List<GameObject> regularRoomObjects;
-    public bool isTrapRoom;
+    public RoomShape roomShapeData;
+    public int roomBaseShapeIndex; // Not the ideal way but it's quick and easy.
+    public bool isTrapRoom;        // set by dungeon manager
     
-
-    public void Start()
+    private RoomShapeVariant variant;
+    public void Awake()
     {
-        // TO DO: Determine decorated variant to use
-        if (roomVariants.Count == 0)
+        if (roomShapeData.possibleRooms.Count == 0)
         {
-            Debug.LogWarning("No room specified in DungeonRoom");
+            Debug.LogWarning("No possible rooms provided for dungeon generation!");
             return;
         }
 
-        int r = randomContext.NextInt(roomVariants.Count);
-        Instantiate(roomVariants[r], transform);
+        int r = randomContext.NextInt(roomShapeData.possibleRooms.Count);
+        
+        variant = roomShapeData.possibleRooms[r];
+        Instantiate(variant.baseShapes[roomBaseShapeIndex], transform);
     }
 
     public void Initialize()
@@ -51,17 +51,15 @@ public class DungeonRoomScript : MonoBehaviour
 
     private void TrapRoomInit()
     {
-        // Create necessary objects for trap room functionality
-        if (trapRoomObjects.Count == 0) return;
-        GameObject trapRoomObject = trapRoomObjects[randomContext.NextInt(trapRoomObjects.Count)];
-        Instantiate(trapRoomObject, transform);
+        if (variant.trapObjects.Count == 0) return;
+        int r = randomContext.NextInt(variant.trapObjects.Count);
+        Instantiate(variant.trapObjects[r], transform);
     }
 
     private void RegularRoomInit()
     {
-        // Create necessary objects for regular room functionality
-        if (regularRoomObjects.Count == 0) return;
-        GameObject regularRoomObject = regularRoomObjects[randomContext.NextInt(regularRoomObjects.Count)];
-        Instantiate(regularRoomObject, transform);
+        if (variant.regularObjects.Count == 0) return;
+        int r = randomContext.NextInt(variant.regularObjects.Count);
+        Instantiate(variant.regularObjects[r], transform);
     }
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   minRebountHeight: 1
   reboundDistance: 1
   reboundIncompleteDistance: 1
-  playerSearchDistance: 7.5
+  playerSearchDistance: 8.5
   minAttackAmount: 1
   maxAttackAmount: 5
   perchDuration: 2
