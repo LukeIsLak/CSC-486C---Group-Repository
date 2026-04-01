@@ -13,7 +13,9 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private float attackRadius = 0.4f;
     [SerializeField] private float attackHitStopDuration = 0.03f;
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private SwordHitBox hitBox;
+    [SerializeField] private SwordHitBox hitBoxA;
+    [SerializeField] private SwordHitBox hitBoxB;
+    [SerializeField] private SwordHitBox hitBoxC;
     // for increaseing player damage
     public float attackMultiplier = 1.0f;
 
@@ -280,16 +282,36 @@ public class PlayerCharacter : MonoBehaviour
         this.swordAnimator = swordAnimator;
     }
 
-    public void EnableSwordColider()
+    public void EnableSwordColiderA()
     {
-        hitBox.ResetHit();
-        hitBox.EnableCollider();
-
+        hitBoxA.EnableCollider();
     }
 
-    public void DisableSwordColider()
+    public void DisableSwordColiderA()
     {
-        hitBox.DisableCollider();
+        hitBoxA.DisableCollider();
+        hitBoxA.ResetHit();
+    }
+    public void EnableSwordColiderB()
+    {
+        hitBoxB.EnableCollider();
+    }
+
+    public void DisableSwordColiderB()
+    {
+        hitBoxB.DisableCollider();
+        hitBoxB.ResetHit();
+    }
+
+    public void EnableSwordColiderC()
+    {
+        hitBoxC.EnableCollider();
+    }
+
+    public void DisableSwordColiderC()
+    {
+        hitBoxC.DisableCollider();
+        hitBoxC.ResetHit();
     }
 
     public float GetAttackDamage()

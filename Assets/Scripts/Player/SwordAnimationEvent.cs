@@ -52,23 +52,63 @@ public class SwordAnimationEvent : MonoBehaviour
         character.CloseComboWindow();
     }
 
-    public void EnableSwordHitbox()
+    public void EnableSwordHitboxA()
     {
         if (character == null)
         {
             Debug.Log("character null");
             return;
         }
-        character.EnableSwordColider();
+        character.EnableSwordColiderA();
     }
 
-    public void DisableSwordHitbox()
+    public void DisableSwordHitboxA()
     {
         if (character == null)
         {
             Debug.Log("character null");
             return;
         }
-        character.DisableSwordColider();
+        character.DisableSwordColiderA();
+    }
+
+    public void EnableSwordHitboxB()
+    {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
+        character.EnableSwordColiderB();
+    }
+
+    public void DisableSwordHitboxB()
+    {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
+        character.DisableSwordColiderB();
+    }
+
+    public void EnableSwordHitboxC()
+    {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
+        character.EnableSwordColiderC();
+    }
+
+    public void DisableSwordHitboxC()
+    {
+        if (character == null)
+        {
+            Debug.Log("character null");
+            return;
+        }
+        character.DisableSwordColiderC();
     }
 }

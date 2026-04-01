@@ -5,25 +5,31 @@ using UnityEngine;
 public class SwordHitBox : MonoBehaviour
 {
     [SerializeField] private PlayerCharacter character;
-    [SerializeField] private Collider[] colliders;
     HashSet<GameObject> hits = new HashSet<GameObject>();
 
-    bool canHit;
+    private Collider collider;
+    bool canHit = true;
     private void Awake()
     {
-        character = GetComponent<PlayerCharacter>();
+        character = GetComponentInParent<PlayerCharacter>();
+        collider = GetComponent<Collider>();
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!canHit) return;    
+        if (!canHit) return;
+        Debug.Log(other.tag);
         if (!other.CompareTag("Enemy")) return;
 
-        if(hits.Contains(other.gameObject)) return;
+        if (hits.Contains(other.gameObject)) return;
 
         hits.Add(other.gameObject);
-
         var enemyComponent = other.GetComponentInParent<EnemyInterface>();
-        if (enemyComponent != null) enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); enemyComponent.Hit(character.attackMultiplier * character.GetAttackDamage()); Debug.Log("EnemyHit");
+        Debug.Log(other.gameObject.name);
+        if (enemyComponent != null) { 
+            enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); 
+            enemyComponent.Hit(character.attackMultiplier * character.GetAttackDamage()); 
+            Debug.Log("EnemyHit"); 
+        }
         //TriggerHitStop(attackHitStopDuration);
 
     }
@@ -36,10 +42,12 @@ public class SwordHitBox : MonoBehaviour
     public void EnableCollider()
     {
         canHit = true;
+        collider.enabled = true;
     }
 
     public void DisableCollider()
     {
         canHit = false;
+        collider.enabled = false;
     }
 }
