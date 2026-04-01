@@ -329,7 +329,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1178,7 +1178,7 @@ MonoBehaviour:
   playerData: {fileID: 0}
   enemyData: {fileID: 0}
   enemyEffects: {fileID: 0}
-  trs: {fileID: 0}
+  rs: {fileID: 0}
   curHealth: 0
   moveSpeed: 8.75
   speedModifier: 1
@@ -1215,6 +1215,8 @@ MonoBehaviour:
   attackAmount: 0
   prevLateralOffset: {x: 0, y: 0, z: 0}
   currentState: 0
+  abandonCheckInterval: 0.5
+  abandonMinProgress: 0.05
 --- !u!114 &724581064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1227,7 +1229,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2a04c0dabd440418a821444854e756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDeath: {fileID: 0}
   healthBar: {fileID: 0}
+  playerData: {fileID: 0}
+  inputScheme: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  hasDied: 0
   shield: 0
 --- !u!4 &724581065
 Transform:
@@ -2910,6 +2918,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11630991510601649, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 616881673742362958, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_Layer
       value: 3
