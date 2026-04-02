@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     public PlayerInventory inventory;
 
+    private bool tutorialWanted = false;
+
     private bool playerInitialized = false;
     private bool inventoryInitialized = false;
     private void Awake()
@@ -126,5 +128,10 @@ public class GameManager : MonoBehaviour
         UIManager.instance.ShowMerchantView();
         UIManager.instance.HideCombatView();
         UIManager.instance.HideNodePanel();
+    }
+
+    //flips the tutorialWanted variable, triggers if the player changes the state of the check box on the title screen
+    public void onTutoialSelected(){
+        tutorialWanted = !tutorialWanted;
     }
 }
