@@ -322,7 +322,11 @@ public class PlayerCharacter : MonoBehaviour
 
     public void AttackSpeedUp(float duration, float increaseSpeedMultiplier)
     {
-        if(increaseAttackSpeedRoutine != null) StopCoroutine(increaseAttackSpeedRoutine);
+        if (increaseAttackSpeedRoutine != null) 
+        { 
+            StopCoroutine(increaseAttackSpeedRoutine);
+            swordAnimator.speed = 1f;
+        }
         increaseAttackSpeedRoutine =StartCoroutine(SpeedUpAnimation(duration, increaseSpeedMultiplier));
         
     }
@@ -336,5 +340,6 @@ public class PlayerCharacter : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         swordAnimator.speed = originalSpeed;
+        increaseAttackSpeedRoutine = null;
     }
 }
