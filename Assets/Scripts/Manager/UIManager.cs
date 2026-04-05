@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private StaminaUI staminaView;
     [SerializeField] private SetPlayerInputScheme inputScheme;
-    
+    [SerializeField] private DamageOverlayUI damageOverlay;
 
     // [SerializeField] private GameObject merchantPanel;
     [SerializeField] private GameObject interactPanel;
@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
         if (staminaView == null) staminaView = GetComponentInChildren<StaminaUI>(true);
         if (chestUI == null) chestUI = GetComponentInChildren<ChestUI>(true);
         if (shieldUI == null) shieldUI = GetComponentInChildren<ShieldUI>(true);
+        if (damageOverlay == null) damageOverlay = GetComponentInChildren<DamageOverlayUI>(true);
         HideInventoryView();
         HideCombatView();
         HidePauseView();
@@ -57,6 +58,7 @@ public class UIManager : MonoBehaviour
         {   
             shieldUI.BindHealthUI(health);
             healthBar.BindHealthUI(health);
+            damageOverlay.BindHealthUI(health);
         }
 
         var playerCharacter = player.GetComponent<PlayerCharacter>();
