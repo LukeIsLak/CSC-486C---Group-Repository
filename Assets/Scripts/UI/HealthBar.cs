@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
+    [SerializeField] private TextMeshProUGUI healthText;
     private Health health;
 
     public void BindHealthUI(Health health)
@@ -24,6 +26,7 @@ public class HealthBar : MonoBehaviour
     {
         slider.maxValue = max;
         slider.value = current;
+        if (healthText != null) healthText.text = $"{Mathf.CeilToInt(current)} / {Mathf.CeilToInt(max)}";
     }
 
 }
