@@ -39,6 +39,7 @@ public class PlayerCharacter : MonoBehaviour
     private Animator swordAnimator;
     private Camera cam;
     private Coroutine hitStopCoroutine;
+    private Coroutine increaseAttackSpeedRoutine;
     private PlayerController playerController;
     private Chest currentChest;
     private string currentAnimationState;
@@ -317,5 +318,28 @@ public class PlayerCharacter : MonoBehaviour
     public float GetAttackDamage()
     {
         return attackDamage;
+    }
+
+    public void AttackSpeedUp(float duration, float increaseSpeedMultiplier)
+    {
+        if (increaseAttackSpeedRoutine != null) 
+        { 
+            StopCoroutine(increaseAttackSpeedRoutine);
+            swordAnimator.speed = 1f;
+        }
+        increaseAttackSpeedRoutine =StartCoroutine(SpeedUpAnimation(duration, increaseSpeedMultiplier));
+        
+    }
+
+    private IEnumerator SpeedUpAnimation(float duration, float increaseSpeedMultiplier)
+    {
+        float originalSpeed = swordAnimator.speed;
+
+        swordAnimator.speed = originalSpeed * increaseSpeedMultiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        swordAnimator.speed = originalSpeed;
+        increaseAttackSpeedRoutine = null;
     }
 }
