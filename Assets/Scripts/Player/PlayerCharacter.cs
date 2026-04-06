@@ -53,6 +53,8 @@ public class PlayerCharacter : MonoBehaviour
     public event System.Action<bool> OnDashNotify;
     private bool lastDashState = true;
 
+    private float baseAttackSpeed = 1f;
+    private float attackSpeedMultiplier = 1f;
     public float nextDashRemaining
     {
         get
@@ -320,15 +322,16 @@ public class PlayerCharacter : MonoBehaviour
         return attackDamage;
     }
 
-    public void AttackSpeedUp(float increaseSpeedMultiplier)
+    public void IncreaseAttackSpeed(float increaseSpeedMultiplier)
     {
-        float originalSpeed = swordAnimator.speed;
-        swordAnimator.speed = originalSpeed * increaseSpeedMultiplier;
+        attackSpeedMultiplier *= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
 
     }
 
-    public void ResetAttackSpeed()
+    public void DecreaseAttackSpeed(float increaseSpeedMultiplier)
     {
-        swordAnimator.speed = 1f;
+        attackSpeedMultiplier /= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
     }
 }
