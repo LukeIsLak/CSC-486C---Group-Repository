@@ -320,26 +320,15 @@ public class PlayerCharacter : MonoBehaviour
         return attackDamage;
     }
 
-    public void AttackSpeedUp(float duration, float increaseSpeedMultiplier)
-    {
-        if (increaseAttackSpeedRoutine != null) 
-        { 
-            StopCoroutine(increaseAttackSpeedRoutine);
-            swordAnimator.speed = 1f;
-        }
-        increaseAttackSpeedRoutine =StartCoroutine(SpeedUpAnimation(duration, increaseSpeedMultiplier));
-        
-    }
-
-    private IEnumerator SpeedUpAnimation(float duration, float increaseSpeedMultiplier)
+    public void AttackSpeedUp(float increaseSpeedMultiplier)
     {
         float originalSpeed = swordAnimator.speed;
-
         swordAnimator.speed = originalSpeed * increaseSpeedMultiplier;
 
-        yield return new WaitForSeconds(duration);
+    }
 
-        swordAnimator.speed = originalSpeed;
-        increaseAttackSpeedRoutine = null;
+    public void ResetAttackSpeed()
+    {
+        swordAnimator.speed = 1f;
     }
 }
