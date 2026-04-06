@@ -53,6 +53,8 @@ public class PlayerCharacter : MonoBehaviour
     public event System.Action<bool> OnDashNotify;
     private bool lastDashState = true;
 
+    private float baseAttackSpeed = 1f;
+    private float attackSpeedMultiplier = 1f;
     public float nextDashRemaining
     {
         get
@@ -320,26 +322,16 @@ public class PlayerCharacter : MonoBehaviour
         return attackDamage;
     }
 
-    public void AttackSpeedUp(float duration, float increaseSpeedMultiplier)
+    public void IncreaseAttackSpeed(float increaseSpeedMultiplier)
     {
-        if (increaseAttackSpeedRoutine != null) 
-        { 
-            StopCoroutine(increaseAttackSpeedRoutine);
-            swordAnimator.speed = 1f;
-        }
-        increaseAttackSpeedRoutine =StartCoroutine(SpeedUpAnimation(duration, increaseSpeedMultiplier));
-        
+        attackSpeedMultiplier *= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
+
     }
 
-    private IEnumerator SpeedUpAnimation(float duration, float increaseSpeedMultiplier)
+    public void DecreaseAttackSpeed(float increaseSpeedMultiplier)
     {
-        float originalSpeed = swordAnimator.speed;
-
-        swordAnimator.speed = originalSpeed * increaseSpeedMultiplier;
-
-        yield return new WaitForSeconds(duration);
-
-        swordAnimator.speed = originalSpeed;
-        increaseAttackSpeedRoutine = null;
+        attackSpeedMultiplier /= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
     }
 }
