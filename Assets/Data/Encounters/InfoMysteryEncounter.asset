@@ -22,7 +22,9 @@ MonoBehaviour:
   - {fileID: -1162132569, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   - {fileID: -183375075, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   encounterWeights:
-  - {fileID: 11400000, guid: a32254f0d69a7474b8b7cfe63a5f03cb, type: 2}
+  - {fileID: 11400000, guid: c7e1b55e5320d5a44b4fa1bddb855f4c, type: 2}
+  - {fileID: 11400000, guid: c7e1b55e5320d5a44b4fa1bddb855f4c, type: 2}
+  - {fileID: 11400000, guid: 9cf12f6b86f89c0409b8b831ed388eca, type: 2}
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 173e6691b947bb14fb8d6b29c4536bad, type: 3}
     m_SceneName: Mystery

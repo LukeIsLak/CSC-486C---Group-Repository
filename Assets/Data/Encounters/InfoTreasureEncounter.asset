@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b81f052c2b98dda42891a27b3639edde, type: 3}
-  m_Name: InfoMerchantEncounter
+  m_Name: InfoTreasureEncounter
   m_EditorClassIdentifier: 
   IND_ACCESSIBLE: 0
   IND_INACCESSIBLE: 1
@@ -23,7 +23,8 @@ MonoBehaviour:
   - {fileID: -865636401, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   encounterWeights:
   - {fileID: 11400000, guid: 04028e59eb33c3c4893982c781856773, type: 2}
-  - {fileID: 11400000, guid: 6308f9aad1dcb1a4a9111eb1a0ef0085, type: 2}
+  - {fileID: 11400000, guid: c7e1b55e5320d5a44b4fa1bddb855f4c, type: 2}
+  - {fileID: 11400000, guid: 9cf12f6b86f89c0409b8b831ed388eca, type: 2}
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 769977e1a2636c84cb658e4b18e1bb6f, type: 3}
     m_SceneName: MinorTreasure

@@ -47,6 +47,7 @@ MonoBehaviour:
   layoutGeneratorPrefab: {fileID: 1542659884841498409, guid: e227d64ebbf116348a4974f253c7f4d6, type: 3}
   mapEncounterPrefab: {fileID: 2838874819895571372, guid: d4c14d69036dffe459cb999afdb94ae6, type: 3}
   playerOnMapPrefab: {fileID: 8671957000330676690, guid: b23e451c849f1274caa828a5ee4e2215, type: 3}
+  defaultEncounter: {fileID: 11400000, guid: 9ea248889b36f144c9b059b555a84738, type: 2}
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
   firstEncounter: {fileID: 11400000, guid: 0feaa69d8f5e1024d83c3dc0291d1f29, type: 2}
   lastEncounter: {fileID: 11400000, guid: 007c3c4f7b4045a4cbdf1083d185fcce, type: 2}
