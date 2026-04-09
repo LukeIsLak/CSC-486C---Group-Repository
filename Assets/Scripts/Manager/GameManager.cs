@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     public PlayerInventory inventory;
 
-    private bool tutorialWanted = false;
+    public bool tutorialWanted = false;
 
     private bool playerInitialized = false;
     private bool inventoryInitialized = false;
@@ -111,14 +111,19 @@ public class GameManager : MonoBehaviour
             return;
         }
         inputSchemeSetter.SetAllOff();
-        inputSchemeSetter.SetInputToCombat();
         InitializedPlayerOnce(player);
         InitializedPerScene(player);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         UIManager.instance.ShowCombatView();
         UIManager.instance.HideNodePanel();
         UIManager.instance.HideMerchantView();
+        if(tutorialWanted){
+            Debug.Log("working");
+            UIManager.instance.ShowTutorialUI();
+        } else {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            inputSchemeSetter.SetInputToCombat();
+        }
     }
     private void HandleMerchantScene() 
     {

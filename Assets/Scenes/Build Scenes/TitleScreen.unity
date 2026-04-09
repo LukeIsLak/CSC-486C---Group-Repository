@@ -314,6 +314,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4156055238786857214, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232211772047195068, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4237467121808342191, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -526,6 +534,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -500
       objectReference: {fileID: 0}
+    - target: {fileID: 6790493804736109465, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_Name
+      value: Encounter slide
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790493804736109465, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7420118703531912906, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 181
@@ -536,6 +552,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7428674697748492076, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152533519624635600, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8159082717970565097, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}

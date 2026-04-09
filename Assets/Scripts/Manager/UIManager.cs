@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private StaminaUI staminaView;
     [SerializeField] private SetPlayerInputScheme inputScheme;
+    [SerializeField] private TutorialUI tutorialView;
     
 
     // [SerializeField] private GameObject merchantPanel;
@@ -141,6 +142,10 @@ public class UIManager : MonoBehaviour
     public void ShowChestUI(Acquirable cardData)
     {
         chestUI.ShowUI(cardData);
+    }
+
+    public void ShowTutorialUI(){
+        tutorialView.showTutorial();
     }
 }
     
