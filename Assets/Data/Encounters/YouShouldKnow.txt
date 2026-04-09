@@ -1,0 +1,13 @@
+Anything beginning with INFO is a container for data to be used in layout generation.
+
+Ignore the IND_* fields. State sprites can also be ignored, but they were used when the layout was traversible via the layout traversal scene.
+
+Encounter Weights is a list of EncounterWeight objects which inform the encounter placement algorithm of how it should choose the associated encounter. If the weight is negative, the encounter cannot be chosen as a child no matter what.
+
+The scene is the scene of the encounter that we should transition into if the encounter is chosen.
+
+Anything beginning with Weight is an EncounterWeight object. At this point, every special encounter should have a negative weight into another special encounter. But the dungeon encounters should be possible for all.
+
+This is to guaruntee that special rooms do not chain, ever. But the good news is that if these negative weights ever come into play then there must exist an special encounter for the player to access. So it's not bad in the end.
+
+It does not suffice to simply give no outgoing weight from a special encounter, since a special encounter and dungeon encounter may be siblings and make it possible that another special encounter is chosen as a child to the current special encounter.

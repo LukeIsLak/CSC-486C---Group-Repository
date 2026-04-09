@@ -22,9 +22,9 @@ MonoBehaviour:
   - {fileID: 1202110436, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   - {fileID: 1158225662, guid: 309b3dfd7a5a93c43aba1fb43c5ca2c0, type: 3}
   encounterWeights:
-  - {fileID: 11400000, guid: 09de037b03ad826418856743ec213f4b, type: 2}
-  - {fileID: 11400000, guid: d1fc75342e8da92419d7d1ce94b10c0e, type: 2}
-  - {fileID: 11400000, guid: f2545d69a5830104daea82f4026473ad, type: 2}
+  - {fileID: 11400000, guid: 04028e59eb33c3c4893982c781856773, type: 2}
+  - {fileID: 11400000, guid: c7e1b55e5320d5a44b4fa1bddb855f4c, type: 2}
+  - {fileID: 11400000, guid: 9cf12f6b86f89c0409b8b831ed388eca, type: 2}
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 3f4f66878de8baa43a0c2e08404584f4, type: 3}
     m_SceneName: Rest

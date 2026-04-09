@@ -39,6 +39,7 @@ public class PlayerCharacter : MonoBehaviour
     private Animator swordAnimator;
     private Camera cam;
     private Coroutine hitStopCoroutine;
+    private Coroutine increaseAttackSpeedRoutine;
     private PlayerController playerController;
     private Chest currentChest;
     private string currentAnimationState;
@@ -52,6 +53,8 @@ public class PlayerCharacter : MonoBehaviour
     public event System.Action<bool> OnDashNotify;
     private bool lastDashState = true;
 
+    private float baseAttackSpeed = 1f;
+    private float attackSpeedMultiplier = 1f;
     public float nextDashRemaining
     {
         get
@@ -317,5 +320,18 @@ public class PlayerCharacter : MonoBehaviour
     public float GetAttackDamage()
     {
         return attackDamage;
+    }
+
+    public void IncreaseAttackSpeed(float increaseSpeedMultiplier)
+    {
+        attackSpeedMultiplier *= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
+
+    }
+
+    public void DecreaseAttackSpeed(float increaseSpeedMultiplier)
+    {
+        attackSpeedMultiplier /= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
     }
 }

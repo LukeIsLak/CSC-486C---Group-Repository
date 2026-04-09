@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TraversableLayout : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class TraversableLayout : MonoBehaviour
     private GameObject playerOnMap;
     
     [Header("Data")]
+    public EncounterInfo defaultEncounter;
     public LayoutData layoutData;
     public EncounterInfo firstEncounter;
     public EncounterInfo lastEncounter;
@@ -272,7 +274,7 @@ public class TraversableLayout : MonoBehaviour
     private EncounterInfo ChooseEncounterFromWeights(List<MapEncounter> parents)
     {
         Dictionary<EncounterInfo, float> weights = new Dictionary<EncounterInfo, float>();
-        float weightSum = 0f; // Save a loop by keeping track of this as we update the dictionary
+        List<EncounterInfo> blacklist = new List<EncounterInfo>();
 
         // Sum probabilities for each encounter, or create entry if not yet tracked
         foreach (MapEncounter parent in parents)
@@ -281,7 +283,13 @@ public class TraversableLayout : MonoBehaviour
             {
                 EncounterInfo enc   = encProb.encounter;
                 float weight        = encProb.weight;
-                weightSum           += weight;
+                
+                // If weight is negative, add to blacklist and continue
+                if (weight < 0)
+                {
+                    blacklist.Add(enc);
+                    continue;
+                }
 
                 if (weights.ContainsKey(enc))
                 {
@@ -292,10 +300,21 @@ public class TraversableLayout : MonoBehaviour
             }
         }
 
+        // Determine sum of weights ignoring (and vetting) blacklisted entries
+        // We have to do this because we will ignore an encounter if ANY parent
+        // has a negative weight, not just if the sum of weights is negative.
+        // This assumes that there is some "default" encounter.
+        float weightSum = 0f;
+        foreach (EncounterInfo key in blacklist)
+            weights.Remove(key);
+
+        foreach (float weight in weights.Values)
+            weightSum += weight;
+        
         if (weights.Count == 0 || weightSum == 0f)
         {
             Debug.Log("No weights available in parent nodes or sum of weights is zero");
-            return null;
+            return defaultEncounter;
         }
 
         float r = Random.Range(0f, weightSum);
@@ -304,8 +323,9 @@ public class TraversableLayout : MonoBehaviour
             r -= value;
             if (r <= 0f) return key;
         }
-        // We shouldn't get here.
-        return null;
+        // We shouldn't get here. In fact, we won't. It can't happen.
+        Debug.LogWarning("Unreachable code reached!");
+        return defaultEncounter;
     }
 
 
