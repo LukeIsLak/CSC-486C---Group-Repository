@@ -12,13 +12,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private StaminaUI staminaView;
     [SerializeField] private SetPlayerInputScheme inputScheme;
+    [SerializeField] private TutorialUI tutorialView;
     
+    [SerializeField] private DamageOverlayUI damageOverlay;
 
     // [SerializeField] private GameObject merchantPanel;
     [SerializeField] private GameObject interactPanel;
     // [SerializeField] private GameObject nodePanel;
     [SerializeField] private ChestUI chestUI;
     [SerializeField] private ShieldUI shieldUI;
+    [SerializeField] private Animator swordAnimator;
+    [SerializeField] private SwordAnimationEvent swordAnimationEvent;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -41,6 +45,7 @@ public class UIManager : MonoBehaviour
         if (staminaView == null) staminaView = GetComponentInChildren<StaminaUI>(true);
         if (chestUI == null) chestUI = GetComponentInChildren<ChestUI>(true);
         if (shieldUI == null) shieldUI = GetComponentInChildren<ShieldUI>(true);
+        if (damageOverlay == null) damageOverlay = GetComponentInChildren<DamageOverlayUI>(true);
         HideInventoryView();
         HideCombatView();
         HidePauseView();
@@ -55,10 +60,16 @@ public class UIManager : MonoBehaviour
         {   
             shieldUI.BindHealthUI(health);
             healthBar.BindHealthUI(health);
+            damageOverlay.BindHealthUI(health);
         }
 
         var playerCharacter = player.GetComponent<PlayerCharacter>();
-        if(playerCharacter != null) staminaView.BindPlayerUI(playerCharacter);
+        if (playerCharacter != null) 
+        {   
+            staminaView.BindPlayerUI(playerCharacter);
+            playerCharacter.SetSwordAnimator(swordAnimator);
+            swordAnimationEvent.BindPlayer(playerCharacter);
+        }
         playerInput = player.GetComponent<PlayerInput>();
         var deck = player.GetComponent<DeckSystems>();
         if (deck != null)
@@ -134,6 +145,10 @@ public class UIManager : MonoBehaviour
     public void ShowChestUI(Acquirable cardData)
     {
         chestUI.ShowUI(cardData);
+    }
+
+    public void ShowTutorialUI(){
+        tutorialView.showTutorial();
     }
 }
     

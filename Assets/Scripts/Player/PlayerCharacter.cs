@@ -13,6 +13,9 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private float attackRadius = 0.4f;
     [SerializeField] private float attackHitStopDuration = 0.03f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private SwordHitBox hitBoxA;
+    [SerializeField] private SwordHitBox hitBoxB;
+    [SerializeField] private SwordHitBox hitBoxC;
     // for increaseing player damage
     public float attackMultiplier = 1.0f;
 
@@ -23,9 +26,9 @@ public class PlayerCharacter : MonoBehaviour
     public bool runawayBullActive = false;
 
     [Header("Animation State")]
-    [SerializeField] private const string ATTACK1 = "Attack 1";
-    [SerializeField] private const string ATTACK2 = "Attack 2";
-    [SerializeField] private const string ATTACK3 = "Attack 3";
+    [SerializeField] private const string ATTACK1 = "SwingA";
+    [SerializeField] private const string ATTACK2 = "SwingB";
+    [SerializeField] private const string ATTACK3 = "SwingC";
     [SerializeField] private const string ATTACKIDLE = "Idle";
 
     [Header("References")]
@@ -36,6 +39,7 @@ public class PlayerCharacter : MonoBehaviour
     private Animator swordAnimator;
     private Camera cam;
     private Coroutine hitStopCoroutine;
+    private Coroutine increaseAttackSpeedRoutine;
     private PlayerController playerController;
     private Chest currentChest;
     private string currentAnimationState;
@@ -49,6 +53,8 @@ public class PlayerCharacter : MonoBehaviour
     public event System.Action<bool> OnDashNotify;
     private bool lastDashState = true;
 
+    private float baseAttackSpeed = 1f;
+    private float attackSpeedMultiplier = 1f;
     public float nextDashRemaining
     {
         get
@@ -63,7 +69,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool queuedNextAttack;
     private void Awake()
     {
-        swordAnimator = GetComponentInChildren<Animator>();
+        //swordAnimator = GetComponentInChildren<Animator>();
         cam = GetComponentInChildren<Camera>();
         playerController = GetComponent<PlayerController>();    
     }
@@ -272,5 +278,60 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (!context.performed) return;
         PlayerCloseInteractableMenu.Raise();
+    }
+
+    public void SetSwordAnimator(Animator swordAnimator)
+    {
+        this.swordAnimator = swordAnimator;
+    }
+
+    public void EnableSwordColiderA()
+    {
+        hitBoxA.EnableCollider();
+    }
+
+    public void DisableSwordColiderA()
+    {
+        hitBoxA.DisableCollider();
+        hitBoxA.ResetHit();
+    }
+    public void EnableSwordColiderB()
+    {
+        hitBoxB.EnableCollider();
+    }
+
+    public void DisableSwordColiderB()
+    {
+        hitBoxB.DisableCollider();
+        hitBoxB.ResetHit();
+    }
+
+    public void EnableSwordColiderC()
+    {
+        hitBoxC.EnableCollider();
+    }
+
+    public void DisableSwordColiderC()
+    {
+        hitBoxC.DisableCollider();
+        hitBoxC.ResetHit();
+    }
+
+    public float GetAttackDamage()
+    {
+        return attackDamage;
+    }
+
+    public void IncreaseAttackSpeed(float increaseSpeedMultiplier)
+    {
+        attackSpeedMultiplier *= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
+
+    }
+
+    public void DecreaseAttackSpeed(float increaseSpeedMultiplier)
+    {
+        attackSpeedMultiplier /= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
     }
 }
