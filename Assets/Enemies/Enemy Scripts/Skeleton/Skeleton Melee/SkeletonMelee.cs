@@ -274,31 +274,30 @@ public class SkeletonMelee : EnemyInterface
     public void GetOffWallAtAngle(float distance = 1.0f, float angleDegrees = 60f, float jumpForce = 7f) {
         if (!inWallSpawn) return;
 
-        // Wall normal is current up vector
         Vector3 wallNormal = transform.up;
 
-        // Calculate the "downward" direction at the specified angle from the wall normal
+        /*Get direction of the proposed landing direction*/
         Vector3 randomPerp = Vector3.Cross(wallNormal, Random.onUnitSphere).normalized;
         Quaternion rot = Quaternion.AngleAxis(angleDegrees, randomPerp);
         Vector3 offWallDir = rot * (-wallNormal);
-
-        // Calculate the target position
         Vector3 targetPos = transform.position + offWallDir * distance;
 
-        // Calculate velocity needed to reach target (simple ballistic arc)
+        /*Get velocity needed to reach proposed landing spot*/
         Vector3 toTarget = targetPos - transform.position;
-        float time = Mathf.Max(0.5f, toTarget.magnitude / jumpForce); // Adjust time as needed
+        float time = Mathf.Max(0.5f, toTarget.magnitude / jumpForce);
         Vector3 velocity = new Vector3(toTarget.x / time, jumpForce, toTarget.z / time);
 
         rb.velocity = velocity;
 
-        // Optionally, rotate to face the direction of the jump
         transform.rotation = Quaternion.LookRotation(new Vector3(velocity.x, 0, velocity.z), Vector3.up);
-
         inWallSpawn = false;
 
-        // Start coroutine to re-enable NavMeshAgent after landing
         StartCoroutine(ReenableNavMeshAfterLanding());
+    }
+
+    public void UpdateAgroApproach() {
+        UpdatePlayerPath();
+        UpdateMove();
     }
 
     /****************************************************/
@@ -320,6 +319,19 @@ public class SkeletonMelee : EnemyInterface
     /****************************************************/
 
     //XXX add bar here for ienumerators
+    //XXX set ignore layers on the spawn states not in prefab
+
+    public void UpdatePlayerPath() {
+        if (checkPlayerPath) StartCoroutine(DelayCalcPlayerPath());
+    }
+
+    private IEnumerator DelayCalcPlayerPath() {
+        checkPlayerPath = false;
+        nma.SetDestination(playerTransform.position);
+        yield return new WaitForSeconds(smd.checkPlayerUpdate);
+        checkPlayerPath = true;
+    }
+
 
     private IEnumerator ReenableNavMeshAfterLanding() {
         while (!IsGrounded())

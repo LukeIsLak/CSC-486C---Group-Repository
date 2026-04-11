@@ -43,6 +43,8 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         AddTransition(SkeletonMeleeStates.AgroApproach, SkeletonMeleeStates.SwingAttack, AgroApproachToSwing);
         AddTransition(SkeletonMeleeStates.AgroApproach, SkeletonMeleeStates.Idle, AgroApproachToIdle);
 
+        AddEnterState(SkeletonMeleeStates.AgroApproach, EnterAgroApproachState);
+        AddWhileState(SkeletonMeleeStates.AgroApproach, WhileAgroApproachState);
         /*DashAttack*/
         AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.AgroApproach, DashToAgroApproach);
         AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.Idle, DashToIdle);
@@ -152,6 +154,23 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
 
     public void EnterSpawnState(SkeletonMelee sm) {
         sm.InitializeSpawn();
+    }
+
+    public void EnterAgroApproachState(SkeletonMelee sm) {
+        sm.isAgro = true;
+        sm.isMoving = true;
+        sm.checkPlayerPath = true;
+        sm.nma.SetDestination(sm.playerTransform.position);
+    }
+
+    /******************************/
+    /*   While State Functions    */
+    /******************************/
+
+
+    public void WhileAgroApproachState(SkeletonMelee sm) {
+        sm.UpdateAgroApproach();
+        sm.nma.nextPosition = sm.gameObject.transform.position;
     }
 
     /******************************/
