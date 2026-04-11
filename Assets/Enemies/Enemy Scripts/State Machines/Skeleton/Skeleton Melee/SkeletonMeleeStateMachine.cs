@@ -1,6 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public struct SkeletonMeleeWeightedAttacks {
+    public SkeletonMeleeAttacks attack;
+    public float weight;
+    public Func<bool> condition;
+    public SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks attack, float weight, Func<bool> condition) {
+        this.attack = attack;
+        this.weight = weight;
+        this.condition = condition;
+    }
+}
+
+public enum SkeletonMeleeAttacks {
+    AttackDash,
+    AttackSwing
+}
 
 public enum SkeletonMeleeStates {
     Init,
@@ -45,6 +62,8 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
 
         AddEnterState(SkeletonMeleeStates.AgroApproach, EnterAgroApproachState);
         AddWhileState(SkeletonMeleeStates.AgroApproach, WhileAgroApproachState);
+        AddExitState(SkeletonMeleeStates.AgroApproach, ExitAgroApproachState);
+
         /*DashAttack*/
         AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.AgroApproach, DashToAgroApproach);
         AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.Idle, DashToIdle);
@@ -109,7 +128,7 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public bool IdleToAgroApproach(SkeletonMelee sm) {
-        return false;
+        return Vector3.Distance(sm.gameObject.transform.position, sm.playerTransform.position) <= sm.smd.detectionRadius;
     }
 
     public bool WanderToIdle(SkeletonMelee sm) {
@@ -117,7 +136,7 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public bool WanderToAgroApproach(SkeletonMelee sm) {
-        return false;
+        return Vector3.Distance(sm.gameObject.transform.position, sm.playerTransform.position) <= sm.smd.detectionRadius;
     }
 
     public bool AgroApproachToDash(SkeletonMelee sm) {
@@ -129,7 +148,7 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public bool AgroApproachToIdle(SkeletonMelee sm) {
-        return false;
+        return Vector3.Distance(sm.gameObject.transform.position, sm.playerTransform.position) > sm.smd.detectionRadius;
     }
 
     public bool DashToAgroApproach(SkeletonMelee sm) {
@@ -156,10 +175,18 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         sm.InitializeSpawn();
     }
 
+    public void EnterIdleState(SkeletonMelee sm) {
+        sm.isMoving = false;
+        sm.anim.SetBool("isMoving", sm.isMoving);
+    }
+
     public void EnterAgroApproachState(SkeletonMelee sm) {
         sm.isAgro = true;
         sm.isMoving = true;
+        sm.anim.SetBool("isMoving", sm.isMoving);
         sm.checkPlayerPath = true;
+        sm.nextAttack = null;
+        sm.WaitToAttack();
         sm.nma.SetDestination(sm.playerTransform.position);
     }
 
@@ -178,6 +205,10 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     /******************************/
 
     public void ExitSpawnWallState(SkeletonMelee sm) {
-        sm.GetOffWallAtAngle();
+        sm.GetOffWall();
+    }
+
+    public void ExitAgroApproachState(SkeletonMelee sm) {
+        sm.isAgro = false;
     }
 }

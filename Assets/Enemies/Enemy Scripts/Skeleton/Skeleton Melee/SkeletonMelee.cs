@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +25,7 @@ public class SkeletonMelee : EnemyInterface
     public bool canWander           = false;
     public bool doneWandering       = false;
     public bool isAgro              = false;
+    public bool canAttack           = false;
 
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
@@ -35,9 +38,21 @@ public class SkeletonMelee : EnemyInterface
     [Header("Misc. Variables")]
     public SkeletonMeleeStates currentState;
 
+    public SkeletonMeleeAttacks? nextAttack = null;
+    public List<SkeletonMeleeWeightedAttacks> weightedAttacks;
+
     /****************************************************/
     /*          Beginning Of Instance Methods           */
     /****************************************************/
+
+    void Awake() {
+        weightedAttacks = new List<SkeletonMeleeWeightedAttacks> {
+            new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackDash, 1f, () => true),
+            new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackSwing, 2f, () => true)
+        };
+
+        initialize();
+    }
 
     public override void initialize() {
         curHealth = smd.baseHealth * playerData.maxHealth;
@@ -124,11 +139,11 @@ public class SkeletonMelee : EnemyInterface
         Vector3 coneDir = -dirToWall;
 
         // Pick a random direction within the cone
-        float angle = Random.Range(-coneAngle / 2f, coneAngle / 2f);
+        float angle = UnityEngine.Random.Range(-coneAngle / 2f, coneAngle / 2f);
         Quaternion rot = Quaternion.AngleAxis(angle, Vector3.up);
         Vector3 randomDir = rot * coneDir;
 
-        float dist = Random.Range(minDist, maxDist);
+        float dist = UnityEngine.Random.Range(minDist, maxDist);
         Vector3 randomPoint = transform.position + randomDir * dist;
 
         return randomPoint;
@@ -196,7 +211,7 @@ public class SkeletonMelee : EnemyInterface
             if (cohesionForce.sqrMagnitude > 0f) cohesionForce = cohesionForce.normalized;
         }
 
-        Vector3 wander = Random.insideUnitSphere;
+        Vector3 wander = UnityEngine.Random.insideUnitSphere;
         wander.y = 0f;
 
         Vector3 finalVelocity   = navDir * smd.navWeight
@@ -233,10 +248,6 @@ public class SkeletonMelee : EnemyInterface
         return Vector3.Distance(transform.position, dest) <= smd.destStopDist;
     }
 
-    private bool IsGrounded() {
-        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, LayerMask.GetMask("Default", "Ground"));
-    }
-
     /****************************************************/
     /*             End Of Helper Methods                */
     /****************************************************/
@@ -271,28 +282,26 @@ public class SkeletonMelee : EnemyInterface
         }
     }
 
-    public void GetOffWallAtAngle(float distance = 1.0f, float angleDegrees = 60f, float jumpForce = 7f) {
+    public void GetOffWall(float distance = 1.0f) {
         if (!inWallSpawn) return;
 
-        Vector3 wallNormal = transform.up;
+        // Vector3 wallNormal = transform.up;
+        // Vector3 offWallDir = -wallNormal;
+        // Vector3 targetPos = transform.position + offWallDir * distance;
 
-        /*Get direction of the proposed landing direction*/
-        Vector3 randomPerp = Vector3.Cross(wallNormal, Random.onUnitSphere).normalized;
-        Quaternion rot = Quaternion.AngleAxis(angleDegrees, randomPerp);
-        Vector3 offWallDir = rot * (-wallNormal);
-        Vector3 targetPos = transform.position + offWallDir * distance;
+        // /*Raycast down to snap to ground*/
+        // RaycastHit hit;
+        // Vector3 rayOrigin = targetPos + Vector3.up * 0.5f;
+        // if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 5f, LayerMask.GetMask("Default", "Surface"))) {
+        //     targetPos.y = hit.point.y;
+        // }
 
-        /*Get velocity needed to reach proposed landing spot*/
-        Vector3 toTarget = targetPos - transform.position;
-        float time = Mathf.Max(0.5f, toTarget.magnitude / jumpForce);
-        Vector3 velocity = new Vector3(toTarget.x / time, jumpForce, toTarget.z / time);
+        // transform.position = targetPos;
+        // transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
 
-        rb.velocity = velocity;
-
-        transform.rotation = Quaternion.LookRotation(new Vector3(velocity.x, 0, velocity.z), Vector3.up);
         inWallSpawn = false;
-
-        StartCoroutine(ReenableNavMeshAfterLanding());
+        nma.enabled = true;
+        nma.Warp(transform.position);
     }
 
     public void UpdateAgroApproach() {
@@ -314,6 +323,23 @@ public class SkeletonMelee : EnemyInterface
         if (smd.wallSpawnChance >= UnityEngine.Random.Range(0, 1)) FindSpawnPosition();
     }
 
+    public SkeletonMeleeAttacks GetNextAttack() {
+        List<SkeletonMeleeWeightedAttacks> possibleAttacks = weightedAttacks.Where(wa => wa.condition == null || wa.condition()).ToList();
+
+
+        float totalWeight = possibleAttacks.Sum(wa => wa.weight);
+        float r = UnityEngine.Random.Range(0, totalWeight);
+        float cumulative = 0f;
+        foreach (var wa in possibleAttacks)
+        {
+            cumulative += wa.weight;
+            if (r < cumulative)
+                return wa.attack;
+        }
+        // fallback (should not happen)
+        return possibleAttacks[0].attack;
+    }
+
     /****************************************************/
     /*               End Of State Methods               */
     /****************************************************/
@@ -332,12 +358,16 @@ public class SkeletonMelee : EnemyInterface
         checkPlayerPath = true;
     }
 
+    public void WaitToAttack() {
+        canAttack = false;
+        StartCoroutine(DelayAttack());
+    }
 
-    private IEnumerator ReenableNavMeshAfterLanding() {
-        while (!IsGrounded())
-            yield return null;
+    private IEnumerator DelayAttack() {
+        float delay = UnityEngine.Random.Range(smd.minAgroToAttackTime, smd.maxAgroToAttackTime);
+        yield return new WaitForSeconds(delay);
 
-        rb.isKinematic = true;
-        nma.enabled = true;
+        nextAttack = GetNextAttack();
+        canAttack = true;
     }
 }

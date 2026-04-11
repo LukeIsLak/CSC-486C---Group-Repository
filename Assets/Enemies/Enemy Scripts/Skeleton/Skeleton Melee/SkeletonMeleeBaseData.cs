@@ -25,6 +25,8 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float wallSpawnChance = 0.5f;
 
     [Header("Skeleton Agro Values")]
+    public float minAgroToAttackTime = 0.2f;
+    public float maxAgroToAttackTime = 0.7f;
     public float checkPlayerUpdate = 0.1f;
     public float detectionRadius = 10f;
 }
