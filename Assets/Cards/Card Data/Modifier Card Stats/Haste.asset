@@ -17,3 +17,4 @@ MonoBehaviour:
   effectValue: 10
   image: {fileID: -553130707, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   buffTime: 10
+  attackspeedbuff: 2
