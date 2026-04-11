@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8129c3a9dd9e2ee4ca0f8ce96846f9af, type: 3}
   m_Name: BrambleStop
   m_EditorClassIdentifier: 
-  name: 
-  type: 0
-  stopDuration: 0
+  name: BrambleStop
+  type: 3
+  stopDuration: 5
