@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum SkeletonMeleeStates {
+    Init,
     Spawn,
     SpawnWall,
     Idle,
@@ -15,12 +16,19 @@ public enum SkeletonMeleeStates {
 public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMeleeStates>
 {
     public void Awake() {
+        /*Init*/
+        AddTransition(SkeletonMeleeStates.Init, SkeletonMeleeStates.Spawn, InitToSpawn);
+
         /*Spawn*/
         AddTransition(SkeletonMeleeStates.Spawn, SkeletonMeleeStates.SpawnWall, SpawnToWall);
         AddTransition(SkeletonMeleeStates.Spawn, SkeletonMeleeStates.Idle, SpawnToIdle);
 
+        AddEnterState(SkeletonMeleeStates.Spawn, EnterSpawnState);
+
         /*SpawnWall*/
         AddTransition(SkeletonMeleeStates.SpawnWall, SkeletonMeleeStates.AgroApproach, WallToAgroApproach);
+
+        AddExitState(SkeletonMeleeStates.SpawnWall, ExitSpawnWallState);
 
         /*Idle*/
         AddTransition(SkeletonMeleeStates.Idle, SkeletonMeleeStates.Wander, IdleToWander);
@@ -77,17 +85,21 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     /******************************/
     /*   Transitions Conditions   */ 
     /******************************/
+    
+    public bool InitToSpawn(SkeletonMelee sm) {
+        return sm.isInitialized;
+    }
 
     public bool SpawnToWall(SkeletonMelee sm) {
-        return false;
+        return sm.inWallSpawn;
     }
 
     public bool SpawnToIdle(SkeletonMelee sm) {
-        return false;
+        return sm.noWallSpot || !sm.inWallSpawn;
     }
 
     public bool WallToAgroApproach(SkeletonMelee sm) {
-        return false;
+        return Vector3.Distance(sm.gameObject.transform.position, sm.playerTransform.position) <= sm.smd.detectionRadius;
     }
 
     public bool IdleToWander(SkeletonMelee sm) {
@@ -137,4 +149,16 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     /******************************/
     /*   Enter State Functions    */
     /******************************/
+
+    public void EnterSpawnState(SkeletonMelee sm) {
+        sm.InitializeSpawn();
+    }
+
+    /******************************/
+    /*   Leave State Functions    */
+    /******************************/
+
+    public void ExitSpawnWallState(SkeletonMelee sm) {
+        sm.GetOffWallAtAngle();
+    }
 }

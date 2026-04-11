@@ -47,10 +47,14 @@ public class SkeletonMelee : EnemyInterface
         rb = GetComponent<Rigidbody>();
 
         SkeletonMeleeStateMachine env_smsm = FindObjectOfType<SkeletonMeleeStateMachine>();
+        env_smsm.AddEntity(this);
+
+        initialize_nma();
     }
 
     public void initialize_nma() {
         if (!startInitialized) StartCoroutine(delay_navmesh());
+        else isInitialized = true;
     }
 
     private IEnumerator delay_navmesh() {
@@ -90,11 +94,11 @@ public class SkeletonMelee : EnemyInterface
     /*          Beginning Of Helper Methods             */
     /****************************************************/
 
-    public Collider[] FindNearbyWalls(float radius = 1.0f) {
+    public Collider[] FindNearbyWalls(float radius = 10.0f) {
         return Physics.OverlapSphere(transform.position, radius, wallMask);
     }
 
-    public Vector3? FindClosestWallPoint(float radius = 1.0f) {
+    public Vector3? FindClosestWallPoint(float radius = 10.0f) {
         Collider[] walls = FindNearbyWalls();
         float minDist = float.MaxValue;
         Vector3? closestPoint = null;
@@ -112,7 +116,7 @@ public class SkeletonMelee : EnemyInterface
         return closestPoint;
     }
 
-    public Vector3? PickRandomPointInConeAwayFromWall(float wallCheckRadius = 2f, float coneAngle = 60f, float minDist = 1f, float maxDist = 3f) {
+    public Vector3? PickRandomPointInConeAwayFromWall(float wallCheckRadius = 20f, float coneAngle = 60f, float minDist = 0.5f, float maxDist = 10f) {
         Vector3? wallPoint = FindClosestWallPoint(wallCheckRadius);
         if (wallPoint == null) return null;
 
@@ -141,10 +145,10 @@ public class SkeletonMelee : EnemyInterface
         count = 0;
         foreach (Collider h in hits) {
             if (h.transform == transform) continue;
-            Rat other = h.gameObject.GetComponent<Rat>();
+            SkeletonMelee other = h.gameObject.GetComponent<SkeletonMelee>();
             if (other == null && h.attachedRigidbody != null) {
                 /*If the rat is on the rigidbody root, use that instead*/
-                other = h.attachedRigidbody.GetComponentInParent<Rat>();
+                other = h.attachedRigidbody.GetComponentInParent<SkeletonMelee>();
             }
             if (other == null) continue;
 
@@ -229,6 +233,10 @@ public class SkeletonMelee : EnemyInterface
         return Vector3.Distance(transform.position, dest) <= smd.destStopDist;
     }
 
+    private bool IsGrounded() {
+        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, LayerMask.GetMask("Default", "Ground"));
+    }
+
     /****************************************************/
     /*             End Of Helper Methods                */
     /****************************************************/
@@ -240,16 +248,84 @@ public class SkeletonMelee : EnemyInterface
     /****************************************************/
 
     private void FindSpawnPosition() {
-        Vector3? spawnPoint = PickRandomPointInConeAwayFromWall();
-        if (spawnPoint != null) {
-            transform.position = spawnPoint.Value;
-            inWallSpawn = true;
-        }
-        else noWallSpot = true;
+        Vector3? wallPoint = FindClosestWallPoint();
+        if (wallPoint != null) {
+            nma.enabled = false;
+            Vector3 dirFromWall = (transform.position - wallPoint.Value).normalized;
+            float offset = 0.1f;
+            Vector3 spawnPos = wallPoint.Value + dirFromWall * offset;
+            transform.position = spawnPos;
 
+            // Raycast from the wall point toward the skeleton to get the wall normal
+            RaycastHit hit;
+            Vector3 rayDir = (transform.position - wallPoint.Value).normalized;
+            if (Physics.Raycast(wallPoint.Value - rayDir * 0.01f, rayDir, out hit, 1f, wallMask)) {
+                transform.rotation = Quaternion.LookRotation(dirFromWall, hit.normal);
+            } else {
+                transform.rotation = Quaternion.LookRotation(dirFromWall, Vector3.up);
+            }
+
+            inWallSpawn = true;
+        } else {
+            noWallSpot = true;
+        }
+    }
+
+    public void GetOffWallAtAngle(float distance = 1.0f, float angleDegrees = 60f, float jumpForce = 7f) {
+        if (!inWallSpawn) return;
+
+        // Wall normal is current up vector
+        Vector3 wallNormal = transform.up;
+
+        // Calculate the "downward" direction at the specified angle from the wall normal
+        Vector3 randomPerp = Vector3.Cross(wallNormal, Random.onUnitSphere).normalized;
+        Quaternion rot = Quaternion.AngleAxis(angleDegrees, randomPerp);
+        Vector3 offWallDir = rot * (-wallNormal);
+
+        // Calculate the target position
+        Vector3 targetPos = transform.position + offWallDir * distance;
+
+        // Calculate velocity needed to reach target (simple ballistic arc)
+        Vector3 toTarget = targetPos - transform.position;
+        float time = Mathf.Max(0.5f, toTarget.magnitude / jumpForce); // Adjust time as needed
+        Vector3 velocity = new Vector3(toTarget.x / time, jumpForce, toTarget.z / time);
+
+        rb.velocity = velocity;
+
+        // Optionally, rotate to face the direction of the jump
+        transform.rotation = Quaternion.LookRotation(new Vector3(velocity.x, 0, velocity.z), Vector3.up);
+
+        inWallSpawn = false;
+
+        // Start coroutine to re-enable NavMeshAgent after landing
+        StartCoroutine(ReenableNavMeshAfterLanding());
     }
 
     /****************************************************/
     /*             End Of Movement Methods              */
     /****************************************************/
+
+
+
+    /****************************************************/
+    /*             Beginning of State Methods           */
+    /****************************************************/
+
+    public void InitializeSpawn() {
+        if (smd.wallSpawnChance >= UnityEngine.Random.Range(0, 1)) FindSpawnPosition();
+    }
+
+    /****************************************************/
+    /*               End Of State Methods               */
+    /****************************************************/
+
+    //XXX add bar here for ienumerators
+
+    private IEnumerator ReenableNavMeshAfterLanding() {
+        while (!IsGrounded())
+            yield return null;
+
+        rb.isKinematic = true;
+        nma.enabled = true;
+    }
 }

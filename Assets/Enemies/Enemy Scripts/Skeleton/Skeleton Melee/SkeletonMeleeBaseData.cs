@@ -20,4 +20,10 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public LayerMask skeletonMask = ~0;
     public float neighbourRadius = 5f;
     public float neighbourStopRadius = 2f;
+
+    [Header("Skeleton Spawn Values")]
+    public float wallSpawnChance = 0.5f;
+
+    [Header("Skeleton Agro Values")]
+    public float detectionRadius = 10f;
 }
