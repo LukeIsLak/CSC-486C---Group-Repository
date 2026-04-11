@@ -20,8 +20,8 @@ public class TutorialUI : MonoBehaviour
     public void onNextClicked(){
         tutorialSlides[index].SetActive(false);
 
-        if (index >= tutorialSlides.Count){
-            index = tutorialSlides.Count;
+        if (index >= tutorialSlides.Count - 1){
+            index = tutorialSlides.Count - 1;
         } else {
             index++;
         }
