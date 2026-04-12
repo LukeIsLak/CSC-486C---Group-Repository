@@ -30,12 +30,16 @@ public class SkeletonMelee : EnemyInterface
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
     
-    
-    public bool isArmoured          = true;
+    public bool canActivate         = true;
+    public bool doneActivate        = false;
+    public bool canDeactivate       = true;
+    public bool doneDeactivate      = false;
 
     public LayerMask wallMask;
 
     [Header("Misc. Variables")]
+    private float activateTime;
+    private float deactivateTime;
     public SkeletonMeleeStates currentState;
 
     public SkeletonMeleeAttacks? nextAttack = null;
@@ -63,6 +67,9 @@ public class SkeletonMelee : EnemyInterface
 
         SkeletonMeleeStateMachine env_smsm = FindObjectOfType<SkeletonMeleeStateMachine>();
         env_smsm.AddEntity(this);
+
+        activateTime = smd.activate.length;
+        deactivateTime = smd.deactivate.length;
 
         initialize_nma();
     }
@@ -369,5 +376,27 @@ public class SkeletonMelee : EnemyInterface
 
         nextAttack = GetNextAttack();
         canAttack = true;
+    }
+
+    public void StartActivate() {
+        if (canActivate) StartCoroutine(DelayActivate());
+    }
+
+    private IEnumerator DelayActivate() {
+        canActivate = false;
+        yield return new WaitForSeconds(activateTime + smd.activateOffset);
+        canActivate = true;
+        doneActivate = true;
+    }
+
+    public void StartDeactivate() {
+        if (canDeactivate) StartCoroutine(DelayDeactivate());
+    }
+
+    private IEnumerator DelayDeactivate() {
+        canDeactivate = false;
+        yield return new WaitForSeconds(deactivateTime);
+        canDeactivate = true;
+        doneDeactivate = true;
     }
 }

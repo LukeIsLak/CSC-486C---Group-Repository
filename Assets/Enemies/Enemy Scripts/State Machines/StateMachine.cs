@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public abstract class StateMachine<TEntity, TState> : MonoBehaviour
+public abstract class StateMachine<TEntity, TState> : MonoBehaviour where TEntity : EnemyInterface
 {
+    
     public List<TEntity> entities;
+    private uint nextFillerBit = 1;
+
+    /*
+        XXX add comments lol
+    */
+
+    private Dictionary<TState, uint> fillerFlagMap = new();
 
     /*
         Transition lookup table is a dictionary which contains they following keys / values:
@@ -64,6 +72,15 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour
         }
     }
 
+    private uint GetOrAssignFillerBit(TState filler) {
+        if (!fillerFlagMap.TryGetValue(filler, out uint bit)) {
+            bit = nextFillerBit;
+            nextFillerBit <<= 1;
+            fillerFlagMap[filler] = bit;
+        }
+        return bit;
+    }
+
     public void AddTransition(TState from, TState to, Func<TEntity, bool> condition) {
         /*If no list currently exists for a state, create one*/
         if (!conditionLookup.TryGetValue(from, out var list)) {
@@ -73,6 +90,27 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour
 
         /*Add transition to list*/
         list.Add((to, condition));
+    }
+
+    /*Explicit way to add filler transitions*/
+    public void AddTransitionWithFiller(TState from, TState to, TState filler, Func<TEntity, bool> condition, Func<TEntity, bool> conditionFiller) {
+        uint fillerBit = GetOrAssignFillerBit(filler);
+
+        AddTransition(from, filler, entity => {
+            if (condition(entity)) {
+                entity.SetFillerFlag(fillerBit);
+                return true;
+            }
+            return false;
+        });
+
+        AddTransition(filler, to, entity => {
+            if ((entity.GetFillerFlag() & fillerBit) != 0 && conditionFiller(entity)) {
+                entity.SetFillerFlag(entity.GetFillerFlag() & ~fillerBit);
+                return true;
+            }
+            return false;
+        });
     }
     
 

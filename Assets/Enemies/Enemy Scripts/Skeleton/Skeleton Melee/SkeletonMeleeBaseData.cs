@@ -29,4 +29,9 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float maxAgroToAttackTime = 0.7f;
     public float checkPlayerUpdate = 0.1f;
     public float detectionRadius = 10f;
+
+    [Header("Misc. Values")]
+    public AnimationClip activate;
+    public AnimationClip deactivate;
+    public float activateOffset = 0.3f;
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyInterface : MonoBehaviour
 {
 
+    private uint fillerFlag = 0;
+
     [Header("Enemy Interface - Base Variables")]
     public CharacterData playerData;
     public BaseEnemyData enemyData;
@@ -55,6 +57,9 @@ public class EnemyInterface : MonoBehaviour
         curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
         if (curHealth <= 0) KillEnemy();
     }
+
+    public uint GetFillerFlag() { return fillerFlag; }
+    public void SetFillerFlag(uint val) { fillerFlag = val; }
 
     /*This has the intention of being overwritten in extended classes*/
     public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {

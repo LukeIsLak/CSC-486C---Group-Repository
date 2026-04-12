@@ -27,7 +27,11 @@ public enum SkeletonMeleeStates {
     Wander,
     AgroApproach,
     DashAttack,
-    SwingAttack
+    SwingAttack,
+
+    Activate,       // FILLER STATE
+    Deactivate      // FILLER STATE
+
 }
 
 public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMeleeStates>
@@ -43,8 +47,16 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         AddEnterState(SkeletonMeleeStates.Spawn, EnterSpawnState);
 
         /*SpawnWall*/
-        AddTransition(SkeletonMeleeStates.SpawnWall, SkeletonMeleeStates.AgroApproach, WallToAgroApproach);
+        AddTransitionWithFiller(
+            SkeletonMeleeStates.SpawnWall, 
+            SkeletonMeleeStates.AgroApproach, 
+            SkeletonMeleeStates.Activate,
+            WallToAgroApproach,
+            ActivateFiller
+        );
+        // AddTransition(SkeletonMeleeStates.SpawnWall, SkeletonMeleeStates.AgroApproach, WallToAgroApproach);
 
+        AddEnterState(SkeletonMeleeStates.SpawnWall, EnterSpawnWallState);
         AddExitState(SkeletonMeleeStates.SpawnWall, ExitSpawnWallState);
 
         /*Idle*/
@@ -167,12 +179,25 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         return false;
     }
 
+    public bool ActivateFiller(SkeletonMelee sm) {
+        return sm.doneActivate;
+    }
+
+    public bool DeactivateFiller(SkeletonMelee sm) {
+        return sm.doneDeactivate;
+    }
+
     /******************************/
     /*   Enter State Functions    */
     /******************************/
 
     public void EnterSpawnState(SkeletonMelee sm) {
         sm.InitializeSpawn();
+    }
+
+    public void EnterSpawnWallState(SkeletonMelee sm) {
+        sm.anim.SetBool("isActive", false);
+        sm.anim.SetTrigger("deactivate");
     }
 
     public void EnterIdleState(SkeletonMelee sm) {
@@ -188,6 +213,14 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         sm.nextAttack = null;
         sm.WaitToAttack();
         sm.nma.SetDestination(sm.playerTransform.position);
+    }
+
+    public void EnterActivateFiller(SkeletonMelee sm) {
+        sm.StartActivate();
+    }
+
+    public void EnterDeactivateFiller(SkeletonMelee sm) {
+        sm.StartDeactivate();
     }
 
     /******************************/
@@ -210,5 +243,13 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
 
     public void ExitAgroApproachState(SkeletonMelee sm) {
         sm.isAgro = false;
+    }
+
+    public void ExitActivateState(SkeletonMelee sm) {
+        sm.doneActivate = false;
+    }
+
+    public void ExitDeactivateState(SkeletonMelee sm) {
+        sm.doneDeactivate = false;
     }
 }
