@@ -203,12 +203,12 @@ public class PlayerCharacter : MonoBehaviour
             yield return null;
         }
         if(runawayBullActive){
-            if(Physics.SphereCast(cam.transform.position, 3f,cam.transform.forward,out RaycastHit hit, 3f, enemyLayer)) {
-                //Debug.Log($"Hit: {hit.collider.name} ");
+            Collider[] hitColliders = Physics.OverlapSphere(cam.transform.position, 3f);
+            //Debug.Log($"Hit: {hit.collider.name} ");
 
-                var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
+            foreach (var hit in hitColliders) {
+                var enemyComponent = hit.GetComponent<Collider>().GetComponentInParent<EnemyInterface>();
                 if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 30, StatusEffectType.Knockback); // need some numbers decided
-            
             }
         }
         isDashing = false;
