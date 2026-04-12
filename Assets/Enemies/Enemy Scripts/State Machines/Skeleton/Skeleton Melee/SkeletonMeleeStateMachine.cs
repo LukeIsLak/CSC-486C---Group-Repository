@@ -65,10 +65,14 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         AddTransition(SkeletonMeleeStates.Idle, SkeletonMeleeStates.AgroApproach, IdleToAgroApproach);
 
         AddEnterState(SkeletonMeleeStates.Idle, EnterIdleState);
-        
+
         /*Wander*/
         AddTransition(SkeletonMeleeStates.Wander, SkeletonMeleeStates.Idle, WanderToIdle);
         AddTransition(SkeletonMeleeStates.Wander, SkeletonMeleeStates.AgroApproach, WanderToAgroApproach);
+
+        AddEnterState(SkeletonMeleeStates.Wander, EnterWanderState);
+        AddWhileState(SkeletonMeleeStates.Wander, WhileWanderState);
+        AddExitState(SkeletonMeleeStates.Wander, ExitWanderState);
 
         /*AgroApproach*/
         AddTransition(SkeletonMeleeStates.AgroApproach, SkeletonMeleeStates.DashAttack, AgroApproachToDash);
@@ -147,7 +151,7 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public bool IdleToWander(SkeletonMelee sm) {
-        return false;
+        return sm.canWander;
     }
 
     public bool IdleToAgroApproach(SkeletonMelee sm) {
@@ -155,7 +159,7 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public bool WanderToIdle(SkeletonMelee sm) {
-        return false;
+        return sm.doneWandering;
     }
 
     public bool WanderToAgroApproach(SkeletonMelee sm) {
@@ -214,6 +218,16 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     public void EnterIdleState(SkeletonMelee sm) {
         sm.isMoving = false;
         sm.anim.SetBool("isMoving", sm.isMoving);
+        sm.StartIdleDuration();
+    }
+
+    public void EnterWanderState(SkeletonMelee sm) {
+        sm.canWander = false;
+        sm.doneWandering = false;
+        sm.isMoving = true;
+        sm.anim.SetBool("isMoving", sm.isMoving);
+        Vector3 wanderTarget = sm.PickWanderSpotOnNavMesh(transform.position, sm.smd.wanderRadius); // Adjust radius as needed
+        sm.nma.SetDestination(wanderTarget);
     }
 
     public void EnterAgroApproachState(SkeletonMelee sm) {
@@ -239,6 +253,10 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     /*   While State Functions    */
     /******************************/
 
+    public void WhileWanderState(SkeletonMelee sm) {
+        sm.UpdateWander();
+        sm.CheckWanderDone();
+    }
 
     public void WhileAgroApproachState(SkeletonMelee sm) {
         sm.UpdateAgroApproach();
@@ -251,6 +269,11 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
 
     public void ExitSpawnWallState(SkeletonMelee sm) {
         sm.GetOffWall();
+    }
+
+    public void ExitWanderState(SkeletonMelee sm) {
+        sm.doneWandering = false;
+        sm.canWander = false;
     }
 
     public void ExitAgroApproachState(SkeletonMelee sm) {

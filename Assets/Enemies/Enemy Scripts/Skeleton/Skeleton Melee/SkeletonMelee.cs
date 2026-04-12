@@ -291,29 +291,52 @@ public class SkeletonMelee : EnemyInterface
 
     public void GetOffWall(float distance = 1.0f) {
         if (!inWallSpawn) return;
-
-        // Vector3 wallNormal = transform.up;
-        // Vector3 offWallDir = -wallNormal;
-        // Vector3 targetPos = transform.position + offWallDir * distance;
-
-        // /*Raycast down to snap to ground*/
-        // RaycastHit hit;
-        // Vector3 rayOrigin = targetPos + Vector3.up * 0.5f;
-        // if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 5f, LayerMask.GetMask("Default", "Surface"))) {
-        //     targetPos.y = hit.point.y;
-        // }
-
-        // transform.position = targetPos;
-        // transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
-
         inWallSpawn = false;
         nma.enabled = true;
         nma.Warp(transform.position);
     }
 
+    public void UpdateWander() {
+        UpdateMove();
+    }
+
     public void UpdateAgroApproach() {
         UpdatePlayerPath();
         UpdateMove();
+    }
+
+    public Vector3 PickWanderSpotOnNavMesh(Vector3 origin, float radius, int maxAttempts = 12) {
+        NavMeshHit hit;
+        NavMeshPath path = new NavMeshPath();
+
+        for (int i = 0; i < maxAttempts; i++) {
+            Vector3 cand = origin + UnityEngine.Random.insideUnitSphere * radius;
+            cand.y = origin.y;
+
+            /*Snap to nearest NavMesh*/
+            if (NavMesh.SamplePosition(cand, out hit, Mathf.Max(1f, radius * 0.25f), NavMesh.AllAreas)) {
+                /*Verify a complete path exists from the source to this point*/
+                if (NavMesh.CalculatePath(origin, hit.position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete) {
+                    return hit.position;
+                }
+            }
+        }
+
+        /*Fallback to the origin if not able to find a spot on the NavMesh*/
+        // XXX in the future fallback to a random spot in the room they are in
+        // XXX given radius
+            // Pick a random spot in the room
+                // if outside radius
+                    // take dir, go in the max radius of magnitude in dir
+        if (NavMesh.SamplePosition(origin, out hit, radius, UnityEngine.AI.NavMesh.AllAreas)) return hit.position;
+        return origin;
+    }
+
+    public void CheckWanderDone() {
+        if (IsAgentAtDestination(nma)) {
+            doneWandering = true;
+            isMoving = false;
+        }
     }
 
     /****************************************************/
@@ -398,5 +421,16 @@ public class SkeletonMelee : EnemyInterface
         yield return new WaitForSeconds(deactivateTime);
         canDeactivate = true;
         doneDeactivate = true;
+    }
+
+    public void StartIdleDuration() {
+        StartCoroutine(Idle());
+    }
+
+    private IEnumerator Idle() {
+        isIdle = true;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(smd.minIdleDuration, smd.maxIdleDuration));
+        isIdle = false;
+        canWander = true;
     }
 }

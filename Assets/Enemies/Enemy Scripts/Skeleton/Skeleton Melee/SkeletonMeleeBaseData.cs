@@ -34,4 +34,7 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public AnimationClip activate;
     public AnimationClip deactivate;
     public float activateOffset = 0.3f;
+    public float minIdleDuration = 0.2f;
+    public float maxIdleDuration = 0.7f;
+    public float wanderRadius = 5f;
 }
