@@ -29,8 +29,9 @@ public enum SkeletonMeleeStates {
     DashAttack,
     SwingAttack,
 
-    Activate,       // FILLER STATE
-    Deactivate      // FILLER STATE
+    ActivateFiller,       // FILLER STATE
+    DeactivateFiller,      // FILLER STATE
+    Deactive,
 
 }
 
@@ -50,9 +51,9 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         AddTransitionWithFiller(
             SkeletonMeleeStates.SpawnWall, 
             SkeletonMeleeStates.AgroApproach, 
-            SkeletonMeleeStates.Activate,
+            SkeletonMeleeStates.ActivateFiller,
             WallToAgroApproach,
-            ActivateFiller
+            ActivateFillerCond
         );
         // AddTransition(SkeletonMeleeStates.SpawnWall, SkeletonMeleeStates.AgroApproach, WallToAgroApproach);
 
@@ -63,6 +64,8 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         AddTransition(SkeletonMeleeStates.Idle, SkeletonMeleeStates.Wander, IdleToWander);
         AddTransition(SkeletonMeleeStates.Idle, SkeletonMeleeStates.AgroApproach, IdleToAgroApproach);
 
+        AddEnterState(SkeletonMeleeStates.Idle, EnterIdleState);
+        
         /*Wander*/
         AddTransition(SkeletonMeleeStates.Wander, SkeletonMeleeStates.Idle, WanderToIdle);
         AddTransition(SkeletonMeleeStates.Wander, SkeletonMeleeStates.AgroApproach, WanderToAgroApproach);
@@ -83,6 +86,14 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         /*SwingAttack*/    
         AddTransition(SkeletonMeleeStates.SwingAttack, SkeletonMeleeStates.AgroApproach, SwingToAgroApproach);
         AddTransition(SkeletonMeleeStates.SwingAttack, SkeletonMeleeStates.Idle, SwingToIdle);
+    
+        /*ActivateFiller*/
+        AddEnterState(SkeletonMeleeStates.ActivateFiller, EnterActivateFiller);
+        AddExitState(SkeletonMeleeStates.ActivateFiller, ExitActivateFiller);
+    
+        /*DeactivateFiller*/
+        AddEnterState(SkeletonMeleeStates.DeactivateFiller, EnterDeactivateFiller);
+        AddExitState(SkeletonMeleeStates.DeactivateFiller, ExitDeactivateFiller);
     }
 
     public override void CheckTransition(SkeletonMelee sm) {
@@ -179,11 +190,11 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         return false;
     }
 
-    public bool ActivateFiller(SkeletonMelee sm) {
+    public bool ActivateFillerCond(SkeletonMelee sm) {
         return sm.doneActivate;
     }
 
-    public bool DeactivateFiller(SkeletonMelee sm) {
+    public bool DeactivateFillerCond(SkeletonMelee sm) {
         return sm.doneDeactivate;
     }
 
@@ -216,6 +227,7 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public void EnterActivateFiller(SkeletonMelee sm) {
+        sm.anim.SetTrigger("activate");
         sm.StartActivate();
     }
 
@@ -245,11 +257,12 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         sm.isAgro = false;
     }
 
-    public void ExitActivateState(SkeletonMelee sm) {
+    public void ExitActivateFiller(SkeletonMelee sm) {
+        sm.anim.SetBool("isActive", true);
         sm.doneActivate = false;
     }
 
-    public void ExitDeactivateState(SkeletonMelee sm) {
+    public void ExitDeactivateFiller(SkeletonMelee sm) {
         sm.doneDeactivate = false;
     }
 }
