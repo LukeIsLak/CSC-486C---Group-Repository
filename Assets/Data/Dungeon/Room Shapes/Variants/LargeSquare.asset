@@ -21,7 +21,7 @@ MonoBehaviour:
   regularObjects:
   - {fileID: 2487751994428010116, guid: ddca8e3060695d64c9c70f4f7f193519, type: 3}
   trapObjects:
-  - {fileID: 3452522053420848015, guid: 558070836969bb84fb32ef5985da61a7, type: 3}
+  - {fileID: 3452522053420848015, guid: b5eeb235c381df347bac091b740f3b10, type: 3}
   decorationSet0:
   - {fileID: 6112615438256996343, guid: 68d8f287ca8694646af105345e5cf90f, type: 3}
   decorationSet1:
