@@ -26,12 +26,16 @@ public class SkeletonMelee : EnemyInterface
     public bool doneWandering       = false;
     public bool isAgro              = false;
     public bool canAttack           = false;
+    public bool isAttacking         = false;
 
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
 
     public bool isDashing           = false;
     private Vector3 dashDirection;
+
+    public bool isSwinging          = false;
+    public float swingTime;
     
     public bool canActivate         = true;
     public bool doneActivate        = false;
@@ -44,6 +48,7 @@ public class SkeletonMelee : EnemyInterface
     private float activateTime;
     private float deactivateTime;
     public SkeletonMeleeStates currentState;
+    public BoxCollider dashHurtBox;
 
     public SkeletonMeleeAttacks? nextAttack = null;
     public List<SkeletonMeleeWeightedAttacks> weightedAttacks;
@@ -54,8 +59,16 @@ public class SkeletonMelee : EnemyInterface
 
     void Awake() {
         weightedAttacks = new List<SkeletonMeleeWeightedAttacks> {
-            new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackDash, 1f, () => true)//,
-            // new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackSwing, 2f, () => true)
+            new SkeletonMeleeWeightedAttacks(
+                SkeletonMeleeAttacks.AttackDash, 1f, () => true
+            ),
+            new SkeletonMeleeWeightedAttacks(
+                SkeletonMeleeAttacks.AttackSwing, 5f, () => {
+                    Vector3 toPlayer = playerTransform.position - transform.position;
+                    toPlayer.y = 0f;
+                    return toPlayer.magnitude <= smd.swingDistance;
+                }
+            )
         };
 
         initialize();
@@ -71,6 +84,7 @@ public class SkeletonMelee : EnemyInterface
         SkeletonMeleeStateMachine env_smsm = FindObjectOfType<SkeletonMeleeStateMachine>();
         env_smsm.AddEntity(this);
 
+        swingTime = smd.swingAttack.length;
         activateTime = smd.activate.length;
         deactivateTime = smd.deactivate.length;
 
@@ -272,9 +286,14 @@ public class SkeletonMelee : EnemyInterface
         Vector3? wallPoint = FindClosestWallPoint();
         if (wallPoint != null) {
             nma.enabled = false;
+            int skeletonLayer = gameObject.layer;
+            for (int i = 0; i < 32; i++) {
+                if ((wallMask.value & (1 << i)) != 0) {
+                    Physics.IgnoreLayerCollision(skeletonLayer, i, true);
+                }
+            }
             Vector3 dirFromWall = (transform.position - wallPoint.Value).normalized;
-            float offset = 0.1f;
-            Vector3 spawnPos = wallPoint.Value + dirFromWall * offset;
+            Vector3 spawnPos = wallPoint.Value + dirFromWall * smd.wallOffset;
             transform.position = spawnPos;
 
             // Raycast from the wall point toward the skeleton to get the wall normal
@@ -294,6 +313,12 @@ public class SkeletonMelee : EnemyInterface
 
     public void GetOffWall(float distance = 1.0f) {
         if (!inWallSpawn) return;
+        int skeletonLayer = gameObject.layer;
+        for (int i = 0; i < 32; i++) {
+            if ((wallMask.value & (1 << i)) != 0) {
+                Physics.IgnoreLayerCollision(skeletonLayer, i, false);
+            }
+        }
         inWallSpawn = false;
         nma.enabled = true;
         nma.Warp(transform.position);
@@ -354,6 +379,15 @@ public class SkeletonMelee : EnemyInterface
     private void OnCollisionEnter(Collision other) {
         if (isDashing && ((1 << other.gameObject.layer) & wallMask.value) != 0) {
             canDeactivate = true;
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (isAttacking && other.gameObject.CompareTag("Player")) {
+            Health h = other.gameObject.GetComponent<Health>();
+            if (h != null) h.TakeDamage(smd.damage);
+            isAttacking = false;
         }
     }
 
@@ -461,7 +495,8 @@ public class SkeletonMelee : EnemyInterface
 
     private IEnumerator DashCoroutine() {
         float timer = 0f;
-        while (timer < smd.dashDuration)
+        dashHurtBox.enabled = true;
+        while (timer < smd.dashDuration && !canDeactivate)
         {
             float speed;
             if (timer < smd.dashEaseIn)
@@ -473,8 +508,19 @@ public class SkeletonMelee : EnemyInterface
             timer += Time.deltaTime;
             yield return null;
         }
+        dashHurtBox.enabled = false;
         rb.velocity = Vector3.zero;
         isDashing = false;
         doneWandering = true;
+    }
+
+    public void StartSwingTimer() {
+        if (!isSwinging) StartCoroutine(SwingTimer());
+    }
+
+    private IEnumerator SwingTimer() {
+        isSwinging = true;
+        yield return new WaitForSeconds(swingTime);
+        isSwinging = false;
     }
 }

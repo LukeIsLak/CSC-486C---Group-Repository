@@ -113,7 +113,7 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour where TEntit
         });
     }
 
-    public void AddTransitionWithFillers(TState from, TState to, Func<TEntity, bool> initialCondition, Func<TEntity, bool> finalCondition, params (TState, Func<TEntity, bool>)[] fillers) {
+    public void AddTransitionWithFillers(TState from, TState to, Func<TEntity, bool> initialCondition, params (TState, Func<TEntity, bool>)[] fillers) {
         uint[] fillerBits = new uint[fillers.Length];
         for (int i = 0; i < fillers.Length; i++) {
             fillerBits[i] = GetOrAssignFillerBit(fillers[i].Item1);
@@ -140,7 +140,7 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour where TEntit
         }
 
         AddTransition(fillers[fillers.Length - 1].Item1, to, entity => {
-            if ((entity.GetFillerFlag() & fillerBits[fillers.Length - 1]) != 0 && finalCondition(entity)) {
+            if ((entity.GetFillerFlag() & fillerBits[fillers.Length - 1]) != 0 && fillers[fillers.Length - 1].Item2(entity)) {
                 entity.SetFillerFlag(entity.GetFillerFlag() & ~fillerBits[fillers.Length - 1]);
                 return true;
             }

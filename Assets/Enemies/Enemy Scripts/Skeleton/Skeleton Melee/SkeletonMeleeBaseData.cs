@@ -23,6 +23,7 @@ public class SkeletonMeleeBaseData : BaseEnemyData
 
     [Header("Skeleton Spawn Values")]
     public float wallSpawnChance = 0.5f;
+    public float wallOffset = 0.5f;
 
     [Header("Skeleton Agro Values")]
     public float minAgroToAttackTime = 0.2f;
@@ -34,7 +35,10 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float dashDuration = 1f;
     public float dashSpeed = 15f;
 
+    public float swingDistance = 3.5f;
+
     [Header("Misc. Values")]
+    public AnimationClip swingAttack;
     public AnimationClip activate;
     public AnimationClip deactivate;
     public float activateOffset = 0.3f;
