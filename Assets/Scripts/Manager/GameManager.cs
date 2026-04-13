@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("working");
             UIManager.instance.ShowTutorialUI();
             inputSchemeSetter.SetInputToInteractableUI();
+            tutorialWanted =  false;
         } else {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
