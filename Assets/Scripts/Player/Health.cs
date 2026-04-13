@@ -60,6 +60,9 @@ public class Health : MonoBehaviour
     public void AddShield(int amount)
     {
         shield += amount;
+        if (shield >= 3){
+            shield = 3;
+        }
         NotifyShieldChanged();
     }
 
