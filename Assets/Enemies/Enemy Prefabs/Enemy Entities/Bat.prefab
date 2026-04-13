@@ -76,9 +76,11 @@ MonoBehaviour:
   curHealth: 0
   moveSpeed: 0
   speedModifier: 1
+  isDead: 0
   hasDamageOverTime: 0
   hasFreeze: 0
   hasKnockback: 0
+  isStopped: 0
   numDamageOverTime: 0
   numFreeze: 0
   currentDoTNames: []
@@ -186,7 +188,7 @@ MonoBehaviour:
       Data2: 1342107268
       Data3: -661144645
       Data4: -1077074637
-    Path: event:/PlayerEvents/SoftSurfaceStrike
+    Path: event:/PlayerEvents/PlayerAttacks/SoftSurfaceStrike
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
