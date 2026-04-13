@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameEventRaiser : MonoBehaviour
 {
     public GameEvent gameEvent;
+    public Animator animator;
     public bool onStart;
 
     void Start()
@@ -14,6 +15,7 @@ public class GameEventRaiser : MonoBehaviour
     
     public void Raise()
     {
+        animator.CrossFadeInFixedTime("Pull", 0.2f);
         gameEvent.Raise();
     }
 }
