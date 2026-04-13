@@ -17,6 +17,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Hover enter on " + gameObject.name);
         TooltipRoutine = StartCoroutine(ShowTooltipDelay());
     }
 
@@ -30,6 +31,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private IEnumerator ShowTooltipDelay()
     {
         yield return new WaitForSeconds(delay);
+        Debug.Log("Tooltip instance is: " + TooltipUI.instance);
         TooltipUI.instance?.Show(header, content);
     }
 }
