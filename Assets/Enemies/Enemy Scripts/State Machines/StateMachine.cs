@@ -112,6 +112,41 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour where TEntit
             return false;
         });
     }
+
+    public void AddTransitionWithFillers(TState from, TState to, Func<TEntity, bool> initialCondition, Func<TEntity, bool> finalCondition, params (TState, Func<TEntity, bool>)[] fillers) {
+        uint[] fillerBits = new uint[fillers.Length];
+        for (int i = 0; i < fillers.Length; i++) {
+            fillerBits[i] = GetOrAssignFillerBit(fillers[i].Item1);
+        }
+
+        AddTransition(from, fillers[0].Item1, entity => {
+            if (initialCondition(entity)) {
+                entity.SetFillerFlag(entity.GetFillerFlag() | fillerBits[0]);
+                return true;
+            }
+            return false;
+        });
+
+        for (int i = 0; i < fillers.Length - 1; i++) {
+            int current = i;
+            int next = i + 1;
+            AddTransition(fillers[current].Item1, fillers[next].Item1, entity => {
+                if ((entity.GetFillerFlag() & fillerBits[current]) != 0 && fillers[current].Item2(entity)) {
+                    entity.SetFillerFlag((entity.GetFillerFlag() & ~fillerBits[current]) | fillerBits[next]);
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        AddTransition(fillers[fillers.Length - 1].Item1, to, entity => {
+            if ((entity.GetFillerFlag() & fillerBits[fillers.Length - 1]) != 0 && finalCondition(entity)) {
+                entity.SetFillerFlag(entity.GetFillerFlag() & ~fillerBits[fillers.Length - 1]);
+                return true;
+            }
+            return false;
+        });
+    }
     
 
     public void AddEnterState(TState state, Action<TEntity> f) {

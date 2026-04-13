@@ -219,7 +219,7 @@ MonoBehaviour:
   enemyEffects: {fileID: 0}
   rs: {fileID: 0}
   curHealth: 0
-  moveSpeed: 0
+  moveSpeed: 10
   speedModifier: 1
   isDead: 0
   hasDamageOverTime: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   hasBlood: 1
   bloodDuration: 1
   bloodEffect: {fileID: 0}
-  anim: {fileID: 0}
+  anim: {fileID: 1017910098}
   rb: {fileID: 0}
   smd: {fileID: 11400000, guid: ff085b78b42f5924d944fa83880b487f, type: 2}
   playerTransform: {fileID: 0}
@@ -247,9 +247,13 @@ MonoBehaviour:
   canWander: 0
   doneWandering: 0
   isAgro: 0
+  canAttack: 0
   isMoving: 0
   checkPlayerPath: 1
-  isArmoured: 1
+  canActivate: 1
+  doneActivate: 0
+  canDeactivate: 1
+  doneDeactivate: 0
   wallMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -295,7 +299,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1

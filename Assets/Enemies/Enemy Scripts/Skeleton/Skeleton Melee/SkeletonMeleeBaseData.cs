@@ -30,6 +30,10 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float checkPlayerUpdate = 0.1f;
     public float detectionRadius = 10f;
 
+    public float dashEaseIn = 0.25f;
+    public float dashDuration = 1f;
+    public float dashSpeed = 15f;
+
     [Header("Misc. Values")]
     public AnimationClip activate;
     public AnimationClip deactivate;

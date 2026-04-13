@@ -86,6 +86,18 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         /*DashAttack*/
         AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.AgroApproach, DashToAgroApproach);
         AddTransition(SkeletonMeleeStates.DashAttack, SkeletonMeleeStates.Idle, DashToIdle);
+        
+        // AddMultTransitionWithFiller(
+        //     SkeletonMeleeStates.DashAttack, 
+        //     SkeletonMeleeStates.AgroApproach, 
+        //     SkeletonMeleeStates.DeactivateFiller,
+        //     StopDashAttack,
+        //     ActivateFillerCond
+        // );
+
+        AddEnterState(SkeletonMeleeStates.DashAttack, EnterDashAttackState);
+        // AddWhileState(SkeletonMeleeStates.DashAttack, WhileDashAttackState);
+        AddExitState(SkeletonMeleeStates.DashAttack, ExitDashAttackState);
 
         /*SwingAttack*/    
         AddTransition(SkeletonMeleeStates.SwingAttack, SkeletonMeleeStates.AgroApproach, SwingToAgroApproach);
@@ -167,7 +179,7 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public bool AgroApproachToDash(SkeletonMelee sm) {
-        return false;
+        return sm.canAttack == true && sm.nextAttack != null && sm.nextAttack.Value == SkeletonMeleeAttacks.AttackDash;
     }
 
     public bool AgroApproachToSwing(SkeletonMelee sm) {
@@ -179,11 +191,11 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     }
 
     public bool DashToAgroApproach(SkeletonMelee sm) {
-        return false;
+        return sm.isDashing == false && Vector3.Distance(sm.gameObject.transform.position, sm.playerTransform.position) <= sm.smd.detectionRadius;
     }
 
     public bool DashToIdle(SkeletonMelee sm) {
-        return false;
+        return sm.isDashing == false && Vector3.Distance(sm.gameObject.transform.position, sm.playerTransform.position) > sm.smd.detectionRadius;
     }
 
     public bool SwingToAgroApproach(SkeletonMelee sm) {
@@ -240,6 +252,11 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
         sm.nma.SetDestination(sm.playerTransform.position);
     }
 
+    public void EnterDashAttackState(SkeletonMelee sm) {
+        sm.anim.SetBool("dashAttack", true);
+        sm.StartDashThrough(sm.playerTransform.position);
+    }
+
     public void EnterActivateFiller(SkeletonMelee sm) {
         sm.anim.SetTrigger("activate");
         sm.StartActivate();
@@ -283,6 +300,13 @@ public class SkeletonMeleeStateMachine : StateMachine<SkeletonMelee, SkeletonMel
     public void ExitActivateFiller(SkeletonMelee sm) {
         sm.anim.SetBool("isActive", true);
         sm.doneActivate = false;
+    }
+
+    public void ExitDashAttackState(SkeletonMelee sm) {
+        sm.anim.SetBool("dashAttack", false);
+        sm.anim.SetTrigger("dashAttack");
+        sm.rb.velocity = Vector3.zero;
+        sm.isDashing = false;
     }
 
     public void ExitDeactivateFiller(SkeletonMelee sm) {

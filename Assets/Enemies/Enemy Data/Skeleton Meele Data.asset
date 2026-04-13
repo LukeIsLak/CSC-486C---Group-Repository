@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skeleton Meele Data
   m_EditorClassIdentifier: 
   baseHealth: 0
-  baseMoveSpeed: 0
+  baseMoveSpeed: 5
   damage: 0
   freezeMult: 1.5
   moveSpeed: 3
@@ -29,3 +29,13 @@ MonoBehaviour:
   neighbourRadius: 5
   neighbourStopRadius: 2
   wallSpawnChance: 1
+  minAgroToAttackTime: 0.2
+  maxAgroToAttackTime: 0.7
+  checkPlayerUpdate: 0.1
+  detectionRadius: 10
+  activate: {fileID: 7400000, guid: 0780a9269a20f394fb388f73b141e7f0, type: 2}
+  deactivate: {fileID: 7400000, guid: 36def2087afa1eb42920c8de59fd267c, type: 2}
+  activateOffset: 0.3
+  minIdleDuration: 0.2
+  maxIdleDuration: 0.7
+  wanderRadius: 5

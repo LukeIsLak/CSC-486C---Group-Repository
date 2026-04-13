@@ -29,6 +29,9 @@ public class SkeletonMelee : EnemyInterface
 
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
+
+    public bool isDashing           = false;
+    private Vector3 dashDirection;
     
     public bool canActivate         = true;
     public bool doneActivate        = false;
@@ -51,8 +54,8 @@ public class SkeletonMelee : EnemyInterface
 
     void Awake() {
         weightedAttacks = new List<SkeletonMeleeWeightedAttacks> {
-            new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackDash, 1f, () => true),
-            new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackSwing, 2f, () => true)
+            new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackDash, 1f, () => true)//,
+            // new SkeletonMeleeWeightedAttacks(SkeletonMeleeAttacks.AttackSwing, 2f, () => true)
         };
 
         initialize();
@@ -344,6 +347,20 @@ public class SkeletonMelee : EnemyInterface
     /****************************************************/
 
 
+    /****************************************************/
+    /*            Beginning of Collision Methods        */
+    /****************************************************/
+
+    private void OnCollisionEnter(Collision other) {
+        if (isDashing && ((1 << other.gameObject.layer) & wallMask.value) != 0) {
+            canDeactivate = true;
+        }
+    }
+
+    /****************************************************/
+    /*              End of Collision Methods            */
+    /****************************************************/
+
 
     /****************************************************/
     /*             Beginning of State Methods           */
@@ -432,5 +449,32 @@ public class SkeletonMelee : EnemyInterface
         yield return new WaitForSeconds(UnityEngine.Random.Range(smd.minIdleDuration, smd.maxIdleDuration));
         isIdle = false;
         canWander = true;
+    }
+
+    public void StartDashThrough(Vector3 target) {
+        isDashing = true;
+        Vector3 dir = (target - transform.position);
+        dir.y = 0f;
+        dashDirection = dir.normalized;
+        StartCoroutine(DashCoroutine());
+    }
+
+    private IEnumerator DashCoroutine() {
+        float timer = 0f;
+        while (timer < smd.dashDuration)
+        {
+            float speed;
+            if (timer < smd.dashEaseIn)
+                speed = Mathf.Lerp(0f, smd.dashSpeed, timer / smd.dashEaseIn);
+            else
+                speed = smd.dashSpeed;
+
+            rb.velocity = dashDirection * speed;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        rb.velocity = Vector3.zero;
+        isDashing = false;
+        doneWandering = true;
     }
 }
