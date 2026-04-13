@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7903295440452963499}
   - component: {fileID: 563350084876671430}
   - component: {fileID: 4745250017721926587}
-  - component: {fileID: 6933832573868888725}
+  - component: {fileID: -3732633790925761257}
   m_Layer: 0
   m_Name: BrambleTrap
   m_TagString: Untagged
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &6933832573868888725
+--- !u!114 &-3732633790925761257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowAmount: 5
-  damage: 5
+  damage: 2
   ttl: 5
-  effect1: {fileID: 11400000, guid: 988cf5a043f134002b69a88ec6ecb5db, type: 2}
+  DoT: {fileID: 11400000, guid: 988cf5a043f134002b69a88ec6ecb5db, type: 2}
+  stopEffect: {fileID: 11400000, guid: f5edba82d71344b12bb280df2c7df83a, type: 2}

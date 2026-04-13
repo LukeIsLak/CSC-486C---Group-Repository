@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DungeonRoomScript : MonoBehaviour
@@ -12,6 +13,7 @@ public class DungeonRoomScript : MonoBehaviour
     public RoomShape roomShapeData;
     public int roomBaseShapeIndex; // Not the ideal way but it's quick and easy.
     public bool isTrapRoom;        // set by dungeon manager
+    private GameObject baseShape;
     
     private RoomShapeVariant variant;
     public void Awake()
@@ -25,13 +27,14 @@ public class DungeonRoomScript : MonoBehaviour
         int r = randomContext.NextInt(roomShapeData.possibleRooms.Count);
         
         variant = roomShapeData.possibleRooms[r];
-        Instantiate(variant.baseShapes[roomBaseShapeIndex], transform);
+        baseShape = Instantiate(variant.baseShapes[roomBaseShapeIndex], transform);
     }
 
     public void Initialize()
     {
         AddToRoomCountEvent.Raise();
         InitByType();
+        PlaceDecorations();
     }
 
     public void InitByType()
@@ -61,5 +64,15 @@ public class DungeonRoomScript : MonoBehaviour
         if (variant.regularObjects.Count == 0) return;
         int r = randomContext.NextInt(variant.regularObjects.Count);
         Instantiate(variant.regularObjects[r], transform);
+    }
+
+    private void PlaceDecorations()
+    {
+        List<GameObject> set = variant.decorationSets[roomBaseShapeIndex];
+        if (set.Count == 0) return;
+        int r = randomContext.NextInt(set.Count + 1);
+        // Chance for no decoration
+        if (r == set.Count) return;
+        GameObject decor = Instantiate(set[r], baseShape.transform, false);  
     }
 }
