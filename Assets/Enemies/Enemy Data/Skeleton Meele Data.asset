@@ -29,10 +29,16 @@ MonoBehaviour:
   neighbourRadius: 5
   neighbourStopRadius: 2
   wallSpawnChance: 1
+  wallOffset: 0.5
   minAgroToAttackTime: 0.2
   maxAgroToAttackTime: 0.7
   checkPlayerUpdate: 0.1
   detectionRadius: 10
+  dashEaseIn: 0.25
+  dashDuration: 1
+  dashSpeed: 15
+  swingDistance: 3.5
+  swingAttack: {fileID: 7400000, guid: 207f997c155c9094ab801ab1a57b81ab, type: 2}
   activate: {fileID: 7400000, guid: 0780a9269a20f394fb388f73b141e7f0, type: 2}
   deactivate: {fileID: 7400000, guid: 36def2087afa1eb42920c8de59fd267c, type: 2}
   activateOffset: 0.3
