@@ -9,7 +9,10 @@ public class BrambleTrap : MonoBehaviour
 
     [SerializeField] private float ttl = 5f;
 
-    [SerializeField] private DamageOverTime effect1;
+    [SerializeField] private DamageOverTime DoT;
+
+    [SerializeField] private Stop stopEffect;
+
 
 
     void Start(){
@@ -23,7 +26,8 @@ public class BrambleTrap : MonoBehaviour
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
         if (enemy != null){
              if (!seenEnemies.Contains(enemy)) {
-                enemy.Hit(damage, effect1.type, effect1);
+                enemy.Hit(damage, DoT.type, DoT);
+                enemy.Hit(0, stopEffect.type, stopEffect);
                 seenEnemies.Add(enemy);
 
                 }
@@ -32,7 +36,8 @@ public class BrambleTrap : MonoBehaviour
                 enemy = other.GetComponentInParent<EnemyInterface>();
                 if (enemy != null){
                     if (!seenEnemies.Contains(enemy)) {
-                    enemy.Hit(damage, effect1.type, effect1);
+                    enemy.Hit(damage, DoT.type, DoT);
+                    enemy.Hit(0, stopEffect.type, stopEffect);
                     seenEnemies.Add(enemy);
 
                     }

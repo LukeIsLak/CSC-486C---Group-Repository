@@ -31,7 +31,7 @@ public class BrambleGrenade : MonoBehaviour
         if (!other.gameObject.CompareTag("Surface")) return;
         Vector3 hitPoint = other.contacts[0].point;
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, other.contacts[0].normal);
-        Instantiate(trapPrefab, hitPoint + Vector3.up * 0.02f, rotation);
+        Instantiate(trapPrefab, hitPoint + Vector3.up * 0.2f, rotation);
         Destroy(this.gameObject);
     }
 }
