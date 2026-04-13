@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class TooltipUI : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class TooltipUI : MonoBehaviour
     }
     public void Show(string header, string content)
     {
+        Debug.Log("Tooltip Show called: ");
         gameObject.SetActive(true);
         headerText.text = header;
         contentText.text = content;
