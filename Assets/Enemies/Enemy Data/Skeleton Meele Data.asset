@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4376a833543d74caddcaf26e9a3888, type: 3}
   m_Name: Skeleton Meele Data
   m_EditorClassIdentifier: 
-  baseHealth: 0
-  baseMoveSpeed: 5
-  damage: 0
+  baseHealth: 0.75
+  baseMoveSpeed: 2
+  damage: 10
   freezeMult: 1.5
   moveSpeed: 3
   navWeight: 1.5
