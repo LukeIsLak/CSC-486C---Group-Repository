@@ -7,6 +7,7 @@ TagManager:
   - TraversalManager
   - Enemy
   - Surface
+  - HasteEffect
   layers:
   - Default
   - TransparentFX

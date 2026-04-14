@@ -64,6 +64,7 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: ce5f1e5afdb1b4666ae89a412fc110ee, type: 3}
     m_SceneName: TitleScreen
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
+  SceneChanging: {fileID: 11400000, guid: 4224c17c5fd01fb40a8be570a9a6e1c4, type: 2}
   fadeTime: 0.3
   steps: 30
   image: {fileID: 6304263765960618055}

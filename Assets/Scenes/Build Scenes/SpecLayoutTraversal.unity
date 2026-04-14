@@ -200,6 +200,7 @@ MonoBehaviour:
   traversableLayoutPrefab: {fileID: 3586655531442555394, guid: 1a3e8eb0918fc8c42a15ac3694c9447f, type: 3}
   layoutData: {fileID: 11400000, guid: 62bdff812ed8e8d4c86c5895830b1258, type: 2}
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
+  diffScaling: {fileID: 11400000, guid: 85d548ea1711f3c48b702264a19bb777, type: 2}
   EnterEncounter: {fileID: 11400000, guid: bd10d720d2ae37d40beb52c0770b1d02, type: 2}
 --- !u!4 &1293395150
 Transform:
