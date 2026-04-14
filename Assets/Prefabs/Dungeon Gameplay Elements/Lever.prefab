@@ -96,6 +96,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8507034572839318580}
+        m_TargetAssemblyTypeName: LeverActivator, Assembly-CSharp
+        m_MethodName: SetAnimTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEnterRange:
     m_PersistentCalls:
       m_Calls: []
@@ -118,7 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: f84fd059baffaea4b819562c99eb63c9, type: 2}
-  animator: {fileID: 3474624905576489852}
   onStart: 0
 --- !u!135 &9124343091191462526
 SphereCollider:
@@ -1097,6 +1108,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fe33dadf973020342a8b1f682768ad33, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3474624905576489852}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fe33dadf973020342a8b1f682768ad33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8507034572839318580}
   m_SourcePrefab: {fileID: 100100000, guid: fe33dadf973020342a8b1f682768ad33, type: 3}
 --- !u!4 &494810654571023551 stripped
 Transform:
@@ -1118,7 +1132,7 @@ Animator:
   m_GameObject: {fileID: 979034873110500869}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 334e0d612bf6f034a88895d20523cbcc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2b91f528e757ef14d9a55f4a7b032d5f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1129,3 +1143,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8507034572839318580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979034873110500869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c4838e3d4aac548806c193bf243c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3474624905576489852}
