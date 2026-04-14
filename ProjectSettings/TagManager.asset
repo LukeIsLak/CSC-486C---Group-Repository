@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Surface
   - HasteEffect
+  - HinderEffect
   layers:
   - Default
   - TransparentFX
