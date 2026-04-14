@@ -29,7 +29,6 @@ public class EncounterDoorCreator : MonoBehaviour
         foreach (var pair in encIndxList)
         {
             GameObject curDoor = Instantiate(encounterDoorPrefab, doorParent);
-            Debug.Log(pair.index);
             curDoor.GetComponent<EncounterDoor>().Initialize(pair.encounter, pair.index, layoutData);
             encounterDoors.Add(curDoor);
         }

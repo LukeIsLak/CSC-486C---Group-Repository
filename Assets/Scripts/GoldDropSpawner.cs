@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 public class GoldDropSpawner : MonoBehaviour
 {
     public GameObject goldDropPrefab;
@@ -20,4 +17,10 @@ public class GoldDropSpawner : MonoBehaviour
     {
         isQuitting = true;
     }
+
+    public void DisableSpawn()
+    {
+        isQuitting = true;
+    }
+
 }

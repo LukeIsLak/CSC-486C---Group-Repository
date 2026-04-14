@@ -16,6 +16,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     [Header("Data")]
     public LayoutData   layoutData;
+    public GameEvent SceneChanging;
 
     public float fadeTime = 1;
     public float steps = 30f;
@@ -74,11 +75,14 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneSwapToMainMenu()
     {
+        SceneChanging.Raise();
         SceneManager.LoadScene(menuScene);
     }
 
     public void SceneSwapToMainMenuFade()
     {
+        SceneChanging.Raise();
+
         DoLoadWithFade(menuScene, true, true);
     }
 
@@ -89,7 +93,8 @@ public class SceneTransitionManager : MonoBehaviour
     **********************************/
     private void DoLoadWithFade(SceneField scene, bool fadeIn, bool fadeOut)
     {
-       StartCoroutine(LoadWithFade(scene, fadeIn, fadeOut)); 
+        SceneChanging.Raise();
+        StartCoroutine(LoadWithFade(scene, fadeIn, fadeOut)); 
     }  
 
     private IEnumerator LoadWithFade(SceneField scene, bool fadeIn, bool fadeOut)
