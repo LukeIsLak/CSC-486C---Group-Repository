@@ -19,9 +19,11 @@ MonoBehaviour:
   - {fileID: 3493508171927403358, guid: 5c10e4778e166544a9539d250aab6574, type: 3}
   - {fileID: 3493508171927403358, guid: f9f8b69ca202bcc4e812e4493a670918, type: 3}
   regularObjects:
-  - {fileID: 2487751994428010116, guid: ddca8e3060695d64c9c70f4f7f193519, type: 3}
+  - {fileID: 6571404116339657046, guid: c0b4b8e3d10164144bfa315c6c1f9e6a, type: 3}
+  - {fileID: 6436682110513870719, guid: bf1df17040042a445a928a252265af0d, type: 3}
   trapObjects:
-  - {fileID: 3452522053420848015, guid: b5eeb235c381df347bac091b740f3b10, type: 3}
+  - {fileID: 6571404116339657046, guid: c0b4b8e3d10164144bfa315c6c1f9e6a, type: 3}
+  - {fileID: 6436682110513870719, guid: bf1df17040042a445a928a252265af0d, type: 3}
   decorationSet0: []
   decorationSet1: []
   decorationSet2: []
