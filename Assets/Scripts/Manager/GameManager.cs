@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     public PlayerInventory inventory;
 
+    public bool tutorialWanted = false;
+
     private bool playerInitialized = false;
     private bool inventoryInitialized = false;
     private void Awake()
@@ -109,14 +111,21 @@ public class GameManager : MonoBehaviour
             return;
         }
         inputSchemeSetter.SetAllOff();
-        inputSchemeSetter.SetInputToCombat();
         InitializedPlayerOnce(player);
         InitializedPerScene(player);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         UIManager.instance.ShowCombatView();
         UIManager.instance.HideNodePanel();
         UIManager.instance.HideMerchantView();
+        if(tutorialWanted){
+            Debug.Log("working");
+            UIManager.instance.ShowTutorialUI();
+            inputSchemeSetter.SetInputToInteractableUI();
+            tutorialWanted = false;
+        } else {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            inputSchemeSetter.SetInputToCombat();
+        }
     }
     private void HandleMerchantScene() 
     {
@@ -126,5 +135,10 @@ public class GameManager : MonoBehaviour
         UIManager.instance.ShowMerchantView();
         UIManager.instance.HideCombatView();
         UIManager.instance.HideNodePanel();
+    }
+
+    //flips the tutorialWanted variable, triggers if the player changes the state of the check box on the title screen
+    public void onTutoialSelected(){
+        tutorialWanted = !tutorialWanted;
     }
 }

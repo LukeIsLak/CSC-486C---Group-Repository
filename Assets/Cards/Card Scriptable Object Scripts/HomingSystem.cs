@@ -8,9 +8,13 @@ public class HomingSystem : MonoBehaviour
     public float rotateSpeed = 20f;
     public float radius = 50f;
 
+    [SerializeField] private float avoidScalar = 2f;
+
 
     private Transform target;
     private bool isActive = false;
+
+    [SerializeField] LayerMask wallLayer;
 
     public HashSet<EnemyInterface> ignoreEnemies;
     // Initialize the homing projectile
@@ -36,6 +40,33 @@ public class HomingSystem : MonoBehaviour
         Vector3 direction = transform.forward;
         if (target != null)
         direction = (target.position - transform.position).normalized;
+
+
+        //Cast Ray to avoid walls
+        RaycastHit hit;
+        Vector3 avoidance = Vector3.zero;
+
+        Vector3 rayOrigin = transform.position + transform.position * 0.01f;
+        Vector3 lookRight = (transform.forward + transform.right).normalized;
+        Vector3 lookLeft = (transform.forward - transform.right).normalized;
+
+        if (Physics.Raycast(rayOrigin, transform.forward, out hit, avoidScalar, wallLayer))
+            {
+                avoidance += hit.normal;
+            }
+        
+        if (Physics.Raycast(rayOrigin, lookRight, out hit, avoidScalar, wallLayer))
+            {
+                avoidance += hit.normal;
+            }
+
+        if (Physics.Raycast(rayOrigin, lookLeft, out hit, avoidScalar, wallLayer))
+            {
+                avoidance += hit.normal;
+            }
+
+        direction = (direction + avoidance * 2f).normalized;
+        float turnMultiplier = (avoidance.magnitude > 0) ? 3f : 1f;
 
         //Make a quaternion in the desired direction and send the object that way.
         Quaternion targetRotation = Quaternion.LookRotation(direction);

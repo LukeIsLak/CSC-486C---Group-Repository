@@ -85,6 +85,9 @@ MonoBehaviour:
   numFreeze: 0
   currentDoTNames: []
   currentDoTTicks: 
+  hasBlood: 1
+  bloodDuration: 1
+  bloodEffect: {fileID: 1630225761089814724, guid: 00ad366def934eb49aa1733379e61a7f, type: 3}
   anim: {fileID: 4090313962949258712}
   rb: {fileID: 6990128973608440802}
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}

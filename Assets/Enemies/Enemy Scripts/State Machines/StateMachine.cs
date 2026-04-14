@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public abstract class StateMachine<TEntity, TState> : MonoBehaviour
+public abstract class StateMachine<TEntity, TState> : MonoBehaviour where TEntity : EnemyInterface
 {
+    
     public List<TEntity> entities;
+    private uint nextFillerBit = 1;
+
+    /*
+        XXX add comments lol
+    */
+
+    private Dictionary<TState, uint> fillerFlagMap = new();
 
     /*
         Transition lookup table is a dictionary which contains they following keys / values:
@@ -64,6 +72,15 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour
         }
     }
 
+    private uint GetOrAssignFillerBit(TState filler) {
+        if (!fillerFlagMap.TryGetValue(filler, out uint bit)) {
+            bit = nextFillerBit;
+            nextFillerBit <<= 1;
+            fillerFlagMap[filler] = bit;
+        }
+        return bit;
+    }
+
     public void AddTransition(TState from, TState to, Func<TEntity, bool> condition) {
         /*If no list currently exists for a state, create one*/
         if (!conditionLookup.TryGetValue(from, out var list)) {
@@ -73,6 +90,62 @@ public abstract class StateMachine<TEntity, TState> : MonoBehaviour
 
         /*Add transition to list*/
         list.Add((to, condition));
+    }
+
+    /*Explicit way to add filler transitions*/
+    public void AddTransitionWithFiller(TState from, TState to, TState filler, Func<TEntity, bool> condition, Func<TEntity, bool> conditionFiller) {
+        uint fillerBit = GetOrAssignFillerBit(filler);
+
+        AddTransition(from, filler, entity => {
+            if (condition(entity)) {
+                entity.SetFillerFlag(fillerBit);
+                return true;
+            }
+            return false;
+        });
+
+        AddTransition(filler, to, entity => {
+            if ((entity.GetFillerFlag() & fillerBit) != 0 && conditionFiller(entity)) {
+                entity.SetFillerFlag(entity.GetFillerFlag() & ~fillerBit);
+                return true;
+            }
+            return false;
+        });
+    }
+
+    public void AddTransitionWithFillers(TState from, TState to, Func<TEntity, bool> initialCondition, params (TState, Func<TEntity, bool>)[] fillers) {
+        uint[] fillerBits = new uint[fillers.Length];
+        for (int i = 0; i < fillers.Length; i++) {
+            fillerBits[i] = GetOrAssignFillerBit(fillers[i].Item1);
+        }
+
+        AddTransition(from, fillers[0].Item1, entity => {
+            if (initialCondition(entity)) {
+                entity.SetFillerFlag(entity.GetFillerFlag() | fillerBits[0]);
+                return true;
+            }
+            return false;
+        });
+
+        for (int i = 0; i < fillers.Length - 1; i++) {
+            int current = i;
+            int next = i + 1;
+            AddTransition(fillers[current].Item1, fillers[next].Item1, entity => {
+                if ((entity.GetFillerFlag() & fillerBits[current]) != 0 && fillers[current].Item2(entity)) {
+                    entity.SetFillerFlag((entity.GetFillerFlag() & ~fillerBits[current]) | fillerBits[next]);
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        AddTransition(fillers[fillers.Length - 1].Item1, to, entity => {
+            if ((entity.GetFillerFlag() & fillerBits[fillers.Length - 1]) != 0 && fillers[fillers.Length - 1].Item2(entity)) {
+                entity.SetFillerFlag(entity.GetFillerFlag() & ~fillerBits[fillers.Length - 1]);
+                return true;
+            }
+            return false;
+        });
     }
     
 

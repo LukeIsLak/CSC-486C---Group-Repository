@@ -1581,6 +1581,7 @@ GameObject:
   - component: {fileID: 7049989944152197481}
   - component: {fileID: 1211737530287194708}
   - component: {fileID: 5188300653492460636}
+  - component: {fileID: 841718258513028309}
   m_Layer: 5
   m_Name: Drag Handler
   m_TagString: Untagged
@@ -1628,7 +1629,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!114 &7049989944152197481
 MonoBehaviour:
@@ -1685,7 +1686,19 @@ MonoBehaviour:
   oldParent: {fileID: 0}
   hoveredDeck: {fileID: 0}
   hoveredTransform: {fileID: 0}
-  nodeTraversalUI: {fileID: 0}
+  nodeTraversalUI: {fileID: 4272331118414658542}
+--- !u!225 &841718258513028309
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208291393152060212}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &4948736479695209979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,6 +2446,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4320048347108535630}
   - {fileID: 1313126976421797905}
   - {fileID: 4085802976690171808}
   - {fileID: 6342401663451328523}
@@ -2440,7 +2454,6 @@ RectTransform:
   - {fileID: 1779100014798809398}
   - {fileID: 6334483969396425046}
   - {fileID: 2946792791567504718}
-  - {fileID: 4320048347108535630}
   m_Father: {fileID: 7425913369047184927}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

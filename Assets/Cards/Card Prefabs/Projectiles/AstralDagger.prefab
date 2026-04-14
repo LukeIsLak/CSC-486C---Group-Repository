@@ -139,6 +139,10 @@ MonoBehaviour:
   speed: 10
   rotateSpeed: 200
   radius: 50
+  avoidScalar: 2
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!136 &-6426606172183505859
 CapsuleCollider:
   m_ObjectHideFlags: 0

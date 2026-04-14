@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject combatPanel;
     [SerializeField] private StaminaUI staminaView;
     [SerializeField] private SetPlayerInputScheme inputScheme;
+    [SerializeField] private TutorialUI tutorialView;
+    
     [SerializeField] private DamageOverlayUI damageOverlay;
 
     // [SerializeField] private GameObject merchantPanel;
@@ -21,6 +25,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ShieldUI shieldUI;
     [SerializeField] private Animator swordAnimator;
     [SerializeField] private SwordAnimationEvent swordAnimationEvent;
+
+    [SerializeField] private GameObject modifierEffects;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -51,6 +57,16 @@ public class UIManager : MonoBehaviour
         HideInteract();
         HideNodePanel();
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        foreach (Transform child in modifierEffects.transform)
+        {
+            Image img = child.GetComponent<Image>();
+            if (img != null) img.enabled = false;
+        }
+    }
+
     public void BindPlayer(GameObject player)
     {
         var health = player.GetComponent<Health>();
@@ -143,6 +159,10 @@ public class UIManager : MonoBehaviour
     public void ShowChestUI(Acquirable cardData)
     {
         chestUI.ShowUI(cardData);
+    }
+
+    public void ShowTutorialUI(){
+        tutorialView.showTutorial();
     }
 }
     

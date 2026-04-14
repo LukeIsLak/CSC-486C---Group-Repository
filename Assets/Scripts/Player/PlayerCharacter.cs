@@ -18,6 +18,9 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private SwordHitBox hitBoxC;
     // for increaseing player damage
     public float attackMultiplier = 1.0f;
+    public int hasteCount = 0;
+    private Vector3 lastPosition;
+    public float movementSpeed;
 
     [Header("Dash")]
     [SerializeField] private float dashTime = 1.0f;
@@ -53,6 +56,8 @@ public class PlayerCharacter : MonoBehaviour
     public event System.Action<bool> OnDashNotify;
     private bool lastDashState = true;
 
+    private float baseAttackSpeed = 1f;
+    private float attackSpeedMultiplier = 1f;
     public float nextDashRemaining
     {
         get
@@ -76,6 +81,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         CheckChestInteractable();
         CheckDashStateForUI();
+        if (hasteCount > 0) UpdateMovementSpeed();
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -201,12 +207,12 @@ public class PlayerCharacter : MonoBehaviour
             yield return null;
         }
         if(runawayBullActive){
-            if(Physics.SphereCast(cam.transform.position, 3f,cam.transform.forward,out RaycastHit hit, 3f, enemyLayer)) {
-                //Debug.Log($"Hit: {hit.collider.name} ");
+            Collider[] hitColliders = Physics.OverlapSphere(cam.transform.position, 3f);
+            //Debug.Log($"Hit: {hit.collider.name} ");
 
-                var enemyComponent = hit.collider.GetComponentInParent<EnemyInterface>();
+            foreach (var hit in hitColliders) {
+                var enemyComponent = hit.GetComponent<Collider>().GetComponentInParent<EnemyInterface>();
                 if (enemyComponent != null) enemyComponent.Hit((playerController.speed / 5) * 30, StatusEffectType.Knockback); // need some numbers decided
-            
             }
         }
         isDashing = false;
@@ -320,26 +326,24 @@ public class PlayerCharacter : MonoBehaviour
         return attackDamage;
     }
 
-    public void AttackSpeedUp(float duration, float increaseSpeedMultiplier)
+    public void IncreaseAttackSpeed(float increaseSpeedMultiplier)
     {
-        if (increaseAttackSpeedRoutine != null) 
-        { 
-            StopCoroutine(increaseAttackSpeedRoutine);
-            swordAnimator.speed = 1f;
-        }
-        increaseAttackSpeedRoutine =StartCoroutine(SpeedUpAnimation(duration, increaseSpeedMultiplier));
-        
+        attackSpeedMultiplier *= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
+
     }
 
-    private IEnumerator SpeedUpAnimation(float duration, float increaseSpeedMultiplier)
+    public void DecreaseAttackSpeed(float increaseSpeedMultiplier)
     {
-        float originalSpeed = swordAnimator.speed;
+        attackSpeedMultiplier /= increaseSpeedMultiplier;
+        swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
+    }
 
-        swordAnimator.speed = originalSpeed * increaseSpeedMultiplier;
-
-        yield return new WaitForSeconds(duration);
-
-        swordAnimator.speed = originalSpeed;
-        increaseAttackSpeedRoutine = null;
+    private void UpdateMovementSpeed() 
+    {
+        float rawSpeed = (transform.position - lastPosition).magnitude / Time.deltaTime;
+        float ease = 0.2f;
+        movementSpeed = Mathf.Lerp(movementSpeed, rawSpeed, ease);
+        lastPosition = transform.position;
     }
 }
