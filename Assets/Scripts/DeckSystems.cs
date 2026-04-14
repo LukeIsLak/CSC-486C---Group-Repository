@@ -127,9 +127,7 @@ public class DeckSystems : MonoBehaviour
         shuffleExcHand();
 
         //redraw the hand
-        for (int i = 0; i < looplength; i++) {
-            drawCard();
-        }
+        StartCoroutine(drawMult(looplength));
     }
 
     /// <summary>
@@ -416,6 +414,14 @@ public class DeckSystems : MonoBehaviour
                 drawFlag = true;
                 StartCoroutine(newCardTimer());
             }
+        }
+    }
+
+    public IEnumerator drawMult(int looplength) {
+        for (int i = 0; i < looplength; i++) {
+            drawCard();
+            yield return new WaitForSeconds(0.3f);
+            NotifyHandContentsChanged();
         }
     }
 }

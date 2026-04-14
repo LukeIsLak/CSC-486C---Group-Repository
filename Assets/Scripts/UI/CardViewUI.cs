@@ -42,23 +42,26 @@ public class CardViewUI : MonoBehaviour
         }
     }
 
-    public void Init(CardInstance cardInstance, bool isGrayOut = false, System.Action onCardClick = null, bool buttonDisable = false)
+    public void Init(CardInstance cardInstance, bool isGrayOut = false, System.Action onCardClick = null, bool buttonDisable = false, bool drawnCard = false)
     {
-        card = cardInstance.cardData;    
-        cardImage.sprite = card.image;
-        if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
-        cardName.text = cardInstance.cardData.name;
-        cardDamage.text = cardInstance.cardData.effectValue.ToString();
-        cardDescription.text = cardInstance.cardData.descrption;
-        this.cardInstance = cardInstance;
+        if (drawnCard) StartCoroutine(cardIViewDelay(cardInstance, isGrayOut, onCardClick, buttonDisable));
+        else {
+            card = cardInstance.cardData;    
+            cardImage.sprite = card.image;
+            if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
+            cardName.text = cardInstance.cardData.name;
+            cardDamage.text = cardInstance.cardData.effectValue.ToString();
+            cardDescription.text = cardInstance.cardData.descrption;
+            this.cardInstance = cardInstance;
 
-        if(button != null)
-        {
-            button.onClick.RemoveAllListeners();
-            button.interactable = !buttonDisable;
-            if(onCardClick != null)
+            if(button != null)
             {
-                button.onClick.AddListener(() => onCardClick?.Invoke());
+                button.onClick.RemoveAllListeners();
+                button.interactable = !buttonDisable;
+                if(onCardClick != null)
+                {
+                    button.onClick.AddListener(() => onCardClick?.Invoke());
+                }
             }
         }
     }
@@ -73,6 +76,28 @@ public class CardViewUI : MonoBehaviour
         cardDamage.text = cardData.effectValue.ToString();
         cardDescription.text = cardData.descrption;
         cardInstance = null;
+
+        if(button != null)
+        {
+            button.onClick.RemoveAllListeners();
+            button.interactable = !buttonDisable;
+            if(onCardClick != null)
+            {
+                button.onClick.AddListener(() => onCardClick?.Invoke());
+            }
+        }
+    }
+
+    public IEnumerator cardIViewDelay (CardInstance cardInstance, bool isGrayOut = false, System.Action onCardClick = null, bool buttonDisable = false) {
+        anim.SetTrigger("getCard");
+        card = cardInstance.cardData;
+        this.cardInstance = cardInstance;
+        yield return new WaitForSeconds(drawEffect.length); 
+        cardImage.sprite = card.image;
+        if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
+        cardName.text = cardInstance.cardData.name;
+        cardDamage.text = cardInstance.cardData.effectValue.ToString();
+        cardDescription.text = cardInstance.cardData.descrption;
 
         if(button != null)
         {
