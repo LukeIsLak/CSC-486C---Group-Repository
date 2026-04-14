@@ -25,7 +25,8 @@ public class SpecTraversalManager : MonoBehaviour
         // Assume selected encounter is set properly.
         playerInventory.ClearBuffer();
         playerInventory.refreshCards();
-        diffScaling.scalingFraction = (layoutData.completedIndices.Count - 2) / (layoutData.depth - 2);
+        diffScaling.scalingFraction = (layoutData.completedIndices.Count - 2f) / (layoutData.depth - 2f);
+        Debug.Log("SETTING DIFF SCALING -- " + diffScaling.scalingFraction.ToString());
         EnterSelectedEncounter();
     }
 
