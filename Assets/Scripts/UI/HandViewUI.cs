@@ -204,7 +204,7 @@ public class HandViewUI : MonoBehaviour
         // Target position in used area (center, or adjust as needed)
         Vector2 targetPos = Vector2.zero;
 
-        float duration = deckSystems.delayamount - 0.02f; // seconds
+        float duration = deckSystems.delayamount; // seconds
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -214,6 +214,9 @@ public class HandViewUI : MonoBehaviour
             yield return null;
         }
         cardRect.anchoredPosition = targetPos;
+
+        // offset the animation
+        yield return new WaitForSeconds(0.2f);
 
         // Play use animation and destroy after
         cardView.PlayUseAndDestroy();

@@ -349,11 +349,11 @@ public class DeckSystems : MonoBehaviour
 
         if (value > 0.1f)
         {
-            ChangeHandIndex(1);
+            ChangeHandIndex(-1);
         }
         else if (value < -0.1f)
         {
-            ChangeHandIndex(-1);
+            ChangeHandIndex(1);
         }
     }
 

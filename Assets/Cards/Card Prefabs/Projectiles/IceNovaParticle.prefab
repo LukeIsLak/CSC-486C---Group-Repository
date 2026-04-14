@@ -1491,7 +1491,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -1090341370, guid: 2b6370e7fa912b24eaf0dc83cd676db6, type: 3}
+    - sprite: {fileID: 822792643, guid: 2b6370e7fa912b24eaf0dc83cd676db6, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4898,12 +4898,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1090341370, guid: 2b6370e7fa912b24eaf0dc83cd676db6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0715be3979d244fe692be5d64443d272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 0.5625}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
