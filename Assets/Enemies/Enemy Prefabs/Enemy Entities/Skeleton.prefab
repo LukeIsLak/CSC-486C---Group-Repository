@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 361387498288884685}
   - component: {fileID: 1234970899931857379}
   - component: {fileID: 2034398724549241429}
+  - component: {fileID: 1563274741519246562}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -145,6 +146,20 @@ MonoBehaviour:
     m_Bits: 1024
   currentState: 0
   dashHurtBox: {fileID: 5844208211211972123}
+--- !u!114 &1563274741519246562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279664425953171000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daeabfcab43abc841a7500e6247ffec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldDropPrefab: {fileID: 300120990534988418, guid: d2ad1c07fb6d3904ca6945de9ffe4d5a, type: 3}
+  amount: 15
 --- !u!1 &4831327252875266159
 GameObject:
   m_ObjectHideFlags: 0
