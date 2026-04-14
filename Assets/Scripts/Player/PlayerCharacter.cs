@@ -18,6 +18,9 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private SwordHitBox hitBoxC;
     // for increaseing player damage
     public float attackMultiplier = 1.0f;
+    public int hasteCount = 0;
+    private Vector3 lastPosition;
+    public float movementSpeed;
 
     [Header("Dash")]
     [SerializeField] private float dashTime = 1.0f;
@@ -78,6 +81,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         CheckChestInteractable();
         CheckDashStateForUI();
+        if (hasteCount > 0) UpdateMovementSpeed();
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -333,5 +337,13 @@ public class PlayerCharacter : MonoBehaviour
     {
         attackSpeedMultiplier /= increaseSpeedMultiplier;
         swordAnimator.speed = baseAttackSpeed * attackSpeedMultiplier;
+    }
+
+    private void UpdateMovementSpeed() 
+    {
+        float rawSpeed = (transform.position - lastPosition).magnitude / Time.deltaTime;
+        float ease = 0.2f;
+        movementSpeed = Mathf.Lerp(movementSpeed, rawSpeed, ease);
+        lastPosition = transform.position;
     }
 }
