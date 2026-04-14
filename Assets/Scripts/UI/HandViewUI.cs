@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ public class HandViewUI : MonoBehaviour
     [SerializeField] private CardViewUI cardViewPrefab;
     [SerializeField] private Dictionary<CardViewUI, Vector2> cardTargetPositions = new();
     [SerializeField] private RectTransform handLocation;
+    [SerializeField] private RectTransform usedCardArea;
 
     [Header("Card Fanning Visual Settings")]
     [SerializeField] private float totalFanAngle = 30f;
@@ -99,13 +101,15 @@ public class HandViewUI : MonoBehaviour
         for (int i = cards.Count - 1; i >= 0; i--)
         {
             var cardView = cards[i];
-            if (cardView.cardInstance == null || !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid))
+            if (!cardView.cardInstance.cleanup && !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid))
             {
                 cardTargetPositions.Remove(cardView);
-                Destroy(cardView.gameObject);
                 cards.RemoveAt(i);
+                MoveCardToUsedArea(cardView);
             }
         }
+
+        UpdateCardPosition();
 
         foreach (var instance in deckSystems.hand)
         {
@@ -172,5 +176,46 @@ public class HandViewUI : MonoBehaviour
             }
         }
         if (selectedCardTransform != null) selectedCardTransform.SetAsLastSibling();
+    }
+
+    public void MoveCardToUsedArea(CardViewUI cardView)
+    {
+        // Remove from hand UI
+        cards.Remove(cardView);
+        cardTargetPositions.Remove(cardView);
+
+        // Start lerp to used area and play animation after
+        StartCoroutine(LerpCardToUsedArea(cardView));
+    }
+
+    private IEnumerator LerpCardToUsedArea(CardViewUI cardView)
+    {
+        RectTransform cardRect = cardView.GetComponent<RectTransform>();
+        // Save the world position before changing parent
+        Vector3 worldPos = cardRect.position;
+
+        // Move to usedCardArea in hierarchy, but keep world position
+        cardView.transform.SetParent(usedCardArea, worldPositionStays: false);
+        cardRect.position = worldPos; // Restore world position so it doesn't jump
+
+        // Now get the new anchored position as the start position
+        Vector2 startPos = cardRect.anchoredPosition;
+
+        // Target position in used area (center, or adjust as needed)
+        Vector2 targetPos = Vector2.zero;
+
+        float duration = deckSystems.delayamount - 0.02f; // seconds
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            cardRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        cardRect.anchoredPosition = targetPos;
+
+        // Play use animation and destroy after
+        cardView.PlayUseAndDestroy();
     }
 }

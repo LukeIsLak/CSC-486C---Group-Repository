@@ -18,6 +18,8 @@ public class CardViewUI : MonoBehaviour
     public AnimationClip drawEffect;
     public AnimationClip useEffect;
 
+    private bool cleanup = false;
+
     public void Init(Cards cardData, bool isGrayOut = false, System.Action onCardClick = null, bool buttonDisable = false, bool drawnCard = false)
     {
         if (drawnCard) StartCoroutine(cardViewDelay(cardData, isGrayOut, onCardClick, buttonDisable));
@@ -46,7 +48,7 @@ public class CardViewUI : MonoBehaviour
     {
         if (drawnCard) StartCoroutine(cardIViewDelay(cardInstance, isGrayOut, onCardClick, buttonDisable));
         else {
-            card = cardInstance.cardData;    
+            card = cardInstance.cardData;
             cardImage.sprite = card.image;
             if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
             cardName.text = cardInstance.cardData.name;
@@ -67,9 +69,12 @@ public class CardViewUI : MonoBehaviour
     }
 
     public IEnumerator cardViewDelay(Cards cardData, bool isGrayOut = false, System.Action onCardClick = null, bool buttonDisable = false) {
-        anim.SetTrigger("getCard");
+        anim.enabled = true;
+        card = cardData;
+        anim.SetBool("getCard", true);
         yield return new WaitForSeconds(drawEffect.length);
-        card = cardData;    
+        anim.SetBool("doneGetCard", true);
+        anim.enabled = false;   
         cardImage.sprite = card.image;
         if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
         cardName.text = cardData.name;
@@ -89,10 +94,13 @@ public class CardViewUI : MonoBehaviour
     }
 
     public IEnumerator cardIViewDelay (CardInstance cardInstance, bool isGrayOut = false, System.Action onCardClick = null, bool buttonDisable = false) {
-        anim.SetTrigger("getCard");
+        anim.enabled = true;
+        anim.SetBool("getCard", true);
         card = cardInstance.cardData;
         this.cardInstance = cardInstance;
         yield return new WaitForSeconds(drawEffect.length); 
+        anim.SetBool("doneGetCard", true);
+        anim.enabled = false;
         cardImage.sprite = card.image;
         if(isGrayOut) cardImage.color = new Color32(176, 176, 176, 255);
         cardName.text = cardInstance.cardData.name;
@@ -108,5 +116,19 @@ public class CardViewUI : MonoBehaviour
                 button.onClick.AddListener(() => onCardClick?.Invoke());
             }
         }
+    }
+
+    public void PlayUseAndDestroy()
+    {
+        StartCoroutine(PlayUseAndDestroyCoroutine());
+    }
+
+    private IEnumerator PlayUseAndDestroyCoroutine()
+    {
+        anim.enabled = true;
+        anim.SetBool("useCard", true);
+        yield return new WaitForSeconds(useEffect.length);
+        anim.enabled = false;
+        Destroy(this.gameObject);
     }
 }
