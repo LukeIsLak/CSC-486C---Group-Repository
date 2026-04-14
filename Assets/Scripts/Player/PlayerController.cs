@@ -22,6 +22,14 @@ public class PlayerController : MonoBehaviour
     private float rotationX;
     private float verticalVelocity;
 
+    //Player Audio Variables
+    [SerializeField]
+    float footstepSpeed = 0.32f;
+    float timer = 0.0f;
+    public bool isMoving = false;
+    private FMOD.Studio.EventInstance footsteps;
+    
+
 
     private void Start()
     {
@@ -43,6 +51,15 @@ public class PlayerController : MonoBehaviour
         }
         verticalVelocity += gravity * Time.deltaTime;
         controller.Move(Vector3.up * verticalVelocity * Time.deltaTime);
+        if(controller.isGrounded && isMoving)
+        {
+            if (timer > footstepSpeed)
+            {
+                PlayFootstep();
+                timer = 0.0f;
+            }
+            timer += Time.deltaTime;
+        }
 
         Look();
     }
@@ -50,6 +67,13 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveDirection = context.ReadValue<Vector2>();
+        if(moveDirection != Vector2.zero)
+        {
+            isMoving = true;
+        } else
+        {
+            isMoving = false;
+        }
         //Debug.Log($"Move value: {moveDirection}");
     }
 
@@ -106,5 +130,15 @@ public class PlayerController : MonoBehaviour
         {
             PauseManager.instance?.Pause();
         }
+    }
+
+    //Audio Functions
+
+    private void PlayFootstep() 
+    {
+        footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMovements/PlayerWalk");
+        footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        footsteps.start();
+        footsteps.release();
     }
 }
