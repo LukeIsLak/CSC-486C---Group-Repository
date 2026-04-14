@@ -833,34 +833,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever Room
       objectReference: {fileID: 0}
-    - target: {fileID: 4713360288163438937, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4713360288163438937, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4713360288163438937, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1635983645}
-    - target: {fileID: 4713360288163438937, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4713360288163438937, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetAnimTrigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 4713360288163438937, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: LeverActivator, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4713360288163438937, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5188310367778011269, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -108
@@ -901,10 +873,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8238941795656405741, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 2b91f528e757ef14d9a55f4a7b032d5f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -912,9 +880,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4229785367325743822, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5762630737993672596, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1635983645}
   m_SourcePrefab: {fileID: 100100000, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
 --- !u!1001 &1179914064
 PrefabInstance:
@@ -1141,29 +1106,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa7f194004cc1584a9ab423201067489, type: 3}
---- !u!1 &1635983642 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5762630737993672596, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-  m_PrefabInstance: {fileID: 1103923372}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1635983644 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8238941795656405741, guid: ab9472997f2484b4798a9e29c916f17e, type: 3}
-  m_PrefabInstance: {fileID: 1103923372}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1635983645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635983642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23c4838e3d4aac548806c193bf243c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1635983644}
 --- !u!1 &1723856916
 GameObject:
   m_ObjectHideFlags: 0
