@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Particle_Fire
+      name: ElementParticles_JCD_20250206_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9c0dfc0df96d704788b447b2e9da37d
-      internalID: 1350213883
+      spriteID: 115a795e0b6a5e1459cf981dcc27391b
+      internalID: 1575493024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Particle_Water
+      name: ElementParticles_JCD_20250206_1
       rect:
         serializedVersion: 2
         x: 7
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 927725fa4a94887478c96bb871d0aead
-      internalID: -1069883867
+      spriteID: a4752eb41d328bf4f818436bf7ad6e76
+      internalID: 68567271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Particle_Blood
+      name: ElementParticles_JCD_20250206_2
       rect:
         serializedVersion: 2
         x: 13
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c0d88784d059814dbe7652ce4503455
-      internalID: -757389262
+      spriteID: 7d2302c20347e2e4ca9c9a90e68f8929
+      internalID: -1520404743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Particle_Ice
+      name: ElementParticles_JCD_20250206_3
       rect:
         serializedVersion: 2
         x: 19
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0027bcfd8a1443478af384f41c7e579
-      internalID: -1090341370
+      spriteID: a3601a3bb3990c14f9ab34be1eda8dee
+      internalID: 822792643
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Particle_Blood: -757389262
-      Particle_Fire: 1350213883
-      Particle_Ice: -1090341370
-      Particle_Water: -1069883867
+      ElementParticles_JCD_20250206_0: 1575493024
+      ElementParticles_JCD_20250206_1: 68567271
+      ElementParticles_JCD_20250206_2: -1520404743
+      ElementParticles_JCD_20250206_3: 822792643
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
