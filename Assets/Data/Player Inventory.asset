@@ -18,9 +18,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb78a43f0b68d4df4bf61e09efbbc613, type: 2}
   - {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
   - {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
-  currency: 53
+  currency: 19
   activeDeck: {fileID: 11400000, guid: eda48a0b12ddb0646b2fb379ccf35524, type: 2}
   bufferDeck: {fileID: 11400000, guid: af6ae8c60be40de4bba33629bf0fb223, type: 2}
   sideboardDeck: {fileID: 11400000, guid: 76889f6fc2b20e246b09716fddaeb2d1, type: 2}
-  nextUid: 14
-  amountRemovalTokens: 0
+  nextUid: 20
+  amountRemovalTokens: 5
