@@ -65,7 +65,7 @@ public class DungeonManager : MonoBehaviour
     {
         List<DungeonRoomScript> rooms = new List<DungeonRoomScript>(FindObjectsByType<DungeonRoomScript>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)); 
 
-        int trapRoomsToCreate = (int)(diffScale.trapRoomFraction * rooms.Count);
+        int trapRoomsToCreate = (int)(diffScale.GetTrapRoomFraction() * rooms.Count);
 
         for (int i = 0; i < trapRoomsToCreate; i++)
         {
