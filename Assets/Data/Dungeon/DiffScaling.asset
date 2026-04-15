@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DiffScaling
   m_EditorClassIdentifier: 
   scalingFraction: 0.14285715
-  minTrapRoomFraction: 0.5
+  minTrapRoomFraction: 0.2
   maxTrapRoomFraction: 0.7
-  minDungeonInterations: 6
-  maxDungeonInterations: 12
+  minDungeonInterations: 3
+  maxDungeonInterations: 7
