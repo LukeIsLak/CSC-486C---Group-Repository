@@ -160,7 +160,7 @@ public class DeckSystems : MonoBehaviour
                 }
             }
         }
-        NotifyHandContentsChanged();
+        // NotifyHandContentsChanged();
 
         return true;
     }
@@ -199,6 +199,7 @@ public class DeckSystems : MonoBehaviour
 
         //get selected card
         CardInstance curCard = hand[currentHandIndex];
+        
 
         // put card in discard, remove from hand and set the cards usabilty to false
         string cardname = hand[currentHandIndex].cardData.name;

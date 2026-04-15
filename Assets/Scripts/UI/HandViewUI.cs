@@ -18,7 +18,7 @@ public class HandViewUI : MonoBehaviour
     [SerializeField] private float selectedCardLift = 30f;
     [SerializeField] private float selectedScale = 1f;
 
-    private List<CardViewUI> cards = new();
+    public List<CardViewUI> cards = new();
     private DeckSystems deckSystems;
 
     void Awake() {
@@ -109,7 +109,7 @@ public class HandViewUI : MonoBehaviour
             if (!cardView.cardInstance.cleanup && !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid) && !cardView.cardInstance.useable)
             {
                 cardTargetPositions.Remove(cardView);
-                //cards.RemoveAt(i);
+                cards.RemoveAt(i);
                 MoveCardToUsedArea(cardView);
             }
         }

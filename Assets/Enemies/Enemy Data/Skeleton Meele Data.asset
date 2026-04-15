@@ -34,7 +34,7 @@ MonoBehaviour:
   minAgroToAttackTime: 0.2
   maxAgroToAttackTime: 0.7
   checkPlayerUpdate: 0.1
-  detectionRadius: 10
+  detectionRadius: 13
   dashEaseIn: 0.25
   dashDuration: 1
   dashSpeed: 15
