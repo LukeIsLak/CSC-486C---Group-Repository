@@ -13,6 +13,7 @@ public class SceneTransitionManager : MonoBehaviour
     public SceneField   lobbyScene;
     public SceneField   layoutScene;
     public SceneField   menuScene;
+    public SceneField   deathScene; 
 
     [Header("Data")]
     public LayoutData   layoutData;
@@ -24,6 +25,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     /* Added this back... Assuming it will be ever-present */
     public static SceneTransitionManager instance;
+    public bool isTransitioning = false;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -75,17 +77,19 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void SceneSwapToMainMenu()
     {
-        SceneChanging.Raise();
         SceneManager.LoadScene(menuScene);
+
     }
 
     public void SceneSwapToMainMenuFade()
     {
-        SceneChanging.Raise();
-
         DoLoadWithFade(menuScene, true, true);
     }
 
+    public void SceneSwapToDeath()
+    {
+        DoLoadWithFade(deathScene, true, true);
+    }
     
 
     /**********************************
@@ -93,7 +97,6 @@ public class SceneTransitionManager : MonoBehaviour
     **********************************/
     private void DoLoadWithFade(SceneField scene, bool fadeIn, bool fadeOut)
     {
-        SceneChanging.Raise();
         StartCoroutine(LoadWithFade(scene, fadeIn, fadeOut)); 
     }  
 
