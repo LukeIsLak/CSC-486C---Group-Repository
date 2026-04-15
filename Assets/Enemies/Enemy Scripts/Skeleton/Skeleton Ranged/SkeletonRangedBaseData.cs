@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 
-[CreateAssetMenu(menuName = "Enemy/Skeleton/Melee")]
-public class SkeletonMeleeBaseData : BaseEnemyData
+[CreateAssetMenu(menuName = "Enemy/Skeleton/Ranged")]
+public class SkeletonRangedBaseData : BaseEnemyData
 {
     public StudioEventEmitter audioEmitter;
     
@@ -34,15 +34,22 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float checkPlayerUpdate = 0.1f;
     public float detectionRadius = 10f;
 
-    public float dashEaseIn = 0.25f;
-    public float dashDuration = 1f;
-    public float dashSpeed = 15f;
-    public float dashDamage =  20f;
-
-    public float swingDistance = 3.5f;
     public float swingDamage = 10f;
+    public float swingDistance = 3.5f;
+
+    [Header("Ranged Attack")]
+    public GameObject boneProjectilePrefab;
+    public float throwSpeed = 15f;
+    public float throwArcHeight = 2f;
+    public float throwDelay = 0.4f;
+    public float throwDamage = 7.5f;
+
+    [Header("Ranged Behavior")]
+    public float preferredRange = 7f;
+    public float rangeTolerance = 1.5f;
 
     [Header("Misc. Values")]
+    public AnimationClip throwAttack;
     public AnimationClip swingAttack;
     public AnimationClip activate;
     public AnimationClip deactivate;
