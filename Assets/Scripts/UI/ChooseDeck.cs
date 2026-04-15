@@ -18,6 +18,11 @@ public class ChooseDeck : MonoBehaviour
         {
             CardViewUI cvUI = Instantiate(cardViewUIPrefab, contentLocation);
             cvUI.Init(card);
+            TooltipTrigger tooltipTrigger = cvUI.GetComponent<TooltipTrigger>();
+            if(tooltipTrigger != null)
+            {
+                tooltipTrigger.SetContent(card.name, card.descrption);
+            }
         }
     }
 

@@ -507,6 +507,7 @@ GameObject:
   - component: {fileID: -6247513457569756132}
   - component: {fileID: -9145859616583957764}
   - component: {fileID: 5155605438558803857}
+  - component: {fileID: 5624004231655685527}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -682,3 +683,18 @@ MonoBehaviour:
   activeDeck: {fileID: 11400000, guid: eda48a0b12ddb0646b2fb379ccf35524, type: 2}
   bufferDeck: {fileID: 11400000, guid: af6ae8c60be40de4bba33629bf0fb223, type: 2}
   sideboardDeck: {fileID: 11400000, guid: 76889f6fc2b20e246b09716fddaeb2d1, type: 2}
+--- !u!114 &5624004231655685527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296036545033250586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516f63b003948cf479a790976b7c3dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  delay: 0.5
