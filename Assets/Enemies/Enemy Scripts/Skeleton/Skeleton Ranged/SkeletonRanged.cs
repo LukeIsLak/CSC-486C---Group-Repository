@@ -333,7 +333,7 @@ public class SkeletonRanged : EnemyInterface
 
     public void UpdateAgroApproach() {
         UpdatePlayerPath();
-        UpdateMove();
+        if (isMoving) UpdateMove();
     }
 
     public Vector3 PickWanderSpotOnNavMesh(Vector3 origin, float radius, int maxAttempts = 12) {
@@ -429,7 +429,22 @@ public class SkeletonRanged : EnemyInterface
 
     private IEnumerator DelayCalcPlayerPath() {
         checkPlayerPath = false;
-        nma.SetDestination(playerTransform.position);
+        float distToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        if (distToPlayer > srd.preferredRange + srd.rangeTolerance) {
+            isMoving = true;
+            nma.SetDestination(playerTransform.position);
+        }
+        else if (distToPlayer < srd.preferredRange - srd.rangeTolerance) {
+            isMoving = true;
+            Vector3 dirAway = (transform.position - playerTransform.position).normalized;
+            Vector3 targetPos = transform.position + dirAway * (srd.preferredRange - distToPlayer + 0.5f);
+            nma.SetDestination(targetPos);
+            UpdateMove();
+        }
+        else {
+            isMoving = false;
+            nma.ResetPath();
+        }
         yield return new WaitForSeconds(srd.checkPlayerUpdate);
         checkPlayerPath = true;
     }

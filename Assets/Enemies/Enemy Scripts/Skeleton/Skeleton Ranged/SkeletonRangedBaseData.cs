@@ -44,6 +44,10 @@ public class SkeletonRangedBaseData : BaseEnemyData
     public float throwDelay = 0.4f;
     public float throwDamage = 7.5f;
 
+    [Header("Ranged Behavior")]
+    public float preferredRange = 7f;
+    public float rangeTolerance = 1.5f;
+
     [Header("Misc. Values")]
     public AnimationClip throwAttack;
     public AnimationClip swingAttack;

@@ -34,13 +34,10 @@ MonoBehaviour:
   minAgroToAttackTime: 0.2
   maxAgroToAttackTime: 0.7
   checkPlayerUpdate: 0.1
-  detectionRadius: 10
-  dashEaseIn: 0.25
-  dashDuration: 1
-  dashSpeed: 15
-  dashDamage: 20
+  detectionRadius: 20
+  swingDamage: 10
   swingDistance: 3.5
-  boneProjectilePrefab: {fileID: 0}
+  boneProjectilePrefab: {fileID: 2551708806297768597, guid: 912c811a2eea8c94abff097e5dccd27c, type: 3}
   throwSpeed: 15
   throwArcHeight: 2
   throwDelay: 0.4
