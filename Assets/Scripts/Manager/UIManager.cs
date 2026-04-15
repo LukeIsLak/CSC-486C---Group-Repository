@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
     public void ShowInventoryView() 
     {
         isInventoryOpen = true;
-        HideCombatView();
+        // HideCombatView();
         inputScheme.SetInputToInteractableUI();
         inventoryView.ShowInventory(); 
     }
