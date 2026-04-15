@@ -40,6 +40,7 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float dashDamage =  20f;
 
     public float swingDistance = 3.5f;
+    public float swingDamage = 10f;
 
     [Header("Misc. Values")]
     public AnimationClip swingAttack;

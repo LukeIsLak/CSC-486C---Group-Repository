@@ -386,7 +386,8 @@ public class SkeletonMelee : EnemyInterface
     private void OnTriggerEnter(Collider other) {
         if (isAttacking && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
-            if (h != null) h.TakeDamage(smd.dashDamage);
+            float d = (isDashing) ? smd.dashDamage : smd.swingDamage;
+            if (h != null) h.TakeDamage(d);
             isAttacking = false;
         }
     }

@@ -34,14 +34,18 @@ public class SkeletonRangedBaseData : BaseEnemyData
     public float checkPlayerUpdate = 0.1f;
     public float detectionRadius = 10f;
 
-    public float dashEaseIn = 0.25f;
-    public float dashDuration = 1f;
-    public float dashSpeed = 15f;
-    public float dashDamage =  20f;
-
+    public float swingDamage = 10f;
     public float swingDistance = 3.5f;
 
+    [Header("Ranged Attack")]
+    public GameObject boneProjectilePrefab;
+    public float throwSpeed = 15f;
+    public float throwArcHeight = 2f;
+    public float throwDelay = 0.4f;
+    public float throwDamage = 7.5f;
+
     [Header("Misc. Values")]
+    public AnimationClip throwAttack;
     public AnimationClip swingAttack;
     public AnimationClip activate;
     public AnimationClip deactivate;

@@ -31,8 +31,7 @@ public class SkeletonRanged : EnemyInterface
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
 
-    public bool isDashing           = false;
-    private Vector3 dashDirection;
+    public bool isThrowing          = false;
 
     public bool isSwinging          = false;
     public float swingTime;
@@ -43,6 +42,10 @@ public class SkeletonRanged : EnemyInterface
     public bool doneDeactivate      = false;
 
     public LayerMask wallMask;
+
+    [Header("Ranged Attack")]
+    public Transform throwStart;
+    public float throwTime;
 
     [Header("Misc. Variables")]
     private float activateTime;
@@ -59,7 +62,7 @@ public class SkeletonRanged : EnemyInterface
     void Awake() {
         weightedAttacks = new List<SkeletonRangedWeightedAttacks> {
             new SkeletonRangedWeightedAttacks(
-                SkeletonRangedAttacks.AttackDash, 1f, () => true
+                SkeletonRangedAttacks.AttackThrow, 1f, () => true
             ),
             new SkeletonRangedWeightedAttacks(
                 SkeletonRangedAttacks.AttackSwing, 5f, () => {
@@ -84,6 +87,7 @@ public class SkeletonRanged : EnemyInterface
         env_srsm.AddEntity(this);
 
         swingTime = srd.swingAttack.length;
+        throwTime = srd.throwAttack.length;
         activateTime = srd.activate.length;
         deactivateTime = srd.deactivate.length;
 
@@ -374,18 +378,10 @@ public class SkeletonRanged : EnemyInterface
     /****************************************************/
     /*            Beginning of Collision Methods        */
     /****************************************************/
-
-    private void OnCollisionEnter(Collision other) {
-        if (isDashing && ((1 << other.gameObject.layer) & wallMask.value) != 0) {
-            canDeactivate = true;
-            rb.velocity = Vector3.zero;
-        }
-    }
-
     private void OnTriggerEnter(Collider other) {
         if (isAttacking && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
-            if (h != null) h.TakeDamage(srd.dashDamage);
+            if (h != null) h.TakeDamage(srd.swingDamage);
             isAttacking = false;
         }
     }
@@ -484,35 +480,6 @@ public class SkeletonRanged : EnemyInterface
         canWander = true;
     }
 
-    public void StartDashThrough(Vector3 target) {
-        isDashing = true;
-        Vector3 dir = (target - transform.position);
-        dir.y = 0f;
-        dashDirection = dir.normalized;
-        StartCoroutine(DashCoroutine());
-    }
-
-    private IEnumerator DashCoroutine() {
-        float timer = 0f;
-        dashHurtBox.enabled = true;
-        while (timer < srd.dashDuration && !canDeactivate)
-        {
-            float speed;
-            if (timer < srd.dashEaseIn)
-                speed = Mathf.Lerp(0f, srd.dashSpeed, timer / srd.dashEaseIn);
-            else
-                speed = srd.dashSpeed;
-
-            rb.velocity = dashDirection * speed;
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        dashHurtBox.enabled = false;
-        rb.velocity = Vector3.zero;
-        isDashing = false;
-        doneWandering = true;
-    }
-
     public void StartSwingTimer() {
         if (!isSwinging) StartCoroutine(SwingTimer());
     }
@@ -521,5 +488,27 @@ public class SkeletonRanged : EnemyInterface
         isSwinging = true;
         yield return new WaitForSeconds(swingTime);
         isSwinging = false;
+    }
+
+    public void StartThrowThrough(Vector3 target) {
+        if (!isThrowing) StartCoroutine(ThrowRoutine(target));
+    }
+
+    private IEnumerator ThrowRoutine(Vector3 target) {
+        isThrowing = true;
+        yield return new WaitForSeconds(srd.throwDelay);
+
+        if (srd.boneProjectilePrefab != null && throwStart != null)
+        {
+            GameObject proj = Instantiate(srd.boneProjectilePrefab, throwStart.position, Quaternion.identity);
+            SkeletonRangedBone bone = proj.GetComponent<SkeletonRangedBone>();
+            if (bone != null) {
+                bone.speed = srd.throwSpeed;
+                bone.damage = srd.throwDamage;
+                bone.LaunchArc(target, srd.throwArcHeight);
+            }
+        }
+        yield return new WaitForSeconds(throwTime - srd.throwDelay);
+        isThrowing = false;
     }
 }

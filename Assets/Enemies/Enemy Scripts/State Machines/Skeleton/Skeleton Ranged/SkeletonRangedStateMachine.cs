@@ -15,7 +15,7 @@ public struct SkeletonRangedWeightedAttacks {
 }
 
 public enum SkeletonRangedAttacks {
-    AttackDash,
+    AttackThrow,
     AttackSwing
 }
 
@@ -26,7 +26,7 @@ public enum SkeletonRangedStates {
     Idle,
     Wander,
     AgroApproach,
-    DashAttack,
+    ThrowAttack,
     SwingAttack,
 
     ActivateFiller,       // FILLER STATE
@@ -75,7 +75,7 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
         AddExitState(SkeletonRangedStates.Wander, ExitWanderState);
 
         /*AgroApproach*/
-        AddTransition(SkeletonRangedStates.AgroApproach, SkeletonRangedStates.DashAttack, AgroApproachToDash);
+        AddTransition(SkeletonRangedStates.AgroApproach, SkeletonRangedStates.ThrowAttack, AgroApproachToThrow);
         AddTransition(SkeletonRangedStates.AgroApproach, SkeletonRangedStates.SwingAttack, AgroApproachToSwing);
         AddTransition(SkeletonRangedStates.AgroApproach, SkeletonRangedStates.Idle, AgroApproachToIdle);
 
@@ -83,23 +83,13 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
         AddWhileState(SkeletonRangedStates.AgroApproach, WhileAgroApproachState);
         AddExitState(SkeletonRangedStates.AgroApproach, ExitAgroApproachState);
 
-        /*DashAttack*/
-        AddTransition(SkeletonRangedStates.DashAttack, SkeletonRangedStates.AgroApproach, DashToAgroApproach);
-        AddTransition(SkeletonRangedStates.DashAttack, SkeletonRangedStates.Idle, DashToIdle);
-        
-        AddTransitionWithFillers(
-            SkeletonRangedStates.DashAttack, 
-            SkeletonRangedStates.Idle, 
-            DashCancel,
-            new (SkeletonRangedStates, Func<SkeletonRanged, bool>)[] {
-                (SkeletonRangedStates.DeactivateFiller, DeactivateFillerCond),
-                (SkeletonRangedStates.ActivateFiller, ActivateFillerCond)
-            }
-        );
+        /*ThrowAttack*/
+        AddTransition(SkeletonRangedStates.ThrowAttack, SkeletonRangedStates.AgroApproach, ThrowToAgroApproach);
+        AddTransition(SkeletonRangedStates.ThrowAttack, SkeletonRangedStates.Idle, ThrowToIdle);
 
-        AddEnterState(SkeletonRangedStates.DashAttack, EnterDashAttackState);
-        // AddWhileState(SkeletonRangedStates.DashAttack, WhileDashAttackState);
-        AddExitState(SkeletonRangedStates.DashAttack, ExitDashAttackState);
+        AddEnterState(SkeletonRangedStates.ThrowAttack, EnterThrowAttackState);
+        // AddWhileState(SkeletonRangedStates.ThrowAttack, WhileThrowAttackState);
+        AddExitState(SkeletonRangedStates.ThrowAttack, ExitThrowAttackState);
 
         /*SwingAttack*/    
         AddTransition(SkeletonRangedStates.SwingAttack, SkeletonRangedStates.AgroApproach, SwingToAgroApproach);
@@ -183,8 +173,8 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
         return Vector3.Distance(sr.gameObject.transform.position, sr.playerTransform.position) <= sr.srd.detectionRadius;
     }
 
-    public bool AgroApproachToDash(SkeletonRanged sr) {
-        return sr.canAttack && sr.nextAttack != null && sr.nextAttack.Value == SkeletonRangedAttacks.AttackDash;
+    public bool AgroApproachToThrow(SkeletonRanged sr) {
+        return sr.canAttack && sr.nextAttack != null && sr.nextAttack.Value == SkeletonRangedAttacks.AttackThrow;
     }
 
     public bool AgroApproachToSwing(SkeletonRanged sr) {
@@ -195,12 +185,12 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
         return Vector3.Distance(sr.gameObject.transform.position, sr.playerTransform.position) > sr.srd.detectionRadius;
     }
 
-    public bool DashToAgroApproach(SkeletonRanged sr) {
-        return !sr.isDashing && Vector3.Distance(sr.gameObject.transform.position, sr.playerTransform.position) <= sr.srd.detectionRadius;
+    public bool ThrowToAgroApproach(SkeletonRanged sr) {
+        return !sr.isThrowing && Vector3.Distance(sr.gameObject.transform.position, sr.playerTransform.position) <= sr.srd.detectionRadius;
     }
 
-    public bool DashToIdle(SkeletonRanged sr) {
-        return !sr.isDashing && Vector3.Distance(sr.gameObject.transform.position, sr.playerTransform.position) > sr.srd.detectionRadius;
+    public bool ThrowToIdle(SkeletonRanged sr) {
+        return !sr.isThrowing && Vector3.Distance(sr.gameObject.transform.position, sr.playerTransform.position) > sr.srd.detectionRadius;
     }
 
     public bool SwingToAgroApproach(SkeletonRanged sr) {
@@ -219,7 +209,7 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
         return sr.doneDeactivate;
     }
 
-    public bool DashCancel(SkeletonRanged sr) {
+    public bool ThrowCancel(SkeletonRanged sr) {
         return sr.canDeactivate;
     }
 
@@ -242,16 +232,16 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
         sr.StartIdleDuration();
     }
 
-    public void EnterWanderState(SkeletonRanged sm) {
+    public void EnterWanderState(SkeletonRanged sr) {
         sr.canWander = false;
         sr.doneWandering = false;
         sr.isMoving = true;
         sr.anim.SetBool("isMoving", sr.isMoving);
-        Vector3 wanderTarget = sr.PickWanderSpotOnNavMesh(transform.position, sr.smd.wanderRadius); // Adjust radius as needed
+        Vector3 wanderTarget = sr.PickWanderSpotOnNavMesh(transform.position, sr.srd.wanderRadius); // Adjust radius as needed
         sr.nma.SetDestination(wanderTarget);
     }
 
-    public void EnterAgroApproachState(SkeletonRanged sm) {
+    public void EnterAgroApproachState(SkeletonRanged sr) {
         sr.isAgro = true;
         sr.isMoving = true;
         sr.checkPlayerPath = true;
@@ -261,25 +251,25 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
         sr.nma.SetDestination(sr.playerTransform.position);
     }
 
-    public void EnterDashAttackState(SkeletonRanged sm) {
+    public void EnterThrowAttackState(SkeletonRanged sr) {
         sr.isAttacking = true;
-        sr.anim.SetBool("dashAttack", true);
-        sr.StartDashThrough(sr.playerTransform.position);
+        sr.anim.SetBool("throwAttack", true);
+        sr.StartThrowThrough(sr.playerTransform.position);
     }
 
-    public void EnterSwingAttackState(SkeletonRanged sm) {
+    public void EnterSwingAttackState(SkeletonRanged sr) {
         sr.isAttacking = true;
         sr.anim.SetBool("normalAttack", true);
         sr.StartSwingTimer();
     }
 
-    public void EnterActivateFiller(SkeletonRanged sm) {
+    public void EnterActivateFiller(SkeletonRanged sr) {
         sr.anim.SetBool("isActive", true);
         sr.anim.SetTrigger("activate");
         sr.StartActivate();
     }
 
-    public void EnterDeactivateFiller(SkeletonRanged sm) {
+    public void EnterDeactivateFiller(SkeletonRanged sr) {
         sr.anim.SetBool("isActive", false);
         sr.anim.SetTrigger("deactivate");
         sr.StartDeactivate();
@@ -289,12 +279,12 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
     /*   While State Functions    */
     /******************************/
 
-    public void WhileWanderState(SkeletonRanged sm) {
+    public void WhileWanderState(SkeletonRanged sr) {
         sr.UpdateWander();
         sr.CheckWanderDone();
     }
 
-    public void WhileAgroApproachState(SkeletonRanged sm) {
+    public void WhileAgroApproachState(SkeletonRanged sr) {
         sr.UpdateAgroApproach();
         sr.nma.nextPosition = sr.gameObject.transform.position;
     }
@@ -303,40 +293,39 @@ public class SkeletonRangedStateMachine : StateMachine<SkeletonRanged, SkeletonR
     /*   Leave State Functions    */
     /******************************/
 
-    public void ExitSpawnWallState(SkeletonRanged sm) {
+    public void ExitSpawnWallState(SkeletonRanged sr) {
         sr.canDeactivate = false;
         sr.GetOffWall();
     }
 
-    public void ExitWanderState(SkeletonRanged sm) {
+    public void ExitWanderState(SkeletonRanged sr) {
         sr.doneWandering = false;
         sr.canWander = false;
     }
 
-    public void ExitAgroApproachState(SkeletonRanged sm) {
+    public void ExitAgroApproachState(SkeletonRanged sr) {
         sr.isAgro = false;
     }
 
-    public void ExitDashAttackState(SkeletonRanged sm) {
+    public void ExitThrowAttackState(SkeletonRanged sr) {
         sr.isAttacking = false;
-        sr.rb.velocity = Vector3.zero;
-        sr.isDashing = false;
-        sr.anim.SetBool("dashAttack", false);
+        sr.isThrowing = false;
+        sr.anim.SetBool("throwAttack", false);
         sr.anim.SetTrigger("doneAttack");
     }
 
-    public void ExitSwingAttack(SkeletonRanged sm) {
+    public void ExitSwingAttack(SkeletonRanged sr) {
         sr.isAttacking = false;
         sr.anim.SetBool("normalAttack", false);
         sr.anim.SetTrigger("doneAttack");
     }
 
-    public void ExitActivateFiller(SkeletonRanged sm) {
+    public void ExitActivateFiller(SkeletonRanged sr) {
         sr.doneActivate = false;
         sr.anim.SetBool("isActive", true);
     }
 
-    public void ExitDeactivateFiller(SkeletonRanged sm) {
+    public void ExitDeactivateFiller(SkeletonRanged sr) {
         sr.canDeactivate = false;
         sr.doneDeactivate = false;
     }
