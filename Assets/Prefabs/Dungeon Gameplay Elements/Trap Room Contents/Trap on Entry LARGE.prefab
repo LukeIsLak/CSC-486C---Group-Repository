@@ -282,7 +282,10 @@ MonoBehaviour:
   possibleWaves:
   - {fileID: 11400000, guid: 31884332833d4bc4c98452e4ec0d916e, type: 2}
   - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
-  possibleWavesWeights: 0100000002000000
+  - {fileID: 11400000, guid: afd0acc0a6f7608448b20d1e0f92243c, type: 2}
+  - {fileID: 11400000, guid: 6a5449116e5fd884e95aabab44004b66, type: 2}
+  - {fileID: 11400000, guid: 01de0d3524925dc4d8750f6f9905b18d, type: 2}
+  possibleWavesWeights: 0a000000140000000a0000000300000007000000
   waves: []
   spawnPoints:
   - {fileID: 8103054933748855330}
