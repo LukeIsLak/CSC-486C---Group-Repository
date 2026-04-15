@@ -193,7 +193,7 @@ MonoBehaviour:
       Data2: 1342107268
       Data3: -661144645
       Data4: -1077074637
-    Path: event:/PlayerEvents/SoftSurfaceStrike
+    Path: event:/PlayerEvents/PlayerAttacks/SoftSurfaceStrike
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
