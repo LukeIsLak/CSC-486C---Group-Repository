@@ -508,6 +508,7 @@ GameObject:
   - component: {fileID: -9145859616583957764}
   - component: {fileID: 5155605438558803857}
   - component: {fileID: 1161687241155759699}
+  - component: {fileID: 423128664022321407}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -592,6 +593,7 @@ MonoBehaviour:
     cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   cardName: {fileID: 1068099308660765868}
   cardImage: {fileID: 7678787111606987049}
@@ -682,6 +684,7 @@ MonoBehaviour:
     cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   activeDeck: {fileID: 11400000, guid: eda48a0b12ddb0646b2fb379ccf35524, type: 2}
   bufferDeck: {fileID: 11400000, guid: af6ae8c60be40de4bba33629bf0fb223, type: 2}
@@ -707,3 +710,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &423128664022321407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296036545033250586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516f63b003948cf479a790976b7c3dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  delay: 0.5
