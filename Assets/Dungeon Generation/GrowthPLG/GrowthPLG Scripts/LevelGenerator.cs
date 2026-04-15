@@ -384,7 +384,7 @@ public class LevelGenerator : MonoBehaviour
         // Make remaining available special rooms non-special
         for (int i = availableSpecials.Count - 1; i >= 0; i--)
         {
-            // availableSpecials[i].SetIsSpecial(false);
+            availableSpecials[i].SetIsSpecial(false);
             availableSpecials.RemoveAt(i);
         }
         
