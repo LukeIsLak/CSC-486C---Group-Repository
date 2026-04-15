@@ -135,3 +135,7 @@ MonoBehaviour:
   speed: 5
   rotateSpeed: 200
   radius: 50
+  avoidScalar: 2
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512

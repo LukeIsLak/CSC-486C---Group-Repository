@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyInterface : MonoBehaviour
 {
 
+    private uint fillerFlag = 0;
+
     [Header("Enemy Interface - Base Variables")]
     public CharacterData playerData;
     public BaseEnemyData enemyData;
@@ -29,6 +31,11 @@ public class EnemyInterface : MonoBehaviour
     public List<string> currentDoTNames  = new List<string>();
     public List<int> currentDoTTicks     = new List<int>();
 
+    [Header("Enemy Interface - Enemy Effects")]
+    public bool hasBlood = true;
+    public float bloodDuration = 1.0f;
+    public GameObject bloodEffect;
+
     public void Awake() {
         initialize();
     }
@@ -51,10 +58,14 @@ public class EnemyInterface : MonoBehaviour
         if (curHealth <= 0) KillEnemy();
     }
 
+    public uint GetFillerFlag() { return fillerFlag; }
+    public void SetFillerFlag(uint val) { fillerFlag = val; }
+
     /*This has the intention of being overwritten in extended classes*/
     public virtual void Hit(float damage, StatusEffectType status = StatusEffectType.None, StatusEffects? statusEffectData = null, Vector3? knockbackOrigin = null) {
         if (curHealth <= 0) return;
         if (curHealth > 0) TakeDamage(damage);
+        if (status == StatusEffectType.None && hasBlood) StartCoroutine(AddBlood());
 
         switch (status) {
             case StatusEffectType.DamageOverTime:
@@ -104,11 +115,13 @@ public class EnemyInterface : MonoBehaviour
 
         if (data.hasBurstPart) {
             particleInstanceBurst = Instantiate(data.burstPart, transform.position, Quaternion.identity, transform);
+            particleInstanceBurst.GetComponent<ParticleFollowTransform>().target = transform;
             psB = particleInstanceBurst.GetComponent<ParticleSystem>();
         }
 
         if (data.hasOngoingPart) {
             particleInstanceOngoing = Instantiate(data.ongoingPart, transform.position, Quaternion.identity, transform);
+            particleInstanceOngoing.GetComponent<ParticleFollowTransform>().target = transform;
             psO = particleInstanceOngoing.GetComponent<ParticleSystem>();
         }
         for (int i = 0; i < currentDoTTicks[index] || isDead; i++) {
@@ -201,5 +214,21 @@ public class EnemyInterface : MonoBehaviour
 
     /****************************************************/
     /*              End Of Status Methods               */
+    /****************************************************/
+
+
+
+    /****************************************************/
+    /*               Beginning Of Effects               */
+    /****************************************************/
+
+    private IEnumerator AddBlood() {
+        GameObject blood = GameObject.Instantiate(bloodEffect, transform.position, Quaternion.identity, this.transform);
+        yield return new WaitForSeconds(bloodDuration);
+        Destroy(blood);
+    }
+
+    /****************************************************/
+    /*                 End Of Effects                   */
     /****************************************************/
 }

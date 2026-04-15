@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HandViewUI : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private CardViewUI cardViewPrefab;
+    [SerializeField] private Dictionary<CardViewUI, Vector2> cardTargetPositions = new();
     [SerializeField] private RectTransform handLocation;
+    [SerializeField] private RectTransform usedCardArea;
 
     [Header("Card Fanning Visual Settings")]
     [SerializeField] private float totalFanAngle = 30f;
@@ -15,6 +19,11 @@ public class HandViewUI : MonoBehaviour
 
     private List<CardViewUI> cards = new();
     private DeckSystems deckSystems;
+
+    void Awake() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
     private void OnEnable()
     {
         Hook(deckSystems);
@@ -24,6 +33,21 @@ public class HandViewUI : MonoBehaviour
     private void OnDisable()
     {
         Unhook(deckSystems);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        DeleteAllCardUI();
+    }
+
+    private void DeleteAllCardUI()
+    {
+        for (int i = cards.Count - 1; i >= 0; i--)
+        {
+            cardTargetPositions.Remove(cards[i]);
+            Destroy(cards[i].gameObject);
+        }
+        cards.Clear();
     }
 
     public void BindDeckSystem(DeckSystems d)
@@ -52,23 +76,50 @@ public class HandViewUI : MonoBehaviour
             deckSystems.OnHandContentsChanged -= RefreshHand;
         }
     }
+
+    private void Update()
+    {
+        float lerpSpeed = 10f;
+        foreach (var card in cards)
+        {
+            if (card == null) continue;
+            RectTransform cardTransform = card.GetComponent<RectTransform>();
+            if (cardTargetPositions.TryGetValue(card, out Vector2 targetPos))
+            {
+                cardTransform.anchoredPosition = Vector2.Lerp(
+                    cardTransform.anchoredPosition,
+                    targetPos,
+                    Time.deltaTime * lerpSpeed
+                );
+            }
+        }
+    }
+
     // When hand contents change, rebuild the UI list to match the data.
     private void RefreshHand()
     {
-        // Destroy all existing UI card gameObjects.
-        foreach (var card in cards)
+        for (int i = cards.Count - 1; i >= 0; i--)
         {
-            Destroy(card.gameObject);
+            var cardView = cards[i];
+            if (!cardView.cardInstance.cleanup && !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid))
+            {
+                cardTargetPositions.Remove(cardView);
+                cards.RemoveAt(i);
+                MoveCardToUsedArea(cardView);
+            }
         }
-        cards.Clear();
 
+        UpdateCardPosition();
 
-        // Create the UI for each card instance in hand 
-        foreach(var instance in deckSystems.hand)
+        foreach (var instance in deckSystems.hand)
         {
-            CardViewUI card = Instantiate(cardViewPrefab, handLocation);
-            card.Init(instance.cardData);
-            cards.Add(card);
+            bool alreadyHasUI = cards.Exists(cv => cv.cardInstance.uid == instance.uid);
+            if (!alreadyHasUI)
+            {
+                CardViewUI card = Instantiate(cardViewPrefab, handLocation);
+                card.Init(instance, drawnCard: true);
+                cards.Add(card);
+            }
         }
 
         // update the card fanning after rebuilt the UI
@@ -98,10 +149,11 @@ public class HandViewUI : MonoBehaviour
 
         RectTransform selectedCardTransform = null;
 
-        for (int i = 0; i < cardCount; i++)
+        for (int i = cardCount - 1; i >= 0; i--)
         {
+            int displayIndex = cardCount - 1 - i;
             // Calculate the angle of this card
-            float angleDeg = startingCardAngle + (angleStep * i);
+            float angleDeg = startingCardAngle + (angleStep * displayIndex);
             float angleRad = angleDeg * Mathf.Deg2Rad;
 
             // Get the card position on the circle arc 
@@ -109,18 +161,64 @@ public class HandViewUI : MonoBehaviour
             float y = radius * Mathf.Cos(angleRad) - radius;
 
             RectTransform cardTransform = cards[i].GetComponent<RectTransform>();
-            // set order of the card
-            cardTransform.SetSiblingIndex(i);
-            cardTransform.anchoredPosition = new Vector2(x, y);
+            cardTransform.SetSiblingIndex(displayIndex);
+
+            // Store the target position
+            cardTargetPositions[cards[i]] = new Vector2(x, y);
+
             cardTransform.localRotation = Quaternion.Euler(0, 0, -angleDeg);
 
             if (i == deckSystems.currentHandIndex)
             {
-                cardTransform.anchoredPosition += Vector2.up * selectedCardLift;
+                cardTargetPositions[cards[i]] += Vector2.up * selectedCardLift;
                 cardTransform.localRotation = Quaternion.identity;
                 selectedCardTransform = cardTransform;
             }
         }
         if (selectedCardTransform != null) selectedCardTransform.SetAsLastSibling();
+    }
+
+    public void MoveCardToUsedArea(CardViewUI cardView)
+    {
+        // Remove from hand UI
+        cards.Remove(cardView);
+        cardTargetPositions.Remove(cardView);
+
+        // Start lerp to used area and play animation after
+        StartCoroutine(LerpCardToUsedArea(cardView));
+    }
+
+    private IEnumerator LerpCardToUsedArea(CardViewUI cardView)
+    {
+        RectTransform cardRect = cardView.GetComponent<RectTransform>();
+        // Save the world position before changing parent
+        Vector3 worldPos = cardRect.position;
+
+        // Move to usedCardArea in hierarchy, but keep world position
+        cardView.transform.SetParent(usedCardArea, worldPositionStays: false);
+        cardRect.position = worldPos; // Restore world position so it doesn't jump
+
+        // Now get the new anchored position as the start position
+        Vector2 startPos = cardRect.anchoredPosition;
+
+        // Target position in used area (center, or adjust as needed)
+        Vector2 targetPos = Vector2.zero;
+
+        float duration = deckSystems.delayamount; // seconds
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            cardRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        cardRect.anchoredPosition = targetPos;
+
+        // offset the animation
+        yield return new WaitForSeconds(0.2f);
+
+        // Play use animation and destroy after
+        cardView.PlayUseAndDestroy();
     }
 }

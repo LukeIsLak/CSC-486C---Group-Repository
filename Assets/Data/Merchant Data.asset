@@ -12,10 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5955d1057313f4299590ecf47e38bc, type: 3}
   m_Name: Merchant Data
   m_EditorClassIdentifier: 
-  dialogue: Let's make a deal.
+  openerOptions:
+  - Let's make a deal.
+  - See anything you like?
+  - Goblin has the wares.
+  successOptions:
+  - Better in your hands than mine.
+  - No refunds!
+  - Thanks for the business.
+  failOptions:
+  - Come back when you're a little richer.
+  - Not enough gold, stranger.
+  - You are too poor!
   wares:
-  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
-  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
-  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
-  - {fileID: 11400000, guid: 6f88f0274bada924198ab7db37cf1c5c, type: 2}
-  - {fileID: 11400000, guid: cbcaa3033429aec40851a7f371f49fd0, type: 2}
+  - {fileID: 11400000, guid: 997daeece4119dc4abdf8a50a7ce20e1, type: 2}
+  - {fileID: 11400000, guid: 1af43996aaea0dc4b84542084dc1e020, type: 2}
+  - {fileID: 11400000, guid: 95b77f181281d2c48920326168c8de2a, type: 2}
+  - {fileID: 11400000, guid: bc55f9f447079854d92572be1ab3ede5, type: 2}
+  - {fileID: 11400000, guid: 9e2e0904a6fa5124591135c7d9d6e148, type: 2}

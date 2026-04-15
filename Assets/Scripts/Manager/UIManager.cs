@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ShieldUI shieldUI;
     [SerializeField] private Animator swordAnimator;
     [SerializeField] private SwordAnimationEvent swordAnimationEvent;
+
+    [SerializeField] private GameObject modifierEffects;
     public bool isInventoryOpen {  get; private set; }
 
     private PlayerInput playerInput;
@@ -53,6 +57,16 @@ public class UIManager : MonoBehaviour
         HideInteract();
         HideNodePanel();
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        foreach (Transform child in modifierEffects.transform)
+        {
+            Image img = child.GetComponent<Image>();
+            if (img != null) img.enabled = false;
+        }
+    }
+
     public void BindPlayer(GameObject player)
     {
         var health = player.GetComponent<Health>();
@@ -92,7 +106,7 @@ public class UIManager : MonoBehaviour
     public void ShowInventoryView() 
     {
         isInventoryOpen = true;
-        HideCombatView();
+        // HideCombatView();
         inputScheme.SetInputToInteractableUI();
         inventoryView.ShowInventory(); 
     }

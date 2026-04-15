@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibleRooms:
   - {fileID: 11400000, guid: 2d82879b380861c48861d323c9f6f448, type: 2}
+  - {fileID: 11400000, guid: 92d793b0502b16d4eaee3bdbbc35430e, type: 2}
+  - {fileID: 11400000, guid: ab450bde737a5894eb404a2ec1e1cd52, type: 2}
+  - {fileID: 11400000, guid: e3e02e3fb2b8d6d40adf43227400c2b0, type: 2}
