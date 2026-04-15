@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 793d1dd16c9fd2e4abde4d88da77598d, type: 3}
-  m_Name: FlashBangOfRats
+  m_Name: Mixed
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 8633630617670396899, guid: 22fae4a37b4305f4390b7879197a9c0c, type: 3}
-  enemyTypes: 01000000
-  enemyCounts: 1e000000
-  spawnDelay: 0.1
+  - {fileID: 1279664425953171000, guid: bb0370bfcbcff944ab6fc5d044e38fcc, type: 3}
+  enemyTypes: 0100000002000000
+  enemyCounts: 0500000002000000
+  spawnDelay: 1
   orderedSpawn: 1
