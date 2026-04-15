@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,10 @@ public class HandViewUI : MonoBehaviour
     private void OnDisable()
     {
         Unhook(deckSystems);
+        foreach (Transform child in usedCardArea)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -101,10 +106,10 @@ public class HandViewUI : MonoBehaviour
         for (int i = cards.Count - 1; i >= 0; i--)
         {
             var cardView = cards[i];
-            if (!cardView.cardInstance.cleanup && !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid))
+            if (!cardView.cardInstance.cleanup && !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid) && !cardView.cardInstance.useable)
             {
                 cardTargetPositions.Remove(cardView);
-                cards.RemoveAt(i);
+                //cards.RemoveAt(i);
                 MoveCardToUsedArea(cardView);
             }
         }
@@ -221,4 +226,5 @@ public class HandViewUI : MonoBehaviour
         // Play use animation and destroy after
         cardView.PlayUseAndDestroy();
     }
+
 }

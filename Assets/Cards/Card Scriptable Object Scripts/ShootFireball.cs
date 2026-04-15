@@ -10,7 +10,7 @@ public class ShootFireball : MonoBehaviour
     [SerializeField] private DamageOverTime effect;
     private bool hasImpact = false;
 
-
+    public GameObject explosionEffect;
     private float dmg;
     private Vector3 dir; 
 
@@ -20,6 +20,8 @@ public class ShootFireball : MonoBehaviour
     public void Init(Vector3 direct, Fireball card){
         //Needs a direction and damage amount
         dir = direct.normalized;
+        projspeed = card.projspeed;
+        dmgradius = card.dmgradius;
         dmg = card.dmg;
     }
 
@@ -64,6 +66,8 @@ public class ShootFireball : MonoBehaviour
             }
         }
 
+        GameObject explosion = Instantiate(explosionEffect);
+        explosion.transform.position = this.transform.position;
         Destroy(this.gameObject);
     }
 

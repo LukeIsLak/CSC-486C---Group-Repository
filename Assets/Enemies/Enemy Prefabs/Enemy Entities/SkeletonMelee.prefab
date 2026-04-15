@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
-  enemyData: {fileID: 0}
-  enemyEffects: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: ff085b78b42f5924d944fa83880b487f, type: 2}
+  enemyEffects: {fileID: 11400000, guid: 58d05ecfd9339f9459ff4c224ffe57be, type: 2}
   rs: {fileID: 0}
   curHealth: 0
   moveSpeed: 10

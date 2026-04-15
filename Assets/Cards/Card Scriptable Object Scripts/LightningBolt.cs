@@ -47,7 +47,7 @@ public class LightningBolt : Cards
             }
             else 
             {
-                enemy = enemy.GetComponentInParent<EnemyInterface>();
+                enemy = hit.collider.GetComponentInParent<EnemyInterface>();
                 enemy.Hit(damage);
             }
         }

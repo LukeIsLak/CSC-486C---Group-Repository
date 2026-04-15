@@ -8,6 +8,7 @@ public class ShootFrostNova : MonoBehaviour
     [SerializeField] private float dmgradius = 1f;
     [SerializeField] private float ttl = 5f;
     [SerializeField] private Freeze effect;
+    public GameObject explosionEffect;
     private bool hasImpact = false;
 
 
@@ -17,9 +18,11 @@ public class ShootFrostNova : MonoBehaviour
     [SerializeField] private LayerMask enemylayer;
 
 
-    public void Init(Vector3 direct, Cards card){
+    public void Init(Vector3 direct, FrostNova card){
         //Needs a direction and damage amount
         dir = direct.normalized;
+        projspeed = card.projspeed;
+        dmgradius = card.dmgradius;
     }
 
     void Start(){
@@ -64,6 +67,8 @@ public class ShootFrostNova : MonoBehaviour
             }
         }
 
+        GameObject explosion = Instantiate(explosionEffect);
+        explosion.transform.position = transform.position;
         Destroy(this.gameObject);
     }
 

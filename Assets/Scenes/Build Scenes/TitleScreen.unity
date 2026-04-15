@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 7388339163064505207, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: usedCardArea
+      value: 
+      objectReference: {fileID: 1865106619}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1598,7 +1602,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1662778299}
   - component: {fileID: 1662778298}
-  - component: {fileID: 1662778300}
   m_Layer: 0
   m_Name: GlobalLightingEffect
   m_TagString: Untagged
@@ -1638,18 +1641,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1662778300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662778297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9379fc8e9a3bd43b4b5b910c9de6dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1696925509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1882,6 +1873,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860569034}
   m_CullTransparentMesh: 1
+--- !u!224 &1865106619 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3218112919415812044, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+  m_PrefabInstance: {fileID: 24231106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1972862147
 GameObject:
   m_ObjectHideFlags: 0
