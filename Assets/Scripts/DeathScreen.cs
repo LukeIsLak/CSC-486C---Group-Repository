@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class DeathScreen : MonoBehaviour
 {
@@ -10,6 +8,12 @@ public class DeathScreen : MonoBehaviour
     public GameEvent ExitToMainMenuEvent;
 
     public bool buttonClicked = false;
+
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     public void QuitGamePressed()
     {
         if (buttonClicked) return;
