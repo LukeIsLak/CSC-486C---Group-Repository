@@ -8,6 +8,7 @@ public class ShootFireball : MonoBehaviour
     [SerializeField] private float dmgradius = 3f;
     [SerializeField] private float ttl = 5f;
     [SerializeField] private DamageOverTime effect;
+    private bool hasImpact = false;
 
 
     private float dmg;
@@ -32,7 +33,10 @@ public class ShootFireball : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other){
-        Impact();
+        if (!hasImpact) {
+            hasImpact = true;
+            Impact();
+        }
     }
 
     void Impact(){

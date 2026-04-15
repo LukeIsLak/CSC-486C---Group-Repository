@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 [CreateAssetMenu(menuName = "Enemy/Skeleton/Melee")]
 public class SkeletonMeleeBaseData : BaseEnemyData
 {
+    public StudioEventEmitter audioEmitter;
+    
     [Header("Speed Multipliers")]
     public float moveSpeed = 3f;
 
@@ -34,6 +37,7 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float dashEaseIn = 0.25f;
     public float dashDuration = 1f;
     public float dashSpeed = 15f;
+    public float dashDamage =  20f;
 
     public float swingDistance = 3.5f;
 

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Skeleton Meele Data
   m_EditorClassIdentifier: 
   baseHealth: 0.75
-  baseMoveSpeed: 2
-  damage: 10
+  baseMoveSpeed: 1
+  damage: 7
   freezeMult: 1.5
+  audioEmitter: {fileID: 0}
   moveSpeed: 3
   navWeight: 1.5
   separationWeight: 2
@@ -37,6 +38,7 @@ MonoBehaviour:
   dashEaseIn: 0.25
   dashDuration: 1
   dashSpeed: 15
+  dashDamage: 15
   swingDistance: 3.5
   swingAttack: {fileID: 7400000, guid: 207f997c155c9094ab801ab1a57b81ab, type: 2}
   activate: {fileID: 7400000, guid: 0780a9269a20f394fb388f73b141e7f0, type: 2}

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1234970899931857379}
   - component: {fileID: 2034398724549241429}
   - component: {fileID: 1563274741519246562}
+  - component: {fileID: 2024303234438435349}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,6 +161,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldDropPrefab: {fileID: 300120990534988418, guid: d2ad1c07fb6d3904ca6945de9ffe4d5a, type: 3}
   amount: 15
+--- !u!114 &2024303234438435349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279664425953171000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -718534289
+      Data2: 1342107268
+      Data3: -661144645
+      Data4: -1077074637
+    Path: event:/PlayerEvents/PlayerAttacks/SoftSurfaceStrike
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &4831327252875266159
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +237,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -258,7 +290,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -276,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2823381461929075574}
   - component: {fileID: 1256864322166534582}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HitBox
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -308,10 +340,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -332,9 +364,9 @@ GameObject:
   - component: {fileID: 1989926878704131463}
   - component: {fileID: 4239248153406931123}
   - component: {fileID: 6699592811018717015}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -460,7 +492,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   anim: {fileID: 0}
   sprite: {fileID: 0}
-  rotatorXawOffsetDeg: 0
+  rotatorXawOffsetDeg: 180
   rotatorLerpSpeed: 20
   checkSide: 0
   isFront: 0
