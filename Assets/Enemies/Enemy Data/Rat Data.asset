@@ -18,11 +18,11 @@ MonoBehaviour:
   freezeMult: 1.5
   moveSpeed: 3
   navWeight: 3
-  separationWeight: 1
+  separationWeight: 0.1
   alignmentWeight: 1
   cohesionWeight: 1
   wanderWeight: 0.3
-  destStopDist: 2
+  destStopDist: 1.75
   minAddIdleWait: 0
   maxAddIdleWait: 2
   leapRadius: 3
@@ -35,11 +35,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   colonyDist: 5
-  neighbourRadius: 5
-  neighbourStopRadius: 2
-  checkPlayerUpdate: 0.1
-  detectionRadius: 7
-  wanderRadius: 6
+  neighbourRadius: 10
+  neighbourStopRadius: 1.5
+  checkPlayerUpdate: 0.25
+  detectionRadius: 15
+  wanderRadius: 9
   idleDuration: 2
   minMoveWait: 0.25
   maxMoveWait: 0.75

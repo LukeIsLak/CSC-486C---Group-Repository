@@ -18,3 +18,4 @@ MonoBehaviour:
   image: {fileID: -553130707, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   buffTime: 10
   attackspeedbuff: 2
+  hasteEffectMat: {fileID: -876546973899608171, guid: 785a72a3b09667d468d092113b1252e4, type: 3}

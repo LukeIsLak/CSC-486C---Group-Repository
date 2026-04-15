@@ -352,6 +352,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 012d1752-73cb-40ca-94d4-f47c4e15d829
     m_ActionName: Interactable UI/Close Menu[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9e9f1f6a-89f1-414b-8e76-3cc832a83ee5
+    m_ActionName: Interactable UI/Scroll[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -378,6 +382,8 @@ MonoBehaviour:
   characterData: {fileID: 0}
   controller: {fileID: 0}
   moveDirection: {x: 0, y: 0}
+  footstepSpeed: 0.32
+  isMoving: 0
 --- !u!114 &3025714530200236336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +409,8 @@ MonoBehaviour:
   hitBoxB: {fileID: 7104236917607576074}
   hitBoxC: {fileID: 3513175387575628314}
   attackMultiplier: 1
+  hasteCount: 0
+  movementSpeed: 0
   dashTime: 0.15
   dashSpeed: 3
   dashCD: 2
@@ -747,8 +755,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6532484783828699154}
   - component: {fileID: 521604548009380659}
-  - component: {fileID: 4540606688409577427}
   - component: {fileID: 6959775197242419839}
+  - component: {fileID: 6841013337811356441}
   m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -825,14 +833,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4540606688409577427
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8774079750195045325}
-  m_Enabled: 1
 --- !u!114 &6959775197242419839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,3 +877,17 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &6841013337811356441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774079750195045325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}

@@ -13,6 +13,8 @@ public class MerchantUI : MonoBehaviour
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private ShopItem token;
     [SerializeField] private TextMeshProUGUI tokenNum;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+    
     private List<MerchantItemUI> merchantItemUIs = new();
     
     private HashSet<MerchantItemUI> purchasedSlot = new(); // use set for tracking purchased items
@@ -49,6 +51,7 @@ public class MerchantUI : MonoBehaviour
             item.Init(shopItem,TryBuying);
             merchantItemUIs.Add(item);
         }
+        dialogueText.text = merchantData.GetOpener();
         UpdateGoldDisplay();
         UpdateTokenDisplay();
     }
@@ -73,6 +76,7 @@ public class MerchantUI : MonoBehaviour
         {
             itemUI.CantAfford();
         }
+        dialogueText.text = merchantData.GetResponse(success);
     }
     private void ClearUI()
     {
@@ -95,6 +99,7 @@ public class MerchantUI : MonoBehaviour
     public void BuyToken()
     {
         bool success = token.TryPurchase();
+        dialogueText.text = merchantData.GetResponse(success);
         UpdateTokenDisplay();
         UpdateGoldDisplay();
     }

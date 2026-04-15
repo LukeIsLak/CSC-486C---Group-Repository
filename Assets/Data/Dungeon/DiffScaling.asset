@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2af235f8d1178e42a9723a241b71ed0, type: 3}
   m_Name: DiffScaling
   m_EditorClassIdentifier: 
-  trapRoomFraction: 0.5
-  minWaves: 1
-  maxWaves: 1
+  scalingFraction: 0.14285715

@@ -146,6 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cc2c2688cfe4745bbdef4fefdcf7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapPrefab: {fileID: 6933832573868888725, guid: 1c9c48a28524a4d50af6a9f660a393f8, type: 3}
+  trapPrefab: {fileID: -3732633790925761257, guid: 1c9c48a28524a4d50af6a9f660a393f8, type: 3}
   forwardForce: 5
   upwardForce: 5

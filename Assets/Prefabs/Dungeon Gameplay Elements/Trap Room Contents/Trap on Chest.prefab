@@ -480,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574095477772361130, guid: 3c34d1e483280b24baa6063a5a4d5dac, type: 3}
       propertyPath: isGoldChest
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574095477772361130, guid: 3c34d1e483280b24baa6063a5a4d5dac, type: 3}
       propertyPath: sequenceObjects.Array.size
