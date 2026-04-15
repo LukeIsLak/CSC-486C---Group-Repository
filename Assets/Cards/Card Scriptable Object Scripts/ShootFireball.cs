@@ -20,6 +20,8 @@ public class ShootFireball : MonoBehaviour
     public void Init(Vector3 direct, Fireball card){
         //Needs a direction and damage amount
         dir = direct.normalized;
+        projspeed = card.projspeed;
+        dmgradius = card.dmgradius;
         dmg = card.dmg;
     }
 

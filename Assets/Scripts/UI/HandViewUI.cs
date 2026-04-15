@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,10 @@ public class HandViewUI : MonoBehaviour
     private void OnDisable()
     {
         Unhook(deckSystems);
+        foreach (Transform child in usedCardArea)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -221,4 +226,5 @@ public class HandViewUI : MonoBehaviour
         // Play use animation and destroy after
         cardView.PlayUseAndDestroy();
     }
+
 }
