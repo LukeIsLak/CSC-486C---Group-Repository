@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/Fireball")]
 public class Fireball : Cards
 {
-    [SerializeField] private float projspeed = 10f;
-    [SerializeField] private float dmgradius = 3f;
+    [SerializeField] public float projspeed = 10f;
+    [SerializeField] public float dmgradius = 3f;
 
     [SerializeField] private ShootFireball aoeprojprefab;
     private GameObject player; // TODO : LK - I left this in for now, in case you guys want it

@@ -17,8 +17,8 @@ MonoBehaviour:
   effectValue: 20
   image: {fileID: 436681993, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   range: 20
-  damage: 20
+  damage: 75
   lightningPrefab: {fileID: -683580621314029025, guid: 449992fdf107d41f18ec6e5a3ec9dde7, type: 3}
   enemylayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64

@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/FrostNova")]
 public class FrostNova : Cards
 {
-    [SerializeField] private float projspeed = 10f;
-    [SerializeField] private float dmgradius = 1f;
+    [SerializeField] public float projspeed = 10f;
+    [SerializeField] public float dmgradius = 1f;
 
     [SerializeField] private ShootFrostNova aoeprojprefab;
     private GameObject player; // TODO : LK - I left this in for now, in case you guys want it
@@ -46,6 +46,6 @@ public class FrostNova : Cards
     Debug.LogError("Projectile prefab not assigned!");
 }
 
-        proj.Init(camera.transform.forward, card);
+        proj.Init(camera.transform.forward, this);
     }
 }

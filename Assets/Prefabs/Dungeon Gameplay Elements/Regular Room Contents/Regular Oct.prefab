@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2024964685943587118}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 1, z: 5}
+  m_LocalPosition: {x: 0, y: 1, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2368599678031002266}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -65,7 +65,7 @@ Transform:
   - {fileID: 4764721202642337309}
   - {fileID: 3075645657098097779}
   m_Father: {fileID: 2826989210775778868}
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2487751994428010116
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2826989210775778868}
   m_Layer: 0
-  m_Name: Regular Room Objects
+  m_Name: Regular Oct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 2972064588340349788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 1, z: 5}
+  m_LocalPosition: {x: 0, y: 1, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -177,7 +177,10 @@ MonoBehaviour:
   possibleWaves:
   - {fileID: 11400000, guid: 31884332833d4bc4c98452e4ec0d916e, type: 2}
   - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
-  possibleWavesWeights: 0100000001000000
+  - {fileID: 11400000, guid: eff1032fad90ee3479fd780eade3c4bd, type: 2}
+  - {fileID: 11400000, guid: afd0acc0a6f7608448b20d1e0f92243c, type: 2}
+  - {fileID: 11400000, guid: 01de0d3524925dc4d8750f6f9905b18d, type: 2}
+  possibleWavesWeights: 0300000003000000010000000200000002000000
   waves: []
   spawnPoints:
   - {fileID: 5258782442626890425}
@@ -217,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 4608850661636715043}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 1, z: -5}
+  m_LocalPosition: {x: 3.613, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -248,7 +251,7 @@ Transform:
   m_GameObject: {fileID: 4617058490950617911}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 1, z: -5}
+  m_LocalPosition: {x: -3, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -48,6 +48,8 @@ public class DeckSystems : MonoBehaviour
     int cardsToDraw = 0;
     bool drawFlag = false;
 
+    public float delayamount = 0.1f;
+
 
     void Start(){
         loadDeck(inventory.activeDeck.contents);
@@ -127,9 +129,7 @@ public class DeckSystems : MonoBehaviour
         shuffleExcHand();
 
         //redraw the hand
-        for (int i = 0; i < looplength; i++) {
-            drawCard();
-        }
+        StartCoroutine(drawMult(looplength));
     }
 
     /// <summary>
@@ -160,7 +160,7 @@ public class DeckSystems : MonoBehaviour
                 }
             }
         }
-        NotifyHandContentsChanged();
+        // NotifyHandContentsChanged();
 
         return true;
     }
@@ -199,6 +199,7 @@ public class DeckSystems : MonoBehaviour
 
         //get selected card
         CardInstance curCard = hand[currentHandIndex];
+        
 
         // put card in discard, remove from hand and set the cards usabilty to false
         string cardname = hand[currentHandIndex].cardData.name;
@@ -207,7 +208,7 @@ public class DeckSystems : MonoBehaviour
         hand.RemoveAt(currentHandIndex);
 
         //call needed card function 
-        StartCoroutine(curCard.cardData.Play(curCard.cardData));
+        StartCoroutine(DelayCardPlay(curCard));
 
         // reset currently selected card
         if(hand.Count == 0 ) currentHandIndex = 0;
@@ -225,6 +226,11 @@ public class DeckSystems : MonoBehaviour
             }
         } 
         
+    }
+
+    private IEnumerator DelayCardPlay(CardInstance curCard) {
+        yield return new WaitForSeconds(delayamount);
+        StartCoroutine(curCard.cardData.Play(curCard.cardData));
     }
 
     /// <summary>
@@ -344,11 +350,11 @@ public class DeckSystems : MonoBehaviour
 
         if (value > 0.1f)
         {
-            ChangeHandIndex(1);
+            ChangeHandIndex(-1);
         }
         else if (value < -0.1f)
         {
-            ChangeHandIndex(-1);
+            ChangeHandIndex(1);
         }
     }
 
@@ -416,6 +422,14 @@ public class DeckSystems : MonoBehaviour
                 drawFlag = true;
                 StartCoroutine(newCardTimer());
             }
+        }
+    }
+
+    public IEnumerator drawMult(int looplength) {
+        for (int i = 0; i < looplength; i++) {
+            drawCard();
+            yield return new WaitForSeconds(0.3f);
+            NotifyHandContentsChanged();
         }
     }
 }

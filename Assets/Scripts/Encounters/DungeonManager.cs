@@ -48,7 +48,8 @@ public class DungeonManager : MonoBehaviour
 
         /* Poll info from persistent data */
         lg.recentPoolSize       = dungeonData.dungeonPoolSize;
-        lg.desiredIterations    = dungeonData.dungeonIters;
+        // lg.desiredIterations    = dungeonData.dungeonIters;
+        lg.desiredIterations    = diffScale.GetDungeonIterations();
         lg.iterationsPerSpecial = dungeonData.dungeonItersPerSpecial;
         lg.randomSeed           = dungeonData.dungeonSeed;
         lg.useSeed              = true;
@@ -66,6 +67,7 @@ public class DungeonManager : MonoBehaviour
         List<DungeonRoomScript> rooms = new List<DungeonRoomScript>(FindObjectsByType<DungeonRoomScript>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)); 
 
         int trapRoomsToCreate = (int)(diffScale.GetTrapRoomFraction() * rooms.Count);
+        print("Trap rooms to create: " + trapRoomsToCreate.ToString());
 
         for (int i = 0; i < trapRoomsToCreate; i++)
         {

@@ -55,7 +55,12 @@ public class EnemyInterface : MonoBehaviour
     public void TakeDamage(float amount) {
         if(curHealth <= 0) return;
         curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
-        if (curHealth <= 0) KillEnemy();
+        if (curHealth <= 0) 
+        {
+            GoldDropSpawner gds = GetComponent<GoldDropSpawner>();
+            if (gds) gds.DoGoldDrop();
+            KillEnemy();
+        }
     }
 
     public uint GetFillerFlag() { return fillerFlag; }
@@ -115,11 +120,13 @@ public class EnemyInterface : MonoBehaviour
 
         if (data.hasBurstPart) {
             particleInstanceBurst = Instantiate(data.burstPart, transform.position, Quaternion.identity, transform);
+            particleInstanceBurst.GetComponent<ParticleFollowTransform>().target = transform;
             psB = particleInstanceBurst.GetComponent<ParticleSystem>();
         }
 
         if (data.hasOngoingPart) {
             particleInstanceOngoing = Instantiate(data.ongoingPart, transform.position, Quaternion.identity, transform);
+            particleInstanceOngoing.GetComponent<ParticleFollowTransform>().target = transform;
             psO = particleInstanceOngoing.GetComponent<ParticleSystem>();
         }
         for (int i = 0; i < currentDoTTicks[index] || isDead; i++) {

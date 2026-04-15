@@ -12,6 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe535a8b15cd5647a3f0a99e6d9256a, type: 3}
   m_Name: Active Deck
   m_EditorClassIdentifier: 
-  contents: []
+  contents:
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 0
+    useable: 0
+    deck: {fileID: 11400000}
+  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+    uid: 1
+    useable: 0
+    deck: {fileID: 11400000}
+  - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
+    uid: 2
+    useable: 1
+    deck: {fileID: 11400000}
+  - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
+    uid: 2
+    useable: 1
+    deck: {fileID: 11400000}
   maxSize: 15
   useMaxSize: 1

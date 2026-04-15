@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 3493508171927403358, guid: f2416ae188762be478e5648921e5a28d, type: 3}
   - {fileID: 3493508171927403358, guid: 635160548c27ce94ea32dce1bb4f6d3c, type: 3}
   regularObjects:
-  - {fileID: 2487751994428010116, guid: ddca8e3060695d64c9c70f4f7f193519, type: 3}
+  - {fileID: 2487751994428010116, guid: 62559788ec328e143b17a71fc85f55b3, type: 3}
   trapObjects:
   - {fileID: 3452522053420848015, guid: b5eeb235c381df347bac091b740f3b10, type: 3}
   decorationSet0:

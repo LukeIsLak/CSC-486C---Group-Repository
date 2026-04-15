@@ -172,7 +172,7 @@ public class LevelGenerator : MonoBehaviour
 
         // Determine the total number of iterations that must be done
         int totalIters      = useSpecialRooms? Mathf.Max(desiredIterations, numSpecial * iterationsPerSpecial) : desiredIterations;
-
+        Debug.Log(totalIters);
         // Do generation
         for (int itersComplete = 1; itersComplete <= totalIters; itersComplete++)
         {

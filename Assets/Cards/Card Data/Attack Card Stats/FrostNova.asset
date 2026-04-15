@@ -16,8 +16,8 @@ MonoBehaviour:
   descrption: Explodes on contact and freezes enemies. Frozen enemies take 1.5x damage
   effectValue: 20
   image: {fileID: 1050318224, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
-  projspeed: 10
-  dmgradius: 1
+  projspeed: 20
+  dmgradius: 3
   aoeprojprefab: {fileID: 8658061710962356025, guid: 8153517f0601f4c1b80f7adac61475a0, type: 3}
   dmg: 20
   enemylayer:

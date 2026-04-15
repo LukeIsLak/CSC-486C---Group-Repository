@@ -10,6 +10,7 @@ public class CardInstance
     //runtime state
     public int uid; // for ui tracking 
     public bool useable; // to see if the card can be used or not
+    public bool cleanup;
 
     public Deck deck; // The deck I belong to
 
@@ -18,5 +19,6 @@ public class CardInstance
         this.cardData = cardData;
         this.uid = uid;
         this.useable = true;
+        this.cleanup = false;
     }
 }
