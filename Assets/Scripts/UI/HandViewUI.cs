@@ -106,10 +106,10 @@ public class HandViewUI : MonoBehaviour
         for (int i = cards.Count - 1; i >= 0; i--)
         {
             var cardView = cards[i];
-            if (!cardView.cardInstance.cleanup && !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid))
+            if (!cardView.cardInstance.cleanup && !deckSystems.hand.Exists(card => card != null && card.uid == cardView.cardInstance.uid) && !cardView.cardInstance.useable)
             {
                 cardTargetPositions.Remove(cardView);
-                cards.RemoveAt(i);
+                //cards.RemoveAt(i);
                 MoveCardToUsedArea(cardView);
             }
         }
