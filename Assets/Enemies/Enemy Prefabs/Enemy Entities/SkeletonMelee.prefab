@@ -116,7 +116,7 @@ MonoBehaviour:
   currentDoTTicks: 
   hasBlood: 1
   bloodDuration: 1
-  bloodEffect: {fileID: 0}
+  bloodEffect: {fileID: 1630225761089814724, guid: 00ad366def934eb49aa1733379e61a7f, type: 3}
   anim: {fileID: 4239248153406931123}
   rb: {fileID: 0}
   smd: {fileID: 11400000, guid: ff085b78b42f5924d944fa83880b487f, type: 2}
