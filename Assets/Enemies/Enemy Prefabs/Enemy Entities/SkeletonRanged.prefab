@@ -401,11 +401,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -718534289
-      Data2: 1342107268
-      Data3: -661144645
-      Data4: -1077074637
-    Path: event:/PlayerEvents/PlayerAttacks/SoftSurfaceStrike
+      Data1: -549139361
+      Data2: 1331399320
+      Data3: 551425427
+      Data4: -1850324237
+    Path: event:/PlayerEvents/PlayerAttacks/HardSurfaceStrike
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0

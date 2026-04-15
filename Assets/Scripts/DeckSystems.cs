@@ -50,6 +50,9 @@ public class DeckSystems : MonoBehaviour
 
     public float delayamount = 0.1f;
 
+    private FMOD.Studio.EventInstance magicCast;
+
+
 
     void Start(){
         loadDeck(inventory.activeDeck.contents);
@@ -206,7 +209,7 @@ public class DeckSystems : MonoBehaviour
         hand[currentHandIndex].useable = false;
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
-
+        PlayCastSound();
         //call needed card function 
         StartCoroutine(DelayCardPlay(curCard));
 
@@ -431,5 +434,13 @@ public class DeckSystems : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             NotifyHandContentsChanged();
         }
+    }
+
+    private void PlayCastSound() 
+    {
+        magicCast = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/MagicCastSFX");
+        magicCast.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        magicCast.start();
+        magicCast.release();
     }
 }
