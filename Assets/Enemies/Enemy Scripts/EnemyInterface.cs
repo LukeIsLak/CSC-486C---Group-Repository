@@ -55,7 +55,12 @@ public class EnemyInterface : MonoBehaviour
     public void TakeDamage(float amount) {
         if(curHealth <= 0) return;
         curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
-        if (curHealth <= 0) KillEnemy();
+        if (curHealth <= 0) 
+        {
+            GoldDropSpawner gds = GetComponent<GoldDropSpawner>();
+            if (gds) gds.DoGoldDrop();
+            KillEnemy();
+        }
     }
 
     public uint GetFillerFlag() { return fillerFlag; }
