@@ -14,6 +14,7 @@ public class SceneTransitionManager : MonoBehaviour
     public SceneField   layoutScene;
     public SceneField   menuScene;
     public SceneField   deathScene; 
+    public SceneField   winScene; 
 
     [Header("Data")]
     public LayoutData   layoutData;
@@ -90,6 +91,12 @@ public class SceneTransitionManager : MonoBehaviour
     {
         DoLoadWithFade(deathScene, true, true);
     }
+
+    public void SceneSwapToWin()
+    {
+        DoLoadWithFade(winScene, true, true);
+    }
+    
     
 
     /**********************************
