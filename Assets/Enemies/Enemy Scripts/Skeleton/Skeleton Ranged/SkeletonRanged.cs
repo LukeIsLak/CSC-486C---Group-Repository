@@ -6,14 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody), typeof(UnityEngine.AI.NavMeshAgent))]
-public class SkeletonMelee : EnemyInterface
+public class SkeletonRanged : EnemyInterface
 {
-    [Header("Skeleton Meele Base Fields")]
+    [Header("Skeleton Ranged Base Fields")]
     public Animator anim;
     public Rigidbody rb;
-    public SkeletonMeleeBaseData smd;
+    public SkeletonRangedBaseData srd;
     public Transform playerTransform;
-    public SkeletonMeleeStateMachine smsm;
+    public SkeletonRangedStateMachine srsm;
     public NavMeshAgent nma;
 
     [Header("State Checkers")]
@@ -31,8 +31,7 @@ public class SkeletonMelee : EnemyInterface
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
 
-    public bool isDashing           = false;
-    private Vector3 dashDirection;
+    public bool isThrowing          = false;
 
     public bool isSwinging          = false;
     public float swingTime;
@@ -44,29 +43,32 @@ public class SkeletonMelee : EnemyInterface
 
     public LayerMask wallMask;
 
+    [Header("Ranged Attack")]
+    public Transform throwStart;
+    public float throwTime;
+
     [Header("Misc. Variables")]
     private float activateTime;
     private float deactivateTime;
-    public SkeletonMeleeStates currentState;
-    public BoxCollider dashHurtBox;
+    public SkeletonRangedStates currentState;
 
-    public SkeletonMeleeAttacks? nextAttack = null;
-    public List<SkeletonMeleeWeightedAttacks> weightedAttacks;
+    public SkeletonRangedAttacks? nextAttack = null;
+    public List<SkeletonRangedWeightedAttacks> weightedAttacks;
 
     /****************************************************/
     /*          Beginning Of Instance Methods           */
     /****************************************************/
 
     void Awake() {
-        weightedAttacks = new List<SkeletonMeleeWeightedAttacks> {
-            new SkeletonMeleeWeightedAttacks(
-                SkeletonMeleeAttacks.AttackDash, 1f, () => true
+        weightedAttacks = new List<SkeletonRangedWeightedAttacks> {
+            new SkeletonRangedWeightedAttacks(
+                SkeletonRangedAttacks.AttackThrow, 1f, () => true
             ),
-            new SkeletonMeleeWeightedAttacks(
-                SkeletonMeleeAttacks.AttackSwing, 5f, () => {
+            new SkeletonRangedWeightedAttacks(
+                SkeletonRangedAttacks.AttackSwing, 5f, () => {
                     Vector3 toPlayer = playerTransform.position - transform.position;
                     toPlayer.y = 0f;
-                    return toPlayer.magnitude <= smd.swingDistance;
+                    return toPlayer.magnitude <= srd.swingDistance;
                 }
             )
         };
@@ -75,18 +77,19 @@ public class SkeletonMelee : EnemyInterface
     }
 
     public override void initialize() {
-        curHealth = smd.baseHealth * playerData.maxHealth;
-        moveSpeed = smd.baseMoveSpeed * playerData.baseSpeed;
+        curHealth = srd.baseHealth * playerData.maxHealth;
+        moveSpeed = srd.baseMoveSpeed * playerData.baseSpeed;
 
         playerTransform = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
 
-        SkeletonMeleeStateMachine env_smsm = FindObjectOfType<SkeletonMeleeStateMachine>();
-        env_smsm.AddEntity(this);
+        SkeletonRangedStateMachine env_srsm = FindObjectOfType<SkeletonRangedStateMachine>();
+        env_srsm.AddEntity(this);
 
-        swingTime = smd.swingAttack.length;
-        activateTime = smd.activate.length;
-        deactivateTime = smd.deactivate.length;
+        swingTime = srd.swingAttack.length;
+        throwTime = srd.throwAttack.length;
+        activateTime = srd.activate.length;
+        deactivateTime = srd.deactivate.length;
 
         initialize_nma();
     }
@@ -120,7 +123,7 @@ public class SkeletonMelee : EnemyInterface
 
     public override void KillEnemy() {
         if (rs != null) rs.RemoveEnemy();
-        if(smsm != null) smsm.RemoveEntity(this);
+        if(srsm != null) srsm.RemoveEntity(this);
         Destroy(this.gameObject);
     }
 
@@ -174,7 +177,7 @@ public class SkeletonMelee : EnemyInterface
     }
 
     private void SteerForce(out Vector3 separation, out Vector3 alignment, out Vector3 cohesionCenter, out int count) {
-        Collider[] hits = Physics.OverlapSphere(transform.position, smd.neighbourRadius, smd.skeletonMask);
+        Collider[] hits = Physics.OverlapSphere(transform.position, srd.neighbourRadius, srd.skeletonMask);
     
         separation      = Vector3.zero;
         alignment       = Vector3.zero;
@@ -184,10 +187,10 @@ public class SkeletonMelee : EnemyInterface
         count = 0;
         foreach (Collider h in hits) {
             if (h.transform == transform) continue;
-            SkeletonMelee other = h.gameObject.GetComponent<SkeletonMelee>();
+            SkeletonRanged other = h.gameObject.GetComponent<SkeletonRanged>();
             if (other == null && h.attachedRigidbody != null) {
                 /*If the rat is on the rigidbody root, use that instead*/
-                other = h.attachedRigidbody.GetComponentInParent<SkeletonMelee>();
+                other = h.attachedRigidbody.GetComponentInParent<SkeletonRanged>();
             }
             if (other == null) continue;
 
@@ -238,11 +241,11 @@ public class SkeletonMelee : EnemyInterface
         Vector3 wander = UnityEngine.Random.insideUnitSphere;
         wander.y = 0f;
 
-        Vector3 finalVelocity   = navDir * smd.navWeight
-                                + separation * smd.separationWeight
-                                + alignmentForce * smd.alignmentWeight
-                                + cohesionForce * smd.cohesionWeight
-                                + wander * smd.wanderWeight;
+        Vector3 finalVelocity   = navDir * srd.navWeight
+                                + separation * srd.separationWeight
+                                + alignmentForce * srd.alignmentWeight
+                                + cohesionForce * srd.cohesionWeight
+                                + wander * srd.wanderWeight;
         
         Vector3 velocity = Vector3.ClampMagnitude(finalVelocity, moveSpeed);
         Vector3 planarMove = new Vector3(velocity.x, 0f, velocity.z) * Time.deltaTime * speedModifier;
@@ -269,7 +272,7 @@ public class SkeletonMelee : EnemyInterface
         }
 
         Vector3 dest = agent.destination;
-        return Vector3.Distance(transform.position, dest) <= smd.destStopDist;
+        return Vector3.Distance(transform.position, dest) <= srd.destStopDist;
     }
 
     /****************************************************/
@@ -293,7 +296,7 @@ public class SkeletonMelee : EnemyInterface
                 }
             }
             Vector3 dirFromWall = (transform.position - wallPoint.Value).normalized;
-            Vector3 spawnPos = wallPoint.Value + dirFromWall * smd.wallOffset;
+            Vector3 spawnPos = wallPoint.Value + dirFromWall * srd.wallOffset;
             transform.position = spawnPos;
 
             // Raycast from the wall point toward the skeleton to get the wall normal
@@ -330,7 +333,7 @@ public class SkeletonMelee : EnemyInterface
 
     public void UpdateAgroApproach() {
         UpdatePlayerPath();
-        UpdateMove();
+        if (isMoving) UpdateMove();
     }
 
     public Vector3 PickWanderSpotOnNavMesh(Vector3 origin, float radius, int maxAttempts = 12) {
@@ -375,19 +378,10 @@ public class SkeletonMelee : EnemyInterface
     /****************************************************/
     /*            Beginning of Collision Methods        */
     /****************************************************/
-
-    private void OnCollisionEnter(Collision other) {
-        if (isDashing && ((1 << other.gameObject.layer) & wallMask.value) != 0) {
-            canDeactivate = true;
-            rb.velocity = Vector3.zero;
-        }
-    }
-
     private void OnTriggerEnter(Collider other) {
         if (isAttacking && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
-            float d = (isDashing) ? smd.dashDamage : smd.swingDamage;
-            if (h != null) h.TakeDamage(d);
+            if (h != null) h.TakeDamage(srd.swingDamage);
             isAttacking = false;
         }
     }
@@ -402,11 +396,11 @@ public class SkeletonMelee : EnemyInterface
     /****************************************************/
 
     public void InitializeSpawn() {
-        if (smd.wallSpawnChance >= UnityEngine.Random.Range(0, 1)) FindSpawnPosition();
+        if (srd.wallSpawnChance >= UnityEngine.Random.Range(0, 1)) FindSpawnPosition();
     }
 
-    public SkeletonMeleeAttacks GetNextAttack() {
-        List<SkeletonMeleeWeightedAttacks> possibleAttacks = weightedAttacks.Where(wa => wa.condition == null || wa.condition()).ToList();
+    public SkeletonRangedAttacks GetNextAttack() {
+        List<SkeletonRangedWeightedAttacks> possibleAttacks = weightedAttacks.Where(wa => wa.condition == null || wa.condition()).ToList();
 
 
         float totalWeight = possibleAttacks.Sum(wa => wa.weight);
@@ -435,8 +429,23 @@ public class SkeletonMelee : EnemyInterface
 
     private IEnumerator DelayCalcPlayerPath() {
         checkPlayerPath = false;
-        nma.SetDestination(playerTransform.position);
-        yield return new WaitForSeconds(smd.checkPlayerUpdate);
+        float distToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        if (distToPlayer > srd.preferredRange + srd.rangeTolerance) {
+            isMoving = true;
+            nma.SetDestination(playerTransform.position);
+        }
+        else if (distToPlayer < srd.preferredRange - srd.rangeTolerance) {
+            isMoving = true;
+            Vector3 dirAway = (transform.position - playerTransform.position).normalized;
+            Vector3 targetPos = transform.position + dirAway * (srd.preferredRange - distToPlayer + 0.5f);
+            nma.SetDestination(targetPos);
+            UpdateMove();
+        }
+        else {
+            isMoving = false;
+            nma.ResetPath();
+        }
+        yield return new WaitForSeconds(srd.checkPlayerUpdate);
         checkPlayerPath = true;
     }
 
@@ -446,7 +455,7 @@ public class SkeletonMelee : EnemyInterface
     }
 
     private IEnumerator DelayAttack() {
-        float delay = UnityEngine.Random.Range(smd.minAgroToAttackTime, smd.maxAgroToAttackTime);
+        float delay = UnityEngine.Random.Range(srd.minAgroToAttackTime, srd.maxAgroToAttackTime);
         yield return new WaitForSeconds(delay);
 
         nextAttack = GetNextAttack();
@@ -459,7 +468,7 @@ public class SkeletonMelee : EnemyInterface
 
     private IEnumerator DelayActivate() {
         canActivate = false;
-        yield return new WaitForSeconds(activateTime + smd.activateOffset);
+        yield return new WaitForSeconds(activateTime + srd.activateOffset);
         canActivate = true;
         doneActivate = true;
     }
@@ -481,38 +490,9 @@ public class SkeletonMelee : EnemyInterface
 
     private IEnumerator Idle() {
         isIdle = true;
-        yield return new WaitForSeconds(UnityEngine.Random.Range(smd.minIdleDuration, smd.maxIdleDuration));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(srd.minIdleDuration, srd.maxIdleDuration));
         isIdle = false;
         canWander = true;
-    }
-
-    public void StartDashThrough(Vector3 target) {
-        isDashing = true;
-        Vector3 dir = (target - transform.position);
-        dir.y = 0f;
-        dashDirection = dir.normalized;
-        StartCoroutine(DashCoroutine());
-    }
-
-    private IEnumerator DashCoroutine() {
-        float timer = 0f;
-        dashHurtBox.enabled = true;
-        while (timer < smd.dashDuration && !canDeactivate)
-        {
-            float speed;
-            if (timer < smd.dashEaseIn)
-                speed = Mathf.Lerp(0f, smd.dashSpeed, timer / smd.dashEaseIn);
-            else
-                speed = smd.dashSpeed;
-
-            rb.velocity = dashDirection * speed;
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        dashHurtBox.enabled = false;
-        rb.velocity = Vector3.zero;
-        isDashing = false;
-        doneWandering = true;
     }
 
     public void StartSwingTimer() {
@@ -523,5 +503,27 @@ public class SkeletonMelee : EnemyInterface
         isSwinging = true;
         yield return new WaitForSeconds(swingTime);
         isSwinging = false;
+    }
+
+    public void StartThrowThrough(Vector3 target) {
+        if (!isThrowing) StartCoroutine(ThrowRoutine(target));
+    }
+
+    private IEnumerator ThrowRoutine(Vector3 target) {
+        isThrowing = true;
+        yield return new WaitForSeconds(srd.throwDelay);
+
+        if (srd.boneProjectilePrefab != null && throwStart != null)
+        {
+            GameObject proj = Instantiate(srd.boneProjectilePrefab, throwStart.position, Quaternion.identity);
+            SkeletonRangedBone bone = proj.GetComponent<SkeletonRangedBone>();
+            if (bone != null) {
+                bone.speed = srd.throwSpeed;
+                bone.damage = srd.throwDamage;
+                bone.LaunchArc(target, srd.throwArcHeight);
+            }
+        }
+        yield return new WaitForSeconds(throwTime - srd.throwDelay);
+        isThrowing = false;
     }
 }
