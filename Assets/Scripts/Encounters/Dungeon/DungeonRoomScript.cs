@@ -56,14 +56,14 @@ public class DungeonRoomScript : MonoBehaviour
     {
         if (variant.trapObjects.Count == 0) return;
         int r = randomContext.NextInt(variant.trapObjects.Count);
-        Instantiate(variant.trapObjects[r], transform);
+        Instantiate(variant.trapObjects[r], transform, false);
     }
 
     private void RegularRoomInit()
     {
         if (variant.regularObjects.Count == 0) return;
         int r = randomContext.NextInt(variant.regularObjects.Count);
-        Instantiate(variant.regularObjects[r], transform);
+        Instantiate(variant.regularObjects[r], transform, false);
     }
 
     private void PlaceDecorations()

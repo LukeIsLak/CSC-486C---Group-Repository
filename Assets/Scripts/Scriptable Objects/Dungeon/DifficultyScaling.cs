@@ -7,10 +7,20 @@ public class DifficultyScaling : ScriptableObject
 {
     public float scalingFraction;
 
+    [Header("Base Parameters")]
+    public float minTrapRoomFraction = 0.0f;
+    public float maxTrapRoomFraction = 0.5f;
+    public int minDungeonInterations = 6;
+    public int maxDungeonInterations = 12;
     public float GetTrapRoomFraction()
     {
         // Do calulation and return scaled value
-        return 0.5f;
+        return Mathf.Lerp(minTrapRoomFraction, maxTrapRoomFraction, scalingFraction);
+    }
+
+    public int GetDungeonIterations()
+    {
+        return Mathf.RoundToInt(Mathf.Lerp(minDungeonInterations, maxDungeonInterations, scalingFraction));
     }
 
     public float GetSpawnCountMultiplier()
