@@ -48,7 +48,8 @@ public class DungeonManager : MonoBehaviour
 
         /* Poll info from persistent data */
         lg.recentPoolSize       = dungeonData.dungeonPoolSize;
-        lg.desiredIterations    = dungeonData.dungeonIters;
+        // lg.desiredIterations    = dungeonData.dungeonIters;
+        lg.desiredIterations    = diffScale.GetDungeonIterations();
         lg.iterationsPerSpecial = dungeonData.dungeonItersPerSpecial;
         lg.randomSeed           = dungeonData.dungeonSeed;
         lg.useSeed              = true;

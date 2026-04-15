@@ -15,5 +15,5 @@ MonoBehaviour:
   dungeonPoolSize: 5
   dungeonIters: 1
   dungeonItersPerSpecial: 1
-  dungeonSeed: -2129909267
+  dungeonSeed: 785440104
   useSeed: 0

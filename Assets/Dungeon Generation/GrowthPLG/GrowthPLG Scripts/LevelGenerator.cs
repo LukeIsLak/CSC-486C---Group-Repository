@@ -172,7 +172,7 @@ public class LevelGenerator : MonoBehaviour
 
         // Determine the total number of iterations that must be done
         int totalIters      = useSpecialRooms? Mathf.Max(desiredIterations, numSpecial * iterationsPerSpecial) : desiredIterations;
-
+        Debug.Log(totalIters);
         // Do generation
         for (int itersComplete = 1; itersComplete <= totalIters; itersComplete++)
         {
@@ -384,7 +384,7 @@ public class LevelGenerator : MonoBehaviour
         // Make remaining available special rooms non-special
         for (int i = availableSpecials.Count - 1; i >= 0; i--)
         {
-            availableSpecials[i].SetIsSpecial(false);
+            // availableSpecials[i].SetIsSpecial(false);
             availableSpecials.RemoveAt(i);
         }
         
