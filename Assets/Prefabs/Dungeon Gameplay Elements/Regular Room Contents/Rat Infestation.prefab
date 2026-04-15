@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5509750170859042251}
   m_Layer: 0
-  m_Name: RATINFESTATION
+  m_Name: Rat Infestation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
