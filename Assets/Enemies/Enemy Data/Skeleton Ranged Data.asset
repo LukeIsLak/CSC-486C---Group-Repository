@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e575eb88b489040bbf182a636cd8a6, type: 3}
   m_Name: Skeleton Ranged Data
   m_EditorClassIdentifier: 
-  baseHealth: 0
-  baseMoveSpeed: 0
+  baseHealth: 0.4
+  baseMoveSpeed: 1
   damage: 0
   freezeMult: 1.5
   audioEmitter: {fileID: 0}
@@ -35,13 +35,15 @@ MonoBehaviour:
   maxAgroToAttackTime: 0.7
   checkPlayerUpdate: 0.1
   detectionRadius: 20
-  swingDamage: 10
+  swingDamage: 7
   swingDistance: 3.5
   boneProjectilePrefab: {fileID: 2551708806297768597, guid: 912c811a2eea8c94abff097e5dccd27c, type: 3}
   throwSpeed: 15
   throwArcHeight: 2
   throwDelay: 0.4
-  throwDamage: 7.5
+  throwDamage: 4
+  preferredRange: 7
+  rangeTolerance: 1.5
   throwAttack: {fileID: 7400000, guid: 3ce591db0b031f84db48b36d99de93c1, type: 2}
   swingAttack: {fileID: 7400000, guid: 207f997c155c9094ab801ab1a57b81ab, type: 2}
   activate: {fileID: 7400000, guid: 0780a9269a20f394fb388f73b141e7f0, type: 2}
