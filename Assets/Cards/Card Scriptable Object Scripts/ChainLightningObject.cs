@@ -5,10 +5,10 @@ using UnityEngine;
 public class ChainLightningObject : MonoBehaviour
 {
 
-    private float damage = 10f;
-    private int chainNumber = 0;
-    private int maxChain = 5;
-    private float ttl = 5f;
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private int chainNumber = 0;
+    [SerializeField] private int maxChain = 5;
+    [SerializeField] private float ttl = 5f;
 
     public HashSet<EnemyInterface> alreadyHit = new HashSet<EnemyInterface>();
 
@@ -24,34 +24,29 @@ public class ChainLightningObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemyInterface enemy = other.GetComponent<EnemyInterface>();
-        //Create a hashset to store the enemies already hit in the chain
-        player = GameObject.FindWithTag("Player");
-
-
-        if (enemy != null){
-            enemy.Hit(damage);
-            ContinueChain(alreadyHit, enemy);
-            Destroy(this.gameObject);
-
+        if (other.gameObject.CompareTag("Enemy")) {
+            EnemyInterface enemy = other.GetComponent<EnemyInterface>();
+            if (enemy == null) enemy = other.GetComponentInParent<EnemyInterface>();
+            if (enemy != null && !alreadyHit.Contains(enemy))
+            {
+                alreadyHit.Add(enemy); // Add before chaining!
+                Vector3 spawn = enemy.transform.position;
+                enemy.Hit(damage);
+                ContinueChain(alreadyHit, enemy, spawn);
+                Destroy(this.gameObject);
+            }
         }
-        else 
-        {
-            enemy = other.GetComponentInParent<EnemyInterface>();
-            enemy.Hit(damage);
-            ContinueChain(alreadyHit, enemy);
+        else {
             Destroy(this.gameObject);
-
         }
     }
 
-    private void ContinueChain(HashSet<EnemyInterface> alreadyHit, EnemyInterface enemy)
-    {
+    private void ContinueChain(HashSet<EnemyInterface> alreadyHit, EnemyInterface enemy, Vector3 spawn) {
         //While the chain hasn't reached its cap, 
-        alreadyHit.Add(enemy);
+        if (enemy != null) alreadyHit.Add(enemy);
         if (chainNumber < maxChain)
             {
-                ChainLightningObject next = Instantiate(ChainLightningPrefab, enemy.transform.position + Vector3.up * 1.5f, enemy.transform.rotation);
+                ChainLightningObject next = Instantiate(ChainLightningPrefab, spawn, Quaternion.identity);
                 next.alreadyHit = alreadyHit;
                 next.chainNumber = chainNumber + 1;
                 HomingSystem homing = next.GetComponent<HomingSystem>();

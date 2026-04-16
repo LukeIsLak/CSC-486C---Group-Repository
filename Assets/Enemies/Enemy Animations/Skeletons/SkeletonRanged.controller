@@ -252,7 +252,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: skeleton-dash-attack
+  m_Name: skeleton-throw-attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -267,7 +267,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: dce40eeb37c99014e98aac31eec17693, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3ce591db0b031f84db48b36d99de93c1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -282,7 +282,7 @@ AnimatorController:
   m_Name: SkeletonRanged
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: dashAttack
+  - m_Name: throwAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -455,7 +455,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: dashAttack
+    m_ConditionEvent: throwAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -539597836506836544}
