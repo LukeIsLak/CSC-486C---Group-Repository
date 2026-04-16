@@ -84,6 +84,7 @@ public class SkeletonRanged : EnemyInterface
         rb = GetComponent<Rigidbody>();
 
         SkeletonRangedStateMachine env_srsm = FindObjectOfType<SkeletonRangedStateMachine>();
+        srsm = env_srsm;
         env_srsm.AddEntity(this);
 
         swingTime = srd.swingAttack.length;
@@ -91,11 +92,11 @@ public class SkeletonRanged : EnemyInterface
         activateTime = srd.activate.length;
         deactivateTime = srd.deactivate.length;
 
-        initialize_nma();
+        // initialize_nma();
     }
 
     public void initialize_nma() {
-        if (!startInitialized) StartCoroutine(delay_navmesh());
+        if (!startInitialized && !isInitialized) StartCoroutine(delay_navmesh());
         else isInitialized = true;
     }
 
@@ -526,4 +527,17 @@ public class SkeletonRanged : EnemyInterface
         yield return new WaitForSeconds(throwTime - srd.throwDelay);
         isThrowing = false;
     }
+
+    /****************************************************/
+    /*         Beginning Of Event Listeners             */
+    /****************************************************/
+
+    public void ApplySpeedModifier() 
+    {
+        speedModifier = enemyEffects.getEnemySpeedModifier();
+    }
+
+    /****************************************************/
+    /*             End Of Event Listeners               */
+    /****************************************************/
 }

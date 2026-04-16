@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Chain Lightning
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
+  price: 30
   acquirable: {fileID: 11400000, guid: b88af4261c833644bb7d632ae3be87c3, type: 2}

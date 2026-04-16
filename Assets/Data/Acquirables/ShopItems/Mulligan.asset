@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Mulligan
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
+  price: 30
   acquirable: {fileID: 11400000, guid: 99cd1fee5cfd50c44aeb90086fc7e885, type: 2}

@@ -75,7 +75,7 @@ public class Rat : EnemyInterface
     }
 
     public void initialize_nma() {
-        if (!startInitialized) StartCoroutine(delay_navmesh());
+        if (!startInitialized && !isInitialized) StartCoroutine(delay_navmesh());
     }
 
     private IEnumerator delay_navmesh() {
@@ -84,7 +84,7 @@ public class Rat : EnemyInterface
 
         if (!nma.isOnNavMesh) {
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas)) {
+            if (NavMesh.SamplePosition(transform.position, out hit, 15f, NavMesh.AllAreas)) {
                 transform.position = hit.position;
             } else {
                 Debug.LogWarning($"{gameObject.name}: Could not find NavMesh nearby at {transform.position}!");
