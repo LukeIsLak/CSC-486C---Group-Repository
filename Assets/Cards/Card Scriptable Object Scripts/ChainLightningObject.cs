@@ -26,7 +26,6 @@ public class ChainLightningObject : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy")) {
             EnemyInterface enemy = other.GetComponent<EnemyInterface>();
-            player = GameObject.FindWithTag("Player");
             if (enemy == null) enemy = other.GetComponentInParent<EnemyInterface>();
             if (enemy != null && !alreadyHit.Contains(enemy))
             {
@@ -42,9 +41,7 @@ public class ChainLightningObject : MonoBehaviour
         }
     }
 
-    private void ContinueChain(HashSet<EnemyInterface> alreadyHit, EnemyInterface enemy, Vector3 spawn)
-    {
-        Debug.Log("Something isnt right here2");
+    private void ContinueChain(HashSet<EnemyInterface> alreadyHit, EnemyInterface enemy, Vector3 spawn) {
         //While the chain hasn't reached its cap, 
         if (enemy != null) alreadyHit.Add(enemy);
         if (chainNumber < maxChain)
