@@ -21,7 +21,8 @@ public class ChainLightningObject1 : MonoBehaviour
 
     [SerializeField] private GameObject ChainLightningPrefab;
     [SerializeField] private GameObject lightningPrefab;
-    
+    private FMOD.Studio.EventInstance lightningSound;
+
 
 
     public void Init(float dmg, float maxRange, int chainNum, int chainMax, List<EnemyInterface> pastHits, LayerMask surfaces)
@@ -66,6 +67,10 @@ public class ChainLightningObject1 : MonoBehaviour
 
         // Order list by proximity, get earliest
         EnemyInterface target = nearbyEnemies.OrderBy(c => (transform.position - c.transform.position).sqrMagnitude).ToArray()[0];
+        if(chainNumber != 1)
+        {
+            PlayLightningSound();
+        }
         target.Hit(damage);
         alreadyHit.Add(target);
         targetPos = target.transform.position;
@@ -98,5 +103,13 @@ public class ChainLightningObject1 : MonoBehaviour
         nextLightning.transform.position = targetPos;
         nextLightning.GetComponent<ChainLightningObject1>().Init(damage, radius, chainNumber + 1, maxChain, alreadyHit, surfaceLayers);
         Destroy(this);
+    }
+
+    private void PlayLightningSound() 
+    {
+        lightningSound = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/chainlightningHit");
+        lightningSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        lightningSound.start();
+        lightningSound.release();
     }
 }

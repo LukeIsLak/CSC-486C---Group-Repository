@@ -34,7 +34,6 @@ public class LightningBolt : Cards
     {
         PlayLightningSound();
         //Make raycast from the camera position and shoot it forward based on the range
-        Ray ray = new Ray(camera.transform.position + camera.transform.forward * 2f, camera.transform.forward);
 
         // Visual effect
 

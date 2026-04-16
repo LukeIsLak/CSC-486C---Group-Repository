@@ -35,13 +35,8 @@ public class ChainLightningObject : MonoBehaviour
         player = GameObject.FindWithTag("Player");
 
 
-        if (enemy != null){
-            enemy.Hit(damage);
-            ContinueChain(alreadyHit, enemy);
-            Destroy(this.gameObject);
-
         if (other.gameObject.CompareTag("Enemy")) {
-            EnemyInterface enemy = other.GetComponent<EnemyInterface>();
+            //EnemyInterface enemy = other.GetComponent<EnemyInterface>();
             if (enemy == null) enemy = other.GetComponentInParent<EnemyInterface>();
             if (enemy != null && !alreadyHit.Contains(enemy))
             {
