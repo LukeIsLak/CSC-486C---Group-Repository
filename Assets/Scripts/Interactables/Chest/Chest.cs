@@ -17,6 +17,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private CardRewardDisplay cardPrefab;
     private MeshFilter meshFilter;
     public bool isOpened { get; private set; }
+    public bool canBeOpened = true;
 
     public bool isGoldChest;
 
@@ -27,7 +28,7 @@ public class Chest : MonoBehaviour
 
     public void Open()
     {
-        if (isOpened) return;
+        if (isOpened || !canBeOpened) return;
         isOpened = true;
         meshFilter.sharedMesh = open;
         meshFilter.sharedMesh.RecalculateBounds();

@@ -384,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3908808506347203233, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5323805884830605802, guid: cb89a1bd5a69b3546bb6d758d377dff1, type: 3}
       propertyPath: isGoldChest

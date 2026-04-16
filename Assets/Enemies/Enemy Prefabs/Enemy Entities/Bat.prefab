@@ -90,6 +90,7 @@ MonoBehaviour:
   hasBlood: 1
   bloodDuration: 1
   bloodEffect: {fileID: 1630225761089814724, guid: 00ad366def934eb49aa1733379e61a7f, type: 3}
+  damageNumber: {fileID: 300120990534988418, guid: 1192aea7bc8fa51409bf5614a67b8e30, type: 3}
   anim: {fileID: 4090313962949258712}
   rb: {fileID: 6990128973608440802}
   bd: {fileID: 11400000, guid: 3ccf445bc3a1a374c997269886483a04, type: 2}
@@ -109,6 +110,7 @@ MonoBehaviour:
   canAttack: 0
   isPerched: 0
   isAttacking: 0
+  isDying: 0
   currentPathIndex: 0
   targetPath: []
   flutterAngleDeg: 0
@@ -119,6 +121,7 @@ MonoBehaviour:
   currentState: 0
   abandonCheckInterval: 0.5
   abandonMinProgress: 0.05
+  sprite: {fileID: 8472818207163890435}
 --- !u!54 &6990128973608440802
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -378,7 +381,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 126ccc6b374713f4d84dc01b8f8933f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

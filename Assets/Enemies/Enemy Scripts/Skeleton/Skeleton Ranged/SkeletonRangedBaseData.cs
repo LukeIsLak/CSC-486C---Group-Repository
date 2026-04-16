@@ -57,4 +57,5 @@ public class SkeletonRangedBaseData : BaseEnemyData
     public float minIdleDuration = 0.2f;
     public float maxIdleDuration = 0.7f;
     public float wanderRadius = 5f;
+    public float dissolveTime = 1.0f;
 }

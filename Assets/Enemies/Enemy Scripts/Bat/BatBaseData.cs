@@ -67,7 +67,7 @@ public class BatBaseData : BaseEnemyData
     public float steerDistanceWeight = 2f;
     public float steerDirectionWeight = 1f;
     public LayerMask steerLayerMask = ~0;
-
+    public float dissolveTime = 1f;
 
 
     [Header("Attack Variables")]
