@@ -71,7 +71,7 @@ public class SkeletonMelee : EnemyInterface
             )
         };
 
-        initialize();
+        // initialize();
     }
 
     public override void initialize() {
@@ -88,11 +88,11 @@ public class SkeletonMelee : EnemyInterface
         activateTime = smd.activate.length;
         deactivateTime = smd.deactivate.length;
 
-        initialize_nma();
+        // initialize_nma();
     }
 
     public void initialize_nma() {
-        if (!startInitialized) StartCoroutine(delay_navmesh());
+        if (!startInitialized && !isInitialized) StartCoroutine(delay_navmesh());
         else isInitialized = true;
     }
 

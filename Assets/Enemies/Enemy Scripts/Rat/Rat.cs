@@ -75,7 +75,7 @@ public class Rat : EnemyInterface
     }
 
     public void initialize_nma() {
-        if (!startInitialized) StartCoroutine(delay_navmesh());
+        if (!startInitialized && !isInitialized) StartCoroutine(delay_navmesh());
     }
 
     private IEnumerator delay_navmesh() {

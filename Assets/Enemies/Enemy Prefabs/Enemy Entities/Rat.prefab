@@ -280,7 +280,7 @@ MonoBehaviour:
   nma: {fileID: 5681783064450362064}
   audioEmitter: {fileID: 0}
   startInitialized: 0
-  isInitialized: 1
+  isInitialized: 0
   isIdle: 0
   isWandering: 0
   canWander: 0
@@ -353,7 +353,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8633630617670396899}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: -1372625422
   m_Radius: 0.6
   m_Speed: 3.5

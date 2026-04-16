@@ -73,7 +73,7 @@ public class SkeletonRanged : EnemyInterface
             )
         };
 
-        initialize();
+        // initialize();
     }
 
     public override void initialize() {
@@ -91,11 +91,11 @@ public class SkeletonRanged : EnemyInterface
         activateTime = srd.activate.length;
         deactivateTime = srd.deactivate.length;
 
-        initialize_nma();
+        // initialize_nma();
     }
 
     public void initialize_nma() {
-        if (!startInitialized) StartCoroutine(delay_navmesh());
+        if (!startInitialized && !isInitialized) StartCoroutine(delay_navmesh());
         else isInitialized = true;
     }
 

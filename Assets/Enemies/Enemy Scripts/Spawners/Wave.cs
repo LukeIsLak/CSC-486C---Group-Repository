@@ -6,7 +6,8 @@ using UnityEngine;
 public enum EnemyType {
     Bat,
     Rat,
-    SkeletonMelee
+    SkeletonMelee,
+    SkeletonRanged
 }
 
 [CreateAssetMenu(menuName="Data/Wave")]
@@ -70,6 +71,9 @@ public class Wave : ScriptableObject
             newEnemy.GetComponent<EnemyInterface>().rs = rs;
 
             switch (enemyTypes[index]) {
+                case EnemyType.SkeletonRanged:
+                    newEnemy.GetComponent<SkeletonRanged>().initialize_nma();
+                    break;
                 case EnemyType.SkeletonMelee:
                     newEnemy.GetComponent<SkeletonMelee>().initialize_nma();
                     break;

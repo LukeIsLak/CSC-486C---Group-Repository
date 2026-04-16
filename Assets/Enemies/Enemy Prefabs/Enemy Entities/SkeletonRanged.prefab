@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 6781407783152861963}
   - component: {fileID: 8766711554779654310}
   - component: {fileID: 7574495703179444194}
+  - component: {fileID: 1483432813959712967}
   m_Layer: 0
   m_Name: SkeletonRanged
   m_TagString: Enemy
@@ -479,3 +480,31 @@ MonoBehaviour:
   throwStart: {fileID: 6679660994354949236}
   throwTime: 0
   currentState: 0
+--- !u!114 &1483432813959712967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953842958892301934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a2dc841c8556e544d8b4e1478d629d40, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7574495703179444194}
+        m_TargetAssemblyTypeName: SkeletonRanged, Assembly-CSharp
+        m_MethodName: initialize_nma
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
