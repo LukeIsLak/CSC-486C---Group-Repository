@@ -84,7 +84,7 @@ public class Rat : EnemyInterface
 
         if (!nma.isOnNavMesh) {
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(transform.position, out hit, 5f, NavMesh.AllAreas)) {
+            if (NavMesh.SamplePosition(transform.position, out hit, 15f, NavMesh.AllAreas)) {
                 transform.position = hit.position;
             } else {
                 Debug.LogWarning($"{gameObject.name}: Could not find NavMesh nearby at {transform.position}!");
