@@ -9,6 +9,8 @@ public class TidalWave : Cards
     // Summons a wave that pushes back all enemies it hits. Enemies accumulate damage while in the wave and upon hitting a surface.
 
     public WaveObject wavePrefab;
+    public int N = 5;
+    public float alpha = 60f;
 
     private GameObject player; // TODO : LK - I left this in for now, in case you guys want it
     private GameObject camera;
@@ -19,11 +21,21 @@ public class TidalWave : Cards
         Debug.Log("Used card");
 
         //Send wave away from the player
-        Vector3 startPos = player.transform.position + player.transform.forward * 2f;
+        float startAngle = -alpha / 2f;
+        float angleStep = (N == 1) ? 0 : alpha / (N - 1);
 
-        WaveObject wave = Instantiate(wavePrefab, startPos, Quaternion.LookRotation(player.transform.forward));
+        Vector3 startPos = player.transform.position + player.transform.forward * 1f;
+        Vector3 forward = player.transform.forward;
 
-        wave.Init(player.transform.forward, card);
+        for (int i = 0; i < N; i++)
+        {
+            float angle = startAngle + angleStep * i;
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up) * Quaternion.LookRotation(forward);
+            Vector3 dir = rotation * Vector3.forward;
+
+            WaveObject wave = Instantiate(wavePrefab, startPos, Quaternion.LookRotation(dir));
+            wave.Init(dir, card);
+        }
 
         yield break;
 
