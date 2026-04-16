@@ -11,9 +11,14 @@ public class BlackHoleObject : MonoBehaviour
     [SerializeField]private float radius = 5f;
     [SerializeField] private float ttl = 5f;
     [SerializeField] private Knockback effect;
+    private FMOD.Studio.EventInstance blackHoleActive;
+
 
     void Start(){
         StartCoroutine(timeToLive(ttl));
+        blackHoleActive = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/blackholeActive");
+        blackHoleActive.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        blackHoleActive.start();
     }
 
     public void Init(Vector3 dir, Cards card)
@@ -48,6 +53,8 @@ public class BlackHoleObject : MonoBehaviour
 
     private IEnumerator timeToLive(float dur) {
         yield return new WaitForSeconds(dur);
+        blackHoleActive.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        blackHoleActive.release();
         Destroy(this.gameObject);
     }
     
