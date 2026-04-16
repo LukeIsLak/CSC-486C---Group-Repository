@@ -37,8 +37,10 @@ public class DeckSystems : MonoBehaviour
     
     public event Action OnHandSelectionChanged;
     public event Action OnHandContentsChanged;
+    public event Action ClearHandUI;
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
+    private void NotifyClearHandUI() => ClearHandUI?.Invoke();
     
     //link to players inventory so system can load the deck in for combat
     public PlayerInventory inventory;
@@ -54,6 +56,12 @@ public class DeckSystems : MonoBehaviour
     void Start(){
         loadDeck(inventory.activeDeck.contents);
         shuffleIncHand();
+    }
+
+    public void reLoadDeck(){
+        loadDeck(inventory.activeDeck.contents);
+        NotifyClearHandUI();
+        NotifyHandContentsChanged();
     }
 
     /// <summary>
@@ -160,7 +168,7 @@ public class DeckSystems : MonoBehaviour
                 }
             }
         }
-        // NotifyHandContentsChanged();
+        //NotifyHandContentsChanged();
 
         return true;
     }
