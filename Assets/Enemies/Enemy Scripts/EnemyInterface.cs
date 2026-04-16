@@ -35,6 +35,7 @@ public class EnemyInterface : MonoBehaviour
     public List<int> currentDoTTicks     = new List<int>();
 
     [Header("Enemy Interface - Enemy Effects")]
+    private List<Color> freezeOriginalMatColors = null;
     public bool hasBlood = true;
     public float bloodDuration = 1.0f;
     public GameObject bloodEffect;
@@ -183,18 +184,27 @@ public class EnemyInterface : MonoBehaviour
         }
 
         SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        List<Color> originalColors = new List<Color>();
+        // Only store original material colors on first freeze
+        if (numFreeze == 1) {
+            freezeOriginalMatColors = new List<Color>();
+            foreach (SpriteRenderer sr in sprites) {
+                if (sr.material.HasProperty("_sprite_color")) freezeOriginalMatColors.Add(sr.material.GetColor("_sprite_color"));
+                else freezeOriginalMatColors.Add(Color.white);
+            }
+        }
+
         foreach (SpriteRenderer sr in sprites) {
-            originalColors.Add(sr.color);
-            sr.color = Color.blue;
+            if (sr.material.HasProperty("_sprite_color")) sr.material.SetColor("_sprite_color", Color.blue);
         }
 
         yield return new WaitForSeconds(data.freezeDuration);
 
         if (--numFreeze <= 0) {
             for (int i = 0; i < sprites.Length; i++) {
-                if (sprites[i] != null)
-                    sprites[i].color = originalColors[i];
+                if (sprites[i] != null && freezeOriginalMatColors != null && i < freezeOriginalMatColors.Count) {
+                    if (sprites[i].material.HasProperty("_sprite_color"))
+                        sprites[i].material.SetColor("_sprite_color", freezeOriginalMatColors[i]);
+                }
             }
 
             if (psO != null) {
@@ -203,6 +213,7 @@ public class EnemyInterface : MonoBehaviour
             }
 
             hasFreeze = false;
+            freezeOriginalMatColors = null;
         }
     }
 
