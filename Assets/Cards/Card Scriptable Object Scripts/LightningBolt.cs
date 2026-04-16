@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Cards/LightningBolt")]
@@ -11,6 +13,7 @@ public class LightningBolt : Cards
     [SerializeField] private LightningBoltObject lightningPrefab;
 
     [SerializeField] private LayerMask enemylayer;
+    [SerializeField] private LayerMask surfaceLayer;
     private GameObject player;
     private GameObject camera;
 
@@ -27,29 +30,12 @@ public class LightningBolt : Cards
 
     private void shootLightning(GameObject camera)
     {
-        //Make raycast from the camera position and shoot it forward based on the range
-        Ray ray = new Ray(camera.transform.position + camera.transform.forward * 2f, camera.transform.forward);
 
+        // Visual effect
+
+        Ray ray = new Ray(camera.transform.position + camera.transform.forward * 2f, camera.transform.forward);
         Vector3 endPoint = ray.origin + ray.direction * range;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, range, enemylayer))
-        {
-            //Find the point that the raycast collided with an object
-            //If an enemy, deal damage
-
-            endPoint = hit.point;
-
-            EnemyInterface enemy = hit.collider.GetComponent<EnemyInterface>();
-            if (enemy != null)
-            {
-                enemy.Hit(effectValue);
-            }
-            else 
-            {
-                enemy = hit.collider.GetComponentInParent<EnemyInterface>();
-                enemy.Hit(effectValue);
-            }
-        }
         Debug.Log("Trying Lightning Bolt");
         LightningBoltObject lightning = Instantiate(lightningPrefab);
         LineRenderer line = lightning.GetComponent<LineRenderer>();
@@ -69,6 +55,44 @@ public class LightningBolt : Cards
 
             line.SetPosition(i, pos);
         }
+
+        //Make raycast from the camera position and shoot it forward based on the range
+
+
+        RaycastHit[] hits = Physics.RaycastAll(ray, range);
+        hits = hits.OrderBy(c => (camera.transform.position - c.transform.position).sqrMagnitude).ToArray();
+
+
+        foreach (RaycastHit hit in hits)
+        {
+            // Check if we found a surface
+            if ((surfaceLayer.value & (1 << hit.collider.gameObject.layer)) != 0)
+                return;
+
+            EnemyInterface ei = hit.collider.GetComponentInParent<EnemyInterface>();
+            if (!ei) return;
+            ei.Hit(effectValue);
+        }
+        /*
+        if (Physics.Raycast(ray, out RaycastHit hit, range, enemylayer))
+        {
+            //Find the point that the raycast collided with an object
+            //If an enemy, deal damage
+
+            endPoint = hit.point;
+
+            EnemyInterface enemy = hit.collider.GetComponent<EnemyInterface>();
+            if (enemy != null)
+            {
+                enemy.Hit(effectValue);
+            }
+            else 
+            {
+                enemy = hit.collider.GetComponentInParent<EnemyInterface>();
+                enemy.Hit(effectValue);
+            }
+        }
+        */
     }
 
     //To add: Visual Effect
