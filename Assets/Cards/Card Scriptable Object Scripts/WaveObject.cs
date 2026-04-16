@@ -34,12 +34,14 @@ public class WaveObject : MonoBehaviour
         //Handle knockback and damage for enemies in the collider
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
         if (enemy != null){
-                enemy.Hit(dmg, effect.type, effect, transform.position);
+                GameObject player = GameObject.FindWithTag("Player");
+                enemy.Hit(dmg, effect.type, effect, player.transform.position);
             }
             else {
                 enemy = other.GetComponentInParent<EnemyInterface>();
                 if (enemy != null){
-                    enemy.Hit(dmg, effect.type, effect, transform.position);
+                    GameObject player = GameObject.FindWithTag("Player");
+                    enemy.Hit(dmg, effect.type, effect, player.transform.position);
                 }
             }
     }
