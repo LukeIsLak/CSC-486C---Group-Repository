@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyInterface : MonoBehaviour
 {
@@ -211,9 +212,12 @@ public class EnemyInterface : MonoBehaviour
     private IEnumerator StartStop(Stop data) {
         isStopped = true;
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null) rb.constraints = RigidbodyConstraints.FreezePosition;
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent != null) agent.isStopped = true;
+        if (rb != null) rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         yield return new WaitForSeconds(data.stopDuration);
-        if (rb != null) rb.constraints = RigidbodyConstraints.None;
+        if (rb != null) rb.constraints = RigidbodyConstraints.FreezeRotation;
+        if (agent != null) agent.isStopped = false;
         isStopped = false;
     }
 

@@ -527,4 +527,17 @@ public class SkeletonRanged : EnemyInterface
         yield return new WaitForSeconds(throwTime - srd.throwDelay);
         isThrowing = false;
     }
+
+    /****************************************************/
+    /*         Beginning Of Event Listeners             */
+    /****************************************************/
+
+    public void ApplySpeedModifier() 
+    {
+        speedModifier = enemyEffects.getEnemySpeedModifier();
+    }
+
+    /****************************************************/
+    /*             End Of Event Listeners               */
+    /****************************************************/
 }
