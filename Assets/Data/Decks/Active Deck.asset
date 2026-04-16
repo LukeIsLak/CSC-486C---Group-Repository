@@ -16,18 +16,22 @@ MonoBehaviour:
   - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 11400000}
   - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
     uid: 1
     useable: 0
+    cleanup: 0
     deck: {fileID: 11400000}
   - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
     uid: 2
     useable: 1
+    cleanup: 0
     deck: {fileID: 11400000}
   - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
     uid: 2
     useable: 1
+    cleanup: 0
     deck: {fileID: 11400000}
-  maxSize: 15
+  maxSize: 10
   useMaxSize: 1
