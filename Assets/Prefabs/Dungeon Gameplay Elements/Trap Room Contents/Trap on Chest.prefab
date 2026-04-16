@@ -49,7 +49,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
   - {fileID: 11400000, guid: 1d899209536c2144abaa9ee180eefb53, type: 2}
   - {fileID: 11400000, guid: a20e4d1311d07914b91617cfbebc295a, type: 2}
-  possibleWavesWeights: 050000000c0000000700000007000000
+  possibleWavesWeights: 050000000c0000001027000007000000
   waves: []
   spawnPoints:
   - {fileID: 5121844001504603081}
@@ -64,7 +64,7 @@ MonoBehaviour:
   remainingEnemies: 0
   uponCompletion: {fileID: 11400000, guid: 164095ff0a96c684ebaf127baaf8cd4c, type: 2}
   delay: 1
-  trapDelay: 1.5
+  trapDelay: 1
 --- !u!1 &3277725079014860740
 GameObject:
   m_ObjectHideFlags: 0

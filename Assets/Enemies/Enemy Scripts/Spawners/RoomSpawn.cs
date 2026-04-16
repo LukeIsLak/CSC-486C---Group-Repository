@@ -33,7 +33,7 @@ public class RoomSpawn : MonoBehaviour
     }
 
     public void InstantiateWave(Wave w, bool isTrapRoom) {
-        float d = (delay >= 0) ? delay : w.spawnDelay;
+        float d = (w.spawnDelay >= 0) ? w.spawnDelay : delay;
         if (hasWaves) remainingEnemies = w.enemyCounts.Sum();
         else remainingEnemies += w.enemyCounts.Sum();
         StartCoroutine(w.SpawnWaveDelay(spawnPoints, d, this, isTrapRoom));
