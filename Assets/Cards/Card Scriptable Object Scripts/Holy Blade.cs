@@ -16,6 +16,7 @@ public class HolyBlade : Cards
         if (player == null) {
             Debug.Log("theres a problem");
             yield return new WaitForSeconds(0.5f);
+            increaseAmount = effectValue / 100;
         }
 
         playerChar = player.GetComponent(typeof(PlayerCharacter)) as PlayerCharacter;
