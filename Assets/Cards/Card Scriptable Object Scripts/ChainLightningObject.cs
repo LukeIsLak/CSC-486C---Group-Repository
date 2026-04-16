@@ -17,6 +17,11 @@ public class ChainLightningObject : MonoBehaviour
 
     private GameObject player;
 
+    private FMOD.Studio.EventInstance lightningSound;
+    private FMOD.Studio.EventInstance chainLightningSound;
+
+
+
 
     void Start(){
         StartCoroutine(timeToLive(ttl));
@@ -24,8 +29,14 @@ public class ChainLightningObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        PlayLightningSound();
+        EnemyInterface enemy = other.GetComponent<EnemyInterface>();
+        //Create a hashset to store the enemies already hit in the chain
+        player = GameObject.FindWithTag("Player");
+
+
         if (other.gameObject.CompareTag("Enemy")) {
-            EnemyInterface enemy = other.GetComponent<EnemyInterface>();
+            //EnemyInterface enemy = other.GetComponent<EnemyInterface>();
             if (enemy == null) enemy = other.GetComponentInParent<EnemyInterface>();
             if (enemy != null && !alreadyHit.Contains(enemy))
             {
@@ -59,6 +70,14 @@ public class ChainLightningObject : MonoBehaviour
     private IEnumerator timeToLive(float dur) {
         yield return new WaitForSeconds(dur);
         Destroy(this.gameObject);
+    }
+
+    private void PlayLightningSound() 
+    {
+        lightningSound = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/chainlightningHit");
+        lightningSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        lightningSound.start();
+        lightningSound.release();
     }
 
 }

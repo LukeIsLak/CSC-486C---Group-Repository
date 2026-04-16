@@ -8,6 +8,8 @@ public class BrambleGrenade : MonoBehaviour
 
     [SerializeField] private float forwardForce = 5f;
     [SerializeField] private float upwardForce = 5f;
+    private FMOD.Studio.EventInstance brambleGrenade;
+
 
 
     private Rigidbody rb;
@@ -29,9 +31,18 @@ public class BrambleGrenade : MonoBehaviour
     {
         //When it lands, spawn the trap at that point
         if (!other.gameObject.CompareTag("Surface")) return;
+        PlayBrambleGrenade();
         Vector3 hitPoint = other.contacts[0].point;
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, other.contacts[0].normal);
         Instantiate(trapPrefab, hitPoint + Vector3.up * 0.2f, rotation);
         Destroy(this.gameObject);
+    }
+
+    private void PlayBrambleGrenade() 
+    {
+        brambleGrenade = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/brambleSnareBase");
+        brambleGrenade.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        brambleGrenade.start();
+        brambleGrenade.release();
     }
 }
