@@ -148,7 +148,7 @@ MonoBehaviour:
   isDying: 0
   wallMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1536
   currentState: 0
   dashHurtBox: {fileID: 5844208211211972123}
   sprite: {fileID: 4165740388970396510}

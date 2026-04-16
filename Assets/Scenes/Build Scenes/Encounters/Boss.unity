@@ -1418,6 +1418,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 145585785080748009, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1102890631558432364, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2339668825262608952, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.38
@@ -1457,6 +1465,10 @@ PrefabInstance:
     - target: {fileID: 2339668825262608952, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515992479925628554, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8351082474959089942, guid: 03b6c56fbc94c5643aeac9f0cb7bcd55, type: 3}
       propertyPath: m_Name
@@ -1506,10 +1518,6 @@ PrefabInstance:
     - target: {fileID: 4843415185380909026, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4845760476549791088, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5473761978391616915, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: playerData
