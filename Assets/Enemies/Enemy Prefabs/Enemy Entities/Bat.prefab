@@ -83,6 +83,7 @@ MonoBehaviour:
   hasFreeze: 0
   hasKnockback: 0
   isStopped: 0
+  isDying: 0
   numDamageOverTime: 0
   numFreeze: 0
   currentDoTNames: []
@@ -110,7 +111,6 @@ MonoBehaviour:
   canAttack: 0
   isPerched: 0
   isAttacking: 0
-  isDying: 0
   currentPathIndex: 0
   targetPath: []
   flutterAngleDeg: 0

@@ -80,6 +80,9 @@ public class Health : MonoBehaviour
     {
         if (hasDied) return;
         hasDied = true;
+        FMOD.ChannelGroup mcg;
+        FMODUnity.RuntimeManager.CoreSystem.getMasterChannelGroup(out mcg);
+        mcg.stop();
         //Destroy(gameObject);
         inputScheme.SetInputToInteractableUI();
         PlayerDeath.Raise();
