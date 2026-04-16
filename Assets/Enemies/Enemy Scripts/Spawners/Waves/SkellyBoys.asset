@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793d1dd16c9fd2e4abde4d88da77598d, type: 3}
   m_Name: SkellyBoys
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
-  enemyTypes: 
-  enemyCounts: 
-  spawnDelay: 0
-  orderedSpawn: 1
+  enemyPrefabs:
+  - {fileID: 1279664425953171000, guid: bb0370bfcbcff944ab6fc5d044e38fcc, type: 3}
+  - {fileID: 8953842958892301934, guid: 87274f330664aa74fa67c09449d83c07, type: 3}
+  enemyTypes: 0200000003000000
+  enemyCounts: 0300000002000000
+  spawnDelay: 1
+  orderedSpawn: 0

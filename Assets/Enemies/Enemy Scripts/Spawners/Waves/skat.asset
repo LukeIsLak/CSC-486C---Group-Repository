@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793d1dd16c9fd2e4abde4d88da77598d, type: 3}
   m_Name: skat
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
-  enemyTypes: 
-  enemyCounts: 
-  spawnDelay: 0
-  orderedSpawn: 1
+  enemyPrefabs:
+  - {fileID: 8953842958892301934, guid: 87274f330664aa74fa67c09449d83c07, type: 3}
+  - {fileID: 864461203881756215, guid: 2b1ab838362516d4092ba1d49f0aca1b, type: 3}
+  enemyTypes: 0300000000000000
+  enemyCounts: 0300000008000000
+  spawnDelay: 1
+  orderedSpawn: 0

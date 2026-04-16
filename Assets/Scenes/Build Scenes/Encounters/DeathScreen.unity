@@ -516,10 +516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6387d02b6f04dc14283cf84fb022e63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: 'Something something you died
+  message: 'You have become consumed by the darkness
 
-    Press a ''button'' to go back to the
-    main menu'
+    Try again at the main menu'
 --- !u!1 &730666129
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Greed
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
+  price: 45
   acquirable: {fileID: 11400000, guid: 484b46b6e9e21de45814b5aadf390db8, type: 2}
