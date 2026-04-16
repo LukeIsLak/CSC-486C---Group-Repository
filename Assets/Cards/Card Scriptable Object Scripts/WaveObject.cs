@@ -30,6 +30,7 @@ public class WaveObject : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("TEST!");
         //Handle knockback and damage for enemies in the collider
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
         if (enemy != null){
