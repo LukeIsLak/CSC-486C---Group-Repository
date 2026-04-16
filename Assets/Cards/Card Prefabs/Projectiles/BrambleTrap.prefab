@@ -189,7 +189,7 @@ MonoBehaviour:
   vineLength: 0.25
   vine: {fileID: 4357611605778420183, guid: 8ee07b2df20803a4ea95ae767b3fa0e5, type: 3}
   slowAmount: 5
-  damage: 2
+  damage: 4
   ttl: 5
   DoT: {fileID: 11400000, guid: 988cf5a043f134002b69a88ec6ecb5db, type: 2}
   stopEffect: {fileID: 11400000, guid: f5edba82d71344b12bb280df2c7df83a, type: 2}
