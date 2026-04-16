@@ -132,7 +132,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: cfde79f3e9b59dc40aafccbe290bda41, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -293,12 +293,14 @@ MonoBehaviour:
   waitToMove: 0
   isMoving: 0
   checkPlayerPath: 1
+  isDying: 0
   isRatMaster: 0
   isLoner: 1
   ratColonyId: -1
   colonyMoveSpot: {x: 0, y: 0, z: 0}
   curLeapDir: {x: 0, y: 0, z: 0}
   currentState: 0
+  sprite: {fileID: 3416086164388169106}
 --- !u!95 &2156385922286755932
 Animator:
   serializedVersion: 5

@@ -50,4 +50,5 @@ public class SkeletonMeleeBaseData : BaseEnemyData
     public float minIdleDuration = 0.2f;
     public float maxIdleDuration = 0.7f;
     public float wanderRadius = 5f;
+    public float dissolveTime = 0.3f;
 }

@@ -145,11 +145,13 @@ MonoBehaviour:
   doneActivate: 0
   canDeactivate: 1
   doneDeactivate: 0
+  isDying: 0
   wallMask:
     serializedVersion: 2
     m_Bits: 1024
   currentState: 0
   dashHurtBox: {fileID: 5844208211211972123}
+  sprite: {fileID: 4165740388970396510}
 --- !u!114 &1563274741519246562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +470,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d4a02517590e3f548aa61a6957be6bc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

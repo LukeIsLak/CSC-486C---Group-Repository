@@ -47,4 +47,6 @@ public class RatBaseData : BaseEnemyData
     public float colonyJoinRadius = 5f;
     public float colonyLeaveRadius = 10f;
     public float colonyFinishRadius = 1.5f;
+
+    public float dissolveTime = 1.0f;
 }

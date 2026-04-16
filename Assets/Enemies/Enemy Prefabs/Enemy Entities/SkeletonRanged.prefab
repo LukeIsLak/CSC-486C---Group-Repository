@@ -111,7 +111,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 444042099e8d09d49b17fcfd028af086, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -476,12 +476,14 @@ MonoBehaviour:
   doneActivate: 0
   canDeactivate: 1
   doneDeactivate: 0
+  isDying: 0
   wallMask:
     serializedVersion: 2
     m_Bits: 1024
   throwStart: {fileID: 6679660994354949236}
   throwTime: 0
   currentState: 0
+  sprite: {fileID: 645200280868132331}
 --- !u!114 &1483432813959712967
 MonoBehaviour:
   m_ObjectHideFlags: 0

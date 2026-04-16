@@ -35,6 +35,7 @@ public class Bat : EnemyInterface
     public bool canAttack           = false;
     public bool isPerched           = false;
     public bool isAttacking         = false;
+    public bool isDying             = false;
 
     [Header("Bat motion")]
     public int currentPathIndex = 0;
@@ -61,6 +62,8 @@ public class Bat : EnemyInterface
     private float abandonTimer      = 0f;
     private Vector3 lastCheckPos    = Vector3.zero;
 
+    public SpriteRenderer sprite;
+    
     /****************************************************/
     /*          Beginning Of Instance Methods           */
     /****************************************************/
@@ -79,10 +82,17 @@ public class Bat : EnemyInterface
         bsm.entities.Add(this);
     }
 
+    // public override void KillEnemy() {
+    //     if (rs != null) rs.RemoveEnemy();
+    //     if (bsm != null) bsm.entities.Remove(this);
+    //     Destroy(this.gameObject);
+    // }
+
     public override void KillEnemy() {
-        if (rs != null) rs.RemoveEnemy();
-        if (bsm != null) bsm.entities.Remove(this);
-        Destroy(this.gameObject);
+        if (isDying) return;
+        isDying = true;
+        StopAllCoroutines();
+        StartCoroutine(DissolveAndDestroy());
     }
 
 
@@ -746,7 +756,7 @@ public class Bat : EnemyInterface
     // }
 
     public void OnCollisionEnter(Collision other) {
-        if (isAttacking && other.gameObject.CompareTag("Player")) {
+        if (!isDying && isAttacking && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
             if (h != null) h.TakeDamage(bd.damage);
             isAttacking = false;
@@ -785,6 +795,28 @@ public class Bat : EnemyInterface
         yield return new WaitForSeconds(delay);
         canAttack = true;
         if (attackAmount <= 0) shouldPerch = true;
+    }
+
+    private IEnumerator DissolveAndDestroy() {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb) rb.velocity = Vector3.zero;
+        if (anim != null) anim.enabled = false;
+
+        float dissolveTime = bd.dissolveTime;
+        float timer = 0f;
+        Material mat = sprite.material;
+
+        while (timer < dissolveTime) {
+            float t = timer / dissolveTime;
+            mat.SetFloat("_fade", 1f - t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mat.SetFloat("_fade", 0f);
+        if (rs != null) rs.RemoveEnemy();
+        if (bsm != null) bsm.RemoveEntity(this);
+
+        Destroy(gameObject);
     }
 
     /****************************************************/

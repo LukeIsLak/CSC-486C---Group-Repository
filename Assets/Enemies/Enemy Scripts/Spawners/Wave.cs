@@ -38,7 +38,7 @@ public class Wave : ScriptableObject
 
 
         if (!orderedSpawn) {
-            ec = enemyCounts;
+            ec = new List<int>(enemyCounts);
             c = enemyCounts.Count;
             available = Enumerable.Repeat(true, c).ToList();
         }
@@ -54,12 +54,16 @@ public class Wave : ScriptableObject
                                                 return true;}).Count();
             }
             else {
-                int _index = Random.Range(0, ec.Count);
-                int seen = 0;
-                index = available.TakeWhile(x => {
-                                                if (x) seen++;
-                                                return seen <= _index; }).Count() - 1;
-                if (--ec[index] == 0) {
+                List<int> availableIndices = new List<int>();
+                for (int j = 0; j < ec.Count; j++) {
+                    if (available[j] && ec[j] > 0) availableIndices.Add(j);
+                }
+                if (availableIndices.Count == 0) break; // No more to spawn
+
+                int randIdx = Random.Range(0, availableIndices.Count);
+                index = availableIndices[randIdx];
+                ec[index]--;
+                if (ec[index] == 0) {
                     available[index] = false;
                     c -= 1;
                 }
