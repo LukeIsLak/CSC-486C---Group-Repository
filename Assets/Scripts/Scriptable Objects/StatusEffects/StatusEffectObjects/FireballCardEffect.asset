@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Fireball
   type: 0
   ticksPerSecond: 2
-  tickDamage: 1
+  tickDamage: 2
   totalTicks: 10
   hasOngoingPart: 1
   hasBurstPart: 1
