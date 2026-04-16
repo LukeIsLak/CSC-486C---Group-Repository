@@ -471,7 +471,26 @@ public class Rat : EnemyInterface
 
     private IEnumerator DelayCalcPlayerPath() {
         checkPlayerPath = false;
-        nma.SetDestination(playerTransform.position);
+        Vector3 ratPos = transform.position;
+        Vector3 plaPos = playerTransform.position;
+        ratPos.y = 0;
+        plaPos.y = 0;
+        float distToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        if (distToPlayer > rd.preferredRange + rd.rangeTolerance) {
+            isMoving = true;
+            nma.SetDestination(playerTransform.position);
+        }
+        else if (distToPlayer < rd.preferredRange - rd.rangeTolerance) {
+            isMoving = true;
+            Vector3 dirAway = (transform.position - playerTransform.position).normalized;
+            Vector3 targetPos = transform.position + dirAway * (rd.preferredRange - distToPlayer + 0.5f);
+            nma.SetDestination(targetPos);
+            UpdateMove();
+        }
+        else {
+            isMoving = false;
+            nma.ResetPath();
+        }
         yield return new WaitForSeconds(rd.checkPlayerUpdate);
         checkPlayerPath = true;
     }

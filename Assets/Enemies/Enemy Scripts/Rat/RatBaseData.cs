@@ -40,6 +40,10 @@ public class RatBaseData : BaseEnemyData
     public float detectionRadius = 5f;
     public float wanderRadius = 4f;
 
+    [Header("Ranged Behavior")]
+    public float preferredRange = 1.5f;
+    public float rangeTolerance = 0.25f;
+
     [Header("Misc. Rat Information")]
     public float idleDuration = 2f;
     public float minMoveWait = 0.25f;
