@@ -6458,7 +6458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryLocation: {fileID: 7654491125290211153}
-  cardViewPrefab: {fileID: 8081956759663492939, guid: e2465ff249be8e64288eca3e9700354b, type: 3}
+  cardViewPrefab: {fileID: 8081956759663492939, guid: d694bdcd6373d7d42a47541dcbaaefa8, type: 3}
   scrollRect: {fileID: 5941285783691745774}
 --- !u!222 &4977096432126337335
 CanvasRenderer:
