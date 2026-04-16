@@ -279,19 +279,19 @@ PrefabInstance:
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
+      objectReference: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: a8a5f9f9cb1c043368838ea4d6a33750, type: 2}
+      objectReference: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: a8a5f9f9cb1c043368838ea4d6a33750, type: 2}
+      objectReference: {fileID: 11400000, guid: 2ecb649e84b487940bb277293ff21409, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: a8a5f9f9cb1c043368838ea4d6a33750, type: 2}
+      objectReference: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     - target: {fileID: 820030912892177376, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

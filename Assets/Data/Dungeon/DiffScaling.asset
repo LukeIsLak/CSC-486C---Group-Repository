@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scalingFraction: 0.85714287
   minTrapRoomFraction: 0.2
-  maxTrapRoomFraction: 0.7
+  maxTrapRoomFraction: 0.6
   minDungeonInterations: 3
   maxDungeonInterations: 6
