@@ -13,7 +13,7 @@ public class FrostNova : Cards
     private GameObject camera;
 
 
-    [SerializeField]public float dmg = 20f;
+    [SerializeField]public float dmg = 1.5f;
     private Vector3 dir; 
 
     [SerializeField] private LayerMask enemylayer;
