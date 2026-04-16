@@ -9,6 +9,8 @@ TagManager:
   - Surface
   - HasteEffect
   - HinderEffect
+  - disconnect
+  - gameManager
   layers:
   - Default
   - TransparentFX
