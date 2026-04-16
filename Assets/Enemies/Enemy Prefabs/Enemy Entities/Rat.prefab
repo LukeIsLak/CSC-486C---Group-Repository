@@ -217,7 +217,6 @@ GameObject:
   - component: {fileID: 6272005085845498792}
   - component: {fileID: 1895772698106345170}
   - component: {fileID: 3495961680161000742}
-  - component: {fileID: 269343639249342761}
   m_Layer: 6
   m_Name: Rat
   m_TagString: Enemy
@@ -385,9 +384,9 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8633630617670396899}
+      - m_Target: {fileID: 5050423561288609642}
         m_TargetAssemblyTypeName: Rat, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: ApplySpeedModifier
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -470,19 +469,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &269343639249342761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8633630617670396899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 0}
-  Response:
-    m_PersistentCalls:
-      m_Calls: []

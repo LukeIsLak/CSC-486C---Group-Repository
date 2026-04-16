@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2034398724549241429}
   - component: {fileID: 1563274741519246562}
   - component: {fileID: 2024303234438435349}
+  - component: {fileID: 4639316819468053291}
   m_Layer: 0
   m_Name: SkeletonMelee
   m_TagString: Enemy
@@ -192,6 +193,34 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &4639316819468053291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279664425953171000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c040e34c07d3334a9cc67c7f20172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 49689543c418cbe408e966af5245f709, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2034398724549241429}
+        m_TargetAssemblyTypeName: SkeletonMelee, Assembly-CSharp
+        m_MethodName: ApplySpeedModifier
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4831327252875266159
 GameObject:
   m_ObjectHideFlags: 0
