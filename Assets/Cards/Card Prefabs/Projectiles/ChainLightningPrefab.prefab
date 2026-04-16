@@ -119,6 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0aad140451d4e09b5db7649b7a4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 15
+  chainNumber: 0
+  maxChain: 5
+  ttl: 5
   ChainLightningPrefab: {fileID: 6355065046752603685}
 --- !u!114 &-3840479584539066528
 MonoBehaviour:
@@ -132,10 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91ac4089c049436d8226c11cc5887a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rotateSpeed: 200
+  speed: 200
+  rotateSpeed: 400
   radius: 50
-  avoidScalar: 2
+  avoidScalar: 1
   wallLayer:
     serializedVersion: 2
     m_Bits: 512

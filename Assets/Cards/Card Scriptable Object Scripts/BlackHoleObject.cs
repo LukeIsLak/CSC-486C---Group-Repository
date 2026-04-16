@@ -9,12 +9,17 @@ public class BlackHoleObject : MonoBehaviour
     [SerializeField] private float speed = 2f;
 
     [SerializeField]private float radius = 5f;
+    [SerializeField] private float timeBetweenTicks = 0.1f;
     [SerializeField] private float ttl = 5f;
     [SerializeField] private Knockback effect;
     private FMOD.Studio.EventInstance blackHoleActive;
 
+    [SerializeField] private float dmg;
 
+
+    private List<EnemyInterface> hitEnemies = new();
     void Start(){
+        StartCoroutine(DamageRefresh());
         StartCoroutine(timeToLive(ttl));
         blackHoleActive = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/blackholeActive");
         blackHoleActive.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
@@ -24,6 +29,7 @@ public class BlackHoleObject : MonoBehaviour
     public void Init(Vector3 dir, Cards card)
     {
         direction = dir;
+        dmg = card.effectValue / ttl * timeBetweenTicks;
     }
 
     // Update is called once per frame
@@ -39,18 +45,29 @@ public class BlackHoleObject : MonoBehaviour
         // XXX fix the reference of origin (in enemy interface)
         EnemyInterface enem = other.GetComponent<EnemyInterface>();
             if (enem != null){
-                enem.Hit(0, effect.type, effect, transform.position);
+                enem.Hit(dmg, effect.type, effect, transform.position);
             }
             else {
                 enem = other.GetComponentInParent<EnemyInterface>();
                 if (enem != null){
-                    enem.Hit(0, effect.type, effect, transform.position);
+                    enem.Hit(0f, effect.type, effect, transform.position);
+                    if (hitEnemies.Contains(enem)) return;
+                    hitEnemies.Add(enem);
+                    enem.Hit(dmg);
                 }
             }
         Debug.Log("In hitbox");
 
     }
 
+    private IEnumerator DamageRefresh()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(timeBetweenTicks);
+            hitEnemies.Clear();
+        }
+    }
     private IEnumerator timeToLive(float dur) {
         yield return new WaitForSeconds(dur);
         blackHoleActive.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);

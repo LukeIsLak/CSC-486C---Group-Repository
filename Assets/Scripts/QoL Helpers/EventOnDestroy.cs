@@ -6,7 +6,7 @@ public class EventOnDestroy : MonoBehaviour
 {
     public GameEvent RaiseOnDestroy;
 
-    public void Oestroy()
+    public void OnDestroy()
     {
         RaiseOnDestroy.Raise();        
     }

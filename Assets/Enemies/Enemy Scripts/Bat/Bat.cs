@@ -61,6 +61,8 @@ public class Bat : EnemyInterface
     private float abandonTimer      = 0f;
     private Vector3 lastCheckPos    = Vector3.zero;
 
+    public SpriteRenderer sprite;
+    
     /****************************************************/
     /*          Beginning Of Instance Methods           */
     /****************************************************/
@@ -79,10 +81,17 @@ public class Bat : EnemyInterface
         bsm.entities.Add(this);
     }
 
+    // public override void KillEnemy() {
+    //     if (rs != null) rs.RemoveEnemy();
+    //     if (bsm != null) bsm.entities.Remove(this);
+    //     Destroy(this.gameObject);
+    // }
+
     public override void KillEnemy() {
-        if (rs != null) rs.RemoveEnemy();
-        if (bsm != null) bsm.entities.Remove(this);
-        Destroy(this.gameObject);
+        if (isDying) return;
+        isDying = true;
+        StopAllCoroutines();
+        StartCoroutine(DissolveAndDestroy());
     }
 
 
@@ -296,7 +305,8 @@ public class Bat : EnemyInterface
         }
         // fallback (should not happen)
         return bd.weightedAttacks[0].attack;
-    }    void AbandonPath(string reason = "") {
+    }    
+    public void AbandonPath(string reason = "") {
         if (debug) Debug.Log($"Bat abandoned path: {reason}");
         isMoving = false;
         if (isPecking) { peckComplete = true; isPecking = false; }
@@ -312,7 +322,7 @@ public class Bat : EnemyInterface
     }
 
     void UpdateMoveSpot(bool s) {
-        if (isMoving && targetPath.Count > 0) {
+        if (isMoving && targetPath.Count > 0 && currentPathIndex < targetPath.Count) {
             Vector3 target = targetPath[currentPathIndex];
 
             // Path abandonment: check periodically if the bat is making progress
@@ -357,6 +367,7 @@ public class Bat : EnemyInterface
                     if (isPecking) peckComplete = true;
                     isMoving = false;
                     transform.rotation = Quaternion.identity;
+                    currentPathIndex = targetPath.Count - 1;
                     // transform.position = new Vector3(transform.position.x, 0.4f, transform.position.z);
                 }
             }
@@ -385,6 +396,18 @@ public class Bat : EnemyInterface
         isMoving = path.Count > 0;
         abandonTimer = 0f;
         lastCheckPos = transform.position;
+    }
+
+    public override void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
+        if (rb == null) rb = GetComponent<Rigidbody>();
+        if (knockbackOrigin == null) return;
+        if (rb != null)
+        {
+            Vector3 direction = (transform.position - knockbackOrigin).normalized;
+            rb.AddForce(direction * data.knockbackForce, ForceMode.Impulse);
+            isMoving = false; // Stop scripted movement
+            StartCoroutine(RecoverFromKnockback());
+        }
     }
 
     /****************************************************/
@@ -514,6 +537,7 @@ public class Bat : EnemyInterface
         UpdateMoveSpot(false);
 
         if (!isMoving && isPecking == true && !isPeckRebounding) peckComplete = true;
+        else if (!isMoving && !isPecking && !isPeckRebounding) peckComplete = true;
     }
 
     public void PeckRebound()
@@ -746,10 +770,11 @@ public class Bat : EnemyInterface
     // }
 
     public void OnCollisionEnter(Collision other) {
-        if (isAttacking && other.gameObject.CompareTag("Player")) {
+        if (!isDying && isAttacking && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
             if (h != null) h.TakeDamage(bd.damage);
             isAttacking = false;
+            if (isPecking) isPeckRebounding = true;
         }
     }
 
@@ -785,6 +810,37 @@ public class Bat : EnemyInterface
         yield return new WaitForSeconds(delay);
         canAttack = true;
         if (attackAmount <= 0) shouldPerch = true;
+    }
+
+    private IEnumerator DissolveAndDestroy() {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb) rb.velocity = Vector3.zero;
+        if (anim != null) anim.enabled = false;
+
+        float dissolveTime = bd.dissolveTime;
+        float timer = 0f;
+        Material mat = sprite.material;
+
+        while (timer < dissolveTime) {
+            float t = timer / dissolveTime;
+            mat.SetFloat("_fade", 1f - t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mat.SetFloat("_fade", 0f);
+        if (rs != null) rs.RemoveEnemy();
+        if (bsm != null) bsm.RemoveEntity(this);
+
+        Destroy(gameObject);
+    }
+
+    private IEnumerator RecoverFromKnockback() {
+        yield return new WaitForSeconds(0.2f); // Adjust as needed
+        if (rb != null) {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        isMoving = true; // Resume movement
     }
 
     /****************************************************/

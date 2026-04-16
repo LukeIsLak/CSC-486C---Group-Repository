@@ -21,11 +21,13 @@ public class NodeTraversalUI : MonoBehaviour
     public List<CardViewUI> playerDeckCards = new();
     public List<CardViewUI> bufferCards = new();
     public List<CardViewUI> sideBoardCards = new();
+    public GameObject tooltip;
 
     public GameEvent ToggleNodeInventory;
 
     private bool isRemoveMode = false;
     private string goingto = "player";
+    
 
     private void Start()
     {
@@ -115,6 +117,9 @@ public class NodeTraversalUI : MonoBehaviour
                 card.Init(instance, !instance.useable, null, true);
             }
             playerDeckCards.Add(card);
+            TooltipTrigger cardToolTipTrigger = card.GetComponent(typeof(TooltipTrigger)) as TooltipTrigger;
+            cardToolTipTrigger.header = instance.cardData.name;
+            cardToolTipTrigger.content = instance.cardData.descrption;
         }
 
     }
@@ -142,6 +147,9 @@ public class NodeTraversalUI : MonoBehaviour
                 //RefreshUI();
             });
             bufferCards.Add(card);
+            TooltipTrigger cardToolTipTrigger = card.GetComponent(typeof(TooltipTrigger)) as TooltipTrigger;
+            cardToolTipTrigger.header = instance.cardData.name;
+            cardToolTipTrigger.content = instance.cardData.descrption;
         }
     }
 
@@ -172,6 +180,7 @@ public class NodeTraversalUI : MonoBehaviour
             Destroy(card.gameObject);
         }
         sideBoardCards.Clear();
+        tooltip.SetActive(false);
     }
 
     private void BuildSideBoardUI() {
@@ -191,6 +200,9 @@ public class NodeTraversalUI : MonoBehaviour
                 RefreshUI();
             });
             sideBoardCards.Add(card);
+            TooltipTrigger cardToolTipTrigger = card.GetComponent(typeof(TooltipTrigger)) as TooltipTrigger;
+            cardToolTipTrigger.header = instance.cardData.name;
+            cardToolTipTrigger.content = instance.cardData.descrption;
         }
         
     }

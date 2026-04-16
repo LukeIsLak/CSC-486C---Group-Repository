@@ -27,7 +27,7 @@ public class Wave : ScriptableObject
     }
 
 
-    public IEnumerator SpawnWaveDelay(List<Transform> spawnPoints, float delay, RoomSpawn rs) {
+    public IEnumerator SpawnWaveDelay(List<Transform> spawnPoints, float delay, RoomSpawn rs, bool isTrapRoom) {
         if (enemyPrefabs == null || enemyCounts == null) yield break;
         int count = enemyCounts.Sum();
         Debug.Log(count);
@@ -38,7 +38,7 @@ public class Wave : ScriptableObject
 
 
         if (!orderedSpawn) {
-            ec = enemyCounts;
+            ec = new List<int>(enemyCounts);
             c = enemyCounts.Count;
             available = Enumerable.Repeat(true, c).ToList();
         }
@@ -54,12 +54,16 @@ public class Wave : ScriptableObject
                                                 return true;}).Count();
             }
             else {
-                int _index = Random.Range(0, ec.Count);
-                int seen = 0;
-                index = available.TakeWhile(x => {
-                                                if (x) seen++;
-                                                return seen <= _index; }).Count() - 1;
-                if (--ec[index] == 0) {
+                List<int> availableIndices = new List<int>();
+                for (int j = 0; j < ec.Count; j++) {
+                    if (available[j] && ec[j] > 0) availableIndices.Add(j);
+                }
+                if (availableIndices.Count == 0) break; // No more to spawn
+
+                int randIdx = Random.Range(0, availableIndices.Count);
+                index = availableIndices[randIdx];
+                ec[index]--;
+                if (ec[index] == 0) {
                     available[index] = false;
                     c -= 1;
                 }
@@ -72,10 +76,22 @@ public class Wave : ScriptableObject
 
             switch (enemyTypes[index]) {
                 case EnemyType.SkeletonRanged:
-                    newEnemy.GetComponent<SkeletonRanged>().initialize_nma();
+                    SkeletonRanged ranged = newEnemy.GetComponent<SkeletonRanged>();
+                    ranged.initialize_nma();
+                    if (isTrapRoom && ranged != null) {
+                            ranged.initialize_nma();
+                            ranged.currentState = SkeletonRangedStates.Idle;
+                            ranged.anim.SetBool("isActive", true);
+                    }
                     break;
                 case EnemyType.SkeletonMelee:
-                    newEnemy.GetComponent<SkeletonMelee>().initialize_nma();
+                    SkeletonMelee melee = newEnemy.GetComponent<SkeletonMelee>();
+                    melee.initialize_nma();
+                    if (isTrapRoom && melee != null) {
+                            melee.initialize_nma();
+                            melee.currentState = SkeletonMeleeStates.Idle;
+                            melee.anim.SetBool("isActive", true);
+                    }
                     break;
                 case EnemyType.Rat:
                     newEnemy.GetComponent<Rat>().initialize_nma();

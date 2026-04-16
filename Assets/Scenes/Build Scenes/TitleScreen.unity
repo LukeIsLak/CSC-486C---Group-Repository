@@ -130,18 +130,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 467889561083017855, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1842146287012955316, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.9086914
-      objectReference: {fileID: 0}
-    - target: {fileID: 4232211772047195068, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4282729452724672082, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.80646706
@@ -186,31 +174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 7370116375876204524, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_text
-      value: 'Any card gained is sent to your <color="red">buffer</color>.
-
-        Your
-        buffer is cleared of cards when you enter a new encounter!
-
-
-        You
-        can have a max of <color="red">10 cards</color> in your deck at a time. Adding
-        a card costs nothing, but removing one will require a <color="red">removal
-        token</color>.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7388339163064505207, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: usedCardArea
+    - target: {fileID: 6197321459651531734, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
+      propertyPath: cardViewPrefab
       value: 
-      objectReference: {fileID: 1865106619}
-    - target: {fileID: 7654491125290211153, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152533519624635600, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8081956759663492939, guid: d694bdcd6373d7d42a47541dcbaaefa8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1039,17 +1006,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b617e616beb1c9547b6571107f4ec188, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &428123389 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2626449438788970428, guid: aa7f194004cc1584a9ab423201067489, type: 3}
-  m_PrefabInstance: {fileID: 201529592}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428123382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72666cc979cbda64da6fc634050f5422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &495712980
@@ -1902,11 +1858,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860569034}
   m_CullTransparentMesh: 1
---- !u!224 &1865106619 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3218112919415812044, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-  m_PrefabInstance: {fileID: 24231106}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1972862147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +2107,7 @@ GameObject:
   - component: {fileID: 2074458956}
   - component: {fileID: 2074458955}
   - component: {fileID: 2074458954}
+  - component: {fileID: 2074458957}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -2269,9 +2221,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 428123389}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: onTutoialSelected
+      - m_Target: {fileID: 2074458957}
+        m_TargetAssemblyTypeName: ToggleForMainMenuTutorial, Assembly-CSharp
+        m_MethodName: OnToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2282,6 +2234,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &2074458957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074458952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e20ad78c71e5e4bb7ec670969d1d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2109840187
 GameObject:
   m_ObjectHideFlags: 0

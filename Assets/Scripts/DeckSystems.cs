@@ -37,16 +37,18 @@ public class DeckSystems : MonoBehaviour
     
     public event Action OnHandSelectionChanged;
     public event Action OnHandContentsChanged;
+    public event Action ClearHandUI;
     private void NotifyHandSelectionChanged() => OnHandSelectionChanged?.Invoke();
     private void NotifyHandContentsChanged() => OnHandContentsChanged?.Invoke();
+    private void NotifyClearHandUI() => ClearHandUI?.Invoke();
     
     //link to players inventory so system can load the deck in for combat
     public PlayerInventory inventory;
 
     // vars related to drawing new cards
     const float TIMETODRAWNEWCARD = 5f;
-    int cardsToDraw = 0;
-    bool drawFlag = false;
+    public int cardsToDraw = 0;
+    public bool drawFlag = false;
 
     public float delayamount = 0.1f;
 
@@ -57,6 +59,12 @@ public class DeckSystems : MonoBehaviour
     void Start(){
         loadDeck(inventory.activeDeck.contents);
         shuffleIncHand();
+    }
+
+    public void reLoadDeck(){
+        loadDeck(inventory.activeDeck.contents);
+        NotifyClearHandUI();
+        NotifyHandContentsChanged();
     }
 
     /// <summary>
@@ -163,7 +171,7 @@ public class DeckSystems : MonoBehaviour
                 }
             }
         }
-        // NotifyHandContentsChanged();
+        //NotifyHandContentsChanged();
 
         return true;
     }
@@ -264,6 +272,13 @@ public class DeckSystems : MonoBehaviour
 
         // shuffle just the players deck, so added cards are spread out and not all at the end
         shuffleExcHand();
+        if (hand.Count < MAXHANDSIZE){
+            if (!drawFlag){
+                cardsToDraw = MAXHANDSIZE - hand.Count;
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        }
     }
 
     /// <summary>

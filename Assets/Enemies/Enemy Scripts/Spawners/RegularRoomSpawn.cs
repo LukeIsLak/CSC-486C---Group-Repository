@@ -18,7 +18,7 @@ public class RegularRoomSpawner : RoomSpawn
             waves.Add(ChooseWave());
         }
 
-        if (hasWaves) InstantiateWave(waves[currentWaveCount]);
-        else for (int i = 0; i < totalWaveCount; i++) InstantiateWave(waves[i]);
+        if (hasWaves) InstantiateWave(waves[currentWaveCount], false);
+        else for (int i = 0; i < totalWaveCount; i++) InstantiateWave(waves[i], false);
     }
 }

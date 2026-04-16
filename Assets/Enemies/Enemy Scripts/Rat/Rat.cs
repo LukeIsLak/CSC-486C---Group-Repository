@@ -37,6 +37,7 @@ public class Rat : EnemyInterface
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
 
+
     [Header("Rat Colony Values")]
     public bool isRatMaster = false;
     public bool isLoner     = true;
@@ -48,6 +49,7 @@ public class Rat : EnemyInterface
 
     [Header("Misc. Variables")]
     public RatStates currentState;
+    public SpriteRenderer sprite;
     
 
     /****************************************************/
@@ -100,12 +102,20 @@ public class Rat : EnemyInterface
         isInitialized = true;
     }
 
+    // public override void KillEnemy() {
+    //     if (rs != null) rs.RemoveEnemy();
+    //     if (rcm != null) rcm.RemoveRat(this, ratColonyId);
+    //     if(rsm != null) rsm.RemoveEntity(this);
+    //     Destroy(this.gameObject);
+    // }
+
     public override void KillEnemy() {
-        if (rs != null) rs.RemoveEnemy();
-        if (rcm != null) rcm.RemoveRat(this, ratColonyId);
-        if(rsm != null) rsm.RemoveEntity(this);
-        Destroy(this.gameObject);
+        if (isDying) return;
+        isDying = true;
+        StopAllCoroutines();
+        StartCoroutine(DissolveAndDestroy());
     }
+
 
     /****************************************************/
     /*             End Of Instance Methods              */
@@ -352,7 +362,7 @@ public class Rat : EnemyInterface
     // }
 
     private void OnCollisionEnter(Collision other) {
-        if (isLeaping && other.gameObject.CompareTag("Player")) {
+        if (!isDying && isLeaping && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
             if (h != null) h.TakeDamage(rd.damage);
             isLeaping = false; // XXX should use another thing here
@@ -460,9 +470,53 @@ public class Rat : EnemyInterface
 
     private IEnumerator DelayCalcPlayerPath() {
         checkPlayerPath = false;
-        nma.SetDestination(playerTransform.position);
+        Vector3 ratPos = transform.position;
+        Vector3 plaPos = playerTransform.position;
+        ratPos.y = 0;
+        plaPos.y = 0;
+        float distToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        if (distToPlayer > rd.preferredRange + rd.rangeTolerance) {
+            isMoving = true;
+            nma.SetDestination(playerTransform.position);
+        }
+        else if (distToPlayer < rd.preferredRange - rd.rangeTolerance) {
+            isMoving = true;
+            Vector3 dirAway = (transform.position - playerTransform.position).normalized;
+            Vector3 targetPos = transform.position + dirAway * (rd.preferredRange - distToPlayer + 0.5f);
+            nma.SetDestination(targetPos);
+            UpdateMove();
+        }
+        else {
+            isMoving = false;
+            nma.ResetPath();
+        }
         yield return new WaitForSeconds(rd.checkPlayerUpdate);
         checkPlayerPath = true;
+    }
+
+    private IEnumerator DissolveAndDestroy() {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent) agent.isStopped = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb) rb.velocity = Vector3.zero;
+        if (anim != null) anim.enabled = false;
+
+        float dissolveTime = rd.dissolveTime;
+        float timer = 0f;
+        Material mat = sprite.material;
+
+        while (timer < dissolveTime) {
+            float t = timer / dissolveTime;
+            mat.SetFloat("_fade", 1f - t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mat.SetFloat("_fade", 0f);
+        if (rs != null) rs.RemoveEnemy();
+        if (rcm != null) rcm.RemoveRat(this, ratColonyId);
+        if(rsm != null) rsm.RemoveEntity(this);
+
+        Destroy(gameObject);
     }
 
     /****************************************************/

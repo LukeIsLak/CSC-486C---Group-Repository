@@ -25,6 +25,8 @@ public class EnemyInterface : MonoBehaviour
     public bool hasKnockback        = false;
     public bool isStopped           = false;
 
+    public bool isDying             = false;
+
     public int numDamageOverTime    = 0;
     public int numFreeze            = 0;
 
@@ -33,9 +35,11 @@ public class EnemyInterface : MonoBehaviour
     public List<int> currentDoTTicks     = new List<int>();
 
     [Header("Enemy Interface - Enemy Effects")]
+    private List<Color> freezeOriginalMatColors = null;
     public bool hasBlood = true;
     public float bloodDuration = 1.0f;
     public GameObject bloodEffect;
+    public GameObject damageNumber;
 
     public void Awake() {
         initialize();
@@ -55,7 +59,16 @@ public class EnemyInterface : MonoBehaviour
 
     public void TakeDamage(float amount) {
         if(curHealth <= 0) return;
-        curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
+        amount = (hasFreeze)? amount * enemyData.freezeMult : amount;
+        curHealth -= amount;
+
+        if (damageNumber != null && amount > 0)
+        {
+            GameObject dm = Instantiate(damageNumber);
+            dm.transform.position = transform.position;
+            dm.GetComponent<DamageNumber>().DoDamage(amount);        
+        }
+
         if (curHealth <= 0) 
         {
             GoldDropSpawner gds = GetComponent<GoldDropSpawner>();
@@ -171,18 +184,27 @@ public class EnemyInterface : MonoBehaviour
         }
 
         SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        List<Color> originalColors = new List<Color>();
+        // Only store original material colors on first freeze
+        if (numFreeze == 1) {
+            freezeOriginalMatColors = new List<Color>();
+            foreach (SpriteRenderer sr in sprites) {
+                if (sr.material.HasProperty("_sprite_color")) freezeOriginalMatColors.Add(sr.material.GetColor("_sprite_color"));
+                else freezeOriginalMatColors.Add(Color.white);
+            }
+        }
+
         foreach (SpriteRenderer sr in sprites) {
-            originalColors.Add(sr.color);
-            sr.color = Color.blue;
+            if (sr.material.HasProperty("_sprite_color")) sr.material.SetColor("_sprite_color", Color.blue);
         }
 
         yield return new WaitForSeconds(data.freezeDuration);
 
         if (--numFreeze <= 0) {
             for (int i = 0; i < sprites.Length; i++) {
-                if (sprites[i] != null)
-                    sprites[i].color = originalColors[i];
+                if (sprites[i] != null && freezeOriginalMatColors != null && i < freezeOriginalMatColors.Count) {
+                    if (sprites[i].material.HasProperty("_sprite_color"))
+                        sprites[i].material.SetColor("_sprite_color", freezeOriginalMatColors[i]);
+                }
             }
 
             if (psO != null) {
@@ -191,10 +213,11 @@ public class EnemyInterface : MonoBehaviour
             }
 
             hasFreeze = false;
+            freezeOriginalMatColors = null;
         }
     }
 
-    public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
+    public virtual void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
         Rigidbody rb = GetComponent<Rigidbody>();
         if (knockbackOrigin == null) return;
         if (rb != null) {

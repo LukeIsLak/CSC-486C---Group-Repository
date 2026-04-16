@@ -82,7 +82,7 @@ Transform:
   m_GameObject: {fileID: 4280383329053051017}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -111,7 +111,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 444042099e8d09d49b17fcfd028af086, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,7 +168,7 @@ Animator:
   m_GameObject: {fileID: 4280383329053051017}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8c1ca9ae13d03004d9af2a59c76819b0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9c112eb10c9873c4d8b37516f6e068e4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -212,6 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361479271275129752}
   - component: {fileID: 5961748393364285535}
+  - component: {fileID: 1351564530796467415}
   m_Layer: 6
   m_Name: HitBox
   m_TagString: Enemy
@@ -248,6 +249,27 @@ BoxCollider:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.56, y: 0.72, z: 0.4}
+  m_Center: {x: -0.015, y: 0, z: 0}
+--- !u!65 &1351564530796467415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5192527514673663988}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 2112
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -371,7 +393,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6781407783152861963
@@ -443,6 +465,7 @@ MonoBehaviour:
   hasFreeze: 0
   hasKnockback: 0
   isStopped: 0
+  isDying: 0
   numDamageOverTime: 0
   numFreeze: 0
   currentDoTNames: []
@@ -450,6 +473,7 @@ MonoBehaviour:
   hasBlood: 1
   bloodDuration: 1
   bloodEffect: {fileID: 1630225761089814724, guid: 00ad366def934eb49aa1733379e61a7f, type: 3}
+  damageNumber: {fileID: 300120990534988418, guid: 1192aea7bc8fa51409bf5614a67b8e30, type: 3}
   anim: {fileID: 1560066035758081881}
   rb: {fileID: 1905335619108903560}
   srd: {fileID: 11400000, guid: eedfcad1bd7f3c946bab96fdbd93e0a9, type: 2}
@@ -481,6 +505,7 @@ MonoBehaviour:
   throwStart: {fileID: 6679660994354949236}
   throwTime: 0
   currentState: 0
+  sprite: {fileID: 645200280868132331}
 --- !u!114 &1483432813959712967
 MonoBehaviour:
   m_ObjectHideFlags: 0

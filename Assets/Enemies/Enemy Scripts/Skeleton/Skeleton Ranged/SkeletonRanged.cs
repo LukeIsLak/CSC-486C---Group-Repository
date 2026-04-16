@@ -55,6 +55,8 @@ public class SkeletonRanged : EnemyInterface
     public SkeletonRangedAttacks? nextAttack = null;
     public List<SkeletonRangedWeightedAttacks> weightedAttacks;
 
+    public SpriteRenderer sprite;
+
     /****************************************************/
     /*          Beginning Of Instance Methods           */
     /****************************************************/
@@ -122,11 +124,19 @@ public class SkeletonRanged : EnemyInterface
         isInitialized = true;
     }
 
+    // public override void KillEnemy() {
+    //     if (rs != null) rs.RemoveEnemy();
+    //     if(srsm != null) srsm.RemoveEntity(this);
+    //     Destroy(this.gameObject);
+    // }
+
     public override void KillEnemy() {
-        if (rs != null) rs.RemoveEnemy();
-        if(srsm != null) srsm.RemoveEntity(this);
-        Destroy(this.gameObject);
+        if (isDying) return;
+        isDying = true;
+        StopAllCoroutines();
+        StartCoroutine(DissolveAndDestroy());
     }
+
 
     /****************************************************/
     /*             End Of Instance Methods              */
@@ -380,7 +390,7 @@ public class SkeletonRanged : EnemyInterface
     /*            Beginning of Collision Methods        */
     /****************************************************/
     private void OnTriggerEnter(Collider other) {
-        if (isAttacking && other.gameObject.CompareTag("Player")) {
+        if (!isDying && isAttacking && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
             if (h != null) h.TakeDamage(srd.swingDamage);
             isAttacking = false;
@@ -526,6 +536,30 @@ public class SkeletonRanged : EnemyInterface
         }
         yield return new WaitForSeconds(throwTime - srd.throwDelay);
         isThrowing = false;
+    }
+
+    private IEnumerator DissolveAndDestroy() {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent) agent.isStopped = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb) rb.velocity = Vector3.zero;
+        if (anim != null) anim.enabled = false;
+
+        float dissolveTime = srd.dissolveTime;
+        float timer = 0f;
+        Material mat = sprite.material;
+
+        while (timer < dissolveTime) {
+            float t = timer / dissolveTime;
+            mat.SetFloat("_fade", 1f - t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mat.SetFloat("_fade", 0f);
+        if (rs != null) rs.RemoveEnemy();
+        if (srsm != null) srsm.RemoveEntity(this);
+
+        Destroy(gameObject);
     }
 
     /****************************************************/

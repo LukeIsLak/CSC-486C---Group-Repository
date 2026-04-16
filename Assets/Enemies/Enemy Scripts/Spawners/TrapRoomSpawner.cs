@@ -13,7 +13,7 @@ public class TrapRoomSpawner : RoomSpawn, ITrapSequence
             waves.Add(ChooseWave());
         }
 
-        InstantiateWave(waves[currentWaveCount]);
+        InstantiateWave(waves[currentWaveCount], true);
     }
 
     public void Begin() {

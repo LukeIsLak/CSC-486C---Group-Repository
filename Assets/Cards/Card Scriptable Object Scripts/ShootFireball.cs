@@ -17,6 +17,7 @@ public class ShootFireball : MonoBehaviour
     [SerializeField] private LayerMask enemylayer;
     private FMOD.Studio.EventInstance explosion;
 
+    [SerializeField] private LayerMask surfaceLayer;
 
 
     public void Init(Vector3 direct, Fireball card){
@@ -24,7 +25,8 @@ public class ShootFireball : MonoBehaviour
         dir = direct.normalized;
         projspeed = card.projspeed;
         dmgradius = card.dmgradius;
-        dmg = card.dmg;
+        dmg = card.effectValue;
+        dmgradius = card.dmgradius;
     }
 
     void Start(){
@@ -41,6 +43,16 @@ public class ShootFireball : MonoBehaviour
             hasImpact = true;
             Impact();
         }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if ((surfaceLayer.value & (1 << other.gameObject.layer)) != 0 && !hasImpact)
+        {
+            hasImpact = true;
+            Impact();
+        }
+
     }
 
     void Impact(){

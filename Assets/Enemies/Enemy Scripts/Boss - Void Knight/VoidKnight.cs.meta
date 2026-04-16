@@ -3,7 +3,25 @@ guid: b381b50f5b59d464981fd0b1b161d5b7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerData: {instanceID: 0}
+  - enemyData: {instanceID: 0}
+  - enemyEffects: {instanceID: 0}
+  - rs: {instanceID: 0}
+  - bloodEffect: {instanceID: 0}
+  - damageNumber: {instanceID: 0}
+  - anim: {instanceID: 0}
+  - rb: {instanceID: 0}
+  - vkd: {instanceID: 0}
+  - playerTransform: {instanceID: 0}
+  - vksm: {instanceID: 0}
+  - nma: {instanceID: 0}
+  - fireball: {instanceID: 0}
+  - divineJudgement: {instanceID: 0}
+  - castSpawn: {instanceID: 0}
+  - OnDefeat: {instanceID: 0}
+  - sprite: {instanceID: 0}
+  - healthBar: {fileID: 5003327183744965446, guid: ab56be152607f43ac930cc49141f0026, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

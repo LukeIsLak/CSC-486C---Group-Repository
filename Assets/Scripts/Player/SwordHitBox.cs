@@ -26,7 +26,7 @@ public class SwordHitBox : MonoBehaviour
         var enemyComponent = other.GetComponentInParent<EnemyInterface>();
         Debug.Log(other.gameObject.name);
         if (enemyComponent != null) { 
-            enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); 
+            if (!enemyComponent.isDying) enemyComponent.GetComponent<FMODUnity.StudioEventEmitter>().Play(); 
             enemyComponent.Hit(character.attackMultiplier * character.GetAttackDamage()); 
             Debug.Log("EnemyHit"); 
         }
