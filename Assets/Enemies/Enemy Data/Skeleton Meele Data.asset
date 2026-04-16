@@ -36,7 +36,7 @@ MonoBehaviour:
   checkPlayerUpdate: 0.1
   detectionRadius: 13
   dashEaseIn: 0.25
-  dashDuration: 1
+  dashDuration: 1.5
   dashSpeed: 15
   dashDamage: 15
   swingDistance: 3.5
