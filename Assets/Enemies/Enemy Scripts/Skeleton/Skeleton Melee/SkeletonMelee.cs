@@ -82,6 +82,7 @@ public class SkeletonMelee : EnemyInterface
         rb = GetComponent<Rigidbody>();
 
         SkeletonMeleeStateMachine env_smsm = FindObjectOfType<SkeletonMeleeStateMachine>();
+        smsm = env_smsm;
         env_smsm.AddEntity(this);
 
         swingTime = smd.swingAttack.length;
