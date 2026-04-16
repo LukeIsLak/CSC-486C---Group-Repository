@@ -11,6 +11,7 @@ public class BlackHoleObject : MonoBehaviour
     [SerializeField]private float radius = 5f;
     [SerializeField] private float ttl = 5f;
     [SerializeField] private Knockback effect;
+    [SerializeField] private int dmg;
 
     void Start(){
         StartCoroutine(timeToLive(ttl));
@@ -19,6 +20,7 @@ public class BlackHoleObject : MonoBehaviour
     public void Init(Vector3 dir, Cards card)
     {
         direction = dir;
+        dmg = card.effectValue;
     }
 
     // Update is called once per frame
@@ -34,12 +36,12 @@ public class BlackHoleObject : MonoBehaviour
         // XXX fix the reference of origin (in enemy interface)
         EnemyInterface enem = other.GetComponent<EnemyInterface>();
             if (enem != null){
-                enem.Hit(0, effect.type, effect, transform.position);
+                enem.Hit(dmg, effect.type, effect, transform.position);
             }
             else {
                 enem = other.GetComponentInParent<EnemyInterface>();
                 if (enem != null){
-                    enem.Hit(0, effect.type, effect, transform.position);
+                    enem.Hit(dmg, effect.type, effect, transform.position);
                 }
             }
         Debug.Log("In hitbox");

@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd11427f66547d4b8338d1af41256de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
+  speed: 10
   jumpForce: 10
   gravity: -30
   xSensitivity: 0.1
@@ -413,7 +413,7 @@ MonoBehaviour:
   movementSpeed: 0
   dashTime: 0.15
   dashSpeed: 3
-  dashCD: 2
+  dashCD: 1.5
   runawayBullActive: 0
   playerData: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
   PlayerInteractEvent: {fileID: 11400000, guid: 63f35d9b82ff48c428018e7a5b854cfb, type: 2}
@@ -454,27 +454,33 @@ MonoBehaviour:
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   currentHandIndex: 0
   currentDeckSize: 0
   discard: []
   inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
+  delayamount: 0.1
 --- !u!114 &-201263358416133198
 MonoBehaviour:
   m_ObjectHideFlags: 0
