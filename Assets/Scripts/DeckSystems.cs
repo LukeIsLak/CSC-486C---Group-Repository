@@ -209,7 +209,6 @@ public class DeckSystems : MonoBehaviour
         hand[currentHandIndex].useable = false;
         discard.Add(hand[currentHandIndex]);
         hand.RemoveAt(currentHandIndex);
-        PlayCastSound();
         //call needed card function 
         StartCoroutine(DelayCardPlay(curCard));
 
@@ -233,6 +232,7 @@ public class DeckSystems : MonoBehaviour
 
     private IEnumerator DelayCardPlay(CardInstance curCard) {
         yield return new WaitForSeconds(delayamount);
+        PlayCastSound();
         StartCoroutine(curCard.cardData.Play(curCard.cardData));
     }
 

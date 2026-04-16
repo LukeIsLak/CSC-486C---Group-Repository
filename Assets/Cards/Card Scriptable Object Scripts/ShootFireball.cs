@@ -15,6 +15,8 @@ public class ShootFireball : MonoBehaviour
     private Vector3 dir; 
 
     [SerializeField] private LayerMask enemylayer;
+    private FMOD.Studio.EventInstance explosion;
+
 
 
     public void Init(Vector3 direct, Fireball card){
@@ -43,6 +45,7 @@ public class ShootFireball : MonoBehaviour
 
     void Impact(){
         //Using projectile information, deal damage to all objects in the area
+        PlayExplosion();
         List <EnemyInterface> seenEnemies = new List<EnemyInterface>();
         Collider[] impactArea = Physics.OverlapSphere(
             transform.position, dmgradius, enemylayer
@@ -74,5 +77,13 @@ public class ShootFireball : MonoBehaviour
     private IEnumerator timeToLive(float dur) {
         yield return new WaitForSeconds(dur);
         Impact();
+    }
+
+    private void PlayExplosion() 
+    {
+        explosion = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/fireballHit");
+        explosion.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        explosion.start();
+        explosion.release();
     }
 }

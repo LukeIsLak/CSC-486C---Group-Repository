@@ -454,27 +454,33 @@ MonoBehaviour:
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   - cardData: {fileID: 0}
     uid: 0
     useable: 0
+    cleanup: 0
     deck: {fileID: 0}
   currentHandIndex: 0
   currentDeckSize: 0
   discard: []
   inventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
+  delayamount: 0.1
 --- !u!114 &-201263358416133198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,4 +896,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 4843415185380909026}

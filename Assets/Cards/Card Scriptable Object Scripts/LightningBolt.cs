@@ -14,6 +14,8 @@ public class LightningBolt : Cards
     [SerializeField] private LayerMask enemylayer;
     private GameObject player;
     private GameObject camera;
+    private FMOD.Studio.EventInstance lightningSound;
+
 
     public override IEnumerator Play(Cards card)
     {
@@ -28,6 +30,7 @@ public class LightningBolt : Cards
 
     private void shootLightning(GameObject camera)
     {
+        PlayLightningSound();
         //Make raycast from the camera position and shoot it forward based on the range
         Ray ray = new Ray(camera.transform.position + camera.transform.forward * 2f, camera.transform.forward);
 
@@ -70,6 +73,14 @@ public class LightningBolt : Cards
 
             line.SetPosition(i, pos);
         }
+    }
+
+    private void PlayLightningSound() 
+    {
+        lightningSound = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/lightningHit");
+        lightningSound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(player));
+        lightningSound.start();
+        lightningSound.release();
     }
 
     //To add: Visual Effect
