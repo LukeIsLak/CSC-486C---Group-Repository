@@ -37,7 +37,6 @@ public class Rat : EnemyInterface
     public bool isMoving            = false;
     public bool checkPlayerPath     = true;
 
-    public bool isDying             = false;
 
     [Header("Rat Colony Values")]
     public bool isRatMaster = false;

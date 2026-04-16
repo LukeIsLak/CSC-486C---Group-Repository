@@ -70,9 +70,6 @@ public class VoidKnight : EnemyInterface
     public bool inAttackCombo1pt1 = false;
     public bool inAttackCombo1pt2 = false;
     public bool inAttackCombo1pt3 = false;
-
-    public bool isDying             = false;
-
     public Transform castSpawn;
     public float castDelay = 0.4f;
 
