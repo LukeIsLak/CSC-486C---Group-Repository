@@ -128,10 +128,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: disconnect
       objectReference: {fileID: 0}
-    - target: {fileID: 294215994136005096, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 607482002801097220, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_Size.y
       value: 1
@@ -166,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1653336787356845628, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_VersionIndex
-      value: 2030
+      value: 2033
       objectReference: {fileID: 0}
     - target: {fileID: 1713704123329346853, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_LocalScale.y
@@ -250,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790856339146487571, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_VersionIndex
-      value: 2030
+      value: 2033
       objectReference: {fileID: 0}
     - target: {fileID: 6117343589369539811, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_Enabled
@@ -318,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7208236152171577989, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_VersionIndex
-      value: 2030
+      value: 2033
       objectReference: {fileID: 0}
     - target: {fileID: 7218260769171497517, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_Size.y
@@ -330,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7811081028092153866, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_VersionIndex
-      value: 2030
+      value: 2033
       objectReference: {fileID: 0}
     - target: {fileID: 7968112755449901653, guid: 02c66b615dba7a64d9b8f1b7440460aa, type: 3}
       propertyPath: m_Convex
