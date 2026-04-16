@@ -30,12 +30,34 @@ public class Deck : ScriptableObject
         // Add to self and update cardinstance reference
         contents.Add(card);
         card.deck = this;
+
+        //reload deck
+        if (maxSize == 10){ // check if it is the active deck
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null) {
+                DeckSystems deckSystem = player.GetComponent(typeof(DeckSystems)) as DeckSystems;
+                deckSystem.reLoadDeck();
+            }
+        }
+
         return true;
     }
 
     public bool RemoveCard(CardInstance card)
     {
-        return contents.Remove(card);
+        if(contents.Remove(card)){
+            //reload deck to reflect change
+            if (maxSize == 10){ // check if it is the active deck
+                GameObject player = GameObject.FindWithTag("Player");
+                if (player != null) {
+                    DeckSystems deckSystem = player.GetComponent(typeof(DeckSystems)) as DeckSystems;
+                    deckSystem.reLoadDeck();
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }

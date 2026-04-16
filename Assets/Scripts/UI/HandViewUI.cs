@@ -71,6 +71,7 @@ public class HandViewUI : MonoBehaviour
         {
             deckSystems.OnHandSelectionChanged += UpdateCardPosition;
             deckSystems.OnHandContentsChanged += RefreshHand;
+            deckSystems.ClearHandUI += DeleteAllCardUI;
         }
     }
     private void Unhook(DeckSystems d)
@@ -79,6 +80,7 @@ public class HandViewUI : MonoBehaviour
         {
             deckSystems.OnHandSelectionChanged -= UpdateCardPosition;
             deckSystems.OnHandContentsChanged -= RefreshHand;
+            deckSystems.ClearHandUI -= DeleteAllCardUI;
         }
     }
 
