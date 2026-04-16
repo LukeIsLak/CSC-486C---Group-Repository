@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: LIGHTNING BOLT
   descrption: Casts a bolt of lightning directly in front of you
-  effectValue: 20
+  effectValue: 75
   image: {fileID: 436681993, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   range: 100
   damage: 75
