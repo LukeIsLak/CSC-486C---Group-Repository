@@ -42,6 +42,8 @@ public class SkeletonMelee : EnemyInterface
     public bool canDeactivate       = true;
     public bool doneDeactivate      = false;
 
+    public bool isDying             = false;
+
     public LayerMask wallMask;
 
     [Header("Misc. Variables")]
@@ -52,6 +54,7 @@ public class SkeletonMelee : EnemyInterface
 
     public SkeletonMeleeAttacks? nextAttack = null;
     public List<SkeletonMeleeWeightedAttacks> weightedAttacks;
+    public SpriteRenderer sprite;
 
     /****************************************************/
     /*          Beginning Of Instance Methods           */
@@ -119,10 +122,17 @@ public class SkeletonMelee : EnemyInterface
         isInitialized = true;
     }
 
+    // public override void KillEnemy() {
+    //     if (rs != null) rs.RemoveEnemy();
+    //     if(smsm != null) smsm.RemoveEntity(this);
+    //     Destroy(this.gameObject);
+    // }
+
     public override void KillEnemy() {
-        if (rs != null) rs.RemoveEnemy();
-        if(smsm != null) smsm.RemoveEntity(this);
-        Destroy(this.gameObject);
+        if (isDying) return;
+        isDying = true;
+        StopAllCoroutines();
+        StartCoroutine(DissolveAndDestroy());
     }
 
     /****************************************************/
@@ -385,7 +395,7 @@ public class SkeletonMelee : EnemyInterface
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (isAttacking && other.gameObject.CompareTag("Player")) {
+        if (!isDying && isAttacking && other.gameObject.CompareTag("Player")) {
             Health h = other.gameObject.GetComponent<Health>();
             float d = (isDashing) ? smd.dashDamage : smd.swingDamage;
             if (h != null) h.TakeDamage(d);
@@ -524,6 +534,30 @@ public class SkeletonMelee : EnemyInterface
         isSwinging = true;
         yield return new WaitForSeconds(swingTime);
         isSwinging = false;
+    }
+
+    private IEnumerator DissolveAndDestroy() {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent) agent.isStopped = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb) rb.velocity = Vector3.zero;
+        if (anim != null) anim.enabled = false;
+
+        float dissolveTime = smd.dissolveTime;
+        float timer = 0f;
+        Material mat = sprite.material;
+
+        while (timer < dissolveTime) {
+            float t = timer / dissolveTime;
+            mat.SetFloat("_fade", 1f - t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mat.SetFloat("_fade", 0f);
+        if (rs != null) rs.RemoveEnemy();
+        if (smsm != null) smsm.RemoveEntity(this);
+
+        Destroy(gameObject);
     }
 
     /****************************************************/

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_enemy_dissolve_bat
+  m_Name: MAT_enemy_dissolve_skel_r
   m_Shader: {fileID: -6465566751694194690, guid: 9ab33df2bcceb7c4ab2f1422c7172348, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -81,7 +81,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Sprite:
-        m_Texture: {fileID: 2800000, guid: acddef4934714a1499770381bfbca88a, type: 3}
+        m_Texture: {fileID: 2800000, guid: cb27a3293ee8e8c4a8244acf08eb4dfc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -140,4 +140,5 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _color: {r: 0.8962264, g: 0.5047403, b: 0.3424262, a: 1}
+    - _sprite_color: {r: 0.9139581, g: 1, b: 0.6650944, a: 0}
   m_BuildTextureStacks: []
