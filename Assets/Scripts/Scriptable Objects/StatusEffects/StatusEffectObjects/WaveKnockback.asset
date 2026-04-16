@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bcad5ca814ecb4a84299d9af15308b, type: 3}
   m_Name: WaveKnockback
   m_EditorClassIdentifier: 
-  name: 
+  name: TidalWave
   type: 2
-  knockbackForce: 5
+  knockbackForce: 500

@@ -82,17 +82,18 @@ public class SkeletonMelee : EnemyInterface
         rb = GetComponent<Rigidbody>();
 
         SkeletonMeleeStateMachine env_smsm = FindObjectOfType<SkeletonMeleeStateMachine>();
+        smsm = env_smsm;
         env_smsm.AddEntity(this);
 
         swingTime = smd.swingAttack.length;
         activateTime = smd.activate.length;
         deactivateTime = smd.deactivate.length;
 
-        initialize_nma();
+        // initialize_nma();
     }
 
     public void initialize_nma() {
-        if (!startInitialized) StartCoroutine(delay_navmesh());
+        if (!startInitialized && !isInitialized) StartCoroutine(delay_navmesh());
         else isInitialized = true;
     }
 
