@@ -24,9 +24,9 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 8e18e4cebb1121d44b6706b064d16834, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: 8e18e4cebb1121d44b6706b064d16834, type: 3}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -44,12 +44,12 @@ Material:
     - _DstBlend: 10
     - _QueueControl: 0
     - _SrcBlend: 5
-    - _frequency: 3
-    - _grad: 0.7
-    - _max_alpha: 0.01
-    - _rem_alpha: 0.3
-    - _speed: -0.5
-    - _strength: 3.71
-    - _warp_amount: 10
+    - _frequency: 6
+    - _grad: 0.45
+    - _max_alpha: 0.05
+    - _rem_alpha: 0
+    - _speed: 0.6
+    - _strength: 0.7
+    - _warp_amount: 1
     m_Colors: []
   m_BuildTextureStacks: []
