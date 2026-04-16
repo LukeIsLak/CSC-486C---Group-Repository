@@ -14,6 +14,7 @@ public class MerchantUI : MonoBehaviour
     [SerializeField] private ShopItem token;
     [SerializeField] private TextMeshProUGUI tokenNum;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private GameObject inRoomShopKeeper;
     
     private List<MerchantItemUI> merchantItemUIs = new();
     
@@ -25,12 +26,14 @@ public class MerchantUI : MonoBehaviour
         RebuildUI();
         Cursor.lockState    = CursorLockMode.None;
         Cursor.visible      = true;
+        inRoomShopKeeper.SetActive(false);
     }
 
     private void OnDisable()
     {
         Cursor.lockState    = CursorLockMode.Locked;
         Cursor.visible      = false;
+        inRoomShopKeeper.SetActive(true);
     }
     
 
