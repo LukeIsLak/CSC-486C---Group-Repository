@@ -48,7 +48,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31884332833d4bc4c98452e4ec0d916e, type: 2}
   - {fileID: 11400000, guid: df6d70efbe5f39a44b5850c23a02d440, type: 2}
   - {fileID: 11400000, guid: 1d899209536c2144abaa9ee180eefb53, type: 2}
-  possibleWavesWeights: 0a0000001400000001000000
+  - {fileID: 11400000, guid: a20e4d1311d07914b91617cfbebc295a, type: 2}
+  possibleWavesWeights: 050000000c0000000700000007000000
   waves: []
   spawnPoints:
   - {fileID: 5121844001504603081}

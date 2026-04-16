@@ -180,7 +180,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eff1032fad90ee3479fd780eade3c4bd, type: 2}
   - {fileID: 11400000, guid: afd0acc0a6f7608448b20d1e0f92243c, type: 2}
   - {fileID: 11400000, guid: 01de0d3524925dc4d8750f6f9905b18d, type: 2}
-  possibleWavesWeights: 0300000003000000010000000200000002000000
+  possibleWavesWeights: 0400000003000000010000000200000002000000
   waves: []
   spawnPoints:
   - {fileID: 5258782442626890425}
