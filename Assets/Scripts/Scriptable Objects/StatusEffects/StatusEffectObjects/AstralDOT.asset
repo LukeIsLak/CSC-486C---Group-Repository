@@ -15,7 +15,7 @@ MonoBehaviour:
   name: AstralDagger
   type: 0
   ticksPerSecond: 2
-  tickDamage: 1
+  tickDamage: 3
   totalTicks: 10
   hasOngoingPart: 0
   hasBurstPart: 0
