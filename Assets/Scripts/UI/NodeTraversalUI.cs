@@ -145,6 +145,9 @@ public class NodeTraversalUI : MonoBehaviour
                 //RefreshUI();
             });
             bufferCards.Add(card);
+            TooltipTrigger cardToolTipTrigger = card.GetComponent(typeof(TooltipTrigger)) as TooltipTrigger;
+            cardToolTipTrigger.header = instance.cardData.name;
+            cardToolTipTrigger.content = instance.cardData.descrption;
         }
     }
 
@@ -194,6 +197,9 @@ public class NodeTraversalUI : MonoBehaviour
                 RefreshUI();
             });
             sideBoardCards.Add(card);
+            TooltipTrigger cardToolTipTrigger = card.GetComponent(typeof(TooltipTrigger)) as TooltipTrigger;
+            cardToolTipTrigger.header = instance.cardData.name;
+            cardToolTipTrigger.content = instance.cardData.descrption;
         }
         
     }

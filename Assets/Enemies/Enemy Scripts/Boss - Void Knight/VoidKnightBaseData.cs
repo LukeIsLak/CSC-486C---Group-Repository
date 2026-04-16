@@ -18,4 +18,6 @@ public class VoidKnightBaseData : BaseEnemyData
     public float checkPlayerUpdate = 0.1f;
     public float detectionRadius = 5f;
     public float wanderRadius = 4f;
+
+    public float dissolveTime = 1.0f;
 }
