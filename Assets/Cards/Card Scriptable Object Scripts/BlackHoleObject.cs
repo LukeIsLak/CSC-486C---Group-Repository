@@ -9,18 +9,22 @@ public class BlackHoleObject : MonoBehaviour
     [SerializeField] private float speed = 2f;
 
     [SerializeField]private float radius = 5f;
+    [SerializeField] private float timeBetweenTicks = 0.1f;
     [SerializeField] private float ttl = 5f;
     [SerializeField] private Knockback effect;
     [SerializeField] private float dmg;
 
+
+    private List<EnemyInterface> hitEnemies = new();
     void Start(){
+        StartCoroutine(DamageRefresh());
         StartCoroutine(timeToLive(ttl));
     }
 
     public void Init(Vector3 dir, Cards card)
     {
         direction = dir;
-        dmg = card.effectValue / 10f;
+        dmg = card.effectValue / ttl * timeBetweenTicks;
     }
 
     // Update is called once per frame
@@ -41,13 +45,24 @@ public class BlackHoleObject : MonoBehaviour
             else {
                 enem = other.GetComponentInParent<EnemyInterface>();
                 if (enem != null){
-                    enem.Hit(dmg, effect.type, effect, transform.position);
+                    enem.Hit(0f, effect.type, effect, transform.position);
+                    if (hitEnemies.Contains(enem)) return;
+                    hitEnemies.Add(enem);
+                    enem.Hit(dmg);
                 }
             }
         Debug.Log("In hitbox");
 
     }
 
+    private IEnumerator DamageRefresh()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(timeBetweenTicks);
+            hitEnemies.Clear();
+        }
+    }
     private IEnumerator timeToLive(float dur) {
         yield return new WaitForSeconds(dur);
         Destroy(this.gameObject);

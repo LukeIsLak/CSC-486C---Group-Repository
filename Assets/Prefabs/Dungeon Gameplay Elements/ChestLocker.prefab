@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3904986d9d369a449e927e08aaa87aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCheckInterval: 5
+  enemyChestParent: {fileID: 0}
+  enemyCheckInterval: 2
   enemyTag: Enemy
   lockedEffect: {fileID: 2639190359849724225, guid: b2f794d57bff2e24581fcc61e05de605, type: 3}
   enemiesLeft: 0

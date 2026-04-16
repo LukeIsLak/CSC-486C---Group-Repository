@@ -4944,14 +4944,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a18cb1483bb4719a9d2737d9d92f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projspeed: 10
-  dmgradius: 3
+  projspeed: 15
+  dmgradius: 8
   ttl: 5
   effect: {fileID: 11400000, guid: 3c8a4643113a6844bad6dcf16d5dd445, type: 2}
   explosionEffect: {fileID: 7964197577560843921, guid: 8c05120d848a6294389b5feb09340471, type: 3}
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
+  surfaceLayer:
+    serializedVersion: 2
+    m_Bits: 1664
 --- !u!54 &5349962524858290087
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ public class EnemyInterface : MonoBehaviour
         amount = (hasFreeze)? amount * enemyData.freezeMult : amount;
         curHealth -= amount;
 
-        if (damageNumber != null)
+        if (damageNumber != null && amount > 0)
         {
             GameObject dm = Instantiate(damageNumber);
             dm.transform.position = transform.position;
