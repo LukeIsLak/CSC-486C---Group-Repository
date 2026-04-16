@@ -305,7 +305,8 @@ public class Bat : EnemyInterface
         }
         // fallback (should not happen)
         return bd.weightedAttacks[0].attack;
-    }    void AbandonPath(string reason = "") {
+    }    
+    public void AbandonPath(string reason = "") {
         if (debug) Debug.Log($"Bat abandoned path: {reason}");
         isMoving = false;
         if (isPecking) { peckComplete = true; isPecking = false; }
@@ -321,7 +322,7 @@ public class Bat : EnemyInterface
     }
 
     void UpdateMoveSpot(bool s) {
-        if (isMoving && targetPath.Count > 0) {
+        if (isMoving && targetPath.Count > 0 && currentPathIndex < targetPath.Count) {
             Vector3 target = targetPath[currentPathIndex];
 
             // Path abandonment: check periodically if the bat is making progress
@@ -366,6 +367,7 @@ public class Bat : EnemyInterface
                     if (isPecking) peckComplete = true;
                     isMoving = false;
                     transform.rotation = Quaternion.identity;
+                    currentPathIndex = targetPath.Count - 1;
                     // transform.position = new Vector3(transform.position.x, 0.4f, transform.position.z);
                 }
             }
@@ -394,6 +396,18 @@ public class Bat : EnemyInterface
         isMoving = path.Count > 0;
         abandonTimer = 0f;
         lastCheckPos = transform.position;
+    }
+
+    public override void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
+        if (rb == null) rb = GetComponent<Rigidbody>();
+        if (knockbackOrigin == null) return;
+        if (rb != null)
+        {
+            Vector3 direction = (transform.position - knockbackOrigin).normalized;
+            rb.AddForce(direction * data.knockbackForce, ForceMode.Impulse);
+            isMoving = false; // Stop scripted movement
+            StartCoroutine(RecoverFromKnockback());
+        }
     }
 
     /****************************************************/
@@ -523,6 +537,7 @@ public class Bat : EnemyInterface
         UpdateMoveSpot(false);
 
         if (!isMoving && isPecking == true && !isPeckRebounding) peckComplete = true;
+        else if (!isMoving && !isPecking && !isPeckRebounding) peckComplete = true;
     }
 
     public void PeckRebound()
@@ -759,6 +774,7 @@ public class Bat : EnemyInterface
             Health h = other.gameObject.GetComponent<Health>();
             if (h != null) h.TakeDamage(bd.damage);
             isAttacking = false;
+            if (isPecking) isPeckRebounding = true;
         }
     }
 
@@ -816,6 +832,15 @@ public class Bat : EnemyInterface
         if (bsm != null) bsm.RemoveEntity(this);
 
         Destroy(gameObject);
+    }
+
+    private IEnumerator RecoverFromKnockback() {
+        yield return new WaitForSeconds(0.2f); // Adjust as needed
+        if (rb != null) {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        isMoving = true; // Resume movement
     }
 
     /****************************************************/
