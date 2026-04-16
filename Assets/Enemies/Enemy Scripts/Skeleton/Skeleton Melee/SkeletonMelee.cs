@@ -71,7 +71,7 @@ public class SkeletonMelee : EnemyInterface
             )
         };
 
-        // initialize();
+        initialize();
     }
 
     public override void initialize() {

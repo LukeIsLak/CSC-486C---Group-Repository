@@ -73,7 +73,7 @@ public class SkeletonRanged : EnemyInterface
             )
         };
 
-        // initialize();
+        initialize();
     }
 
     public override void initialize() {
@@ -84,6 +84,7 @@ public class SkeletonRanged : EnemyInterface
         rb = GetComponent<Rigidbody>();
 
         SkeletonRangedStateMachine env_srsm = FindObjectOfType<SkeletonRangedStateMachine>();
+        srsm = env_srsm;
         env_srsm.AddEntity(this);
 
         swingTime = srd.swingAttack.length;
