@@ -27,7 +27,7 @@ public class Wave : ScriptableObject
     }
 
 
-    public IEnumerator SpawnWaveDelay(List<Transform> spawnPoints, float delay, RoomSpawn rs) {
+    public IEnumerator SpawnWaveDelay(List<Transform> spawnPoints, float delay, RoomSpawn rs, bool isTrapRoom) {
         if (enemyPrefabs == null || enemyCounts == null) yield break;
         int count = enemyCounts.Sum();
         Debug.Log(count);
@@ -76,10 +76,22 @@ public class Wave : ScriptableObject
 
             switch (enemyTypes[index]) {
                 case EnemyType.SkeletonRanged:
-                    newEnemy.GetComponent<SkeletonRanged>().initialize_nma();
+                    SkeletonRanged ranged = newEnemy.GetComponent<SkeletonRanged>();
+                    ranged.initialize_nma();
+                    if (isTrapRoom && ranged != null) {
+                            ranged.initialize_nma();
+                            ranged.currentState = SkeletonRangedStates.Idle;
+                            ranged.anim.SetBool("isActive", true);
+                    }
                     break;
                 case EnemyType.SkeletonMelee:
-                    newEnemy.GetComponent<SkeletonMelee>().initialize_nma();
+                    SkeletonMelee melee = newEnemy.GetComponent<SkeletonMelee>();
+                    melee.initialize_nma();
+                    if (isTrapRoom && melee != null) {
+                            melee.initialize_nma();
+                            melee.currentState = SkeletonMeleeStates.Idle;
+                            melee.anim.SetBool("isActive", true);
+                    }
                     break;
                 case EnemyType.Rat:
                     newEnemy.GetComponent<Rat>().initialize_nma();

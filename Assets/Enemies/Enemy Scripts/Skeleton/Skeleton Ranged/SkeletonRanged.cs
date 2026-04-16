@@ -41,8 +41,6 @@ public class SkeletonRanged : EnemyInterface
     public bool canDeactivate       = true;
     public bool doneDeactivate      = false;
 
-    public bool isDying             = false;
-
     public LayerMask wallMask;
 
     [Header("Ranged Attack")]

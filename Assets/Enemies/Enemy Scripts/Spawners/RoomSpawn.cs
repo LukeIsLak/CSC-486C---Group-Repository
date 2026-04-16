@@ -32,11 +32,11 @@ public class RoomSpawn : MonoBehaviour
         foreach (int i in possibleWavesWeights) if (i <= 0) Debug.LogError($"TrapRoomSpawner Initilization Error: possibleWavesWeights has an instance of <= 0", this);
     }
 
-    public void InstantiateWave(Wave w) {
-        float d = (delay >= 0) ? delay : w.spawnDelay;
+    public void InstantiateWave(Wave w, bool isTrapRoom) {
+        float d = (w.spawnDelay >= 0) ? w.spawnDelay : delay;
         if (hasWaves) remainingEnemies = w.enemyCounts.Sum();
         else remainingEnemies += w.enemyCounts.Sum();
-        StartCoroutine(w.SpawnWaveDelay(spawnPoints, d, this));
+        StartCoroutine(w.SpawnWaveDelay(spawnPoints, d, this, isTrapRoom));
     }
 
     public Wave ChooseWave() {
@@ -63,7 +63,7 @@ public class RoomSpawn : MonoBehaviour
                     uponCompletion.Raise();
                     return;
                 }
-                InstantiateWave(waves[currentWaveCount]);
+                InstantiateWave(waves[currentWaveCount], false);
             }
         }
         else {
