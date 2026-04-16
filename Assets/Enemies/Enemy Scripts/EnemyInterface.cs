@@ -206,7 +206,7 @@ public class EnemyInterface : MonoBehaviour
         }
     }
 
-    public void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
+    public virtual void HandleKnockback(Knockback data, Vector3 knockbackOrigin) {
         Rigidbody rb = GetComponent<Rigidbody>();
         if (knockbackOrigin == null) return;
         if (rb != null) {
