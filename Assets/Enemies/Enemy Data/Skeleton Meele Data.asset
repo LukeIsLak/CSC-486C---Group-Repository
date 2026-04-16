@@ -48,3 +48,4 @@ MonoBehaviour:
   minIdleDuration: 0.2
   maxIdleDuration: 0.7
   wanderRadius: 5
+  dissolveTime: 1
