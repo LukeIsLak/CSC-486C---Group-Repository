@@ -64,7 +64,7 @@ MonoBehaviour:
   remainingEnemies: 0
   uponCompletion: {fileID: 11400000, guid: 164095ff0a96c684ebaf127baaf8cd4c, type: 2}
   delay: 1
-  trapDelay: 1.5
+  trapDelay: 1
 --- !u!1 &3277725079014860740
 GameObject:
   m_ObjectHideFlags: 0
