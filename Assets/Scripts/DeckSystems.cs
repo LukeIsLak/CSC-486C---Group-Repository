@@ -45,8 +45,8 @@ public class DeckSystems : MonoBehaviour
 
     // vars related to drawing new cards
     const float TIMETODRAWNEWCARD = 5f;
-    int cardsToDraw = 0;
-    bool drawFlag = false;
+    public int cardsToDraw = 0;
+    public bool drawFlag = false;
 
     public float delayamount = 0.1f;
 
@@ -261,6 +261,13 @@ public class DeckSystems : MonoBehaviour
 
         // shuffle just the players deck, so added cards are spread out and not all at the end
         shuffleExcHand();
+        if (hand.Count < MAXHANDSIZE){
+            if (!drawFlag){
+                cardsToDraw = MAXHANDSIZE - hand.Count;
+                drawFlag = true;
+                StartCoroutine(newCardTimer());
+            }
+        }
     }
 
     /// <summary>
