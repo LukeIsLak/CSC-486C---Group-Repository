@@ -10,6 +10,8 @@ public class DaggerObject : MonoBehaviour
     [SerializeField] private DamageOverTime effect;
 
     [SerializeField] private float ttl = 5f;
+    private FMOD.Studio.EventInstance daggerHit;
+
 
 
     void Start(){
@@ -19,6 +21,7 @@ public class DaggerObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        PlayDaggerHit();
         EnemyInterface enemy = other.GetComponent<EnemyInterface>();
         //On hit, get the enemy data and deal the damage
         if (enemy != null){
@@ -36,5 +39,13 @@ public class DaggerObject : MonoBehaviour
     private IEnumerator timeToLive(float dur) {
         yield return new WaitForSeconds(dur);
         Destroy(this.gameObject);
+    }
+
+    private void PlayDaggerHit() 
+    {
+        daggerHit = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerAttacks/SoftSurfaceStrike");
+        daggerHit.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        daggerHit.start();
+        daggerHit.release();
     }
 }

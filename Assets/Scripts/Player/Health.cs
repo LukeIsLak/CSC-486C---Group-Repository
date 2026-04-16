@@ -26,6 +26,8 @@ public class Health : MonoBehaviour
     
     private void NotifyHealthChanged() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
     private void NotifyShieldChanged() => OnShieldChanged?.Invoke(shield);
+    private FMOD.Studio.EventInstance damageFX;
+
 
     public void Init(float maxHealth, float currentHealth)
     {
@@ -36,6 +38,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        PlayPlayerHit();
         if (amount <= 0) return;
 
         OnDamaged?.Invoke();
@@ -92,5 +95,13 @@ public class Health : MonoBehaviour
     {
         this.currentHealth = amount;
         NotifyHealthChanged();
+    }
+
+    private void PlayPlayerHit() 
+    {
+        damageFX = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerHit/PlayerHit1");
+        damageFX.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        damageFX.start();
+        damageFX.release();
     }
 }

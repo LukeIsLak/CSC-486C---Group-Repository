@@ -76,6 +76,8 @@ public class VineSegmentFollow : MonoBehaviour
     private float vineLength;
     private List<GameObject> segments = new List<GameObject>();
     public Transform EnemyTransform => enemy;
+    private FMOD.Studio.EventInstance brambleGrab;
+
 
     public void Init(Transform trap, Transform enemy, GameObject vinePrefab, float vineLength)
     {
@@ -83,6 +85,7 @@ public class VineSegmentFollow : MonoBehaviour
         this.enemy = enemy;
         this.vinePrefab = vinePrefab;
         this.vineLength = vineLength;
+        PlayBrambleGrab();
     }
 
     void Update()
@@ -117,5 +120,13 @@ public class VineSegmentFollow : MonoBehaviour
 
             segments.Add(seg);
         }
+    }
+
+    private void PlayBrambleGrab() 
+    {
+        brambleGrab = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMagic/brambleSnareGrab");
+        brambleGrab.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        brambleGrab.start();
+        brambleGrab.release();
     }
 }

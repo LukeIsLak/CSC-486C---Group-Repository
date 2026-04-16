@@ -58,6 +58,8 @@ public class PlayerCharacter : MonoBehaviour
 
     private float baseAttackSpeed = 1f;
     private float attackSpeedMultiplier = 1f;
+    private FMOD.Studio.EventInstance dashFX;
+
     public float nextDashRemaining
     {
         get
@@ -198,6 +200,11 @@ public class PlayerCharacter : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        dashFX = FMODUnity.RuntimeManager.CreateInstance("event:/PlayerEvents/PlayerMovements/PlayerDash");
+        dashFX.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        dashFX.start();
+        dashFX.release();
+        
         isDashing = true;
         nextDashTime = Time.time + dashCD;
         float startTime = Time.time;
