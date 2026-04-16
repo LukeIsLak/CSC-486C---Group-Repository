@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 8300452717123703922}
   - component: {fileID: 5747227150658919177}
   - component: {fileID: 3743577658938888159}
+  - component: {fileID: 6793841711990688424}
   m_Layer: 0
   m_Name: Void Knight
   m_TagString: Enemy
@@ -351,6 +352,9 @@ MonoBehaviour:
   numFreeze: 0
   currentDoTNames: []
   currentDoTTicks: 
+  hasBlood: 1
+  bloodDuration: 1
+  bloodEffect: {fileID: 0}
   anim: {fileID: 65138019106130861}
   rb: {fileID: 1102890631558432364}
   vkd: {fileID: 11400000, guid: 4409d4b437777c74e82dc09b32f14286, type: 2}
@@ -503,3 +507,17 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &6793841711990688424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8351082474959089942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daeabfcab43abc841a7500e6247ffec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldDropPrefab: {fileID: 300120990534988418, guid: d2ad1c07fb6d3904ca6945de9ffe4d5a, type: 3}
+  amount: 9999

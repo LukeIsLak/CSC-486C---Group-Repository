@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldDropPrefab: {fileID: 300120990534988418, guid: d2ad1c07fb6d3904ca6945de9ffe4d5a, type: 3}
-  amount: 5
+  amount: 2
 --- !u!114 &3495961680161000742
 MonoBehaviour:
   m_ObjectHideFlags: 0
