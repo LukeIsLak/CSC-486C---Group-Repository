@@ -115,6 +115,9 @@ public class NodeTraversalUI : MonoBehaviour
                 card.Init(instance, !instance.useable, null, true);
             }
             playerDeckCards.Add(card);
+            TooltipTrigger cardToolTipTrigger = card.GetComponent(typeof(TooltipTrigger)) as TooltipTrigger;
+            cardToolTipTrigger.header = instance.cardData.name;
+            cardToolTipTrigger.content = instance.cardData.descrption;
         }
 
     }
