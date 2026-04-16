@@ -1563,6 +1563,10 @@ PrefabInstance:
       propertyPath: playerData
       value: 
       objectReference: {fileID: 11400000, guid: 24a4f5365b9d19e46975d40bcca18c0b, type: 2}
+    - target: {fileID: 6626778532956506341, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
+      propertyPath: m_Radius
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 8877979250449340063, guid: fcca757da40ce5641b192ebbcbc2a684, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.88
