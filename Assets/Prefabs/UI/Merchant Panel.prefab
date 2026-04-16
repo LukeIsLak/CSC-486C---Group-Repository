@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30
+  m_text: 60
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 216a5a5f4396e7b429d67178bd0c0ba6, type: 2}
   m_sharedMaterial: {fileID: 5262850782016000912, guid: 216a5a5f4396e7b429d67178bd0c0ba6, type: 2}
@@ -1993,7 +1993,9 @@ MonoBehaviour:
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
   token: {fileID: 11400000, guid: ceb8742b317c1b143a48806263a04d06, type: 2}
   tokenNum: {fileID: 5481811662566758808}
+  tokenCost: {fileID: 3293709549465157156}
   dialogueText: {fileID: 5161873222387985257}
+  inRoomShopKeeper: {fileID: 0}
 --- !u!114 &3541623191748942653
 MonoBehaviour:
   m_ObjectHideFlags: 0

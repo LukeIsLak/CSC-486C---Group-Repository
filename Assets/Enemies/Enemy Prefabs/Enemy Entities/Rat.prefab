@@ -271,6 +271,7 @@ MonoBehaviour:
   hasBlood: 1
   bloodDuration: 1
   bloodEffect: {fileID: 1630225761089814724, guid: 00ad366def934eb49aa1733379e61a7f, type: 3}
+  damageNumber: {fileID: 300120990534988418, guid: 1192aea7bc8fa51409bf5614a67b8e30, type: 3}
   anim: {fileID: 5652962033149474173}
   rb: {fileID: 3693198263070883069}
   rd: {fileID: 11400000, guid: 9b7570a54ad9409448bf314754504fad, type: 2}

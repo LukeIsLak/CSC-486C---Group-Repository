@@ -13,6 +13,7 @@ public class MerchantUI : MonoBehaviour
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private ShopItem token;
     [SerializeField] private TextMeshProUGUI tokenNum;
+    [SerializeField] private TextMeshProUGUI tokenCost;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject inRoomShopKeeper;
     
@@ -98,6 +99,7 @@ public class MerchantUI : MonoBehaviour
     private void UpdateTokenDisplay()
     {
        tokenNum.text = playerInventory.amountRemovalTokens.ToString();
+       tokenCost.text = token.price.ToString();
     }
     public void BuyToken()
     {
