@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: TIDAL WAVE
   descrption: Summons a wave that pushes back all enemies it hits, accumulating damage
-  effectValue: 4
+  effectValue: 9
   image: {fileID: -279287036, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   wavePrefab: {fileID: 399922250164900069, guid: d39ce1e1c9b8e4b2b98fbacd4ff7c00b, type: 3}
   N: 9

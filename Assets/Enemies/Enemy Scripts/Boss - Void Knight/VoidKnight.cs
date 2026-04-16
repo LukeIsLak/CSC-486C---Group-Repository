@@ -70,11 +70,11 @@ public class VoidKnight : EnemyInterface
     public bool inAttackCombo1pt1 = false;
     public bool inAttackCombo1pt2 = false;
     public bool inAttackCombo1pt3 = false;
-
     public Transform castSpawn;
     public float castDelay = 0.4f;
 
     public GameEvent OnDefeat;
+    public SpriteRenderer sprite;
 
     public List<VoidKnightWeightedAttacks> weightedAttacks;
 
@@ -195,7 +195,7 @@ public class VoidKnight : EnemyInterface
     }
 
     public void OnTriggerEnter(Collider other) {
-        if (isAttacking && other.CompareTag("Player")) {
+        if (!isDying && isAttacking && other.CompareTag("Player")) {
             print("Test");
             Health h = other.GetComponent<Health>();
             if (h != null) h.TakeDamage(vkd.damage); //TODO: LK - eventually, when we figure out the base values, replace this!
@@ -344,11 +344,19 @@ public class VoidKnight : EnemyInterface
             isAttacking = false;
         }
     }
+    
+
+    // public override void KillEnemy() {
+    //     if (rs != null) rs.RemoveEnemy();
+    //     if (OnDefeat != null) OnDefeat.Raise();
+    //     Destroy(this.gameObject);
+    // }
 
     public override void KillEnemy() {
-        if (rs != null) rs.RemoveEnemy();
-        if (OnDefeat != null) OnDefeat.Raise();
-        Destroy(this.gameObject);
+        if (isDying) return;
+        isDying = true;
+        StopAllCoroutines();
+        StartCoroutine(DissolveAndDestroy());
     }
 
     /****************************************************/
@@ -372,4 +380,27 @@ public class VoidKnight : EnemyInterface
     // if the boss can see the player, move towards it
     // boss should remember position of player, but if can't see before attack or for a duration of the wander it loses sight of them
 
+    private IEnumerator DissolveAndDestroy() {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent) agent.isStopped = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb) rb.velocity = Vector3.zero;
+        if (anim != null) anim.enabled = false;
+
+        float dissolveTime = vkd.dissolveTime;
+        float timer = 0f;
+        Material mat = sprite.material;
+
+        while (timer < dissolveTime) {
+            float t = timer / dissolveTime;
+            mat.SetFloat("_fade", 1f - t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mat.SetFloat("_fade", 0f);
+        // if (rs != null) rs.RemoveEnemy();
+        if (vksm != null) vksm.RemoveEntity(this);
+        if (OnDefeat != null) OnDefeat.Raise();
+        Destroy(gameObject);
+    }
 }

@@ -25,7 +25,7 @@ MonoBehaviour:
   destStopDist: 1.75
   minAddIdleWait: 0
   maxAddIdleWait: 2
-  leapRadius: 3
+  leapRadius: 5
   leapSpeedRatio: 4
   leapForce: 4
   leapYIncrease: 1.75
@@ -40,9 +40,12 @@ MonoBehaviour:
   checkPlayerUpdate: 0.25
   detectionRadius: 15
   wanderRadius: 9
+  preferredRange: 3
+  rangeTolerance: 1.5
   idleDuration: 2
   minMoveWait: 0.25
   maxMoveWait: 0.75
   colonyJoinRadius: 5
   colonyLeaveRadius: 10
   colonyFinishRadius: 2
+  dissolveTime: 1

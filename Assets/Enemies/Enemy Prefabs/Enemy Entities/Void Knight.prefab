@@ -538,9 +538,11 @@ MonoBehaviour:
   inAttackCombo1pt1: 0
   inAttackCombo1pt2: 0
   inAttackCombo1pt3: 0
+  isDying: 0
   castSpawn: {fileID: 5196187500254166737}
   castDelay: 1
   OnDefeat: {fileID: 11400000, guid: 14f6adaa366ad7f44bd46b7a917caef4, type: 2}
+  sprite: {fileID: 5261843600281316724}
 --- !u!54 &1102890631558432364
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -549,7 +551,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8351082474959089942}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

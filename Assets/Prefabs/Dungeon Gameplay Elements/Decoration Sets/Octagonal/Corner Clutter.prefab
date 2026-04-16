@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1196486914623603666}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Corner Clutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 4086021156591960277, guid: d00e93772b27aad4b8977952840e03bc, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -132,6 +136,10 @@ PrefabInstance:
     - target: {fileID: 7479356647599712262, guid: fed578ce02a1a16448f687c72081c8ff, type: 3}
       propertyPath: m_Name
       value: Barrel2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479356647599712262, guid: fed578ce02a1a16448f687c72081c8ff, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7820451906166420156, guid: fed578ce02a1a16448f687c72081c8ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -247,6 +255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skull (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3214577101061826860, guid: 0ac48c35742c7fd4c8778a8d3feb7a7e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -320,6 +332,10 @@ PrefabInstance:
     - target: {fileID: 3214577101061826860, guid: 0ac48c35742c7fd4c8778a8d3feb7a7e, type: 3}
       propertyPath: m_Name
       value: Skull (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214577101061826860, guid: 0ac48c35742c7fd4c8778a8d3feb7a7e, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -395,6 +411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel
       objectReference: {fileID: 0}
+    - target: {fileID: 6596402054710889742, guid: 632711694472c1c469e27f3438a769dc, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -416,6 +436,10 @@ PrefabInstance:
     - target: {fileID: 7479356647599712262, guid: fed578ce02a1a16448f687c72081c8ff, type: 3}
       propertyPath: m_Name
       value: Barrel2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479356647599712262, guid: fed578ce02a1a16448f687c72081c8ff, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7820451906166420156, guid: fed578ce02a1a16448f687c72081c8ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -519,6 +543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vase
       objectReference: {fileID: 0}
+    - target: {fileID: 6879288171050335552, guid: ecd0f5d73bf1234469ced8e926b2870d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -585,6 +613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skull (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3214577101061826860, guid: 0ac48c35742c7fd4c8778a8d3feb7a7e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -646,6 +678,10 @@ PrefabInstance:
     - target: {fileID: 6879288171050335552, guid: ecd0f5d73bf1234469ced8e926b2870d, type: 3}
       propertyPath: m_Name
       value: Vase (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6879288171050335552, guid: ecd0f5d73bf1234469ced8e926b2870d, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -721,6 +757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skull (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3214577101061826860, guid: 0ac48c35742c7fd4c8778a8d3feb7a7e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -782,6 +822,10 @@ PrefabInstance:
     - target: {fileID: 6596402054710889742, guid: 632711694472c1c469e27f3438a769dc, type: 3}
       propertyPath: m_Name
       value: Barrel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596402054710889742, guid: 632711694472c1c469e27f3438a769dc, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -857,6 +901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor_BricksSeparate2
       objectReference: {fileID: 0}
+    - target: {fileID: 8040949159052171099, guid: e949e93faf1962e4d9ea416aecf34a59, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -919,6 +967,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vase (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6879288171050335552, guid: ecd0f5d73bf1234469ced8e926b2870d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -980,6 +1032,10 @@ PrefabInstance:
     - target: {fileID: 6596402054710889742, guid: 632711694472c1c469e27f3438a769dc, type: 3}
       propertyPath: m_Name
       value: Barrel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596402054710889742, guid: 632711694472c1c469e27f3438a769dc, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1055,6 +1111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cobweb2
       objectReference: {fileID: 0}
+    - target: {fileID: 2088365523038702245, guid: 21d7ebed5d88be14cb8c453347bf0a4b, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1116,6 +1176,10 @@ PrefabInstance:
     - target: {fileID: 3214577101061826860, guid: 0ac48c35742c7fd4c8778a8d3feb7a7e, type: 3}
       propertyPath: m_Name
       value: Skull (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214577101061826860, guid: 0ac48c35742c7fd4c8778a8d3feb7a7e, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

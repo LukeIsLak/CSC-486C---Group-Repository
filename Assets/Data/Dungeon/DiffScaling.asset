@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2af235f8d1178e42a9723a241b71ed0, type: 3}
   m_Name: DiffScaling
   m_EditorClassIdentifier: 
-  scalingFraction: 0.14285715
+  scalingFraction: 0.85714287
   minTrapRoomFraction: 0.2
-  maxTrapRoomFraction: 0.7
+  maxTrapRoomFraction: 0.6
   minDungeonInterations: 3
-  maxDungeonInterations: 7
+  maxDungeonInterations: 6
