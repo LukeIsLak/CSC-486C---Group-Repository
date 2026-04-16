@@ -525,4 +525,17 @@ public class SkeletonMelee : EnemyInterface
         yield return new WaitForSeconds(swingTime);
         isSwinging = false;
     }
+
+    /****************************************************/
+    /*         Beginning Of Event Listeners             */
+    /****************************************************/
+
+    public void ApplySpeedModifier() 
+    {
+        speedModifier = enemyEffects.getEnemySpeedModifier();
+    }
+
+    /****************************************************/
+    /*             End Of Event Listeners               */
+    /****************************************************/
 }
