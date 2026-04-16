@@ -35,7 +35,6 @@ public class Bat : EnemyInterface
     public bool canAttack           = false;
     public bool isPerched           = false;
     public bool isAttacking         = false;
-    public bool isDying             = false;
 
     [Header("Bat motion")]
     public int currentPathIndex = 0;

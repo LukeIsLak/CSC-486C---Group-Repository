@@ -25,6 +25,8 @@ public class EnemyInterface : MonoBehaviour
     public bool hasKnockback        = false;
     public bool isStopped           = false;
 
+    public bool isDying             = false;
+
     public int numDamageOverTime    = 0;
     public int numFreeze            = 0;
 
