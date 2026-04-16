@@ -6,7 +6,6 @@ using UnityEngine;
 public class LightningBolt : Cards
 {
     [SerializeField] private float range = 20f;
-    [SerializeField] private float damage = 20f;
 
 
     [SerializeField] private LightningBoltObject lightningPrefab;
@@ -43,12 +42,12 @@ public class LightningBolt : Cards
             EnemyInterface enemy = hit.collider.GetComponent<EnemyInterface>();
             if (enemy != null)
             {
-                enemy.Hit(damage);
+                enemy.Hit(effectValue);
             }
             else 
             {
                 enemy = hit.collider.GetComponentInParent<EnemyInterface>();
-                enemy.Hit(damage);
+                enemy.Hit(effectValue);
             }
         }
         Debug.Log("Trying Lightning Bolt");

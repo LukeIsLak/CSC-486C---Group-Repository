@@ -15,6 +15,10 @@ MonoBehaviour:
   name: Bramble DoT
   type: 0
   ticksPerSecond: 1
-  tickDamage: 2
+  tickDamage: 5
   totalTicks: 5
+  hasOngoingPart: 0
+  hasBurstPart: 0
   isStackable: 1
+  ongoingPart: {fileID: 0}
+  burstPart: {fileID: 0}

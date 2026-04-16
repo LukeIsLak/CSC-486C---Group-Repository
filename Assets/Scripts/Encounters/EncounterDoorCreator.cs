@@ -23,7 +23,9 @@ public class EncounterDoorCreator : MonoBehaviour
         traversableLayout.InitializeUninteractable(true);
         traversableLayout.DoProgress(layoutData.completedIndices);
         traversableLayout.transform.SetParent(mapParent, false);
+        AdjustLayout();
         traversableLayout.UpdateAppearance();
+
         List<(EncounterInfo encounter, int index)> encIndxList = traversableLayout.GetNextEncounters(layoutData.completedIndices);
 
         foreach (var pair in encIndxList)
@@ -34,6 +36,23 @@ public class EncounterDoorCreator : MonoBehaviour
         }
         // traversableLayout.DestroyEverything();
         DoDoorPlacement(encounterDoors);
+    }
+
+    void AdjustLayout()
+    {
+        List<Transform> layers = traversableLayout.layerContainers;
+        int numCompleted = layoutData.completedIndices.Count;
+        for (int i = 0; i < layers.Count; i++ )
+        {
+            if (numCompleted - 1 <= i && i < numCompleted + layoutData.lookAhead)
+            {
+                layers[i].gameObject.SetActive(true);
+                continue;
+            }
+            layers[i].gameObject.SetActive(false);
+        }
+        traversableLayout.transform.localPosition += 3 * (numCompleted - 1) * Vector3.forward;
+        traversableLayout.playerOnMap.SetActive(false);
     }
 
     void DoDoorPlacement(List<GameObject> encounterDoors)

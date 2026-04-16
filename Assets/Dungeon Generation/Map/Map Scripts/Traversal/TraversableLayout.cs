@@ -10,7 +10,7 @@ public class TraversableLayout : MonoBehaviour
     private MapGen layoutGenerator;    
     public GameObject mapEncounterPrefab;
     public GameObject playerOnMapPrefab;
-    private GameObject playerOnMap;
+    public GameObject playerOnMap;
     
     [Header("Data")]
     public EncounterInfo defaultEncounter;

@@ -11,7 +11,7 @@ public class BlackHoleObject : MonoBehaviour
     [SerializeField]private float radius = 5f;
     [SerializeField] private float ttl = 5f;
     [SerializeField] private Knockback effect;
-    [SerializeField] private int dmg;
+    [SerializeField] private float dmg;
 
     void Start(){
         StartCoroutine(timeToLive(ttl));
@@ -20,7 +20,7 @@ public class BlackHoleObject : MonoBehaviour
     public void Init(Vector3 dir, Cards card)
     {
         direction = dir;
-        dmg = card.effectValue;
+        dmg = card.effectValue / 10f;
     }
 
     // Update is called once per frame

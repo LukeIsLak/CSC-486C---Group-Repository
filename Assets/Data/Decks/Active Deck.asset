@@ -13,24 +13,29 @@ MonoBehaviour:
   m_Name: Active Deck
   m_EditorClassIdentifier: 
   contents:
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+  - cardData: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
     uid: 0
     useable: 0
     cleanup: 0
     deck: {fileID: 11400000}
-  - cardData: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+  - cardData: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
     uid: 1
+    useable: 1
+    cleanup: 0
+    deck: {fileID: 11400000}
+  - cardData: {fileID: 11400000, guid: a8a5f9f9cb1c043368838ea4d6a33750, type: 2}
+    uid: 2
     useable: 0
     cleanup: 0
     deck: {fileID: 11400000}
-  - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
-    uid: 2
-    useable: 1
+  - cardData: {fileID: 11400000, guid: a8a5f9f9cb1c043368838ea4d6a33750, type: 2}
+    uid: 3
+    useable: 0
     cleanup: 0
     deck: {fileID: 11400000}
-  - cardData: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
-    uid: 2
-    useable: 1
+  - cardData: {fileID: 11400000, guid: a8a5f9f9cb1c043368838ea4d6a33750, type: 2}
+    uid: 4
+    useable: 0
     cleanup: 0
     deck: {fileID: 11400000}
   maxSize: 10
