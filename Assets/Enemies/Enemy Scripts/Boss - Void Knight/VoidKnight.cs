@@ -78,6 +78,8 @@ public class VoidKnight : EnemyInterface
 
     public List<VoidKnightWeightedAttacks> weightedAttacks;
 
+    public VOIDHealthBar healthBar;
+
     void Awake() {
         weightedAttacks = new List<VoidKnightWeightedAttacks> {
             new VoidKnightWeightedAttacks(VoidKnightAttacks.AttackCombo1, 2f, () => 
@@ -87,6 +89,10 @@ public class VoidKnight : EnemyInterface
         };
 
         initialize();
+    }
+
+    void Update() {
+        healthBar.SetHealth(curHealth);
     }
 
     public void ChangeMoveSpeed() {
@@ -126,6 +132,7 @@ public class VoidKnight : EnemyInterface
         currentMoveSpeed = moveSpeed;
         currentMoveDistMult = moveDistMult;
 
+        healthBar.SetMax(curHealth);
         playerTransform = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
 
