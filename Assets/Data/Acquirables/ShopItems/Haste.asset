@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Haste
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
+  price: 15
   acquirable: {fileID: 11400000, guid: 7ebe112ba1314b6469b09cadb7a5639a, type: 2}

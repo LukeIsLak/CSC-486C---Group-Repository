@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Hinder
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
+  price: 15
   acquirable: {fileID: 11400000, guid: eacb572a6a26f9148858376f6ed6dfec, type: 2}

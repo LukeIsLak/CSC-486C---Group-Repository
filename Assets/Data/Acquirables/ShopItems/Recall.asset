@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Recall
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
+  price: 45
   acquirable: {fileID: 11400000, guid: f3b594ad9efe6a84e9b4a714d4d1824a, type: 2}

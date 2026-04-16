@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 1bba852eae9c17b4ca7f672c2baa580a, type: 2}
-  price: 20
+  price: 45
   acquirable: {fileID: 11400000, guid: d5e4f50c7a0aa2d43a43807cb605cce2, type: 2}
