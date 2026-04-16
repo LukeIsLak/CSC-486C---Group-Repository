@@ -17,9 +17,8 @@ MonoBehaviour:
   effectValue: 35
   image: {fileID: -2073127299, guid: c56240a0befec8b47bd8a88892eef643, type: 3}
   projspeed: 20
-  dmgradius: 5
+  dmgradius: 10
   aoeprojprefab: {fileID: 3445122416420712902, guid: fb5df5d8aa61e41b1ab116e36c6d1840, type: 3}
-  dmg: 35
   enemylayer:
     serializedVersion: 2
     m_Bits: 0

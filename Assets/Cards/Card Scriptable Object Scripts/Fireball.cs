@@ -13,7 +13,6 @@ public class Fireball : Cards
     private GameObject camera;
 
 
-    [SerializeField]public float dmg = 20f;
     private Vector3 dir; 
 
     [SerializeField] private LayerMask enemylayer;
