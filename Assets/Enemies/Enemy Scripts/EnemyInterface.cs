@@ -36,6 +36,7 @@ public class EnemyInterface : MonoBehaviour
     public bool hasBlood = true;
     public float bloodDuration = 1.0f;
     public GameObject bloodEffect;
+    public GameObject damageNumber;
 
     public void Awake() {
         initialize();
@@ -55,7 +56,16 @@ public class EnemyInterface : MonoBehaviour
 
     public void TakeDamage(float amount) {
         if(curHealth <= 0) return;
-        curHealth -= (hasFreeze)? amount * enemyData.freezeMult : amount;
+        amount = (hasFreeze)? amount * enemyData.freezeMult : amount;
+        curHealth -= amount;
+
+        if (damageNumber != null)
+        {
+            GameObject dm = Instantiate(damageNumber);
+            dm.transform.position = transform.position;
+            dm.GetComponent<DamageNumber>().DoDamage(amount);        
+        }
+
         if (curHealth <= 0) 
         {
             GoldDropSpawner gds = GetComponent<GoldDropSpawner>();
