@@ -1685,7 +1685,7 @@ GameObject:
   - component: {fileID: 5239484889446624403}
   m_Layer: 5
   m_Name: HasteModifier
-  m_TagString: Untagged
+  m_TagString: HasteEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
