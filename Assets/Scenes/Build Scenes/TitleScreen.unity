@@ -130,18 +130,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 467889561083017855, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1842146287012955316, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.9086914
-      objectReference: {fileID: 0}
-    - target: {fileID: 4232211772047195068, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4282729452724672082, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.80646706
@@ -185,31 +173,6 @@ PrefabInstance:
     - target: {fileID: 5272061132759555729, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
       propertyPath: m_Name
       value: UI Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7370116375876204524, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_text
-      value: 'Any card gained is sent to your <color="red">buffer</color>.
-
-        Your
-        buffer is cleared of cards when you enter a new encounter!
-
-
-        You
-        can have a max of <color="red">10 cards</color> in your deck at a time. Adding
-        a card costs nothing, but removing one will require a <color="red">removal
-        token</color>.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7388339163064505207, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: usedCardArea
-      value: 
-      objectReference: {fileID: 1865106619}
-    - target: {fileID: 7654491125290211153, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152533519624635600, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1902,11 +1865,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860569034}
   m_CullTransparentMesh: 1
---- !u!224 &1865106619 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3218112919415812044, guid: f89d700f94a3b0f49a47cd807fc19686, type: 3}
-  m_PrefabInstance: {fileID: 24231106}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1972862147
 GameObject:
   m_ObjectHideFlags: 0
