@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5718ba391cc3c547bac68b740de5433, type: 3}
   m_Name: AstralDOT
   m_EditorClassIdentifier: 
-  name: 
+  name: AstralDagger
   type: 0
-  ticksPerSecond: 0
-  tickDamage: 0
-  totalTicks: 0
+  ticksPerSecond: 2
+  tickDamage: 1
+  totalTicks: 10
+  hasOngoingPart: 0
+  hasBurstPart: 0
   isStackable: 0
+  ongoingPart: {fileID: 0}
+  burstPart: {fileID: 0}
