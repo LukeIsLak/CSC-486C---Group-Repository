@@ -275,7 +275,7 @@ PrefabInstance:
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
+      objectReference: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[1]
       value: 
@@ -283,7 +283,7 @@ PrefabInstance:
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
+      objectReference: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[3]
       value: 
@@ -291,7 +291,7 @@ PrefabInstance:
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 261e94c646cd1d04484b1e4435d881d9, type: 2}
+      objectReference: {fileID: 11400000, guid: b03cad7470ab14a409a2f4fda7425a35, type: 2}
     - target: {fileID: 820030912892177376, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -453,13 +453,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 172685095}
     m_Modifications:
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: startingDeck.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+      objectReference: {fileID: 11400000, guid: 5cf1fb975b48a449dbffae81a134ae62, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[2]
       value: 
@@ -467,11 +471,11 @@ PrefabInstance:
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+      objectReference: {fileID: 11400000, guid: a8a5f9f9cb1c043368838ea4d6a33750, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
+      objectReference: {fileID: 11400000, guid: 9205340398f8b6a44a72d89c7505a6ce, type: 2}
     - target: {fileID: 820030912892177376, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -564,9 +568,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6556909392661031375, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20655252
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556909392661031375, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.25490198
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556909392661031375, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.06666667
+      objectReference: {fileID: 0}
     - target: {fileID: 6996761552266640917, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: m_Name
       value: Starting Deck Choice (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717451713916378143, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_text
+      value: AoE Build
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1152,23 +1172,23 @@ PrefabInstance:
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: f5c4ff1033f6442b8af5699d6e86e6dd, type: 2}
+      objectReference: {fileID: 11400000, guid: 5a6800853a7e44fc198d3c9a15ca383b, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 5a6800853a7e44fc198d3c9a15ca383b, type: 2}
+      objectReference: {fileID: 11400000, guid: a620209f988d74d7ab067a6080b5aa9e, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: a620209f988d74d7ab067a6080b5aa9e, type: 2}
+      objectReference: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 5cf1fb975b48a449dbffae81a134ae62, type: 2}
+      objectReference: {fileID: 11400000, guid: f27a1cfd3ff77403b944bdf27a126418, type: 2}
     - target: {fileID: 364232667937964812, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: startingDeck.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 18924dd359ae44506b78346952893dfd, type: 2}
+      objectReference: {fileID: 11400000, guid: 76528c16485954646ae1873df3f5e83b, type: 2}
     - target: {fileID: 820030912892177376, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -1261,9 +1281,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6556909392661031375, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.08845793
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556909392661031375, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556909392661031375, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.25490198
+      objectReference: {fileID: 0}
     - target: {fileID: 6996761552266640917, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
       propertyPath: m_Name
       value: Starting Deck Choice (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717451713916378143, guid: 20b8973308ecbe1458cdb162e1e1502f, type: 3}
+      propertyPath: m_text
+      value: Damage Build
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
