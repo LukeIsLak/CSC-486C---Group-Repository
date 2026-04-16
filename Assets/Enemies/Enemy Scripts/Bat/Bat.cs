@@ -322,7 +322,7 @@ public class Bat : EnemyInterface
     }
 
     void UpdateMoveSpot(bool s) {
-        if (isMoving && targetPath.Count > 0) {
+        if (isMoving && targetPath.Count > 0 && currentPathIndex < targetPath.Count) {
             Vector3 target = targetPath[currentPathIndex];
 
             // Path abandonment: check periodically if the bat is making progress
@@ -367,6 +367,7 @@ public class Bat : EnemyInterface
                     if (isPecking) peckComplete = true;
                     isMoving = false;
                     transform.rotation = Quaternion.identity;
+                    currentPathIndex = targetPath.Count - 1;
                     // transform.position = new Vector3(transform.position.x, 0.4f, transform.position.z);
                 }
             }
@@ -536,6 +537,7 @@ public class Bat : EnemyInterface
         UpdateMoveSpot(false);
 
         if (!isMoving && isPecking == true && !isPeckRebounding) peckComplete = true;
+        else if (!isMoving && !isPecking && !isPeckRebounding) peckComplete = true;
     }
 
     public void PeckRebound()
@@ -772,6 +774,7 @@ public class Bat : EnemyInterface
             Health h = other.gameObject.GetComponent<Health>();
             if (h != null) h.TakeDamage(bd.damage);
             isAttacking = false;
+            if (isPecking) isPeckRebounding = true;
         }
     }
 

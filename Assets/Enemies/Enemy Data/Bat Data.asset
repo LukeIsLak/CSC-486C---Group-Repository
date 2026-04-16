@@ -66,4 +66,5 @@ MonoBehaviour:
   steerLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  dissolveTime: 1
   attackCooldown: 2
