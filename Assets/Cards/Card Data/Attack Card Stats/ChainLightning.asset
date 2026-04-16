@@ -19,3 +19,6 @@ MonoBehaviour:
   ChainLightningPrefab: {fileID: 4385831330015336454, guid: dc3f3b293afc3a5469485a2fafaba949, type: 3}
   range: 50
   maxChain: 5
+  surfaceLayers:
+    serializedVersion: 2
+    m_Bits: 1664

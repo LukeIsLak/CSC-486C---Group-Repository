@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8957309204160062646}
   - component: {fileID: 7482677469695261818}
   - component: {fileID: 1926454118453946783}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 8695621672723069038}
   - component: {fileID: 3079072066734742486}
   - component: {fileID: 1445662574220625267}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stairs (3)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -2065,7 +2065,7 @@ GameObject:
   - component: {fileID: 5693716586340603555}
   - component: {fileID: 137547661035856263}
   - component: {fileID: 8524835807106412866}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -2165,7 +2165,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764048643727703986}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -2189,7 +2189,7 @@ GameObject:
   - component: {fileID: 3513920583286673875}
   - component: {fileID: 2866587053112671711}
   - component: {fileID: 3591478735582580468}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stairs (2)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -4101,7 +4101,7 @@ GameObject:
   - component: {fileID: 7944828946272742255}
   - component: {fileID: 607482002801097220}
   - component: {fileID: 2392289768034286107}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (6)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -4201,7 +4201,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285528078274986927}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -4223,7 +4223,7 @@ GameObject:
   - component: {fileID: 5122517616359484310}
   - component: {fileID: 2402475539674314079}
   - component: {fileID: 294215994136005096}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4361,7 +4361,7 @@ GameObject:
   - component: {fileID: 7564953129056648862}
   - component: {fileID: 6844457011762443494}
   - component: {fileID: 200465839185950458}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -4461,7 +4461,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841908796308291590}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -4479,7 +4479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7751227016225427787}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pillars2
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -4522,7 +4522,7 @@ GameObject:
   - component: {fileID: 4296813890183934825}
   - component: {fileID: 6595363290074943209}
   - component: {fileID: 2096560299714145338}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (9)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -4622,7 +4622,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2743927724443206261}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -4644,7 +4644,7 @@ GameObject:
   - component: {fileID: 6802524477179733528}
   - component: {fileID: 866742230334460663}
   - component: {fileID: 2581977433165848363}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -4768,7 +4768,7 @@ GameObject:
   - component: {fileID: 8347705547367204451}
   - component: {fileID: 4282861316106564950}
   - component: {fileID: 2146028070321946647}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stairs
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -6680,7 +6680,7 @@ GameObject:
   - component: {fileID: 905631857476576250}
   - component: {fileID: 191175339805923924}
   - component: {fileID: 4421259380966357502}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (5)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -6804,7 +6804,7 @@ GameObject:
   - component: {fileID: 7465831062134344104}
   - component: {fileID: 8767717095416123411}
   - component: {fileID: 3918626107834374929}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stairs (1)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -8716,7 +8716,7 @@ GameObject:
   - component: {fileID: 7401188255778957242}
   - component: {fileID: 7218260769171497517}
   - component: {fileID: 660009274031377708}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (8)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -8816,7 +8816,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6550061536764279506}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -8838,7 +8838,7 @@ GameObject:
   - component: {fileID: 6013489622504706165}
   - component: {fileID: 2993703789246481412}
   - component: {fileID: 2189467737969192922}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (7)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -8938,7 +8938,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6582619737934149969}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -8957,7 +8957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6478772597612676785}
   - component: {fileID: 4743359566699594895}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Platforming
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -9019,7 +9019,7 @@ GameObject:
   - component: {fileID: 5746814994720401988}
   - component: {fileID: 64935742422136817}
   - component: {fileID: 7292534648883562410}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -9119,7 +9119,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7926104556232565935}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -9141,7 +9141,7 @@ GameObject:
   - component: {fileID: 4405527893568723166}
   - component: {fileID: 5648357488776724555}
   - component: {fileID: 2655120395007463966}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9279,7 +9279,7 @@ GameObject:
   - component: {fileID: 6117343589369539811}
   - component: {fileID: 7968112755449901653}
   - component: {fileID: 1428941502961306399}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9417,7 +9417,7 @@ GameObject:
   - component: {fileID: 334855111521377449}
   - component: {fileID: 6263911774243028609}
   - component: {fileID: 5542956575732665033}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -9517,7 +9517,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9010355041131877188}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}

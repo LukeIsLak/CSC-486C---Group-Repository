@@ -14,6 +14,8 @@ public class ChainLightningObject1 : MonoBehaviour
     [SerializeField] private int chainNumber = 0;
     [SerializeField] private int maxChain = 5;
     [SerializeField] private Vector3 targetPos;
+    [SerializeField] private LayerMask surfaceLayers;
+    
 
     public List<EnemyInterface> alreadyHit = new List<EnemyInterface>();
 
@@ -22,7 +24,7 @@ public class ChainLightningObject1 : MonoBehaviour
     
 
 
-    public void Init(float dmg, float maxRange, int chainNum, int chainMax, List<EnemyInterface> pastHits)
+    public void Init(float dmg, float maxRange, int chainNum, int chainMax, List<EnemyInterface> pastHits, LayerMask surfaces)
     {
         // Set values
         damage = dmg;
@@ -30,6 +32,7 @@ public class ChainLightningObject1 : MonoBehaviour
         chainNumber = chainNum;
         maxChain = chainMax;
         alreadyHit = pastHits;
+        surfaceLayers = surfaces;
         // Do lightning logic
         Fire();
         StartCoroutine(HandleNext());
@@ -48,10 +51,11 @@ public class ChainLightningObject1 : MonoBehaviour
 
             if (alreadyHit.Contains(ei)) continue;
             // Check if visible 
-            Vector3 direction = hitCollider.transform.position - transform.position;
+            Vector3 targetPoint = hitCollider.ClosestPoint(transform.position);
+            Vector3 direction = targetPoint - transform.position;
 
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction.normalized, out hit, direction.magnitude, LayerMask.GetMask("Surface"))) 
+            if (Physics.Raycast(transform.position, direction.normalized, out hit, direction.magnitude, surfaceLayers)) 
             {
                 continue;
             }
@@ -92,7 +96,7 @@ public class ChainLightningObject1 : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         GameObject nextLightning = Instantiate(ChainLightningPrefab);
         nextLightning.transform.position = targetPos;
-        nextLightning.GetComponent<ChainLightningObject1>().Init(damage, radius, chainNumber + 1, maxChain, alreadyHit);
+        nextLightning.GetComponent<ChainLightningObject1>().Init(damage, radius, chainNumber + 1, maxChain, alreadyHit, surfaceLayers);
         Destroy(this);
     }
 }
