@@ -27,6 +27,7 @@ public class Health : MonoBehaviour
     private void NotifyHealthChanged() => OnHealthChanged?.Invoke(currentHealth, maxHealth);
     private void NotifyShieldChanged() => OnShieldChanged?.Invoke(shield);
     private FMOD.Studio.EventInstance damageFX;
+    FMOD.ChannelGroup mcg;
 
 
     public void Init(float maxHealth, float currentHealth)
@@ -78,11 +79,11 @@ public class Health : MonoBehaviour
     }
     private void Die()
     {
-        if (hasDied) return;
-        hasDied = true;
-        FMOD.ChannelGroup mcg;
+        PlayMusic.stopMusic();
         FMODUnity.RuntimeManager.CoreSystem.getMasterChannelGroup(out mcg);
         mcg.stop();
+        if (hasDied) return;
+        hasDied = true;
         //Destroy(gameObject);
         inputScheme.SetInputToInteractableUI();
         PlayerDeath.Raise();

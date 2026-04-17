@@ -15,6 +15,10 @@ public class TitleScreen : MonoBehaviour
         MainMenu.SetActive(true);
         OptionsMenu.SetActive(false);
 
+        FMOD.Studio.Bus masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
     }
 
     public void OnPlayButton(){
