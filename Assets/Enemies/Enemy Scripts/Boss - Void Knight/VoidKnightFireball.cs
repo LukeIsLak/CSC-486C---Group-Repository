@@ -26,6 +26,7 @@ public class VoidKnightFireball : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
+        if (other.gameObject.layer == LayerMask.GetMask("IgnoreMe")) return;
         Impact();
     }
 
