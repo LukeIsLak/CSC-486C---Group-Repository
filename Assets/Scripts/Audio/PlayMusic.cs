@@ -6,14 +6,14 @@ using UnityEngine;
 public class PlayMusic : MonoBehaviour
 {
    
-private FMOD.Studio.EventInstance instance;
+static FMOD.Studio.EventInstance instance;
 
-public FMODUnity.EventReference fmodEvent;
+//public FMODUnity.EventReference fmodEvent;
 [SerializeField] 
 float inCombat = 0;
 void OnEnable()
 {
-    instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent);
+    instance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/DynamicMusic");
     instance.start();
 }
 void Update()
@@ -35,6 +35,11 @@ private void OnTriggerExit(Collider other)
     {
         inCombat = 0;    
     } 
+}
+
+public static void stopMusic()
+{
+    instance.release();
 }
 
 
