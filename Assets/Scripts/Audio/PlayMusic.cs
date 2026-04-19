@@ -6,41 +6,50 @@ using UnityEngine;
 public class PlayMusic : MonoBehaviour
 {
    
-static FMOD.Studio.EventInstance instance;
+    static FMOD.Studio.EventInstance instance;
 
-//public FMODUnity.EventReference fmodEvent;
-[SerializeField] 
-float inCombat = 0;
-void OnEnable()
-{
-    instance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/DynamicMusic");
-    instance.start();
-}
-void Update()
-{
-    instance.setParameterByName("Combat", inCombat);
-}
+    //public FMODUnity.EventReference fmodEvent;
+    [SerializeField] 
+    float inCombat = 0;
 
-private void OnTriggerEnter(Collider other)
-{
-    if(other.tag == "Enemy")
+    List<GameObject> enemiesInRange = new();
+
+    void OnEnable()
     {
-        inCombat = 1;    
+        instance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/DynamicMusic");
+        instance.start();
     }
-}
-
-private void OnTriggerExit(Collider other)
-{
-    if(other.tag == "Enemy")
+    void Update()
     {
-        inCombat = 0;    
-    } 
-}
+        enemiesInRange.RemoveAll(item => item == null);
+        inCombat = enemiesInRange.Count > 0? 1 : 0;
+        instance.setParameterByName("Combat", inCombat);
+    }
 
-public static void stopMusic()
-{
-    instance.release();
-}
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            enemiesInRange.Add(other.gameObject);
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            enemiesInRange.Remove(other.gameObject);
+        } 
+    }
 
+    public static void stopMusic()
+    {
+        instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        instance.release();
+    }
+
+    void OnDestroy()
+    {
+        //stopMusic();
+    }
 }
